@@ -16,13 +16,14 @@ Los saberes de los pueblos Selk'nam, Haush y Yagán sobre la vida en el territor
 
 Un juego web que se juega desde el navegador, también en el celular. Cada partida es un viaje en el que el fuego es tu vida: se gasta con el frío y el viento, y se mantiene con lo que el territorio ofrece. Lo que se aprende en un viaje pasa a la siguiente generación como **cartas de saber**, cada una con su fuente citada. La mecánica del roguelike (morir, volver a empezar, avanzar) representa así la **transmisión de la memoria**.
 
-El concepto completo está en [docs/00-guia-hackathon.md](docs/00-guia-hackathon.md#7-idea-de-juego-borrador-para-discutir).
+El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 
 ## Documentación
 
 | Documento | Contenido |
 |---|---|
 | [00 · Guía de la hackatón](docs/00-guia-hackathon.md) | Bases, fechas, criterios de evaluación, cuidados culturales y plan por fases |
+| [01 · Concepto](docs/01-concepto.md) | Premisa, los tres pueblos, bucle central, transmisión entre partidas, tono y aporte al eje |
 
 ## Cómo jugar
 
