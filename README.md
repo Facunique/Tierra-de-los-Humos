@@ -23,7 +23,7 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 | Documento | Contenido |
 |---|---|
 | [00 · Guía de la hackatón](docs/00-guia-hackathon.md) | Bases, fechas, criterios de evaluación, cuidados culturales y plan por fases |
-| [01 · Concepto](docs/01-concepto.md) | Premisa, los tres pueblos, bucle central, transmisión entre partidas, tono y aporte al eje |
+| [01 · Concepto](docs/01-concepto.md) | Premisa, pueblos (Yagán primero), bucle central, transmisión entre partidas, tono y aporte al eje |
 
 ## Cómo jugar
 
