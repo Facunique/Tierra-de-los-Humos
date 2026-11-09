@@ -1,0 +1,28 @@
+# Dependencias y builds
+node_modules/
+dist/
+build/
+.cache/
+.vite/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Archivos de trabajo de arte (exportar a PNG antes de subir)
+*.psd
+*.kra~
+*.aseprite~
