@@ -1,4 +1,4 @@
-# Proyecto Fuego — roguelike fueguino
+# Tierra de los Humos — roguelike fueguino
 
 Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de Tierra del Fuego. Lo desarrolla el equipo **Tierra de los Humos** para la hackatón [SoberaníaTech 2026](https://soberaniatech.com.ar/), organizada por la Agencia de Innovación de Tierra del Fuego.
 
