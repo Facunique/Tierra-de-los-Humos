@@ -25,6 +25,14 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 | [00 · Guía de la hackatón](docs/00-guia-hackathon.md) | Bases, fechas, criterios de evaluación, cuidados culturales y plan por fases |
 | [01 · Concepto](docs/01-concepto.md) | Premisa, pueblos (Yagán primero), bucle central, transmisión entre partidas, tono y aporte al eje |
 
+Trabajo interno del equipo:
+
+| Documento | Contenido |
+|---|---|
+| [Memoria del proyecto](equipo/memory.md) | Decisiones tomadas, estado actual, pendientes y glosario |
+| [Comunicaciones con comunidades](equipo/comunicaciones.md) | Registro de la consulta a comunidades y personas, con permisos y correcciones |
+| [AGENTS.md](AGENTS.md) | Reglas de trabajo para asistentes de IA (y para el equipo) |
+
 ## Cómo jugar
 
 *Pendiente: se completa cuando haya un prototipo publicado.*
