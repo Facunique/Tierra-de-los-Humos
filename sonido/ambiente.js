@@ -229,7 +229,11 @@
       silenciar(si) { silenciado = !!si; if (maestro) suave(maestro.gain, silenciado ? 0 : volumenActual, 0.1); },
       /** Avisa cada vez que suena un efecto, para mostrar subtítulos en pantalla. */
       alSonar(fn) { oyentes.push(fn); },
-      async pausar() { if (ctx) await ctx.suspend(); },
+      async pausar() {
+        // Sin esto, el planificador seguiría programando sonidos con el reloj del audio detenido.
+        if (reloj) { clearInterval(reloj); reloj = null; }
+        if (ctx) await ctx.suspend();
+      },
       get activo() { return iniciado && ctx && ctx.state === 'running'; },
       efectos: Object.keys(EFECTOS),
     };

@@ -126,7 +126,7 @@ También comían los **hongos que crecen en los árboles** (no los del suelo) y 
 | Lenga | Cooper (p. 81) la llama «siempreverde», pero la botánica actual la describe como de hoja caduca, que se pone roja en otoño (Multequina, IADIZA-CONICET). | ✅ Seguimos la botánica actual y anotamos la diferencia. |
 | Clima | Ráfagas violentas, cambios bruscos, y nevadas incluso en verano (Cooper, p. 81). | ✅ Puede nevar en cualquier estación del juego. |
 | Turbales | Pantanos de musgo que retienen agua como una esponja (Spears, p. 149, sobre la Isla de los Estados). | ✅ |
-| Árbol bandera | — | 🔍 Falta fuente. |
+| Árbol bandera | — | 🔍 **Sin fuente.** Se retiró de todas las escenas en vivo (vitrina, maqueta, portada y presentación) hasta que haya una cita. El sprite queda en el catálogo, marcado. |
 
 ## Hallazgos para todo el equipo
 

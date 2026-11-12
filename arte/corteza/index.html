@@ -165,7 +165,7 @@
   ];
   const OBJETOS = [
     { id: 'choza', x: 8, y: 4 }, { id: 'conchal', x: 10, y: 4 }, { id: 'lena', x: 6, y: 4 },
-    { id: 'mejillones', x: 16, y: 4 }, { id: 'arbol-bandera', x: 19, y: 4 }, { id: 'hongos', x: 16, y: 11 },
+    { id: 'mejillones', x: 16, y: 4 }, { id: 'guindo-grande', x: 19, y: 4 }, { id: 'hongos', x: 16, y: 11 },
     { id: 'pirita', x: 19, y: 11 }, { id: 'saber', x: 3, y: 11 }, { id: 'lobo-marino', x: 8, y: 5 }, { id: 'cormoran', x: 18, y: 10 },
     { id: 'pato-vapor', x: 5, y: 9 }, { id: 'ballena', x: 15, y: 8 },
   ];
@@ -314,7 +314,7 @@
   }
   const REGLAS = [
     ['Capas de papel', 'Cada isla es papel recortado: playa, tierra y bosque en capas con borde ondulado y sombra.', ['GLLG', '.GG.', ',,,,'], {}],
-    ['La luz viene del norte', 'Como el sol en Tierra del Fuego. Las sombras caen siempre hacia abajo y a la derecha.', ['LLGG', 'p..t', ',,-,'], { objetos: [{ id: 'arbol-bandera', x: 1, y: 1 }] }],
+    ['La luz viene del norte', 'Como el sol en Tierra del Fuego. Las sombras caen siempre hacia abajo y a la derecha.', ['LLGG', 'p..t', ',,-,'], { objetos: [{ id: 'conchal', x: 1, y: 1 }] }],
     ['Lo que se junta es pegatina', 'Leña, mariscos, hongos de árbol, pirita y saberes son pixel art con borde de papel. Si es pegatina, se puede agarrar.', ['GGLGG', '.....', ',,,,,'], { objetos: [{ id: 'lena', x: 0, y: 1 }, { id: 'mejillones', x: 1, y: 1 }, { id: 'hongos', x: 2, y: 1 }, { id: 'pirita', x: 3, y: 1 }, { id: 'saber', x: 4, y: 1 }] }],
     ['Lo desconocido es humo', 'Lo que no exploraste está tapado por nubes de humo, como el que vieron los navegantes desde el mar.', ['GGLL', '..,,', ',,--'], { explorado: (x) => x < 2 }],
     ['Frío afuera, cálido adentro', 'El paisaje es gris y verde oscuro. Solo el fuego y el saber son cálidos: lo que hay que cuidar.', [',--,', '-~~-', ',--,'], { hora: 'noche', canoa: { x: 1, y: 1, fuego: 4 } }],
@@ -359,7 +359,7 @@
 
   // ── Catálogo de elementos ──────────────────────────────────────────────
   const elem = document.getElementById('elementos');
-  const VECTOR = [['choza', 'Choza de domo', 'playa'], ['choza-conica', 'Choza cónica', 'playa'], ['conchal', 'Conchal', 'playa'], ['arbol-bandera', 'Árbol bandera', 'playa'], ['lobo-marino', 'Lobo marino', 'roca'], ['cormoran', 'Cormorán', 'roca'], ['pato-vapor', 'Pato vapor', 'agua'], ['ballena', 'Ballena', 'agua'], ['ballena-varada', 'Ballena varada', 'playa', 0.8], ['guindo-grande', 'Guindo de corteza', 'playa', 0.95], ['pinguino', 'Pingüino', 'playa'], ['cauquen', 'Cauquén', 'playa'], ['gaviota', 'Gaviota', 'roca'], ['tonina', 'Toninas', 'agua']];
+  const VECTOR = [['choza', 'Choza de domo', 'playa'], ['choza-conica', 'Choza cónica', 'playa'], ['conchal', 'Conchal', 'playa'], ['arbol-bandera', 'Árbol bandera (🔍 sin fuente, no usar en escenas)', 'playa'], ['lobo-marino', 'Lobo marino', 'roca'], ['cormoran', 'Cormorán', 'roca'], ['pato-vapor', 'Pato vapor', 'agua'], ['ballena', 'Ballena', 'agua'], ['ballena-varada', 'Ballena varada', 'playa', 0.8], ['guindo-grande', 'Guindo de corteza', 'playa', 0.95], ['pinguino', 'Pingüino', 'playa'], ['cauquen', 'Cauquén', 'playa'], ['gaviota', 'Gaviota', 'roca'], ['tonina', 'Toninas', 'agua']];
   function fondo(x, tipo) {
     x.fillStyle = tipo === 'playa' ? C.g : C.C; x.fillRect(0, 0, 96, 96);
     if (tipo === 'roca') { x.fillStyle = C.p; x.beginPath(); x.ellipse(48, 74, 34, 12, 0, 0, Math.PI * 2); x.fill(); x.fillStyle = C.k; x.beginPath(); x.ellipse(56, 76, 24, 9, 0, 0, Math.PI * 2); x.fill(); }
