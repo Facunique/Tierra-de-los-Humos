@@ -94,7 +94,8 @@ Checklist para llevar:
 - [ ] Notebook con cargador, adaptador HDMI y adaptador USB-C.
 - [ ] Parlante chico o auriculares (el sonido es parte de la experiencia).
 - [ ] El video descargado, por si falla la demo en vivo.
-- [ ] Un **cartel con QR** al enlace del juego (GitHub Pages).
+- [ ] El **cartel A3 con QR** impreso: [`stand/cartel-A3.pdf`](../stand/cartel-A3.pdf). Antes, verificar el QR en un celular (ver [`stand/README.md`](../stand/README.md)).
+- [ ] La **vidriera** corriendo en una pantalla, en bucle: [`stand/vidriera.html`](../stand/vidriera.html), con <kbd>F</kbd> para pantalla completa.
 - [ ] **Cartas de saber impresas** en cartulina, para que la gente se las lleve: [`arte/cartas/cartas-para-imprimir.pdf`](../arte/cartas/cartas-para-imprimir.pdf) (A4, doble faz, girar por el borde largo). Llevan la fuente al dorso. Antes de imprimir, la Persona C aprueba los textos.
 - [ ] Mínimo 2 integrantes presentes (obligatorio).
 

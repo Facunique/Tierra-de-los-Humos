@@ -52,6 +52,7 @@ Arte y sonido:
 | [Pantallas del juego](arte/pantallas/index.html) | Maqueta navegable de todo el recorrido: título, viaje, cartas, fin del viaje, códice y cierre en presente |
 | [`arte/`](arte/README.md) | Motor de dibujo, paleta, pegatinas pixel, logo y tipografía. Todo propio |
 | [Cartas para imprimir](arte/cartas/cartas-para-imprimir.pdf) | Cartas de saber en A4, doble faz, para la demo |
+| [Stand de la demo](stand/README.md) | Vidriera que se reproduce sola, cartel A3 con QR y códigos QR |
 | [Propuestas de estilo](arte/propuestas/index.html) | Las tres propuestas que votó el equipo (registro) |
 | [`sonido/`](sonido/README.md) | Sonido ambiente y efectos generados por código, con demo |
 
@@ -117,6 +118,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Claude (Anthropic), a través de Claude Code:** se usó para resumir las bases de la hackatón, proponer un plan de trabajo y armar la estructura inicial de este repositorio y de su documentación. El equipo revisa y decide todo el contenido.
 - **Arte y sonido (12/11):** a pedido de la persona a cargo del arte, Claude Code buscó fuentes sobre el paisaje fueguino y la cultura material yagán, y propuso la dirección de arte (`docs/04-direccion-de-arte.md`). También escribió el código que define y genera la paleta, los sprites en pixel art, el logo y la página de propuestas (`arte/`), y el código que sintetiza el sonido (`sonido/`), junto con el plan de video y pitch (`equipo/comunicacion.md`). El equipo revisa los dibujos y elige el estilo. Los datos culturales marcados con 🔍 los verifica la persona de investigación con las fuentes y la comunidad.
 - **Estilo Corteza y rigor histórico (12/11):** el equipo eligió el estilo. Claude Code escribió el motor de dibujo (`arte/corteza/`), las cartas, el HUD y el logo. También leyó el capítulo «The Yahgan» del *Handbook of South American Indians* (Cooper, 1946) y *The Gold Diggings of Cape Horn* (Spears, 1895), auditó cada elemento del arte contra esas fuentes, con página (`docs/05-rigor-historico.md`), y corrigió lo que no coincidía. La validación final es del equipo y de la comunidad.
+- **Mapa, alto contraste, transiciones y stand (12/11):** Claude Code armó el mapa de los territorios ancestrales con costas reales y fuentes (`arte/mapa/`), el modo alto contraste y las transiciones del motor (`arte/corteza/`), y la vidriera y el cartel del stand (`stand/`).
 - **Presentación, cartas impresas y video (12/11):** Claude Code armó la presentación del pitch (`presentacion/`), las cartas para imprimir (`arte/cartas/`) y el storyboard del video (`equipo/video/`), y redactó este README con huecos marcados (✏️) para que los complete el equipo.
 - **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
 

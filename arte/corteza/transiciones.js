@@ -60,9 +60,9 @@
   /** Nubes de humo que tapan el contenedor. Deja la capa puesta hasta humoDescubre. */
   function humoCubre(contenedor, ms) {
     if (capaHumo) capaHumo.cv.remove();
-    capaHumo = capa(contenedor); const { x, W, H } = capaHumo; capaHumo.nubes = nubesPara(W, H);
+    const c = capaHumo = capa(contenedor); const { x, W, H } = c; c.nubes = nubesPara(W, H);
     if (reducido()) { x.fillStyle = C.h; x.fillRect(0, 0, W, H); return Promise.resolve(); }
-    return animar(ms || 650, (t) => { x.clearRect(0, 0, W, H); pintarNubes(x, capaHumo.nubes, suave(t)); });
+    return animar(ms || 650, (t) => { x.clearRect(0, 0, W, H); pintarNubes(x, c.nubes, suave(t)); });
   }
   /** Las nubes se abren y desaparecen. */
   function humoDescubre(contenedor, ms) {
