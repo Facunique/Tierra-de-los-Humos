@@ -623,12 +623,48 @@
         }
       ]
     },
+    "icono-pez": {
+      "categoria": "icono",
+      "descripcion": "Pescado",
+      "cuadros": [
+        {
+          "x": 32,
+          "y": 128,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-erizo": {
+      "categoria": "icono",
+      "descripcion": "Erizo de mar",
+      "cuadros": [
+        {
+          "x": 48,
+          "y": 128,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-huevos": {
+      "categoria": "icono",
+      "descripcion": "Huevos de aves",
+      "cuadros": [
+        {
+          "x": 64,
+          "y": 128,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
     "icono-hongo": {
       "categoria": "icono",
       "descripcion": "Hongos de árbol",
       "cuadros": [
         {
-          "x": 32,
+          "x": 80,
           "y": 128,
           "w": 16,
           "h": 16
@@ -640,7 +676,7 @@
       "descripcion": "Pirita (piedra de fuego)",
       "cuadros": [
         {
-          "x": 48,
+          "x": 96,
           "y": 128,
           "w": 16,
           "h": 16
@@ -652,7 +688,7 @@
       "descripcion": "Calafate",
       "cuadros": [
         {
-          "x": 64,
+          "x": 112,
           "y": 128,
           "w": 16,
           "h": 16

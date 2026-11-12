@@ -748,6 +748,63 @@
       '.zDDDDDDDDDDDDz.',
       '..zzzzzzzzzzzz..',
     ],
+    // Pescado: el segundo alimento en importancia. Lo pescaban las mujeres con una línea sin anzuelo (Cooper 1946, p. 84).
+    'icono-pez': [
+      '................',
+      '................',
+      '................',
+      '................',
+      '.....zzzzz......',
+      '...zzDDDDDzz..zz',
+      '..zDDEEDDDDDDzDz',
+      '.zDzDEEDDDDDDDDz',
+      'zDDDDEEDDDDDDDz.',
+      '.zhhhhhhhhhhhhDz',
+      '..zzhhhhhhhhzzhz',
+      '....zzzzzzzz..zz',
+      '.......zhz......',
+      '........z.......',
+      '................',
+      '................',
+    ],
+    // Erizo de mar: se juntaba con un tenedor de madera de cuatro puntas (Cooper 1946, p. 84).
+    'icono-erizo': [
+      '................',
+      '....z..z..z.....',
+      '..z..zJzJz..z...',
+      '...zzbbbbbzz....',
+      '.z.zbbJbbbbz.z..',
+      '..zbJbbbbJbbz...',
+      'zzbbbbbJbbbbbzz.',
+      '..zbbJbbbbbJbz..',
+      'zzbbbbbbJbbbbzz.',
+      '..zbbbJbbbbbbz..',
+      '.z.zbbbbbJbbz.z.',
+      '...zzbbbbbbzz...',
+      '..z..zzzzzz..z..',
+      '.kppPPPpppPPppk.',
+      'kpPPpppPPPpppPpk',
+      '.kkkkkkkkkkkkkk.',
+    ],
+    // Huevos de aves: tercer grupo de alimentos en importancia (Cooper 1946, p. 84).
+    'icono-huevos': [
+      '................',
+      '................',
+      '................',
+      '................',
+      '.....zzz........',
+      '....zwwwz.zzz...',
+      '...zwwPwwzwwwz..',
+      '...zwwwwwzwPwwz.',
+      '...zwPwwwzwwwwz.',
+      '..mzwwwwPzwwPwzm',
+      '.mmmzwwwzwwwwwzm',
+      'mmGmmzzzmzzzzzmm',
+      '.mmGmmGmmmGmmGm.',
+      '..mmmmmmmmmmmm..',
+      '................',
+      '................',
+    ],
     // Hongos de árbol (Cyttaria, en ramas de Nothofagus): se comían y se guardaban secos (Cooper 1946, p. 84).
     'icono-hongo': [
       '................',
@@ -863,7 +920,7 @@
   const NOMBRES_ICONOS = {
     'icono-fuego': 'Fuego', 'icono-lena': 'Leña', 'icono-comida': 'Comida', 'icono-refugio': 'Refugio',
     'icono-viento': 'Viento', 'icono-lluvia': 'Lluvia', 'icono-frio': 'Frío', 'icono-saber': 'Carta de saber',
-    'icono-codice': 'Códice', 'icono-generacion': 'Generación (lo que se hereda)', 'icono-remo': 'Remar (mover)', 'icono-calma': 'Calma', 'icono-calafate': 'Calafate', 'icono-hongo': 'Hongos de árbol', 'icono-pirita': 'Pirita (piedra de fuego)',
+    'icono-codice': 'Códice', 'icono-generacion': 'Generación (lo que se hereda)', 'icono-remo': 'Remar (mover)', 'icono-calma': 'Calma', 'icono-calafate': 'Calafate', 'icono-hongo': 'Hongos de árbol', 'icono-pez': 'Pescado', 'icono-erizo': 'Erizo de mar', 'icono-huevos': 'Huevos de aves', 'icono-pirita': 'Pirita (piedra de fuego)',
   };
   Object.keys(ICONOS).forEach((id) => sumar(id, 'icono', NOMBRES_ICONOS[id], [ICONOS[id]]));
 

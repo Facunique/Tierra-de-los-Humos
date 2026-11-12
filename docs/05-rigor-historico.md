@@ -90,11 +90,16 @@ También comían los **hongos que crecen en los árboles** (no los del suelo) y 
 | Elemento | Qué dice la fuente | Estado |
 |---|---|---|
 | Mejillones | Se juntaban a mano; las lapas, con un palo plano; los erizos, con un tenedor de madera de cuatro puntas (Cooper, p. 84). Lo hacían las mujeres (p. 96). | ✅ Es la pegatina principal de comida. |
-| Peces | Pescaban las mujeres, con una línea de tallo de cachiyuyo o de tendón de ballena trenzado. En lugar de anzuelo, la carnada iba en un nudo corredizo de barba de ballena, y el pez se agarraba con la mano. No había redes verdaderas (Cooper, p. 84; Spears, p. 60-61). | 🔍 No hay sprite todavía. ⛔ Nunca dibujar anzuelos ni redes. |
+| Peces | Pescaban las mujeres, con una línea de tallo de cachiyuyo o de tendón de ballena trenzado. En lugar de anzuelo, la carnada iba en un nudo corredizo de barba de ballena, y el pez se agarraba con la mano. No había redes verdaderas (Cooper, p. 84; Spears, p. 60-61). | 🔧 **Agregado** (pegatina `pescado`). ⛔ Nunca dibujar anzuelos ni redes. |
+| Erizos | Se juntaban con un tenedor de madera de cuatro puntas (Cooper, p. 84). Cuarto grupo de alimentos. | 🔧 **Agregado** (pegatina `erizos`, sobre la roca). 🔍 La especie y el color exactos. |
+| Huevos | Tercer grupo de alimentos, junto con las gaviotas (Cooper, p. 84). Los juntaban las mujeres (p. 96). | 🔧 **Agregado** (pegatina `huevos`). |
+| Gaviota, cauquén, pingüino | Las gaviotas en el tercer grupo; los cauquenes (gansos) y los pingüinos en el cuarto (Cooper, p. 84). | 🔧 **Agregados** como papel, en reposo. 🔍 Especies y nombres oficiales (ver Goodall). |
+| Toninas y marsopas | Las marsopas en el tercer grupo de alimentos (Cooper, p. 84). | 🔧 **Agregadas** (`tonina`), nadando. 🔍 Especie del Beagle. |
 | Hongos de árbol | Ver arriba (Cooper, p. 84). Los juntaban las mujeres (p. 96). | 🔧 **Agregados** (pegatina `hongos`). |
 | Calafate | Cooper menciona el calafate (*Berberis*) en el bosque (p. 81), pero entre las bayas que se comían nombra sobre todo la grosella negra silvestre (p. 84). | 🔧 **Lo sacamos del mapa.** El sprite queda guardado, marcado 🔍. |
 | Lobo marino | Se cazaba con lanza o arpón, desde la canoa o desde tierra (Cooper, p. 84). | ✅ Aparece descansando en las rocas. ⛔ Ninguna escena de caza. |
 | Ballena | Se cazaba poco. Las ballenas varadas se aprovechaban con entusiasmo (Cooper, p. 84) y reunían a muchas familias (p. 99). | ✅ Ballena en el canal. Ver «Destino del viaje». |
+| Ballena varada | Ídem. | 🔧 **Agregada** (`ballena-varada`), sobre la playa, sin escenas de faenado. Es candidata a destino del viaje. |
 | Cormoranes y otras aves | Los cormoranes se cazaban de noche, con antorchas; las aves, con lazos (Cooper, p. 84). | ✅ El cormorán aparece posado. ⛔ Ninguna escena de caza. |
 | Zorros y ratas | No se comían, salvo el zorro en una hambruna (Cooper, p. 81 y 84). | ⛔ No aparecen como comida. |
 
@@ -117,6 +122,7 @@ También comían los **hongos que crecen en los árboles** (no los del suelo) y 
 | Elemento | Qué dice la fuente | Estado |
 |---|---|---|
 | Bosque | Islas cubiertas de bosque hasta unos 450 m de altura: guindo, lenga y ñire, canelo, ciprés, leña dura, calafate y chaura (Cooper, p. 81). | ✅ Guindo y lenga. |
+| Guindo de corteza | La corteza de la canoa salía solo del guindo y se sacaba en primavera (Cooper, p. 88), del árbol en pie, de un tronco recto y sin ramas de por lo menos 8 m (Museo Marítimo de Ushuaia). Solo había corteza buena en ciertos lugares (Cooper, p. 95). | 🔧 **Agregado** (`guindo-grande`): tronco alto y recto, con la franja clara donde se sacó la corteza. Es candidato a destino del viaje. |
 | Lenga | Cooper (p. 81) la llama «siempreverde», pero la botánica actual la describe como de hoja caduca, que se pone roja en otoño (Multequina, IADIZA-CONICET). | ✅ Seguimos la botánica actual y anotamos la diferencia. |
 | Clima | Ráfagas violentas, cambios bruscos, y nevadas incluso en verano (Cooper, p. 81). | ✅ Puede nevar en cualquier estación del juego. |
 | Turbales | Pantanos de musgo que retienen agua como una esponja (Spears, p. 149, sobre la Isla de los Estados). | ✅ |

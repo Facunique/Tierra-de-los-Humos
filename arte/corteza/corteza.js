@@ -56,7 +56,7 @@
   const SOMBRA = rgba(C.A, 0.55);
 
   // Lo que se junta se dibuja como pegatina pixel. id del objeto → sprite de arte.js
-  const PEGATINAS = { lena: 'icono-lena', mejillones: 'icono-comida', hongos: 'icono-hongo', pirita: 'icono-pirita', calafate: 'icono-calafate', saber: 'icono-saber' };
+  const PEGATINAS = { lena: 'icono-lena', mejillones: 'icono-comida', hongos: 'icono-hongo', pirita: 'icono-pirita', pescado: 'icono-pez', erizos: 'icono-erizo', huevos: 'icono-huevos', calafate: 'icono-calafate', saber: 'icono-saber' };
 
   // ── Pegatinas pixel con borde de papel ──────────────────────────────────
   const cachePegatinas = {};
@@ -284,6 +284,70 @@
       ctx.strokeStyle = rgba(C.E, 0.8); ctx.lineWidth = 1.6 * s; ctx.beginPath(); ctx.moveTo(x - 23 * s, y + 1 * s); ctx.quadraticCurveTo(x, y + 3 * s, x + 21 * s, y + 1 * s); ctx.stroke();
       const sop = (t * 0.5) % 1; // el soplido
       if (sop < 0.45) { ctx.fillStyle = rgba(C.W, 0.85 * (1 - sop / 0.45)); ctx.beginPath(); circulo(ctx, x - 8 * s, y - 12 * s - sop * 20 * s, 3 * s + sop * 6 * s); circulo(ctx, x - 12 * s, y - 9 * s - sop * 14 * s, 2.5 * s + sop * 4 * s); ctx.fill(); }
+    },
+    // Ballena varada en la playa: se aprovechaba con entusiasmo y reunía a muchas familias (Cooper 1946, p. 84 y 99).
+    'ballena-varada'(ctx, x, y, s, t) {
+      const L = 46 * s;
+      ctx.fillStyle = SOMBRA; ctx.beginPath(); elipse(ctx, x + 5 * s, y + 3 * s, L * 0.95, 6 * s); ctx.fill();
+      ctx.strokeStyle = rgba(C.E, 0.85); ctx.lineWidth = 1.6 * s; ctx.beginPath(); ctx.moveTo(x - L, y + 4 * s); ctx.quadraticCurveTo(x, y + 8 * s + Math.sin(t * 1.5) * 1.5 * s, x + L, y + 4 * s); ctx.stroke();
+      // cuerpo de costado, cabeza a la izquierda, cola a la derecha
+      ctx.fillStyle = C.z; ctx.beginPath(); ctx.moveTo(x - L * 0.92, y); ctx.bezierCurveTo(x - L * 0.9, y - 17 * s, x + L * 0.35, y - 19 * s, x + L * 0.72, y - 5 * s);
+      ctx.lineTo(x + L * 0.98, y - 12 * s); ctx.lineTo(x + L * 0.9, y + 1 * s); ctx.lineTo(x + L * 1.0, y + 6 * s); ctx.lineTo(x + L * 0.7, y + 2 * s); ctx.quadraticCurveTo(x, y + 6 * s, x - L * 0.92, y); ctx.fill();
+      ctx.fillStyle = C.h; ctx.beginPath(); ctx.moveTo(x - L * 0.85, y + 1 * s); ctx.quadraticCurveTo(x - L * 0.2, y + 5 * s, x + L * 0.5, y + 1 * s); ctx.quadraticCurveTo(x - L * 0.2, y - 3 * s, x - L * 0.85, y + 1 * s); ctx.fill();
+      ctx.strokeStyle = rgba(C.z, 0.6); ctx.lineWidth = 1 * s; // pliegues de la garganta
+      for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.moveTo(x - L * 0.8, y + (0.5 + i * 0.6) * s); ctx.quadraticCurveTo(x - L * 0.3, y + (2.5 + i * 0.6) * s, x + L * 0.1, y + (1 + i * 0.5) * s); ctx.stroke(); }
+      ctx.fillStyle = C.h; ctx.beginPath(); elipse(ctx, x - L * 0.3, y - 13 * s, L * 0.35, 2.4 * s, -0.05); ctx.fill();
+      ctx.fillStyle = C.w; ctx.beginPath(); circulo(ctx, x - L * 0.7, y - 7 * s, 1.3 * s); ctx.fill();
+    },
+    // Guindo grande: de ahí salía la corteza de la canoa, en primavera, del árbol en pie (Cooper 1946, p. 88; Museo Marítimo de Ushuaia).
+    'guindo-grande'(ctx, x, y, s, t, viento, est) {
+      const [so, me, lu] = GUINDO, h = 1.25 * s;
+      ctx.fillStyle = SOMBRA; ctx.beginPath(); elipse(ctx, x + 9 * h, y + 2 * h, 16 * h, 4 * h); ctx.fill();
+      ctx.fillStyle = C.r; ctx.fillRect(x - 3 * h, y - 30 * h, 6 * h, 31 * h);
+      ctx.fillStyle = C.R; ctx.fillRect(x - 1.6 * h, y - 24 * h, 3.4 * h, 18 * h); // franja donde se sacó la corteza
+      ctx.strokeStyle = C.r; ctx.lineWidth = 0.8 * h; ctx.beginPath(); ctx.moveTo(x - 1.6 * h, y - 24 * h); ctx.lineTo(x + 1.8 * h, y - 24 * h); ctx.moveTo(x - 1.6 * h, y - 6 * h); ctx.lineTo(x + 1.8 * h, y - 6 * h); ctx.stroke();
+      const matas = [[-8, -30, 9, 5.5], [8, -31, 9, 5.5], [0, -34, 10, 6], [-5, -40, 8, 5], [6, -41, 7, 4.5], [0, -46, 6, 4]];
+      ctx.fillStyle = so; ctx.beginPath(); matas.forEach(([dx, dy, rx, ry]) => elipse(ctx, x + dx * h + 2 * h, y + dy * h + 2 * h, rx * h, ry * h)); ctx.fill();
+      ctx.fillStyle = me; ctx.beginPath(); matas.forEach(([dx, dy, rx, ry]) => elipse(ctx, x + dx * h, y + dy * h, rx * h, ry * h)); ctx.fill();
+      ctx.fillStyle = lu; ctx.beginPath(); matas.forEach(([dx, dy, rx, ry], i) => { if (i % 2 === 0) elipse(ctx, x + (dx - rx * 0.3) * h, y + (dy - ry * 0.45) * h, rx * 0.45 * h, ry * 0.3 * h); }); ctx.fill();
+      if (est && est.nieve) { ctx.fillStyle = rgba(C.W, 0.85); ctx.beginPath(); elipse(ctx, x - 2 * h, y - 49 * h, 5 * h, 1.6 * h); ctx.fill(); }
+    },
+    // Pingüino: entre los alimentos del cuarto grupo (Cooper 1946, p. 84).
+    pinguino(ctx, x, y, s) {
+      ctx.fillStyle = SOMBRA; ctx.beginPath(); elipse(ctx, x + 3 * s, y + 1 * s, 6 * s, 1.8 * s); ctx.fill();
+      ctx.fillStyle = C.z; ctx.beginPath(); elipse(ctx, x, y - 8 * s, 5 * s, 8.5 * s); circulo(ctx, x - 0.5 * s, y - 17 * s, 3.6 * s); ctx.fill();
+      ctx.fillStyle = C.w; ctx.beginPath(); elipse(ctx, x - 1.2 * s, y - 7 * s, 3.2 * s, 6 * s); ctx.fill();
+      ctx.strokeStyle = C.z; ctx.lineWidth = 1.2 * s; ctx.beginPath(); ctx.moveTo(x - 4 * s, y - 10 * s); ctx.quadraticCurveTo(x - 1 * s, y - 8 * s, x + 2 * s, y - 10.5 * s); ctx.stroke();
+      ctx.strokeStyle = C.w; ctx.lineWidth = 1 * s; ctx.beginPath(); ctx.arc(x - 0.5 * s, y - 17 * s, 2.6 * s, Math.PI * 0.6, Math.PI * 1.3); ctx.stroke();
+      ctx.fillStyle = C.p; ctx.beginPath(); ctx.moveTo(x - 3.5 * s, y - 17.5 * s); ctx.lineTo(x - 6.5 * s, y - 16.8 * s); ctx.lineTo(x - 3.5 * s, y - 16 * s); ctx.fill();
+    },
+    // Cauquén (ganso): entre los alimentos del cuarto grupo (Cooper 1946, p. 84).
+    cauquen(ctx, x, y, s) {
+      ctx.fillStyle = SOMBRA; ctx.beginPath(); elipse(ctx, x + 3 * s, y + 1 * s, 9 * s, 2 * s); ctx.fill();
+      ctx.strokeStyle = C.k; ctx.lineWidth = 1.2 * s; ctx.beginPath(); ctx.moveTo(x - 1 * s, y - 3 * s); ctx.lineTo(x - 2 * s, y); ctx.moveTo(x + 2 * s, y - 3 * s); ctx.lineTo(x + 2.5 * s, y); ctx.stroke();
+      ctx.fillStyle = C.h; ctx.beginPath(); elipse(ctx, x + 2 * s, y - 7 * s, 9 * s, 4.5 * s, -0.1); ctx.fill();
+      ctx.strokeStyle = C.z; ctx.lineWidth = 0.8 * s; for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.moveTo(x + (-1 + i * 3) * s, y - 9 * s); ctx.lineTo(x + (1 + i * 3) * s, y - 4.5 * s); ctx.stroke(); }
+      ctx.fillStyle = C.w; ctx.beginPath(); elipse(ctx, x - 5 * s, y - 8 * s, 3.5 * s, 3.5 * s); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(x - 7 * s, y - 9 * s); ctx.quadraticCurveTo(x - 8.5 * s, y - 15 * s, x - 7 * s, y - 18 * s); ctx.lineTo(x - 4.5 * s, y - 17 * s); ctx.quadraticCurveTo(x - 5.5 * s, y - 13 * s, x - 3.5 * s, y - 9 * s); ctx.fill();
+      ctx.beginPath(); circulo(ctx, x - 6 * s, y - 18 * s, 2.6 * s); ctx.fill();
+      ctx.fillStyle = C.z; ctx.beginPath(); ctx.moveTo(x - 8 * s, y - 18.5 * s); ctx.lineTo(x - 10.5 * s, y - 17.8 * s); ctx.lineTo(x - 8 * s, y - 17 * s); ctx.fill(); circulo(ctx, x - 6.4 * s, y - 18.6 * s, 0.6 * s); ctx.fill();
+    },
+    // Gaviota: tercer grupo de alimentos, con los huevos (Cooper 1946, p. 84).
+    gaviota(ctx, x, y, s) {
+      ctx.fillStyle = SOMBRA; ctx.beginPath(); elipse(ctx, x + 3 * s, y + 1 * s, 7 * s, 1.8 * s); ctx.fill();
+      ctx.fillStyle = C.w; ctx.beginPath(); elipse(ctx, x + 1 * s, y - 6 * s, 7 * s, 4 * s, -0.1); circulo(ctx, x - 5 * s, y - 10 * s, 3 * s); ctx.fill();
+      ctx.fillStyle = C.z; ctx.beginPath(); ctx.moveTo(x - 2 * s, y - 9 * s); ctx.quadraticCurveTo(x + 5 * s, y - 11 * s, x + 10 * s, y - 6 * s); ctx.quadraticCurveTo(x + 4 * s, y - 6 * s, x - 2 * s, y - 7 * s); ctx.fill();
+      ctx.fillStyle = C.O; ctx.beginPath(); ctx.moveTo(x - 7.5 * s, y - 10.5 * s); ctx.lineTo(x - 11 * s, y - 10 * s); ctx.lineTo(x - 7.5 * s, y - 9.2 * s); ctx.fill();
+      ctx.strokeStyle = C.O; ctx.lineWidth = 1 * s; ctx.beginPath(); ctx.moveTo(x, y - 3 * s); ctx.lineTo(x - 0.5 * s, y); ctx.moveTo(x + 2.5 * s, y - 3 * s); ctx.lineTo(x + 3 * s, y); ctx.stroke();
+    },
+    // Toninas: pequeños cetáceos del canal; las marsopas, en el tercer grupo de alimentos (Cooper 1946, p. 84). 🔍 especie.
+    tonina(ctx, x, y, s, t) {
+      [[-9, 0], [8, 3]].forEach(([dx, dy], i) => {
+        const fase = (Math.sin(t * 1.6 + i * 2) + 1) / 2, h = 4 + fase * 5;
+        ctx.fillStyle = C.z; ctx.beginPath(); ctx.moveTo(x + dx * s - 7 * s, y + dy * s); ctx.quadraticCurveTo(x + dx * s - 2 * s, y + dy * s - h * s, x + dx * s + 3 * s, y + dy * s - h * 1.1 * s); ctx.quadraticCurveTo(x + dx * s + 2 * s, y + dy * s - h * 0.4 * s, x + dx * s + 7 * s, y + dy * s); ctx.fill();
+        ctx.fillStyle = C.w; ctx.beginPath(); elipse(ctx, x + dx * s - 3 * s, y + dy * s - 1 * s, 2.5 * s, 1 * s); ctx.fill();
+        ctx.strokeStyle = rgba(C.E, 0.8); ctx.lineWidth = 1.4 * s; ctx.beginPath(); ctx.moveTo(x + dx * s - 9 * s, y + dy * s + 1 * s); ctx.quadraticCurveTo(x + dx * s, y + dy * s + 3 * s, x + dx * s + 9 * s, y + dy * s + 1 * s); ctx.stroke();
+      });
     },
   };
 

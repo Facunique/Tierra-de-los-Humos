@@ -359,19 +359,19 @@
 
   // ── Catálogo de elementos ──────────────────────────────────────────────
   const elem = document.getElementById('elementos');
-  const VECTOR = [['choza', 'Choza de domo', 'playa'], ['choza-conica', 'Choza cónica', 'playa'], ['conchal', 'Conchal', 'playa'], ['arbol-bandera', 'Árbol bandera', 'playa'], ['lobo-marino', 'Lobo marino', 'roca'], ['cormoran', 'Cormorán', 'roca'], ['pato-vapor', 'Pato vapor', 'agua'], ['ballena', 'Ballena', 'agua']];
+  const VECTOR = [['choza', 'Choza de domo', 'playa'], ['choza-conica', 'Choza cónica', 'playa'], ['conchal', 'Conchal', 'playa'], ['arbol-bandera', 'Árbol bandera', 'playa'], ['lobo-marino', 'Lobo marino', 'roca'], ['cormoran', 'Cormorán', 'roca'], ['pato-vapor', 'Pato vapor', 'agua'], ['ballena', 'Ballena', 'agua'], ['ballena-varada', 'Ballena varada', 'playa', 0.8], ['guindo-grande', 'Guindo de corteza', 'playa', 0.95], ['pinguino', 'Pingüino', 'playa'], ['cauquen', 'Cauquén', 'playa'], ['gaviota', 'Gaviota', 'roca'], ['tonina', 'Toninas', 'agua']];
   function fondo(x, tipo) {
     x.fillStyle = tipo === 'playa' ? C.g : C.C; x.fillRect(0, 0, 96, 96);
     if (tipo === 'roca') { x.fillStyle = C.p; x.beginPath(); x.ellipse(48, 74, 34, 12, 0, 0, Math.PI * 2); x.fill(); x.fillStyle = C.k; x.beginPath(); x.ellipse(56, 76, 24, 9, 0, 0, Math.PI * 2); x.fill(); }
   }
-  VECTOR.forEach(([id, nombre, tipo]) => {
+  VECTOR.forEach(([id, nombre, tipo, escala]) => {
     const cv = document.createElement('canvas'); cv.width = 192; cv.height = 192;
     const x = cv.getContext('2d'); x.scale(2, 2); fondo(x, tipo);
-    CZ.figuras[id](x, 48, tipo === 'agua' ? 62 : 74, 1.25, 1.3, 0.6, CZ.ESTACIONES.verano);
+    CZ.figuras[id](x, 48, tipo === 'agua' ? 62 : (id === 'guindo-grande' ? 88 : 74), escala || 1.25, 1.3, 0.6, CZ.ESTACIONES.verano);
     const f = document.createElement('figure'); f.appendChild(cv);
     f.insertAdjacentHTML('beforeend', '<figcaption>' + nombre + '<small>papel</small></figcaption>'); elem.appendChild(f);
   });
-  [['lena', 'Leña'], ['mejillones', 'Mejillones'], ['hongos', 'Hongos de árbol'], ['pirita', 'Pirita'], ['saber', 'Saber']].forEach(([id, nombre]) => {
+  [['lena', 'Leña'], ['mejillones', 'Mejillones'], ['pescado', 'Pescado'], ['erizos', 'Erizos'], ['huevos', 'Huevos'], ['hongos', 'Hongos de árbol'], ['pirita', 'Pirita'], ['saber', 'Saber']].forEach(([id, nombre]) => {
     const cv = document.createElement('canvas'); cv.width = 192; cv.height = 192;
     const x = cv.getContext('2d'); x.fillStyle = C.g; x.fillRect(0, 0, 192, 192);
     const p = CZ.pegatina(CZ.PEGATINAS[id], 5); x.imageSmoothingEnabled = false; x.drawImage(p, (192 - p.width) / 2, (192 - p.height) / 2);
