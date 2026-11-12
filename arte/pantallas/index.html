@@ -250,6 +250,7 @@
 <script src="../corteza/transiciones.js"></script>
 <script src="../cartas/saberes-borrador.js"></script>
 <script src="../../sonido/ambiente.js"></script>
+<script src="../../sonido/voz.js"></script>
 <script>
 (function () {
   'use strict';
@@ -512,14 +513,24 @@
     const nuevo = !memoria.has(k);
     memoria.add(k); if (viaje && nuevo) viaje.aprendidos.push(k);
     const v = $('velo');
-    v.innerHTML = '<article class="carta-saber papel">' + cartaHTML(k) + '<p class="borrador">Borrador para la Persona C.</p><button class="boton-papel boton-papel--fuego" id="b-guardar">' + (nuevo ? 'Guardar en la memoria' : 'Seguir') + '</button></article>';
+    const conVoz = window.TDH_VOZ && TDH_VOZ.disponible();
+    v.innerHTML = '<article class="carta-saber papel">' + cartaHTML(k) + '<p class="borrador">Borrador para la Persona C.</p>' +
+      (conVoz ? '<button class="boton-papel" id="b-escuchar" aria-pressed="false">🔊 Escuchar la carta</button>' : '') +
+      '<button class="boton-papel boton-papel--fuego" id="b-guardar">' + (nuevo ? 'Guardar en la memoria' : 'Seguir') + '</button></article>';
+    if (conVoz) $('b-escuchar').addEventListener('click', async (e) => {
+      const b = e.currentTarget;
+      if (TDH_VOZ.hablando) { TDH_VOZ.detener(); b.setAttribute('aria-pressed', 'false'); b.textContent = '🔊 Escuchar la carta'; return; }
+      b.setAttribute('aria-pressed', 'true'); b.textContent = '⏹ Detener';
+      await TDH_VOZ.leerCarta(SABERES[k]);
+      b.setAttribute('aria-pressed', 'false'); b.textContent = '🔊 Escuchar la carta';
+    });
     v.classList.add('abierto');
     if (window.TDH_TRANSICIONES) TDH_TRANSICIONES.cartaEntra(v.querySelector('.carta-saber'));
     requestAnimationFrame(() => escenaEn(v.querySelector('canvas'), SABERES[k].mapa, SABERES[k].extra, 1.6));
     if (sonido && conSonido && nuevo) sonido.efecto('saber');
     $('b-guardar').addEventListener('click', cerrarSaber); $('b-guardar').focus();
   }
-  function cerrarSaber() { $('velo').classList.remove('abierto'); if (viaje) acciones(); }
+  function cerrarSaber() { if (window.TDH_VOZ) TDH_VOZ.detener(); $('velo').classList.remove('abierto'); if (viaje) acciones(); }
   $('r-carta').addEventListener('click', () => { ir('viaje'); mostrarSaber('pirita'); });
 
   // ── Códice ──────────────────────────────────────────────────────────────

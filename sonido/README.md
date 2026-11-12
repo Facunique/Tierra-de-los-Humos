@@ -42,6 +42,18 @@ Sugerencia de cuándo usar cada efecto:
 | `apagado` | Cuando el fuego se apaga (fin del viaje) |
 | `generacion` | Al empezar el viaje de la siguiente generación |
 
+## Lectura en voz alta de las cartas
+
+[`voz.js`](voz.js) lee las cartas de saber con la voz que ya trae el sistema (Web Speech API), en castellano y de preferencia rioplatense. No usa archivos ni hace falta internet en la mayoría de los equipos. Sirve a quien lee con dificultad, a quien ve poco y a los chicos más chicos.
+
+```js
+if (TDH_VOZ.disponible()) botonEscuchar.hidden = false;
+TDH_VOZ.leerCarta({ tipo, titulo, dato, juego, fuente });
+TDH_VOZ.detener();
+```
+
+La voz del sistema no sabe pronunciar palabras en lengua yagán: si alguna carta las incluye, tiene que ir con una grabación hecha junto con la comunidad. En la maqueta, cada carta tiene el botón «Escuchar la carta».
+
 ## Decisiones
 
 - **Sin música ni cantos inventados.** Los cantos yaganes son patrimonio de la comunidad. Solo suena el territorio y el fuego. Si la comunidad comparte y autoriza algo, se suma con su crédito.
