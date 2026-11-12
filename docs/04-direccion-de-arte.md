@@ -149,6 +149,10 @@ La maqueta incluye un **bucle de prueba**, no el motor del juego: el fuego se ga
 
 Los textos de las cartas de la maqueta (fuego, amarre, mejillones, pesca sin anzuelo, hongos, pirita, choza, corteza y ballena varada) salen de Cooper (1946), con página. Son **borradores para la Persona C**.
 
+### Postal del viaje
+
+Al terminar un viaje (fin o llegada), la maqueta ofrece «Ver la postal del viaje»: una imagen de 1200 × 800 con el mapa y el recorrido como un hilo punteado, la generación, cómo terminó, los saberes aprendidos y un recuadro del mapa real de los canales. Se guarda como PNG para compartir o llevar del stand. La genera `arte/postal/postal.js`. Aclara que la familia y el mapa son ficción y los saberes no.
+
 ## 8. Cartas de saber y códice
 
 ![Carta de saber de papel con ilustración, etiquetas Dato y En el juego, y la fuente con página; al lado, el códice con dos cartas y dos todavía en el humo](img/corteza-cartas.jpg)

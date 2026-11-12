@@ -178,7 +178,7 @@
       <p>Pero lo aprendido no se pierde. Estos saberes pasan a la siguiente generación:</p>
       <ul class="lista-saberes" id="lista-fin"></ul>
     </div>
-    <div class="botones"><button class="boton-papel boton-papel--fuego" id="b-nueva-gen">Empezar la generación siguiente</button><button class="boton-papel" data-ir="codice">Ver el códice</button></div>
+    <div class="botones"><button class="boton-papel boton-papel--fuego" id="b-nueva-gen">Empezar la generación siguiente</button><button class="boton-papel b-postal">Ver la postal del viaje</button><button class="boton-papel" data-ir="codice">Ver el códice</button></div>
   </div>
 </section>
 
@@ -193,7 +193,7 @@
       <p class="borrador">Destino de ejemplo, con fuente (Cooper 1946, p. 84, 94-95 y 99). El destino final lo elige el equipo.</p>
       <ul class="lista-saberes" id="lista-llegada"></ul>
     </div>
-    <div class="botones"><button class="boton-papel boton-papel--fuego" id="b-otra-vez">Otro viaje</button><button class="boton-papel" data-ir="codice">Ver el códice</button></div>
+    <div class="botones"><button class="boton-papel boton-papel--fuego" id="b-otra-vez">Otro viaje</button><button class="boton-papel b-postal">Ver la postal del viaje</button><button class="boton-papel" data-ir="codice">Ver el códice</button></div>
   </div>
 </section>
 
@@ -248,6 +248,7 @@
 <script src="../mapa/costas.js"></script>
 <script src="../mapa/mapa.js"></script>
 <script src="../corteza/transiciones.js"></script>
+<script src="../postal/postal.js"></script>
 <script src="../cartas/saberes-borrador.js"></script>
 <script src="../../sonido/ambiente.js"></script>
 <script src="../../sonido/voz.js"></script>
@@ -361,7 +362,7 @@
   try { altoContraste = localStorage.getItem('tdh-alto-contraste') === '1'; } catch (e) { /* sin almacenamiento: queda apagado */ }
   const esAgua = (x, y) => y >= 0 && x >= 0 && y < MAPA_VIAJE.length && x < MAPA_VIAJE[0].length && '~-,kr'.includes(MAPA_VIAJE[y][x]) && MAPA_VIAJE[y][x] !== 'r';
   function nuevoViaje() {
-    viaje = { canoa: { x: 2, y: 6, fuego: 4, mira: 1 }, energia: 16, lena: 1, comida: 0, pasos: 0, hora: 'dia', clima: 'calma', objetos: OBJ_VIAJE.map((o) => Object.assign({}, o)), visto: new Set(), aprendidos: [], pirita: false };
+    viaje = { canoa: { x: 2, y: 6, fuego: 4, mira: 1 }, energia: 16, lena: 1, comida: 0, pasos: 0, hora: 'dia', clima: 'calma', objetos: OBJ_VIAJE.map((o) => Object.assign({}, o)), visto: new Set(), aprendidos: [], pirita: false, ruta: [[2, 6]] };
     revelar(viaje.canoa.x, viaje.canoa.y);
     motor = CZ.crear($('mapa'), { celda: 48 });
     actualizarEscena();
@@ -404,6 +405,7 @@
     if (!esAgua(nx, ny)) { anunciar('La canoa solo va por el agua.'); return; }
     if (dx) c.mira = dx;
     c.x = nx; c.y = ny; c.remando = true; setTimeout(() => (c.remando = false), 500);
+    viaje.ruta.push([nx, ny]);
     viaje.pasos++;
     // El fuego se gasta: más con viento en el canal hondo y con lluvia.
     let gasto = 1;
@@ -448,11 +450,31 @@
     if (!memoria.has('amarre')) mostrarSaber('amarre');
     actualizarEscena(); pintarHud(); acciones();
   }
+  // ── Postal del viaje ────────────────────────────────────────────────────
+  let ultimoViaje = null;
+  function mostrarPostal() {
+    const u = ultimoViaje || { ruta: [[2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6]], visto: new Set(['0,4', '1,4']), objetos: OBJ_VIAJE, pasos: 6, llego: false, generacion, aprendidos: ['fuego'] };
+    const vis = u.visto.size > 2 ? u.visto : (() => { const v = new Set(); for (let y = 0; y < MAPA_VIAJE.length; y++) for (let x = 0; x < 12; x++) v.add(x + ',' + y); return v; })();
+    const cv = TDH_POSTAL.dibujar(document.createElement('canvas'), { mapa: MAPA_VIAJE, objetos: u.objetos, ruta: u.ruta, explorado: (x, y) => vis.has(x + ',' + y), generacion: u.generacion, llego: u.llego, destino: 'la ballena varada', pasos: u.pasos, saberes: u.aprendidos.map((k) => SABERES[k].titulo), pueblo: 'yagán' });
+    cv.style.cssText = 'width:min(100%,900px);height:auto;border-radius:12px;display:block';
+    cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', 'Postal del viaje de la generación ' + u.generacion + ', con el mapa del recorrido y los saberes aprendidos.');
+    const v = $('velo'); v.innerHTML = '';
+    const caja = document.createElement('div'); caja.style.cssText = 'display:grid;gap:12px;justify-items:center;width:min(100%,900px)';
+    caja.appendChild(cv);
+    caja.insertAdjacentHTML('beforeend', '<div class="botones"><button class="boton-papel boton-papel--fuego" id="b-bajar-postal">Guardar la postal</button><button class="boton-papel" id="b-cerrar-postal">Cerrar</button></div>');
+    v.appendChild(caja); v.classList.add('abierto');
+    $('b-bajar-postal').addEventListener('click', () => TDH_POSTAL.descargar(cv, 'tierra-de-los-humos-generacion-' + u.generacion + '.png'));
+    $('b-cerrar-postal').addEventListener('click', () => v.classList.remove('abierto'));
+    $('b-bajar-postal').focus();
+  }
+  document.querySelectorAll('.b-postal').forEach((b) => b.addEventListener('click', mostrarPostal));
+
   function terminar(llego) {
     const lista = $(llego ? 'lista-llegada' : 'lista-fin');
     lista.innerHTML = viaje.aprendidos.length ? viaje.aprendidos.map((k) => '<li>' + SABERES[k].titulo + '</li>').join('') : '<li>Esta vez no aprendieron nada nuevo.</li>';
     if (llego && !memoria.has('ballena')) { memoria.add('ballena'); lista.insertAdjacentHTML('beforeend', '<li>La ballena varada</li>'); }
     if (sonido && conSonido) sonido.efecto(llego ? 'saber' : 'apagado');
+    ultimoViaje = { ruta: viaje.ruta, visto: viaje.visto, objetos: viaje.objetos, pasos: viaje.pasos, llego, generacion, aprendidos: viaje.aprendidos.concat(llego && !viaje.aprendidos.includes('ballena') ? ['ballena'] : []) };
     viaje = null;
     ir(llego ? 'llegada' : 'fin');
   }
