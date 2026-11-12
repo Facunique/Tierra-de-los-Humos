@@ -28,6 +28,13 @@ Tres ideas lo sostienen:
 
 El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 
+### Para todos, también en el aula
+
+- **Accesible:** las cartas se escuchan en voz alta, hay modo alto contraste, tipografía para baja visión, colores probados para daltonismo y subtítulos para cada sonido.
+- **El territorio se siente:** la luz del juego es la de Ushuaia en ese momento (de día, al atardecer o de noche, y en su estación), y el sonido cambia según el lugar: el bosque, la playa y el canal abierto suenan distinto.
+- **Algo para llevarse:** al terminar, una postal del viaje con el recorrido y los saberes aprendidos.
+- **En la escuela:** una [guía para docentes](escuelas/README.md) con una actividad por carta, y una [versión de mesa](mesa/README.md) para jugar sin pantallas.
+
 | El viaje | Una carta de saber | Fin del viaje y herencia |
 |---|---|---|
 | ![El viaje: la canoa con su fuego rema por el canal; en la playa hay una choza, leña y un saber como pegatinas; a la derecha, humo](equipo/video/04-viaje.jpg) | ![Carta «Piedras de fuego» con su dato, su recurso de juego y la fuente con página](equipo/video/05-carta.jpg) | ![Pantalla «El viaje termina acá»: lo aprendido pasa a la siguiente generación](equipo/video/06-fin.jpg) |
@@ -53,9 +60,10 @@ Arte y sonido:
 | [`arte/`](arte/README.md) | Motor de dibujo, paleta, pegatinas pixel, logo y tipografía. Todo propio |
 | [Cartas para imprimir](arte/cartas/cartas-para-imprimir.pdf) | Cartas de saber en A4, doble faz, para la demo |
 | [Versión de mesa](mesa/README.md) | El juego en papel, para escuelas sin pantallas: tablero A3, fichas, reglas de una página y Libro de la familia |
+| [Guía para docentes](escuelas/README.md) | Cómo usar el juego en clase, cuidados, una actividad por carta, la tabla de luz de Ushuaia y una hoja para fotocopiar ([PDF](escuelas/guia-docente-A4.pdf)) |
 | [Stand de la demo](stand/README.md) | Vidriera que se reproduce sola, cartel A3 con QR y códigos QR |
 | [Propuestas de estilo](arte/propuestas/index.html) | Las tres propuestas que votó el equipo (registro) |
-| [`sonido/`](sonido/README.md) | Sonido ambiente y efectos generados por código, con demo |
+| [`sonido/`](sonido/README.md) | Sonido ambiente que cambia según el lugar, efectos y lectura de las cartas en voz alta. Todo generado por código, con demo |
 
 Trabajo interno del equipo:
 
@@ -89,7 +97,8 @@ Trabajo interno del equipo:
 
 - **Juego web** en HTML, CSS y JavaScript, dibujado en Canvas 2D. Sin librerías externas. ✏️ *Stack final y publicación en GitHub Pages: Persona B.*
 - **Arte:** motor de dibujo propio, «Corteza» (`arte/corteza/corteza.js`), y pegatinas pixel definidas como texto (`arte/fuente/arte.js`).
-- **Sonido:** sintetizado con Web Audio (`sonido/ambiente.js`), sin archivos de audio.
+- **Sonido:** sintetizado con Web Audio (`sonido/ambiente.js`), sin archivos de audio. Las cartas se leen con la voz del dispositivo (Web Speech, `sonido/voz.js`).
+- **Luz real:** la posición del sol en Ushuaia se calcula en el navegador, sin internet, con el algoritmo de la [NOAA](https://gml.noaa.gov/grad/solcalc/calcdetails.html) (`arte/corteza/luz-real.js`).
 - **Sin internet:** todo, tipografía incluida, se sirve desde el repositorio.
 - **Herramientas de apoyo** (solo para regenerar imágenes): Node.js y Playwright.
 
@@ -122,6 +131,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Voz, postal y versión de mesa (12/11):** Claude Code sumó la lectura en voz alta de las cartas (`sonido/voz.js`), la postal del viaje (`arte/postal/`) y la versión de mesa para imprimir (`mesa/`), con reglas y números de prueba que el equipo ajusta.
 - **Mapa, alto contraste, transiciones y stand (12/11):** Claude Code armó el mapa de los territorios ancestrales con costas reales y fuentes (`arte/mapa/`), el modo alto contraste y las transiciones del motor (`arte/corteza/`), y la vidriera y el cartel del stand (`stand/`).
 - **Presentación, cartas impresas y video (12/11):** Claude Code armó la presentación del pitch (`presentacion/`), las cartas para imprimir (`arte/cartas/`) y el storyboard del video (`equipo/video/`), y redactó este README con huecos marcados (✏️) para que los complete el equipo.
+- **Luz real, sonido por lugar y guía docente (12/11):** Claude Code escribió el cálculo de la luz real de Ushuaia (`arte/corteza/luz-real.js`), las capas de sonido de bosque y playa (`sonido/ambiente.js`) y la guía para docentes con una actividad por carta (`escuelas/`). Las actividades parten solo de los datos citados en las cartas y las revisa el equipo.
 - **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
 
 ## Integrantes

@@ -9,6 +9,19 @@
 - **Hecho:** `docs/00-guia-hackathon.md`, `docs/01-concepto.md`, `docs/04-direccion-de-arte.md` (con tres propuestas de estilo en `arte/propuestas/`), paleta y primer set de 42 sprites (`arte/`), sonido generado por código (`sonido/`), logo, plan de comunicación (`equipo/comunicacion.md`) y borrador del avance del 14/11 (`equipo/avance-14-11.md`).
 - **También hecho (12/11):** estilo **Corteza** con motor de dibujo, vitrina, cartas, HUD, logo e imagen para compartir; auditoría histórica del arte contra el *Handbook of South American Indians* (`docs/05-rigor-historico.md`).
 - **También hecho (12/11, noche):** maqueta navegable de las pantallas (`arte/pantallas/`), elementos nuevos con fuente, 9 borradores de cartas (`arte/cartas/saberes-borrador.js`) con su versión para imprimir, presentación del pitch (`presentacion/`), storyboard del video (`equipo/video/`) y README con huecos ✏️.
+- **También hecho (12/11, cierre):** voz para leer las cartas (`sonido/voz.js`), postal del viaje (`arte/postal/`), versión de mesa (`mesa/`), modo alto contraste, stand de la demo (`stand/`), luz real de Ushuaia (`arte/corteza/luz-real.js`), sonido según el lugar y guía para docentes (`escuelas/`).
+- **Módulos listos para que A y B los sumen al juego** (todos sin dependencias, ya probados en la maqueta `arte/pantallas/`):
+
+  | Módulo | Qué hace | Cómo se usa |
+  |---|---|---|
+  | `arte/corteza/corteza.js` | Dibuja el mapa, la canoa, el humo y la luz | `TDH_CORTEZA.crear(canvas).escena({...})` |
+  | `arte/corteza/transiciones.js` | Paso del fuego y aparición de carta | ver `docs/04`, sección 6 |
+  | `arte/corteza/luz-real.js` | Hora y estación reales de Ushuaia | `TDH_LUZ_REAL.ahora()` → `{ hora, estacion, texto }` |
+  | `sonido/ambiente.js` | Ambiente, efectos y sonido por lugar | `TDH_SONIDO.lugarDe(mapa, x, y)` |
+  | `sonido/voz.js` | Lee las cartas en voz alta | `TDH_VOZ.leerCarta(carta)` |
+  | `arte/postal/postal.js` | Postal del viaje en PNG | `TDH_POSTAL.dibujar(canvas, datos)` |
+  | `arte/cartas/saberes-borrador.js` | Las 9 cartas, con fuente y página | `TDH_SABERES.SABERES` |
+
 - **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md`, elegir el stack, cotejar el libro de Goodall.
 
 ## Fechas clave
@@ -36,6 +49,8 @@
 - **Stack.** Propuesta: HTML + JavaScript con Canvas, con Vite o sin build, en GitHub Pages. Falta confirmarlo.
 - **Destino del viaje.** Tiene que ser un motivo real y documentado. **Ya hay base documental:** un grupo yagán podía entrar al territorio de otro para comer una ballena varada, para buscar piedras de fuego (pirita) o corteza buena para canoas (que solo se hallaban en ciertos lugares), por hambre o para hacer trueque (Cooper 1946, p. 94-95). Los varamientos reunían a muchas familias (p. 99). Falta que el equipo elija uno con la Persona C.
 - **Integrantes y roles** para el README.
+- **Qué módulos de la Persona D entran al juego final** (luz real, sonido por lugar, voz, postal, alto contraste). La propuesta es sumarlos todos: ya andan en la maqueta y no cambian el diseño. Lo deciden A y B según el tiempo.
+- **Revisión de la guía para docentes** (`escuelas/`) por la Persona C y, si se puede, por docentes.
 
 ## Lo que sabemos (y de dónde)
 

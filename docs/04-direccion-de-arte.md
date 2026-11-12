@@ -124,6 +124,8 @@ Es el único elemento que aparece en todas las pantallas, así que es lo más cu
 - **Cámara para celular:** `motor.centrar(x, y, 10, 9)` muestra 10 × 9 casillas alrededor de la canoa. `motor.casillaEn(clientX, clientY)` convierte un toque en una casilla.
 - **Rendimiento:** el mapa se arma una vez (entre 40 y 120 ms) y se vuelve a armar solo si cambian el mapa, la estación o lo explorado. Cada cuadro reusa esa base.
 - **Para el HUD y las cartas:** `TDH_CORTEZA.fuego(ctx, x, y, escala, nivel, t)`, `TDH_CORTEZA.canoa(...)` y `TDH_CORTEZA.pegatina(idSprite, escala)`. Las clases CSS (`.carta-saber`, `.ficha`, `.codice`, `.boton-papel`) están en `carta.css`.
+- **Luz real:** `TDH_LUZ_REAL.ahora()` devuelve `{ hora, estacion, texto }` para pasarlo a `motor.escena` (ver la sección 4).
+- **Sonido por lugar:** `TDH_SONIDO.lugarDe(mapa, x, y)` devuelve `{ bosque, playa, mar }` para `sonido.ambiente` (ver la sección 12).
 - **Transiciones** (`arte/corteza/transiciones.js`), listas para la interfaz:
   - `humoCubre` y `humoDescubre`: el humo tapa y destapa la pantalla al cambiar de una a otra;
   - `pasoDelFuego`: la brasa de la canoa apagada viaja hasta la canoa de la generación siguiente, con los saberes heredados (es un recurso de juego);
@@ -218,6 +220,8 @@ Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 18 KB): vie
 - [x] El fuego siempre con su número al lado.
 - [x] Las pegatinas tienen un borde claro: se distinguen del paisaje por la forma, no solo por el color.
 - [x] Subtítulos de sonido.
+- [x] **Cartas leídas en voz alta** (`sonido/voz.js`, con la voz del dispositivo), para quien lee con dificultad o ve poco.
+- [x] **El lugar suena distinto** (bosque, playa, canal): el mapa también se puede «leer» con el oído.
 - [x] Movimiento que se puede apagar, y respeta "reducir movimiento".
 - [x] Cámara que sigue a la canoa en el celular, con zonas táctiles grandes.
 - [x] Tipografía para baja visión.

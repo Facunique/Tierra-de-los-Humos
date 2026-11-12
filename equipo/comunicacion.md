@@ -42,9 +42,9 @@ Tres ideas que se repiten en el video, el pitch y el README:
 | 0:40 a 1:15 | Partida real: remar, el humo se abre, el viento sube, el fuego del HUD baja, juntar leña y mariscos. | "El fuego es tu vida. El viento y la lluvia lo gastan; la leña y el refugio lo sostienen. Alejarse del campamento es una apuesta." |
 | 1:15 a 1:40 | Aparece una carta de saber. Zoom a las etiquetas *Dato*, *En el juego* y a la fuente. | "En el viaje aparecen saberes. Cada carta separa lo que es dato de lo que es recurso de juego, y cita su fuente." |
 | 1:40 a 2:05 | El fuego se apaga (sonido `apagado`). Fundido. Pantalla de nueva generación, con el saber heredado. | "Si el fuego se apaga, el viaje termina. Pero lo aprendido no se pierde: pasa a la siguiente generación." |
-| 2:05 a 2:25 | Recorrido por el códice. | "Todas las cartas se juntan en un códice que se puede recorrer sin jugar, pensado para escuelas." |
+| 2:05 a 2:25 | Recorrido por el códice. | "Todas las cartas se juntan en un códice que se puede recorrer sin jugar. Para las escuelas hay una guía para docentes y una versión de mesa, sin pantallas." |
 | 2:25 a 2:45 | Imágenes del equipo trabajando y, **solo si la comunidad lo autoriza**, de la consulta. Si no, texto en pantalla. | "Lo hicimos consultando a [comunidad o persona, solo con permiso]. Lo que nos corrigieron, lo cambiamos." |
-| 2:45 a 3:00 | El juego en un celular. Logo, enlace y nombres del equipo. Cierre del códice, en presente. | "Se juega desde el navegador, también en el celular y sin conexión. Los pueblos fueguinos están vivos. Esta es una forma más de escucharlos." |
+| 2:45 a 3:00 | El juego en un celular. Logo, enlace y nombres del equipo. Cierre del códice, en presente. | "Se juega desde el navegador, también en el celular, sin instalar nada. Los pueblos fueguinos están vivos. Esta es una forma más de escucharlos." |
 
 🔍 **Antes de grabar, la Persona C revisa cada frase de la voz** (por ejemplo, el dato del humo visto desde el mar y la fecha).
 
@@ -66,8 +66,8 @@ Todo el equipo habla: es parte del criterio. Cada bloque tiene una persona y una
 | 0:00 a 0:40 | **D** | 1. Portada con humo · 2. El problema | El gancho del humo (como en el video). El problema: los saberes de los pueblos fueguinos se cuentan en pasado y a los jóvenes les llegan poco. |
 | 0:40 a 1:30 | **C** | 3. La consulta · 4. Una carta de saber, ampliada | Con quién hablamos y qué nos corrigieron (solo lo autorizado). Cómo se arma una carta: dato, recurso de juego, fuente. Las líneas rojas que respetamos. **El arte también está auditado:** la canoa, las chozas y lo que se junta siguen el *Handbook of South American Indians* (Cooper, 1946), con página (`docs/05`). |
 | 1:30 a 3:00 | **A** | 5. Demo en vivo | Una partida corta y preparada: remar, el viento, el fuego que baja, una carta, el fuego que se apaga, la nueva generación. **Si algo falla, pasar al video sin dudar.** |
-| 3:00 a 4:00 | **B** | 6. Herencia y códice · 7. Para todos | El códice para escuelas. Celular, sin internet, contraste, tipografía para baja visión, subtítulos de sonido. Código MIT y contenido CC BY-SA. |
-| 4:00 a 5:00 | **D** | 8. Qué sigue · 9. Cierre | Kawésqar y Selk'nam, solo con sus comunidades. Llevarlo a escuelas de Ushuaia, Tolhuin y Río Grande. Cierre: "cuando el fuego se apaga, lo aprendido no se pierde". Enlace y QR. |
+| 3:00 a 4:00 | **B** | 6. Herencia y códice · 7. Para todos | El códice. Celular, cartas en voz alta, alto contraste, tipografía para baja visión y subtítulos de sonido. El sonido cuenta el lugar y la luz es la de Ushuaia en ese momento. Código MIT y contenido CC BY-SA. |
+| 4:00 a 5:00 | **D** | 8. Qué sigue · 9. Cierre | Kawésqar y Selk'nam, solo con sus comunidades. Llevarlo a escuelas de Ushuaia, Tolhuin y Río Grande, con la guía para docentes y la versión de mesa. Cierre: "cuando el fuego se apaga, lo aprendido no se pierde". Enlace y QR. |
 
 **Diapositivas:** ya están armadas en [`presentacion/index.html`](../presentacion/index.html), en estilo Corteza y sin internet. Con <kbd>←</kbd> <kbd>→</kbd> se pasa, con <kbd>N</kbd> se ven las notas del orador y con <kbd>F</kbd> se pone pantalla completa. El respaldo está en `presentacion/pitch.pdf`. Faltan los huecos marcados en amarillo: consulta, enlace y nombres. Se arman el 16/11 con capturas reales del juego. Pueden hacerse en HTML para que anden sin internet, con el mismo arte.
 

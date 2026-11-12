@@ -7,6 +7,7 @@ Todo el arte del juego es **propio**. El estilo elegido es **Corteza**: el paisa
 | Ruta | Qué es |
 |---|---|
 | `corteza/corteza.js` | **El motor de dibujo**: mapa, canoa, chozas, fauna, pegatinas, luz del fuego, humo, clima, estaciones y cámara para celular. Sin dependencias, salvo `fuente/arte.js`. |
+| `corteza/luz-real.js` | La luz real de Ushuaia: calcula la hora (día, atardecer, noche) y la estación del momento, sin internet. |
 | `corteza/transiciones.js` | Transiciones: humo entre pantallas, el paso del fuego entre generaciones y la entrada de la carta. |
 | `corteza/carta.css` | Cartas de saber, códice, fichas del HUD y botones de papel. |
 | `corteza/index.html` | La vitrina del estilo y un ejemplo completo de uso: tocá el agua y la canoa rema. |
@@ -26,8 +27,8 @@ Cómo usarlo en el juego: ver la sección 6 de `docs/04-direccion-de-arte.md`.
 | `fuente/arte.js` | **La fuente única:** paleta de 42 colores y cada sprite dibujado letra por letra. Funciona en el navegador y en Node. |
 | `generar.cjs` | Genera todos los PNG. `node arte/generar.cjs` desde la raíz del repo. No hay que instalar nada. |
 | `sprites/*.png` | Cada sprite suelto, con sus cuadros uno al lado del otro. |
-| `hoja-sprites.png` | Todos los sprites juntos (verano). También `hoja-sprites-otono.png` y `hoja-sprites-invierno.png`. |
-| `hoja-sprites.json` | El atlas: dónde está cada cuadro dentro de la hoja. Sirve para las tres estaciones. |
+| `hoja-sprites.png` | Todos los sprites juntos (verano). También `hoja-sprites-primavera.png`, `hoja-sprites-otono.png` y `hoja-sprites-invierno.png`. |
+| `hoja-sprites.json` | El atlas: dónde está cada cuadro dentro de la hoja. Sirve para las cuatro estaciones. |
 | `paleta/` | La paleta en `.gpl` (Aseprite, GIMP, Krita), `.hex` (Lospec), `.json` y `.png`. |
 | `tipografia/` | Atkinson Hyperlegible (licencia OFL) y su CSS, para usar sin internet. |
 | `propuestas/index.html` | Las tres propuestas de estilo que votó el equipo (registro). |

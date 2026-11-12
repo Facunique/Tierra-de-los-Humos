@@ -8,6 +8,8 @@ Todo funciona **sin internet**: se abre con doble clic desde la carpeta del repo
 | [`cartel-A3.pdf`](cartel-A3.pdf) | Cartel para imprimir en A3 y colgar en el stand. Su fuente es [`cartel.html`](cartel.html). |
 | `qr-juego.svg`, `qr-repositorio.svg` | Los códigos QR del juego (GitHub Pages) y del repositorio. |
 | [`../arte/cartas/cartas-para-imprimir.pdf`](../arte/cartas/cartas-para-imprimir.pdf) | Cartas de saber para regalar, A4 doble faz. |
+| [`../escuelas/guia-docente-A4.pdf`](../escuelas/guia-docente-A4.pdf) | Guía para docentes. Llevar algunas copias para quienes trabajan en escuelas. |
+| [`../mesa/`](../mesa/README.md) | La versión de mesa impresa, para jugar en el stand sin pantalla. |
 
 ## Cómo usar la vidriera
 
