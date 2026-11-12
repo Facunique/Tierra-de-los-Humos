@@ -121,6 +121,7 @@
       <button class="boton-papel" data-ir="codice">Códice</button>
       <button class="boton-papel" data-ir="ayuda">Cómo se juega</button>
       <button class="boton-papel" id="b-sonido" aria-pressed="false">Sonido: no</button>
+      <button class="boton-papel" id="b-contraste" aria-pressed="false">Alto contraste: no</button>
     </div>
     <p class="aviso-ficcion">La familia, el mapa y los eventos son ficción. Los saberes, no: cada uno cita su fuente.</p>
   </div>
@@ -346,6 +347,8 @@
     { id: 'guindo-grande', x: 24, y: 4, junta: 'corteza' }, { id: 'ballena-varada', x: 26, y: 11, meta: true }, { id: 'lena', x: 22, y: 4, junta: 'lena' },
   ];
   let viaje = null, motor = null, vista = null;
+  let altoContraste = false;
+  try { altoContraste = localStorage.getItem('tdh-alto-contraste') === '1'; } catch (e) { /* sin almacenamiento: queda apagado */ }
   const esAgua = (x, y) => y >= 0 && x >= 0 && y < MAPA_VIAJE.length && x < MAPA_VIAJE[0].length && '~-,kr'.includes(MAPA_VIAJE[y][x]) && MAPA_VIAJE[y][x] !== 'r';
   function nuevoViaje() {
     viaje = { canoa: { x: 2, y: 6, fuego: 4, mira: 1 }, energia: 16, lena: 1, comida: 0, pasos: 0, hora: 'dia', clima: 'calma', objetos: OBJ_VIAJE.map((o) => Object.assign({}, o)), visto: new Set(), aprendidos: [], pirita: false };
@@ -362,7 +365,7 @@
     }
   }
   function actualizarEscena() {
-    motor.escena({ vista, mapa: MAPA_VIAJE, objetos: viaje.objetos, canoa: viaje.canoa, humos: [{ x: 27.5, y: 9.6 }, { x: 25.2, y: 1.5 }], estacion: 'verano', clima: viaje.clima, hora: viaje.hora, explorado: (x, y) => viaje.visto.has(x + ',' + y) });
+    motor.escena({ vista, altoContraste, mapa: MAPA_VIAJE, objetos: viaje.objetos, canoa: viaje.canoa, humos: [{ x: 27.5, y: 9.6 }, { x: 25.2, y: 1.5 }], estacion: 'verano', clima: viaje.clima, hora: viaje.hora, explorado: (x, y) => viaje.visto.has(x + ',' + y) });
   }
   function ajustarMapa() {
     const caja = document.querySelector('#p-viaje .mapa').getBoundingClientRect();
@@ -547,6 +550,16 @@
     e.currentTarget.setAttribute('aria-pressed', String(conSonido)); e.currentTarget.textContent = 'Sonido: ' + (conSonido ? 'sí' : 'no');
     if (conSonido) { await sonido.iniciar(); sonarAmbiente(); } else sonido.pausar();
   });
+
+  // ── Alto contraste ──────────────────────────────────────────────────────
+  function pintarBotonContraste() { const b = $('b-contraste'); b.setAttribute('aria-pressed', String(altoContraste)); b.textContent = 'Alto contraste: ' + (altoContraste ? 'sí' : 'no'); }
+  $('b-contraste').addEventListener('click', () => {
+    altoContraste = !altoContraste; pintarBotonContraste();
+    try { localStorage.setItem('tdh-alto-contraste', altoContraste ? '1' : '0'); } catch (e) { /* no pasa nada */ }
+    Object.values(fondos).forEach((f) => f.m && f.m.escena({ altoContraste }));
+    if (viaje) actualizarEscena();
+  });
+  pintarBotonContraste();
 
   // ── Bucle de dibujo ─────────────────────────────────────────────────────
   const fuegoDelHud = (t) => { const x = fuegoHud.getContext('2d'); x.clearRect(0, 0, 80, 88); x.fillStyle = C.g; x.beginPath(); x.ellipse(40, 78, 26, 7, 0, 0, Math.PI * 2); x.fill(); CZ.fuego(x, 40, 74, 1.7, viaje ? viaje.canoa.fuego : 3, t); };

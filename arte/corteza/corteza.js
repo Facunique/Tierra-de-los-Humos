@@ -16,6 +16,10 @@
  *   motor.escena({ mapa: [...], objetos: [...], canoa: { x: 9, y: 6, fuego: 3 } });
  *   requestAnimationFrame(function cuadro(ms) { motor.dibujar(ms / 1000); requestAnimationFrame(cuadro); });
  *
+ * Opciones de la escena: estacion, clima, hora, explorado, vista, altoContraste (true: costa con franja
+ * blanca y contorno, noche que nunca tapa del todo, humo con contorno, pegatinas con borde oscuro,
+ * anillo en la canoa y sin grano de papel).
+ *
  * Letras del mapa:  ~ canal hondo · - canal · , agua baja · k cachiyuyo · r roca
  *                   . playa · p pradera · G guindo · L lenga · t turbal · M cumbre
  *
@@ -60,11 +64,12 @@
 
   // ── Pegatinas pixel con borde de papel ──────────────────────────────────
   const cachePegatinas = {};
-  function pegatina(idSprite, escala, estacion) {
-    const k = idSprite + '|' + escala + '|' + (estacion || 'verano');
+  function pegatina(idSprite, escala, estacion, fuerte) {
+    const k = idSprite + '|' + escala + '|' + (estacion || 'verano') + (fuerte ? '|f' : '');
     if (cachePegatinas[k]) return cachePegatinas[k];
     const px = ARTE.pixeles(idSprite, 0, estacion);
-    const w = px[0].length, h = px.length, borde = Math.max(2, Math.round(escala * 1.5)), sombra = Math.max(2, Math.round(escala * 1.2));
+    // En alto contraste, el borde de papel es más ancho y lleva un contorno oscuro por fuera.
+    const w = px[0].length, h = px.length, borde = Math.max(2, Math.round(escala * (fuerte ? 2.4 : 1.5))), sombra = Math.max(2, Math.round(escala * 1.2));
     const W = w * escala + borde * 2 + sombra, H = h * escala + borde * 2 + sombra;
     const silueta = lienzo(w * escala, h * escala), cs = silueta.getContext('2d');
     px.forEach((f, y) => f.forEach((c, x) => { if (c) { cs.fillStyle = '#000'; cs.fillRect(x * escala, y * escala, escala, escala); } }));
@@ -79,6 +84,7 @@
     // Sombra del papel hacia el sureste, después el papel, después el pixel art.
     const tinte = (src, color) => { const t = lienzo(W, H), ct = t.getContext('2d'); ct.drawImage(src, 0, 0); ct.globalCompositeOperation = 'source-in'; ct.fillStyle = color; ct.fillRect(0, 0, W, H); return t; };
     co.drawImage(tinte(papel, SOMBRA), sombra * 0.6, sombra);
+    if (fuerte) { const g = Math.max(2, Math.round(escala * 0.7)); for (let a = 0; a < 12; a++) co.drawImage(tinte(papel, C.z), Math.round(Math.cos(a / 12 * TAU) * g), Math.round(Math.sin(a / 12 * TAU) * g)); }
     co.drawImage(tinte(papel, C.i), 0, 0);
     co.drawImage(tinte(papel, rgba(C.R, 0.35)), 0, 0); // fibra cálida del papel
     co.drawImage(tinte(papel, C.i), -1, -1);
@@ -377,7 +383,7 @@
     const op = Object.assign({ celda: 48, dpr: Math.min(2, raiz.devicePixelRatio || 1) }, opciones || {});
     const ctx = canvas.getContext('2d');
     let E = null; // escena
-    let base = null, claveBase = '', niebla = null, claveNiebla = '';
+    let base = null, claveBase = '', niebla = null, claveNiebla = '', costa = null, costaVisible = null;
     let T = op.celda, dpr = op.dpr;
 
     function tipo(x, y) { if (x < 0 || y < 0 || y >= E.alto || x >= E.ancho) return TIPOS['~']; return TIPOS[E.mapa[y][x]] || TIPOS['~']; }
@@ -419,7 +425,13 @@
       mancha(c, tierra, 1.12, rgba(C.F, 0.55), 0, 0, 0.2);
       mancha(c, tierra, 0.98, C.F, 0, 0, 0.18);
       // 2. Espuma: toda costa tiene su línea clara (accesibilidad: agua y guindo casi no se distinguen sin color)
-      mancha(c, tierra, 0.8, C.E);
+      if (E.altoContraste) {
+        mancha(c, tierra, 0.9, C.z); mancha(c, tierra, 0.85, C.W);
+        // La misma franja, aparte, para dibujarla encima de la noche
+        costa = lienzo(base.width, base.height); const cc = costa.getContext('2d'); cc.scale(dpr, dpr);
+        mancha(cc, tierra, 0.9, C.z); mancha(cc, tierra, 0.85, C.W);
+        cc.globalCompositeOperation = 'destination-out'; mancha(cc, tierra, 0.72, '#000');
+      } else { mancha(c, tierra, 0.8, C.E); costa = null; }
       // 3. Sombra al sureste, playa y tierra adentro con su bisel de papel
       mancha(c, tierra, 0.72, SOMBRA, 0.07 * T, 0.12 * T);
       mancha(c, tierra, 0.72, est.playa);
@@ -488,24 +500,34 @@
         for (let k = 0; k < 2; k++) nubes.push([(x + 0.2 + hash(x, y, k + 5) * 0.6) * T, (y + 0.2 + hash(x, y, k + 9) * 0.6) * T, T * (0.55 + hash(x, y, k + 2) * 0.4)]);
       }
       c.fillStyle = rgba(C.A, 0.5); c.beginPath(); nubes.forEach(([x, y, r]) => circulo(c, x + 0.08 * T, y + 0.16 * T, r)); c.fill();
+      if (E.altoContraste) { c.fillStyle = C.z; c.beginPath(); nubes.forEach(([x, y, r]) => circulo(c, x, y, r + 0.06 * T)); c.fill(); }
       c.fillStyle = C.h; c.beginPath(); nubes.forEach(([x, y, r]) => circulo(c, x, y, r)); c.fill();
       c.fillStyle = C.H; c.beginPath(); nubes.forEach(([x, y, r]) => circulo(c, x - r * 0.1, y - r * 0.14, r * 0.84)); c.fill();
       c.fillStyle = rgba(C.N, 0.55); c.beginPath(); nubes.forEach(([x, y, r]) => circulo(c, x - r * 0.2, y - r * 0.28, r * 0.6)); c.fill();
     }
 
     function asegurarCaches() {
-      const kb = E.mapa.join('|') + E.estacion + T + dpr;
-      if (kb !== claveBase) { armarBase(); claveBase = kb; }
+      const kb = E.mapa.join('|') + E.estacion + T + dpr + !!E.altoContraste;
+      let cambio = false;
+      if (kb !== claveBase) { armarBase(); claveBase = kb; cambio = true; }
       let kn = '';
       for (let y = 0; y < E.alto; y++) for (let x = 0; x < E.ancho; x++) kn += explorado(x, y) ? '1' : '0';
-      kn += T + '|' + dpr + '|' + !!E.explorado + E.bordeNiebla;
-      if (kn !== claveNiebla) { armarNiebla(); claveNiebla = kn; }
+      kn += T + '|' + dpr + '|' + !!E.explorado + E.bordeNiebla + !!E.altoContraste;
+      if (kn !== claveNiebla) { armarNiebla(); claveNiebla = kn; cambio = true; }
+      if (cambio) { // la franja de costa de alto contraste, sin lo que tapa el humo
+        costaVisible = null;
+        if (costa) {
+          costaVisible = lienzo(costa.width, costa.height); const cv = costaVisible.getContext('2d');
+          cv.drawImage(costa, 0, 0);
+          if (niebla && E.explorado) { cv.globalCompositeOperation = 'destination-out'; cv.drawImage(niebla, Math.round(-T / 2 * dpr), Math.round(-T / 2 * dpr)); }
+        }
+      }
     }
 
     // Luz en escalones, como capas de papel de calco alrededor del fuego.
     function luz(t) {
       const amb = { dia: 0.95, tarde: 0.72, noche: 0.2 }[E.hora] - (E.clima === 'lluvia' ? 0.14 : 0) - (E.clima === 'nieve' ? 0.05 : 0);
-      const osc = Math.max(0, (1 - amb) * 0.92);
+      const osc = Math.max(0, (1 - amb) * (E.altoContraste ? 0.55 : 0.92)); // en alto contraste la noche nunca tapa del todo
       const W = E.ancho * T, H = E.alto * T;
       if (E.hora === 'tarde') { ctx.fillStyle = rgba(C.o, 0.13); ctx.fillRect(0, 0, W, H); }
       if (E.hora === 'noche') { ctx.fillStyle = rgba(C.B, 0.25); ctx.fillRect(0, 0, W, H); }
@@ -625,8 +647,13 @@
             FIGURAS[o.id](ctx, x, y, s, t, viento, est, Object.assign({ deEspaldas: aguaArriba && !aguaAbajo }, o));
           }
           else if (PEGATINAS[o.id] || ARTE.SPRITES[o.id]) {
+            dibujarPegatina(o, x, t, s);
+          }
+        }
+        function dibujarPegatina(o, x, t, s) {
+          {
             const esc = Math.max(1, Math.round(T * dpr * 0.55 / 16));
-            const img = pegatina(PEGATINAS[o.id] || o.id, esc, E.estacion);
+            const img = pegatina(PEGATINAS[o.id] || o.id, esc, E.estacion, E.altoContraste);
             const w = img.width / dpr, h = img.height / dpr, salto = Math.sin(t * 2.2 + o.x * 1.7) * 1.5 * s;
             if (o.id === 'saber') { // el saber brilla, tibio
               ctx.save(); ctx.globalCompositeOperation = 'lighter';
@@ -635,6 +662,11 @@
             ctx.imageSmoothingEnabled = false;
             ctx.drawImage(img, Math.round((x - w / 2) * dpr) / dpr, Math.round(((o.y + 0.5) * T - h / 2 + salto) * dpr) / dpr, w, h);
           }
+        }
+        if (E.canoa && E.altoContraste) { // anillo para ubicar la canoa de un vistazo
+          const ax = (E.canoa.x + 0.5) * T, ay = (E.canoa.y + 0.6) * T;
+          ctx.lineWidth = 5 * s; ctx.strokeStyle = C.z; ctx.beginPath(); elipse(ctx, ax, ay, 0.62 * T, 0.36 * T); ctx.stroke();
+          ctx.lineWidth = 2.5 * s; ctx.strokeStyle = C.Y; ctx.beginPath(); elipse(ctx, ax, ay, 0.62 * T, 0.36 * T); ctx.stroke();
         }
         if (E.canoa) canoa(ctx, (E.canoa.x + 0.5) * T, (E.canoa.y + 0.66) * T, s * 1.2, E.canoa.fuego, t, E.canoa.mira || 1, E.canoa.remando);
         if (E.canoa && E.canoa.fuego > 0) humo(ctx, (E.canoa.x + 0.5) * T, (E.canoa.y + 0.66) * T - 30 * s, s * 0.8, t, viento, 6, 70);
@@ -645,11 +677,17 @@
         mundo();
         for (const h of E.humos || []) humo(ctx, h.x * T, h.y * T, s * 1.2, t + h.x, viento, 8, 110);
         luz(t);
+        if (E.altoContraste) { // la costa y lo que se junta se ven siempre, aunque sea de noche
+          if (costaVisible) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 0.9; ctx.drawImage(costaVisible, Math.round(-ox * dpr), Math.round(-oy * dpr)); ctx.globalAlpha = 1; mundo(); }
+          for (const o of objs) if (!FIGURAS[o.id] && (PEGATINAS[o.id] || ARTE.SPRITES[o.id]) && explorado(o.x, o.y)) dibujarPegatina(o, (o.x + 0.5) * T, t, s);
+        }
         clima(t);
-        // Grano de papel encima de todo
-        ctx.save(); ctx.globalCompositeOperation = 'overlay'; ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.fillStyle = ctx.createPattern(grano(), 'repeat'); ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.restore();
+        // Grano de papel encima de todo (no en alto contraste: ensucia la lectura)
+        if (!E.altoContraste) {
+          ctx.save(); ctx.globalCompositeOperation = 'overlay'; ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.fillStyle = ctx.createPattern(grano(), 'repeat'); ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.restore();
+        }
         ctx.setTransform(1, 0, 0, 1, 0, 0);
       },
       /** Convierte coordenadas de un toque o clic (en el canvas) a casilla del mapa. */

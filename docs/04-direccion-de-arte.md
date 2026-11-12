@@ -208,6 +208,7 @@ Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 10 KB): vie
 - [x] Movimiento que se puede apagar, y respeta "reducir movimiento".
 - [x] Cámara que sigue a la canoa en el celular, con zonas táctiles grandes.
 - [x] Tipografía para baja visión.
+- [x] **Modo alto contraste** (opción `altoContraste` del motor): costa con franja blanca y contorno que se ve también de noche, noche que nunca tapa del todo, humo con contorno, pegatinas con borde oscuro, anillo en la canoa y sin grano de papel. Botón en la vitrina y en el título de la maqueta.
 - [ ] Textos alternativos de cada carta (Persona B, con los textos de la Persona C).
 - [ ] Probar en un celular de gama baja y en el proyector.
 

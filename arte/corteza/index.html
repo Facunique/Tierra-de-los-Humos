@@ -109,7 +109,7 @@
       <select id="vision"><option value="">Visión típica</option><option value="protanopia">Protanopía</option><option value="deuteranopia">Deuteranopía</option><option value="tritanopia">Tritanopía</option><option value="grises">Escala de grises</option></select></div>
     <div class="control"><span class="rotulo" id="r-mas">Más</span>
       <div class="segmentos" aria-labelledby="r-mas">
-        <button type="button" id="b-mov" aria-pressed="true">Animar</button><button type="button" id="b-sonido" aria-pressed="false">Sonido</button><button type="button" id="b-reiniciar">Reiniciar</button></div></div>
+        <button type="button" id="b-mov" aria-pressed="true">Animar</button><button type="button" id="b-sonido" aria-pressed="false">Sonido</button><button type="button" id="b-contraste" aria-pressed="false">Alto contraste</button><button type="button" id="b-reiniciar">Reiniciar</button></div></div>
   </div>
 
   <h2>Seis reglas del estilo</h2>
@@ -178,7 +178,7 @@
     }
   }
   function reiniciar() { visto.clear(); for (let x = 0; x <= INICIO.x; x++) revelar(x, INICIO.y); estado.canoa = { x: INICIO.x, y: INICIO.y, fuego: estado.canoa ? estado.canoa.fuego : 3, mira: 1 }; camino = []; }
-  const estado = { estacion: 'verano', clima: 'calma', hora: 'dia', canoa: null };
+  const estado = { estacion: 'verano', clima: 'calma', hora: 'dia', canoa: null, altoContraste: false };
   let camino = [];
   reiniciar();
 
@@ -201,7 +201,7 @@
   const escena = () => motor.escena({
     vista,
     mapa: MAPA, objetos: OBJETOS, canoa: estado.canoa, humos: [{ x: 20.5, y: 1.6 }, { x: 1.3, y: 12 }],
-    estacion: estado.estacion, clima: estado.clima, hora: estado.hora, explorado: (x, y) => visto.has(x + ',' + y),
+    estacion: estado.estacion, clima: estado.clima, hora: estado.hora, altoContraste: estado.altoContraste, explorado: (x, y) => visto.has(x + ',' + y),
   });
   escena();
 
@@ -302,6 +302,7 @@
     conSonido = !conSonido; e.currentTarget.setAttribute('aria-pressed', String(conSonido));
     if (conSonido) { await sonido.iniciar(); sonidoAmbiente(); } else sonido.pausar();
   });
+  document.getElementById('b-contraste').addEventListener('click', (e) => { estado.altoContraste = !estado.altoContraste; e.currentTarget.setAttribute('aria-pressed', String(estado.altoContraste)); escena(); });
   document.getElementById('b-reiniciar').addEventListener('click', () => { reiniciar(); escena(); pintarHud(); ayuda.textContent = 'Tocá una casilla de agua para remar.'; });
 
   // ── Reglas, con un dibujo cada una ─────────────────────────────────────
