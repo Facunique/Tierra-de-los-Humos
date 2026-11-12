@@ -119,7 +119,8 @@ const muestra = new Imagen(arte.PALETA.length * T, T);
 arte.PALETA.forEach((c, i) => { for (let yy = 0; yy < T; yy++) for (let xx = 0; xx < T; xx++) muestra.pintar(i * T + xx, yy, c.hex); });
 muestra.guardar(path.join(dirPaleta, 'paleta.png'));
 
-// ── 4. Logo, favicon e imagen para compartir ────────────────────────────
+// ── 4. Logo pixel (versión anterior, en logo/pixel/) ────────────────────
+// El logo oficial es el del estilo Corteza: lo genera arte/corteza/exportar.cjs.
 // Letras pixel propias (5 × 7), solo las que usa el nombre. Así el logo no depende de ninguna tipografía.
 const LETRAS = {
   T: ['#####', '..#..', '..#..', '..#..', '..#..', '..#..', '..#..'],
@@ -205,7 +206,7 @@ function paisaje(L, horizonte) { // cielo cubierto, cordillera nevada, bosque de
   }
 }
 
-const dirLogo = path.join(RAIZ, 'logo');
+const dirLogo = path.join(RAIZ, 'logo', 'pixel');
 fs.mkdirSync(dirLogo, { recursive: true });
 const NOMBRE = 'Tierra de los Humos';
 

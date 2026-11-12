@@ -622,6 +622,42 @@
           "h": 16
         }
       ]
+    },
+    "icono-hongo": {
+      "categoria": "icono",
+      "descripcion": "Hongos de árbol",
+      "cuadros": [
+        {
+          "x": 32,
+          "y": 128,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-pirita": {
+      "categoria": "icono",
+      "descripcion": "Pirita (piedra de fuego)",
+      "cuadros": [
+        {
+          "x": 48,
+          "y": 128,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-calafate": {
+      "categoria": "icono",
+      "descripcion": "Calafate",
+      "cuadros": [
+        {
+          "x": 64,
+          "y": 128,
+          "w": 16,
+          "h": 16
+        }
+      ]
     }
   }
 }

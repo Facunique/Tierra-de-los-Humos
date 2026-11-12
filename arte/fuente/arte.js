@@ -748,6 +748,62 @@
       '.zDDDDDDDDDDDDz.',
       '..zzzzzzzzzzzz..',
     ],
+    // Hongos de árbol (Cyttaria, en ramas de Nothofagus): se comían y se guardaban secos (Cooper 1946, p. 84).
+    'icono-hongo': [
+      '................',
+      '..........zzz...',
+      '.........zOOYz..',
+      '....zzz.zOqOOz..',
+      '...zOYOzzOOqOz..',
+      '..zOqOOOzzOOz...',
+      '..zOOOqOz.zz....',
+      '..zqOOOOzrr.....',
+      '...zOqOzrrz.....',
+      'zz..zzzrrz.zzz..',
+      'zrrrrrrrz.zOYOz.',
+      '.zzzzzrrrrzOqOOz',
+      '......zzzzzOOqOz',
+      '..........zqOOz.',
+      '...........zzz..',
+      '................',
+    ],
+    // Pirita: con un pedernal saca chispas para encender el fuego. Solo se hallaba en ciertos lugares (Cooper 1946, p. 91 y 95).
+    'icono-pirita': [
+      '..........y.....',
+      '.....y...yYy....',
+      '......y...y..y..',
+      '....zzzzzzz.....',
+      '...zYYYYYYOz....',
+      '..zYYYYYYOKz....',
+      '.zzzzzzzzOKKz...',
+      '.zYYYOOOzKKKz...',
+      '.zYYOOOKzKKz....',
+      '.zYOOOKKzKz.....',
+      '.zOOOKKKzz......',
+      '.zzzzzzzz.zzzz..',
+      '.........zpPPPz.',
+      '........zpPPPpz.',
+      '........zppppz..',
+      '.........zzzz...',
+    ],
+    'icono-calafate': [
+      '................',
+      '.........zzz....',
+      '........zLlGz...',
+      '.......zrlGGz...',
+      '..zzz.zr.zzz....',
+      '.zbbbzzr........',
+      'zbJbbbzrzzz.....',
+      'zbbbbbzzbbbz....',
+      '.zbbbzzbJbbbz...',
+      '..zzzzbbbbbbz...',
+      '...zbbzbbbbz....',
+      '..zbJbbzzzz.....',
+      '..zbbbbbz.......',
+      '...zbbbz........',
+      '....zzz.........',
+      '................',
+    ],
   };
 
   // ───────────────────────────────────────────────────────────────────────
@@ -807,7 +863,7 @@
   const NOMBRES_ICONOS = {
     'icono-fuego': 'Fuego', 'icono-lena': 'Leña', 'icono-comida': 'Comida', 'icono-refugio': 'Refugio',
     'icono-viento': 'Viento', 'icono-lluvia': 'Lluvia', 'icono-frio': 'Frío', 'icono-saber': 'Carta de saber',
-    'icono-codice': 'Códice', 'icono-generacion': 'Generación (lo que se hereda)', 'icono-remo': 'Remar (mover)', 'icono-calma': 'Calma',
+    'icono-codice': 'Códice', 'icono-generacion': 'Generación (lo que se hereda)', 'icono-remo': 'Remar (mover)', 'icono-calma': 'Calma', 'icono-calafate': 'Calafate', 'icono-hongo': 'Hongos de árbol', 'icono-pirita': 'Pirita (piedra de fuego)',
   };
   Object.keys(ICONOS).forEach((id) => sumar(id, 'icono', NOMBRES_ICONOS[id], [ICONOS[id]]));
 
