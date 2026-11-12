@@ -1,8 +1,22 @@
 # Arte · Tierra de los Humos
 
-Todo el arte del juego es **propio** y sale de un solo archivo de texto: [`fuente/arte.js`](fuente/arte.js). Los PNG se generan a partir de ese archivo. La dirección de arte completa (por qué cada color, fuentes, propuestas) está en [`docs/04-direccion-de-arte.md`](../docs/04-direccion-de-arte.md).
+Todo el arte del juego es **propio**. El estilo elegido es **Corteza**: el paisaje es papel recortado en capas y lo que se puede juntar es una pegatina en pixel art. La dirección de arte está en [`docs/04-direccion-de-arte.md`](../docs/04-direccion-de-arte.md), y la auditoría histórica de cada elemento, en [`docs/05-rigor-historico.md`](../docs/05-rigor-historico.md).
 
-## Qué hay
+## Estilo Corteza (lo que usa el juego)
+
+| Ruta | Qué es |
+|---|---|
+| `corteza/corteza.js` | **El motor de dibujo**: mapa, canoa, chozas, fauna, pegatinas, luz del fuego, humo, clima, estaciones y cámara para celular. Sin dependencias, salvo `fuente/arte.js`. |
+| `corteza/carta.css` | Cartas de saber, códice, fichas del HUD y botones de papel. |
+| `corteza/index.html` | La vitrina del estilo y un ejemplo completo de uso: tocá el agua y la canoa rema. |
+| `corteza/portada.html` | La fuente del logo, el ícono y la imagen para compartir. `node arte/corteza/exportar.cjs` los exporta a `logo/` (necesita Playwright). |
+| `logo/` | `logo.png`, `compartir.png` (1200 × 630), `icono-512.png`, `icono-192.png`, `favicon-32.png`. En `logo/pixel/` queda el logo pixel de la primera ronda. |
+
+Cómo usarlo en el juego: ver la sección 6 de `docs/04-direccion-de-arte.md`.
+
+**Antes de dibujar algo nuevo** (un objeto, un animal, una escena), buscalo en `docs/05-rigor-historico.md`. Si no está, primero buscá la fuente (autor, obra, página) y sumá la fila.
+
+## Pixel art (pegatinas e íconos) y paleta
 
 | Ruta | Qué es |
 |---|---|
@@ -12,9 +26,8 @@ Todo el arte del juego es **propio** y sale de un solo archivo de texto: [`fuent
 | `hoja-sprites.png` | Todos los sprites juntos (verano). También `hoja-sprites-otono.png` y `hoja-sprites-invierno.png`. |
 | `hoja-sprites.json` | El atlas: dónde está cada cuadro dentro de la hoja. Sirve para las tres estaciones. |
 | `paleta/` | La paleta en `.gpl` (Aseprite, GIMP, Krita), `.hex` (Lospec), `.json` y `.png`. |
-| `logo/` | Logo (`logo.svg`, `logo.png`), favicon (`favicon.svg`, `favicon-32.png`), ícono para celular (`icono-192.png`) e imagen para compartir en redes (`compartir.png`, 1200 × 630). |
 | `tipografia/` | Atkinson Hyperlegible (licencia OFL) y su CSS, para usar sin internet. |
-| `propuestas/index.html` | Las tres propuestas de estilo, interactivas. Doble clic para abrir. |
+| `propuestas/index.html` | Las tres propuestas de estilo que votó el equipo (registro). |
 
 ## Cómo dibujar o corregir un sprite
 
@@ -42,7 +55,9 @@ Si algo está mal (una fila más corta, una letra que no existe), el generador a
 
 **¿Preferís un programa de dibujo?** Cargá `paleta/paleta.gpl` en Aseprite, Krita o GIMP, dibujá con esos colores y pasá el resultado al equipo: se puede convertir a texto. Lo importante es no salirse de la paleta.
 
-## Cómo usarlo en el juego (Personas A y B)
+## Cómo usar los sprites pixel sueltos (Personas A y B)
+
+En el estilo Corteza, el motor ya dibuja las pegatinas. Esto sirve si se necesita un sprite pixel aparte (por ejemplo, un ícono en el HUD).
 
 **Opción 1: hoja de sprites + atlas** (lo más común con Canvas).
 

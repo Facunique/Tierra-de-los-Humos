@@ -31,15 +31,15 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 
 ### Arte y sonido (Persona D)
 - **Dirección de arte con investigación del territorio** ([`docs/04-direccion-de-arte.md`](../docs/04-direccion-de-arte.md)): qué se ve en los canales (guindo, lenga, turbales, playas de canto rodado, fauna) y qué sabemos de la vida yagán que el arte necesita (la canoa de corteza, el fuego en el centro, la choza, los conchales), con fuentes.
-- **Tres propuestas de estilo** sobre la misma escena, interactivas, con estación, clima, hora, nivel de fuego y simulación de daltonismo ([`arte/propuestas/index.html`](../arte/propuestas/index.html)). ✏️ Cuál eligió el equipo.
+- **Tres propuestas de estilo** sobre la misma escena ([`arte/propuestas/index.html`](../arte/propuestas/index.html)). El equipo eligió **Corteza**: paisaje de papel recortado, con lo que se junta en pixel art.
+- **Motor de dibujo Corteza listo para el juego** ([`arte/corteza/`](../arte/corteza/index.html)): luz del fuego en anillos, humo sobre lo no explorado, estaciones, clima, cámara para celular, cartas de saber y códice.
+- **Auditoría histórica del arte** ([`docs/05-rigor-historico.md`](../docs/05-rigor-historico.md)): cada elemento dibujado, contrastado con el *Handbook of South American Indians* (Cooper, 1946), con página. Se corrigieron la canoa (costuras, fogón y lugares de cada persona) y las chozas (con la puerta hacia el mar), y se sumaron los hongos de árbol y la pirita.
 - **Paleta de 42 colores** del paisaje de los canales, con contraste AAA en todos los textos.
 - **42 sprites propios** (terreno, canoa con fuego animado, choza, conchal, fauna, fuego del HUD en 5 niveles, íconos) en tres estaciones, con su atlas para el motor.
 - **Sonido ambiente generado por código** (viento, mar, lluvia, fuego) y efectos, con subtítulos para accesibilidad. Sin archivos de audio ni licencias de terceros.
 - Logo, ícono y tipografía para baja visión (Atkinson Hyperlegible, licencia OFL), incluida para que funcione sin internet.
 
-| Propuesta A | Propuesta B | Propuesta C |
-|---|---|---|
-| ![Propuesta A, pixel art](../docs/img/propuesta-a.png) | ![Propuesta B, formas recortadas](../docs/img/propuesta-b.jpg) | ![Propuesta C, símbolos](../docs/img/propuesta-c.png) |
+![Estilo Corteza: islas de papel, choza, conchal, pegatinas de leña y mejillones, y la canoa con su fuego](../docs/img/corteza-escena.jpg)
 
 ## 3. Decisiones importantes
 
@@ -50,7 +50,8 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 | Los peligros son el clima y el territorio. Sin violencia ni seres ceremoniales. | Líneas rojas del eje y de las bases. |
 | Sin música inventada: el sonido es el territorio y el fuego. | Los cantos son patrimonio de la comunidad. |
 | ✏️ Stack. | ✏️ |
-| ✏️ Estilo visual elegido. | ✏️ |
+| Estilo visual: Corteza (papel recortado y pegatinas pixel). | Más sereno, cuenta mejor el territorio, y se lee bien en el celular. |
+| Todo lo dibujado tiene que coincidir con las fuentes etnográficas. | Rigor (20 puntos) y respeto: auditoría en `docs/05`. |
 
 ## 4. Uso de inteligencia artificial
 
@@ -60,7 +61,7 @@ Declarado en el README (cláusula 7.4). ✏️ Revisar que esté al día.
 
 - ✏️ Programación: pulido, balance, códice, versión sin internet.
 - ✏️ Contenido: cartas restantes, revisión cultural final.
-- Arte y sonido: ilustraciones de las cartas, arte del destino del viaje, integración del sonido.
+- Arte y sonido: ilustraciones de las cartas, arte del destino del viaje (por ejemplo, la ballena varada), integración del motor Corteza y del sonido, cotejo con el libro de Goodall.
 - Comunicación: README completo, video de 3 minutos, pitch de 5 minutos con ensayo.
 
 ## 6. Dificultades y pedidos a la mentoría

@@ -1,6 +1,6 @@
 # Tierra de los Humos — roguelike fueguino
 
-![Tierra de los Humos: una canoa con el fuego encendido en un canal fueguino, con la cordillera nevada y columnas de humo](arte/logo/compartir.png)
+![Tierra de los Humos: costa fueguina en otoño recortada en papel, con una choza y un conchal, y en primer plano una canoa de corteza con el fuego encendido, el hombre adelante con el arpón y la mujer atrás remando](arte/logo/compartir.png)
 
 Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de Tierra del Fuego. Lo desarrolla el equipo **Tierra de los Humos** para la hackatón [SoberaníaTech 2026](https://soberaniatech.com.ar/), organizada por la Agencia de Innovación de Tierra del Fuego.
 
@@ -26,14 +26,16 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 |---|---|
 | [00 · Guía de la hackatón](docs/00-guia-hackathon.md) | Bases, fechas, criterios de evaluación, cuidados culturales y plan por fases |
 | [01 · Concepto](docs/01-concepto.md) | Premisa, pueblos (Yagán primero), bucle central, transmisión entre partidas, tono y aporte al eje |
-| [04 · Dirección de arte y sonido](docs/04-direccion-de-arte.md) | Investigación visual del territorio, tres propuestas de estilo, paleta, sprites, sonido y accesibilidad |
+| [04 · Dirección de arte y sonido](docs/04-direccion-de-arte.md) | El estilo Corteza: principios, motor de dibujo, cartas, paleta, sonido y accesibilidad |
+| [05 · Rigor histórico del arte](docs/05-rigor-historico.md) | Cada elemento dibujado contrastado con las fuentes etnográficas, con página |
 
 Arte y sonido:
 
 | Recurso | Contenido |
 |---|---|
-| [Propuestas de estilo](arte/propuestas/index.html) | La misma escena en tres estilos, interactiva (abrir el archivo en el navegador) |
-| [`arte/`](arte/README.md) | Paleta, sprites, hoja de sprites, logo y tipografía. Todo propio y generado desde texto |
+| [Estilo Corteza](arte/corteza/index.html) | El estilo elegido, en vivo: tocá el agua y la canoa rema (abrir el archivo en el navegador) |
+| [`arte/`](arte/README.md) | Motor de dibujo, paleta, pegatinas pixel, logo y tipografía. Todo propio |
+| [Propuestas de estilo](arte/propuestas/index.html) | Las tres propuestas que votó el equipo (registro) |
 | [`sonido/`](sonido/README.md) | Sonido ambiente y efectos generados por código, con demo |
 
 Trabajo interno del equipo:
@@ -63,7 +65,7 @@ Trabajo interno del equipo:
 |---|---|---|---|
 | Tipografía [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible) | Braille Institute of America | [SIL Open Font License 1.1](arte/tipografia/OFL.txt) | Todos los textos. Archivos en `arte/tipografia/` |
 
-El resto del arte (sprites, paleta, logo, letras del logo) y todo el sonido son **propios del equipo** (CC BY-SA 4.0). No se usan fotos históricas, ilustraciones, sonidos ni música de terceros. *Se completa si se suma alguna librería o recurso nuevo.*
+El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido son **propios del equipo** (CC BY-SA 4.0). No se usan fotos históricas, ilustraciones, sonidos ni música de terceros. *Se completa si se suma alguna librería o recurso nuevo.*
 
 ## Uso de inteligencia artificial
 
@@ -71,6 +73,7 @@ Las bases piden declararlo (cláusula 7.4).
 
 - **Claude (Anthropic), a través de Claude Code:** se usó para resumir las bases de la hackatón, proponer un plan de trabajo y armar la estructura inicial de este repositorio y de su documentación. El equipo revisa y decide todo el contenido.
 - **Arte y sonido (12/11):** a pedido de la persona a cargo del arte, Claude Code buscó fuentes sobre el paisaje fueguino y la cultura material yagán, y propuso la dirección de arte (`docs/04-direccion-de-arte.md`). También escribió el código que define y genera la paleta, los sprites en pixel art, el logo y la página de propuestas (`arte/`), y el código que sintetiza el sonido (`sonido/`), junto con el plan de video y pitch (`equipo/comunicacion.md`). El equipo revisa los dibujos y elige el estilo. Los datos culturales marcados con 🔍 los verifica la persona de investigación con las fuentes y la comunidad.
+- **Estilo Corteza y rigor histórico (12/11):** el equipo eligió el estilo. Claude Code escribió el motor de dibujo (`arte/corteza/`), las cartas, el HUD y el logo. También leyó el capítulo «The Yahgan» del *Handbook of South American Indians* (Cooper, 1946) y *The Gold Diggings of Cape Horn* (Spears, 1895), auditó cada elemento del arte contra esas fuentes, con página (`docs/05-rigor-historico.md`), y corrigió lo que no coincidía. La validación final es del equipo y de la comunidad.
 
 ## Integrantes
 
