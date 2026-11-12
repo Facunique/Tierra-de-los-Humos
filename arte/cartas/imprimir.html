@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cartas para imprimir</title>
+<meta name="description" content="Tierra de los Humos: cartas de saber para imprimir en A4 doble faz (frente con el saber, dorso con la fuente), para la demo del 19/11.">
+<link rel="stylesheet" href="../tipografia/atkinson.css">
+<link rel="stylesheet" href="../corteza/carta.css">
+<style>
+  :root { --fondo: #e9dfc8; --texto: #28221e; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; } }
+  :root[data-theme="dark"] { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; }
+  .instrucciones { max-width: 760px; margin: 0 auto; padding: 24px 16px 8px; }
+  .instrucciones h1 { margin: 0 0 6px; font-size: 28px; }
+  .instrucciones p { margin: 0 0 8px; }
+  .hoja { width: 210mm; height: 297mm; margin: 12px auto; background: #fff; display: grid; grid-template-columns: repeat(2, 90mm); grid-template-rows: repeat(2, 132mm); gap: 6mm; justify-content: center; align-content: center; page-break-after: always; break-after: page; overflow: hidden; }
+  .hoja:last-child { page-break-after: auto; break-after: auto; }
+  .carta-impresa { width: 90mm; height: 132mm; position: relative; color: #28221e; background: #eee5d0; border-radius: 4mm 5mm 3.5mm 5.5mm / 5mm 3.5mm 5.5mm 4mm; border: 0.3mm solid #977250; overflow: hidden; padding: 5mm 5.5mm 4.5mm; display: flex; flex-direction: column; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .carta-impresa::before { content: ""; position: absolute; inset: 2.2mm; border: 0.35mm dashed rgba(94,65,44,.4); border-radius: inherit; pointer-events: none; }
+  .carta-impresa .tipo { margin: 0 0 2mm; font-size: 2.6mm; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #973a25; }
+  .carta-impresa canvas { width: 100%; height: auto; aspect-ratio: 2 / 1; border-radius: 2.5mm; margin-bottom: 3mm; display: block; }
+  .carta-impresa h2 { margin: 0 0 2.5mm; font-size: 5.2mm; line-height: 1.15; }
+  .carta-impresa p { margin: 0 0 2.5mm; font-size: 3.35mm; line-height: 1.4; }
+  .carta-impresa .etiqueta { font-size: 2.6mm; padding: 0.2mm 1.6mm; }
+  .carta-impresa .pie { margin-top: auto; font-size: 2.5mm; color: #5b524a; display: flex; justify-content: space-between; border-top: 0.3mm dashed #8f897f; padding-top: 1.6mm; }
+  /* Dorso */
+  .dorso { background: #1d2e38; color: #eee5d0; border-color: #0f1a21; justify-content: space-between; }
+  .dorso::before { border-color: rgba(238,229,208,.35); }
+  .dorso canvas { aspect-ratio: 1 / 1; width: 46mm; margin: 4mm auto 0; border-radius: 50%; box-shadow: 1.5mm 2mm 0 rgba(0,0,0,.35); }
+  .dorso .nombre { text-align: center; font-weight: 700; font-size: 6mm; line-height: 1.05; margin: 3mm 0 0; }
+  .dorso .fuente { background: #eee5d0; color: #28221e; border-radius: 2.5mm; padding: 3mm 3.5mm; font-size: 3mm; line-height: 1.4; }
+  .dorso .fuente b { display: block; font-size: 2.5mm; letter-spacing: .12em; text-transform: uppercase; color: #973a25; margin-bottom: 1mm; }
+  .dorso .aviso { font-size: 2.5mm; text-align: center; color: #c3cbca; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .instrucciones { display: none; }
+    .hoja { margin: 0; }
+  }
+  @media screen and (max-width: 840px) { .hoja { transform-origin: top left; } }
+</style>
+</head>
+<body>
+  <div class="instrucciones">
+    <h1>Cartas de saber para imprimir</h1>
+    <p>A4, doble faz, «girar por el borde largo». Cada hoja impar trae los frentes y la siguiente, los dorsos, en espejo para que coincidan. Después se recortan por el borde.</p>
+    <p>Los textos son un <strong>borrador para la Persona C</strong> (<code>arte/cartas/saberes-borrador.js</code>). Si se corrigen ahí, esta hoja se actualiza sola.</p>
+  </div>
+  <div id="hojas"></div>
+
+<script src="../fuente/arte.js"></script>
+<script src="../corteza/corteza.js"></script>
+<script src="saberes-borrador.js"></script>
+<script>
+(function () {
+  'use strict';
+  const CZ = window.TDH_CORTEZA, { SABERES, ORDEN } = window.TDH_SABERES;
+  const cont = document.getElementById('hojas');
+  function dibujar(canvas, mapa, extra, ancho) {
+    const celda = Math.ceil(ancho / mapa[0].length);
+    const m = CZ.crear(canvas, { celda, dpr: 2 });
+    m.escena(Object.assign({ mapa, objetos: [], estacion: 'verano', clima: 'calma', hora: 'dia' }, extra || {}));
+    m.dibujar(1.6);
+  }
+  const textoPlano = (h) => h.replace(/<[^>]+>/g, '');
+  for (let i = 0; i < ORDEN.length; i += 4) {
+    const grupo = ORDEN.slice(i, i + 4);
+    const frente = document.createElement('section'); frente.className = 'hoja'; frente.setAttribute('aria-label', 'Frentes ' + (i / 4 + 1));
+    const dorso = document.createElement('section'); dorso.className = 'hoja'; dorso.setAttribute('aria-label', 'Dorsos ' + (i / 4 + 1));
+    grupo.forEach((k, j) => {
+      const c = SABERES[k];
+      const f = document.createElement('article'); f.className = 'carta-impresa';
+      f.innerHTML = '<p class="tipo">Saber · Yagán · ' + c.tipo + '</p><canvas aria-hidden="true"></canvas><h2>' + c.titulo + '</h2>' +
+        '<p><span class="etiqueta etiqueta--dato">Dato</span> ' + c.dato + '</p><p><span class="etiqueta etiqueta--juego">En el juego</span> ' + c.juego + '</p>' +
+        '<div class="pie"><span>Tierra de los Humos</span><span>' + (ORDEN.indexOf(k) + 1) + ' / ' + ORDEN.length + '</span></div>';
+      frente.appendChild(f);
+      dibujar(f.querySelector('canvas'), c.mapa, c.extra, 340);
+    });
+    // Dorsos en espejo por fila (para imprimir doble faz girando por el borde largo)
+    const espejo = [];
+    for (let j = 0; j < 4; j += 2) espejo.push(grupo[j + 1], grupo[j]);
+    espejo.forEach((k) => {
+      const d = document.createElement('article'); d.className = 'carta-impresa dorso';
+      if (!k) { d.style.visibility = 'hidden'; dorso.appendChild(d); return; }
+      const c = SABERES[k];
+      d.innerHTML = '<canvas aria-hidden="true"></canvas><p class="nombre">Tierra de<br>los Humos</p>' +
+        '<div class="fuente"><b>Fuente de «' + c.titulo + '»</b>' + c.fuente + '</div>' +
+        '<p class="aviso">La familia y el mapa del juego son ficción. Los saberes, no. Roguelike fueguino · SoberaníaTech 2026</p>';
+      dorso.appendChild(d);
+      dibujar(d.querySelector('canvas'), ['~~~', '~~~', '~~~'], { hora: 'tarde' }, 180);
+      const x = d.querySelector('canvas').getContext('2d'); x.setTransform(2, 0, 0, 2, 0, 0);
+      CZ.humo(x, 90, 70, 1.2, 2.2, 0.5, 7, 60); CZ.canoa(x, 90, 120, 1.25, 4, 2.15, 1, false);
+    });
+    cont.appendChild(frente); cont.appendChild(dorso);
+  }
+  document.body.dataset.listo = '1';
+  void textoPlano;
+})();
+</script>
+</body>
+</html>
