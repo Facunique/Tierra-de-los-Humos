@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pitch Tierra de los Humos</title>
+<meta name="description" content="Presentación del pitch de 5 minutos de Tierra de los Humos, en estilo Corteza. Funciona sin internet. Flechas para avanzar, N para notas, F para pantalla completa.">
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<link rel="stylesheet" href="../arte/corteza/carta.css">
+<link rel="icon" href="../arte/logo/favicon-32.png" type="image/png">
+<style>
+  :root { --noche: #0b1015; --papel: #eee5d0; --tinta: #28221e; --ocre: #973a25; --luz: #ffd47c; --fondo: #0b1015; --texto: #eee5d0; color-scheme: dark; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --fondo: #e9dfc8; --texto: #28221e; color-scheme: light; } }
+  :root[data-theme="light"] { --fondo: #e9dfc8; --texto: #28221e; color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--fondo); color: var(--texto); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; overflow: hidden; }
+  /* Lienzo fijo de 1600 × 900 que se escala para entrar en la pantalla */
+  #escenario { position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px; transform-origin: center; }
+  .diapo { position: absolute; inset: 0; display: none; overflow: hidden; border-radius: 6px; background: #1d2e38; color: var(--tinta); }
+  .diapo.activa { display: block; }
+  .diapo > canvas.fondo { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .contenido { position: absolute; inset: 0; padding: 70px 90px; display: flex; flex-direction: column; gap: 28px; }
+  .rotulo { background: var(--papel); color: var(--tinta); padding: 34px 44px 30px; position: relative; border-radius: 22px 30px 20px 32px / 30px 20px 32px 22px; box-shadow: 12px 16px 0 rgba(15,26,33,.55); }
+  .rotulo::before { content: ""; position: absolute; inset: 12px; border: 2.5px dashed rgba(94,65,44,.35); border-radius: inherit; pointer-events: none; }
+  .sub { margin: 0 0 10px; font-size: 24px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ocre); }
+  h1 { margin: 0; font-size: 120px; line-height: .95; letter-spacing: -0.01em; }
+  h2 { margin: 0; font-size: 68px; line-height: 1.05; }
+  p { margin: 0; font-size: 34px; line-height: 1.35; }
+  .grande { font-size: 44px; line-height: 1.3; }
+  ul.puntos { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px; }
+  ul.puntos li { font-size: 34px; line-height: 1.3; padding-left: 52px; position: relative; }
+  ul.puntos li::before { content: ""; position: absolute; left: 6px; top: 12px; width: 26px; height: 26px; border-radius: 50%; background: var(--luz); box-shadow: 0 0 0 4px rgba(151,58,37,.35); }
+  .pendiente { background: #ffd47c; color: #28221e; border-radius: 8px; padding: 0 10px; font-weight: 700; }
+  .fila { display: flex; gap: 40px; align-items: stretch; }
+  .columna { flex: 1; display: flex; flex-direction: column; gap: 24px; }
+  .chip { display: inline-block; background: rgba(11,16,21,.78); color: #eee5d0; font-size: 24px; padding: 8px 18px; border-radius: 12px; }
+  .pie { position: absolute; left: 90px; bottom: 34px; font-size: 22px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #eee5d0; text-shadow: 0 2px 0 #0f1a21; }
+  .carta-grande { width: 520px; transform: rotate(-2deg); }
+  .carta-grande .carta-saber__titulo { font-size: 32px; }
+  .carta-grande p { font-size: 21px !important; }
+  .carta-grande .carta-saber__fuente { font-size: 17px !important; }
+  .generaciones { display: flex; gap: 26px; align-items: center; }
+  .gen { flex: 1; text-align: center; }
+  .gen canvas { width: 100%; border-radius: 18px; box-shadow: 8px 10px 0 rgba(15,26,33,.55); }
+  .gen p { font-size: 28px; margin-top: 12px; color: #eee5d0; text-shadow: 0 2px 0 #0f1a21; }
+  .flecha { font-size: 70px; color: var(--luz); text-shadow: 0 3px 0 #0f1a21; }
+  /* Interfaz del presentador */
+  #barra { position: fixed; z-index: 10; left: 0; right: 0; bottom: 0; display: flex; gap: 10px; align-items: center; justify-content: center; padding: 8px; font-size: 15px; color: #c3cbca; opacity: .25; transition: opacity .2s; }
+  #barra:hover, #barra:focus-within { opacity: 1; }
+  #barra button { font: inherit; min-height: 40px; min-width: 44px; padding: 6px 12px; border-radius: 10px; border: 1px solid #2d3a44; background: #162028; color: #e7ecea; cursor: pointer; }
+  #barra button:focus-visible { outline: 3px solid var(--luz); outline-offset: 2px; }
+  #notas { position: fixed; z-index: 11; right: 12px; top: 12px; width: min(460px, 92vw); max-height: 70vh; overflow-y: auto; background: rgba(11,16,21,.94); color: #e7ecea; border: 1px solid #2d3a44; border-radius: 12px; padding: 14px 16px; font-size: 16px; line-height: 1.45; display: none; }
+  #notas.visible { display: block; }
+  #notas h3 { margin: 0 0 6px; font-size: 15px; color: var(--luz); text-transform: uppercase; letter-spacing: .1em; }
+  #reloj { font-variant-numeric: tabular-nums; }
+  @media print {
+    @page { size: 1600px 900px; margin: 0; }
+    html, body { overflow: visible; height: auto; background: #fff; }
+    #escenario { position: static; transform: none !important; }
+    .diapo { display: block !important; position: relative; width: 1600px; height: 900px; page-break-after: always; break-after: page; border-radius: 0; }
+    #barra, #notas { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="escenario" role="region" aria-roledescription="presentación" aria-label="Pitch de Tierra de los Humos">
+
+  <!-- 1. Portada · D -->
+  <section class="diapo" data-quien="D" data-tiempo="0:00" aria-label="Diapositiva 1: portada">
+    <canvas class="fondo" data-escena="portada"></canvas>
+    <div class="contenido" style="justify-content:center;align-items:flex-end">
+      <div class="rotulo" style="width:760px">
+        <p class="sub">Roguelike fueguino</p>
+        <h1>Tierra de los Humos</h1>
+        <p style="margin-top:18px">Un viaje en canoa por los canales. Cuando el fuego se apaga, lo aprendido pasa a la siguiente generación.</p>
+      </div>
+    </div>
+    <div class="pie">SoberaníaTech 2026 · Eje 04 · Memoria, Cultura e Innovación Comunitaria</div>
+    <aside class="nota">D · 0:00 a 0:20. «Hace más de 500 años, los navegantes que pasaron por el estrecho vieron humo en la costa. Eran los fuegos de los pueblos de esta tierra.» Pausa. Pasar a la siguiente.</aside>
+  </section>
+
+  <!-- 2. El problema · D -->
+  <section class="diapo" data-quien="D" data-tiempo="0:20" aria-label="Diapositiva 2: el problema">
+    <canvas class="fondo" data-escena="humos"></canvas>
+    <div class="contenido" style="justify-content:center">
+      <div class="rotulo" style="width:1000px">
+        <p class="sub">El problema</p>
+        <h2>Los saberes de los pueblos fueguinos casi siempre se cuentan en pasado.</h2>
+        <p class="grande" style="margin-top:22px">Pero esos pueblos siguen acá. Y lo que saben del territorio (navegar, recolectar, cuidar el fuego) llega poco a jóvenes y escuelas.</p>
+      </div>
+    </div>
+    <aside class="nota">D · 0:20 a 0:40. Decir el problema en una frase. Remarcar «en presente»: hay comunidades yaganes vivas hoy.</aside>
+  </section>
+
+  <!-- 3. La consulta · C -->
+  <section class="diapo" data-quien="C" data-tiempo="0:40" aria-label="Diapositiva 3: la consulta">
+    <canvas class="fondo" data-escena="playa"></canvas>
+    <div class="contenido" style="justify-content:center">
+      <div class="rotulo" style="width:1100px">
+        <p class="sub">Construido con consulta</p>
+        <h2>Primero preguntamos.</h2>
+        <ul class="puntos" style="margin-top:26px">
+          <li>Con quién hablamos: <span class="pendiente">[completar solo con lo autorizado]</span></li>
+          <li>Qué nos corrigieron y qué cambiamos: <span class="pendiente">[completar]</span></li>
+          <li>Personajes sin nombre propio y como siluetas, hasta que la comunidad diga otra cosa.</li>
+          <li>Sin seres ceremoniales, sin violencia, en presente.</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="nota">C · 0:40 a 1:05. Solo nombrar a personas o comunidades que lo autorizaron (ver equipo/comunicaciones.md). Si todavía no respondieron, decir que se las contactó y cuándo: mostrar que lo intentamos también cuenta.</aside>
+  </section>
+
+  <!-- 4. Rigor · C -->
+  <section class="diapo" data-quien="C" data-tiempo="1:05" aria-label="Diapositiva 4: cada saber con su fuente">
+    <canvas class="fondo" data-escena="canal"></canvas>
+    <div class="contenido">
+      <div class="fila" style="flex:1;align-items:center">
+        <div class="columna" style="flex:1.1">
+          <div class="rotulo">
+            <p class="sub">Rigor</p>
+            <h2>Cada saber, con su fuente y su página.</h2>
+            <p style="margin-top:18px">La carta separa lo que es <b>dato</b> de lo que es <b>recurso de juego</b>.</p>
+            <p style="margin-top:14px">Y el dibujo también: la canoa, las chozas y lo que se junta siguen el <i>Handbook of South American Indians</i> (Cooper, 1946).</p>
+          </div>
+        </div>
+        <div class="columna" style="align-items:center"><div id="carta-demo" class="carta-grande"></div></div>
+      </div>
+    </div>
+    <aside class="nota">C · 1:05 a 1:30. Leer la carta en voz alta: dato, recurso de juego, fuente con página. Mencionar que el arte se auditó contra las fuentes (docs/05): por ejemplo, la mujer rema atrás y el hombre va adelante con el arpón.</aside>
+  </section>
+
+  <!-- 5. Demo · A -->
+  <section class="diapo" data-quien="A" data-tiempo="1:30" aria-label="Diapositiva 5: demo">
+    <canvas class="fondo" data-escena="demo"></canvas>
+    <div class="contenido" style="justify-content:flex-end">
+      <div style="display:flex;gap:16px;align-items:center">
+        <span class="chip">Demo en vivo · 1:30 minutos</span>
+        <span class="chip">Si algo falla: pasar al video</span>
+      </div>
+    </div>
+    <aside class="nota">A · 1:30 a 3:00. Partida corta preparada: remar, ver cómo el viento gasta el fuego, juntar leña, aparece una carta, el fuego se apaga, empieza la generación 2 con el saber heredado. Tener abierto el juego en otra pestaña y el video descargado como respaldo.</aside>
+  </section>
+
+  <!-- 6. Herencia · B -->
+  <section class="diapo" data-quien="B" data-tiempo="3:00" aria-label="Diapositiva 6: la mecánica es la memoria">
+    <canvas class="fondo" data-escena="noche"></canvas>
+    <div class="contenido">
+      <div class="rotulo" style="width:1100px"><p class="sub">La mecánica es el mensaje</p><h2>Morir y volver a empezar es transmitir.</h2></div>
+      <div class="generaciones" style="margin-top:auto">
+        <div class="gen"><canvas data-mini="gen1"></canvas><p>Generación 1: el fuego se apaga</p></div>
+        <div class="flecha" aria-hidden="true">→</div>
+        <div class="gen"><canvas data-mini="gen2"></canvas><p>Generación 2: sabe amarrar en el cachiyuyo</p></div>
+        <div class="flecha" aria-hidden="true">→</div>
+        <div class="gen"><canvas data-mini="gen3"></canvas><p>Generación 3: llega con el fuego encendido</p></div>
+      </div>
+    </div>
+    <aside class="nota">B · 3:00 a 3:30. Explicar que cada pueblo tiene su propio linaje y su propio códice. El códice se recorre sin jugar: es la parte pensada para las escuelas.</aside>
+  </section>
+
+  <!-- 7. Para todos · B -->
+  <section class="diapo" data-quien="B" data-tiempo="3:30" aria-label="Diapositiva 7: accesible y abierto">
+    <canvas class="fondo" data-escena="playa"></canvas>
+    <div class="contenido" style="justify-content:center">
+      <div class="rotulo" style="width:1180px">
+        <p class="sub">Para todos</p>
+        <h2>Se juega en el navegador, también en el celular y sin internet.</h2>
+        <ul class="puntos" style="margin-top:26px">
+          <li>Contraste AAA, tipografía para baja visión y subtítulos para cada sonido.</li>
+          <li>Probado con simulación de daltonismo; la costa no depende del color.</li>
+          <li>Código abierto (MIT) y contenidos libres (CC BY-SA 4.0).</li>
+          <li>Arte y sonido propios, generados con código: pesa muy poco.</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="nota">B · 3:30 a 4:00. Mostrar el celular con el juego abierto, si da el tiempo.</aside>
+  </section>
+
+  <!-- 8. Qué sigue · D -->
+  <section class="diapo" data-quien="D" data-tiempo="4:00" aria-label="Diapositiva 8: qué sigue">
+    <canvas class="fondo" data-escena="otono"></canvas>
+    <div class="contenido" style="justify-content:center">
+      <div class="rotulo" style="width:1080px">
+        <p class="sub">Qué sigue</p>
+        <h2>Profundidad antes que cantidad.</h2>
+        <ul class="puntos" style="margin-top:26px">
+          <li>Kawésqar y Selk'nam, solo junto a sus comunidades.</li>
+          <li>Llevar el códice a escuelas de Ushuaia, Tolhuin y Río Grande.</li>
+          <li>Que la comunidad pueda corregir y sumar saberes.</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="nota">D · 4:00 a 4:40. Breve. Cerrar mirando al jurado.</aside>
+  </section>
+
+  <!-- 9. Cierre · D -->
+  <section class="diapo" data-quien="D" data-tiempo="4:40" aria-label="Diapositiva 9: cierre">
+    <canvas class="fondo" data-escena="portada"></canvas>
+    <div class="contenido" style="justify-content:center;align-items:flex-end;text-align:center">
+      <div class="rotulo" style="width:860px">
+        <h2 style="font-size:58px">Cuando el fuego se apaga, lo aprendido no se pierde.</h2>
+        <p style="margin-top:22px">Jugalo en: <span class="pendiente">[enlace de GitHub Pages]</span></p>
+        <p style="margin-top:10px">Equipo Tierra de los Humos: <span class="pendiente">[nombres]</span></p>
+      </div>
+    </div>
+    <aside class="nota">D · 4:40 a 5:00. La frase final, despacio. «Gracias.» Todo el equipo al frente.</aside>
+  </section>
+</div>
+
+<div id="notas" role="complementary" aria-label="Notas del orador"><h3 id="notas-titulo"></h3><div id="notas-texto"></div></div>
+<nav id="barra" aria-label="Controles de la presentación">
+  <button id="b-ant" aria-label="Anterior">←</button>
+  <span id="contador" aria-live="polite"></span>
+  <button id="b-sig" aria-label="Siguiente">→</button>
+  <button id="b-notas" aria-pressed="false">Notas (N)</button>
+  <button id="b-pantalla">Pantalla completa (F)</button>
+  <span id="reloj" title="Tiempo desde la primera diapositiva">0:00</span>
+</nav>
+
+<script src="../arte/fuente/arte.js"></script>
+<script src="../arte/corteza/corteza.js"></script>
+<script src="../arte/cartas/saberes-borrador.js"></script>
+<script>
+(function () {
+  'use strict';
+  const CZ = window.TDH_CORTEZA, { SABERES } = window.TDH_SABERES;
+  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const diapos = [...document.querySelectorAll('.diapo')];
+  let actual = 0, inicio = null;
+
+  // ── Escenas de fondo (33 × 19 casillas de 48 px ≈ 1600 × 900) ───────────
+  function costa(filaPlaya, extra) {
+    const mapa = [];
+    for (let y = 0; y < 19; y++) {
+      let f = '';
+      for (let x = 0; x < 34; x++) {
+        const b = filaPlaya + Math.round(Math.sin(x * 0.55) * 0.7);
+        f += y === 0 ? (x % 5 === 2 ? 'L' : 'M') : y < b - 1 ? ((x * 7 + y) % 5 ? 'G' : 'L') : y === b - 1 ? '.' : y === b ? (x % 6 === 3 ? 'k' : ',') : (y > b + 4 ? '~' : '-');
+      }
+      mapa.push(f);
+    }
+    return Object.assign({ mapa, objetos: [], estacion: 'verano', clima: 'calma', hora: 'tarde' }, extra || {});
+  }
+  const ESCENAS = {
+    portada: () => costa(5, { estacion: 'otono', objetos: [{ id: 'choza', x: 22, y: 4 }, { id: 'conchal', x: 24, y: 4 }], humos: [{ x: 14.5, y: 1.4 }, { x: 29.5, y: 1.7 }] }),
+    humos: () => costa(4, { hora: 'tarde', humos: [{ x: 4.5, y: 1.5 }, { x: 11.5, y: 1.2 }, { x: 19.5, y: 1.8 }, { x: 27.5, y: 1.4 }, { x: 31.5, y: 2 }] }),
+    playa: () => costa(9, { hora: 'dia', objetos: [{ id: 'choza', x: 26, y: 8 }, { id: 'lena', x: 23, y: 8 }, { id: 'mejillones', x: 29, y: 8 }] }),
+    canal: () => costa(3, { hora: 'dia', canoa: { x: 4, y: 12, fuego: 3 } }),
+    demo: () => Object.assign(costa(6, { hora: 'dia', canoa: { x: 16, y: 10, fuego: 3, remando: true }, objetos: [{ id: 'lena', x: 12, y: 5 }, { id: 'saber', x: 20, y: 5 }, { id: 'choza', x: 16, y: 5 }] }), {}),
+    noche: () => costa(4, { hora: 'noche', clima: 'nieve', estacion: 'invierno', canoa: { x: 26, y: 12, fuego: 2 } }),
+    otono: () => costa(6, { estacion: 'otono', hora: 'dia', objetos: [{ id: 'arbol-bandera', x: 6, y: 5 }, { id: 'guindo-grande', x: 28, y: 5 }] }),
+  };
+  const motores = new Map();
+  function motorDe(cv) {
+    if (!motores.has(cv)) {
+      const m = CZ.crear(cv, { celda: 48, dpr: Math.min(2, devicePixelRatio || 1) });
+      m.escena(ESCENAS[cv.dataset.escena]());
+      motores.set(cv, m);
+    }
+    return motores.get(cv);
+  }
+  function mini(cv, mapa, extra) {
+    const m = CZ.crear(cv, { celda: 52, dpr: 2 });
+    m.escena(Object.assign({ mapa, objetos: [], estacion: 'verano', clima: 'calma', hora: 'tarde' }, extra)); m.dibujar(1.6);
+  }
+
+  // ── Contenido especial ──────────────────────────────────────────────────
+  (function cartaDemo() {
+    const c = SABERES.amarre, cont = document.getElementById('carta-demo');
+    cont.innerHTML = '<article class="carta-saber papel"><p class="carta-saber__tipo">Saber · Yagán · ' + c.tipo + '</p><canvas class="carta-saber__ilus" aria-hidden="true"></canvas><h3 class="carta-saber__titulo">' + c.titulo + '</h3><p><span class="etiqueta etiqueta--dato">Dato</span>' + c.dato + '</p><p><span class="etiqueta etiqueta--juego">En el juego</span>' + c.juego + '</p><p class="carta-saber__fuente">Fuente: ' + c.fuente + '</p></article>';
+    mini(cont.querySelector('canvas'), c.mapa, c.extra);
+  })();
+  mini(document.querySelector('[data-mini=gen1]'), ['GGLG', '..,,', ',,--'], { canoa: { x: 2, y: 2, fuego: 0 }, hora: 'tarde' });
+  mini(document.querySelector('[data-mini=gen2]'), ['GGLG', '....', ',k,,'], { canoa: { x: 1, y: 2, fuego: 2 } });
+  mini(document.querySelector('[data-mini=gen3]'), ['GLGG', '....', ',,,,'], { objetos: [{ id: 'ballena-varada', x: 2, y: 1 }], canoa: { x: 1, y: 2, fuego: 4 }, humos: [{ x: 3.6, y: 0.5 }] });
+
+  // ── Navegación ──────────────────────────────────────────────────────────
+  function mostrar(i) {
+    actual = Math.max(0, Math.min(diapos.length - 1, i));
+    diapos.forEach((d, j) => { d.classList.toggle('activa', j === actual); d.setAttribute('aria-hidden', String(j !== actual)); });
+    const d = diapos[actual];
+    document.getElementById('contador').textContent = (actual + 1) + ' / ' + diapos.length;
+    document.getElementById('notas-titulo').textContent = 'Habla ' + d.dataset.quien + ' · desde ' + d.dataset.tiempo;
+    document.getElementById('notas-texto').textContent = d.querySelector('.nota').textContent;
+    if (actual > 0 && !inicio) inicio = Date.now();
+    location.hash = actual + 1;
+  }
+  document.querySelectorAll('.nota').forEach((n) => (n.hidden = true));
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); mostrar(actual + 1); }
+    if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); mostrar(actual - 1); }
+    if (e.key === 'Home') mostrar(0);
+    if (e.key === 'End') mostrar(diapos.length - 1);
+    if (e.key === 'n' || e.key === 'N') alternarNotas();
+    if (e.key === 'f' || e.key === 'F') pantallaCompleta();
+  });
+  let x0 = null;
+  document.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', (e) => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) mostrar(actual + (dx < 0 ? 1 : -1)); x0 = null; });
+  document.getElementById('b-ant').onclick = () => mostrar(actual - 1);
+  document.getElementById('b-sig').onclick = () => mostrar(actual + 1);
+  function alternarNotas() { const n = document.getElementById('notas'); n.classList.toggle('visible'); document.getElementById('b-notas').setAttribute('aria-pressed', String(n.classList.contains('visible'))); }
+  document.getElementById('b-notas').onclick = alternarNotas;
+  function pantallaCompleta() { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+  document.getElementById('b-pantalla').onclick = pantallaCompleta;
+
+  // ── Escala y animación ──────────────────────────────────────────────────
+  function escalar() { const e = Math.min(innerWidth / 1600, innerHeight / 900); document.getElementById('escenario').style.transform = 'translate(-50%, -50%) scale(' + e + ')'; }
+  addEventListener('resize', escalar); escalar();
+  let ultimo = 0;
+  function cuadro(ms) {
+    if (ms - ultimo > 40) {
+      ultimo = ms;
+      const cv = diapos[actual].querySelector('canvas.fondo');
+      if (cv) { const t = reducido ? 2 : ms / 1000; motorDe(cv).dibujar(t); if (cv.dataset.escena === 'portada') canoaGrande(cv, t); }
+      if (inicio) { const s = Math.floor((Date.now() - inicio) / 1000); document.getElementById('reloj').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+    }
+    requestAnimationFrame(cuadro);
+  }
+  // La canoa grande en primer plano (portada y cierre)
+  function canoaGrande(cv, t) {
+    const x = cv.getContext('2d'), e = cv.width / 1632;
+    x.setTransform(e, 0, 0, e, 0, 0);
+    CZ.humo(x, 360, 500, 3, t + 1, 0.8, 8, 150); CZ.canoa(x, 360, 640, 3.4, 4, t, 1, false);
+    x.setTransform(1, 0, 0, 1, 0, 0);
+  }
+  // Para exportar a PDF: dibuja todas las escenas una vez
+  window.prepararImpresion = () => { diapos.forEach((d) => { const cv = d.querySelector('canvas.fondo'); if (cv) { motorDe(cv).dibujar(2); if (cv.dataset.escena === 'portada') canoaGrande(cv, 2); } }); document.body.dataset.listo = '1'; };
+  mostrar((parseInt(location.hash.slice(1), 10) || 1) - 1);
+  requestAnimationFrame(cuadro);
+})();
+</script>
+</body>
+</html>
