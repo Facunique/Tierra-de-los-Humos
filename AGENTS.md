@@ -37,8 +37,10 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 
 | Ruta | Qué hay |
 |---|---|
-| `docs/` | Diseño del juego: guía de la hackatón, concepto, alcance, contenido cultural |
-| `equipo/` | Trabajo interno del equipo: memoria del proyecto y registro de comunicaciones con comunidades |
+| `docs/` | Diseño del juego: guía de la hackatón, concepto, alcance, contenido cultural, dirección de arte |
+| `arte/` | Arte propio: `fuente/arte.js` es la fuente única (paleta y sprites en texto); `node arte/generar.cjs` genera los PNG. Ver `arte/README.md` |
+| `sonido/` | Sonido generado por código (Web Audio), sin archivos de audio. Ver `sonido/README.md` |
+| `equipo/` | Trabajo interno del equipo: memoria del proyecto, registro de comunicaciones con comunidades y plan de comunicación (video, pitch, demo) |
 | `AGENTS.md` | Este archivo |
 | `README.md` | Presentación pública del proyecto (lo evalúa el jurado) |
 
@@ -51,4 +53,5 @@ El código del juego todavía no existe. Stack propuesto: HTML + JavaScript con 
 - Commits chicos, con mensaje en castellano que diga qué cambió y por qué.
 - **Uso de IA**: las bases obligan a declararlo (cláusula 7.4). Si hacés un aporte nuevo (código, textos, arte, música), sumalo a la sección *Uso de inteligencia artificial* del README.
 - Licencias: código MIT, contenidos CC BY-SA 4.0. Todo recurso de terceros va con su licencia en el README.
+- **Arte:** no edites los PNG a mano; cambiá `arte/fuente/arte.js` y regenerá. Usá solo colores de la paleta. Las personas van como siluetas sin rasgos hasta que la comunidad diga otra cosa. Reglas completas en `docs/04-direccion-de-arte.md`.
 - Priorizá lo que sume puntos según los criterios de evaluación (sección 5 de la guía): que se pueda jugar de punta a punta, en el celular, y con contenido citado.

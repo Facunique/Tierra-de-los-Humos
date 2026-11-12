@@ -1,5 +1,7 @@
 # Tierra de los Humos — roguelike fueguino
 
+![Tierra de los Humos: una canoa con el fuego encendido en un canal fueguino, con la cordillera nevada y columnas de humo](arte/logo/compartir.png)
+
 Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de Tierra del Fuego. Lo desarrolla el equipo **Tierra de los Humos** para la hackatón [SoberaníaTech 2026](https://soberaniatech.com.ar/), organizada por la Agencia de Innovación de Tierra del Fuego.
 
 > 🚧 **En desarrollo** (9 al 17 de noviembre de 2026). Por ahora el repositorio tiene la documentación de planificación; el código del juego se suma durante la hackatón.
@@ -24,6 +26,15 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 |---|---|
 | [00 · Guía de la hackatón](docs/00-guia-hackathon.md) | Bases, fechas, criterios de evaluación, cuidados culturales y plan por fases |
 | [01 · Concepto](docs/01-concepto.md) | Premisa, pueblos (Yagán primero), bucle central, transmisión entre partidas, tono y aporte al eje |
+| [04 · Dirección de arte y sonido](docs/04-direccion-de-arte.md) | Investigación visual del territorio, tres propuestas de estilo, paleta, sprites, sonido y accesibilidad |
+
+Arte y sonido:
+
+| Recurso | Contenido |
+|---|---|
+| [Propuestas de estilo](arte/propuestas/index.html) | La misma escena en tres estilos, interactiva (abrir el archivo en el navegador) |
+| [`arte/`](arte/README.md) | Paleta, sprites, hoja de sprites, logo y tipografía. Todo propio y generado desde texto |
+| [`sonido/`](sonido/README.md) | Sonido ambiente y efectos generados por código, con demo |
 
 Trabajo interno del equipo:
 
@@ -31,6 +42,7 @@ Trabajo interno del equipo:
 |---|---|
 | [Memoria del proyecto](equipo/memory.md) | Decisiones tomadas, estado actual, pendientes y glosario |
 | [Comunicaciones con comunidades](equipo/comunicaciones.md) | Registro de la consulta a comunidades y personas, con permisos y correcciones |
+| [Comunicación](equipo/comunicacion.md) | Plan del video, el pitch, el avance del 14/11 y la demo del 19/11 |
 | [AGENTS.md](AGENTS.md) | Reglas de trabajo para asistentes de IA (y para el equipo) |
 
 ## Cómo jugar
@@ -47,13 +59,18 @@ Trabajo interno del equipo:
 
 ## Recursos de terceros
 
-*Pendiente.* Acá se listan las librerías, fuentes tipográficas, sonidos u otros recursos ajenos, cada uno con su licencia.
+| Recurso | Autor | Licencia | Dónde se usa |
+|---|---|---|---|
+| Tipografía [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible) | Braille Institute of America | [SIL Open Font License 1.1](arte/tipografia/OFL.txt) | Todos los textos. Archivos en `arte/tipografia/` |
+
+El resto del arte (sprites, paleta, logo, letras del logo) y todo el sonido son **propios del equipo** (CC BY-SA 4.0). No se usan fotos históricas, ilustraciones, sonidos ni música de terceros. *Se completa si se suma alguna librería o recurso nuevo.*
 
 ## Uso de inteligencia artificial
 
 Las bases piden declararlo (cláusula 7.4).
 
 - **Claude (Anthropic), a través de Claude Code:** se usó para resumir las bases de la hackatón, proponer un plan de trabajo y armar la estructura inicial de este repositorio y de su documentación. El equipo revisa y decide todo el contenido.
+- **Arte y sonido (12/11):** a pedido de la persona a cargo del arte, Claude Code buscó fuentes sobre el paisaje fueguino y la cultura material yagán, y propuso la dirección de arte (`docs/04-direccion-de-arte.md`). También escribió el código que define y genera la paleta, los sprites en pixel art, el logo y la página de propuestas (`arte/`), y el código que sintetiza el sonido (`sonido/`), junto con el plan de video y pitch (`equipo/comunicacion.md`). El equipo revisa los dibujos y elige el estilo. Los datos culturales marcados con 🔍 los verifica la persona de investigación con las fuentes y la comunidad.
 
 ## Integrantes
 
