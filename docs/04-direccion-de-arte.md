@@ -206,7 +206,9 @@ El pixel art de la primera ronda (propuesta A) queda como **capa secundaria**: s
 
 ## 12. Sonido
 
-Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 10 KB): viento, mar, lluvia, fuego y efectos (remo, ola, leña, mariscos, saber, fuego apagado, nueva generación). Cada efecto tiene su subtítulo en pantalla. **Sin música inventada:** no imitamos cantos yaganes. Detalle en [`sonido/README.md`](../sonido/README.md).
+Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 18 KB): viento, mar, lluvia, fuego y efectos (remo, ola, leña, mariscos, saber, fuego apagado, nueva generación). Cada efecto tiene su subtítulo en pantalla.
+
+**El lugar suena distinto:** cerca del bosque, las hojas suenan con el viento y cruje alguna rama; en la playa, la resaca arrastra piedritas y valvas después de cada ola; en el canal abierto, el mar es más grave y fuerte. Lo calcula `TDH_SONIDO.lugarDe(mapa, x, y)` con las casillas que rodean a la canoa. No se imitan aves ni animales. **Sin música inventada:** no imitamos cantos yaganes. Detalle en [`sonido/README.md`](../sonido/README.md).
 
 ## 13. Accesibilidad
 

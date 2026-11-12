@@ -593,7 +593,9 @@
   function sonarAmbiente() {
     if (!sonido || !conSonido) return;
     const v = actual === 'viaje' && viaje ? viaje : null;
-    sonido.ambiente({ viento: v ? { calma: 0.15, viento: 0.85, lluvia: 0.35 }[v.clima] : 0.2, mar: 0.5, lluvia: v && v.clima === 'lluvia' ? 0.8 : (actual === 'fin' ? 0.7 : 0), fuego: v ? v.canoa.fuego : (actual === 'fin' ? 0 : 3) });
+    // El lugar: en el viaje, lo que rodea a la canoa; en las otras pantallas, la costa del fondo (bosque y playa).
+    const lugar = v ? TDH_SONIDO.lugarDe(MAPA_VIAJE, v.canoa.x, v.canoa.y) : { bosque: 0.5, playa: 0.4, mar: 0.5 };
+    sonido.ambiente({ viento: v ? { calma: 0.15, viento: 0.85, lluvia: 0.35 }[v.clima] : 0.2, mar: lugar.mar, bosque: lugar.bosque, playa: lugar.playa, lluvia: v && v.clima === 'lluvia' ? 0.8 : (actual === 'fin' ? 0.7 : 0), fuego: v ? v.canoa.fuego : (actual === 'fin' ? 0 : 3) });
   }
   $('b-sonido').addEventListener('click', async (e) => {
     if (!sonido) return; conSonido = !conSonido;

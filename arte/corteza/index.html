@@ -211,7 +211,8 @@
   let conSonido = false;
   function sonidoAmbiente() {
     if (!sonido || !conSonido) return;
-    sonido.ambiente({ viento: { calma: 0.15, viento: 0.9, lluvia: 0.35, nieve: 0.25 }[estado.clima], mar: estado.clima === 'viento' ? 0.85 : 0.45, lluvia: estado.clima === 'lluvia' ? 0.8 : 0, fuego: estado.canoa.fuego });
+    const lugar = TDH_SONIDO.lugarDe(MAPA, estado.canoa.x, estado.canoa.y); // bosque, playa y mar según dónde está la canoa
+    sonido.ambiente({ viento: { calma: 0.15, viento: 0.9, lluvia: 0.35, nieve: 0.25 }[estado.clima], mar: Math.min(1, lugar.mar + (estado.clima === 'viento' ? 0.3 : 0)), bosque: lugar.bosque, playa: lugar.playa, lluvia: estado.clima === 'lluvia' ? 0.8 : 0, fuego: estado.canoa.fuego });
   }
 
   // ── Luz real de Ushuaia: la hora y la estación del día de hoy ──────────
@@ -255,7 +256,7 @@
     ultimoPaso = ms;
     const p = camino.shift();
     estado.canoa.mira = p.x < estado.canoa.x ? -1 : (p.x > estado.canoa.x ? 1 : estado.canoa.mira);
-    estado.canoa.x = p.x; estado.canoa.y = p.y; revelar(p.x, p.y);
+    estado.canoa.x = p.x; estado.canoa.y = p.y; revelar(p.x, p.y); sonidoAmbiente();
     if (sonido && conSonido) sonido.efecto('remo');
     if (!camino.length) ayuda.textContent = 'Llegaste. Tocá otra casilla de agua para seguir.';
   }

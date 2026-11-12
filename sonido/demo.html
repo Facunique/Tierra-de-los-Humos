@@ -40,13 +40,18 @@
     <div class="fila"><label for="viento">Viento</label><input id="viento" type="range" min="0" max="100" value="25"><output for="viento">25</output></div>
     <div class="fila"><label for="mar">Mar</label><input id="mar" type="range" min="0" max="100" value="60"><output for="mar">60</output></div>
     <div class="fila"><label for="lluvia">Lluvia</label><input id="lluvia" type="range" min="0" max="100" value="0"><output for="lluvia">0</output></div>
+    <div class="fila"><label for="bosque">Bosque cerca</label><input id="bosque" type="range" min="0" max="100" value="0"><output for="bosque">0</output></div>
+    <div class="fila"><label for="playa">Playa cerca</label><input id="playa" type="range" min="0" max="100" value="0"><output for="playa">0</output></div>
     <div class="fila"><label for="fuego">Fuego (0 a 4)</label><input id="fuego" type="range" min="0" max="4" value="3"><output for="fuego">3</output></div>
     <div class="fila"><label for="volumen">Volumen</label><input id="volumen" type="range" min="0" max="100" value="80"><output for="volumen">80</output></div>
     <div class="botones" aria-label="Climas de ejemplo">
-      <button type="button" data-clima='{"viento":15,"mar":45,"lluvia":0,"fuego":3}'>Calma</button>
-      <button type="button" data-clima='{"viento":85,"mar":90,"lluvia":30,"fuego":2}'>Temporal</button>
-      <button type="button" data-clima='{"viento":30,"mar":50,"lluvia":80,"fuego":2}'>Lluvia</button>
-      <button type="button" data-clima='{"viento":10,"mar":30,"lluvia":0,"fuego":1}'>Noche y brasas</button>
+      <button type="button" data-clima='{"viento":15,"mar":45,"lluvia":0,"fuego":3,"bosque":0,"playa":0}'>Calma</button>
+      <button type="button" data-clima='{"viento":45,"mar":30,"lluvia":0,"fuego":3,"bosque":90,"playa":20}'>Orilla del bosque</button>
+      <button type="button" data-clima='{"viento":20,"mar":65,"lluvia":0,"fuego":3,"bosque":20,"playa":90}'>Playa de piedras</button>
+      <button type="button" data-clima='{"viento":30,"mar":95,"lluvia":0,"fuego":3,"bosque":0,"playa":0}'>Canal abierto</button>
+      <button type="button" data-clima='{"viento":85,"mar":90,"lluvia":30,"fuego":2,"bosque":30,"playa":0}'>Temporal</button>
+      <button type="button" data-clima='{"viento":30,"mar":50,"lluvia":80,"fuego":2,"bosque":40,"playa":10}'>Lluvia</button>
+      <button type="button" data-clima='{"viento":10,"mar":30,"lluvia":0,"fuego":1,"bosque":30,"playa":30}'>Noche y brasas</button>
       <button type="button" id="silencio" aria-pressed="false">Silenciar</button>
     </div>
   </section>
@@ -64,7 +69,7 @@
   const sonido = TDH_SONIDO.crear();
   const $ = (id) => document.getElementById(id);
   const NOMBRES = { remo: 'Remar', ola: 'Ola', lena: 'Leña al fuego', comida: 'Mariscos', saber: 'Saber nuevo', apagado: 'Se apaga el fuego', generacion: 'Nueva generación' };
-  function leer() { return { viento: $('viento').value / 100, mar: $('mar').value / 100, lluvia: $('lluvia').value / 100, fuego: Number($('fuego').value) }; }
+  function leer() { return { viento: $('viento').value / 100, mar: $('mar').value / 100, lluvia: $('lluvia').value / 100, fuego: Number($('fuego').value), bosque: $('bosque').value / 100, playa: $('playa').value / 100 }; }
   document.querySelectorAll('input[type=range]').forEach((r) => r.addEventListener('input', () => {
     r.nextElementSibling.textContent = r.value;
     if (r.id === 'volumen') sonido.volumen(r.value / 100); else sonido.ambiente(leer());

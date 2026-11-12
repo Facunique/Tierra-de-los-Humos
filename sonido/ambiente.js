@@ -2,11 +2,13 @@
  * Tierra de los Humos · Sonido ambiente generado por código (Web Audio)
  * ---------------------------------------------------------------------
  * No usa archivos de audio: todo se sintetiza en el momento a partir de ruido
- * y osciladores. Ventajas: pesa ~10 KB, anda sin internet, no hay licencias de
+ * y osciladores. Ventajas: pesa unos 18 KB, anda sin internet, no hay licencias de
  * terceros que registrar, y el sonido responde al estado del juego.
  *
  * Qué suena:
  *   Ambiente (continuo):  viento · mar · lluvia · fuego (crepitar según el nivel 0 a 4)
+ *   Según el lugar:       bosque (hojas que suenan con el viento y alguna rama que cruje)
+ *                         playa (después de cada ola, la resaca arrastra piedritas y valvas)
  *   Efectos (una vez):    remo · ola · lena · comida · saber · apagado · generacion
  *
  * Qué NO suena, a propósito: música o cantos "indígenas" inventados. Los cantos
@@ -18,6 +20,10 @@
  *   boton.onclick = () => sonido.iniciar();          // el navegador exige un toque/click primero
  *   sonido.ambiente({ viento: 0.3, mar: 0.6, lluvia: 0, fuego: 3 });   // valores de 0 a 1 (fuego de 0 a 4)
  *   sonido.efecto('remo');
+ *
+ *   // El lugar: cuánto bosque, playa y mar abierto hay cerca de la canoa (0 a 1)
+ *   const lugar = TDH_SONIDO.lugarDe(mapa, canoa.x, canoa.y);   // mapa: filas de letras del motor Corteza
+ *   sonido.ambiente(Object.assign({ viento: 0.3, lluvia: 0, fuego: 3 }, lugar));
  *   sonido.volumen(0.8); sonido.silenciar(true);
  *
  * Licencia: código MIT; los sonidos que produce, CC BY-SA 4.0.
@@ -29,7 +35,7 @@
     const op = Object.assign({ volumen: 0.8 }, opciones || {});
     let ctx = null, maestro = null, iniciado = false, reloj = null;
     const capas = {};
-    const objetivo = { viento: 0, mar: 0.5, lluvia: 0, fuego: 3 };
+    const objetivo = { viento: 0, mar: 0.5, lluvia: 0, fuego: 3, bosque: 0, playa: 0 };
     let silenciado = false, volumenActual = op.volumen;
     const oyentes = []; // para "subtítulos" de sonido (accesibilidad)
 
@@ -92,6 +98,16 @@
       cadena(fuenteRuido('marron'), filtro('lowpass', 180, 0.7), capas.fuego, maestro);
       capas.fuegoSoplo = ganancia(0);
       cadena(fuenteRuido('rosa'), filtro('bandpass', 1200, 0.6), capas.fuegoSoplo, maestro);
+
+      // Bosque: el viento entre las hojas de la lenga. Ruido rosa agudo que "respira"
+      // con un vaivén irregular; suena más cuanto más viento hay.
+      capas.bosque = ganancia(0);
+      capas.bosqueFiltro = filtro('bandpass', 3200, 0.6);
+      capas.bosqueModulo = ganancia(0.55);
+      cadena(fuenteRuido('rosa'), filtro('highpass', 1400, 0.5), capas.bosqueFiltro, capas.bosqueModulo, capas.bosque, maestro);
+      const hojas = ctx.createOscillator(); hojas.frequency.value = 0.31;
+      const hojasGan = ganancia(0.4);
+      hojas.connect(hojasGan); hojasGan.connect(capas.bosqueModulo.gain); hojas.start();
     }
 
     // ── Eventos breves (crepitar, gotas, olas) ──────────────────────────
@@ -118,6 +134,27 @@
     function gota(t) { rafagaRuido(t, 0.02, { desde: 2500 + Math.random() * 3000, q: 6, vol: 0.06 + Math.random() * 0.08 }); }
     function olaRompe(t, fuerza) {
       rafagaRuido(t, 1.8 + Math.random(), { tipo: 'rosa', filtroTipo: 'lowpass', desde: 2600, hasta: 300, q: 0.4, vol: 0.18 * fuerza, ataque: 0.35 });
+      if (objetivo.playa > 0.05) resaca(t + 1.1, objetivo.playa * fuerza);
+    }
+    // Resaca: el agua vuelve y arrastra piedritas y valvas. Muchos golpecitos agudos,
+    // primero seguidos y después cada vez más espaciados y suaves.
+    function resaca(t, fuerza) {
+      const n = Math.round(14 + fuerza * 26);
+      for (let i = 0; i < n; i++) {
+        const avance = i / n, d = 1.6 * Math.pow(avance, 1.4) + Math.random() * 0.05;
+        rafagaRuido(t + d, 0.008 + Math.random() * 0.02, { desde: 2400 + Math.random() * 4200, q: 3 + Math.random() * 6, vol: (0.03 + Math.random() * 0.07) * fuerza * (1 - avance * 0.7) });
+      }
+      rafagaRuido(t, 1.8, { tipo: 'blanco', filtroTipo: 'highpass', desde: 3000, hasta: 5200, q: 0.4, vol: 0.025 * fuerza, ataque: 0.2 });
+    }
+    // Una rama que cruje con una ráfaga: un tono grave de madera que se dobla.
+    function crujido(t) {
+      const o = ctx.createOscillator(); o.type = 'sawtooth';
+      const base = 90 + Math.random() * 60;
+      o.frequency.setValueAtTime(base, t); o.frequency.linearRampToValueAtTime(base * (0.8 + Math.random() * 0.5), t + 0.5);
+      const f = filtro('bandpass', 600 + Math.random() * 500, 4);
+      const g = ganancia(0);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.025, t + 0.15); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.7);
+      cadena(o, f, g, maestro); o.start(t); o.stop(t + 0.75);
     }
 
     // Reloj: cada 100 ms decide qué eventos suenan en los próximos 100 ms.
@@ -142,6 +179,13 @@
         suave(capas.vientoFiltro.frequency, 300 + v * 500 + Math.random() * 500 * v, 0.8);
         suave(capas.vientoSilbido.frequency, 700 + Math.random() * 700, 1.2);
         suave(capas.vientoSilbidoGan.gain, v > 0.6 ? (v - 0.6) * 0.12 * Math.random() : 0, 1);
+        // Las hojas siguen a la ráfaga, y con viento fuerte cruje alguna rama.
+        const b = objetivo.bosque;
+        if (b > 0) {
+          suave(capas.bosque.gain, b * (0.14 + rafaga * 0.4), 0.5 + Math.random() * 0.6);
+          suave(capas.bosqueFiltro.frequency, 2400 + Math.random() * 2200, 0.7);
+          if (v > 0.5 && Math.random() < b * 0.35) crujido(t0 + Math.random() * 0.5);
+        }
       }
     }
 
@@ -155,6 +199,7 @@
       suave(capas.lluvia.gain, o.lluvia * 0.12, 1.2);
       suave(capas.fuego.gain, [0, 0.12, 0.2, 0.28, 0.36][o.fuego] || 0, 0.8);
       suave(capas.fuegoSoplo.gain, [0, 0, 0.008, 0.016, 0.026][o.fuego] || 0, 0.8);
+      suave(capas.bosque.gain, o.bosque * (0.14 + o.viento * 0.35), 1.5);
     }
 
     // ── Efectos ─────────────────────────────────────────────────────────
@@ -216,7 +261,7 @@
         if (!reloj) reloj = setInterval(programar, 100);
         return true;
       },
-      /** Cambia el ambiente con transición suave. viento, mar, lluvia: 0 a 1 · fuego: 0 a 4. */
+      /** Cambia el ambiente con transición suave. viento, mar, lluvia, bosque, playa: 0 a 1 · fuego: 0 a 4. */
       ambiente(valores) { Object.assign(objetivo, valores || {}); objetivo.fuego = Math.max(0, Math.min(4, Math.round(objetivo.fuego))); aplicarAmbiente(); },
       /** Suena un efecto. Devuelve el texto de su subtítulo. */
       efecto(nombre) {
@@ -240,7 +285,34 @@
     return api;
   }
 
-  const modulo = { crear };
+  // ── El lugar: qué hay alrededor de la canoa ───────────────────────────
+  // Mira las casillas a `radio` de distancia (por defecto 2) en un mapa del motor
+  // Corteza y devuelve valores de 0 a 1 para el ambiente:
+  //   bosque: casillas de lenga (L) o guindo (G) cerca · playa: casillas de playa (.)
+  //   mar: cuánta agua hay alrededor, con el agua honda (~) pesando más.
+  // Las casillas cercanas pesan más que las lejanas.
+  function lugarDe(mapa, x, y, radio) {
+    radio = radio || 2;
+    let bosque = 0, playa = 0, agua = 0, total = 0;
+    for (let dy = -radio; dy <= radio; dy++) {
+      for (let dx = -radio; dx <= radio; dx++) {
+        const d = Math.hypot(dx, dy); if (d > radio + 0.5) continue;
+        const peso = 1 / (1 + d);
+        const fila = mapa[y + dy];
+        const c = fila && x + dx >= 0 ? (fila[x + dx] || '~') : '~';
+        total += peso;
+        if (c === 'L' || c === 'G') bosque += peso;
+        else if (c === '.') playa += peso;
+        else if (c === '~') agua += peso * 1.3;
+        else if (c === '-' || c === 'r') agua += peso;
+        else if (c === ',' || c === 'k') agua += peso * 0.6;
+      }
+    }
+    const tope = (v) => Math.round(Math.min(1, v) * 100) / 100;
+    return { bosque: tope((bosque / total) * 2.2), playa: tope((playa / total) * 2.6), mar: tope(0.15 + (agua / total) * 0.8) };
+  }
+
+  const modulo = { crear, lugarDe };
   if (typeof module !== 'undefined' && module.exports) module.exports = modulo;
   else raiz.TDH_SONIDO = modulo;
 })(typeof window !== 'undefined' ? window : globalThis);
