@@ -22,13 +22,15 @@ Tres ideas que se repiten en el video, el pitch y el README:
 | **14/11** | **Primer avance documentado** (borrador en [`avance-14-11.md`](avance-14-11.md)). | D escribe; A, B y C completan su parte |
 | 15/11 | README completo (ver checklist abajo). Capturas del juego. | D, con B (Tecnologías) y C (Fuentes) |
 | 16/11 mañana | Grabar el video. | D graba, A juega, todos ponen la voz |
-| 16/11 tarde | Armar la presentación y **ensayar el pitch dos veces** con reloj. | Equipo |
+| 16/11 tarde | Completar la presentación (ya armada en [`presentacion/`](../presentacion/index.html)) con capturas reales y **ensayar el pitch dos veces** con reloj. | Equipo |
 | 17/11 | Ensayo del pitch de la organización. **Entrega antes de las 20:00.** | Equipo; la persona referente confirma la entrega |
 | 19/11 | Demo en Fábrica de Talento (mínimo 2 integrantes). | Equipo |
 
 ---
 
 ## Video (máximo 3:00)
+
+**Storyboard con un cuadro por tramo:** [`video/README.md`](video/README.md).
 
 **Formato:** 1920 × 1080, 30 cuadros por segundo, con subtítulos quemados en la imagen (accesibilidad y por si el jurado lo mira sin sonido). Audio: la voz del equipo más el sonido ambiente del propio juego. **Sin música de terceros.**
 
@@ -67,7 +69,7 @@ Todo el equipo habla: es parte del criterio. Cada bloque tiene una persona y una
 | 3:00 a 4:00 | **B** | 6. Herencia y códice · 7. Para todos | El códice para escuelas. Celular, sin internet, contraste, tipografía para baja visión, subtítulos de sonido. Código MIT y contenido CC BY-SA. |
 | 4:00 a 5:00 | **D** | 8. Qué sigue · 9. Cierre | Kawésqar y Selk'nam, solo con sus comunidades. Llevarlo a escuelas de Ushuaia, Tolhuin y Río Grande. Cierre: "cuando el fuego se apaga, lo aprendido no se pierde". Enlace y QR. |
 
-**Diapositivas:** pocas palabras, una imagen grande por diapositiva, estilo Corteza (rótulos de papel sobre el paisaje, paleta del juego, tipografía Atkinson Hyperlegible). Se arman el 16/11 con capturas reales del juego. Pueden hacerse en HTML para que anden sin internet, con el mismo arte.
+**Diapositivas:** ya están armadas en [`presentacion/index.html`](../presentacion/index.html), en estilo Corteza y sin internet. Con <kbd>←</kbd> <kbd>→</kbd> se pasa, con <kbd>N</kbd> se ven las notas del orador y con <kbd>F</kbd> se pone pantalla completa. El respaldo está en `presentacion/pitch.pdf`. Faltan los huecos marcados en amarillo: consulta, enlace y nombres. Se arman el 16/11 con capturas reales del juego. Pueden hacerse en HTML para que anden sin internet, con el mismo arte.
 
 **Ensayo:** dos pasadas completas con reloj el 16/11, una el 17/11 en el ensayo oficial. Si un bloque se pasa de tiempo, se recorta texto, no la demo.
 
@@ -93,7 +95,7 @@ Checklist para llevar:
 - [ ] Parlante chico o auriculares (el sonido es parte de la experiencia).
 - [ ] El video descargado, por si falla la demo en vivo.
 - [ ] Un **cartel con QR** al enlace del juego (GitHub Pages).
-- [ ] **4 a 6 cartas de saber impresas** en cartulina, para que la gente se las lleve. Llevan la fuente al dorso. Es un recuerdo y muestra el rigor.
+- [ ] **Cartas de saber impresas** en cartulina, para que la gente se las lleve: [`arte/cartas/cartas-para-imprimir.pdf`](../arte/cartas/cartas-para-imprimir.pdf) (A4, doble faz, girar por el borde largo). Llevan la fuente al dorso. Antes de imprimir, la Persona C aprueba los textos.
 - [ ] Mínimo 2 integrantes presentes (obligatorio).
 
 ## README (desde el 15/11)

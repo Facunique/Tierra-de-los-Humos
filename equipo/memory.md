@@ -8,7 +8,8 @@
 - **Fase:** diseño y producción de arte. Todavía no hay código del juego, pero el motor de dibujo (`arte/corteza/corteza.js`) ya está listo para usar.
 - **Hecho:** `docs/00-guia-hackathon.md`, `docs/01-concepto.md`, `docs/04-direccion-de-arte.md` (con tres propuestas de estilo en `arte/propuestas/`), paleta y primer set de 42 sprites (`arte/`), sonido generado por código (`sonido/`), logo, plan de comunicación (`equipo/comunicacion.md`) y borrador del avance del 14/11 (`equipo/avance-14-11.md`).
 - **También hecho (12/11):** estilo **Corteza** con motor de dibujo, vitrina, cartas, HUD, logo e imagen para compartir; auditoría histórica del arte contra el *Handbook of South American Indians* (`docs/05-rigor-historico.md`).
-- **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05`, `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md`, elegir el stack, cotejar el libro de Goodall.
+- **También hecho (12/11, noche):** maqueta navegable de las pantallas (`arte/pantallas/`), elementos nuevos con fuente, 9 borradores de cartas (`arte/cartas/saberes-borrador.js`) con su versión para imprimir, presentación del pitch (`presentacion/`), storyboard del video (`equipo/video/`) y README con huecos ✏️.
+- **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md`, elegir el stack, cotejar el libro de Goodall.
 
 ## Fechas clave
 
