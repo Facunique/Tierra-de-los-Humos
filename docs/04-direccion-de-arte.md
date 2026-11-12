@@ -123,6 +123,12 @@ Es el único elemento que aparece en todas las pantallas, así que es lo más cu
 - **Cámara para celular:** `motor.centrar(x, y, 10, 9)` muestra 10 × 9 casillas alrededor de la canoa. `motor.casillaEn(clientX, clientY)` convierte un toque en una casilla.
 - **Rendimiento:** el mapa se arma una vez (entre 40 y 120 ms) y se vuelve a armar solo si cambian el mapa, la estación o lo explorado. Cada cuadro reusa esa base.
 - **Para el HUD y las cartas:** `TDH_CORTEZA.fuego(ctx, x, y, escala, nivel, t)`, `TDH_CORTEZA.canoa(...)` y `TDH_CORTEZA.pegatina(idSprite, escala)`. Las clases CSS (`.carta-saber`, `.ficha`, `.codice`, `.boton-papel`) están en `carta.css`.
+- **Transiciones** (`arte/corteza/transiciones.js`), listas para la interfaz:
+  - `humoCubre` y `humoDescubre`: el humo tapa y destapa la pantalla al cambiar de una a otra;
+  - `pasoDelFuego`: la brasa de la canoa apagada viaja hasta la canoa de la generación siguiente, con los saberes heredados (es un recurso de juego);
+  - `cartaEntra`: la carta se despliega como un papel.
+
+  Todas devuelven una promesa y respetan «reducir movimiento». Están en uso en la maqueta.
 - La vitrina (`arte/corteza/index.html`) es un ejemplo completo: remar tocando el agua, buscar el camino por el agua, revelar el humo, la cámara que sigue a la canoa y el sonido.
 
 ## 7. Pantallas del juego

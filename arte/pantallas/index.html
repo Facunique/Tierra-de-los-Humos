@@ -247,6 +247,7 @@
 <script src="../corteza/corteza.js"></script>
 <script src="../mapa/costas.js"></script>
 <script src="../mapa/mapa.js"></script>
+<script src="../corteza/transiciones.js"></script>
 <script src="../cartas/saberes-borrador.js"></script>
 <script src="../../sonido/ambiente.js"></script>
 <script>
@@ -321,7 +322,15 @@
     if (foco) { foco.setAttribute('tabindex', '-1'); foco.focus({ preventScroll: true }); }
     sonarAmbiente();
   }
-  document.addEventListener('click', (e) => { const b = e.target.closest('[data-ir]'); if (b) ir(b.dataset.ir); });
+  // Dentro del juego, cambiar de pantalla pasa por el humo; la barra de revisión salta directo.
+  let enTransicion = false;
+  async function irConHumo(nombre) {
+    if (enTransicion || !window.TDH_TRANSICIONES) { ir(nombre); return; }
+    enTransicion = true;
+    await TDH_TRANSICIONES.humoCubre(document.body, 450); ir(nombre); await TDH_TRANSICIONES.humoDescubre(document.body, 550);
+    enTransicion = false;
+  }
+  document.addEventListener('click', (e) => { const b = e.target.closest('[data-ir]'); if (!b) return; if (b.closest('.revision')) ir(b.dataset.ir); else irConHumo(b.dataset.ir); });
 
   // ── El viaje (maqueta del bucle, no es el motor del juego) ──────────────
   const MAPA_VIAJE = [
@@ -449,7 +458,12 @@
   $('a-juntar').addEventListener('click', juntar);
   $('a-avivar').addEventListener('click', avivar);
   $('a-amarrar').addEventListener('click', amarrar);
-  $('b-nueva-gen').addEventListener('click', () => { generacion++; $('gen-yagan').textContent = 'Generación ' + generacion; if (sonido && conSonido) sonido.efecto('generacion'); ir('viaje'); });
+  $('b-nueva-gen').addEventListener('click', async () => {
+    const desde = generacion; generacion++; $('gen-yagan').textContent = 'Generación ' + generacion;
+    if (sonido && conSonido) sonido.efecto('generacion');
+    if (window.TDH_TRANSICIONES) await TDH_TRANSICIONES.pasoDelFuego(document.body, { desde, hasta: generacion, saberes: [...memoria].map((k) => SABERES[k].titulo) });
+    ir('viaje');
+  });
   $('b-otra-vez').addEventListener('click', () => { generacion++; $('gen-yagan').textContent = 'Generación ' + generacion; ir('viaje'); });
   $('mapa').addEventListener('click', (e) => {
     const c = motor.casillaEn(e.clientX, e.clientY), k = viaje.canoa;
@@ -500,6 +514,7 @@
     const v = $('velo');
     v.innerHTML = '<article class="carta-saber papel">' + cartaHTML(k) + '<p class="borrador">Borrador para la Persona C.</p><button class="boton-papel boton-papel--fuego" id="b-guardar">' + (nuevo ? 'Guardar en la memoria' : 'Seguir') + '</button></article>';
     v.classList.add('abierto');
+    if (window.TDH_TRANSICIONES) TDH_TRANSICIONES.cartaEntra(v.querySelector('.carta-saber'));
     requestAnimationFrame(() => escenaEn(v.querySelector('canvas'), SABERES[k].mapa, SABERES[k].extra, 1.6));
     if (sonido && conSonido && nuevo) sonido.efecto('saber');
     $('b-guardar').addEventListener('click', cerrarSaber); $('b-guardar').focus();

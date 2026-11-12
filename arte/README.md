@@ -7,6 +7,7 @@ Todo el arte del juego es **propio**. El estilo elegido es **Corteza**: el paisa
 | Ruta | Qué es |
 |---|---|
 | `corteza/corteza.js` | **El motor de dibujo**: mapa, canoa, chozas, fauna, pegatinas, luz del fuego, humo, clima, estaciones y cámara para celular. Sin dependencias, salvo `fuente/arte.js`. |
+| `corteza/transiciones.js` | Transiciones: humo entre pantallas, el paso del fuego entre generaciones y la entrada de la carta. |
 | `corteza/carta.css` | Cartas de saber, códice, fichas del HUD y botones de papel. |
 | `corteza/index.html` | La vitrina del estilo y un ejemplo completo de uso: tocá el agua y la canoa rema. |
 | `pantallas/index.html` | Maqueta navegable de todas las pantallas del juego (título, pueblo, viaje, carta, fin, llegada, códice, cierre en presente, ayuda), con un bucle de prueba. |
