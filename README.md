@@ -48,6 +48,7 @@ Arte y sonido:
 | Recurso | Contenido |
 |---|---|
 | [Estilo Corteza](arte/corteza/index.html) | El estilo elegido, en vivo: tocá el agua y la canoa rema (abrir el archivo en el navegador) |
+| [Mapa de territorios](arte/mapa/index.html) | Tierra del Fuego y los canales, con los territorios ancestrales de cada pueblo y sus fuentes |
 | [Pantallas del juego](arte/pantallas/index.html) | Maqueta navegable de todo el recorrido: título, viaje, cartas, fin del viaje, códice y cierre en presente |
 | [`arte/`](arte/README.md) | Motor de dibujo, paleta, pegatinas pixel, logo y tipografía. Todo propio |
 | [Cartas para imprimir](arte/cartas/cartas-para-imprimir.pdf) | Cartas de saber en A4, doble faz, para la demo |
@@ -105,6 +106,7 @@ Trabajo interno del equipo:
 | Recurso | Autor | Licencia | Dónde se usa |
 |---|---|---|---|
 | Tipografía [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible) | Braille Institute of America | [SIL Open Font License 1.1](arte/tipografia/OFL.txt) | Todos los textos. Archivos en `arte/tipografia/` |
+| Costas de [Natural Earth](https://www.naturalearthdata.com/) (1:10 millones), vía [world-atlas](https://github.com/topojson/world-atlas) y [topojson-client](https://github.com/topojson/topojson-client) | Natural Earth; Mike Bostock | Dominio público (datos); ISC (herramientas, solo para preparar los datos) | Mapa de territorios (`arte/mapa/costas.js`) |
 
 El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido son **propios del equipo** (CC BY-SA 4.0). No se usan fotos históricas, ilustraciones, sonidos ni música de terceros. *Se completa si se suma alguna librería o recurso nuevo.*
 

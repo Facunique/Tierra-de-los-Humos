@@ -128,6 +128,19 @@ También comían los **hongos que crecen en los árboles** (no los del suelo) y 
 | Turbales | Pantanos de musgo que retienen agua como una esponja (Spears, p. 149, sobre la Isla de los Estados). | ✅ |
 | Árbol bandera | — | 🔍 **Sin fuente.** Se retiró de todas las escenas en vivo (vitrina, maqueta, portada y presentación) hasta que haya una cita. El sprite queda en el catálogo, marcado. |
 
+### El mapa de territorios (`arte/mapa/`)
+
+| Elemento | Qué dice la fuente | Estado |
+|---|---|---|
+| Yagán | La costa sur de la Isla Grande, desde el extremo este del canal Beagle hasta la península Brecknock, y las islas al sur hasta el cabo de Hornos (Cooper, p. 81). La franja entre el Beagle y la cordillera era yagán (Cooper, «The Ona», p. 107). | ✅ Zona aproximada, sin borde. |
+| Selk'nam | Toda la Isla Grande, salvo esa franja del Beagle y las costas de bahía Inútil y del seno Almirantazgo. Un grupo al norte de los ríos Grande y del Fuego, en la estepa, y otro al sur, en el bosque (Cooper, «The Ona», p. 107-108). | ✅ Zona aproximada. |
+| Haush | La península Mitre, en el extremo sudeste de la Isla Grande (Cooper, «The Ona», p. 108). | ✅ Zona aproximada. |
+| Kawésqar | El archipiélago de la costa chilena, desde el golfo de Penas hasta las islas al oeste de Tierra del Fuego (Bird, J. 1946, «The Alacaluf», *Handbook*, vol. 1, p. 55). | ✅ Zona aproximada. El golfo de Penas queda fuera del mapa. |
+| Sin fronteras | Había contacto, trueque y casamientos entre vecinos (Cooper, p. 82 y 107). | ✅ Las zonas son manchas suaves, sin líneas. Tampoco se dibujan límites entre países. |
+| Paisaje | Al norte y al este de la Isla Grande, estepa ondulada; al sur y al oeste, montaña y bosque, que empieza al sur de los ríos Grande y del Fuego (Cooper, «The Ona», p. 107). | ✅ Degradé de estepa a bosque, y la cordillera con nieve. |
+| Costas | Natural Earth, escala 1:10 millones (dominio público). | ✅ Costas reales, simplificadas a unos 500 m. |
+| Nombres | Toponimia oficial: Canal Beagle, Isla Grande de Tierra del Fuego, Isla Navarino, Isla Hoste, Cabo de Hornos, Península Mitre, Isla de los Estados. | 🔍 Cotejar con la cartografía del IGN (línea de la guía de la hackatón). |
+
 ## Hallazgos para todo el equipo
 
 1. **El destino del viaje ya tiene base documental.** Un grupo podía entrar al territorio de otro para comer una **ballena varada**, para buscar **piedras de fuego (pirita)** o **corteza buena para canoas**, que solo se hallaban en ciertos lugares, por **hambre** o para hacer **trueque** (Cooper, p. 94-95). Los varamientos reunían a muchas familias (p. 99). Cualquiera de estos sirve de destino para el MVP. Lo decide el equipo con la Persona C, y se anota en `equipo/memory.md`.

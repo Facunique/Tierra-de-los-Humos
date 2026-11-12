@@ -17,6 +17,7 @@
 | Qué | Dónde | Cómo abrirlo |
 |---|---|---|
 | **El estilo, en vivo** | [`arte/corteza/index.html`](../arte/corteza/index.html) | Doble clic. Tocá el agua y la canoa rema. Anda sin internet. |
+| **Mapa de territorios** | [`arte/mapa/index.html`](../arte/mapa/index.html) | Costas reales, zonas de cada pueblo con su fuente y capa de ciudades de hoy. También en la pantalla «¿A quién acompañás?». |
 | **Pantallas del juego** (maqueta navegable) | [`arte/pantallas/index.html`](../arte/pantallas/index.html) | Título, elegir pueblo, viaje, carta de saber, fin del viaje, llegada, códice, cierre en presente y ayuda. |
 | Motor de dibujo para el juego | [`arte/corteza/corteza.js`](../arte/corteza/corteza.js) | Ver la sección 6. |
 | Cartas, códice y HUD (CSS) | [`arte/corteza/carta.css`](../arte/corteza/carta.css) | — |
@@ -72,6 +73,10 @@ El detalle completo, elemento por elemento y con página, está en [`05-rigor-hi
 7. **Acompañar, no encarnar.** Las personas son siluetas chicas sin rasgos. La protagonista visual es la canoa con su fuego.
 8. **Toda costa tiene espuma.** El agua y el guindo casi no se distinguen sin color (contraste 1,1:1), así que una línea clara los separa siempre.
 9. **Fiel a las fuentes.** Nada se dibuja «porque queda lindo». Si no hay fuente, no va, o va marcado 🔍 (ver `05`).
+
+### El mapa de los territorios
+
+![Mapa de Tierra del Fuego en estilo Corteza con los territorios yagán, selk'nam, haush y kawésqar como manchas suaves y rótulos de papel](img/mapa-territorios.jpg)
 
 ## 4. La escena según la hora y la estación
 
