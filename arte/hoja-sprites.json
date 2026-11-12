@@ -1,0 +1,627 @@
+{
+  "meta": {
+    "imagen": "hoja-sprites.png",
+    "celda": 16,
+    "estaciones": [
+      "verano",
+      "otono",
+      "invierno"
+    ],
+    "licencia": "CC BY-SA 4.0",
+    "fuente": "arte/fuente/arte.js"
+  },
+  "sprites": {
+    "mar-hondo": {
+      "categoria": "terreno",
+      "descripcion": "Canal abierto y profundo. Cruzarlo con viento es arriesgado.",
+      "cuadros": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "x": 16,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "mar": {
+      "categoria": "terreno",
+      "descripcion": "Agua del canal.",
+      "cuadros": [
+        {
+          "x": 32,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "x": 48,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "agua-somera": {
+      "categoria": "terreno",
+      "descripcion": "Agua baja cerca de la costa.",
+      "cuadros": [
+        {
+          "x": 64,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "x": 80,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "cachiyuyo": {
+      "categoria": "terreno",
+      "descripcion": "Bosque de algas en el agua baja.",
+      "cuadros": [
+        {
+          "x": 96,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "x": 112,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "orilla": {
+      "categoria": "terreno",
+      "descripcion": "Playa de canto rodado con la ola.",
+      "cuadros": [
+        {
+          "x": 128,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "grava": {
+      "categoria": "terreno",
+      "descripcion": "Playa de grava, buen lugar para varar la canoa.",
+      "cuadros": [
+        {
+          "x": 144,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "roca": {
+      "categoria": "terreno",
+      "descripcion": "Roca en el agua.",
+      "cuadros": [
+        {
+          "x": 160,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "bosque-guindo": {
+      "categoria": "terreno",
+      "descripcion": "Bosque de guindo, siempreverde, junto al mar.",
+      "cuadros": [
+        {
+          "x": 176,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "bosque-lenga": {
+      "categoria": "terreno",
+      "descripcion": "Bosque de lenga: cambia de color con la estación.",
+      "cuadros": [
+        {
+          "x": 192,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "turbal": {
+      "categoria": "terreno",
+      "descripcion": "Turbal de musgo rojizo con charcos.",
+      "cuadros": [
+        {
+          "x": 208,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "montana": {
+      "categoria": "terreno",
+      "descripcion": "Cumbre nevada. No se puede cruzar.",
+      "cuadros": [
+        {
+          "x": 224,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "niebla": {
+      "categoria": "terreno",
+      "descripcion": "Humo de lo que todavía no se vio (niebla de guerra).",
+      "cuadros": [
+        {
+          "x": 0,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "x": 16,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "niebla-borde": {
+      "categoria": "terreno",
+      "descripcion": "Borde de la niebla, tramado.",
+      "cuadros": [
+        {
+          "x": 32,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "x": 48,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "choza": {
+      "categoria": "lugar",
+      "descripcion": "Choza de ramas cubierta con cueros, con salida para el humo.",
+      "cuadros": [
+        {
+          "x": 64,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "conchal": {
+      "categoria": "lugar",
+      "descripcion": "Conchal: anillo de valvas donde hubo un campamento.",
+      "cuadros": [
+        {
+          "x": 80,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "arbol-bandera": {
+      "categoria": "lugar",
+      "descripcion": "Árbol torcido por el viento del oeste.",
+      "cuadros": [
+        {
+          "x": 96,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "lena": {
+      "categoria": "recurso",
+      "descripcion": "Leña para el fuego.",
+      "cuadros": [
+        {
+          "x": 112,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "mejillones": {
+      "categoria": "recurso",
+      "descripcion": "Banco de mejillones en la roca.",
+      "cuadros": [
+        {
+          "x": 128,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "calafate": {
+      "categoria": "recurso",
+      "descripcion": "Arbusto de calafate con frutos.",
+      "cuadros": [
+        {
+          "x": 144,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "lobo-marino": {
+      "categoria": "fauna",
+      "descripcion": "Lobo marino sobre la roca.",
+      "cuadros": [
+        {
+          "x": 160,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "cormoran": {
+      "categoria": "fauna",
+      "descripcion": "Cormorán posado.",
+      "cuadros": [
+        {
+          "x": 176,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "pato-vapor": {
+      "categoria": "fauna",
+      "descripcion": "Pato vapor, no vuela.",
+      "cuadros": [
+        {
+          "x": 192,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "ballena": {
+      "categoria": "fauna",
+      "descripcion": "Lomo de ballena y su soplido.",
+      "cuadros": [
+        {
+          "x": 208,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "canoa": {
+      "categoria": "canoa",
+      "descripcion": "Canoa de corteza con el fuego encendido a bordo.",
+      "cuadros": [
+        {
+          "x": 0,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "x": 16,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "x": 32,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "canoa-apagada": {
+      "categoria": "canoa",
+      "descripcion": "La canoa cuando el fuego se apagó.",
+      "cuadros": [
+        {
+          "x": 48,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "fuego-apagado": {
+      "categoria": "hud",
+      "descripcion": "Fuego del HUD, nivel 0 de 4 (apagado).",
+      "cuadros": [
+        {
+          "x": 64,
+          "y": 32,
+          "w": 32,
+          "h": 32
+        },
+        {
+          "x": 96,
+          "y": 32,
+          "w": 32,
+          "h": 32
+        },
+        {
+          "x": 128,
+          "y": 32,
+          "w": 32,
+          "h": 32
+        }
+      ]
+    },
+    "fuego-brasas": {
+      "categoria": "hud",
+      "descripcion": "Fuego del HUD, nivel 1 de 4 (brasas).",
+      "cuadros": [
+        {
+          "x": 160,
+          "y": 32,
+          "w": 32,
+          "h": 32
+        },
+        {
+          "x": 192,
+          "y": 32,
+          "w": 32,
+          "h": 32
+        },
+        {
+          "x": 224,
+          "y": 32,
+          "w": 32,
+          "h": 32
+        }
+      ]
+    },
+    "fuego-debil": {
+      "categoria": "hud",
+      "descripcion": "Fuego del HUD, nivel 2 de 4 (debil).",
+      "cuadros": [
+        {
+          "x": 0,
+          "y": 64,
+          "w": 32,
+          "h": 32
+        },
+        {
+          "x": 32,
+          "y": 64,
+          "w": 32,
+          "h": 32
+        },
+        {
+          "x": 64,
+          "y": 64,
+          "w": 32,
+          "h": 32
+        }
+      ]
+    },
+    "fuego-parejo": {
+      "categoria": "hud",
+      "descripcion": "Fuego del HUD, nivel 3 de 4 (parejo).",
+      "cuadros": [
+        {
+          "x": 96,
+          "y": 64,
+          "w": 32,
+          "h": 32
+        },
+        {
+          "x": 128,
+          "y": 64,
+          "w": 32,
+          "h": 32
+        },
+        {
+          "x": 160,
+          "y": 64,
+          "w": 32,
+          "h": 32
+        }
+      ]
+    },
+    "fuego-vivo": {
+      "categoria": "hud",
+      "descripcion": "Fuego del HUD, nivel 4 de 4 (vivo).",
+      "cuadros": [
+        {
+          "x": 0,
+          "y": 96,
+          "w": 32,
+          "h": 32
+        },
+        {
+          "x": 32,
+          "y": 96,
+          "w": 32,
+          "h": 32
+        },
+        {
+          "x": 64,
+          "y": 96,
+          "w": 32,
+          "h": 32
+        }
+      ]
+    },
+    "icono-fuego": {
+      "categoria": "icono",
+      "descripcion": "Fuego",
+      "cuadros": [
+        {
+          "x": 96,
+          "y": 96,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-lena": {
+      "categoria": "icono",
+      "descripcion": "Leña",
+      "cuadros": [
+        {
+          "x": 112,
+          "y": 96,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-comida": {
+      "categoria": "icono",
+      "descripcion": "Comida",
+      "cuadros": [
+        {
+          "x": 128,
+          "y": 96,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-refugio": {
+      "categoria": "icono",
+      "descripcion": "Refugio",
+      "cuadros": [
+        {
+          "x": 144,
+          "y": 96,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-viento": {
+      "categoria": "icono",
+      "descripcion": "Viento",
+      "cuadros": [
+        {
+          "x": 160,
+          "y": 96,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-lluvia": {
+      "categoria": "icono",
+      "descripcion": "Lluvia",
+      "cuadros": [
+        {
+          "x": 176,
+          "y": 96,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-frio": {
+      "categoria": "icono",
+      "descripcion": "Frío",
+      "cuadros": [
+        {
+          "x": 192,
+          "y": 96,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-saber": {
+      "categoria": "icono",
+      "descripcion": "Carta de saber",
+      "cuadros": [
+        {
+          "x": 208,
+          "y": 96,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-codice": {
+      "categoria": "icono",
+      "descripcion": "Códice",
+      "cuadros": [
+        {
+          "x": 224,
+          "y": 96,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-generacion": {
+      "categoria": "icono",
+      "descripcion": "Generación (lo que se hereda)",
+      "cuadros": [
+        {
+          "x": 240,
+          "y": 96,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-remo": {
+      "categoria": "icono",
+      "descripcion": "Remar (mover)",
+      "cuadros": [
+        {
+          "x": 0,
+          "y": 128,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "icono-calma": {
+      "categoria": "icono",
+      "descripcion": "Calma",
+      "cuadros": [
+        {
+          "x": 16,
+          "y": 128,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    }
+  }
+}
