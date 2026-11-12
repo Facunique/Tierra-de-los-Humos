@@ -97,13 +97,13 @@
   <div class="controles" role="group" aria-label="Controles de la escena">
     <div class="control"><span class="rotulo" id="r-est">Estación</span>
       <div class="segmentos" data-control="estacion" aria-labelledby="r-est">
-        <button type="button" data-valor="verano" aria-pressed="true">Verano</button><button type="button" data-valor="otono" aria-pressed="false">Otoño</button><button type="button" data-valor="invierno" aria-pressed="false">Invierno</button></div></div>
+        <button type="button" data-valor="primavera" aria-pressed="false">Primavera</button><button type="button" data-valor="verano" aria-pressed="true">Verano</button><button type="button" data-valor="otono" aria-pressed="false">Otoño</button><button type="button" data-valor="invierno" aria-pressed="false">Invierno</button></div></div>
     <div class="control"><span class="rotulo" id="r-cli">Clima</span>
       <div class="segmentos" data-control="clima" aria-labelledby="r-cli">
         <button type="button" data-valor="calma" aria-pressed="true">Calma</button><button type="button" data-valor="viento" aria-pressed="false">Viento</button><button type="button" data-valor="lluvia" aria-pressed="false">Lluvia</button><button type="button" data-valor="nieve" aria-pressed="false">Nieve</button></div></div>
     <div class="control"><span class="rotulo" id="r-hora">Hora</span>
       <div class="segmentos" data-control="hora" aria-labelledby="r-hora">
-        <button type="button" data-valor="dia" aria-pressed="true">Día</button><button type="button" data-valor="tarde" aria-pressed="false">Atardecer</button><button type="button" data-valor="noche" aria-pressed="false">Noche</button></div></div>
+        <button type="button" data-valor="dia" aria-pressed="true">Día</button><button type="button" data-valor="tarde" aria-pressed="false">Atardecer</button><button type="button" data-valor="noche" aria-pressed="false">Noche</button><button type="button" data-valor="real" aria-pressed="false">Hora real de Ushuaia</button></div></div>
     <div class="control"><label for="fuego">Fuego: <b id="fuego-valor">3 de 4</b></label><input id="fuego" type="range" min="0" max="4" value="3"></div>
     <div class="control"><label for="vision">Ver como</label>
       <select id="vision"><option value="">Visión típica</option><option value="protanopia">Protanopía</option><option value="deuteranopia">Deuteranopía</option><option value="tritanopia">Tritanopía</option><option value="grises">Escala de grises</option></select></div>
@@ -140,6 +140,7 @@
 
 <script src="../fuente/arte.js"></script>
 <script src="corteza.js"></script>
+<script src="luz-real.js"></script>
 <script src="../../sonido/ambiente.js"></script>
 <script>
 (function () {
@@ -211,6 +212,14 @@
   function sonidoAmbiente() {
     if (!sonido || !conSonido) return;
     sonido.ambiente({ viento: { calma: 0.15, viento: 0.9, lluvia: 0.35, nieve: 0.25 }[estado.clima], mar: estado.clima === 'viento' ? 0.85 : 0.45, lluvia: estado.clima === 'lluvia' ? 0.8 : 0, fuego: estado.canoa.fuego });
+  }
+
+  // ── Luz real de Ushuaia: la hora y la estación del día de hoy ──────────
+  function aplicarLuzReal() {
+    const luz = TDH_LUZ_REAL.ahora();
+    estado.hora = luz.hora; estado.estacion = luz.estacion;
+    document.querySelectorAll('[data-control="estacion"] button').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.valor === luz.estacion)));
+    ayuda.textContent = luz.texto;
   }
 
   // ── Remar al tocar el agua ─────────────────────────────────────────────
@@ -289,7 +298,8 @@
   document.querySelectorAll('.segmentos[data-control]').forEach((g) => g.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     g.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    estado[g.dataset.control] = b.dataset.valor; escena(); pintarHud(); sonidoAmbiente();
+    if (g.dataset.control === 'hora' && b.dataset.valor === 'real') aplicarLuzReal(); else estado[g.dataset.control] = b.dataset.valor;
+    escena(); pintarHud(); sonidoAmbiente();
   }));
   const rango = document.getElementById('fuego');
   rango.addEventListener('input', () => { estado.canoa.fuego = Number(rango.value); document.getElementById('fuego-valor').textContent = rango.value + ' de 4'; pintarHud(); sonidoAmbiente(); if (sonido && conSonido && estado.canoa.fuego === 0) sonido.efecto('apagado'); });

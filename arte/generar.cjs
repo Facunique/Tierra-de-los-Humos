@@ -244,4 +244,4 @@ const NOMBRE = 'Tierra de los Humos';
   L.png(12).guardar(path.join(dirLogo, 'icono-192.png'));
 }
 
-console.log(`Listo: ${ids.length} sprites, hoja de ${ANCHO_HOJA}×${ALTO_HOJA} px en 3 estaciones, paleta de ${arte.PALETA.length} colores.`);
+console.log(`Listo: ${ids.length} sprites, hoja de ${ANCHO_HOJA}×${ALTO_HOJA} px en ${Object.keys(arte.ESTACIONES).length} estaciones, paleta de ${arte.PALETA.length} colores.`);

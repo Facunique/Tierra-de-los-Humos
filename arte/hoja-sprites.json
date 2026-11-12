@@ -3,6 +3,7 @@
     "imagen": "hoja-sprites.png",
     "celda": 16,
     "estaciones": [
+      "primavera",
       "verano",
       "otono",
       "invierno"

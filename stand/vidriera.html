@@ -46,6 +46,7 @@
 <script src="../arte/fuente/arte.js"></script>
 <script src="../arte/corteza/corteza.js"></script>
 <script src="../arte/corteza/transiciones.js"></script>
+<script src="../arte/corteza/luz-real.js"></script>
 <script src="../arte/mapa/costas.js"></script>
 <script src="../arte/mapa/mapa.js"></script>
 <script src="../arte/cartas/saberes-borrador.js"></script>
@@ -71,13 +72,14 @@
   const RUTA = [[2, 6], [4, 6], [6, 6], [8, 6], [10, 6], [12, 6], [14, 6], [15, 7], [16, 8], [17, 9], [17, 10], [16, 10], [15, 10], [14, 11], [13, 11]];
   const ESCENAS = [
     { dur: 9000, entrar() {
-      costa(34, 19, 5, { humos: [{ x: 14.5, y: 1.4 }, { x: 29.5, y: 1.7 }], objetos: [{ id: 'choza', x: 24, y: 4 }, { id: 'conchal', x: 26, y: 4 }] });
+      const luz = TDH_LUZ_REAL.ahora(); // el título con la luz de hoy en Ushuaia
+      costa(34, 19, 5, { hora: luz.hora, estacion: luz.estacion, humos: [{ x: 14.5, y: 1.4 }, { x: 29.5, y: 1.7 }], objetos: [{ id: 'choza', x: 24, y: 4 }, { id: 'conchal', x: 26, y: 4 }] });
       extraDibujo = (t) => { // canoa grande abajo a la izquierda, según lo que se ve de la pantalla
         const x = fondo.getContext('2d'), dpr = fondo.width / fondo.clientWidth || 1, esc = Math.max(innerWidth / fondo.width * dpr, innerHeight / fondo.height * dpr);
         const vx = innerWidth * 0.24, vy = innerHeight * 0.66, cx = (vx - (innerWidth - fondo.width / dpr * esc) / 2) / esc * dpr, cy = (vy - (innerHeight - fondo.height / dpr * esc) / 2) / esc * dpr, k = Math.min(innerWidth, innerHeight) / 260 / esc * dpr;
         x.setTransform(1, 0, 0, 1, 0, 0); CZ.humo(x, cx, cy - 34 * k, k, t + 1, 0.8, 8, 120); CZ.canoa(x, cx, cy, k, 4, t, 1, false); };
       centro.innerHTML = '<div class="titulo rotulo papel" style="position:relative"><h1>Tierra de los Humos</h1><p>Un viaje en canoa por los canales fueguinos</p></div>';
-      centro.style.placeItems = 'center end'; leyendaTexto('Cuando el fuego se apaga, lo aprendido pasa a la siguiente generación.');
+      centro.style.placeItems = 'center end'; leyendaTexto('Cuando el fuego se apaga, lo aprendido pasa a la siguiente generación.', luz.texto);
     } },
     { dur: 15000, entrar() {
       const visto = new Set(), revelar = (cx, cy) => { for (let y = 0; y < MAPA_VIAJE.length; y++) for (let x = 0; x < MAPA_VIAJE[0].length; x++) { const dx = (x - cx) / 1.8, dy = (y - cy) / 1.45; if (dx * dx + dy * dy < 14) visto.add(x + ',' + y); } };

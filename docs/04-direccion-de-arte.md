@@ -83,7 +83,8 @@ El detalle completo, elemento por elemento y con página, está en [`05-rigor-hi
 ![La misma escena en otoño, de noche y con lluvia: la luz del fuego se abre en anillos de papel alrededor de la canoa](img/corteza-otono-noche.jpg)
 
 - **Luz en escalones:** de noche y al atardecer, la luz del fuego se abre en anillos de borde ondulado, como capas de papel de calco. Cuanto más fuerte el fuego, más lejos se ve.
-- **Estaciones:** la lenga, el ñire, el suelo y la turba cambian de color; el guindo no.
+- **Estaciones:** la lenga, el ñire, el suelo y la turba cambian de color; el guindo no. Son cuatro: primavera (hojas nuevas, verde claro), verano, otoño (rojo y anaranjado) e invierno (gris y nieve).
+- **Luz real de Ushuaia** ([`arte/corteza/luz-real.js`](../arte/corteza/luz-real.js)): calcula dónde está el sol en Ushuaia en este momento, sin internet, con el algoritmo de posición solar de la NOAA (error de un par de minutos). Si el sol está a más de 6° sobre el horizonte es de día; entre 6° y −6°, amanece o atardece; más abajo, es de noche. La estación sale del mes, en el hemisferio sur. Así, en la demo del 19/11 el juego tiene la misma luz que hay en el canal Beagle (el sol sale a las 05:11 y se pone a las 21:27), y en junio la noche es larga (de 17:11 a 09:59). Se usa en el título y en el viaje de la maqueta (botón «Luz real de Ushuaia», encendido de entrada), en la vitrina («Hora real de Ushuaia») y en la vidriera del stand. El aviso dice, por ejemplo: «En Ushuaia ahora: de día. El sol se pone a las 21:13».
 - **Clima:** la lluvia son tiras de papel y anillos en el agua; el viento, líneas curvas que tumban el humo; la nieve, puntos de papel.
 - Todo el movimiento se puede apagar, y el motor respeta la opción de "reducir movimiento" del sistema.
 
@@ -257,6 +258,7 @@ Las fuentes etnográficas están en [`05-rigor-historico.md`](05-rigor-historico
 - Braille Institute of America. *Atkinson Hyperlegible* (SIL OFL 1.1). https://github.com/googlefonts/atkinson-hyperlegible
 - Cooper, J. M. (1946). «The Yahgan». En *Handbook of South American Indians*, vol. 1, pp. 81-106. Smithsonian Institution. https://archive.org/details/bulletin14311946smit
 - Denver Art Museum. *The Story Behind How an Alaska Native Story Led to a Video Game*. https://denverartmuseum.org/article/story-how-alaska-native-story-led-video-game
+- NOAA Global Monitoring Laboratory. *Solar Calculation Details* (algoritmo de posición solar, basado en Meeus, *Astronomical Algorithms*). https://gml.noaa.gov/grad/solcalc/calcdetails.html
 - Machado, G., Oliveira, M. y Fernandes, L. (2009). *A Physiologically-based Model for Simulation of Color Vision Deficiency*. IEEE TVCG 15(6).
 - Multequina n.º 10 (IADIZA-CONICET). https://www.mendoza.conicet.gov.ar/portal/multequina/indice/pdf/10/10_1.pdf 🔍 autores y título.
 - Spears, J. R. (1895). *The Gold Diggings of Cape Horn*. Putnam. https://www.gutenberg.org/ebooks/39109

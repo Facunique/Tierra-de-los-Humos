@@ -52,6 +52,7 @@
 
   // Colores por estación. El guindo es de hoja perenne: no cambia.
   const ESTACIONES = {
+    primavera: { lenga: [C.G, C.L, C.W], suelo: C.m, playa: C.g, turba: C.t, pasto: C.L }, // brotes claros de la lenga
     verano: { lenga: [C.G, C.l, C.L], suelo: C.m, playa: C.g, turba: C.t, pasto: C.L },
     otono: { lenga: [C.t, C.o, C.O], suelo: C.K, playa: C.g, turba: C.q, pasto: C.O },
     invierno: { lenga: [C.x, C.h, C.W], suelo: C.N, playa: C.N, turba: C.h, pasto: C.W, nieve: true },

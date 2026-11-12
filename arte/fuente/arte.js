@@ -92,6 +92,7 @@
   // Cambios de color por estación. Solo cambia la lenga, el ñire y el musgo:
   // el guindo es de hoja perenne y se queda verde todo el año.
   const ESTACIONES = {
+    primavera: { nombre: 'Primavera', cambios: { l: 'L' } },
     verano:   { nombre: 'Verano',   cambios: {} },
     otono:    { nombre: 'Otoño',    cambios: { G: 't', l: 'o', L: 'O', m: 'O' } },
     invierno: { nombre: 'Invierno', cambios: { G: 'x', l: 'h', L: 'W', m: 'N', t: 'h' } },

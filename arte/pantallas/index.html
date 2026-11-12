@@ -122,8 +122,9 @@
       <button class="boton-papel" data-ir="ayuda">Cómo se juega</button>
       <button class="boton-papel" id="b-sonido" aria-pressed="false">Sonido: no</button>
       <button class="boton-papel" id="b-contraste" aria-pressed="false">Alto contraste: no</button>
+      <button class="boton-papel" id="b-luz" aria-pressed="true">Luz real de Ushuaia: sí</button>
     </div>
-    <p class="aviso-ficcion">La familia, el mapa y los eventos son ficción. Los saberes, no: cada uno cita su fuente.</p>
+    <p class="aviso-ficcion">La familia, el mapa y los eventos son ficción. Los saberes, no: cada uno cita su fuente.<span id="aviso-luz" aria-live="polite" style="display:block;margin-top:4px;opacity:.85"></span></p>
   </div>
 </section>
 
@@ -248,6 +249,7 @@
 <script src="../mapa/costas.js"></script>
 <script src="../mapa/mapa.js"></script>
 <script src="../corteza/transiciones.js"></script>
+<script src="../corteza/luz-real.js"></script>
 <script src="../postal/postal.js"></script>
 <script src="../cartas/saberes-borrador.js"></script>
 <script src="../../sonido/ambiente.js"></script>
@@ -362,7 +364,7 @@
   try { altoContraste = localStorage.getItem('tdh-alto-contraste') === '1'; } catch (e) { /* sin almacenamiento: queda apagado */ }
   const esAgua = (x, y) => y >= 0 && x >= 0 && y < MAPA_VIAJE.length && x < MAPA_VIAJE[0].length && '~-,kr'.includes(MAPA_VIAJE[y][x]) && MAPA_VIAJE[y][x] !== 'r';
   function nuevoViaje() {
-    viaje = { canoa: { x: 2, y: 6, fuego: 4, mira: 1 }, energia: 16, lena: 1, comida: 0, pasos: 0, hora: 'dia', clima: 'calma', objetos: OBJ_VIAJE.map((o) => Object.assign({}, o)), visto: new Set(), aprendidos: [], pirita: false, ruta: [[2, 6]] };
+    viaje = { canoa: { x: 2, y: 6, fuego: 4, mira: 1 }, energia: 16, lena: 1, comida: 0, pasos: 0, hora: luzInicial().hora, estacion: luzInicial().estacion, clima: 'calma', objetos: OBJ_VIAJE.map((o) => Object.assign({}, o)), visto: new Set(), aprendidos: [], pirita: false, ruta: [[2, 6]] };
     revelar(viaje.canoa.x, viaje.canoa.y);
     motor = CZ.crear($('mapa'), { celda: 48 });
     actualizarEscena();
@@ -376,7 +378,7 @@
     }
   }
   function actualizarEscena() {
-    motor.escena({ vista, altoContraste, mapa: MAPA_VIAJE, objetos: viaje.objetos, canoa: viaje.canoa, humos: [{ x: 27.5, y: 9.6 }, { x: 25.2, y: 1.5 }], estacion: 'verano', clima: viaje.clima, hora: viaje.hora, explorado: (x, y) => viaje.visto.has(x + ',' + y) });
+    motor.escena({ vista, altoContraste, mapa: MAPA_VIAJE, objetos: viaje.objetos, canoa: viaje.canoa, humos: [{ x: 27.5, y: 9.6 }, { x: 25.2, y: 1.5 }], estacion: viaje.estacion, clima: viaje.clima, hora: viaje.hora, explorado: (x, y) => viaje.visto.has(x + ',' + y) });
   }
   function ajustarMapa() {
     const caja = document.querySelector('#p-viaje .mapa').getBoundingClientRect();
@@ -599,6 +601,18 @@
     if (conSonido) { await sonido.iniciar(); sonarAmbiente(); } else sonido.pausar();
   });
 
+  // ── Luz real de Ushuaia: el viaje empieza con la hora y la estación de hoy ──
+  let luzReal = true;
+  try { luzReal = localStorage.getItem('tdh-luz-real') !== '0'; } catch (e) { /* sin almacenamiento: queda encendida */ }
+  function luzInicial() { return luzReal && window.TDH_LUZ_REAL ? TDH_LUZ_REAL.ahora() : { hora: 'dia', estacion: 'verano' }; }
+  function pintarLuz() {
+    const b = $('b-luz'); b.setAttribute('aria-pressed', String(luzReal)); b.textContent = 'Luz real de Ushuaia: ' + (luzReal ? 'sí' : 'no');
+    $('aviso-luz').textContent = luzReal && window.TDH_LUZ_REAL ? TDH_LUZ_REAL.ahora().texto + ' El viaje empieza con esa luz.' : '';
+    $('aviso-luz').hidden = !luzReal;
+    if (fondos.titulo) { const l = luzReal && window.TDH_LUZ_REAL ? TDH_LUZ_REAL.ahora() : { hora: 'tarde', estacion: 'verano' }; fondos.titulo.m.escena({ hora: l.hora, estacion: l.estacion }); }
+  }
+  $('b-luz').addEventListener('click', () => { luzReal = !luzReal; try { localStorage.setItem('tdh-luz-real', luzReal ? '1' : '0'); } catch (e) { /* no pasa nada */ } pintarLuz(); });
+
   // ── Alto contraste ──────────────────────────────────────────────────────
   function pintarBotonContraste() { const b = $('b-contraste'); b.setAttribute('aria-pressed', String(altoContraste)); b.textContent = 'Alto contraste: ' + (altoContraste ? 'sí' : 'no'); }
   $('b-contraste').addEventListener('click', () => {
@@ -621,8 +635,9 @@
     }
     requestAnimationFrame(cuadro);
   }
-  addEventListener('resize', () => { prepararFondos(); if (actual === 'viaje' && viaje) ajustarMapa(); });
+  addEventListener('resize', () => { prepararFondos(); pintarLuz(); if (actual === 'viaje' && viaje) ajustarMapa(); });
   prepararFondos();
+  pintarLuz();
   ir('titulo');
   requestAnimationFrame(cuadro);
 })();
