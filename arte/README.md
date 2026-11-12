@@ -9,6 +9,7 @@ Todo el arte del juego es **propio**. El estilo elegido es **Corteza**: el paisa
 | `corteza/corteza.js` | **El motor de dibujo**: mapa, canoa, chozas, fauna, pegatinas, luz del fuego, humo, clima, estaciones y cámara para celular. Sin dependencias, salvo `fuente/arte.js`. |
 | `corteza/carta.css` | Cartas de saber, códice, fichas del HUD y botones de papel. |
 | `corteza/index.html` | La vitrina del estilo y un ejemplo completo de uso: tocá el agua y la canoa rema. |
+| `pantallas/index.html` | Maqueta navegable de todas las pantallas del juego (título, pueblo, viaje, carta, fin, llegada, códice, cierre en presente, ayuda), con un bucle de prueba. |
 | `corteza/portada.html` | La fuente del logo, el ícono y la imagen para compartir. `node arte/corteza/exportar.cjs` los exporta a `logo/` (necesita Playwright). |
 | `logo/` | `logo.png`, `compartir.png` (1200 × 630), `icono-512.png`, `icono-192.png`, `favicon-32.png`. En `logo/pixel/` queda el logo pixel de la primera ronda. |
 

@@ -17,6 +17,7 @@
 | Qué | Dónde | Cómo abrirlo |
 |---|---|---|
 | **El estilo, en vivo** | [`arte/corteza/index.html`](../arte/corteza/index.html) | Doble clic. Tocá el agua y la canoa rema. Anda sin internet. |
+| **Pantallas del juego** (maqueta navegable) | [`arte/pantallas/index.html`](../arte/pantallas/index.html) | Título, elegir pueblo, viaje, carta de saber, fin del viaje, llegada, códice, cierre en presente y ayuda. |
 | Motor de dibujo para el juego | [`arte/corteza/corteza.js`](../arte/corteza/corteza.js) | Ver la sección 6. |
 | Cartas, códice y HUD (CSS) | [`arte/corteza/carta.css`](../arte/corteza/carta.css) | — |
 | Logo, ícono e imagen para compartir | [`arte/logo/`](../arte/logo/) | Fuente: `arte/corteza/portada.html` |
@@ -112,14 +113,32 @@ Es el único elemento que aparece en todas las pantallas, así que es lo más cu
 </script>
 ```
 
-- **Objetos de papel:** `choza`, `choza-conica`, `conchal`, `arbol-bandera`, `lobo-marino`, `cormoran`, `pato-vapor`, `ballena`.
-- **Pegatinas:** `lena`, `mejillones`, `hongos`, `pirita`, `saber` (y cualquier sprite de `arte.js`).
+- **Objetos de papel:** `choza`, `choza-conica`, `conchal`, `arbol-bandera`, `guindo-grande`, `ballena-varada`, `lobo-marino`, `cormoran`, `pato-vapor`, `ballena`, `pinguino`, `cauquen`, `gaviota`, `tonina`.
+- **Pegatinas:** `lena`, `mejillones`, `pescado`, `erizos`, `huevos`, `hongos`, `pirita`, `saber` (y cualquier sprite de `arte.js`).
 - **Cámara para celular:** `motor.centrar(x, y, 10, 9)` muestra 10 × 9 casillas alrededor de la canoa. `motor.casillaEn(clientX, clientY)` convierte un toque en una casilla.
 - **Rendimiento:** el mapa se arma una vez (entre 40 y 120 ms) y se vuelve a armar solo si cambian el mapa, la estación o lo explorado. Cada cuadro reusa esa base.
 - **Para el HUD y las cartas:** `TDH_CORTEZA.fuego(ctx, x, y, escala, nivel, t)`, `TDH_CORTEZA.canoa(...)` y `TDH_CORTEZA.pegatina(idSprite, escala)`. Las clases CSS (`.carta-saber`, `.ficha`, `.codice`, `.boton-papel`) están en `carta.css`.
 - La vitrina (`arte/corteza/index.html`) es un ejemplo completo: remar tocando el agua, buscar el camino por el agua, revelar el humo, la cámara que sigue a la canoa y el sonido.
 
-## 7. Cartas de saber y códice
+## 7. Pantallas del juego
+
+La maqueta [`arte/pantallas/index.html`](../arte/pantallas/index.html) muestra todo el recorrido con el estilo aplicado:
+
+1. **Título**: escena animada, rótulo de papel y aviso de qué es ficción y qué no.
+2. **Elegir pueblo**: la familia yagán está disponible; la kawésqar figura como «próximamente, con la consulta a sus comunidades».
+3. **Viaje**: HUD de fichas, cámara sobre la canoa, botones grandes (*Juntar*, *Avivar el fuego*, *Amarrar y acampar*) y teclado (flechas o WASD, <kbd>Enter</kbd>, <kbd>F</kbd>, <kbd>M</kbd>).
+4. **Carta de saber**: aparece encima del mapa cuando se junta algo nuevo.
+5. **Fin del viaje**: el fuego se apaga y se listan los saberes que pasan a la generación siguiente.
+6. **Llegada**: la ballena varada, con humo de otras familias que se acercan (destino de ejemplo).
+7. **Códice**: separado por pueblo, con las cartas no encontradas tapadas por humo.
+8. **Hoy**: el cierre en presente. El texto es provisorio y se escribe con la comunidad.
+9. **Cómo se juega**: la ayuda.
+
+La maqueta incluye un **bucle de prueba**, no el motor del juego: el fuego se gasta al remar (más con viento en el canal hondo o con lluvia), la leña lo aviva, la pirita lo vuelve a encender una vez, el amarre en el cachiyuyo hace pasar la noche, y los saberes quedan en la memoria del linaje. Sirve como referencia de interfaz y de ritmo para A y B. Los números son de prueba.
+
+Los textos de las cartas de la maqueta (fuego, amarre, mejillones, pesca sin anzuelo, hongos, pirita, choza, corteza y ballena varada) salen de Cooper (1946), con página. Son **borradores para la Persona C**.
+
+## 8. Cartas de saber y códice
 
 ![Carta de saber de papel con ilustración, etiquetas Dato y En el juego, y la fuente con página; al lado, el códice con dos cartas y dos todavía en el humo](img/corteza-cartas.jpg)
 
@@ -134,13 +153,13 @@ Es el único elemento que aparece en todas las pantallas, así que es lo más cu
 - **Códice:** grilla de cartas separada por pueblo. Las cartas no encontradas están tapadas por humo.
 - **Cierre del códice:** una pantalla en presente, con las comunidades de hoy. 🔍 Consultar con la comunidad cómo quiere verse.
 
-## 8. Elementos
+## 9. Elementos
 
 ![Catálogo: chozas de domo y cónica, conchal, árbol bandera, lobo marino, cormorán, pato vapor y ballena en papel; leña, mejillones, hongos, pirita y saber como pegatinas pixel; la canoa](img/corteza-elementos.png)
 
 El pixel art de la primera ronda (propuesta A) queda como **capa secundaria**: sus íconos se usan como pegatinas y en el HUD. Los tiles pixel se conservan en `arte/sprites/` como registro, pero el mapa del juego se dibuja con el motor Corteza.
 
-## 9. Paleta «Canales» (42 colores)
+## 10. Paleta «Canales» (42 colores)
 
 ![La paleta completa](../arte/paleta/paleta.png)
 
@@ -164,16 +183,16 @@ El pixel art de la primera ronda (propuesta A) queda como **capa secundaria**: s
 | Etiqueta «Dato» | 7,9:1 | AAA |
 | Etiqueta «En el juego» | 11,2:1 | AAA |
 
-## 10. Tipografía
+## 11. Tipografía
 
 - **Atkinson Hyperlegible** (Braille Institute of America, licencia SIL OFL 1.1), pensada para baja visión. Va incluida en `arte/tipografia/`, así que funciona sin internet.
 - Tamaño mínimo: 16 px en el juego y 15 px en las cartas.
 
-## 11. Sonido
+## 12. Sonido
 
 Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 10 KB): viento, mar, lluvia, fuego y efectos (remo, ola, leña, mariscos, saber, fuego apagado, nueva generación). Cada efecto tiene su subtítulo en pantalla. **Sin música inventada:** no imitamos cantos yaganes. Detalle en [`sonido/README.md`](../sonido/README.md).
 
-## 12. Accesibilidad
+## 13. Accesibilidad
 
 - [x] Contraste AAA en los textos.
 - [x] Costa con espuma, para no depender del color.
@@ -187,7 +206,7 @@ Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 10 KB): vie
 - [ ] Textos alternativos de cada carta (Persona B, con los textos de la Persona C).
 - [ ] Probar en un celular de gama baja y en el proyector.
 
-## 13. Líneas rojas aplicadas al arte
+## 14. Líneas rojas aplicadas al arte
 
 - ❌ Fotos históricas o ilustraciones de terceros. Todo el arte es propio.
 - ❌ Seres ceremoniales, ritos (*ciéxaus*, *kina*), pintura corporal o adornos.
@@ -197,7 +216,7 @@ Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 10 KB): vie
 - ❌ Guardas o grecas «indígenas» inventadas como decoración.
 - ✅ Los peligros se dibujan como clima: viento, lluvia, nieve, oleaje, noche.
 
-## 14. Preguntas de arte para la consulta
+## 15. Preguntas de arte para la consulta
 
 1. ¿Podemos mostrar personas, aunque sean siluetas sin rasgos? ¿Cómo prefieren que se vean?
 2. ¿Está bien mostrar a la mujer remando atrás y al hombre adelante con el arpón, como dicen las fuentes?
@@ -206,7 +225,7 @@ Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 10 KB): vie
 5. ¿Cómo quieren que se vea la pantalla final, la del presente de la comunidad?
 6. ¿Hay música o sonidos que quieran compartir, o que no deberían usarse?
 
-## 15. Referencias de estilo
+## 16. Referencias de estilo
 
 Tomamos principios, no copiamos ningún juego.
 

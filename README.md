@@ -34,6 +34,7 @@ Arte y sonido:
 | Recurso | Contenido |
 |---|---|
 | [Estilo Corteza](arte/corteza/index.html) | El estilo elegido, en vivo: tocá el agua y la canoa rema (abrir el archivo en el navegador) |
+| [Pantallas del juego](arte/pantallas/index.html) | Maqueta navegable de todo el recorrido: título, viaje, cartas, fin del viaje, códice y cierre en presente |
 | [`arte/`](arte/README.md) | Motor de dibujo, paleta, pegatinas pixel, logo y tipografía. Todo propio |
 | [Propuestas de estilo](arte/propuestas/index.html) | Las tres propuestas que votó el equipo (registro) |
 | [`sonido/`](sonido/README.md) | Sonido ambiente y efectos generados por código, con demo |
@@ -74,6 +75,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Claude (Anthropic), a través de Claude Code:** se usó para resumir las bases de la hackatón, proponer un plan de trabajo y armar la estructura inicial de este repositorio y de su documentación. El equipo revisa y decide todo el contenido.
 - **Arte y sonido (12/11):** a pedido de la persona a cargo del arte, Claude Code buscó fuentes sobre el paisaje fueguino y la cultura material yagán, y propuso la dirección de arte (`docs/04-direccion-de-arte.md`). También escribió el código que define y genera la paleta, los sprites en pixel art, el logo y la página de propuestas (`arte/`), y el código que sintetiza el sonido (`sonido/`), junto con el plan de video y pitch (`equipo/comunicacion.md`). El equipo revisa los dibujos y elige el estilo. Los datos culturales marcados con 🔍 los verifica la persona de investigación con las fuentes y la comunidad.
 - **Estilo Corteza y rigor histórico (12/11):** el equipo eligió el estilo. Claude Code escribió el motor de dibujo (`arte/corteza/`), las cartas, el HUD y el logo. También leyó el capítulo «The Yahgan» del *Handbook of South American Indians* (Cooper, 1946) y *The Gold Diggings of Cape Horn* (Spears, 1895), auditó cada elemento del arte contra esas fuentes, con página (`docs/05-rigor-historico.md`), y corrigió lo que no coincidía. La validación final es del equipo y de la comunidad.
+- **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
 
 ## Integrantes
 
