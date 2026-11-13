@@ -223,6 +223,7 @@ Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 18 KB): vie
 - [x] Las pegatinas tienen un borde claro: se distinguen del paisaje por la forma, no solo por el color.
 - [x] Subtítulos de sonido.
 - [x] **Cartas leídas en voz alta** (`sonido/voz.js`, con la voz del dispositivo), para quien lee con dificultad o ve poco.
+- [x] **Narrador** (`sonido/narrador.js`): describe en voz alta lo que rodea a la canoa y cuenta lo que pasa, para jugar sin ver la pantalla.
 - [x] **El lugar suena distinto** (bosque, playa, canal): el mapa también se puede «leer» con el oído.
 - [x] Movimiento que se puede apagar, y respeta "reducir movimiento".
 - [x] Cámara que sigue a la canoa en el celular, con zonas táctiles grandes.

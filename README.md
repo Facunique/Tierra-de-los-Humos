@@ -30,7 +30,7 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 
 ### Para todos, también en el aula
 
-- **Accesible:** las cartas se escuchan en voz alta, hay modo alto contraste, tipografía para baja visión, colores probados para daltonismo y subtítulos para cada sonido.
+- **Accesible:** un narrador cuenta el viaje en voz alta para jugar sin ver la pantalla, las cartas se escuchan en voz alta, hay modo alto contraste, tipografía para baja visión, colores probados para daltonismo y subtítulos para cada sonido.
 - **El territorio se siente:** la luz del juego es la de Ushuaia en ese momento (de día, al atardecer o de noche, y en su estación), y el sonido cambia según el lugar: el bosque, la playa y el canal abierto suenan distinto.
 - **Algo para llevarse:** al terminar, una postal del viaje con el recorrido y los saberes aprendidos.
 - **En la escuela:** una [guía para docentes](escuelas/README.md) con una actividad por carta, y una [versión de mesa](mesa/README.md) para jugar sin pantallas.
@@ -137,6 +137,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Presentación, cartas impresas y video (12/11):** Claude Code armó la presentación del pitch (`presentacion/`), las cartas para imprimir (`arte/cartas/`) y el storyboard del video (`equipo/video/`), y redactó este README con huecos marcados (✏️) para que los complete el equipo.
 - **Luz real, sonido por lugar y guía docente (12/11):** Claude Code escribió el cálculo de la luz real de Ushuaia (`arte/corteza/luz-real.js`), las capas de sonido de bosque y playa (`sonido/ambiente.js`) y la guía para docentes con una actividad por carta (`escuelas/`). Las actividades parten solo de los datos citados en las cartas y las revisa el equipo.
 - **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
+- **Narrador y prueba de punta a punta (13/11):** a pedido de la persona a cargo del arte, Claude Code escribió el narrador (`sonido/narrador.js`), que describe el viaje en voz alta, y una prueba que juega partidas enteras en varios celulares tocando los botones (`pruebas/de-punta-a-punta.cjs`), con sus pruebas.
 - **Editor de saberes (13/11):** a pedido de la persona a cargo del arte, Claude Code armó el editor de saberes (`herramientas/`), con sus pruebas. Las reglas que revisa son las del repositorio; las cartas que se escriban con él las revisa la Persona C.
 - **Sonido y postal conectados al núcleo (13/11):** a pedido de la persona a cargo del arte, Claude Code escribió `sonido/juego.js`, que hace sonar cada evento de la partida con su subtítulo, y `TDH_POSTAL.datosDe`, que arma la postal con el estado de la partida, con sus pruebas (`pruebas/sonido-juego.test.cjs`). También armó la hoja para la reunión del 14/11 (`equipo/reunion-14-11/`) y puso al día el avance del 14/11.
 - **Stack (13/11):** a pedido de la Persona B, Claude Code comparó opciones (JavaScript sin build, módulos ES, Vite, Phaser y Preact o Svelte) contra el código que ya existía y los criterios de la hackatón, y recomendó seguir sin build. La decisión fue de la Persona B.

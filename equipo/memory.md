@@ -20,6 +20,7 @@
   | `arte/corteza/transiciones.js` | Paso del fuego y aparición de carta | ver `docs/04`, sección 6 |
   | `arte/corteza/luz-real.js` | Hora y estación reales de Ushuaia | `TDH_LUZ_REAL.ahora()` → `{ hora, estacion, texto }` |
   | `sonido/ambiente.js` | Ambiente, efectos y sonido por lugar | `TDH_SONIDO.lugarDe(mapa, x, y)` |
+  | `sonido/narrador.js` | Cuenta el viaje en voz alta, para jugar sin ver | `TDH_NARRADOR.conectar(TDH_VOZ).tras(eventos, partida.estado, partida.puede())` |
   | `sonido/juego.js` | Conecta el sonido con la partida: cada evento suena con su subtítulo | `TDH_SONIDO_JUEGO.conectar(sonido).eventos(partida.hacer(accion))` |
   | `sonido/voz.js` | Lee las cartas en voz alta | `TDH_VOZ.leerCarta(carta)` |
   | `arte/postal/postal.js` | Postal del viaje en PNG | `TDH_POSTAL.dibujar(canvas, TDH_POSTAL.datosDe(partida.estado, { generacion, saberes }))` |

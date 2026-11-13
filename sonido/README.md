@@ -74,6 +74,23 @@ oido.generacion();              // al empezar la generación siguiente
 
 Se probó con 60 partidas del núcleo jugadas por los bots de la Persona A: todos los eventos tienen sonido y subtítulo. Las pruebas están en `pruebas/sonido-juego.test.cjs`. En [`demo.html`](demo.html), «Escuchar una partida» hace sonar una partida de prueba.
 
+## Narrador: jugar sin ver
+
+[`narrador.js`](narrador.js) cuenta el viaje en voz alta, con la voz del dispositivo. Junto con el sonido según el lugar, el viaje se puede seguir con el oído, sin ver la pantalla.
+
+- **Describir** (por ejemplo, con la tecla <kbd>D</kbd>): «Fuego 3 de 4. Llevan 1 de leña y 0 de comida. Cae la tarde y hay viento. Al norte, playa con leña; al este, agua baja; al sur, canal; al oeste, canal hondo. Se puede juntar leña. Hasta la ballena varada faltan 30 casillas, hacia el este.»
+- **Después de cada acción**, en corto, solo lo interesante: «Juntaste leña. Al sur, playa con hongos de árbol. Se puede juntar hongos de árbol.» El agua abierta no se nombra, para no cansar.
+- Lo que no se exploró se dice «humo, sin explorar», y no se cuenta qué hay ahí.
+
+```js
+const narrador = TDH_NARRADOR.conectar(TDH_VOZ, { saberes: TDH_SABERES.SABERES });
+narrador.describir(partida.estado, partida.puede());
+narrador.tras(partida.hacer(accion), partida.estado, partida.puede());
+narrador.repetir();
+```
+
+Las funciones devuelven el texto, así que también sirven para un lector de pantalla (`aria-live`). Se probó narrando 40 partidas del núcleo; las pruebas están en `pruebas/narrador.test.cjs`. En [`demo.html`](demo.html), la casilla «Con narrador» hace narrar la partida de prueba.
+
 ## Sonido según el lugar
 
 El mismo viento no suena igual en el canal abierto que pegado a la costa. `TDH_SONIDO.lugarDe(mapa, x, y)` mira las casillas que rodean a la canoa (a dos casillas, con más peso las más cercanas) en un mapa del motor Corteza y devuelve tres valores de 0 a 1:
