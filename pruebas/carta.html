@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prueba · Carta de saber</title>
+<meta name="description" content="Página de prueba de la interfaz: un viaje corto con la partida falsa, para ver la carta de saber.">
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<link rel="stylesheet" href="../arte/corteza/carta.css">
+<link rel="stylesheet" href="../juego/interfaz/juego.css">
+<link rel="icon" href="../arte/logo/favicon-32.png" type="image/png">
+<style>
+  /* Solo para esta página de prueba. */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: #0b1015; color: #e7ecea; font: 17px/1.5 "Atkinson Hyperlegible", system-ui, sans-serif; overflow: hidden; }
+  :focus-visible { outline: 3px solid #ffd47c; outline-offset: 3px; }
+  .marco { position: fixed; inset: 0; display: flex; flex-direction: column; }
+  .aviso-prueba { margin: 0; padding: 4px 12px; background: #973a25; color: #eee5d0; font-size: 13px; text-align: center; }
+  .mapa { flex: 1; min-height: 0; display: grid; place-items: center; background: #2d4553; overflow: hidden; }
+  #mapa { max-width: 100%; max-height: 100%; cursor: pointer; touch-action: manipulation; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: #1d2e38; }
+  .cruz { display: grid; grid-template-columns: repeat(3, 52px); grid-template-rows: repeat(2, 48px); gap: 6px; }
+  .cruz .boton-papel { min-height: 48px; padding: 0; font-size: 20px; }
+  .acciones > .boton-papel { font-size: 15px; padding: 10px 12px; }
+  .anuncio { position: fixed; z-index: 4; left: 50%; top: 96px; transform: translateX(-50%); background: rgba(11,16,21,.88); color: #eef2ef; padding: 6px 14px; border-radius: 10px; font-size: 15px; max-width: 90%; text-align: center; pointer-events: none; }
+  .anuncio:empty { display: none; }
+</style>
+</head>
+<body>
+<div class="marco">
+  <p class="aviso-prueba">Página de prueba con una partida falsa (pruebas/partida-falsa.js). No es el juego.</p>
+  <div class="hud-corteza" id="hud" aria-label="Estado del viaje"></div>
+  <main class="mapa"><canvas id="mapa" role="img" aria-label="Mapa del viaje. Tocá el agua al lado de la canoa para remar, o usá las flechas."></canvas></main>
+  <div class="acciones">
+    <div class="cruz" role="group" aria-label="Remar">
+      <span></span><button class="boton-papel" data-remar="0,-1" aria-label="Remar hacia arriba">↑</button><span></span>
+      <button class="boton-papel" data-remar="-1,0" aria-label="Remar a la izquierda">←</button><button class="boton-papel" data-remar="0,1" aria-label="Remar hacia abajo">↓</button><button class="boton-papel" data-remar="1,0" aria-label="Remar a la derecha">→</button>
+    </div>
+    <button class="boton-papel" id="b-contraste" type="button" aria-pressed="false">Alto contraste: no</button>
+    <button class="boton-papel" id="b-otra" type="button">Otra partida</button>
+  </div>
+</div>
+<div class="anuncio" id="anuncio" role="status" aria-live="polite"></div>
+
+<script src="../arte/fuente/arte.js"></script>
+<script src="../arte/corteza/corteza.js"></script>
+<script src="../arte/corteza/transiciones.js"></script>
+<script src="../datos/saberes.js"></script>
+<script src="../sonido/voz.js"></script>
+<script src="../juego/interfaz/carta.js"></script>
+<script src="partida-falsa.js"></script>
+<script>
+(function () {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const ARTE = TDH_ARTE, CZ = TDH_CORTEZA, { SABERES, ORDEN } = TDH_SABERES;
+  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const memoria = new Set();
+  let altoContraste = false;
+  try { altoContraste = localStorage.getItem('tdh-alto-contraste') === '1'; } catch (e) { /* queda apagado */ }
+
+  let partida, motor, vista = null, semilla = 1;
+  function nueva() {
+    partida = TDH_PARTIDA.nueva({ semilla: semilla++, saberes: ORDEN.slice() });
+    motor = CZ.crear($('mapa'), { celda: 48 });
+    ajustar(); pintarHud(); anunciar('Remá con las flechas o tocando el agua. A los 3 pasos aparece un saber.');
+  }
+  function escena() { motor.escena(Object.assign({}, partida.estado, { vista, altoContraste })); }
+  function ajustar() {
+    const caja = document.querySelector('.mapa').getBoundingClientRect(), M = partida.estado.mapa;
+    const a = Math.min(M[0].length, caja.width < 760 ? 9 : 15);
+    const h = Math.min(M.length, Math.max(5, Math.round(a * caja.height / caja.width)));
+    const c = partida.estado.canoa;
+    vista = { x: Math.max(0, Math.min(M[0].length - a, c.x + 0.5 - a / 2)), y: Math.max(0, Math.min(M.length - h, c.y + 0.5 - h / 2)), ancho: a, alto: h };
+    escena();
+    motor.ajustar(Math.max(24, Math.floor(Math.min(caja.width / a, caja.height / h))));
+    $('mapa').style.width = (a * motor.celda) + 'px'; $('mapa').style.height = (h * motor.celda) + 'px';
+  }
+  function pintarHud() {
+    const h = $('hud'), c = partida.estado.canoa; h.innerHTML = '';
+    const f = document.createElement('span'); f.className = 'ficha ficha--fuego' + (c.fuego <= 1 ? ' ficha--alerta' : ''); f.textContent = 'Fuego ' + c.fuego + ' de 4'; h.appendChild(f);
+    const s = document.createElement('span'); s.className = 'ficha'; s.appendChild(ARTE.aCanvas('icono-saber', 0, 'verano', 1)); s.appendChild(document.createTextNode('Saberes ' + memoria.size)); h.appendChild(s);
+  }
+  function anunciar(t) { $('anuncio').textContent = t; clearTimeout(anunciar.id); anunciar.id = setTimeout(() => ($('anuncio').textContent = ''), 3000); }
+
+  // Los eventos de la partida, en orden. Las cartas esperan a que se cierre la anterior.
+  async function atender(eventos) {
+    for (const ev of eventos) {
+      if (ev.tipo === 'fuego') anunciar(ev.despues > ev.antes ? 'El fuego se aviva.' : 'El fuego baja a ' + ev.despues + '.');
+      if (ev.tipo === 'junto') anunciar('Juntaste ' + ({ lena: 'leña', mejillones: 'mejillones', pescado: 'pescado' }[ev.que] || ev.que) + '.');
+      if (ev.tipo === 'saber' && SABERES[ev.id]) {
+        const nueva = !memoria.has(ev.id); memoria.add(ev.id); pintarHud();
+        await TDH_CARTA.mostrar(SABERES[ev.id], { nueva, altoContraste });
+      }
+      if (ev.tipo === 'fin') anunciar(ev.gano ? 'Llegaron a la ballena varada con el fuego encendido.' : 'El fuego se apagó. Tocá «Otra partida».');
+    }
+  }
+  function remar(dx, dy) {
+    if (TDH_CARTA.abierta() || partida.terminada) return;
+    const ev = partida.hacer({ tipo: 'remar', dx, dy });
+    if (!ev.length) { anunciar('La canoa solo va por el agua.'); return; }
+    partida.estado.canoa.remando = true; setTimeout(() => (partida.estado.canoa.remando = false), 500);
+    ajustar(); pintarHud(); atender(ev);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    const t = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0], w: [0, -1], s: [0, 1], a: [-1, 0], d: [1, 0] }[e.key];
+    if (t) { e.preventDefault(); remar(t[0], t[1]); }
+  });
+  document.querySelectorAll('[data-remar]').forEach((b) => b.addEventListener('click', () => { const [dx, dy] = b.dataset.remar.split(',').map(Number); remar(dx, dy); }));
+  $('mapa').addEventListener('click', (e) => {
+    const c = motor.casillaEn(e.clientX, e.clientY), k = partida.estado.canoa;
+    if (Math.abs(c.x - k.x) >= Math.abs(c.y - k.y)) remar(Math.sign(c.x - k.x), 0); else remar(0, Math.sign(c.y - k.y));
+  });
+  function pintarContraste() { const b = $('b-contraste'); b.setAttribute('aria-pressed', String(altoContraste)); b.textContent = 'Alto contraste: ' + (altoContraste ? 'sí' : 'no'); }
+  $('b-contraste').addEventListener('click', () => { altoContraste = !altoContraste; try { localStorage.setItem('tdh-alto-contraste', altoContraste ? '1' : '0'); } catch (e) { /* nada */ } pintarContraste(); escena(); });
+  $('b-otra').addEventListener('click', () => { memoria.clear(); nueva(); });
+  addEventListener('resize', () => ajustar());
+
+  pintarContraste();
+  nueva();
+  (function cuadro(ms) { motor.dibujar(reducido ? 2 : ms / 1000); requestAnimationFrame(cuadro); })(0);
+})();
+</script>
+</body>
+</html>

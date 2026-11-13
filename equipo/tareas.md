@@ -42,7 +42,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Decidir el stack: JavaScript sin build (13/11).
 - [ ] Acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (propuesta en `memory.md`, *Por decidir*).
 - [ ] Definir la estructura de datos de cartas de saber y especies, para que la Persona C solo cargue contenido. **Cartas:** hecho en `datos/saberes.js` (suma `id`, `pueblo`, `alt` y `estado`, con plantilla para cargar sin programar). Faltan las especies.
-- [ ] Pantalla de carta de saber, con la fuente citada visible. La maqueta (`arte/pantallas/`) y `arte/corteza/carta.css` ya tienen el diseño.
+- [ ] Pantalla de carta de saber, con la fuente citada visible. **Hecha** en `juego/interfaz/carta.js` y probada con la partida falsa (`pruebas/carta.html`); falta conectarla al núcleo de A.
 - [ ] Herencia entre partidas (localStorage): los saberes pasan a la siguiente generación del mismo pueblo.
 - [ ] Códice (modo museo) separado por pueblo, que se pueda recorrer sin jugar.
 - [ ] Controles táctiles y de teclado (los de la sección *Cómo jugar* del README).
