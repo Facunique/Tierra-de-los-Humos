@@ -71,6 +71,9 @@
 <script src="../juego/interfaz/carta.js"></script>
 <script src="../juego/nucleo/azar.js"></script>
 <script src="../juego/nucleo/reglas.js"></script>
+<script src="../juego/nucleo/territorio/elementos.js"></script>
+<script src="../juego/nucleo/territorio/destinos.js"></script>
+<script src="../juego/nucleo/territorio/pueblos.js"></script>
 <script src="../juego/nucleo/mapa.js"></script>
 <script src="../juego/nucleo/partida.js"></script>
 <script>
@@ -88,19 +91,22 @@
   let generacion = 1;
   let partida, motor, vista = null, cola = [], ocupado = false;
 
-  const NOMBRES = { lena: 'leña', mejillones: 'mejillones', pescado: 'pescado', hongos: 'hongos', pirita: 'pirita', choza: 'el saber de la choza', corteza: 'corteza de guindo' };
+  const nombreDe = (id) => (TDH_ELEMENTOS.ELEMENTOS[id] || { nombre: id }).nombre;
+  const revision = params.get('revision') === '1';
+  const destino = params.get('destino') || undefined;
   const CLIMA = { calma: ['icono-calma', 'Calma'], viento: ['icono-viento', 'Viento'], lluvia: ['icono-lluvia', 'Lluvia'] };
   const HORA = { dia: 'Día', tarde: 'Tarde', noche: 'Noche' };
 
   function nueva() {
-    partida = TDH_PARTIDA.nueva({ semilla, saberes: ORDEN.slice(), heredados: [...linaje], mapa: mapaFijo ? 'fijo' : undefined });
+    partida = TDH_PARTIDA.nueva({ semilla, saberes: ORDEN.slice(), heredados: [...linaje], mapa: mapaFijo ? 'fijo' : undefined, destino });
     motor = CZ.crear($('mapa'), { celda: 48 });
     cola = [];
     $('semilla').textContent = 'Semilla ' + semilla + (partida.estado.mapaFijo ? ' · mapa fijo' : '') + ' · generación ' + generacion + '.';
     ajustar(); pintar();
-    anunciar('Llevá el fuego hasta la ballena varada, al este.');
+    anunciar('Llevá el fuego hasta ' + partida.estado.destino.nombre + ', al este.');
+    if (revision) pintarRevision();
   }
-  function escena() { motor.escena(Object.assign({}, partida.estado, { vista })); }
+  function escena() { motor.escena(Object.assign({}, partida.estado, { vista }, revision ? { explorado: () => true } : {})); }
   function ajustar() {
     const caja = document.querySelector('.mapa').getBoundingClientRect(), M = partida.estado.mapa;
     const a = Math.min(M[0].length, caja.width < 760 ? 9 : 15);
@@ -126,7 +132,7 @@
     h.appendChild(ficha(null, HORA[e.hora]));
     h.appendChild(ficha('icono-generacion', 'Gen. ' + generacion));
     const p = partida.puede();
-    $('a-juntar').disabled = !p.juntar; $('a-juntar').textContent = p.juntar ? 'Juntar ' + NOMBRES[p.juntar] : 'Juntar';
+    $('a-juntar').disabled = !p.juntar; $('a-juntar').textContent = p.juntar ? 'Juntar ' + nombreDe(p.juntar) : 'Juntar';
     $('a-avivar').disabled = !p.avivar;
     $('a-amarrar').disabled = !p.amarrar;
   }
@@ -137,7 +143,7 @@
     for (const ev of eventos) {
       if (ev.tipo === 'fuego' && ev.despues < ev.antes) anunciar(ev.despues === 0 ? 'El fuego se apagó.' : 'El fuego baja a ' + ev.despues + (ev.causas && ev.causas.length ? ' (' + ev.causas.filter((c) => c !== 'choza').join(', ') + ')' : '') + '.');
       if (ev.tipo === 'avivo') anunciar('El fuego se aviva.');
-      if (ev.tipo === 'junto') anunciar('Juntaste ' + NOMBRES[ev.que] + '.');
+      if (ev.tipo === 'junto') anunciar('Juntaste ' + ev.nombre + '.');
       if (ev.tipo === 'clima') anunciar({ calma: 'El tiempo se calma.', viento: 'Se levanta viento.', lluvia: 'Empieza a llover.' }[ev.clima]);
       if (ev.tipo === 'hora') anunciar({ dia: 'Amanece.', tarde: 'Cae la tarde.', noche: 'Se hace de noche: el frío gasta el fuego.' }[ev.hora]);
       if (ev.tipo === 'reencendido') anunciar('Con la pirita, el fuego vuelve a prender.');
@@ -173,10 +179,10 @@
   function terminar(gano) {
     const e = partida.estado;
     for (const id of e.aprendidos) linaje.add(id);
-    $('fin-titulo').textContent = gano ? 'Llegaron a la ballena varada' : 'El viaje termina acá';
+    $('fin-titulo').textContent = gano ? 'Llegaron' : 'El viaje termina acá';
     $('fin-texto').textContent = gano
-      ? 'Llegaron con el fuego encendido. Otras familias ven el humo y se acercan (Cooper, 1946, p. 99).'
-      : 'El fuego se apagó después de ' + e.pasos + ' casillas. Lo aprendido pasa a la generación siguiente.';
+      ? 'Llegaron a ' + e.destino.nombre + ' con el fuego encendido, después de ' + e.pasos + ' casillas.'
+      : 'El fuego se apagó ' + ({ noche: 'con el frío de la noche', lluvia: 'con la lluvia', viento: 'con el viento del canal', remar: 'de tanto remar' }[e.causa] || '') + ', después de ' + e.pasos + ' casillas. Lo aprendido pasa a la generación siguiente.';
     $('fin-lista').innerHTML = e.aprendidos.length ? e.aprendidos.map((k) => '<li>' + SABERES[k].titulo + '</li>').join('') : '<li>Esta vez no aprendieron nada nuevo.</li>';
     setTimeout(() => { $('fin').classList.add('abierto'); $('b-generacion').focus(); }, 600);
   }
@@ -202,6 +208,22 @@
     if (!ruta) { anunciar('No hay camino por agua hasta ahí.'); return; }
     cola = ruta; seguirCola();
   });
+  // Modo revisión (?revision=1): el mapa sin humo y la lista de lo que hay, con su fuente y su estado.
+  function pintarRevision() {
+    let panel = $('revision');
+    if (!panel) {
+      panel = document.createElement('aside'); panel.id = 'revision'; panel.setAttribute('aria-label', 'Revisión de los datos del territorio');
+      panel.style.cssText = 'position:fixed;right:8px;top:96px;bottom:120px;width:min(380px,92vw);overflow:auto;z-index:5;background:rgba(11,16,21,.92);color:#e7ecea;padding:12px 14px;border-radius:12px;font-size:14px;line-height:1.4';
+      document.body.appendChild(panel);
+    }
+    const E = TDH_ELEMENTOS.ELEMENTOS, d = TDH_DESTINOS.DESTINOS[partida.estado.destino.id];
+    const cuenta = {};
+    for (const o of partida.estado.objetos) if (o.elemento && o.id === (E[o.elemento] || {}).dibujo) cuenta[o.elemento] = (cuenta[o.elemento] || 0) + 1;
+    const fila = (titulo, x) => '<p style="margin:0 0 10px"><b>' + titulo + '</b> · ' + x.estado + '<br>' + x.dato + '<br><i>' + x.fuente + '</i></p>';
+    panel.innerHTML = '<h2 style="font-size:16px;margin:0 0 8px">Revisión del territorio</h2>' +
+      (d ? fila('Destino: ' + d.nombre, d) : '') +
+      TDH_PUEBLOS.PUEBLOS[partida.estado.pueblo].elementos.map((id) => fila(E[id].nombre + ' (' + (cuenta[id] || 0) + ' en el mapa)', E[id])).join('');
+  }
   addEventListener('resize', () => ajustar());
 
   nueva();

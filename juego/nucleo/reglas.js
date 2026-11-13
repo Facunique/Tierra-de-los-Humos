@@ -27,15 +27,13 @@
     GASTO_VIENTO_HONDO: 1,        // extra con viento en el canal hondo (~)
     GASTO_LLUVIA: 1,              // extra con lluvia
     GASTO_NOCHE: 1,               // extra de noche: el frío
-    AHORRO_CHOZA: 1,              // menos gasto con una choza cerca (carta «choza»)
-    DISTANCIA_CHOZA: 2,           // «cerca» = a esta distancia o menos, en casillas
+    // Lo que ahorra estar cerca de una choza está en su elemento (territorio/elementos.js, `cerca`).
 
     // ── Recursos ──────────────────────────────────────────────────────────
-    LENA_INICIAL: 1,
-    LENA_POR_ATADO: 2,            // cada pegatina de leña que se junta (el mapa es el doble de ancho que el tablero de mesa)
-    LENA_MAX: 5,
-    AVIVAR: 6,                    // energía que suma una leña (en la mesa, 5)
-    COMIDA_MAX: 5,
+    // Cuánto suma cada cosa que se junta está en su elemento (territorio/elementos.js, `efecto`).
+    RECURSOS_INICIALES: { lena: 1, comida: 0, pirita: 0 },
+    RECURSOS_MAX: { lena: 5, comida: 5, pirita: 1 },   // con el máximo, lo que se junta queda en el mapa
+    AVIVAR: 6,                    // energía que suma una leña (en la mesa, 5; el mapa es el doble de ancho que el tablero)
     COMER_AL_ACAMPAR: 3,          // energía que suma comer al pasar la noche
     PIRITA_REENCIENDE: 4,         // energía con la que vuelve el fuego (fuego 1)
 

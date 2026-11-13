@@ -9,6 +9,11 @@
  *   TDH_AZAR.entero(al, 3, 7)   // entero entre 3 y 7, incluidos
  *   TDH_AZAR.elegir(al, ['a', 'b'])
  *   TDH_AZAR.ponderado(al, { calma: 2, viento: 1 })   // elige una clave según su peso
+ *   TDH_AZAR.derivar(semilla, 'clima')   // una semilla propia para cada sistema
+ *
+ * Cada sistema (terreno, objetos, fauna, clima) usa su propia secuencia, sacada
+ * de la semilla del viaje con derivar(). Así, cambiar los datos de un sistema no
+ * cambia los demás.
  *
  * Es el mismo generador que usa la partida falsa (mulberry32).
  * Sin DOM: anda en el navegador (global TDH_AZAR) y en Node (require).
@@ -26,6 +31,24 @@
       t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
       return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
+  }
+
+  /**
+   * Semilla derivada: una por cada sistema y cada tramo, para que agregar algo en
+   * un sistema no cambie los demás (por ejemplo, sumar un elemento a los datos no
+   * mueve las costas). Mismo resultado en todos los navegadores y en Node.
+   *   TDH_AZAR.derivar(semilla, 'terreno', tramo)
+   * @param {number} semilla
+   * @param {...(string|number)} partes
+   * @returns {number}
+   */
+  function derivar(semilla, ...partes) {
+    // FNV-1a de 32 bits sobre el texto «semilla|parte|parte…», mezclado al final.
+    const texto = [semilla >>> 0, ...partes].join('|');
+    let h = 0x811c9dc5;
+    for (let i = 0; i < texto.length; i++) { h ^= texto.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+    h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b); h ^= h >>> 13;
+    return h >>> 0;
   }
 
   const entero = (al, min, max) => min + Math.floor(al() * (max - min + 1));
@@ -47,7 +70,7 @@
     return l;
   }
 
-  const api = { crear, entero, elegir, ponderado, mezclar };
+  const api = { crear, derivar, entero, elegir, ponderado, mezclar };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else raiz.TDH_AZAR = api;
 })(typeof window !== 'undefined' ? window : globalThis);

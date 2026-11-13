@@ -42,7 +42,7 @@ function cuidadoso(p, maximo) {
       if (ruta && ruta.length > 6) ruta = null;
     }
     if (!ruta) {
-      const utiles = e.objetos.filter((o) => o.junta && e.explorado(o.x, o.y) && (o.junta !== 'lena' || e.recursos.lena < R.LENA_MAX));
+      const utiles = e.objetos.filter((o) => o.junta && e.explorado(o.x, o.y) && (o.junta !== 'lena' || e.recursos.lena < R.RECURSOS_MAX.lena));
       if (utiles.length) {
         ruta = MAPA.camino(e.mapa, c, (x, y) => utiles.some((o) => cerca(o, x, y)));
         if (ruta && ruta.length > 6) ruta = null;
