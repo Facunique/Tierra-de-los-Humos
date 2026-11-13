@@ -1,9 +1,9 @@
 # Primer avance documentado · 14/11/2026
 
-> **Borrador** preparado por la Persona D el 12/11. Cada persona completa lo marcado con ✏️ el 14/11 antes de entregar. Lo que no esté hecho se dice tal cual: mostrar el estado real suma más que inflarlo.
+> **Borrador** preparado por la Persona D el 12/11 y puesto al día el 13/11 con lo que hay en el repositorio. Cada persona revisa su parte y completa lo marcado con ✏️ el 14/11 antes de entregar. Lo que no esté hecho se dice tal cual: mostrar el estado real suma más que inflarlo.
 
 **Equipo:** Tierra de los Humos · **Eje:** 04, Memoria, Cultura e Innovación Comunitaria
-**Repositorio:** ✏️ enlace · **Prototipo en línea:** ✏️ enlace de GitHub Pages
+**Repositorio:** [github.com/Facunique/Tierra-de-los-Humos](https://github.com/Facunique/Tierra-de-los-Humos) · **En línea:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/)
 
 ![Tierra de los Humos](../arte/logo/compartir.png)
 
@@ -15,26 +15,34 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 
 ### Diseño y documentación
 - Concepto del juego ([`docs/01-concepto.md`](../docs/01-concepto.md)) y guía de la hackatón ([`docs/00-guia-hackathon.md`](../docs/00-guia-hackathon.md)).
-- Memoria de decisiones del equipo ([`equipo/memory.md`](memory.md)).
-- ✏️ Alcance del MVP (`docs/02-alcance-mvp.md`).
+- Memoria de decisiones del equipo ([`equipo/memory.md`](memory.md)) y reparto de tareas con cronograma ([`equipo/tareas.md`](tareas.md)).
+- ✏️ Alcance del MVP (`docs/02-alcance-mvp.md`): todavía no está escrito.
 
 ### Consulta y contenido cultural (Persona C)
-- ✏️ Con quién nos contactamos y cuándo (sin datos personales). Estado de cada contacto.
-- ✏️ Qué nos respondieron y qué cambiamos por eso.
-- ✏️ Cuántas cartas de saber hay escritas y verificadas, y con qué fuentes.
+- **Reunión en persona con un referente de la comunidad yagán, el 14/11 a las 11:00.** Llevamos una hoja con el juego y 13 preguntas: si se puede jugar «como» una familia yagán, nombres, cómo se ve, el destino del viaje y permisos ([`reunion-14-11/hoja-A4.pdf`](reunion-14-11/hoja-A4.pdf)). El registro va en [`comunicaciones.md`](comunicaciones.md). Hasta que lo autorice, figura solo por su rol.
+- ✏️ Qué nos respondió y qué cambiamos por eso (completar el mismo 14/11).
+- **9 cartas de saber en borrador** ([`datos/saberes.js`](../datos/saberes.js)), todas con fuente y página: Cooper (1946), «The Yahgan», *Handbook of South American Indians*. Cada carta separa el dato del recurso de juego y tiene texto alternativo. ✏️ Cuántas revisó la Persona C.
 
 ### Programación (Personas A y B)
-- ✏️ Stack elegido y por qué.
-- ✏️ Qué se puede jugar hoy: mapa, turnos, fuego, recursos, victoria y derrota, carta de saber.
-- ✏️ Deploy en GitHub Pages.
-- ✏️ Captura o GIF del prototipo.
+- **Stack decidido:** HTML, CSS y JavaScript sin build, con Canvas 2D y sin librerías externas. Abre con doble clic y sin internet, pesa poco para el celular y reusa el motor de dibujo y el sonido que ya estaban ([`memory.md`](memory.md#decisiones)).
+- **Publicado en GitHub Pages:** la pantalla de título, con luz real de Ushuaia, sonido y alto contraste.
+- **Núcleo del juego** (Persona A, [PR 10](https://github.com/Facunique/Tierra-de-los-Humos/pull/10), en revisión): se juega un viaje de punta a punta en `pruebas/nucleo.html`.
+  - Mapa al azar en cada partida, con humo sobre lo no explorado.
+  - Fuego, leña, comida, pirita, clima, día y noche, y acampar en el cachiyuyo.
+  - Cartas de saber, victoria y derrota, y herencia entre generaciones.
+  - Los datos del territorio están aparte del código, cada uno con su fuente.
+  - 49 pruebas automáticas. Un jugador automático que junta y acampa llega al destino el 84 % de las veces; uno que no junta nada no llega nunca.
+- **Interfaz** (Persona B): pantalla de carta de saber con la fuente siempre visible y lectura en voz alta, probada con una partida de prueba ([`pruebas/carta.html`](../pruebas/carta.html)). Pruebas que revisan que cada carta tenga fuente, texto alternativo e identificador.
+- ✏️ Falta conectar el núcleo con la interfaz en el `index.html` publicado (A y B).
+
+![El núcleo del juego: la canoa con su fuego rema por el canal, con una playa, el bosque, leña y pescado para juntar, y el humo sobre lo no explorado](reunion-14-11/viaje.jpg)
 
 ### Arte y sonido (Persona D)
 - **Dirección de arte con investigación del territorio** ([`docs/04-direccion-de-arte.md`](../docs/04-direccion-de-arte.md)): qué se ve en los canales (guindo, lenga, turbales, playas de canto rodado, fauna) y qué sabemos de la vida yagán que el arte necesita (la canoa de corteza, el fuego en el centro, la choza, los conchales), con fuentes.
 - **Tres propuestas de estilo** sobre la misma escena ([`arte/propuestas/index.html`](../arte/propuestas/index.html)). El equipo eligió **Corteza**: paisaje de papel recortado, con lo que se junta en pixel art.
 - **Motor de dibujo Corteza listo para el juego** ([`arte/corteza/`](../arte/corteza/index.html)): luz del fuego en anillos, humo sobre lo no explorado, estaciones, clima, cámara para celular, cartas de saber y códice.
 - **Auditoría histórica del arte** ([`docs/05-rigor-historico.md`](../docs/05-rigor-historico.md)): cada elemento dibujado, contrastado con el *Handbook of South American Indians* (Cooper, 1946), con página. Se corrigieron la canoa (costuras, fogón y lugares de cada persona) y las chozas (con la puerta hacia el mar), y se sumaron los hongos de árbol y la pirita.
-- **Paleta de 42 colores** del paisaje de los canales, con contraste AAA en todos los textos.
+- **Paleta de 42 colores** del paisaje de los canales, con contraste AAA en el texto principal y AA como mínimo en etiquetas y notas.
 - **48 sprites propios** (terreno, canoa con fuego animado, choza, conchal, fauna, fuego del HUD en 5 niveles, íconos) en cuatro estaciones, con su atlas para el motor.
 - **Sonido ambiente generado por código** (viento, mar, lluvia, fuego) y efectos, con subtítulos para accesibilidad. Cambia según el lugar: el bosque, la playa y el canal abierto suenan distinto. Sin archivos de audio ni licencias de terceros.
 - **Luz real de Ushuaia:** el juego calcula, sin internet, dónde está el sol en el canal Beagle y empieza con esa luz y esa estación.
@@ -51,22 +59,25 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 | Personajes sin nombres propios y como siluetas, hasta consultar a la comunidad. | Respeto: no usar nombres ni representar personas sin permiso. |
 | Los peligros son el clima y el territorio. Sin violencia ni seres ceremoniales. | Líneas rojas del eje y de las bases. |
 | Sin música inventada: el sonido es el territorio y el fuego. | Los cantos son patrimonio de la comunidad. |
-| ✏️ Stack. | ✏️ |
+| Stack: JavaScript sin build, en GitHub Pages. | Anda con doble clic y sin internet, sin configurar nada, y reusa lo que ya existía. |
+| Los datos del territorio y de las cartas van aparte del código. | Así la investigación corrige contenido sin programar. |
+| El referente de la comunidad figura solo por su rol hasta que autorice su nombre. | El repositorio es público. |
 | Estilo visual: Corteza (papel recortado y pegatinas pixel). | Más sereno, cuenta mejor el territorio, y se lee bien en el celular. |
 | Todo lo dibujado tiene que coincidir con las fuentes etnográficas. | Rigor (20 puntos) y respeto: auditoría en `docs/05`. |
 
 ## 4. Uso de inteligencia artificial
 
-Declarado en el README (cláusula 7.4). ✏️ Revisar que esté al día.
+Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la IA, a pedido de quién y quién decidió. ✏️ Revisar que esté al día el 14/11.
 
 ## 5. Próximos pasos (15 al 17/11)
 
-- ✏️ Programación: pulido, balance, códice, versión sin internet.
-- ✏️ Contenido: cartas restantes, revisión cultural final.
-- Arte y sonido: ilustraciones de las cartas, arte del destino del viaje (por ejemplo, la ballena varada), integración del motor Corteza y del sonido, cotejo con el libro de Goodall.
-- Comunicación: README completo, video de 3 minutos, pitch de 5 minutos con ensayo.
+- **Programación:** conectar el núcleo con la interfaz; herencia guardada en el navegador; códice; pulido y balance jugando con personas; versión sin internet para la demo. ✏️ A y B confirman.
+- **Contenido:** aplicar lo que diga la comunidad, elegir el destino del viaje, revisar las cartas y escribir las que falten, y la revisión cultural final. ✏️ C confirma.
+- **Arte y sonido:** ajustar el arte con lo que diga la comunidad; integrar el sonido según el lugar en el juego; resolver las tres fuentes pendientes del territorio (leña, conchales y tonina); cotejo con el libro de Goodall.
+- **Comunicación:** README completo con capturas del juego real, video de 3 minutos (16/11) y pitch de 5 minutos con ensayo.
 
 ## 6. Dificultades y pedidos a la mentoría
 
-- ✏️ Por ejemplo: si la comunidad no respondió, pedir ayuda para el contacto o alternativas (museo, CADIC).
-- ✏️ Dudas técnicas.
+- ✏️ Según cómo salga la reunión: si hace falta, pedir ayuda para seguir la consulta (por ejemplo, con el Museo Marítimo o el CADIC).
+- **El destino del viaje:** hay tres opciones documentadas (Cooper, 1946, p. 94-99). Preguntar a la mentoría si conviene una sola bien hecha o dejar las tres.
+- ✏️ Dudas técnicas de A y B.

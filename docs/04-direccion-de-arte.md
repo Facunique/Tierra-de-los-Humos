@@ -197,6 +197,7 @@ El pixel art de la primera ronda (propuesta A) queda como **capa secundaria**: s
 |---|---|---|
 | Tinta sobre papel | 12,5:1 | AAA |
 | Ocre sobre papel | 5,7:1 | AA |
+| Gris de notas y pies sobre papel (`#5b524a`) | 6,1:1 | AA |
 | Papel sobre noche | 15,2:1 | AAA |
 | Etiqueta «Dato» | 7,9:1 | AAA |
 | Etiqueta «En el juego» | 11,2:1 | AAA |
@@ -214,7 +215,7 @@ Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 18 KB): vie
 
 ## 13. Accesibilidad
 
-- [x] Contraste AAA en los textos.
+- [x] Contraste AAA en el texto principal y AA como mínimo en etiquetas y notas (ver la tabla de la sección 10).
 - [x] Costa con espuma, para no depender del color.
 - [x] Simulación de daltonismo en la vitrina.
 - [x] El fuego siempre con su número al lado.
