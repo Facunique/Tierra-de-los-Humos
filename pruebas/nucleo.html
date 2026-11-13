@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prueba · Núcleo del viaje</title>
+<meta name="description" content="Página de prueba del núcleo: un viaje entero con el mapa generado al azar, el fuego, los recursos, el clima y las cartas de saber.">
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<link rel="stylesheet" href="../arte/corteza/carta.css">
+<link rel="stylesheet" href="../juego/interfaz/juego.css">
+<link rel="icon" href="../arte/logo/favicon-32.png" type="image/png">
+<style>
+  /* Solo para esta página de prueba. La interfaz del juego es de la Persona B. */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: #0b1015; color: #e7ecea; font: 17px/1.5 "Atkinson Hyperlegible", system-ui, sans-serif; overflow: hidden; }
+  :focus-visible { outline: 3px solid #ffd47c; outline-offset: 3px; }
+  .marco { position: fixed; inset: 0; display: flex; flex-direction: column; }
+  .aviso-prueba { margin: 0; padding: 4px 12px; background: #973a25; color: #eee5d0; font-size: 13px; text-align: center; }
+  .hud-corteza { flex-wrap: wrap; gap: 6px; padding: 6px 8px; }
+  .hud-corteza .ficha { font-size: 14px; }
+  .mapa { flex: 1; min-height: 0; display: grid; place-items: center; background: #2d4553; overflow: hidden; }
+  #mapa { max-width: 100%; max-height: 100%; cursor: pointer; touch-action: manipulation; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: #1d2e38; }
+  .cruz { display: grid; grid-template-columns: repeat(3, 48px); grid-template-rows: repeat(2, 44px); gap: 6px; }
+  .cruz .boton-papel { min-height: 44px; padding: 0; font-size: 20px; }
+  .acciones > .boton-papel { font-size: 15px; padding: 10px 12px; min-height: 44px; }
+  .boton-papel[disabled] { opacity: .5; cursor: not-allowed; }
+  .anuncio { position: fixed; z-index: 4; left: 50%; top: 104px; transform: translateX(-50%); background: rgba(11,16,21,.88); color: #eef2ef; padding: 6px 14px; border-radius: 10px; font-size: 15px; max-width: 90%; text-align: center; pointer-events: none; }
+  .anuncio:empty { display: none; }
+  .fin { position: fixed; inset: 0; z-index: 20; display: none; place-items: center; padding: 16px; background: rgba(11,16,21,.78); }
+  .fin.abierto { display: grid; }
+  .fin .papel { width: min(100%, 440px); }
+  .fin h2 { margin: 0 0 8px; }
+  .fin ul { margin: 0 0 12px; padding-left: 20px; }
+  .fin .botones { display: flex; flex-wrap: wrap; gap: 8px; }
+  .fin .boton-papel { flex: 1 1 180px; }
+</style>
+</head>
+<body>
+<div class="marco">
+  <p class="aviso-prueba">Prueba del núcleo (juego/nucleo/). <span id="semilla"></span></p>
+  <div class="hud-corteza" id="hud" aria-label="Estado del viaje"></div>
+  <main class="mapa"><canvas id="mapa" role="img" aria-label="Mapa del viaje. Tocá el agua para remar hasta ahí, o usá las flechas."></canvas></main>
+  <div class="acciones">
+    <div class="cruz" role="group" aria-label="Remar">
+      <span></span><button class="boton-papel" data-remar="0,-1" aria-label="Remar hacia arriba">↑</button><span></span>
+      <button class="boton-papel" data-remar="-1,0" aria-label="Remar a la izquierda">←</button><button class="boton-papel" data-remar="0,1" aria-label="Remar hacia abajo">↓</button><button class="boton-papel" data-remar="1,0" aria-label="Remar a la derecha">→</button>
+    </div>
+    <button class="boton-papel" id="a-juntar" type="button">Juntar</button>
+    <button class="boton-papel" id="a-avivar" type="button">Avivar el fuego</button>
+    <button class="boton-papel" id="a-amarrar" type="button">Amarrar y acampar</button>
+    <button class="boton-papel" id="b-otra" type="button">Otro viaje</button>
+  </div>
+</div>
+<div class="anuncio" id="anuncio" role="status" aria-live="polite"></div>
+<div class="fin" id="fin" role="dialog" aria-modal="true" aria-labelledby="fin-titulo">
+  <article class="papel">
+    <h2 id="fin-titulo"></h2>
+    <p id="fin-texto"></p>
+    <ul id="fin-lista"></ul>
+    <div class="botones"><button class="boton-papel boton-papel--fuego" id="b-generacion" type="button">Empezar la generación siguiente</button></div>
+  </article>
+</div>
+
+<script src="../arte/fuente/arte.js"></script>
+<script src="../arte/corteza/corteza.js"></script>
+<script src="../arte/corteza/transiciones.js"></script>
+<script src="../datos/saberes.js"></script>
+<script src="../sonido/voz.js"></script>
+<script src="../juego/interfaz/carta.js"></script>
+<script src="../juego/nucleo/azar.js"></script>
+<script src="../juego/nucleo/reglas.js"></script>
+<script src="../juego/nucleo/mapa.js"></script>
+<script src="../juego/nucleo/partida.js"></script>
+<script>
+(function () {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const ARTE = TDH_ARTE, CZ = TDH_CORTEZA, { SABERES, ORDEN } = TDH_SABERES;
+  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const params = new URLSearchParams(location.search);
+  let semilla = Number(params.get('semilla')) || Math.floor(Math.random() * 1e6);
+  const mapaFijo = params.get('mapa') === 'fijo';
+
+  // La herencia vive solo en esta página (la de verdad, con localStorage, es de la Persona B).
+  const linaje = new Set();
+  let generacion = 1;
+  let partida, motor, vista = null, cola = [], ocupado = false;
+
+  const NOMBRES = { lena: 'leña', mejillones: 'mejillones', pescado: 'pescado', hongos: 'hongos', pirita: 'pirita', choza: 'el saber de la choza', corteza: 'corteza de guindo' };
+  const CLIMA = { calma: ['icono-calma', 'Calma'], viento: ['icono-viento', 'Viento'], lluvia: ['icono-lluvia', 'Lluvia'] };
+  const HORA = { dia: 'Día', tarde: 'Tarde', noche: 'Noche' };
+
+  function nueva() {
+    partida = TDH_PARTIDA.nueva({ semilla, saberes: ORDEN.slice(), heredados: [...linaje], mapa: mapaFijo ? 'fijo' : undefined });
+    motor = CZ.crear($('mapa'), { celda: 48 });
+    cola = [];
+    $('semilla').textContent = 'Semilla ' + semilla + (partida.estado.mapaFijo ? ' · mapa fijo' : '') + ' · generación ' + generacion + '.';
+    ajustar(); pintar();
+    anunciar('Llevá el fuego hasta la ballena varada, al este.');
+  }
+  function escena() { motor.escena(Object.assign({}, partida.estado, { vista })); }
+  function ajustar() {
+    const caja = document.querySelector('.mapa').getBoundingClientRect(), M = partida.estado.mapa;
+    const a = Math.min(M[0].length, caja.width < 760 ? 9 : 15);
+    const h = Math.min(M.length, Math.max(5, Math.round(a * caja.height / caja.width)));
+    const c = partida.estado.canoa;
+    vista = { x: Math.max(0, Math.min(M[0].length - a, c.x + 0.5 - a / 2)), y: Math.max(0, Math.min(M.length - h, c.y + 0.5 - h / 2)), ancho: a, alto: h };
+    escena();
+    motor.ajustar(Math.max(24, Math.floor(Math.min(caja.width / a, caja.height / h))));
+    $('mapa').style.width = (a * motor.celda) + 'px'; $('mapa').style.height = (h * motor.celda) + 'px';
+  }
+  function ficha(icono, texto, clase) {
+    const f = document.createElement('span'); f.className = 'ficha' + (clase ? ' ' + clase : '');
+    if (icono) f.appendChild(ARTE.aCanvas(icono, 0, 'verano', 1));
+    f.appendChild(document.createTextNode(texto)); return f;
+  }
+  function pintar() {
+    const e = partida.estado, h = $('hud'); h.innerHTML = '';
+    h.appendChild(ficha('icono-fuego', 'Fuego ' + e.canoa.fuego + ' de 4', 'ficha--fuego' + (e.canoa.fuego <= 1 ? ' ficha--alerta' : '')));
+    h.appendChild(ficha('icono-lena', 'Leña ' + e.recursos.lena));
+    h.appendChild(ficha('icono-comida', 'Comida ' + e.recursos.comida));
+    if (e.recursos.pirita) h.appendChild(ficha('icono-pirita', 'Pirita'));
+    h.appendChild(ficha(CLIMA[e.clima][0], CLIMA[e.clima][1]));
+    h.appendChild(ficha(null, HORA[e.hora]));
+    h.appendChild(ficha('icono-generacion', 'Gen. ' + generacion));
+    const p = partida.puede();
+    $('a-juntar').disabled = !p.juntar; $('a-juntar').textContent = p.juntar ? 'Juntar ' + NOMBRES[p.juntar] : 'Juntar';
+    $('a-avivar').disabled = !p.avivar;
+    $('a-amarrar').disabled = !p.amarrar;
+  }
+  function anunciar(t) { $('anuncio').textContent = t; clearTimeout(anunciar.id); anunciar.id = setTimeout(() => ($('anuncio').textContent = ''), 3200); }
+
+  // Los textos los pone la interfaz: el núcleo solo dice qué pasó.
+  async function atender(eventos) {
+    for (const ev of eventos) {
+      if (ev.tipo === 'fuego' && ev.despues < ev.antes) anunciar(ev.despues === 0 ? 'El fuego se apagó.' : 'El fuego baja a ' + ev.despues + (ev.causas && ev.causas.length ? ' (' + ev.causas.filter((c) => c !== 'choza').join(', ') + ')' : '') + '.');
+      if (ev.tipo === 'avivo') anunciar('El fuego se aviva.');
+      if (ev.tipo === 'junto') anunciar('Juntaste ' + NOMBRES[ev.que] + '.');
+      if (ev.tipo === 'clima') anunciar({ calma: 'El tiempo se calma.', viento: 'Se levanta viento.', lluvia: 'Empieza a llover.' }[ev.clima]);
+      if (ev.tipo === 'hora') anunciar({ dia: 'Amanece.', tarde: 'Cae la tarde.', noche: 'Se hace de noche: el frío gasta el fuego.' }[ev.hora]);
+      if (ev.tipo === 'reencendido') anunciar('Con la pirita, el fuego vuelve a prender.');
+      if (ev.tipo === 'acampe') anunciar('Amarraron la canoa en el cachiyuyo y pasaron la noche' + (ev.comio ? ' comiendo lo que juntaron.' : '.'));
+      if (ev.tipo === 'saber' && SABERES[ev.id]) {
+        cola = [];
+        await TDH_CARTA.mostrar(SABERES[ev.id], { nueva: !linaje.has(ev.id) });
+      }
+      if (ev.tipo === 'fin') { cola = []; terminar(ev.gano); }
+    }
+  }
+  async function hacer(accion) {
+    if (ocupado || TDH_CARTA.abierta() || partida.terminada) return false;
+    const ev = partida.hacer(accion);
+    if (!ev.length) { if (accion.tipo === 'remar') anunciar('La canoa solo va por el agua.'); return false; }
+    if (accion.tipo === 'remar') { partida.estado.canoa.remando = true; setTimeout(() => (partida.estado.canoa.remando = false), 400); }
+    ocupado = true;
+    ajustar(); pintar();
+    await atender(ev);
+    ocupado = false;
+    pintar();
+    return true;
+  }
+  // Tocar lejos: rema casilla por casilla por el agua. Se corta si aparece una carta o termina el viaje.
+  async function seguirCola() {
+    while (cola.length && !partida.terminada) {
+      const p = cola.shift(), c = partida.estado.canoa;
+      if (!(await hacer({ tipo: 'remar', dx: p.x - c.x, dy: p.y - c.y }))) { cola = []; break; }
+      await new Promise((r) => setTimeout(r, reducido ? 0 : 160));
+    }
+  }
+
+  function terminar(gano) {
+    const e = partida.estado;
+    for (const id of e.aprendidos) linaje.add(id);
+    $('fin-titulo').textContent = gano ? 'Llegaron a la ballena varada' : 'El viaje termina acá';
+    $('fin-texto').textContent = gano
+      ? 'Llegaron con el fuego encendido. Otras familias ven el humo y se acercan (Cooper, 1946, p. 99).'
+      : 'El fuego se apagó después de ' + e.pasos + ' casillas. Lo aprendido pasa a la generación siguiente.';
+    $('fin-lista').innerHTML = e.aprendidos.length ? e.aprendidos.map((k) => '<li>' + SABERES[k].titulo + '</li>').join('') : '<li>Esta vez no aprendieron nada nuevo.</li>';
+    setTimeout(() => { $('fin').classList.add('abierto'); $('b-generacion').focus(); }, 600);
+  }
+  $('b-generacion').addEventListener('click', () => { $('fin').classList.remove('abierto'); generacion++; semilla++; nueva(); });
+  $('b-otra').addEventListener('click', () => { semilla++; nueva(); });
+  $('a-juntar').addEventListener('click', () => hacer({ tipo: 'juntar' }));
+  $('a-avivar').addEventListener('click', () => hacer({ tipo: 'avivar' }));
+  $('a-amarrar').addEventListener('click', () => hacer({ tipo: 'amarrar' }));
+
+  document.addEventListener('keydown', (e) => {
+    if (TDH_CARTA.abierta() || $('fin').classList.contains('abierto')) return;
+    const t = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0], w: [0, -1], s: [0, 1], a: [-1, 0], d: [1, 0] }[e.key];
+    if (t) { e.preventDefault(); cola = []; hacer({ tipo: 'remar', dx: t[0], dy: t[1] }); return; }
+    if (e.key === 'Enter' || e.key === 'j') { e.preventDefault(); hacer({ tipo: 'juntar' }); }
+    if (e.key === 'f') hacer({ tipo: 'avivar' });
+    if (e.key === 'm') hacer({ tipo: 'amarrar' });
+  });
+  document.querySelectorAll('[data-remar]').forEach((b) => b.addEventListener('click', () => { const [dx, dy] = b.dataset.remar.split(',').map(Number); cola = []; hacer({ tipo: 'remar', dx, dy }); }));
+  $('mapa').addEventListener('click', (e) => {
+    if (ocupado || partida.terminada) return;
+    const c = motor.casillaEn(e.clientX, e.clientY);
+    const ruta = partida.camino(c.x, c.y);
+    if (!ruta) { anunciar('No hay camino por agua hasta ahí.'); return; }
+    cola = ruta; seguirCola();
+  });
+  addEventListener('resize', () => ajustar());
+
+  nueva();
+  (function cuadro(ms) { motor.dibujar(reducido ? 2 : ms / 1000); requestAnimationFrame(cuadro); })(0);
+})();
+</script>
+</body>
+</html>
