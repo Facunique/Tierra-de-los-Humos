@@ -27,7 +27,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 ## Persona A: Programación núcleo (Mati)
 
 - [x] Decidir el stack con B: JavaScript sin build (13/11).
-- [ ] Acordar con B la estructura de carpetas del juego, para no pisarse. **Propuesta en `memory.md`, *Por decidir*:** el contrato de la partida falsa, ampliado sin romperlo.
+- [ ] Acordar con B la estructura de carpetas del juego, para no pisarse. **Propuesta en [`juego/nucleo/README.md`](../juego/nucleo/README.md):** el contrato de la partida falsa, ampliado sin romperlo.
 - [x] Motor por turnos con grilla (13/11, `juego/nucleo/partida.js`). Dibujar con el motor Corteza (`TDH_CORTEZA.crear(canvas).escena({...})`), no desde cero. Ver `docs/04-direccion-de-arte.md`, sección 6.
 - [x] Mapa de agua e islas generado al azar (13/11, `juego/nucleo/mapa.js`), que se revela a medida que se avanza (el humo del motor tapa lo no explorado).
 - [x] Sistema del fuego: se gasta con frío (de noche), viento y lluvia (13/11).
@@ -36,6 +36,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [ ] Ciclo completo de una partida: explorar, encontrar, volver.
 - [x] **Meta 14/11:** una partida jugable de punta a punta con una carta de saber al final. Se prueba en `pruebas/nucleo.html` (13/11). Falta que B lo conecte en la interfaz del juego.
 - [ ] Pulido y balance jugando con personas (los bots de `pruebas/bots.cjs` ya miden que se pueda ganar).
+- [x] Datos del territorio aparte del código (13/11, `juego/nucleo/territorio/`): qué hay en el mapa, dónde va, qué hace, de qué fuente sale y el destino. Se cambian sin programar.
 
 ## Persona B: Programación de interfaz, contenido y deploy (Facu)
 
