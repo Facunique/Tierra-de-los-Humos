@@ -10,6 +10,7 @@
  *   Según el lugar:       bosque (hojas que suenan con el viento y alguna rama que cruje)
  *                         playa (después de cada ola, la resaca arrastra piedritas y valvas)
  *   Efectos (una vez):    remo · ola · lena · comida · saber · apagado · generacion
+ *                         junto · piedra · chispa · acampe · llegada · clima · hora
  *
  * Qué NO suena, a propósito: música o cantos "indígenas" inventados. Los cantos
  * yaganes son patrimonio de la comunidad; no se imitan. Tampoco hay voces.
@@ -20,6 +21,8 @@
  *   boton.onclick = () => sonido.iniciar();          // el navegador exige un toque/click primero
  *   sonido.ambiente({ viento: 0.3, mar: 0.6, lluvia: 0, fuego: 3 });   // valores de 0 a 1 (fuego de 0 a 4)
  *   sonido.efecto('remo');
+ *   sonido.efecto('junto', 'Juntaste leña');           // el segundo dato cambia el subtítulo
+ *   // Para conectarlo con la partida del núcleo, ver sonido/juego.js.
  *
  *   // El lugar: cuánto bosque, playa y mar abierto hay cerca de la canoa (0 a 1)
  *   const lugar = TDH_SONIDO.lugarDe(mapa, canoa.x, canoa.y);   // mapa: filas de letras del motor Corteza
@@ -228,6 +231,38 @@
         tono(t + 0.05, 70, 0.9, 0.3, 'sine');
         return 'El fuego se apagó';
       },
+      junto(t) { // algo que se levanta de la playa o del bosque: roce y un golpe chico
+        rafagaRuido(t, 0.22, { tipo: 'rosa', desde: 1800, hasta: 700, q: 0.9, vol: 0.12, ataque: 0.02 });
+        tono(t + 0.12, 220, 0.12, 0.12, 'triangle');
+        return 'Juntaste algo';
+      },
+      piedra(t) { // dos piedras que chocan
+        [0, 0.11].forEach((d) => { rafagaRuido(t + d, 0.03, { desde: 4200, q: 9, vol: 0.22 }); tono(t + d, 1900 + Math.random() * 300, 0.06, 0.05, 'square'); });
+        return 'Juntaste una piedra';
+      },
+      chispa(t) { // la pirita contra el pedernal y el fuego que vuelve
+        [0, 0.09, 0.2].forEach((d) => rafagaRuido(t + d, 0.02, { desde: 6000, q: 10, vol: 0.2 }));
+        rafagaRuido(t + 0.3, 1.2, { tipo: 'rosa', filtroTipo: 'bandpass', desde: 600, hasta: 1400, q: 0.7, vol: 0.12, ataque: 0.4 });
+        return 'La pirita vuelve a encender el fuego';
+      },
+      acampe(t) { // amarrar: la canoa se acomoda en el cachiyuyo
+        rafagaRuido(t, 1.4, { tipo: 'rosa', filtroTipo: 'lowpass', desde: 900, hasta: 250, q: 0.5, vol: 0.14, ataque: 0.3 });
+        tono(t + 0.5, 110, 1.2, 0.08, 'sine');
+        return 'Amarran la canoa y pasan la noche';
+      },
+      llegada(t) { // llegar al destino con el fuego encendido
+        [147, 196, 294].forEach((f, i) => tono(t + i * 0.18, f, 2.6, 0.08 / (i + 1), 'sine'));
+        EFECTOS.saber(t + 0.6);
+        return 'Llegaron con el fuego encendido';
+      },
+      clima(t) { // el tiempo cambia: una ráfaga que pasa
+        rafagaRuido(t, 1.6, { tipo: 'rosa', filtroTipo: 'bandpass', desde: 300, hasta: 1200, q: 0.8, vol: 0.12, ataque: 0.6 });
+        return 'Cambia el tiempo';
+      },
+      hora(t) { // cae la tarde o la noche: un tono grave y suave
+        tono(t, 98, 1.8, 0.06, 'sine'); tono(t + 0.05, 147, 1.6, 0.03, 'sine');
+        return 'Cambia la luz';
+      },
       generacion(t) { // comienzo de una nueva generación: un acorde grave que crece
         [98, 147, 196].forEach((f, i) => {
           const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = f;
@@ -263,10 +298,11 @@
       },
       /** Cambia el ambiente con transición suave. viento, mar, lluvia, bosque, playa: 0 a 1 · fuego: 0 a 4. */
       ambiente(valores) { Object.assign(objetivo, valores || {}); objetivo.fuego = Math.max(0, Math.min(4, Math.round(objetivo.fuego))); aplicarAmbiente(); },
-      /** Suena un efecto. Devuelve el texto de su subtítulo. */
-      efecto(nombre) {
+      /** Suena un efecto. Devuelve el texto de su subtítulo. `texto` (opcional) reemplaza el subtítulo. */
+      efecto(nombre, texto) {
         if (!iniciado || !EFECTOS[nombre]) return null;
-        const texto = EFECTOS[nombre](ahora() + 0.01);
+        const propio = EFECTOS[nombre](ahora() + 0.01);
+        texto = texto || propio;
         oyentes.forEach((fn) => fn(texto, nombre));
         return texto;
       },

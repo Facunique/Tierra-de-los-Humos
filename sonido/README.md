@@ -23,7 +23,9 @@ El sonido se **genera con código** en el navegador (Web Audio). No hay archivos
   sonido.ambiente(Object.assign({ viento: 0.4, lluvia: 0, fuego: 3 }, lugar));
 
   // 3. Efectos puntuales:
-  sonido.efecto('remo');       // también: ola, lena, comida, saber, apagado, generacion
+  sonido.efecto('remo');       // también: ola, lena, comida, saber, apagado, generacion,
+                               // junto, piedra, chispa, acampe, llegada, clima, hora
+  sonido.efecto('junto', 'Juntaste leña');   // el segundo dato cambia el subtítulo
 
   // 4. Subtítulos de sonido (accesibilidad): mostrar el texto en pantalla
   sonido.alSonar((texto) => mostrarSubtitulo(texto));  // "[Aprendiste un saber]"
@@ -45,6 +47,32 @@ Sugerencia de cuándo usar cada efecto:
 | `saber` | Al aparecer una carta de saber |
 | `apagado` | Cuando el fuego se apaga (fin del viaje) |
 | `generacion` | Al empezar el viaje de la siguiente generación |
+
+## Conectado a la partida
+
+[`juego.js`](juego.js) traduce lo que pasa en el juego a sonido. Lee el contrato del núcleo (`juego/nucleo/partida.js`, o la partida falsa de `pruebas/`): el estado da el ambiente y cada evento de `partida.hacer()` suena una vez, con su subtítulo.
+
+```js
+const oido = TDH_SONIDO_JUEGO.conectar(sonido, { saberes: TDH_SABERES.SABERES });
+const eventos = partida.hacer(accion);
+oido.eventos(eventos);          // efectos con subtítulo, en orden
+oido.estado(partida.estado);    // viento, lluvia, fuego y lugar
+oido.generacion();              // al empezar la generación siguiente
+```
+
+| Evento del núcleo | Suena | Subtítulo (ejemplo) |
+|---|---|---|
+| `remo` | remo | Remada |
+| `fuego` con viento en el canal | ola | Una ola golpea la canoa |
+| `junto` (comida / pirita / otra cosa) | comida / piedra / junto | Juntaste mejillones |
+| `avivo` | lena | Se agrega leña al fuego |
+| `saber` | saber | Aprendiste un saber: El fuego viaja en la canoa |
+| `reencendido` | chispa | La pirita vuelve a encender el fuego |
+| `acampe` | acampe | Amarran la canoa y pasan la noche |
+| `clima`, `hora` | clima, hora | Se levanta el viento · Cae la noche |
+| `fin` | llegada / apagado | Llegaron con el fuego encendido · El viento apagó el fuego |
+
+Se probó con 60 partidas del núcleo jugadas por los bots de la Persona A: todos los eventos tienen sonido y subtítulo. Las pruebas están en `pruebas/sonido-juego.test.cjs`. En [`demo.html`](demo.html), «Escuchar una partida» hace sonar una partida de prueba.
 
 ## Sonido según el lugar
 

@@ -20,8 +20,9 @@
   | `arte/corteza/transiciones.js` | Paso del fuego y aparición de carta | ver `docs/04`, sección 6 |
   | `arte/corteza/luz-real.js` | Hora y estación reales de Ushuaia | `TDH_LUZ_REAL.ahora()` → `{ hora, estacion, texto }` |
   | `sonido/ambiente.js` | Ambiente, efectos y sonido por lugar | `TDH_SONIDO.lugarDe(mapa, x, y)` |
+  | `sonido/juego.js` | Conecta el sonido con la partida: cada evento suena con su subtítulo | `TDH_SONIDO_JUEGO.conectar(sonido).eventos(partida.hacer(accion))` |
   | `sonido/voz.js` | Lee las cartas en voz alta | `TDH_VOZ.leerCarta(carta)` |
-  | `arte/postal/postal.js` | Postal del viaje en PNG | `TDH_POSTAL.dibujar(canvas, datos)` |
+  | `arte/postal/postal.js` | Postal del viaje en PNG | `TDH_POSTAL.dibujar(canvas, TDH_POSTAL.datosDe(partida.estado, { generacion, saberes }))` |
   | `datos/saberes.js` | Las 9 cartas, con fuente, página y texto alternativo (antes `arte/cartas/saberes-borrador.js`) | `TDH_SABERES.SABERES` |
 
 - **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md`, acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (ver *Por decidir*), cotejar el libro de Goodall.

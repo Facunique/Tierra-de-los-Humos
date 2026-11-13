@@ -56,6 +56,12 @@
     </div>
   </section>
 
+  <section aria-labelledby="t-partida">
+    <h2 id="t-partida">Una partida de prueba</h2>
+    <p style="margin:0 0 8px;font-size:14px">Rema sola una partida de prueba y la hace sonar con <code>sonido/juego.js</code>, el puente entre el núcleo del juego y el sonido: cada evento con su efecto y su subtítulo, y el ambiente según el lugar.</p>
+    <div class="botones"><button type="button" id="partida">Escuchar una partida</button><span class="estado" id="lugar" aria-live="polite"></span></div>
+  </section>
+
   <section aria-labelledby="t-ef">
     <h2 id="t-ef">Efectos</h2>
     <div class="botones" id="efectos"></div>
@@ -65,10 +71,14 @@
   </section>
 </main>
 <script src="ambiente.js"></script>
+<script src="juego.js"></script>
+<script src="../datos/saberes.js"></script>
+<script src="../pruebas/partida-falsa.js"></script>
 <script>
   const sonido = TDH_SONIDO.crear();
+  const oido = TDH_SONIDO_JUEGO.conectar(sonido, { saberes: TDH_SABERES.SABERES });
   const $ = (id) => document.getElementById(id);
-  const NOMBRES = { remo: 'Remar', ola: 'Ola', lena: 'Leña al fuego', comida: 'Mariscos', saber: 'Saber nuevo', apagado: 'Se apaga el fuego', generacion: 'Nueva generación' };
+  const NOMBRES = { remo: 'Remar', ola: 'Ola', lena: 'Leña al fuego', comida: 'Mariscos', saber: 'Saber nuevo', apagado: 'Se apaga el fuego', generacion: 'Nueva generación', junto: 'Juntar', piedra: 'Pirita', chispa: 'Volver a encender', acampe: 'Acampar', llegada: 'Llegada', clima: 'Cambia el tiempo', hora: 'Cae la noche' };
   function leer() { return { viento: $('viento').value / 100, mar: $('mar').value / 100, lluvia: $('lluvia').value / 100, fuego: Number($('fuego').value), bosque: $('bosque').value / 100, playa: $('playa').value / 100 }; }
   document.querySelectorAll('input[type=range]').forEach((r) => r.addEventListener('input', () => {
     r.nextElementSibling.textContent = r.value;
@@ -91,6 +101,21 @@
     const b = document.createElement('button'); b.type = 'button'; b.textContent = NOMBRES[n] || n;
     b.addEventListener('click', async () => { if (!sonido.activo) { await sonido.iniciar(); sonido.ambiente(leer()); $('estado').textContent = 'Sonando'; $('iniciar').textContent = 'Pausar'; } sonido.efecto(n); });
     $('efectos').appendChild(b);
+  });
+  // Partida de prueba: rema a la derecha y, si choca, prueba arriba o abajo.
+  let paso = null;
+  $('partida').addEventListener('click', async () => {
+    if (paso) { clearInterval(paso); paso = null; oido.callar(); $('partida').textContent = 'Escuchar una partida'; $('lugar').textContent = ''; return; }
+    await sonido.iniciar(); $('estado').textContent = 'Sonando'; $('iniciar').textContent = 'Pausar';
+    const p = TDH_PARTIDA.nueva({ semilla: Math.floor(Math.random() * 1000), saberes: TDH_SABERES.ORDEN });
+    oido.estado(p.estado); $('partida').textContent = 'Parar la partida';
+    paso = setInterval(() => {
+      if (p.terminada) { clearInterval(paso); paso = null; $('partida').textContent = 'Escuchar una partida'; return; }
+      const c = p.estado.canoa, x0 = c.x, y0 = c.y;
+      for (const [dx, dy] of [[1, 0], [0, -1], [0, 1]]) { const evs = p.hacer({ tipo: 'remar', dx, dy }); oido.eventos(evs); if (p.estado.canoa.x !== x0 || p.estado.canoa.y !== y0) break; }
+      const a = oido.estado(p.estado);
+      $('lugar').textContent = 'Bosque ' + Math.round(a.bosque * 100) + ' · Playa ' + Math.round(a.playa * 100) + ' · Mar ' + Math.round(a.mar * 100) + ' · Fuego ' + a.fuego + ' de 4';
+    }, 1400);
   });
   sonido.alSonar((texto) => {
     const s = document.createElement('span'); s.textContent = '[' + texto + ']';
