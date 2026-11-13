@@ -23,7 +23,7 @@ Las reglas completas entran en una página: [`reglas.html`](reglas.html).
 ## Notas
 
 - Los números (fuego, remo, dado) son **recursos de juego, de prueba**. Se ajustan jugando.
-- Los saberes son los mismos borradores de `arte/cartas/saberes-borrador.js`, con su fuente y página. Los revisa la Persona C.
+- Los saberes son los mismos borradores de `datos/saberes.js`, con su fuente y página. Los revisa la Persona C.
 - Para usarla en clase, la [guía para docentes](../escuelas/README.md) propone una actividad por carta y una clase de 80 minutos.
 - Las fuentes de los PDF son `tablero.html`, `fichas.html` y `reglas.html`, con los datos en `mesa.js`. Para regenerarlos: `node mesa/exportar.cjs` (necesita Playwright).
 

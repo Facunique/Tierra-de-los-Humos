@@ -39,6 +39,8 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 |---|---|
 | `docs/` | Diseño del juego: guía de la hackatón, concepto, alcance, contenido cultural, dirección de arte |
 | `arte/` | Arte propio. Estilo **Corteza**: `corteza/corteza.js` es el motor de dibujo del juego; `fuente/arte.js` tiene la paleta y las pegatinas pixel (`node arte/generar.cjs` genera los PNG). Ver `arte/README.md` |
+| `datos/` | Datos del juego en `.js`: las cartas de saber (`saberes.js`, con plantilla para cargar cartas sin programar) |
+| `pruebas/` | Pruebas con `node --test` (sin dependencias), desde la raíz del repo |
 | `sonido/` | Sonido generado por código (Web Audio), sin archivos de audio: ambiente según el lugar, efectos y voz para leer las cartas. Ver `sonido/README.md` |
 | `mesa/` | Versión de mesa para imprimir (tablero, fichas, reglas) |
 | `escuelas/` | Guía para docentes: una actividad por carta (`actividades.js`), en A4 |

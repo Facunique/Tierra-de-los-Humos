@@ -22,7 +22,7 @@
   | `sonido/ambiente.js` | Ambiente, efectos y sonido por lugar | `TDH_SONIDO.lugarDe(mapa, x, y)` |
   | `sonido/voz.js` | Lee las cartas en voz alta | `TDH_VOZ.leerCarta(carta)` |
   | `arte/postal/postal.js` | Postal del viaje en PNG | `TDH_POSTAL.dibujar(canvas, datos)` |
-  | `arte/cartas/saberes-borrador.js` | Las 9 cartas, con fuente y página | `TDH_SABERES.SABERES` |
+  | `datos/saberes.js` | Las 9 cartas, con fuente, página y texto alternativo (antes `arte/cartas/saberes-borrador.js`) | `TDH_SABERES.SABERES` |
 
 - **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md`, acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (ver *Por decidir*), cotejar el libro de Goodall.
 

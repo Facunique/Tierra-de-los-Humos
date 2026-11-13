@@ -1,7 +1,7 @@
 /*
  * Tierra de los Humos · Actividades para el aula (una por carta de saber)
  * ----------------------------------------------------------------------
- * Cada actividad parte SOLO del dato de su carta (arte/cartas/saberes-borrador.js),
+ * Cada actividad parte SOLO del dato de su carta (datos/saberes.js),
  * que cita a Cooper (1946) con página. Lo que no está en la fuente va como
  * pregunta abierta o como "para pensar", nunca como dato.
  *

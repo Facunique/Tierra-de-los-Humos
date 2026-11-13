@@ -137,6 +137,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Luz real, sonido por lugar y guía docente (12/11):** Claude Code escribió el cálculo de la luz real de Ushuaia (`arte/corteza/luz-real.js`), las capas de sonido de bosque y playa (`sonido/ambiente.js`) y la guía para docentes con una actividad por carta (`escuelas/`). Las actividades parten solo de los datos citados en las cartas y las revisa el equipo.
 - **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
 - **Stack (13/11):** a pedido de la Persona B, Claude Code comparó opciones (JavaScript sin build, módulos ES, Vite, Phaser y Preact o Svelte) contra el código que ya existía y los criterios de la hackatón, y recomendó seguir sin build. La decisión fue de la Persona B.
+- **Datos de las cartas (13/11):** a pedido de la Persona B, Claude Code pasó las cartas a `datos/saberes.js` con `id`, `pueblo`, `estado` y una plantilla para cargarlas sin programar, escribió el texto alternativo de cada ilustración (describe solo lo dibujado) y las pruebas de `pruebas/datos.test.cjs`. No cambió ningún texto cultural: los revisa la Persona C.
 
 ## Integrantes
 
