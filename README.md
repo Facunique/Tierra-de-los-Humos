@@ -6,7 +6,7 @@ Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de
 
 > 🚧 **En desarrollo** (9 al 17 de noviembre de 2026). Ya están el estilo visual, el motor de dibujo, el sonido y una maqueta navegable de todas las pantallas; el código del juego se suma durante la hackatón.
 
-**Jugalo:** ✏️ *[enlace de GitHub Pages]* · **Video:** ✏️ *[enlace]* · **Presentación:** [`presentacion/`](presentacion/index.html) ([PDF](presentacion/pitch.pdf))
+**Jugalo:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/) (por ahora, la pantalla de título y la maqueta jugable) · **Video:** ✏️ *[enlace]* · **Presentación:** [`presentacion/`](presentacion/index.html) ([PDF](presentacion/pitch.pdf))
 
 ## Eje
 
@@ -96,7 +96,7 @@ Trabajo interno del equipo:
 ## Tecnologías
 
 - **Juego web** en HTML, CSS y JavaScript, dibujado en Canvas 2D. **Sin build y sin librerías externas:** cada archivo se carga con `<script>`, así que el juego también se abre con doble clic en `index.html`, sin internet.
-- **Publicación:** GitHub Pages, desde la rama `main` (carpeta raíz). ✏️ *Enlace final: Persona B.*
+- **Publicación:** GitHub Pages, desde la rama `main` (carpeta raíz), en [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/). El archivo `.nojekyll` evita que GitHub procese el sitio con Jekyll.
 - **Datos:** las cartas de saber y las especies están en archivos JavaScript con su fuente citada. Lo que se hereda entre partidas se guarda en el navegador (`localStorage`).
 - **Pruebas:** con el comando `node --test`, que ya viene con Node.js.
 - **Arte:** motor de dibujo propio, «Corteza» (`arte/corteza/corteza.js`), y pegatinas pixel definidas como texto (`arte/fuente/arte.js`).
@@ -137,6 +137,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Luz real, sonido por lugar y guía docente (12/11):** Claude Code escribió el cálculo de la luz real de Ushuaia (`arte/corteza/luz-real.js`), las capas de sonido de bosque y playa (`sonido/ambiente.js`) y la guía para docentes con una actividad por carta (`escuelas/`). Las actividades parten solo de los datos citados en las cartas y las revisa el equipo.
 - **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
 - **Stack (13/11):** a pedido de la Persona B, Claude Code comparó opciones (JavaScript sin build, módulos ES, Vite, Phaser y Preact o Svelte) contra el código que ya existía y los criterios de la hackatón, y recomendó seguir sin build. La decisión fue de la Persona B.
+- **Deploy (13/11):** a pedido de la Persona B, Claude Code armó el `index.html` de la raíz con la pantalla de título de la maqueta, para publicar en GitHub Pages, y lo probó por `file://` y a 375 px de ancho.
 
 ## Integrantes
 
