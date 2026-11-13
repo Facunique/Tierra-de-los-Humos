@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hoja para la reunión</title>
+<meta name="description" content="Tierra de los Humos: hoja A4 para llevar a la reunión del 14/11 con el referente de la comunidad yagán. Qué es el juego, cómo citamos y las preguntas, con espacio para anotar.">
+<link rel="stylesheet" href="../../arte/tipografia/atkinson.css">
+<link rel="stylesheet" href="../../arte/corteza/carta.css">
+<style>
+  :root { --fondo: #e9dfc8; --texto: #28221e; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; } }
+  :root[data-theme="dark"] { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; }
+  .instrucciones { max-width: 760px; margin: 16px auto 0; padding: 0 16px; }
+  .hoja { width: 210mm; height: 297mm; margin: 12px auto; background: #eee5d0; color: #28221e; padding: 12mm 14mm 14mm; position: relative; overflow: hidden; break-after: page; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hoja:last-child { break-after: auto; page-break-after: auto; }
+  .encabezado { display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm; border-bottom: .6mm dashed #977250; padding-bottom: 3mm; margin-bottom: 4mm; }
+  h1 { margin: 0; font-size: 9mm; line-height: 1.02; }
+  .sub { font-size: 3.4mm; font-weight: 700; color: #973a25; letter-spacing: .1em; text-transform: uppercase; }
+  .datos { font-size: 3.3mm; text-align: right; line-height: 1.35; }
+  h2 { font-size: 4.6mm; margin: 3.5mm 0 1.5mm; color: #973a25; }
+  p, li { font-size: 3.6mm; line-height: 1.42; margin: 0 0 1.4mm; }
+  ul, ol { margin: 0 0 1mm; padding-left: 5mm; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .caja { background: #f7f1e3; border-radius: 3mm; padding: 3mm 4mm; border: .3mm solid #cdbf9f; margin-bottom: 3mm; }
+  .caja--tinta { background: #1d2e38; color: #eee5d0; border-color: #0f1a21; }
+  .caja--tinta h2 { color: #f2c46d; margin-top: 0; }
+  figure { margin: 0; }
+  figure img { width: 100%; display: block; border-radius: 3mm; box-shadow: 1mm 1.5mm 0 rgba(40,34,30,.2); }
+  figcaption { font-size: 3mm; color: #5b524a; margin-top: 1.5mm; line-height: 1.35; }
+  .capturas { display: grid; grid-template-columns: 1.55fr 1fr; gap: 5mm; align-items: start; }
+  .pie { position: absolute; left: 14mm; right: 14mm; bottom: 7mm; font-size: 2.8mm; color: #5b524a; display: flex; justify-content: space-between; border-top: .3mm dashed #8f897f; padding-top: 1.5mm; }
+
+  /* Preguntas con espacio para anotar */
+  .bloque { margin-bottom: 2.6mm; }
+  .bloque h2 { margin-top: 0; }
+  .pregunta { display: grid; grid-template-columns: 6mm 1fr; gap: 0 2mm; margin-bottom: 1.6mm; }
+  .pregunta b.n { color: #973a25; font-size: 3.6mm; }
+  .pregunta p { margin: 0; font-weight: 700; }
+  .renglon { grid-column: 2; border-bottom: .3mm solid #b8a98a; height: 8.4mm; }
+  .opciones { grid-column: 2; display: flex; gap: 5mm; flex-wrap: wrap; font-size: 3.3mm; margin-top: 1mm; }
+  .opciones span::before { content: ""; display: inline-block; width: 3.2mm; height: 3.2mm; border: .35mm solid #5e412c; border-radius: .6mm; margin-right: 1.4mm; vertical-align: -.5mm; }
+  @media print { body { background: #fff; } .instrucciones { display: none; } .hoja { margin: 0; } }
+  @media screen and (max-width: 840px) { body { overflow-x: auto; } }
+</style>
+</head>
+<body>
+<div class="instrucciones">
+  <p><strong>Hoja para la reunión del 14/11 (A4, dos páginas).</strong> Para imprimir y llevar. La primera página es para mostrar; la segunda tiene las preguntas, con espacio para anotar. El PDF está en <code>equipo/reunion-14-11/hoja-A4.pdf</code>.</p>
+</div>
+
+<!-- 1 · Para mostrar -->
+<section class="hoja" aria-label="Qué es el juego">
+  <div class="encabezado">
+    <div><div class="sub">Para conversar · 14 de noviembre de 2026</div><h1>Tierra de los Humos</h1></div>
+    <div class="datos">Un juego hecho para la hackatón<br>SoberaníaTech 2026 (Tierra del Fuego),<br>eje Memoria y Cultura</div>
+  </div>
+  <p><b>Qué es.</b> Un juego por turnos, para el navegador y el celular. Cada partida es un viaje en canoa por los canales, acompañando a una familia yagán. El fuego de la canoa es la vida: se gasta con el viento, la lluvia y la noche, y se mantiene con leña. Si se apaga, el viaje termina, pero lo aprendido pasa a la generación siguiente como <b>cartas de saber</b>.</p>
+  <p><b>Para qué.</b> Para que chicos y escuelas conozcan saberes del pueblo yagán sobre el territorio, contados en presente. Hay una versión para imprimir y una guía para docentes.</p>
+
+  <div class="capturas">
+    <figure><img src="viaje.jpg" alt="El juego: la canoa de corteza con el fuego en el medio rema por el canal; atrás, una persona rema y adelante otra lleva el arpón en reposo. Hay una playa, el bosque y, a la derecha, el humo tapa lo que todavía no se exploró."><figcaption>El viaje. La familia, el mapa y los números son ficción. Las personas van como siluetas, sin rasgos ni nombres.</figcaption></figure>
+    <figure><img src="carta.jpg" alt="Carta de saber «El fuego viaja en la canoa», con una ilustración, el dato, lo que hace en el juego y la fuente con página."><figcaption>Una carta de saber. Separa el <b>dato</b> (lo que dice la fuente) de lo que es <b>juego</b>, y cita autor y página.</figcaption></figure>
+  </div>
+
+  <div class="dos" style="margin-top:4mm">
+    <div class="caja">
+      <h2 style="margin-top:0">Lo que nos propusimos</h2>
+      <ul>
+        <li>No inventar datos. Lo que no tiene fuente no va, o queda marcado como pendiente.</li>
+        <li>Hablar del pueblo yagán en presente.</li>
+        <li>Sin violencia ni enemigos: el desafío es el clima, el mar y el fuego.</li>
+        <li>Sin seres ni ceremonias.</li>
+        <li>Sin nombres en lengua yagán hasta que la comunidad lo autorice.</li>
+        <li>Sin fotos históricas: todo está dibujado por el equipo.</li>
+      </ul>
+    </div>
+    <div class="caja caja--tinta">
+      <h2>Lo que venimos a preguntar</h2>
+      <p>Las fuentes que usamos son escritas y de afuera, sobre todo Cooper (1946), que reúne lo que escribieron viajeros, misioneros y etnógrafos. Queremos saber qué está bien, qué está mal y qué no debería estar.</p>
+      <p style="margin:0">Todo lo que nos digan se anota y se cambia. El repositorio es público: solo publicamos nombres o palabras con permiso.</p>
+    </div>
+  </div>
+  <div class="pie"><span>Tierra de los Humos · github.com/Facunique/Tierra-de-los-Humos</span><span>1 / 2</span></div>
+</section>
+
+<!-- 2 · Preguntas -->
+<section class="hoja" aria-label="Preguntas para anotar">
+  <div class="encabezado">
+    <div><div class="sub">Para anotar en la reunión</div><h1>Preguntas</h1></div>
+    <div class="datos">Anotar las palabras tal cual.<br>Lo urgente: 2, 9 y 11.</div>
+  </div>
+
+  <div class="bloque">
+    <h2>El juego y el pueblo yagán</h2>
+    <div class="pregunta"><b class="n">1</b><p>¿Están de acuerdo con que el juego trate sobre su pueblo y su forma de vida?</p><div class="renglon"></div></div>
+    <div class="pregunta"><b class="n">2</b><p>¿Se puede jugar «como» una familia yagán, o prefieren que el juego la acompañe?</p><div class="opciones"><span>Jugar como la familia</span><span>Acompañarla</span><span>Otra forma</span></div><div class="renglon"></div></div>
+    <div class="pregunta"><b class="n">3</b><p>¿Por qué se movían las familias de un lugar a otro? ¿Cuál podría ser el destino del viaje? Tenemos tres opciones de Cooper (1946, p. 94-99): una ballena varada, corteza para canoas o piedras de fuego.</p><div class="renglon"></div></div>
+    <div class="pregunta"><b class="n">4</b><p>¿Hay algo que no debería aparecer en el juego?</p><div class="renglon"></div></div>
+  </div>
+
+  <div class="bloque">
+    <h2>Cómo se ve</h2>
+    <div class="pregunta"><b class="n">5</b><p>¿Podemos mostrar personas como siluetas sin rasgos? ¿Cómo prefieren que se vean?</p><div class="renglon"></div></div>
+    <div class="pregunta"><b class="n">6</b><p>La fuente dice que la mujer remaba y manejaba la canoa, y el hombre iba adelante con el arpón (Cooper, 1946, p. 88 y 96). ¿Está bien mostrarlo así?</p><div class="renglon"></div></div>
+    <div class="pregunta"><b class="n">7</b><p>¿Hay colores, formas u objetos que no deberían aparecer? ¿Y alguno que falte?</p><div class="renglon"></div></div>
+    <div class="pregunta"><b class="n">8</b><p>¿Cómo quieren que se vea la pantalla final, la que cuenta el presente de la comunidad?</p><div class="renglon"></div></div>
+  </div>
+
+  <div class="bloque">
+    <h2>Palabras y sonido</h2>
+    <div class="pregunta"><b class="n">9</b><p>¿Podemos usar palabras en yagán (personajes, lugares, objetos)? ¿Cuáles?</p><div class="renglon"></div></div>
+    <div class="pregunta"><b class="n">10</b><p>El juego solo suena a viento, mar y fuego, sin música. ¿Hay sonidos que quieran compartir, o que no deberían usarse?</p><div class="renglon"></div></div>
+  </div>
+
+  <div class="bloque">
+    <h2>Permisos y próximos pasos</h2>
+    <div class="pregunta"><b class="n">11</b><p>¿Podemos nombrarlo a usted y a la comunidad en el juego, el README y la presentación?</p><div class="opciones"><span>Con su nombre</span><span>Solo por su rol</span><span>A la comunidad sí</span><span>No</span></div></div>
+    <div class="pregunta"><b class="n">12</b><p>¿Podemos citar sus palabras?</p><div class="opciones"><span>Sí</span><span>Solo después de que las revise</span><span>No</span></div></div>
+    <div class="pregunta"><b class="n">13</b><p>¿Quiere ver el juego o las cartas antes de la entrega (17/11) o en la demo (19/11, Fábrica de Talento)?</p><div class="renglon"></div></div>
+  </div>
+  <div class="pie"><span>Lo anotado se pasa el mismo día a equipo/comunicaciones.md, sin teléfonos, mails ni datos personales.</span><span>2 / 2</span></div>
+</section>
+<script>document.body.dataset.listo = '1';</script>
+</body>
+</html>
