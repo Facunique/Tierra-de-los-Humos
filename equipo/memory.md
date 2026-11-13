@@ -27,6 +27,11 @@
   | `datos/saberes.js` | Las 9 cartas, con fuente, página y texto alternativo (antes `arte/cartas/saberes-borrador.js`) | `TDH_SABERES.SABERES` |
 
 - **Editor de saberes (13/11):** `herramientas/editor-de-saberes.html` permite escribir o corregir cartas sin programar, también a partir de un relato de la comunidad (solo con permiso). Se puede mostrar en la reunión del 14/11.
+- **Lo que encontraron las pruebas automáticas (13/11, Persona D)**, para que lo revisen A y B. No se tocó su código:
+  - Se puede acampar noche tras noche sin gastar fuego, así que una partida podría no terminar nunca. ¿Limitar los acampes seguidos o que cada noche gaste algo?
+  - En `pruebas/nucleo.html`, al cerrar una carta la celda cambia en 1 px y el motor vuelve a armar el mapa entero: un tirón de un segundo en un celular lento. Conviene calcular la celda solo al abrir y al cambiar el tamaño de la pantalla.
+  - El cartel de «El viaje termina acá» no tiene margen interno, y en el celular el aviso de arriba tapa los íconos del HUD.
+  - **Antes de entregar (16/11):** `node pruebas/de-punta-a-punta.cjs` juega partidas enteras en cinco pantallas tocando los botones y avisa si algo se rompe.
 - **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md`, acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (ver *Por decidir*), cotejar el libro de Goodall.
 
 ## Fechas clave
