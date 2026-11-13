@@ -74,7 +74,7 @@ function subtitulos() {
     for (const t of teclas) {
       if (await visible(p, /^(Guardar en la memoria|Seguir)$/)) return 'carta';
       if (await visible(p, /Empezar la generación siguiente/)) return 'fin';
-      if (await visible(p, /^Juntar$/) && (await boton(p, /^Juntar$/).isEnabled())) { await boton(p, /^Juntar$/).click(); await p.waitForTimeout(pausa); }
+      if (await visible(p, /^Juntar/) && (await boton(p, /^Juntar/).isEnabled())) { await boton(p, /^Juntar/).click(); await p.waitForTimeout(pausa); }
       await p.keyboard.press(t);
       await p.waitForTimeout(pausa);
     }
@@ -89,7 +89,11 @@ function subtitulos() {
   await grabar('02-humo', url(VIAJE, 'semilla=' + SEMILLA), async (p) => {
     await p.waitForTimeout(800);
     if (await visible(p, /^(Guardar en la memoria|Seguir)$/)) await boton(p, /^(Guardar en la memoria|Seguir)$/).click();
-    await remar(p, Array(9).fill(ESTE), 1100);
+    for (let i = 0; i < 10; i++) {
+      const r = await remar(p, [ESTE], 1100);
+      if (r === 'carta') { await p.waitForTimeout(1200); await boton(p, /^(Guardar en la memoria|Seguir)$/).click(); await p.waitForTimeout(500); }
+      if (r === 'fin') break;
+    }
     await p.waitForTimeout(1200);
   });
 
@@ -100,7 +104,7 @@ function subtitulos() {
       const r = await remar(p, [ESTE, i % 4 === 3 ? 'ArrowDown' : ESTE], 700);
       if (r === 'carta') { cartas++; await p.waitForTimeout(cartas === 1 ? 9000 : 2500); await boton(p, /^(Guardar en la memoria|Seguir)$/).click(); await p.waitForTimeout(600); }
       if (r === 'fin') break;
-      if (await visible(p, /^Avivar el fuego$/) && /Fuego [12] de 4/.test(await p.textContent('body'))) { await boton(p, /^Avivar el fuego$/).click(); await p.waitForTimeout(900); }
+      if (await visible(p, /^Avivar el fuego$/) && (await boton(p, /^Avivar el fuego$/).isEnabled()) && /Fuego [12] de 4/.test(await p.textContent('body'))) { await boton(p, /^Avivar el fuego$/).click(); await p.waitForTimeout(900); }
       if (cartas >= 2 && i > 20) break;
     }
   });
@@ -129,8 +133,16 @@ function subtitulos() {
       if (r === 'carta') { await p.waitForTimeout(3500); await boton(p, /^(Guardar en la memoria|Seguir)$/).click(); }
       if (r === 'fin') break;
     }
-  }, Object.assign({}, devices['Pixel 5'], { deviceScaleFactor: 1, recordVideo: { dir: CLIPS, size: { width: 393, height: 851 } } }));
+  }, Object.assign({}, devices['Pixel 5'], { deviceScaleFactor: 1, recordVideo: { dir: CLIPS, size: devices['Pixel 5'].viewport } }));
 
   await nav.close();
+
+  // GIF para el README: 8 segundos del viaje, 800 px de ancho, sin la franja de arriba.
+  const { spawnSync } = require('child_process');
+  const viaje = path.join(CLIPS, '04-viaje-y-05-carta.webm'), gif = path.join(CLIPS, 'juego.gif');
+  const filtro = 'crop=iw:ih-40:0:40,fps=12,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=96[p];[b][p]paletteuse=dither=bayer:bayer_scale=4';
+  const r = spawnSync('ffmpeg', ['-v', 'error', '-y', '-ss', '1', '-t', '8', '-i', viaje, '-vf', filtro, gif]);
+  if (r.error) console.log('Sin ffmpeg: no se armó el GIF (los clips están igual).');
+  else if (r.status === 0) console.log('✓ juego.gif (' + Math.round(fs.statSync(gif).size / 1024) + ' KB)');
   console.log('Listo. Clips en equipo/video/clips/');
 })();

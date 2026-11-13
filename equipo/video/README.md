@@ -20,6 +20,15 @@
 
 ## Cómo grabarlo
 
+**Los clips del juego ya se pueden grabar solos:**
+
+```bash
+node equipo/video/grabar.cjs
+```
+
+El script juega y graba un clip por cuadro en `equipo/video/clips/`, en 1920 × 1080: título, humo, viaje con carta, fin y herencia, códice, y el juego en un celular. También escribe `subtitulos.srt` con la voz de la tabla de arriba y arma `clips/juego.gif` para el README. Los clips no se suben al repositorio porque pesan mucho. El 16/11, con el juego conectado, alcanza con volver a correrlo. Lo que sigue a mano: las voces, la toma del celular en la mano y el montaje.
+
+
 1. **Pantalla:** OBS Studio, 1920 × 1080. Abrir el juego en pantalla completa y activar el sonido.
 2. **Celular (cuadro 9):** la grabación de pantalla del teléfono, más una toma del celular en la mano.
 3. **Voz:** una persona por tramo, en un lugar sin eco. Grabar cada frase dos veces.
