@@ -101,7 +101,7 @@
     { dur: 10000, entrar() {
       costa(34, 19, 4, { hora: 'dia', estacion: 'verano' }); extraDibujo = null;
       centro.style.placeItems = 'center'; centro.innerHTML = '<figure class="mapa-vid papel" style="margin:0"><canvas id="mapa-vid"></canvas></figure>';
-      TDH_MAPA.dibujar($('mapa-vid'), { ancho: 1200, territorios: true, nombres: true, hoy: true, destacar: 'yagan' });
+      TDH_TERRITORIOS.dibujar($('mapa-vid'), { ancho: 1200, territorios: true, nombres: true, hoy: true, destacar: 'yagan' });
       leyendaTexto('Los canales del sur, territorio del pueblo yagán.', 'Zonas aproximadas, según Cooper (1946) y Bird (1946), Handbook of South American Indians.');
     } },
     { dur: 14000, entrar() {

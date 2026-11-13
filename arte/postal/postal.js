@@ -64,9 +64,9 @@
     x.restore();
     // Arriba, el título del recorrido; abajo, dónde queda en el mapa real (si está cargado)
     x.fillStyle = C.I; x.font = F(22, 700); x.fillText('El viaje por los canales', mx, my - 34);
-    if (raiz.TDH_MAPA && raiz.TDH_COSTAS) {
+    if (raiz.TDH_TERRITORIOS && raiz.TDH_COSTAS) {
       const iw = 300, mini = document.createElement('canvas');
-      const r = raiz.TDH_MAPA.dibujar(mini, { ancho: iw, territorios: true, nombres: false, hoy: false, destacar: d.pueblo === 'yagán' ? 'yagan' : null, dpr: 2 });
+      const r = raiz.TDH_TERRITORIOS.dibujar(mini, { ancho: iw, territorios: true, nombres: false, hoy: false, destacar: d.pueblo === 'yagán' ? 'yagan' : null, dpr: 2 });
       const iy = my + MH + 34, ih = Math.min(r.alto, H - iy - 26);
       if (ih > 120) {
         papel(x, mx - 8, iy - 8, iw + 16, ih + 16, 12);

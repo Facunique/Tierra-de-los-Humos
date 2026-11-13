@@ -83,7 +83,7 @@
   CZ.humo(x, 230, 380, 3, 3.1, 0.8, 8, 150); CZ.canoa(x, 230, 520, 3.6, 4, 2.15, 1, false);
   fondo.style.objectFit = 'cover';
   document.querySelectorAll('[data-icono]').forEach((c) => { const s = ARTE.aCanvas(c.dataset.icono, 0, 'verano', 4); c.width = s.width; c.height = s.height; c.getContext('2d').drawImage(s, 0, 0); });
-  TDH_MAPA.dibujar(document.getElementById('mapa'), { ancho: 900, territorios: true, nombres: true, hoy: true, destacar: 'yagan', dpr: 2 });
+  TDH_TERRITORIOS.dibujar(document.getElementById('mapa'), { ancho: 900, territorios: true, nombres: true, hoy: true, destacar: 'yagan', dpr: 2 });
   document.body.dataset.listo = '1';
 })();
 </script>
