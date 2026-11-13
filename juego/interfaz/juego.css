@@ -1,0 +1,70 @@
+/*
+ * Tierra de los Humos · Estilos de la interfaz del juego
+ * Va después de arte/corteza/carta.css, que ya trae el papel, la carta, el HUD y
+ * los botones. Acá va solo lo que agrega el juego.
+ * Licencia: MIT.
+ */
+
+/* ── Carta de saber encima del viaje (juego/interfaz/carta.js) ──────────────
+   La carta entra entera en la pantalla. Si el texto no entra, se desplaza el
+   cuerpo (dato y en el juego); la fuente y los botones quedan siempre a la vista. */
+.tdh-velo {
+  position: fixed; inset: 0; z-index: 30;
+  display: grid; place-items: center;
+  padding: max(12px, env(safe-area-inset-top)) 16px max(12px, env(safe-area-inset-bottom));
+  background: rgba(11, 16, 21, 0.72);
+}
+.tdh-carta {
+  width: min(100%, 400px); max-width: none;
+  max-height: 100%;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.tdh-carta .carta-saber__ilus {
+  flex: none;
+  max-height: 30vh; max-height: 30dvh;   /* en un celular acostado, la ilustración cede lugar al texto */
+  object-fit: cover;
+}
+.tdh-carta .carta-saber__titulo { flex: none; font-size: 22px; }
+.tdh-carta .carta-saber__tipo { flex: none; }
+.tdh-carta__cuerpo {
+  flex: 1 1 auto; min-height: 3em;
+  overflow-y: auto; overscroll-behavior: contain;
+  margin: 0 -4px; padding: 0 4px;
+}
+.tdh-carta__cuerpo p { font-size: 16px; line-height: 1.5; }
+.tdh-carta__cuerpo:focus-visible { outline: 3px solid var(--tdh-luz); outline-offset: 2px; border-radius: 6px; }
+.tdh-carta .carta-saber__fuente { flex: none; }
+.tdh-carta__estado { flex: none; font-size: 12px !important; color: #5b524a; margin: 0 0 6px !important; }
+.tdh-carta__botones { flex: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; position: relative; z-index: 1; }
+.tdh-carta__botones .boton-papel { flex: 1 1 160px; }
+
+/* Alto contraste: el velo tapa más el mapa y la carta tiene borde de tinta. */
+.tdh-velo--contraste { background: rgba(11, 16, 21, 0.9); }
+.tdh-velo--contraste .tdh-carta { outline: 3px solid var(--tdh-nieve); outline-offset: 0; }
+.tdh-velo--contraste .tdh-carta::before { border-color: var(--tdh-tinta); }
+.tdh-velo--contraste .carta-saber__fuente { color: var(--tdh-tinta); border-top-color: var(--tdh-tinta); }
+
+/* Celular acostado (pantalla baja y ancha): la carta va en dos columnas para
+   que la fuente y los botones entren sin desplazar la carta. */
+@media (max-height: 500px) and (min-width: 560px) {
+  .tdh-carta {
+    width: min(100%, 780px); height: 100%;
+    display: grid; column-gap: 18px;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-areas: "tipo cuerpo" "ilus cuerpo" "titulo cuerpo" "estado fuente" "botones fuente";
+  }
+  .tdh-carta .carta-saber__tipo { grid-area: tipo; }
+  .tdh-carta .carta-saber__ilus { grid-area: ilus; max-height: 32dvh; }
+  .tdh-carta .carta-saber__titulo { grid-area: titulo; font-size: 19px; margin-bottom: 4px; }
+  .tdh-carta__cuerpo { grid-area: cuerpo; min-height: 0; }
+  .tdh-carta .carta-saber__fuente { grid-area: fuente; align-self: end; }
+  .tdh-carta__estado { grid-area: estado; }
+  .tdh-carta__botones { grid-area: botones; }
+  .tdh-carta__botones .boton-papel { flex: 1 1 120px; font-size: 15px; padding: 10px 12px; }
+}
+@media (max-width: 380px) {
+  .tdh-carta { padding: 14px 14px 12px; }
+  .tdh-carta .carta-saber__titulo { font-size: 20px; }
+}

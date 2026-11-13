@@ -138,6 +138,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
 - **Stack (13/11):** a pedido de la Persona B, Claude Code comparó opciones (JavaScript sin build, módulos ES, Vite, Phaser y Preact o Svelte) contra el código que ya existía y los criterios de la hackatón, y recomendó seguir sin build. La decisión fue de la Persona B.
 - **Datos de las cartas (13/11):** a pedido de la Persona B, Claude Code pasó las cartas a `datos/saberes.js` con `id`, `pueblo`, `estado` y una plantilla para cargarlas sin programar, escribió el texto alternativo de cada ilustración (describe solo lo dibujado) y las pruebas de `pruebas/datos.test.cjs`. No cambió ningún texto cultural: los revisa la Persona C.
+- **Pantalla de carta (13/11):** a pedido de la Persona B, Claude Code escribió la pantalla de carta de saber (`juego/interfaz/carta.js` y `juego.css`), una partida falsa para probarla mientras se programa el núcleo (`pruebas/partida-falsa.js`, con su página `pruebas/carta.html`) y las pruebas del contrato entre núcleo e interfaz.
 
 ## Integrantes
 
