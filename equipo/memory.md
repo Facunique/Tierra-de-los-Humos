@@ -28,6 +28,7 @@
 
 | Fecha | Qué |
 |---|---|
+| 14/11, 11:00 | Reunión en persona con el referente de la comunidad yagán. Ver `comunicaciones.md`. |
 | 14/11 | Primer avance documentado (obligatorio). Meta: esqueleto jugable. |
 | 17/11, 20:00 | Entrega final: se cierran los repositorios. Meta interna: terminar el 16. |
 | 19/11 | Demo pública en Fábrica de Talento, Ushuaia (al menos 2 integrantes). |
@@ -77,7 +78,8 @@ El detalle de cada conversación está en [`comunicaciones.md`](comunicaciones.m
 
 | Quién | Relación con el proyecto | Estado |
 |---|---|---|
-| Comunidad Yagán Paiakoala (Ushuaia) | Comunidad yagán viva. Interlocutora principal para validar. | Encontrada. Sin contactar todavía. |
+| Referente de la comunidad yagán | Interlocutor principal para validar. | Reunión en persona el 14/11 a las 11:00. |
+| Comunidad Yagán Paiakoala (Ushuaia) | Comunidad yagán viva. | Encontrada. Confirmar si es la comunidad del referente. |
 | Mónica Alvarado | Fundadora del parque Yatana. Convivió con Cristina Calderón. Conocida de un integrante. | Hay que ver si se la puede contactar. |
 
 ## Glosario y convenciones
@@ -90,3 +92,16 @@ El detalle de cada conversación está en [`comunicaciones.md`](comunicaciones.m
 - **Viaje:** una partida. Se compone de **etapas**, y cada etapa de varias vueltas de *explorar, encontrar, volver*.
 - **🔍:** pendiente de verificar con fuentes o con la comunidad.
 - Grafías: **Yagán** (o Yámana), **Kawésqar**, **Selk'nam**, **Haush**.
+
+## Equipo
+
+Los documentos se refieren a cada integrante por letra.
+
+| Letra | Integrante | Área |
+|---|---|---|
+| A | Mati | Programación |
+| B | Facu | Programación |
+| C | Dani | Consulta a la comunidad e investigación cultural |
+| D | Nacho | Arte, sonido y comunicación |
+
+🔍 Las áreas salen de cómo las usan los documentos del 12/11. Falta sumar acá el archivo de división de tareas del equipo.
