@@ -1,8 +1,12 @@
 # Tierra de los Humos — roguelike fueguino
 
+![Tierra de los Humos: costa fueguina en otoño recortada en papel, con una choza y un conchal, y en primer plano una canoa de corteza con el fuego encendido, el hombre adelante con el arpón y la mujer atrás remando](arte/logo/compartir.png)
+
 Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de Tierra del Fuego. Lo desarrolla el equipo **Tierra de los Humos** para la hackatón [SoberaníaTech 2026](https://soberaniatech.com.ar/), organizada por la Agencia de Innovación de Tierra del Fuego.
 
-> 🚧 **En desarrollo** (9 al 17 de noviembre de 2026). Por ahora el repositorio tiene la documentación de planificación; el código del juego se suma durante la hackatón.
+> 🚧 **En desarrollo** (9 al 17 de noviembre de 2026). Ya están el estilo visual, el motor de dibujo, el sonido y una maqueta navegable de todas las pantallas; el código del juego se suma durante la hackatón.
+
+**Jugalo:** ✏️ *[enlace de GitHub Pages]* · **Video:** ✏️ *[enlace]* · **Presentación:** [`presentacion/`](presentacion/index.html) ([PDF](presentacion/pitch.pdf))
 
 ## Eje
 
@@ -16,7 +20,26 @@ Los saberes de los pueblos Selk'nam, Haush y Yagán sobre la vida en el territor
 
 Un juego web que se juega desde el navegador, también en el celular. Cada partida es un viaje en el que el fuego es tu vida: se gasta con el frío y el viento, y se mantiene con lo que el territorio ofrece. Lo que se aprende en un viaje pasa a la siguiente generación como **cartas de saber**, cada una con su fuente citada. La mecánica del roguelike (morir, volver a empezar, avanzar) representa así la **transmisión de la memoria**.
 
+Tres ideas lo sostienen:
+
+1. **El fuego es la vida.** Las familias yaganes llevaban el fuego encendido en el medio de la canoa (Cooper, 1946, p. 88 y 91). En el juego, ese fuego es la barra de vida.
+2. **Morir es transmitir.** Cuando el fuego se apaga, los saberes encontrados pasan a la siguiente generación del mismo pueblo.
+3. **Cada saber tiene fuente, y los pueblos están vivos.** Nada inventado presentado como real: cada carta separa el *dato* del *recurso de juego* y cita su fuente con página. Todo se cuenta en presente, con consulta a la comunidad.
+
 El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
+
+### Para todos, también en el aula
+
+- **Accesible:** las cartas se escuchan en voz alta, hay modo alto contraste, tipografía para baja visión, colores probados para daltonismo y subtítulos para cada sonido.
+- **El territorio se siente:** la luz del juego es la de Ushuaia en ese momento (de día, al atardecer o de noche, y en su estación), y el sonido cambia según el lugar: el bosque, la playa y el canal abierto suenan distinto.
+- **Algo para llevarse:** al terminar, una postal del viaje con el recorrido y los saberes aprendidos.
+- **En la escuela:** una [guía para docentes](escuelas/README.md) con una actividad por carta, y una [versión de mesa](mesa/README.md) para jugar sin pantallas.
+
+| El viaje | Una carta de saber | Fin del viaje y herencia |
+|---|---|---|
+| ![El viaje: la canoa con su fuego rema por el canal; en la playa hay una choza, leña y un saber como pegatinas; a la derecha, humo](equipo/video/04-viaje.jpg) | ![Carta «Piedras de fuego» con su dato, su recurso de juego y la fuente con página](equipo/video/05-carta.jpg) | ![Pantalla «El viaje termina acá»: lo aprendido pasa a la siguiente generación](equipo/video/06-fin.jpg) |
+
+*Capturas de la maqueta de pantallas. Se reemplazan por capturas del juego el 16/11.*
 
 ## Documentación
 
@@ -24,6 +47,23 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 |---|---|
 | [00 · Guía de la hackatón](docs/00-guia-hackathon.md) | Bases, fechas, criterios de evaluación, cuidados culturales y plan por fases |
 | [01 · Concepto](docs/01-concepto.md) | Premisa, pueblos (Yagán primero), bucle central, transmisión entre partidas, tono y aporte al eje |
+| [04 · Dirección de arte y sonido](docs/04-direccion-de-arte.md) | El estilo Corteza: principios, motor de dibujo, cartas, paleta, sonido y accesibilidad |
+| [05 · Rigor histórico del arte](docs/05-rigor-historico.md) | Cada elemento dibujado contrastado con las fuentes etnográficas, con página |
+
+Arte y sonido:
+
+| Recurso | Contenido |
+|---|---|
+| [Estilo Corteza](arte/corteza/index.html) | El estilo elegido, en vivo: tocá el agua y la canoa rema (abrir el archivo en el navegador) |
+| [Mapa de territorios](arte/mapa/index.html) | Tierra del Fuego y los canales, con los territorios ancestrales de cada pueblo y sus fuentes |
+| [Pantallas del juego](arte/pantallas/index.html) | Maqueta navegable de todo el recorrido: título, viaje, cartas, fin del viaje, códice y cierre en presente |
+| [`arte/`](arte/README.md) | Motor de dibujo, paleta, pegatinas pixel, logo y tipografía. Todo propio |
+| [Cartas para imprimir](arte/cartas/cartas-para-imprimir.pdf) | Cartas de saber en A4, doble faz, para la demo |
+| [Versión de mesa](mesa/README.md) | El juego en papel, para escuelas sin pantallas: tablero A3, fichas, reglas de una página y Libro de la familia |
+| [Guía para docentes](escuelas/README.md) | Cómo usar el juego en clase, cuidados, una actividad por carta, la tabla de luz de Ushuaia y una hoja para fotocopiar ([PDF](escuelas/guia-docente-A4.pdf)) |
+| [Stand de la demo](stand/README.md) | Vidriera que se reproduce sola, cartel A3 con QR y códigos QR |
+| [Propuestas de estilo](arte/propuestas/index.html) | Las tres propuestas que votó el equipo (registro) |
+| [`sonido/`](sonido/README.md) | Sonido ambiente que cambia según el lugar, efectos y lectura de las cartas en voz alta. Todo generado por código, con demo |
 
 Trabajo interno del equipo:
 
@@ -31,35 +71,81 @@ Trabajo interno del equipo:
 |---|---|
 | [Memoria del proyecto](equipo/memory.md) | Decisiones tomadas, estado actual, pendientes y glosario |
 | [Comunicaciones con comunidades](equipo/comunicaciones.md) | Registro de la consulta a comunidades y personas, con permisos y correcciones |
+| [Comunicación](equipo/comunicacion.md) | Plan del video, el pitch, el avance del 14/11 y la demo del 19/11 |
+| [Storyboard del video](equipo/video/README.md) | Un cuadro por tramo, con la voz y el sonido |
 | [AGENTS.md](AGENTS.md) | Reglas de trabajo para asistentes de IA (y para el equipo) |
 
 ## Cómo jugar
 
-*Pendiente: se completa cuando haya un prototipo publicado.*
+**Objetivo:** llegar al destino con el fuego encendido. Si el fuego se apaga, el viaje termina y lo aprendido pasa a la siguiente generación.
+
+| Qué | En el celular | Con teclado |
+|---|---|---|
+| Remar | Tocar una casilla de agua al lado de la canoa | Flechas o <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> |
+| Juntar (leña, comida, pirita, saberes) | Botón «Juntar» | <kbd>Enter</kbd> |
+| Avivar el fuego con leña | Botón «Avivar el fuego» | <kbd>F</kbd> |
+| Amarrar en el cachiyuyo y acampar | Botón «Amarrar y acampar» | <kbd>M</kbd> |
+
+- **El fuego** se gasta al remar, y más con viento en el canal hondo o con lluvia. Siempre se muestra su número («Fuego 3 de 4»).
+- **Lo que tiene borde de papel (las pegatinas) se puede juntar.** El resto es paisaje.
+- **El humo** cubre lo que todavía no exploraste.
+- **El códice** junta todas las cartas de saber, separadas por pueblo, y se puede recorrer sin jugar.
+
+✏️ *Completar con los números finales del juego (Personas A y B).*
 
 ## Tecnologías
 
-*Pendiente.* La propuesta es un juego web HTML5 por turnos, publicado en GitHub Pages.
+- **Juego web** en HTML, CSS y JavaScript, dibujado en Canvas 2D. Sin librerías externas. ✏️ *Stack final y publicación en GitHub Pages: Persona B.*
+- **Arte:** motor de dibujo propio, «Corteza» (`arte/corteza/corteza.js`), y pegatinas pixel definidas como texto (`arte/fuente/arte.js`).
+- **Sonido:** sintetizado con Web Audio (`sonido/ambiente.js`), sin archivos de audio. Las cartas se leen con la voz del dispositivo (Web Speech, `sonido/voz.js`).
+- **Luz real:** la posición del sol en Ushuaia se calcula en el navegador, sin internet, con el algoritmo de la [NOAA](https://gml.noaa.gov/grad/solcalc/calcdetails.html) (`arte/corteza/luz-real.js`).
+- **Sin internet:** todo, tipografía incluida, se sirve desde el repositorio.
+- **Herramientas de apoyo** (solo para regenerar imágenes): Node.js y Playwright.
 
 ## Fuentes
 
-*Pendiente.* Acá se listan todas las fuentes de los contenidos culturales, de especies y de lugares que usa el juego.
+✏️ *La lista completa la arma la Persona C en `docs/03-contenido-cultural.md`.* Fuentes ya usadas en el arte y en los borradores de cartas (el detalle, con página, está en [`docs/05-rigor-historico.md`](docs/05-rigor-historico.md)):
+
+- Cooper, J. M. (1946). «The Yahgan». En J. H. Steward (ed.), *Handbook of South American Indians*, vol. 1, pp. 81-106. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143.
+- Spears, J. R. (1895). *The Gold Diggings of Cape Horn*. Nueva York: Putnam.
+- Museo Marítimo de Ushuaia. *La canoa yagán* (reconstrucción de una canoa de corteza).
+- Multequina n.º 10 (IADIZA-CONICET), sobre los bosques de *Nothofagus* de Tierra del Fuego.
+- Goodall, R. N. P. (1979). *Tierra del Fuego*. Buenos Aires: Ediciones Shanamaiim. *(En proceso de cotejo.)*
 
 ## Recursos de terceros
 
-*Pendiente.* Acá se listan las librerías, fuentes tipográficas, sonidos u otros recursos ajenos, cada uno con su licencia.
+| Recurso | Autor | Licencia | Dónde se usa |
+|---|---|---|---|
+| Tipografía [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible) | Braille Institute of America | [SIL Open Font License 1.1](arte/tipografia/OFL.txt) | Todos los textos. Archivos en `arte/tipografia/` |
+| Costas de [Natural Earth](https://www.naturalearthdata.com/) (1:10 millones), vía [world-atlas](https://github.com/topojson/world-atlas) y [topojson-client](https://github.com/topojson/topojson-client) | Natural Earth; Mike Bostock | Dominio público (datos); ISC (herramientas, solo para preparar los datos) | Mapa de territorios (`arte/mapa/costas.js`) |
+
+El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido son **propios del equipo** (CC BY-SA 4.0). No se usan fotos históricas, ilustraciones, sonidos ni música de terceros. *Se completa si se suma alguna librería o recurso nuevo.*
 
 ## Uso de inteligencia artificial
 
 Las bases piden declararlo (cláusula 7.4).
 
 - **Claude (Anthropic), a través de Claude Code:** se usó para resumir las bases de la hackatón, proponer un plan de trabajo y armar la estructura inicial de este repositorio y de su documentación. El equipo revisa y decide todo el contenido.
+- **Arte y sonido (12/11):** a pedido de la persona a cargo del arte, Claude Code buscó fuentes sobre el paisaje fueguino y la cultura material yagán, y propuso la dirección de arte (`docs/04-direccion-de-arte.md`). También escribió el código que define y genera la paleta, los sprites en pixel art, el logo y la página de propuestas (`arte/`), y el código que sintetiza el sonido (`sonido/`), junto con el plan de video y pitch (`equipo/comunicacion.md`). El equipo revisa los dibujos y elige el estilo. Los datos culturales marcados con 🔍 los verifica la persona de investigación con las fuentes y la comunidad.
+- **Estilo Corteza y rigor histórico (12/11):** el equipo eligió el estilo. Claude Code escribió el motor de dibujo (`arte/corteza/`), las cartas, el HUD y el logo. También leyó el capítulo «The Yahgan» del *Handbook of South American Indians* (Cooper, 1946) y *The Gold Diggings of Cape Horn* (Spears, 1895), auditó cada elemento del arte contra esas fuentes, con página (`docs/05-rigor-historico.md`), y corrigió lo que no coincidía. La validación final es del equipo y de la comunidad.
+- **Voz, postal y versión de mesa (12/11):** Claude Code sumó la lectura en voz alta de las cartas (`sonido/voz.js`), la postal del viaje (`arte/postal/`) y la versión de mesa para imprimir (`mesa/`), con reglas y números de prueba que el equipo ajusta.
+- **Mapa, alto contraste, transiciones y stand (12/11):** Claude Code armó el mapa de los territorios ancestrales con costas reales y fuentes (`arte/mapa/`), el modo alto contraste y las transiciones del motor (`arte/corteza/`), y la vidriera y el cartel del stand (`stand/`).
+- **Presentación, cartas impresas y video (12/11):** Claude Code armó la presentación del pitch (`presentacion/`), las cartas para imprimir (`arte/cartas/`) y el storyboard del video (`equipo/video/`), y redactó este README con huecos marcados (✏️) para que los complete el equipo.
+- **Luz real, sonido por lugar y guía docente (12/11):** Claude Code escribió el cálculo de la luz real de Ushuaia (`arte/corteza/luz-real.js`), las capas de sonido de bosque y playa (`sonido/ambiente.js`) y la guía para docentes con una actividad por carta (`escuelas/`). Las actividades parten solo de los datos citados en las cartas y las revisa el equipo.
+- **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
 
 ## Integrantes
 
 Equipo **Tierra de los Humos**:
 
-- *Pendiente: nombres y roles*
+| Integrante | Rol |
+|---|---|
+| ✏️ *[nombre]* | Programación núcleo: motor, mapa, fuego, ciclo de partida |
+| ✏️ *[nombre]* | Programación de interfaz, contenido y publicación |
+| ✏️ *[nombre]* | Investigación cultural y consulta con comunidades |
+| ✏️ *[nombre]* | Arte, sonido y comunicación |
+
+✏️ *Indicar quién es la persona referente.*
 
 ## Licencias
 

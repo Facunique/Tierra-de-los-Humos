@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portada y logo</title>
+<meta name="description" content="Tierra de los Humos: fuente del logo, el ícono y la imagen para compartir en estilo Corteza. Se exportan a PNG con arte/corteza/exportar.cjs.">
+<link rel="stylesheet" href="../tipografia/atkinson.css">
+<style>
+  :root { --fondo: #e9dfc8; --texto: #28221e; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; } }
+  :root[data-theme="dark"] { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; }
+  body { margin: 0; padding: 16px; background: var(--fondo); color: var(--texto); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; display: grid; gap: 24px; justify-items: start; }
+  body.exportar { padding: 0; background: transparent; gap: 0; }
+  .pieza { position: relative; overflow: hidden; }
+  canvas { display: block; }
+  /* Imagen para compartir: 1200 × 630 */
+  #compartir { width: 1200px; height: 630px; }
+  #compartir .rotulo { position: absolute; right: 56px; top: 150px; width: 520px; padding: 30px 34px 26px; }
+  #compartir h1 { margin: 0; font-size: 70px; line-height: 0.98; letter-spacing: -0.01em; }
+  #compartir p { margin: 16px 0 0; font-size: 25px; line-height: 1.32; }
+  #compartir .eje { position: absolute; left: 34px; bottom: 26px; font-size: 18px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #eee5d0; text-shadow: 0 2px 0 #0f1a21; }
+  /* Logo: 960 × 300 */
+  #logo { width: max-content; height: 300px; display: flex; padding-right: 16px; align-items: center; gap: 30px; background: transparent; }
+  #logo .emblema { width: 280px; height: 280px; border-radius: 50%; overflow: hidden; box-shadow: 8px 10px 0 rgba(15,26,33,.55); flex: none; margin-left: 6px; }
+  #logo .rotulo { padding: 22px 30px 20px; }
+  #logo h1 { margin: 0; font-size: 82px; line-height: 0.95; }
+  #logo p { margin: 10px 0 0; font-size: 22px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #973a25; }
+  /* Ícono cuadrado: 512 × 512 */
+  #icono { width: 512px; height: 512px; border-radius: 96px; }
+  .papel-rotulo {
+    background: #eee5d0; color: #28221e; position: relative;
+    border-radius: 16px 22px 14px 24px / 22px 14px 24px 16px; box-shadow: 8px 10px 0 rgba(15,26,33,.55);
+  }
+  .papel-rotulo::before { content: ""; position: absolute; inset: 9px; border-radius: inherit; border: 2px dashed rgba(94,65,44,.35); }
+</style>
+</head>
+<body>
+  <div class="pieza" id="compartir">
+    <canvas id="c-compartir"></canvas>
+    <div class="rotulo papel-rotulo">
+      <h1>Tierra de los Humos</h1>
+      <p>Un viaje en canoa por los canales fueguinos. Cuando el fuego se apaga, lo aprendido pasa a la siguiente generación.</p>
+    </div>
+    <div class="eje">SoberaníaTech 2026 · Memoria y Cultura</div>
+  </div>
+
+  <div class="pieza" id="logo">
+    <div class="emblema"><canvas id="c-emblema"></canvas></div>
+    <div class="rotulo papel-rotulo"><h1>Tierra de<br>los Humos</h1><p>Roguelike fueguino</p></div>
+  </div>
+
+  <div class="pieza" id="icono"><canvas id="c-icono"></canvas></div>
+
+<script src="../fuente/arte.js"></script>
+<script src="corteza.js"></script>
+<script>
+  const CZ = window.TDH_CORTEZA;
+  const params = new URLSearchParams(location.search);
+  if (params.has('exportar')) document.body.classList.add('exportar');
+  const T_FIJO = 2.15; // un instante lindo del fuego y del humo
+
+  function escena(canvas, mapa, extra, celda, ancho, alto) {
+    const m = CZ.crear(canvas, { celda, dpr: 2 });
+    m.escena(Object.assign({ mapa, objetos: [], estacion: 'otono', clima: 'calma', hora: 'tarde' }, extra));
+    m.dibujar(T_FIJO);
+    canvas.style.width = (ancho || mapa[0].length * celda) + 'px';
+    canvas.style.height = (alto || mapa.length * celda) + 'px';
+    return m;
+  }
+
+  // Imagen para compartir: la costa, el canal, la canoa con su fuego, humos de otros fogones.
+  escena(document.getElementById('c-compartir'), [
+    'MMLMMMLLMMMMLLMMMLLMMMMMM',
+    'LLLGGLLLtLLLGGLLLGGLLLGGL',
+    'GGLGGGGLLGGGGLGGGGGLGGGGG',
+    '..GG....GG....GGG......GG',
+    ',,,k,,,,,,,,,,,,,,k,,,,,,',
+    '--------,,,,------,,-----',
+    '~~~~~~~~~~~~~~~~~~~~~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~~~~~~',
+  ], { objetos: [{ id: 'choza', x: 5, y: 3 }, { id: 'conchal', x: 7, y: 3 }, { id: 'guindo-grande', x: 20, y: 3 }],
+       humos: [{ x: 12.5, y: 1.4 }, { x: 22.6, y: 1.8 }] }, 48, 1200, 624);
+  // La canoa grande, en primer plano, encima de la escena
+  (function () {
+    const cv = document.getElementById('c-compartir'), x = cv.getContext('2d');
+    x.setTransform(2, 0, 0, 2, 0, 0);
+    CZ.humo(x, 215, 430, 2.4, T_FIJO + 1, 0.9, 8, 120);
+    CZ.canoa(x, 215, 500, 2.6, 4, T_FIJO, 1, false);
+    x.setTransform(1, 0, 0, 1, 0, 0);
+  })();
+
+  // Emblema redondo para el logo
+  escena(document.getElementById('c-emblema'), ['LGGL', '..,,', '~~~~', '~~~~'], {}, 70, 280, 280);
+  (function () { const cv = document.getElementById('c-emblema'), x = cv.getContext('2d'); x.setTransform(2, 0, 0, 2, 0, 0); CZ.humo(x, 140, 150, 1.5, T_FIJO + 1, 0.6, 7, 80); CZ.canoa(x, 140, 200, 1.95, 4, T_FIJO, 1, false); })();
+
+  // Ícono cuadrado (favicon, pantalla de inicio del celular)
+  escena(document.getElementById('c-icono'), ['~~~~', '~~~~', '~~~~', '~~~~'], { hora: 'noche' }, 128, 512, 512);
+  (function () { const cv = document.getElementById('c-icono'), x = cv.getContext('2d'); x.setTransform(2, 0, 0, 2, 0, 0); CZ.humo(x, 262, 230, 2.8, T_FIJO + 1, 0.4, 7, 150); CZ.canoa(x, 262, 370, 4.6, 4, T_FIJO, 1, false); })();
+  document.body.dataset.listo = '1';
+</script>
+</body>
+</html>

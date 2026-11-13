@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cartel del stand</title>
+<meta name="description" content="Tierra de los Humos: cartel A3 para el stand de la demo del 19/11, con la idea del juego, el mapa de territorios y el QR para jugar.">
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<style>
+  :root { --fondo: #e9dfc8; --texto: #28221e; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; } }
+  :root[data-theme="dark"] { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; }
+  @page { size: A3; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; }
+  .hoja { width: 297mm; height: 420mm; margin: 12px auto; background: #1d2e38; position: relative; overflow: hidden; color: #28221e; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hoja > canvas.fondo { position: absolute; left: 0; top: 0; width: 297mm; height: 170mm; }
+  .hoja .titulo { position: absolute; right: 14mm; top: 24mm; width: 150mm; padding: 9mm 10mm 8mm; }
+  .papel { background: #eee5d0; border-radius: 6mm 8mm 5mm 9mm / 8mm 5mm 9mm 6mm; box-shadow: 3mm 4mm 0 rgba(15,26,33,.55); position: relative; }
+  .papel::before { content: ""; position: absolute; inset: 3mm; border: .6mm dashed rgba(94,65,44,.35); border-radius: inherit; pointer-events: none; }
+  .sub { margin: 0 0 2mm; font-size: 5mm; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #973a25; }
+  h1 { margin: 0; font-size: 22mm; line-height: .92; }
+  .titulo p { margin: 4mm 0 0; font-size: 6.4mm; line-height: 1.3; }
+  .ideas { position: absolute; left: 14mm; right: 14mm; top: 178mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7mm; }
+  .idea { padding: 7mm 7mm 6mm; }
+  .idea canvas { width: 16mm; height: 16mm; image-rendering: pixelated; display: block; margin-bottom: 3mm; }
+  .idea h2 { margin: 0 0 2mm; font-size: 7.4mm; line-height: 1.1; }
+  .idea p { margin: 0; font-size: 4.7mm; line-height: 1.35; }
+  .abajo { position: absolute; left: 14mm; right: 14mm; top: 262mm; bottom: 34mm; display: grid; grid-template-columns: 1.25fr 1fr; gap: 8mm; }
+  .mapa { padding: 4mm; display: flex; flex-direction: column; }
+  .mapa canvas { width: 100%; height: auto; border-radius: 3mm; display: block; }
+  .mapa p { margin: 2.5mm 1mm 0; font-size: 3.6mm; color: #5b524a; }
+  .jugalo { padding: 9mm 9mm 8mm; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #ffd47c; }
+  .jugalo h2 { margin: 0 0 4mm; font-size: 11mm; line-height: 1; }
+  .jugalo img { width: 62mm; height: 62mm; border-radius: 3mm; }
+  .jugalo p { margin: 4mm 0 0; font-size: 4.6mm; }
+  .jugalo code { font-size: 4.2mm; }
+  .pie { position: absolute; left: 14mm; right: 14mm; bottom: 8mm; height: 20mm; display: flex; gap: 6mm; justify-content: space-between; align-items: center; color: #eee5d0; font-size: 4.2mm; font-weight: 700; line-height: 1.35; }
+  .pie .codigo { display: flex; gap: 3mm; align-items: center; text-align: right; flex: none; }
+  .pie img { width: 18mm; height: 18mm; border-radius: 1.5mm; }
+  .instrucciones { max-width: 760px; margin: 16px auto 0; padding: 0 16px; }
+  @media print { body { background: #fff; } .instrucciones { display: none; } .hoja { margin: 0; } }
+</style>
+</head>
+<body>
+  <div class="instrucciones">
+    <p><strong>Cartel A3 para el stand.</strong> Antes de imprimir: completar los nombres del equipo y verificar que el QR abra el juego (<code>stand/generar-qr.cjs</code> lo regenera con otra dirección).</p>
+  </div>
+  <section class="hoja" aria-label="Cartel A3">
+    <canvas class="fondo" id="fondo" aria-hidden="true"></canvas>
+    <div class="titulo papel">
+      <p class="sub">Roguelike fueguino</p>
+      <h1>Tierra de los Humos</h1>
+      <p>Un viaje en canoa por los canales fueguinos. Cuando el fuego se apaga, lo aprendido pasa a la siguiente generación.</p>
+    </div>
+    <div class="ideas">
+      <div class="idea papel"><canvas data-icono="icono-fuego" aria-hidden="true"></canvas><h2>El fuego es la vida</h2><p>Las familias yaganes llevaban el fuego encendido en el medio de la canoa. En el juego, ese fuego es tu vida.</p></div>
+      <div class="idea papel"><canvas data-icono="icono-generacion" aria-hidden="true"></canvas><h2>Morir es transmitir</h2><p>Si el fuego se apaga, lo aprendido no se pierde: pasa a la siguiente generación del mismo pueblo.</p></div>
+      <div class="idea papel"><canvas data-icono="icono-saber" aria-hidden="true"></canvas><h2>Cada saber, con su fuente</h2><p>Cada carta separa el dato del recurso de juego y cita su fuente con página. Los pueblos están vivos.</p></div>
+    </div>
+    <div class="abajo">
+      <figure class="mapa papel" style="margin:0"><canvas id="mapa" aria-hidden="true"></canvas><p>Territorios ancestrales, aproximados (Cooper, 1946; Bird, 1946). Costas: Natural Earth.</p></figure>
+      <div class="jugalo papel"><h2>Jugalo en tu celular</h2><img src="qr-juego.svg" alt="Código QR para abrir el juego"><p><code>facunique.github.io/Tierra-de-los-Humos</code></p></div>
+    </div>
+    <div class="pie"><span>SoberaníaTech 2026 · Eje 04 · Memoria, Cultura e Innovación Comunitaria<br>Equipo Tierra de los Humos: ✏️ <span style="opacity:.8">[nombres]</span></span><span class="codigo"><span>Código abierto<br>y contenidos libres</span><img src="qr-repositorio.svg" alt="Código QR del repositorio"></span></div>
+  </section>
+
+<script src="../arte/fuente/arte.js"></script>
+<script src="../arte/corteza/corteza.js"></script>
+<script src="../arte/mapa/costas.js"></script>
+<script src="../arte/mapa/mapa.js"></script>
+<script>
+(function () {
+  const CZ = TDH_CORTEZA, ARTE = TDH_ARTE;
+  // Escena del encabezado: la costa en otoño y la canoa grande
+  const mapa = [];
+  for (let y = 0; y < 11; y++) { let f = ''; for (let x = 0; x < 19; x++) { const b = 4 + Math.round(Math.sin(x * 0.55) * 0.7); f += y === 0 ? (x % 5 === 2 ? 'L' : 'M') : y < b - 1 ? ((x * 7 + y) % 5 ? 'G' : 'L') : y === b - 1 ? '.' : y === b ? (x % 6 === 3 ? 'k' : ',') : (y > b + 3 ? '~' : '-'); } mapa.push(f); }
+  const fondo = document.getElementById('fondo');
+  const m = CZ.crear(fondo, { celda: 60, dpr: 2 });
+  m.escena({ mapa, objetos: [{ id: 'choza', x: 3, y: 3 }, { id: 'conchal', x: 5, y: 3 }], humos: [{ x: 9.5, y: 1.2 }, { x: 16.5, y: 1.5 }], estacion: 'otono', hora: 'tarde' });
+  m.dibujar(2.15);
+  const x = fondo.getContext('2d'); x.setTransform(2, 0, 0, 2, 0, 0);
+  CZ.humo(x, 230, 380, 3, 3.1, 0.8, 8, 150); CZ.canoa(x, 230, 520, 3.6, 4, 2.15, 1, false);
+  fondo.style.objectFit = 'cover';
+  document.querySelectorAll('[data-icono]').forEach((c) => { const s = ARTE.aCanvas(c.dataset.icono, 0, 'verano', 4); c.width = s.width; c.height = s.height; c.getContext('2d').drawImage(s, 0, 0); });
+  TDH_MAPA.dibujar(document.getElementById('mapa'), { ancho: 900, territorios: true, nombres: true, hoy: true, destacar: 'yagan', dpr: 2 });
+  document.body.dataset.listo = '1';
+})();
+</script>
+</body>
+</html>

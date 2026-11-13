@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía para docentes</title>
+<meta name="description" content="Tierra de los Humos en el aula: cómo jugar en clase, cuidados al hablar de los pueblos fueguinos, una actividad por carta de saber y hojas para fotocopiar. A4, para imprimir.">
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<link rel="stylesheet" href="../arte/corteza/carta.css">
+<style>
+  :root { --fondo: #e9dfc8; --texto: #28221e; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; } }
+  :root[data-theme="dark"] { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; }
+  .instrucciones { max-width: 760px; margin: 16px auto 0; padding: 0 16px; }
+  .instrucciones p { margin: 0 0 8px; }
+  .instrucciones a { color: inherit; }
+
+  /* Hoja A4 de papel */
+  .hoja { width: 210mm; height: 297mm; margin: 12px auto; background: #eee5d0; color: #28221e; padding: 12mm 14mm 16mm; position: relative; overflow: hidden; break-after: page; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hoja:last-child { break-after: auto; page-break-after: auto; }
+  .encabezado { display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm; border-bottom: .6mm dashed #977250; padding-bottom: 3mm; margin-bottom: 4mm; }
+  h1 { margin: 0; font-size: 9mm; line-height: 1.02; }
+  .sub { font-size: 3.4mm; font-weight: 700; color: #973a25; letter-spacing: .1em; text-transform: uppercase; }
+  .datos { font-size: 3.3mm; text-align: right; line-height: 1.35; }
+  h2 { font-size: 4.6mm; margin: 3.5mm 0 1.5mm; color: #973a25; }
+  h3 { font-size: 4.1mm; margin: 0 0 1mm; }
+  p, li { font-size: 3.5mm; line-height: 1.42; margin: 0 0 1.3mm; }
+  ol, ul { margin: 0 0 1mm; padding-left: 5mm; }
+  a { color: #1d4f6b; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .caja { background: #f7f1e3; border-radius: 3mm; padding: 3mm 4mm; border: .3mm solid #cdbf9f; margin-bottom: 3mm; }
+  .caja--tinta { background: #1d2e38; color: #eee5d0; border-color: #0f1a21; }
+  .caja--tinta h2 { color: #f2c46d; margin-top: 0; }
+  .pie { position: absolute; left: 14mm; right: 14mm; bottom: 7mm; font-size: 2.8mm; color: #5b524a; display: flex; justify-content: space-between; border-top: .3mm dashed #8f897f; padding-top: 1.5mm; }
+  .portada-escena { width: 100%; height: 62mm; border-radius: 4mm; display: block; margin-bottom: 4mm; box-shadow: 1.5mm 2mm 0 rgba(40,34,30,.25); }
+  .con-mapa { display: grid; grid-template-columns: 112mm 1fr; gap: 5mm; align-items: start; }
+  .mapa { width: 100%; border-radius: 3mm; display: block; box-shadow: 1mm 1.5mm 0 rgba(40,34,30,.2); }
+  .tiempo { display: grid; grid-template-columns: 14mm 1fr; gap: 1mm 3mm; }
+  .tiempo b { color: #973a25; font-size: 3.5mm; }
+  .formatos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+  .formatos .caja { margin: 0; }
+
+  /* Cuidados */
+  .cuidados { list-style: none; padding: 0; display: grid; gap: 1.6mm; }
+  .cuidados li { padding-left: 7mm; position: relative; }
+  .cuidados li::before { content: ""; position: absolute; left: 0; top: .9mm; width: 4mm; height: 4mm; border-radius: 50%; background: #973a25; box-shadow: inset 0 0 0 1mm #eee5d0, 0 0 0 .3mm #973a25; }
+
+  /* Esquema de una carta */
+  .esquema { display: grid; grid-template-columns: 32mm 1fr; gap: 1.2mm 3mm; align-items: center; }
+  .esquema .marca { font-size: 3mm; font-weight: 700; text-align: right; }
+
+  /* Actividad por carta */
+  .actividad { display: grid; grid-template-columns: 58mm 1fr; gap: 5mm; padding: 3.5mm 0; border-bottom: .4mm dashed #b8a98a; }
+  .actividad:last-of-type { border-bottom: 0; }
+  .actividad canvas { width: 58mm; height: 29mm; border-radius: 2.5mm; display: block; margin-bottom: 2mm; }
+  .actividad .tipo { margin: 0 0 .8mm; font-size: 2.6mm; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #973a25; }
+  .actividad .dato { font-size: 3.05mm; line-height: 1.38; }
+  .actividad .fuente { font-size: 2.6mm; color: #5b524a; line-height: 1.3; }
+  .actividad .pregunta { font-size: 3.9mm; font-weight: 700; margin-bottom: 1.6mm; }
+  .actividad ol li { font-size: 3.3mm; line-height: 1.38; margin-bottom: .9mm; }
+  .chips { display: flex; flex-wrap: wrap; gap: 1.2mm; margin: 1.2mm 0; }
+  .chip { font-size: 2.7mm; font-weight: 700; padding: .4mm 2mm; border-radius: 10mm; background: #dfe7e0; color: #23402f; }
+  .chip--min { background: #f2dfb6; color: #5e412c; }
+  .nota { font-size: 3.1mm; line-height: 1.38; background: #f7f1e3; border-left: 1mm solid #973a25; padding: 1.4mm 2.4mm; border-radius: 0 2mm 2mm 0; margin: 0; }
+  .nota--pensar { border-left-color: #1d4f6b; }
+
+  /* Tabla de luz */
+  table { width: 100%; border-collapse: collapse; margin: 2mm 0 3mm; }
+  th, td { border: .3mm solid #977250; padding: 1.3mm 2mm; font-size: 3.3mm; text-align: center; }
+  th { background: #f7f1e3; }
+  td:first-child, th:first-child { text-align: left; }
+  tr.destacada td { background: #f2dfb6; font-weight: 700; }
+  .barra { display: block; height: 2.6mm; border-radius: 1.3mm; background: linear-gradient(90deg, #f2c46d, #c7772d); }
+
+  /* Hoja fotocopiable: carta en blanco */
+  .blancas { display: grid; grid-template-rows: 1fr 1fr; gap: 6mm; height: 236mm; }
+  .carta-blanca { border: .5mm dashed #977250; border-radius: 4mm; padding: 4mm 5mm; display: grid; grid-template-columns: 62mm 1fr; gap: 3mm 5mm; grid-template-rows: auto 1fr; background: #fbf7ee; }
+  .carta-blanca .cab { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: baseline; }
+  .carta-blanca .dibujo { border: .3mm solid #cdbf9f; border-radius: 3mm; display: grid; place-items: center; font-size: 3mm; color: #8f897f; text-align: center; padding: 2mm; }
+  .renglones { display: grid; gap: 2.4mm; align-content: start; }
+  .renglones label { font-size: 3.2mm; font-weight: 700; }
+  .renglon { border-bottom: .3mm solid #b8a98a; height: 6.5mm; }
+  .carta-blanca .etiqueta { font-size: 2.8mm; }
+
+  @media print { body { background: #fff; } .instrucciones { display: none; } .hoja { margin: 0; } }
+  @media screen and (max-width: 840px) { body { overflow-x: auto; } }
+</style>
+</head>
+<body>
+<div class="instrucciones">
+  <p><strong>Guía para docentes (A4).</strong> Para imprimir o leer en pantalla. Las actividades salen de <code>escuelas/actividades.js</code> y los textos de las cartas, de <code>arte/cartas/saberes-borrador.js</code>: si se corrigen ahí, esta guía se actualiza sola. Para el PDF: <code>node escuelas/exportar.cjs</code>.</p>
+</div>
+
+<!-- 1 · Portada y cómo usarla -->
+<section class="hoja" aria-label="Portada">
+  <div class="encabezado">
+    <div><div class="sub">Guía para docentes</div><h1>Tierra de los Humos<br>en el aula</h1></div>
+    <div class="datos">Secundaria, ciclo básico<br>(se adapta a primaria alta)<br>Dos módulos de 40 minutos</div>
+  </div>
+  <canvas class="portada-escena" id="portada" aria-hidden="true"></canvas>
+  <p><b>Tierra de los Humos</b> es un juego por turnos. Cada partida es un viaje en canoa por los canales de Tierra del Fuego junto a una familia <b>yagán</b>. El fuego de la canoa es la vida: si se apaga, el viaje termina, pero lo aprendido pasa a la generación siguiente como <b>cartas de saber</b>. Cada carta tiene un dato con su <b>fuente y página</b>.</p>
+  <p>Esta guía propone una clase alrededor del juego: jugar, leer una carta como una fuente, hacer una actividad y conversar sobre lo que se hereda.</p>
+
+  <h2>Tres formas de jugar en clase</h2>
+  <div class="formatos">
+    <div class="caja"><h3>Con pantallas</h3><p>En celulares o computadoras, en grupos de 2 o 3. No hace falta instalar nada: se abre en el navegador.</p><p>Tiene <b>Escuchar la carta</b> (lectura en voz alta), <b>Alto contraste</b> y subtítulos de sonido.</p></div>
+    <div class="caja"><h3>Con proyector</h3><p>Una sola partida para toda la clase. En cada turno, la clase vota hacia dónde remar y si conviene amarrar.</p><p>Sirve para la primera vez: todos ven las mismas cartas.</p></div>
+    <div class="caja"><h3>Sin pantallas</h3><p>La <b>versión de mesa</b>: tablero A3, fichas, reglas de una página y las 9 cartas para imprimir. Se juega con un dado común.</p><p>Archivos en la carpeta <code>mesa/</code> del repositorio.</p></div>
+  </div>
+
+  <h2>Una clase posible (80 minutos)</h2>
+  <div class="tiempo">
+    <b>10 min</b><p><b>El mapa.</b> Muestren el mapa de territorios (página 2). ¿Dónde viven los pueblos fueguinos? ¿Qué hay alrededor: mar, bosque, montaña?</p>
+    <b>25 min</b><p><b>Jugar.</b> Una o dos generaciones. Cuando aparece una carta, se lee en voz alta.</p>
+    <b>30 min</b><p><b>Una actividad por grupo.</b> Cada grupo toma una carta distinta y hace su actividad (páginas 3 a 5).</p>
+    <b>15 min</b><p><b>Lo que se hereda.</b> Cada grupo cuenta su carta: el dato, la fuente y lo que pensaron. Cierre: ¿qué saber de su familia les gustaría que pase a la generación siguiente? (hoja de la página 7).</p>
+  </div>
+  <div class="pie"><span>Tierra de los Humos · SoberaníaTech 2026 · Guía para docentes</span><span>1</span></div>
+</section>
+
+<!-- 2 · Cuidados, cómo leer una carta, mapa -->
+<section class="hoja" aria-label="Cuidados y fuentes">
+  <div class="encabezado">
+    <div><div class="sub">Antes de empezar</div><h1>Cuidados para el aula</h1></div>
+    <div class="datos">Son las mismas reglas<br>con las que se hizo el juego.</div>
+  </div>
+  <div class="dos">
+    <div>
+      <ul class="cuidados">
+        <li><b>En presente.</b> El pueblo yagán sigue vivo: hay familias y comunidades yaganes hoy. Eviten «extinguidos», «desaparecidos» o «los últimos».</li>
+        <li><b>Dato y juego, separados.</b> La familia, el mapa y los números del juego son ficción. Los saberes no: cada uno cita su fuente con página.</li>
+        <li><b>La fuente mira desde afuera.</b> Las cartas citan a Cooper (1946), que reunió lo que escribieron viajeros, misioneros y etnógrafos entre fines del siglo XIX y comienzos del XX. Es una mirada externa y de una época.</li>
+        <li><b>Sin disfraces ni ceremonias.</b> No recreen ceremonias ni se pinten imitando fotos antiguas. Las ceremonias son de las comunidades.</li>
+        <li><b>Fotos históricas, con contexto.</b> Si muestran alguna, digan quién la tomó, cuándo y en qué situación. El juego no usa fotos: todo está dibujado.</li>
+        <li><b>Sin palabras inventadas.</b> No pongan nombres «en yagán» a personajes ni a cosas. La lengua es de la comunidad.</li>
+        <li><b>Sin violencia.</b> El juego no tiene enemigos ni peleas: el desafío es el clima, el mar y el fuego.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="caja">
+        <h2 style="margin-top:0">Cómo leer una carta</h2>
+        <div class="esquema">
+          <span class="marca">Tipo</span><p style="margin:0">Pueblo y tema: fuego, canoa, alimento, refugio, encuentro.</p>
+          <span class="marca">Título</span><p style="margin:0">Una frase que resume el saber.</p>
+          <span class="marca"><span class="etiqueta etiqueta--dato">Dato</span></span><p style="margin:0">Lo que dice la fuente.</p>
+          <span class="marca"><span class="etiqueta etiqueta--juego">En el juego</span></span><p style="margin:0">Cómo se usa ese saber en el juego. Es invento nuestro.</p>
+          <span class="marca">Fuente</span><p style="margin:0">Autor, año, obra y página. Al dorso de la carta impresa.</p>
+        </div>
+      </div>
+      <div class="caja caja--tinta">
+        <h2>Leer una fuente</h2>
+        <p>Con cualquier carta, tres preguntas:</p>
+        <ol>
+          <li>¿Quién lo escribió, cuándo y desde dónde?</li>
+          <li>¿Qué dice exactamente? ¿Qué agregamos nosotros?</li>
+          <li>¿Qué no sabemos todavía? ¿A quién se lo podríamos preguntar?</li>
+        </ol>
+        <p style="margin:0">El libro de Cooper está libre en internet: <a href="https://archive.org/details/bulletin14311946smit" style="color:#f2c46d">archive.org/details/bulletin14311946smit</a></p>
+      </div>
+    </div>
+  </div>
+  <h2>El mapa: territorios ancestrales</h2>
+  <div class="con-mapa">
+  <img class="mapa" src="../arte/mapa/mapa-territorios.jpg" alt="Mapa de Tierra del Fuego con los territorios ancestrales de los pueblos Kawésqar, Selk'nam, Haush y Yagán, y las ciudades de hoy: Río Grande, Tolhuin, Ushuaia y Puerto Williams. El territorio yagán está en los canales del sur, alrededor del canal Beagle y hasta el cabo de Hornos.">
+  <div>
+    <p>Son <b>zonas, no fronteras</b>: los pueblos se movían, se visitaban y se casaban entre sí.</p>
+    <p>El territorio ancestral <b>yagán</b> es la costa sur de la Isla Grande y las islas hasta el cabo de Hornos, alrededor del canal Beagle (Cooper, 1946, p. 81). Ahí transcurre el juego.</p>
+    <p><b>Para preguntar:</b> ¿qué ciudades de hoy están dentro de esos territorios? ¿Por qué un pueblo que viajaba en canoa ocupaba las islas y la costa, y no la estepa del norte?</p>
+    <p style="font-size:2.8mm;color:#5b524a">Costas: Natural Earth (dominio público). Territorios según las fuentes etnográficas del juego (<code>docs/05-rigor-historico.md</code>).</p>
+  </div>
+  </div>
+  <div class="pie"><span>Tierra de los Humos · Guía para docentes</span><span>2</span></div>
+</section>
+
+<div id="actividades"></div>
+
+<!-- 6 · El año en los canales -->
+<section class="hoja" aria-label="El año en los canales">
+  <div class="encabezado">
+    <div><div class="sub">Actividad extra</div><h1>El año en los canales</h1></div>
+    <div class="datos">Matemática · Geografía · Ciencias Naturales<br>Se usa con la carta «Una canoa de corteza»</div>
+  </div>
+  <p>Ushuaia está muy al sur (54,8° de latitud). Por eso, entre el verano y el invierno, las horas de luz cambian muchísimo. El juego lo usa: con la opción <b>Luz real de Ushuaia</b>, la partida empieza con la luz que hay ahí en ese momento.</p>
+  <p>La tabla la calcula el mismo juego, sin internet, con el algoritmo de posición del sol de la NOAA (error de un par de minutos). Es la hora oficial argentina; el día 21 de cada mes.</p>
+  <table id="tabla-luz" aria-label="Salida y puesta del sol en Ushuaia, el día 21 de cada mes">
+    <thead><tr><th>Mes</th><th>Estación</th><th>Sale el sol</th><th>Se pone</th><th>Horas de luz</th><th style="width:30%">Comparación</th><th>En mi ciudad</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <div class="dos">
+    <div class="caja">
+      <h2 style="margin-top:0">Para resolver</h2>
+      <ol>
+        <li>¿Cuántas horas de luz más tiene diciembre que junio en Ushuaia?</li>
+        <li>¿En qué meses el día y la noche duran casi lo mismo? ¿Cómo se llaman esos días?</li>
+        <li>Busquen las horas de luz de su ciudad y completen la última columna. ¿Dónde cambian más a lo largo del año? ¿Por qué?</li>
+        <li>Si un viaje en canoa dura todo el día con luz, ¿cuántas horas puede remar una familia en diciembre? ¿Y en junio?</li>
+      </ol>
+    </div>
+    <div class="caja">
+      <h2 style="margin-top:0">Para conversar</h2>
+      <p>La carta «Una canoa de corteza» dice que la corteza se sacaba en <b>primavera</b>, cuando sube la savia (Cooper, 1946, p. 88). Ubiquen la primavera en la tabla (fila destacada).</p>
+      <p>¿Qué otras cosas de su vida cambian con la estación? ¿Qué saberes de su familia dependen del calendario: una siembra, una cosecha, una fiesta, un viaje?</p>
+      <p style="margin:0;font-size:3mm;color:#5b524a">La tabla es un cálculo astronómico, no un dato etnográfico: no dice cómo organizaban el año las familias yaganes.</p>
+    </div>
+  </div>
+  <div class="pie"><span>Tierra de los Humos · Guía para docentes</span><span>6</span></div>
+</section>
+
+<!-- 7 · Hoja fotocopiable -->
+<section class="hoja" aria-label="Hoja para fotocopiar: un saber de mi familia">
+  <div class="encabezado">
+    <div><div class="sub">Para fotocopiar · cierre de la clase</div><h1>Un saber que quiero heredar</h1></div>
+    <div class="datos">Un saber de tu familia o de tu barrio.<br>Igual que en el juego: dato, fuente y uso.</div>
+  </div>
+  <div class="blancas">
+    <div class="carta-blanca">
+      <div class="cab"><b class="sub">Saber · Mi familia</b><span style="font-size:3mm">Nombre: ______________________</span></div>
+      <div class="dibujo">Dibujo del saber<br>(sin fotos de personas)</div>
+      <div class="renglones">
+        <label>Título</label><div class="renglon"></div>
+        <label><span class="etiqueta etiqueta--dato">Dato</span> ¿Qué se sabe? ¿Cómo se hace?</label><div class="renglon"></div><div class="renglon"></div><div class="renglon"></div>
+        <label>Fuente: ¿quién me lo enseñó?</label><div class="renglon"></div>
+        <p style="font-size:2.8mm;color:#5b524a;margin:0">Alcanza con «mi abuela» o «un vecino». No pongas nombres completos ni datos de contacto.</p>
+        <label><span class="etiqueta etiqueta--juego">En el juego</span> Si fuera una carta, ¿para qué serviría?</label><div class="renglon"></div>
+      </div>
+    </div>
+    <div class="carta-blanca">
+      <div class="cab"><b class="sub">Saber · Mi familia</b><span style="font-size:3mm">Nombre: ______________________</span></div>
+      <div class="dibujo">Dibujo del saber<br>(sin fotos de personas)</div>
+      <div class="renglones">
+        <label>Título</label><div class="renglon"></div>
+        <label><span class="etiqueta etiqueta--dato">Dato</span> ¿Qué se sabe? ¿Cómo se hace?</label><div class="renglon"></div><div class="renglon"></div><div class="renglon"></div>
+        <label>Fuente: ¿quién me lo enseñó?</label><div class="renglon"></div>
+        <p style="font-size:2.8mm;color:#5b524a;margin:0">Alcanza con «mi abuela» o «un vecino». No pongas nombres completos ni datos de contacto.</p>
+        <label><span class="etiqueta etiqueta--juego">En el juego</span> Si fuera una carta, ¿para qué serviría?</label><div class="renglon"></div>
+      </div>
+    </div>
+  </div>
+  <div class="pie"><span>Tierra de los Humos · Guía para docentes · CC BY-SA 4.0</span><span>7</span></div>
+</section>
+
+<!-- 8 · Para seguir -->
+<section class="hoja" aria-label="Para seguir">
+  <div class="encabezado">
+    <div><div class="sub">Para seguir</div><h1>Fuentes y materiales</h1></div>
+    <div class="datos">Todo es libre: se puede copiar,<br>adaptar y compartir citando.</div>
+  </div>
+  <div class="dos">
+    <div>
+      <h2>Las fuentes de las cartas</h2>
+      <p><b>Cooper, J. M. (1946).</b> «The Yahgan». En J. H. Steward (ed.), <i>Handbook of South American Indians</i>, vol. 1, pp. 81-106. Smithsonian Institution. En inglés. Libre en <a href="https://archive.org/details/bulletin14311946smit">archive.org/details/bulletin14311946smit</a>.</p>
+      <p>Cada objeto, persona y escena del juego está revisado contra las fuentes, con página, en <code>docs/05-rigor-historico.md</code>. Ahí también está lo que todavía falta verificar (marcado con 🔍).</p>
+      <h2>Materiales del juego</h2>
+      <ul>
+        <li><b>Cartas de saber para imprimir</b> (A4, doble faz): <code>arte/cartas/cartas-para-imprimir.pdf</code>.</li>
+        <li><b>Versión de mesa:</b> <code>mesa/tablero-A3.pdf</code>, <code>mesa/fichas-A4.pdf</code> y <code>mesa/reglas-A4.pdf</code>.</li>
+        <li><b>Mapa de territorios:</b> <code>arte/mapa/</code>.</li>
+        <li><b>Postal del viaje:</b> al terminar una partida, el juego arma una imagen con el recorrido y los saberes, para guardar o compartir.</li>
+      </ul>
+      <p>Repositorio: <a href="https://github.com/Facunique/Tierra-de-los-Humos">github.com/Facunique/Tierra-de-los-Humos</a></p>
+      <div class="caja" style="display:grid;grid-template-columns:30mm 1fr;gap:4mm;align-items:center;margin-top:3mm">
+        <img src="../stand/qr-juego.svg" alt="Código QR para abrir el juego" style="width:30mm;height:30mm;image-rendering:pixelated">
+        <div><h3>Para jugar</h3><p style="margin:0">Escaneen el código o entren a <b>facunique.github.io/Tierra-de-los-Humos</b>. La versión en línea se publica para la demo del 19 de noviembre de 2026.</p></div>
+      </div>
+      <div class="caja">
+        <h2 style="margin-top:0">La luz de hoy en Ushuaia</h2>
+        <p style="margin:0">Con la opción <b>Luz real de Ushuaia</b>, el juego empieza con la luz que hay en el canal Beagle en ese momento: de día, al atardecer o de noche, y en la estación del año. Si juegan en junio a las 9 de la mañana, en Ushuaia todavía es de noche y la canoa sale a oscuras, con la luz del fuego. Es un buen comienzo para la actividad «El año en los canales».</p>
+      </div>
+    </div>
+    <div>
+      <div class="caja">
+        <h2 style="margin-top:0">Accesibilidad</h2>
+        <ul>
+          <li><b>Escuchar la carta:</b> la lee en voz alta con la voz del dispositivo.</li>
+          <li><b>Alto contraste:</b> costas, humo y objetos con borde marcado, para baja visión y para el proyector.</li>
+          <li><b>Subtítulos de sonido:</b> cada sonido se muestra también como texto.</li>
+          <li><b>Colores revisados</b> para daltonismo, y tipografía para baja visión (Atkinson Hyperlegible).</li>
+          <li>Se juega con el dedo, el mouse o el teclado. El movimiento se puede apagar.</li>
+        </ul>
+      </div>
+      <div class="caja">
+        <h2 style="margin-top:0">El sonido cuenta el lugar</h2>
+        <p style="margin:0">Con el sonido encendido, el bosque, la playa y el canal abierto suenan distinto. Se puede jugar con los ojos cerrados un rato y adivinar dónde está la canoa. No hay música ni cantos inventados: los cantos yaganes son de la comunidad.</p>
+      </div>
+      <div class="caja caja--tinta">
+        <h2>Un borrador abierto</h2>
+        <p style="margin:0">Los textos de las cartas y de esta guía son un borrador. Los revisa el equipo con las fuentes, y se van a consultar con la comunidad yagán. Si encuentran un error o tienen una sugerencia, se puede avisar en el repositorio.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pie"><span>Tierra de los Humos · SoberaníaTech 2026 · Textos CC BY-SA 4.0 · Código MIT</span><span>8</span></div>
+</section>
+
+<script src="../arte/fuente/arte.js"></script>
+<script src="../arte/corteza/corteza.js"></script>
+<script src="../arte/corteza/luz-real.js"></script>
+<script src="../arte/cartas/saberes-borrador.js"></script>
+<script src="actividades.js"></script>
+<script>
+(function () {
+  'use strict';
+  const CZ = window.TDH_CORTEZA, { SABERES, ORDEN } = window.TDH_SABERES, { ACTIVIDADES } = window.TDH_ACTIVIDADES;
+  function dibujar(canvas, mapa, extra, ancho) {
+    const celda = Math.ceil(ancho / mapa[0].length);
+    const m = CZ.crear(canvas, { celda, dpr: 2 });
+    m.escena(Object.assign({ mapa, objetos: [], estacion: 'verano', clima: 'calma', hora: 'dia' }, extra || {}));
+    m.dibujar(1.6);
+  }
+
+  // Portada: la canoa en el canal, al atardecer, con humo de otras familias
+  dibujar(document.getElementById('portada'),
+    ['MLGGLMGGLLGGMLGG', 'GGLp.GGLLG..GGLG', '...,,....,,k,...', ',,,,----,,,,,,,,', '--------~~~~----', '~~~~~~~~~~~~~~~~'],
+    { canoa: { x: 6, y: 3, fuego: 4, remando: true }, hora: 'tarde', estacion: 'otono', humos: [{ x: 3.5, y: 1.2 }, { x: 12.6, y: 1.4 }], objetos: [{ id: 'choza', x: 4, y: 1 }, { id: 'conchal', x: 3, y: 2 }] }, 640);
+
+  // Actividades: tres por hoja, en el orden de las cartas
+  const cont = document.getElementById('actividades');
+  const POR_HOJA = 3;
+  for (let i = 0; i < ORDEN.length; i += POR_HOJA) {
+    const hoja = document.createElement('section'); hoja.className = 'hoja';
+    const n = i / POR_HOJA + 3;
+    hoja.setAttribute('aria-label', 'Actividades ' + (i / POR_HOJA + 1));
+    hoja.innerHTML = '<div class="encabezado"><div><div class="sub">Una actividad por carta · ' + (i + 1) + ' a ' + Math.min(i + POR_HOJA, ORDEN.length) + ' de ' + ORDEN.length + '</div><h1>Las cartas en clase</h1></div><div class="datos">Cada actividad parte solo<br>del dato de su carta.</div></div>';
+    ORDEN.slice(i, i + POR_HOJA).forEach((k) => {
+      const c = SABERES[k], a = ACTIVIDADES[k];
+      const art = document.createElement('article'); art.className = 'actividad';
+      const fuente = c.fuente.replace(/<[^>]+>/g, '').replace(/^Cooper, J\. M\. \(1946\)\. «The Yahgan»\. Handbook of South American Indians, vol\. 1\. Smithsonian Institution/, 'Cooper (1946)');
+      const izquierda = '<div><canvas aria-hidden="true"></canvas><p class="tipo">Carta ' + (ORDEN.indexOf(k) + 1) + ' · ' + c.tipo + '</p><h3>' + c.titulo + '</h3><p class="dato"><span class="etiqueta etiqueta--dato">Dato</span> ' + c.dato + '</p><p class="fuente">' + fuente + '</p></div>';
+      const derecha = a
+        ? '<div><p class="pregunta">' + a.pregunta + '</p><ol>' + a.actividad.map((p) => '<li>' + p + '</li>').join('') + '</ol>' +
+          '<div class="chips"><span class="chip chip--min">' + a.minutos + ' min</span>' + a.areas.map((x) => '<span class="chip">' + x + '</span>').join('') + '</div>' +
+          '<p class="nota' + (a.cuidado.tipo === 'Para pensar' ? ' nota--pensar' : '') + '"><b>' + a.cuidado.tipo + ':</b> ' + a.cuidado.texto + '</p></div>'
+        : '<div><p class="pregunta">Actividad pendiente.</p><p>Esta carta todavía no tiene actividad en <code>escuelas/actividades.js</code>.</p></div>';
+      art.innerHTML = izquierda + derecha;
+      hoja.appendChild(art);
+      dibujar(art.querySelector('canvas'), c.mapa, c.extra, 260);
+    });
+    hoja.insertAdjacentHTML('beforeend', '<div class="pie"><span>Tierra de los Humos · Guía para docentes</span><span>' + n + '</span></div>');
+    cont.appendChild(hoja);
+  }
+
+  // Tabla de luz: el día 21 de cada mes, calculada con la luz real de Ushuaia
+  const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  const NOMBRE_ESTACION = { primavera: 'Primavera', verano: 'Verano', otono: 'Otoño', invierno: 'Invierno' };
+  const anio = new Date().getFullYear();
+  const filas = MESES.map((mes, m) => {
+    const luz = TDH_LUZ_REAL.en(new Date(Date.UTC(anio, m, 21, 15, 0))); // mediodía en Ushuaia (UTC−3)
+    return { mes, luz };
+  });
+  const maximo = Math.max(...filas.map((f) => f.luz.horasDeLuz));
+  const cuerpo = document.querySelector('#tabla-luz tbody');
+  filas.forEach(({ mes, luz }) => {
+    const horas = Math.floor(luz.horasDeLuz), minutos = Math.round((luz.horasDeLuz - horas) * 60);
+    const tr = document.createElement('tr');
+    if (luz.estacion === 'primavera') tr.className = 'destacada';
+    tr.innerHTML = '<td>' + mes + '</td><td>' + NOMBRE_ESTACION[luz.estacion] + '</td><td>' + luz.salida + '</td><td>' + luz.puesta + '</td><td>' + horas + ' h ' + String(minutos).padStart(2, '0') + ' min</td>' +
+      '<td><span class="barra" style="width:' + Math.round((luz.horasDeLuz / maximo) * 100) + '%"></span></td><td></td>';
+    cuerpo.appendChild(tr);
+  });
+
+  // Listo para exportar cuando cargó la imagen del mapa
+  const img = document.querySelector('.mapa');
+  const listo = () => { document.body.dataset.listo = '1'; };
+  if (img.complete) listo(); else { img.addEventListener('load', listo); img.addEventListener('error', listo); }
+})();
+</script>
+</body>
+</html>

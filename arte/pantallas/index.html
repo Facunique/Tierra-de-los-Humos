@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pantallas del juego</title>
+<meta name="description" content="Tierra de los Humos: maqueta navegable de todas las pantallas del juego en estilo Corteza, con el bucle de viaje, cartas de saber, herencia entre generaciones y códice.">
+<link rel="stylesheet" href="../tipografia/atkinson.css">
+<link rel="stylesheet" href="../corteza/carta.css">
+<link rel="icon" href="../logo/favicon-32.png" type="image/png">
+<style>
+  :root {
+    --fondo: #e9dfc8; --panel: #f4ecdb; --borde: #cdbf9f; --texto: #28221e; --texto-2: #5b524a;
+    --noche: #0b1015; --mar: #1d2e38; --papel: #eee5d0; --tinta: #28221e; --luz: #ffd47c; --ocre: #973a25;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --fondo: #0b1015; --panel: #162028; --borde: #2d3a44; --texto: #e7ecea; --texto-2: #a9b4b6; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --fondo: #0b1015; --panel: #162028; --borde: #2d3a44; --texto: #e7ecea; --texto-2: #a9b4b6; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--noche); color: var(--texto); font: 17px/1.5 "Atkinson Hyperlegible", system-ui, sans-serif; overflow: hidden; }
+  button { font: inherit; }
+  :focus-visible { outline: 3px solid var(--luz); outline-offset: 3px; }
+  [tabindex="-1"]:focus { outline: none; }
+
+  /* Barra de revisión (solo maqueta) */
+  .revision { position: fixed; z-index: 50; left: 0; right: 0; bottom: 0; display: flex; gap: 6px; overflow-x: auto; padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); background: rgba(11,16,21,.92); }
+  .revision span { color: #a9b4b6; font-size: 12px; align-self: center; white-space: nowrap; padding: 0 4px; }
+  .revision button { flex: none; font-size: 13px; min-height: 34px; padding: 4px 10px; border-radius: 8px; border: 1px solid #2d3a44; background: #162028; color: #e7ecea; cursor: pointer; }
+  .revision button[aria-current="true"] { background: var(--luz); color: #1d1a18; font-weight: 700; }
+
+  /* Pantallas */
+  .pantalla { position: fixed; inset: 0 0 46px 0; display: none; overflow: hidden; }
+  .pantalla.activa { display: block; }
+  .fondo-escena { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .capa { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; padding: 16px; gap: 14px; overflow-y: auto; }
+  .centro { align-items: center; justify-content: safe center; text-align: center; }
+  .rotulo { padding: 22px 26px 20px; max-width: 560px; position: relative; }
+  .rotulo::before { content: ""; position: absolute; inset: 8px; border-radius: inherit; border: 1.5px dashed rgba(94,65,44,.35); pointer-events: none; }
+  .rotulo h1 { margin: 0; font-size: clamp(36px, 9vw, 64px); line-height: 1; }
+  .rotulo h2 { margin: 0 0 6px; font-size: clamp(24px, 6vw, 36px); line-height: 1.1; }
+  .rotulo p { margin: 10px 0 0; font-size: 17px; }
+  .sub { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ocre); margin: 0 0 6px; }
+  .botones { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .boton-papel { min-width: 180px; }
+  .boton-papel[disabled] { opacity: .55; cursor: not-allowed; }
+  .aviso-ficcion { font-size: 14px; color: #eee5d0; background: rgba(11,16,21,.7); padding: 6px 12px; border-radius: 8px; max-width: 520px; }
+
+  /* Elegir pueblo */
+  .mapa-pueblos { margin: 0; padding: 10px; width: min(100%, 620px); flex: none; }
+  .mapa-pueblos canvas { width: 100%; height: auto; display: block; border-radius: 10px; }
+  .mapa-pueblos figcaption { font-size: 13px; color: #5b524a; margin-top: 6px; text-align: left; }
+  .pueblos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; width: min(100%, 900px); }
+  .pueblo { text-align: left; padding: 18px; cursor: pointer; border: 0; display: flex; flex-direction: column; gap: 8px; }
+  .pueblo canvas { width: 100%; height: auto; border-radius: 10px; }
+  .pueblo h3 { margin: 0; font-size: 22px; }
+  .pueblo p { margin: 0; font-size: 15px; }
+  .pueblo[aria-disabled="true"] { opacity: .7; cursor: default; }
+  .estado-pueblo { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+
+  /* Viaje */
+  #p-viaje .marco { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  #p-viaje .hud-corteza { position: relative; z-index: 3; justify-content: flex-start; }
+  #p-viaje .mapa { flex: 1; min-height: 0; display: grid; place-items: center; background: #2d4553; overflow: hidden; }
+  #p-viaje canvas#mapa { max-width: 100%; max-height: 100%; cursor: pointer; touch-action: manipulation; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 12px; background: var(--mar); }
+  .acciones .boton-papel { min-width: 0; flex: 1 1 140px; font-size: 15px; padding: 10px 12px; }
+  .objetivo { margin-left: auto; color: #eef2ef; font-size: 14px; align-self: center; }
+  .anuncio { opacity: 0; position: absolute; z-index: 4; left: 50%; top: 70px; transform: translateX(-50%); background: rgba(11,16,21,.85); color: #eef2ef; padding: 6px 14px; border-radius: 10px; font-size: 15px; max-width: 90%; text-align: center; pointer-events: none; transition: opacity .4s; }
+
+  /* Modal de carta */
+  .velo { position: fixed; inset: 0 0 46px 0; z-index: 20; display: none; place-items: center; background: rgba(11,16,21,.72); padding: 16px; }
+  .velo.abierto { display: grid; }
+  .velo .carta-saber { width: min(100%, 380px); max-height: 100%; overflow-y: auto; }
+  .velo .boton-papel { width: 100%; margin-top: 6px; }
+  .borrador { font-size: 12px; color: #5b524a; margin: 6px 0 0 !important; }
+
+  /* Códice */
+  #p-codice .capa { background: var(--fondo); color: var(--texto); }
+  .encabezado-codice { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+  .encabezado-codice h2 { margin: 0; font-size: 30px; }
+  .pestanas-pueblo { display: flex; gap: 6px; }
+  .pestanas-pueblo button { min-height: 40px; padding: 6px 14px; border-radius: 10px; border: 1px solid var(--borde); background: var(--panel); color: var(--texto); cursor: pointer; }
+  .pestanas-pueblo button[aria-selected="true"] { background: var(--ocre); color: #eee5d0; font-weight: 700; }
+
+  /* Ayuda */
+  .ayuda-lista { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; text-align: left; width: min(100%, 900px); }
+  .ayuda-lista .papel { padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .ayuda-lista canvas { width: 48px; height: 48px; flex: none; image-rendering: pixelated; }
+  .ayuda-lista h3 { margin: 0 0 2px; font-size: 17px; }
+  .ayuda-lista p { margin: 0; font-size: 15px; }
+  kbd { font: 700 13px/1 "Atkinson Hyperlegible", sans-serif; border: 1px solid #8f897f; border-bottom-width: 3px; border-radius: 5px; padding: 2px 6px; background: #f7f1e3; color: #28221e; }
+  .lista-saberes { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 6px; text-align: left; }
+  .lista-saberes li { background: rgba(255,212,124,.18); border-radius: 8px; padding: 6px 10px; font-weight: 700; }
+  @media (max-width: 600px) {
+    #p-viaje .hud-corteza { gap: 6px; padding: 6px 8px; }
+    #p-viaje .ficha { min-height: 32px; padding: 2px 8px 2px 4px; font-size: 13px; gap: 4px; box-shadow: 2px 3px 0 rgba(15,26,33,.6); }
+    #p-viaje .ficha canvas { width: 22px; height: 22px; }
+    #p-viaje .ficha--fuego canvas { width: 28px; height: 31px; }
+    .acciones { gap: 6px; padding: 8px; }
+    .acciones .boton-papel { flex: 1 1 40%; font-size: 14px; min-height: 44px; padding: 8px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .anuncio { transition: none; } }
+</style>
+</head>
+<body>
+
+<!-- 1. Título -->
+<section class="pantalla activa" id="p-titulo" aria-labelledby="t-titulo">
+  <canvas class="fondo-escena" id="fondo-titulo" aria-hidden="true"></canvas>
+  <div class="capa centro">
+    <div class="rotulo papel">
+      <p class="sub">Roguelike fueguino</p>
+      <h1 id="t-titulo">Tierra de los Humos</h1>
+      <p>Un viaje en canoa por los canales. Cuando el fuego se apaga, lo aprendido pasa a la siguiente generación.</p>
+    </div>
+    <div class="botones">
+      <button class="boton-papel boton-papel--fuego" data-ir="pueblo">Empezar el viaje</button>
+      <button class="boton-papel" data-ir="codice">Códice</button>
+      <button class="boton-papel" data-ir="ayuda">Cómo se juega</button>
+      <button class="boton-papel" id="b-sonido" aria-pressed="false">Sonido: no</button>
+      <button class="boton-papel" id="b-contraste" aria-pressed="false">Alto contraste: no</button>
+      <button class="boton-papel" id="b-luz" aria-pressed="true">Luz real de Ushuaia: sí</button>
+    </div>
+    <p class="aviso-ficcion">La familia, el mapa y los eventos son ficción. Los saberes, no: cada uno cita su fuente.<span id="aviso-luz" aria-live="polite" style="display:block;margin-top:4px;opacity:.85"></span></p>
+  </div>
+</section>
+
+<!-- 2. Elegir pueblo -->
+<section class="pantalla" id="p-pueblo" aria-labelledby="t-pueblo">
+  <canvas class="fondo-escena" id="fondo-pueblo" aria-hidden="true"></canvas>
+  <div class="capa centro">
+    <div class="rotulo papel"><h2 id="t-pueblo">¿A quién acompañás?</h2><p>Cada pueblo vive el territorio a su manera, y guarda sus propios saberes.</p></div>
+    <figure class="mapa-pueblos papel"><canvas id="mapa-pueblos" role="img" aria-label="Mapa de Tierra del Fuego con los territorios ancestrales: yagán en el canal Beagle y las islas del sur, selk'nam en la Isla Grande, haush en la península Mitre y kawésqar en los canales del oeste."></canvas><figcaption>Territorios ancestrales, aproximados (Cooper, 1946, p. 81 y 107-108; Bird, 1946, p. 55).</figcaption></figure>
+    <div class="pueblos">
+      <button class="pueblo papel" data-ir="viaje" aria-describedby="d-yagan">
+        <canvas id="ilus-yagan" aria-hidden="true"></canvas>
+        <span class="estado-pueblo" style="color:#2c5140">Disponible</span>
+        <h3>Una familia yagán</h3>
+        <p id="d-yagan">Canoeros de los canales del sur: el canal Beagle y las islas hasta el cabo de Hornos.</p>
+        <span class="estado-pueblo" style="color:#973a25" id="gen-yagan">Generación 1</span>
+      </button>
+      <div class="pueblo papel" aria-disabled="true">
+        <canvas id="ilus-kawesqar" aria-hidden="true"></canvas>
+        <span class="estado-pueblo">Próximamente</span>
+        <h3>Una familia kawésqar</h3>
+        <p>Canoeros de los canales del oeste. Se suma solo con la consulta a sus comunidades.</p>
+      </div>
+    </div>
+    <button class="boton-papel" data-ir="titulo">Volver</button>
+  </div>
+</section>
+
+<!-- 3. Viaje -->
+<section class="pantalla" id="p-viaje" aria-labelledby="t-viaje">
+  <h2 id="t-viaje" class="visualmente-oculto" style="position:absolute;left:-9999px">Viaje</h2>
+  <div class="marco">
+    <div class="hud-corteza" id="hud" aria-label="Estado del viaje"></div>
+    <div class="mapa"><canvas id="mapa" role="img" aria-label="Mapa del viaje. Tocá una casilla de agua vecina para remar, o usá las flechas del teclado."></canvas></div>
+    <div class="acciones" role="group" aria-label="Acciones">
+      <button class="boton-papel" id="a-juntar" disabled>Juntar</button>
+      <button class="boton-papel" id="a-avivar">Avivar el fuego</button>
+      <button class="boton-papel" id="a-amarrar" disabled>Amarrar y acampar</button>
+      <button class="boton-papel" data-ir="titulo">Pausa</button>
+    </div>
+  </div>
+  <div class="anuncio" id="anuncio" role="status" aria-live="polite"></div>
+</section>
+
+<!-- 4. Fin del viaje (el fuego se apagó) -->
+<section class="pantalla" id="p-fin" aria-labelledby="t-fin">
+  <canvas class="fondo-escena" id="fondo-fin" aria-hidden="true"></canvas>
+  <div class="capa centro">
+    <div class="rotulo papel">
+      <p class="sub">El fuego se apagó</p>
+      <h2 id="t-fin">El viaje termina acá</h2>
+      <p>Pero lo aprendido no se pierde. Estos saberes pasan a la siguiente generación:</p>
+      <ul class="lista-saberes" id="lista-fin"></ul>
+    </div>
+    <div class="botones"><button class="boton-papel boton-papel--fuego" id="b-nueva-gen">Empezar la generación siguiente</button><button class="boton-papel b-postal">Ver la postal del viaje</button><button class="boton-papel" data-ir="codice">Ver el códice</button></div>
+  </div>
+</section>
+
+<!-- 5. Llegada (con el fuego encendido) -->
+<section class="pantalla" id="p-llegada" aria-labelledby="t-llegada">
+  <canvas class="fondo-escena" id="fondo-llegada" aria-hidden="true"></canvas>
+  <div class="capa centro">
+    <div class="rotulo papel">
+      <p class="sub">Llegaron con el fuego encendido</p>
+      <h2 id="t-llegada">La ballena varada</h2>
+      <p>Otras familias vieron el humo y se acercan. Un varamiento reunía a muchas familias para compartir.</p>
+      <p class="borrador">Destino de ejemplo, con fuente (Cooper 1946, p. 84, 94-95 y 99). El destino final lo elige el equipo.</p>
+      <ul class="lista-saberes" id="lista-llegada"></ul>
+    </div>
+    <div class="botones"><button class="boton-papel boton-papel--fuego" id="b-otra-vez">Otro viaje</button><button class="boton-papel b-postal">Ver la postal del viaje</button><button class="boton-papel" data-ir="codice">Ver el códice</button></div>
+  </div>
+</section>
+
+<!-- 6. Códice -->
+<section class="pantalla" id="p-codice" aria-labelledby="t-codice">
+  <div class="capa">
+    <div class="encabezado-codice">
+      <h2 id="t-codice">Códice</h2>
+      <div class="pestanas-pueblo" role="tablist" aria-label="Pueblo"><button role="tab" aria-selected="true">Yagán</button><button role="tab" aria-selected="false" disabled title="Próximamente">Kawésqar</button></div>
+      <span id="cuenta-codice"></span>
+      <button class="boton-papel" data-ir="titulo">Volver</button>
+    </div>
+    <div class="codice" id="codice"></div>
+    <div class="botones" style="margin-top:8px"><button class="boton-papel" data-ir="cierre">Hoy</button></div>
+  </div>
+</section>
+
+<!-- 7. Cierre en presente -->
+<section class="pantalla" id="p-cierre" aria-labelledby="t-cierre">
+  <canvas class="fondo-escena" id="fondo-cierre" aria-hidden="true"></canvas>
+  <div class="capa centro">
+    <div class="rotulo papel">
+      <p class="sub">Hoy</p>
+      <h2 id="t-cierre">Los fuegos siguen encendidos</h2>
+      <p>El pueblo yagán sigue vivo. Hay familias y comunidades yaganes que hoy cuidan su lengua, su memoria y sus oficios, como la cestería de junco.</p>
+      <p class="borrador">Texto provisorio. Se escribe junto con la comunidad, y solo se la nombra si lo autoriza (ver <code>equipo/comunicaciones.md</code>).</p>
+    </div>
+    <button class="boton-papel" data-ir="titulo">Volver al inicio</button>
+  </div>
+</section>
+
+<!-- 8. Cómo se juega -->
+<section class="pantalla" id="p-ayuda" aria-labelledby="t-ayuda">
+  <canvas class="fondo-escena" id="fondo-ayuda" aria-hidden="true"></canvas>
+  <div class="capa centro">
+    <div class="rotulo papel"><h2 id="t-ayuda">Cómo se juega</h2><p>Llegá al destino con el fuego encendido. Si se apaga, lo aprendido pasa a la siguiente generación.</p></div>
+    <div class="ayuda-lista" id="ayuda-lista"></div>
+    <button class="boton-papel" data-ir="titulo">Volver</button>
+  </div>
+</section>
+
+<!-- Carta de saber (aparece encima del viaje) -->
+<div class="velo" id="velo" role="dialog" aria-modal="true" aria-labelledby="carta-titulo"></div>
+
+<nav class="revision" aria-label="Pantallas (solo para revisar la maqueta)">
+  <span>Maqueta · ir a:</span>
+  <button data-ir="titulo">Título</button><button data-ir="pueblo">Pueblo</button><button data-ir="viaje">Viaje</button><button id="r-carta">Carta</button><button data-ir="fin">Fin del viaje</button><button data-ir="llegada">Llegada</button><button data-ir="codice">Códice</button><button data-ir="cierre">Hoy</button><button data-ir="ayuda">Ayuda</button>
+</nav>
+
+<script src="../fuente/arte.js"></script>
+<script src="../corteza/corteza.js"></script>
+<script src="../mapa/costas.js"></script>
+<script src="../mapa/mapa.js"></script>
+<script src="../corteza/transiciones.js"></script>
+<script src="../corteza/luz-real.js"></script>
+<script src="../postal/postal.js"></script>
+<script src="../cartas/saberes-borrador.js"></script>
+<script src="../../sonido/ambiente.js"></script>
+<script src="../../sonido/voz.js"></script>
+<script>
+(function () {
+  'use strict';
+  const ARTE = window.TDH_ARTE, CZ = window.TDH_CORTEZA, C = ARTE.COLOR;
+  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (id) => document.getElementById(id);
+
+  // Saberes: borrador compartido en arte/cartas/saberes-borrador.js
+  const { COOPER, SABERES } = window.TDH_SABERES;
+  const ORDEN = Object.keys(SABERES);
+  const memoria = new Set(); // lo que sabe el linaje yagán (pasa de generación en generación)
+  let generacion = 1;
+
+  // ── Utilidades de dibujo ────────────────────────────────────────────────
+  function escenaEn(canvas, mapa, extra, t) {
+    const r = canvas.getBoundingClientRect();
+    const celda = Math.max(8, Math.ceil(Math.max((r.width || 300) / mapa[0].length, (r.height || 150) / mapa.length)));
+    const m = CZ.crear(canvas, { celda });
+    m.escena(Object.assign({ mapa, objetos: [], estacion: 'verano', clima: 'calma', hora: 'dia' }, extra || {}));
+    m.dibujar(t || 1.3);
+    return m;
+  }
+  function fondoGrande(canvas, extra) {
+    const W = Math.max(innerWidth, 320), H = Math.max(innerHeight - 46, 320);
+    const cols = Math.ceil(W / 48) + 1, filas = Math.ceil(H / 48) + 1;
+    const mapa = [];
+    for (let y = 0; y < filas; y++) {
+      let f = '';
+      for (let x = 0; x < cols; x++) {
+        const borde = 3 + Math.round(Math.sin(x * 0.7) * 0.6);
+        f += y === 0 ? (x % 4 === 1 ? 'L' : 'M') : y < borde - 1 ? (x % 3 ? 'G' : 'L') : y === borde - 1 ? '.' : y === borde ? (x % 5 === 2 ? 'k' : ',') : (y > filas - 3 ? '~' : '-');
+      }
+      mapa.push(f);
+    }
+    const m = CZ.crear(canvas, { celda: 48 });
+    m.escena(Object.assign({ mapa, objetos: [], estacion: 'verano', clima: 'calma', hora: 'tarde', humos: [{ x: cols * 0.75, y: 1.6 }, { x: cols * 0.2, y: 1.4 }] }, extra || {}));
+    canvas.style.objectFit = 'cover';
+    return { m, mapa, cols, filas };
+  }
+
+  // ── Fondos animados de las pantallas ────────────────────────────────────
+  const fondos = {};
+  function prepararFondos() {
+    fondos.titulo = fondoGrande($('fondo-titulo'), {});
+    fondos.titulo.canoa = { x: Math.floor(fondos.titulo.cols * 0.3), y: 5, fuego: 4 };
+    fondos.titulo.m.escena({ canoa: fondos.titulo.canoa, objetos: [{ id: 'choza', x: Math.floor(fondos.titulo.cols * 0.62), y: 2 }] });
+    fondos.pueblo = fondoGrande($('fondo-pueblo'), { hora: 'dia' });
+    fondos.fin = fondoGrande($('fondo-fin'), { hora: 'tarde', clima: 'lluvia' });
+    fondos.fin.m.escena({ canoa: { x: Math.floor(fondos.fin.cols * 0.5), y: 5, fuego: 0 } });
+    fondos.llegada = fondoGrande($('fondo-llegada'), { hora: 'tarde' });
+    const cl = fondos.llegada.cols;
+    fondos.llegada.m.escena({ objetos: [{ id: 'ballena-varada', x: Math.floor(cl * 0.5), y: 2 }, { id: 'gaviota', x: Math.floor(cl * 0.5) + 2, y: 2 }], canoa: { x: Math.floor(cl * 0.35), y: 5, fuego: 3 }, humos: [{ x: cl * 0.15, y: 1.5 }, { x: cl * 0.8, y: 1.2 }, { x: cl * 0.9, y: 1.8 }] });
+    fondos.cierre = fondoGrande($('fondo-cierre'), { hora: 'dia', estacion: 'invierno' });
+    fondos.ayuda = fondoGrande($('fondo-ayuda'), { hora: 'dia' });
+    escenaEn($('ilus-yagan'), ['GGLGGLGG', '..,,,,..', ',,,--,,,'], { canoa: { x: 3, y: 2, fuego: 4 }, hora: 'tarde' });
+    escenaEn($('ilus-kawesqar'), ['~~~~~~~~', '~~~~~~~~', '~~~~~~~~'], { explorado: () => false, bordeNiebla: false });
+    if (window.TDH_MAPA) TDH_MAPA.dibujar($('mapa-pueblos'), { ancho: 900, territorios: true, nombres: true, hoy: false, destacar: 'yagan' });
+  }
+
+  // ── Navegación ──────────────────────────────────────────────────────────
+  let actual = 'titulo';
+  function ir(nombre) {
+    document.querySelectorAll('.pantalla').forEach((p) => p.classList.toggle('activa', p.id === 'p-' + nombre));
+    document.querySelectorAll('.revision [data-ir]').forEach((b) => b.setAttribute('aria-current', String(b.dataset.ir === nombre)));
+    actual = nombre;
+    if (nombre === 'viaje') { if (!viaje) nuevoViaje(); ajustarMapa(); }
+    if (nombre === 'codice') pintarCodice();
+    if (nombre === 'ayuda') pintarAyuda();
+    const foco = document.querySelector('#p-' + nombre + ' h1, #p-' + nombre + ' h2');
+    if (foco) { foco.setAttribute('tabindex', '-1'); foco.focus({ preventScroll: true }); }
+    sonarAmbiente();
+  }
+  // Dentro del juego, cambiar de pantalla pasa por el humo; la barra de revisión salta directo.
+  let enTransicion = false;
+  async function irConHumo(nombre) {
+    if (enTransicion || !window.TDH_TRANSICIONES) { ir(nombre); return; }
+    enTransicion = true;
+    await TDH_TRANSICIONES.humoCubre(document.body, 450); ir(nombre); await TDH_TRANSICIONES.humoDescubre(document.body, 550);
+    enTransicion = false;
+  }
+  document.addEventListener('click', (e) => { const b = e.target.closest('[data-ir]'); if (!b) return; if (b.closest('.revision')) ir(b.dataset.ir); else irConHumo(b.dataset.ir); });
+
+  // ── El viaje (maqueta del bucle, no es el motor del juego) ──────────────
+  const MAPA_VIAJE = [
+    'MMLMMMLLMMMMLLMMMLLMMMMMLLMMM',
+    'LLLLtLLLpLLLttLLLLGGLLLLtLLLL',
+    'GLLttLLppLGGLLLLGGGLGLLGGGGLG',
+    'GGGGpGGGGpGGGGGGGGGGGGGGGGGGG',
+    '...GG.......GGG...G.....GG...',
+    ',,k,,,,,r,,,,,,,,,k,,,,,,,k,,',
+    '-,,-------------,,-----------',
+    '~--~~~~~-------~~~~~~~--~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
+    '----~~~~~~~~~~~~~-------~~---',
+    ',,,k,----~~~---,,,r,k,,,,,,k,',
+    '..,,,,,,----,,,,,.......,....',
+    'GGL...,,,--,,,..LLGGGtGGG..GG',
+  ];
+  const OBJ_VIAJE = [
+    { id: 'choza', x: 8, y: 4 }, { id: 'conchal', x: 10, y: 4 }, { id: 'lena', x: 6, y: 4, junta: 'lena' }, { id: 'saber', x: 9, y: 4, junta: 'choza' },
+    { id: 'mejillones', x: 16, y: 4, junta: 'mejillones' }, { id: 'hongos', x: 17, y: 11, junta: 'hongos' },
+    { id: 'pirita', x: 20, y: 11, junta: 'pirita' }, { id: 'lena', x: 2, y: 11, junta: 'lena' }, { id: 'pescado', x: 13, y: 10, junta: 'pescado' },
+    { id: 'lobo-marino', x: 8, y: 5 }, { id: 'cormoran', x: 18, y: 10 }, { id: 'pato-vapor', x: 5, y: 9 }, { id: 'tonina', x: 21, y: 8 },
+    { id: 'guindo-grande', x: 24, y: 4, junta: 'corteza' }, { id: 'ballena-varada', x: 26, y: 11, meta: true }, { id: 'lena', x: 22, y: 4, junta: 'lena' },
+  ];
+  let viaje = null, motor = null, vista = null;
+  let altoContraste = false;
+  try { altoContraste = localStorage.getItem('tdh-alto-contraste') === '1'; } catch (e) { /* sin almacenamiento: queda apagado */ }
+  const esAgua = (x, y) => y >= 0 && x >= 0 && y < MAPA_VIAJE.length && x < MAPA_VIAJE[0].length && '~-,kr'.includes(MAPA_VIAJE[y][x]) && MAPA_VIAJE[y][x] !== 'r';
+  function nuevoViaje() {
+    viaje = { canoa: { x: 2, y: 6, fuego: 4, mira: 1 }, energia: 16, lena: 1, comida: 0, pasos: 0, hora: luzInicial().hora, estacion: luzInicial().estacion, clima: 'calma', objetos: OBJ_VIAJE.map((o) => Object.assign({}, o)), visto: new Set(), aprendidos: [], pirita: false, ruta: [[2, 6]] };
+    revelar(viaje.canoa.x, viaje.canoa.y);
+    motor = CZ.crear($('mapa'), { celda: 48 });
+    actualizarEscena();
+    pintarHud(); acciones();
+    if (!memoria.has('fuego')) setTimeout(() => mostrarSaber('fuego'), 400);
+  }
+  function revelar(cx, cy) {
+    for (let y = 0; y < MAPA_VIAJE.length; y++) for (let x = 0; x < MAPA_VIAJE[0].length; x++) {
+      const dx = (x - cx) / 1.7, dy = (y - cy) / 1.4;
+      if (dx * dx + dy * dy < 3.4 * 3.4) viaje.visto.add(x + ',' + y);
+    }
+  }
+  function actualizarEscena() {
+    motor.escena({ vista, altoContraste, mapa: MAPA_VIAJE, objetos: viaje.objetos, canoa: viaje.canoa, humos: [{ x: 27.5, y: 9.6 }, { x: 25.2, y: 1.5 }], estacion: viaje.estacion, clima: viaje.clima, hora: viaje.hora, explorado: (x, y) => viaje.visto.has(x + ',' + y) });
+  }
+  function ajustarMapa() {
+    const caja = document.querySelector('#p-viaje .mapa').getBoundingClientRect();
+    // Cámara siempre: 9 columnas en el celular, 15 en pantallas anchas. El alto sale de la proporción de la pantalla.
+    const a = caja.width < 760 ? 9 : 15;
+    const h = Math.min(MAPA_VIAJE.length, Math.max(6, Math.round(a * caja.height / caja.width)));
+    const celda = Math.floor(Math.min(caja.width / a, caja.height / h));
+    vista = objetivoVista(a, h);
+    motor.ajustar(Math.max(24, celda));
+    actualizarEscena();
+    const cv = $('mapa'); cv.style.width = (a * motor.celda) + 'px'; cv.style.height = (h * motor.celda) + 'px';
+  }
+  function objetivoVista(a, h) {
+    const c = viaje.canoa, W = MAPA_VIAJE[0].length, H = MAPA_VIAJE.length;
+    return { x: Math.max(0, Math.min(W - a, c.x + 0.5 - a / 2)), y: Math.max(0, Math.min(H - h, c.y + 0.5 - h / 2)), ancho: a, alto: h };
+  }
+  function anunciar(t) { const a = $('anuncio'); a.textContent = t; a.style.opacity = 1; clearTimeout(anunciar.id); anunciar.id = setTimeout(() => (a.style.opacity = 0), 2600); }
+  function vecinos(x, y) { return [[x, y], [x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]]; }
+  function objetoJuntable() { const c = viaje.canoa; return viaje.objetos.find((o) => o.junta && vecinos(c.x, c.y).some(([x, y]) => x === o.x && y === o.y)); }
+  function cercaDeMeta() { const c = viaje.canoa; return viaje.objetos.find((o) => o.meta && Math.abs(o.x - c.x) <= 1 && Math.abs(o.y - c.y) <= 1); }
+  function puedeAmarrar() { const c = viaje.canoa; return MAPA_VIAJE[c.y][c.x] === 'k' && vecinos(c.x, c.y).some(([x, y]) => MAPA_VIAJE[y] && MAPA_VIAJE[y][x] === '.'); }
+
+  function mover(dx, dy) {
+    if (!viaje || actual !== 'viaje' || $('velo').classList.contains('abierto')) return;
+    const c = viaje.canoa, nx = c.x + dx, ny = c.y + dy;
+    if (!esAgua(nx, ny)) { anunciar('La canoa solo va por el agua.'); return; }
+    if (dx) c.mira = dx;
+    c.x = nx; c.y = ny; c.remando = true; setTimeout(() => (c.remando = false), 500);
+    viaje.ruta.push([nx, ny]);
+    viaje.pasos++;
+    // El fuego se gasta: más con viento en el canal hondo y con lluvia.
+    let gasto = 1;
+    if (viaje.clima === 'viento' && MAPA_VIAJE[ny][nx] === '~') gasto++;
+    if (viaje.clima === 'lluvia') gasto++;
+    viaje.energia = Math.max(0, viaje.energia - gasto);
+    c.fuego = Math.ceil(viaje.energia / 4);
+    if (viaje.pasos % 10 === 0) { viaje.clima = ['calma', 'viento', 'lluvia', 'calma'][(viaje.pasos / 10) % 4]; anunciar({ calma: 'El tiempo se calma.', viento: 'Se levanta viento del oeste.', lluvia: 'Empieza a llover.' }[viaje.clima]); }
+    if (viaje.pasos % 7 === 0) viaje.hora = { dia: 'tarde', tarde: 'noche', noche: 'noche' }[viaje.hora];
+    revelar(nx, ny);
+    if (sonido && conSonido) sonido.efecto('remo');
+    if (c.fuego === 0) {
+      if (viaje.pirita) { viaje.pirita = false; viaje.energia = 4; c.fuego = 1; anunciar('Con la pirita y el pedernal, el fuego vuelve a prender.'); }
+      else { terminar(false); return; }
+    }
+    const meta = cercaDeMeta();
+    if (meta) { terminar(true); return; }
+    if (vista) vista = objetivoVista(vista.ancho, vista.alto);
+    actualizarEscena(); pintarHud(); acciones();
+  }
+  function juntar() {
+    const o = objetoJuntable(); if (!o) return;
+    viaje.objetos = viaje.objetos.filter((x) => x !== o);
+    const que = o.junta;
+    if (que === 'lena') { viaje.lena = Math.min(5, viaje.lena + 2); anunciar('Juntaste leña.'); if (sonido && conSonido) sonido.efecto('lena'); }
+    else if (que === 'pirita') { viaje.pirita = true; anunciar('Guardaste pirita para encender el fuego.'); }
+    else if (['mejillones', 'pescado', 'hongos'].includes(que)) { viaje.comida++; anunciar('Juntaste comida.'); if (sonido && conSonido) sonido.efecto('comida'); }
+    else anunciar('Encontraste algo para aprender.');
+    if (SABERES[que]) mostrarSaber(que);
+    actualizarEscena(); pintarHud(); acciones();
+  }
+  function avivar() {
+    if (viaje.lena <= 0) { anunciar('No queda leña. Buscala en las playas.'); return; }
+    viaje.lena--; viaje.energia = Math.min(16, viaje.energia + 5); viaje.canoa.fuego = Math.ceil(viaje.energia / 4);
+    anunciar('El fuego se aviva.'); if (sonido && conSonido) sonido.efecto('lena');
+    actualizarEscena(); pintarHud(); acciones();
+  }
+  function amarrar() {
+    if (!puedeAmarrar()) return;
+    viaje.hora = 'dia'; viaje.clima = 'calma';
+    anunciar('Amarraron la canoa en el cachiyuyo y pasaron la noche en la playa.');
+    if (!memoria.has('amarre')) mostrarSaber('amarre');
+    actualizarEscena(); pintarHud(); acciones();
+  }
+  // ── Postal del viaje ────────────────────────────────────────────────────
+  let ultimoViaje = null;
+  function mostrarPostal() {
+    const u = ultimoViaje || { ruta: [[2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6]], visto: new Set(['0,4', '1,4']), objetos: OBJ_VIAJE, pasos: 6, llego: false, generacion, aprendidos: ['fuego'] };
+    const vis = u.visto.size > 2 ? u.visto : (() => { const v = new Set(); for (let y = 0; y < MAPA_VIAJE.length; y++) for (let x = 0; x < 12; x++) v.add(x + ',' + y); return v; })();
+    const cv = TDH_POSTAL.dibujar(document.createElement('canvas'), { mapa: MAPA_VIAJE, objetos: u.objetos, ruta: u.ruta, explorado: (x, y) => vis.has(x + ',' + y), generacion: u.generacion, llego: u.llego, destino: 'la ballena varada', pasos: u.pasos, saberes: u.aprendidos.map((k) => SABERES[k].titulo), pueblo: 'yagán' });
+    cv.style.cssText = 'width:min(100%,900px);height:auto;border-radius:12px;display:block';
+    cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', 'Postal del viaje de la generación ' + u.generacion + ', con el mapa del recorrido y los saberes aprendidos.');
+    const v = $('velo'); v.innerHTML = '';
+    const caja = document.createElement('div'); caja.style.cssText = 'display:grid;gap:12px;justify-items:center;width:min(100%,900px)';
+    caja.appendChild(cv);
+    caja.insertAdjacentHTML('beforeend', '<div class="botones"><button class="boton-papel boton-papel--fuego" id="b-bajar-postal">Guardar la postal</button><button class="boton-papel" id="b-cerrar-postal">Cerrar</button></div>');
+    v.appendChild(caja); v.classList.add('abierto');
+    $('b-bajar-postal').addEventListener('click', () => TDH_POSTAL.descargar(cv, 'tierra-de-los-humos-generacion-' + u.generacion + '.png'));
+    $('b-cerrar-postal').addEventListener('click', () => v.classList.remove('abierto'));
+    $('b-bajar-postal').focus();
+  }
+  document.querySelectorAll('.b-postal').forEach((b) => b.addEventListener('click', mostrarPostal));
+
+  function terminar(llego) {
+    const lista = $(llego ? 'lista-llegada' : 'lista-fin');
+    lista.innerHTML = viaje.aprendidos.length ? viaje.aprendidos.map((k) => '<li>' + SABERES[k].titulo + '</li>').join('') : '<li>Esta vez no aprendieron nada nuevo.</li>';
+    if (llego && !memoria.has('ballena')) { memoria.add('ballena'); lista.insertAdjacentHTML('beforeend', '<li>La ballena varada</li>'); }
+    if (sonido && conSonido) sonido.efecto(llego ? 'saber' : 'apagado');
+    ultimoViaje = { ruta: viaje.ruta, visto: viaje.visto, objetos: viaje.objetos, pasos: viaje.pasos, llego, generacion, aprendidos: viaje.aprendidos.concat(llego && !viaje.aprendidos.includes('ballena') ? ['ballena'] : []) };
+    viaje = null;
+    ir(llego ? 'llegada' : 'fin');
+  }
+  $('a-juntar').addEventListener('click', juntar);
+  $('a-avivar').addEventListener('click', avivar);
+  $('a-amarrar').addEventListener('click', amarrar);
+  $('b-nueva-gen').addEventListener('click', async () => {
+    const desde = generacion; generacion++; $('gen-yagan').textContent = 'Generación ' + generacion;
+    if (sonido && conSonido) sonido.efecto('generacion');
+    if (window.TDH_TRANSICIONES) await TDH_TRANSICIONES.pasoDelFuego(document.body, { desde, hasta: generacion, saberes: [...memoria].map((k) => SABERES[k].titulo) });
+    ir('viaje');
+  });
+  $('b-otra-vez').addEventListener('click', () => { generacion++; $('gen-yagan').textContent = 'Generación ' + generacion; ir('viaje'); });
+  $('mapa').addEventListener('click', (e) => {
+    const c = motor.casillaEn(e.clientX, e.clientY), k = viaje.canoa;
+    const dx = Math.sign(c.x - k.x), dy = Math.sign(c.y - k.y);
+    if (Math.abs(c.x - k.x) >= Math.abs(c.y - k.y)) mover(dx, 0); else mover(0, dy);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (actual !== 'viaje') return;
+    if ($('velo').classList.contains('abierto')) { if (e.key === 'Escape' || e.key === 'Enter') cerrarSaber(); return; }
+    const t = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0], w: [0, -1], s: [0, 1], a: [-1, 0], d: [1, 0] }[e.key];
+    if (t) { e.preventDefault(); mover(t[0], t[1]); }
+    if (e.key === 'Enter' || e.key === 'j') juntar();
+    if (e.key === 'f') avivar();
+    if (e.key === 'm') amarrar();
+  });
+
+  // ── HUD y acciones ──────────────────────────────────────────────────────
+  const fuegoHud = document.createElement('canvas'); fuegoHud.width = 80; fuegoHud.height = 88;
+  function ficha(icono, texto, clase) { const f = document.createElement('span'); f.className = 'ficha' + (clase ? ' ' + clase : ''); if (icono) f.appendChild(icono); f.appendChild(document.createTextNode(texto)); return f; }
+  function pintarHud() {
+    const h = $('hud'); h.innerHTML = '';
+    const n = viaje.canoa.fuego;
+    h.appendChild(ficha(fuegoHud, 'Fuego ' + n + ' de 4', 'ficha--fuego' + (n <= 1 ? ' ficha--alerta' : '')));
+    h.appendChild(ficha(ARTE.aCanvas('icono-lena', 0, 'verano', 1), 'Leña ' + viaje.lena));
+    h.appendChild(ficha(ARTE.aCanvas('icono-comida', 0, 'verano', 1), 'Comida ' + viaje.comida));
+    if (viaje.pirita) h.appendChild(ficha(ARTE.aCanvas('icono-pirita', 0, 'verano', 1), 'Pirita'));
+    const ic = { calma: 'icono-calma', viento: 'icono-viento', lluvia: 'icono-lluvia' }[viaje.clima];
+    h.appendChild(ficha(ARTE.aCanvas(ic, 0, 'verano', 1), { calma: 'Calma', viento: 'Viento', lluvia: 'Lluvia' }[viaje.clima]));
+    h.appendChild(ficha(ARTE.aCanvas('icono-generacion', 0, 'verano', 1), 'Gen. ' + generacion));
+  }
+  function acciones() {
+    const o = objetoJuntable();
+    $('a-juntar').disabled = !o;
+    $('a-juntar').textContent = o ? 'Juntar ' + ({ lena: 'leña', mejillones: 'mejillones', pescado: 'pescado', hongos: 'hongos', pirita: 'pirita', choza: 'el saber', corteza: 'corteza' }[o.junta] || '') : 'Juntar';
+    $('a-avivar').disabled = viaje.lena <= 0 || viaje.energia >= 16;
+    $('a-amarrar').disabled = !puedeAmarrar();
+  }
+
+  // ── Cartas de saber ─────────────────────────────────────────────────────
+  function cartaHTML(k) {
+    const c = SABERES[k];
+    return '<p class="carta-saber__tipo">Saber · Yagán · ' + c.tipo + '</p><canvas class="carta-saber__ilus" aria-hidden="true"></canvas><h3 class="carta-saber__titulo" id="carta-titulo">' + c.titulo + '</h3>' +
+      '<p><span class="etiqueta etiqueta--dato">Dato</span>' + c.dato + '</p><p><span class="etiqueta etiqueta--juego">En el juego</span>' + c.juego + '</p><p class="carta-saber__fuente">Fuente: ' + c.fuente + '</p>';
+  }
+  function mostrarSaber(k) {
+    const nuevo = !memoria.has(k);
+    memoria.add(k); if (viaje && nuevo) viaje.aprendidos.push(k);
+    const v = $('velo');
+    const conVoz = window.TDH_VOZ && TDH_VOZ.disponible();
+    v.innerHTML = '<article class="carta-saber papel">' + cartaHTML(k) + '<p class="borrador">Borrador para la Persona C.</p>' +
+      (conVoz ? '<button class="boton-papel" id="b-escuchar" aria-pressed="false">🔊 Escuchar la carta</button>' : '') +
+      '<button class="boton-papel boton-papel--fuego" id="b-guardar">' + (nuevo ? 'Guardar en la memoria' : 'Seguir') + '</button></article>';
+    if (conVoz) $('b-escuchar').addEventListener('click', async (e) => {
+      const b = e.currentTarget;
+      if (TDH_VOZ.hablando) { TDH_VOZ.detener(); b.setAttribute('aria-pressed', 'false'); b.textContent = '🔊 Escuchar la carta'; return; }
+      b.setAttribute('aria-pressed', 'true'); b.textContent = '⏹ Detener';
+      await TDH_VOZ.leerCarta(SABERES[k]);
+      b.setAttribute('aria-pressed', 'false'); b.textContent = '🔊 Escuchar la carta';
+    });
+    v.classList.add('abierto');
+    if (window.TDH_TRANSICIONES) TDH_TRANSICIONES.cartaEntra(v.querySelector('.carta-saber'));
+    requestAnimationFrame(() => escenaEn(v.querySelector('canvas'), SABERES[k].mapa, SABERES[k].extra, 1.6));
+    if (sonido && conSonido && nuevo) sonido.efecto('saber');
+    $('b-guardar').addEventListener('click', cerrarSaber); $('b-guardar').focus();
+  }
+  function cerrarSaber() { if (window.TDH_VOZ) TDH_VOZ.detener(); $('velo').classList.remove('abierto'); if (viaje) acciones(); }
+  $('r-carta').addEventListener('click', () => { ir('viaje'); mostrarSaber('pirita'); });
+
+  // ── Códice ──────────────────────────────────────────────────────────────
+  function pintarCodice() {
+    const cont = $('codice'); cont.innerHTML = '';
+    $('cuenta-codice').textContent = memoria.size + ' de ' + ORDEN.length + ' saberes';
+    ORDEN.forEach((k) => {
+      if (memoria.has(k)) {
+        const a = document.createElement('article'); a.className = 'carta-saber papel'; a.innerHTML = cartaHTML(k).replace(' id="carta-titulo"', '');
+        cont.appendChild(a); requestAnimationFrame(() => escenaEn(a.querySelector('canvas'), SABERES[k].mapa, SABERES[k].extra, 1.6));
+      } else {
+        const h = document.createElement('div'); h.className = 'carta-saber--humo'; h.setAttribute('role', 'img'); h.setAttribute('aria-label', 'Saber todavía no encontrado');
+        const cv = document.createElement('canvas'); cv.setAttribute('aria-hidden', 'true'); h.appendChild(cv);
+        h.insertAdjacentHTML('beforeend', '<span>Todavía en el humo</span>'); cont.appendChild(h);
+        requestAnimationFrame(() => escenaEn(cv, ['~~~~~~~~', '~~~~~~~~', '~~~~~~~~', '~~~~~~~~', '~~~~~~~~', '~~~~~~~~'], { explorado: () => false, bordeNiebla: false }));
+      }
+    });
+  }
+
+  // ── Ayuda ───────────────────────────────────────────────────────────────
+  function pintarAyuda() {
+    const L = $('ayuda-lista'); if (L.children.length) return;
+    const fila = (canvas, titulo, texto) => { const d = document.createElement('div'); d.className = 'papel'; d.appendChild(canvas); d.insertAdjacentHTML('beforeend', '<div><h3>' + titulo + '</h3><p>' + texto + '</p></div>'); L.appendChild(d); };
+    const fz = document.createElement('canvas'); fz.width = 96; fz.height = 96; const x = fz.getContext('2d'); x.scale(2, 2); CZ.fuego(x, 24, 44, 1.2, 3, 1.2);
+    fila(fz, 'El fuego es tu vida', 'Remar lo gasta, y más con viento en el canal hondo o con lluvia. Si llega a 0, el viaje termina.');
+    fila(ARTE.aCanvas('icono-lena', 0, 'verano', 3), 'Avivar el fuego', 'Usá leña para que el fuego crezca. La leña está en las playas.');
+    fila(ARTE.aCanvas('icono-comida', 0, 'verano', 3), 'Lo que tiene borde de papel, se junta', 'Acercá la canoa y tocá «Juntar». Las pegatinas son leña, comida, pirita y saberes.');
+    fila(ARTE.aCanvas('icono-remo', 0, 'verano', 3), 'Remar', 'Tocá una casilla de agua al lado de la canoa, o usá las flechas o <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>. <kbd>Enter</kbd> junta, <kbd>F</kbd> aviva, <kbd>M</kbd> amarra.');
+    fila(ARTE.aCanvas('icono-refugio', 0, 'verano', 3), 'Amarrar y acampar', 'En el cachiyuyo, junto a una playa, se puede pasar la noche.');
+    fila(ARTE.aCanvas('icono-viento', 0, 'verano', 3), 'Escuchá y mirá el lugar', 'Con «Luz real de Ushuaia», el viaje empieza con la luz que hay ahora en el canal Beagle. Con sonido, el bosque, la playa y el canal abierto suenan distinto. «Escuchar la carta» la lee en voz alta.');
+    fila(ARTE.aCanvas('icono-generacion', 0, 'verano', 3), 'Lo aprendido se hereda', 'Cada saber que encontrás queda en la memoria de la familia y pasa a la siguiente generación.');
+  }
+
+  // ── Sonido ──────────────────────────────────────────────────────────────
+  const sonido = window.TDH_SONIDO ? TDH_SONIDO.crear() : null;
+  let conSonido = false;
+  function sonarAmbiente() {
+    if (!sonido || !conSonido) return;
+    const v = actual === 'viaje' && viaje ? viaje : null;
+    // El lugar: en el viaje, lo que rodea a la canoa; en las otras pantallas, la costa del fondo (bosque y playa).
+    const lugar = v ? TDH_SONIDO.lugarDe(MAPA_VIAJE, v.canoa.x, v.canoa.y) : { bosque: 0.5, playa: 0.4, mar: 0.5 };
+    sonido.ambiente({ viento: v ? { calma: 0.15, viento: 0.85, lluvia: 0.35 }[v.clima] : 0.2, mar: lugar.mar, bosque: lugar.bosque, playa: lugar.playa, lluvia: v && v.clima === 'lluvia' ? 0.8 : (actual === 'fin' ? 0.7 : 0), fuego: v ? v.canoa.fuego : (actual === 'fin' ? 0 : 3) });
+  }
+  $('b-sonido').addEventListener('click', async (e) => {
+    if (!sonido) return; conSonido = !conSonido;
+    e.currentTarget.setAttribute('aria-pressed', String(conSonido)); e.currentTarget.textContent = 'Sonido: ' + (conSonido ? 'sí' : 'no');
+    if (conSonido) { await sonido.iniciar(); sonarAmbiente(); } else sonido.pausar();
+  });
+
+  // ── Luz real de Ushuaia: el viaje empieza con la hora y la estación de hoy ──
+  let luzReal = true;
+  try { luzReal = localStorage.getItem('tdh-luz-real') !== '0'; } catch (e) { /* sin almacenamiento: queda encendida */ }
+  function luzInicial() { return luzReal && window.TDH_LUZ_REAL ? TDH_LUZ_REAL.ahora() : { hora: 'dia', estacion: 'verano' }; }
+  function pintarLuz() {
+    const b = $('b-luz'); b.setAttribute('aria-pressed', String(luzReal)); b.textContent = 'Luz real de Ushuaia: ' + (luzReal ? 'sí' : 'no');
+    $('aviso-luz').textContent = luzReal && window.TDH_LUZ_REAL ? TDH_LUZ_REAL.ahora().texto + ' El viaje empieza con esa luz.' : '';
+    $('aviso-luz').hidden = !luzReal;
+    if (fondos.titulo) { const l = luzReal && window.TDH_LUZ_REAL ? TDH_LUZ_REAL.ahora() : { hora: 'tarde', estacion: 'verano' }; fondos.titulo.m.escena({ hora: l.hora, estacion: l.estacion }); }
+  }
+  $('b-luz').addEventListener('click', () => { luzReal = !luzReal; try { localStorage.setItem('tdh-luz-real', luzReal ? '1' : '0'); } catch (e) { /* no pasa nada */ } pintarLuz(); });
+
+  // ── Alto contraste ──────────────────────────────────────────────────────
+  function pintarBotonContraste() { const b = $('b-contraste'); b.setAttribute('aria-pressed', String(altoContraste)); b.textContent = 'Alto contraste: ' + (altoContraste ? 'sí' : 'no'); }
+  $('b-contraste').addEventListener('click', () => {
+    altoContraste = !altoContraste; pintarBotonContraste();
+    try { localStorage.setItem('tdh-alto-contraste', altoContraste ? '1' : '0'); } catch (e) { /* no pasa nada */ }
+    Object.values(fondos).forEach((f) => f.m && f.m.escena({ altoContraste }));
+    if (viaje) actualizarEscena();
+  });
+  pintarBotonContraste();
+
+  // ── Bucle de dibujo ─────────────────────────────────────────────────────
+  const fuegoDelHud = (t) => { const x = fuegoHud.getContext('2d'); x.clearRect(0, 0, 80, 88); x.fillStyle = C.g; x.beginPath(); x.ellipse(40, 78, 26, 7, 0, 0, Math.PI * 2); x.fill(); CZ.fuego(x, 40, 74, 1.7, viaje ? viaje.canoa.fuego : 3, t); };
+  let ultimo = 0;
+  function cuadro(ms) {
+    const t = reducido ? 2 : ms / 1000;
+    if (ms - ultimo > 40) {
+      ultimo = ms;
+      if (actual === 'viaje' && viaje) { motor.dibujar(t); fuegoDelHud(t); if (sonido && conSonido && ms % 1000 < 45) sonarAmbiente(); }
+      else if (fondos[actual]) fondos[actual].m.dibujar(t);
+    }
+    requestAnimationFrame(cuadro);
+  }
+  addEventListener('resize', () => { prepararFondos(); pintarLuz(); if (actual === 'viaje' && viaje) ajustarMapa(); });
+  prepararFondos();
+  pintarLuz();
+  ir('titulo');
+  requestAnimationFrame(cuadro);
+})();
+</script>
+</body>
+</html>

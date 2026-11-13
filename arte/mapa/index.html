@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Territorios ancestrales</title>
+<meta name="description" content="Tierra de los Humos: mapa de Tierra del Fuego y los canales en estilo Corteza, con los territorios ancestrales de los pueblos yagán, selk'nam, haush y kawésqar, con sus fuentes.">
+<link rel="stylesheet" href="../tipografia/atkinson.css">
+<link rel="icon" href="../logo/favicon-32.png" type="image/png">
+<style>
+  :root { --fondo: #e9dfc8; --panel: #f4ecdb; --borde: #cdbf9f; --texto: #28221e; --texto-2: #5b524a; --acento: #973a25; --sobre-acento: #eee5d0; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo: #0b1015; --panel: #162028; --borde: #2d3a44; --texto: #e7ecea; --texto-2: #a9b4b6; --acento: #ffd47c; --sobre-acento: #1d1a18; color-scheme: dark; } }
+  :root[data-theme="dark"] { --fondo: #0b1015; --panel: #162028; --borde: #2d3a44; --texto: #e7ecea; --texto-2: #a9b4b6; --acento: #ffd47c; --sobre-acento: #1d1a18; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font: 17px/1.55 "Atkinson Hyperlegible", system-ui, sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 28px 16px 56px; }
+  h1 { font-size: clamp(30px, 5vw, 48px); line-height: 1.1; margin: 0 0 8px; }
+  .bajada { color: var(--texto-2); max-width: 760px; margin: 0 0 16px; }
+  .controles { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+  .controles button { font: inherit; font-size: 15px; min-height: 42px; padding: 6px 14px; border-radius: 10px; border: 1px solid var(--borde); background: var(--panel); color: var(--texto); cursor: pointer; }
+  .controles button[aria-pressed="true"] { background: var(--acento); color: var(--sobre-acento); font-weight: 700; }
+  .controles button:focus-visible { outline: 3px solid #f39a2c; outline-offset: 2px; }
+  .lienzo { border-radius: 14px; overflow: hidden; box-shadow: 6px 8px 0 rgba(15,26,33,.35); line-height: 0; }
+  canvas { width: 100%; height: auto; display: block; }
+  .leyenda { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; margin-top: 18px; }
+  .pueblo { background: var(--panel); border: 1px solid var(--borde); border-radius: 12px; padding: 12px 14px; }
+  .pueblo h2 { font-size: 18px; margin: 0 0 4px; display: flex; gap: 8px; align-items: center; }
+  .pueblo h2 i { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+  .pueblo p { margin: 0; font-size: 15px; }
+  .pueblo small { display: block; margin-top: 6px; color: var(--texto-2); font-size: 13px; }
+  .notas { margin-top: 20px; font-size: 14px; color: var(--texto-2); }
+  .notas li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Territorios ancestrales</h1>
+  <p class="bajada">Dónde vivían los pueblos de Tierra del Fuego según las fuentes etnográficas. Son zonas, no fronteras: los pueblos se movían, se visitaban, comerciaban y se casaban entre sí. Y siguen acá: hoy hay comunidades que mantienen viva su memoria.</p>
+  <div class="controles" role="group" aria-label="Capas del mapa">
+    <button type="button" data-capa="territorios" aria-pressed="true">Territorios</button>
+    <button type="button" data-capa="nombres" aria-pressed="true">Lugares</button>
+    <button type="button" data-capa="hoy" aria-pressed="false">Ciudades de hoy</button>
+  </div>
+  <div class="lienzo"><canvas id="mapa" role="img" aria-label="Mapa de Tierra del Fuego y los canales en estilo de papel recortado. Al sur, a lo largo del canal Beagle y en las islas hasta el cabo de Hornos, el territorio yagán. En la Isla Grande, el selk'nam; en la península Mitre, el haush; en los canales del oeste, el kawésqar."></canvas></div>
+  <div class="leyenda" id="leyenda"></div>
+  <ul class="notas">
+    <li>Las zonas son aproximadas y se dibujan sin límites porque las fuentes describen contacto, comercio y casamientos entre vecinos (Cooper, 1946, p. 82 y 107).</li>
+    <li>Paisaje: al norte de la Isla Grande, estepa; al sur, bosque y montaña (Cooper, 1946, p. 107).</li>
+    <li>No se dibujan límites entre países. Nombres según la toponimia oficial.</li>
+    <li>Costas: Natural Earth (dominio público), escala 1:10 millones. Arte: CC BY-SA 4.0.</li>
+    <li>Fuentes: Cooper, J. M. (1946), «The Yahgan» y «The Ona»; Bird, J. (1946), «The Alacaluf». <i>Handbook of South American Indians</i>, vol. 1. Smithsonian Institution.</li>
+  </ul>
+</main>
+<script src="../fuente/arte.js"></script>
+<script src="costas.js"></script>
+<script src="mapa.js"></script>
+<script>
+  const capas = { territorios: true, nombres: true, hoy: false };
+  const cv = document.getElementById('mapa');
+  function pintar() { TDH_MAPA.dibujar(cv, Object.assign({ ancho: Math.min(1100, Math.max(600, cv.parentElement.clientWidth * 1.4)) }, capas)); }
+  document.querySelectorAll('[data-capa]').forEach((b) => b.addEventListener('click', () => { capas[b.dataset.capa] = !capas[b.dataset.capa]; b.setAttribute('aria-pressed', String(capas[b.dataset.capa])); pintar(); }));
+  const ley = document.getElementById('leyenda');
+  TDH_MAPA.TERRITORIOS.forEach((t) => ley.insertAdjacentHTML('beforeend', '<div class="pueblo"><h2><i style="background:' + t.color + '"></i>' + t.nombre + '</h2><p>' + t.detalle + '.</p><small>Fuente: ' + t.fuente + '.</small></div>'));
+  document.fonts.ready.then(pintar); pintar();
+</script>
+</body>
+</html>

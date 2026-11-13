@@ -37,8 +37,13 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 
 | Ruta | Qué hay |
 |---|---|
-| `docs/` | Diseño del juego: guía de la hackatón, concepto, alcance, contenido cultural |
-| `equipo/` | Trabajo interno del equipo: memoria del proyecto y registro de comunicaciones con comunidades |
+| `docs/` | Diseño del juego: guía de la hackatón, concepto, alcance, contenido cultural, dirección de arte |
+| `arte/` | Arte propio. Estilo **Corteza**: `corteza/corteza.js` es el motor de dibujo del juego; `fuente/arte.js` tiene la paleta y las pegatinas pixel (`node arte/generar.cjs` genera los PNG). Ver `arte/README.md` |
+| `sonido/` | Sonido generado por código (Web Audio), sin archivos de audio: ambiente según el lugar, efectos y voz para leer las cartas. Ver `sonido/README.md` |
+| `mesa/` | Versión de mesa para imprimir (tablero, fichas, reglas) |
+| `escuelas/` | Guía para docentes: una actividad por carta (`actividades.js`), en A4 |
+| `presentacion/` y `stand/` | Pitch en HTML y PDF; vidriera y cartel para la demo del 19/11 |
+| `equipo/` | Trabajo interno del equipo: memoria del proyecto, registro de comunicaciones con comunidades y plan de comunicación (video, pitch, demo) |
 | `AGENTS.md` | Este archivo |
 | `README.md` | Presentación pública del proyecto (lo evalúa el jurado) |
 
@@ -51,4 +56,6 @@ El código del juego todavía no existe. Stack propuesto: HTML + JavaScript con 
 - Commits chicos, con mensaje en castellano que diga qué cambió y por qué.
 - **Uso de IA**: las bases obligan a declararlo (cláusula 7.4). Si hacés un aporte nuevo (código, textos, arte, música), sumalo a la sección *Uso de inteligencia artificial* del README.
 - Licencias: código MIT, contenidos CC BY-SA 4.0. Todo recurso de terceros va con su licencia en el README.
+- **Arte:** el estilo es Corteza (`docs/04-direccion-de-arte.md`). No edites los PNG a mano; cambiá `arte/fuente/arte.js` o `arte/corteza/corteza.js` y regenerá. Usá solo colores de la paleta. Las personas van como siluetas sin rasgos hasta que la comunidad diga otra cosa.
+- **Rigor histórico del arte:** antes de dibujar o cambiar un objeto, una persona o una escena, buscalo en `docs/05-rigor-historico.md`. Si no está, buscá la fuente (autor, obra, página) y sumá la fila. No dibujes nada que las fuentes no respalden: ni perros, ni anzuelos, ni redes, ni escenas de caza.
 - Priorizá lo que sume puntos según los criterios de evaluación (sección 5 de la guía): que se pueda jugar de punta a punta, en el celular, y con contenido citado.

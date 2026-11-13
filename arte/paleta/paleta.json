@@ -1,0 +1,296 @@
+[
+  {
+    "clave": "A",
+    "id": "mar-noche",
+    "hex": "#0f1a21",
+    "grupo": "mar",
+    "nota": "Agua de noche o muy honda."
+  },
+  {
+    "clave": "B",
+    "id": "mar-hondo",
+    "hex": "#1d2e38",
+    "grupo": "mar",
+    "nota": "Canal abierto, profundo."
+  },
+  {
+    "clave": "C",
+    "id": "mar",
+    "hex": "#2d4553",
+    "grupo": "mar",
+    "nota": "Agua del canal con cielo cubierto."
+  },
+  {
+    "clave": "D",
+    "id": "mar-gris",
+    "hex": "#4b6672",
+    "grupo": "mar",
+    "nota": "Reflejo del cielo nublado."
+  },
+  {
+    "clave": "F",
+    "id": "agua-somera",
+    "hex": "#3d6866",
+    "grupo": "mar",
+    "nota": "Agua baja sobre piedra y algas, más verde."
+  },
+  {
+    "clave": "E",
+    "id": "espuma",
+    "hex": "#9db3b6",
+    "grupo": "mar",
+    "nota": "Cresta de ola, espuma contra la roca."
+  },
+  {
+    "clave": "n",
+    "id": "noche",
+    "hex": "#0b1015",
+    "grupo": "cielo",
+    "nota": "Fondo de interfaz y noche cerrada."
+  },
+  {
+    "clave": "h",
+    "id": "humo-oscuro",
+    "hex": "#59656c",
+    "grupo": "cielo",
+    "nota": "Humo denso, nubes de tormenta."
+  },
+  {
+    "clave": "H",
+    "id": "humo",
+    "hex": "#8e999c",
+    "grupo": "cielo",
+    "nota": "Columna de humo de un fogón."
+  },
+  {
+    "clave": "N",
+    "id": "niebla",
+    "hex": "#c3cbca",
+    "grupo": "cielo",
+    "nota": "Neblina sobre el canal."
+  },
+  {
+    "clave": "W",
+    "id": "nieve",
+    "hex": "#eef2ef",
+    "grupo": "cielo",
+    "nota": "Nieve de las cumbres, todo el año en lo alto."
+  },
+  {
+    "clave": "k",
+    "id": "piedra-oscura",
+    "hex": "#33312f",
+    "grupo": "piedra",
+    "nota": "Roca mojada, sombra."
+  },
+  {
+    "clave": "p",
+    "id": "piedra",
+    "hex": "#625f5a",
+    "grupo": "piedra",
+    "nota": "Roca de la costa."
+  },
+  {
+    "clave": "P",
+    "id": "canto-rodado",
+    "hex": "#8f897f",
+    "grupo": "piedra",
+    "nota": "Piedras redondeadas de la playa."
+  },
+  {
+    "clave": "g",
+    "id": "grava",
+    "hex": "#b3a78f",
+    "grupo": "piedra",
+    "nota": "Playa de grava seca, lecho del fogón."
+  },
+  {
+    "clave": "v",
+    "id": "guindo-sombra",
+    "hex": "#1a3227",
+    "grupo": "bosque",
+    "nota": "Guindo (Nothofagus betuloides): hoja perenne, domina la costa."
+  },
+  {
+    "clave": "V",
+    "id": "guindo",
+    "hex": "#2c5140",
+    "grupo": "bosque",
+    "nota": "Verde oscuro y brillante del guindo."
+  },
+  {
+    "clave": "Q",
+    "id": "guindo-luz",
+    "hex": "#457052",
+    "grupo": "bosque",
+    "nota": "Luz sobre la copa del guindo."
+  },
+  {
+    "clave": "G",
+    "id": "lenga-sombra",
+    "hex": "#3d5f37",
+    "grupo": "bosque",
+    "nota": "Lenga (Nothofagus pumilio): pierde la hoja en otoño."
+  },
+  {
+    "clave": "l",
+    "id": "lenga",
+    "hex": "#5d8a47",
+    "grupo": "bosque",
+    "nota": "Verde de la lenga en verano."
+  },
+  {
+    "clave": "L",
+    "id": "lenga-brote",
+    "hex": "#92ad5c",
+    "grupo": "bosque",
+    "nota": "Brote claro de primavera."
+  },
+  {
+    "clave": "o",
+    "id": "lenga-otono",
+    "hex": "#b0462e",
+    "grupo": "bosque",
+    "nota": "Rojo de la lenga en otoño."
+  },
+  {
+    "clave": "O",
+    "id": "nire-otono",
+    "hex": "#cf8a3a",
+    "grupo": "bosque",
+    "nota": "Amarillo anaranjado del ñire en otoño."
+  },
+  {
+    "clave": "m",
+    "id": "musgo",
+    "hex": "#6f7d36",
+    "grupo": "bosque",
+    "nota": "Musgo y pasto de la orilla."
+  },
+  {
+    "clave": "t",
+    "id": "turba-roja",
+    "hex": "#7e3529",
+    "grupo": "bosque",
+    "nota": "Turbal de Sphagnum magellanicum, rojizo."
+  },
+  {
+    "clave": "K",
+    "id": "cachiyuyo",
+    "hex": "#6a5527",
+    "grupo": "bosque",
+    "nota": "Bosque de algas (cachiyuyo) en el agua baja."
+  },
+  {
+    "clave": "r",
+    "id": "corteza",
+    "hex": "#5e412c",
+    "grupo": "madera",
+    "nota": "Corteza de la canoa y troncos."
+  },
+  {
+    "clave": "R",
+    "id": "corteza-clara",
+    "hex": "#977250",
+    "grupo": "madera",
+    "nota": "Madera pelada, remo, borde de la canoa."
+  },
+  {
+    "clave": "u",
+    "id": "cuero",
+    "hex": "#74543f",
+    "grupo": "madera",
+    "nota": "Capa de cuero de lobo marino."
+  },
+  {
+    "clave": "e",
+    "id": "brasa",
+    "hex": "#6e2116",
+    "grupo": "fuego",
+    "nota": "Brasa que queda cuando el fuego baja."
+  },
+  {
+    "clave": "f",
+    "id": "fuego",
+    "hex": "#d24e1c",
+    "grupo": "fuego",
+    "nota": "Cuerpo de la llama."
+  },
+  {
+    "clave": "y",
+    "id": "llama",
+    "hex": "#f39a2c",
+    "grupo": "fuego",
+    "nota": "Llama viva."
+  },
+  {
+    "clave": "Y",
+    "id": "luz",
+    "hex": "#ffd47c",
+    "grupo": "fuego",
+    "nota": "Corazón del fuego. También el color del saber."
+  },
+  {
+    "clave": "x",
+    "id": "ceniza",
+    "hex": "#463f3b",
+    "grupo": "fuego",
+    "nota": "Ceniza, fuego apagado."
+  },
+  {
+    "clave": "q",
+    "id": "ocre-rojo",
+    "hex": "#973a25",
+    "grupo": "tierra",
+    "nota": "Ocre de la tierra. Solo en interfaz y cartas, nunca como pintura corporal."
+  },
+  {
+    "clave": "w",
+    "id": "arcilla-blanca",
+    "hex": "#e7ddcb",
+    "grupo": "tierra",
+    "nota": "Arcilla clara, conchas, plumaje blanco."
+  },
+  {
+    "clave": "z",
+    "id": "carbon",
+    "hex": "#1d1a18",
+    "grupo": "tierra",
+    "nota": "Carbón, contornos, siluetas."
+  },
+  {
+    "clave": "j",
+    "id": "mejillon",
+    "hex": "#262842",
+    "grupo": "tierra",
+    "nota": "Valva de mejillón, negro azulado."
+  },
+  {
+    "clave": "J",
+    "id": "nacar",
+    "hex": "#7f8fb0",
+    "grupo": "tierra",
+    "nota": "Brillo de nácar en las valvas."
+  },
+  {
+    "clave": "b",
+    "id": "calafate",
+    "hex": "#3b2d5a",
+    "grupo": "tierra",
+    "nota": "Fruto del calafate, violeta oscuro."
+  },
+  {
+    "clave": "i",
+    "id": "papel",
+    "hex": "#eee5d0",
+    "grupo": "interfaz",
+    "nota": "Fondo de las cartas de saber."
+  },
+  {
+    "clave": "I",
+    "id": "tinta",
+    "hex": "#28221e",
+    "grupo": "interfaz",
+    "nota": "Texto sobre papel."
+  }
+]

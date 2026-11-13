@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sonido de los canales</title>
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<link rel="icon" href="../arte/logo/favicon-32.png" type="image/png">
+<meta name="description" content="Tierra de los Humos: prueba del sonido ambiente generado por código (viento, mar, lluvia, fuego) y de los efectos del juego.">
+<style>
+  :root { --fondo: #0b1015; --panel: #1b252d; --borde: #2d3a44; --texto: #e7ecea; --texto-2: #a9b4b6; --acento: #ffd47c; --acento-2: #f39a2c; color-scheme: dark; }
+  :root[data-theme="light"] { --fondo: #eee5d0; --panel: #f7f1e3; --borde: #cdbf9f; --texto: #28221e; --texto-2: #5b524a; --acento: #973a25; --acento-2: #b0462e; color-scheme: light; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --fondo: #eee5d0; --panel: #f7f1e3; --borde: #cdbf9f; --texto: #28221e; --texto-2: #5b524a; --acento: #973a25; --acento-2: #b0462e; color-scheme: light; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font: 17px/1.5 "Atkinson Hyperlegible", system-ui, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: clamp(28px, 6vw, 40px); margin: 0 0 8px; line-height: 1.1; }
+  p { color: var(--texto-2); }
+  button { font: inherit; min-height: 44px; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--borde); background: var(--panel); color: var(--texto); cursor: pointer; }
+  button:focus-visible, input:focus-visible { outline: 3px solid var(--acento-2); outline-offset: 2px; }
+  .grande { background: var(--acento); color: #1d1a18; font-weight: 700; border: 0; padding: 12px 22px; font-size: 18px; }
+  section { background: var(--panel); border: 1px solid var(--borde); border-radius: 10px; padding: 16px 18px; margin-top: 18px; }
+  h2 { font-size: 19px; margin: 0 0 10px; }
+  .fila { display: grid; grid-template-columns: 7.5em minmax(0, 1fr) 3em; gap: 10px; align-items: center; margin: 8px 0; }
+  input[type="range"] { width: 100%; accent-color: var(--acento-2); min-height: 32px; }
+  .botones { display: flex; flex-wrap: wrap; gap: 8px; }
+  #subtitulos { min-height: 2.6em; font-size: 18px; color: var(--texto); }
+  #subtitulos span { display: inline-block; background: var(--fondo); border: 1px solid var(--borde); border-radius: 6px; padding: 2px 10px; margin: 2px 4px 2px 0; }
+  .estado { font-size: 14px; color: var(--texto-2); margin-left: 8px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>El sonido de los canales</h1>
+  <p>Todo lo que se escucha acá se genera con código en el momento: no hay archivos de audio. Sin música ni cantos inventados: solo el territorio y el fuego.</p>
+  <button class="grande" id="iniciar" type="button">Encender el sonido</button><span class="estado" id="estado">Apagado</span>
+
+  <section aria-labelledby="t-amb">
+    <h2 id="t-amb">Ambiente</h2>
+    <div class="fila"><label for="viento">Viento</label><input id="viento" type="range" min="0" max="100" value="25"><output for="viento">25</output></div>
+    <div class="fila"><label for="mar">Mar</label><input id="mar" type="range" min="0" max="100" value="60"><output for="mar">60</output></div>
+    <div class="fila"><label for="lluvia">Lluvia</label><input id="lluvia" type="range" min="0" max="100" value="0"><output for="lluvia">0</output></div>
+    <div class="fila"><label for="bosque">Bosque cerca</label><input id="bosque" type="range" min="0" max="100" value="0"><output for="bosque">0</output></div>
+    <div class="fila"><label for="playa">Playa cerca</label><input id="playa" type="range" min="0" max="100" value="0"><output for="playa">0</output></div>
+    <div class="fila"><label for="fuego">Fuego (0 a 4)</label><input id="fuego" type="range" min="0" max="4" value="3"><output for="fuego">3</output></div>
+    <div class="fila"><label for="volumen">Volumen</label><input id="volumen" type="range" min="0" max="100" value="80"><output for="volumen">80</output></div>
+    <div class="botones" aria-label="Climas de ejemplo">
+      <button type="button" data-clima='{"viento":15,"mar":45,"lluvia":0,"fuego":3,"bosque":0,"playa":0}'>Calma</button>
+      <button type="button" data-clima='{"viento":45,"mar":30,"lluvia":0,"fuego":3,"bosque":90,"playa":20}'>Orilla del bosque</button>
+      <button type="button" data-clima='{"viento":20,"mar":65,"lluvia":0,"fuego":3,"bosque":20,"playa":90}'>Playa de piedras</button>
+      <button type="button" data-clima='{"viento":30,"mar":95,"lluvia":0,"fuego":3,"bosque":0,"playa":0}'>Canal abierto</button>
+      <button type="button" data-clima='{"viento":85,"mar":90,"lluvia":30,"fuego":2,"bosque":30,"playa":0}'>Temporal</button>
+      <button type="button" data-clima='{"viento":30,"mar":50,"lluvia":80,"fuego":2,"bosque":40,"playa":10}'>Lluvia</button>
+      <button type="button" data-clima='{"viento":10,"mar":30,"lluvia":0,"fuego":1,"bosque":30,"playa":30}'>Noche y brasas</button>
+      <button type="button" id="silencio" aria-pressed="false">Silenciar</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-ef">
+    <h2 id="t-ef">Efectos</h2>
+    <div class="botones" id="efectos"></div>
+    <h2 style="margin-top:16px">Subtítulos de sonido</h2>
+    <p style="margin:0 0 6px;font-size:14px">En el juego, cada efecto se muestra también como texto, para quien juega sin sonido o no oye.</p>
+    <div id="subtitulos" aria-live="polite"></div>
+  </section>
+</main>
+<script src="ambiente.js"></script>
+<script>
+  const sonido = TDH_SONIDO.crear();
+  const $ = (id) => document.getElementById(id);
+  const NOMBRES = { remo: 'Remar', ola: 'Ola', lena: 'Leña al fuego', comida: 'Mariscos', saber: 'Saber nuevo', apagado: 'Se apaga el fuego', generacion: 'Nueva generación' };
+  function leer() { return { viento: $('viento').value / 100, mar: $('mar').value / 100, lluvia: $('lluvia').value / 100, fuego: Number($('fuego').value), bosque: $('bosque').value / 100, playa: $('playa').value / 100 }; }
+  document.querySelectorAll('input[type=range]').forEach((r) => r.addEventListener('input', () => {
+    r.nextElementSibling.textContent = r.value;
+    if (r.id === 'volumen') sonido.volumen(r.value / 100); else sonido.ambiente(leer());
+  }));
+  $('iniciar').addEventListener('click', async () => {
+    if (sonido.activo) { await sonido.pausar(); $('estado').textContent = 'En pausa'; $('iniciar').textContent = 'Encender el sonido'; return; }
+    const ok = await sonido.iniciar();
+    sonido.ambiente(leer());
+    $('estado').textContent = ok ? 'Sonando' : 'Este navegador no tiene Web Audio';
+    $('iniciar').textContent = 'Pausar';
+  });
+  document.querySelectorAll('[data-clima]').forEach((b) => b.addEventListener('click', () => {
+    const c = JSON.parse(b.dataset.clima);
+    Object.entries(c).forEach(([k, v]) => { $(k).value = v; $(k).nextElementSibling.textContent = v; });
+    sonido.ambiente(leer());
+  }));
+  $('silencio').addEventListener('click', (e) => { const si = e.currentTarget.getAttribute('aria-pressed') !== 'true'; e.currentTarget.setAttribute('aria-pressed', String(si)); e.currentTarget.textContent = si ? 'Activar sonido' : 'Silenciar'; sonido.silenciar(si); });
+  sonido.efectos.forEach((n) => {
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = NOMBRES[n] || n;
+    b.addEventListener('click', async () => { if (!sonido.activo) { await sonido.iniciar(); sonido.ambiente(leer()); $('estado').textContent = 'Sonando'; $('iniciar').textContent = 'Pausar'; } sonido.efecto(n); });
+    $('efectos').appendChild(b);
+  });
+  sonido.alSonar((texto) => {
+    const s = document.createElement('span'); s.textContent = '[' + texto + ']';
+    $('subtitulos').prepend(s);
+    while ($('subtitulos').children.length > 4) $('subtitulos').lastChild.remove();
+  });
+</script>
+</body>
+</html>

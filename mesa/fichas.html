@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fichas de mesa</title>
+<meta name="description" content="Tierra de los Humos de mesa: fichas de doble faz para imprimir en A4 (recurso de un lado, humo del otro), la canoa y la brasa del medidor de fuego.">
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<style>
+  :root { --fondo: #e9dfc8; --texto: #28221e; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; } }
+  :root[data-theme="dark"] { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; }
+  .hoja { width: 210mm; height: 297mm; margin: 12px auto; background: #fff; padding: 14mm 12mm; position: relative; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-after: page; page-break-after: always; color: #28221e; }
+  .hoja:last-child { break-after: auto; page-break-after: auto; }
+  h2 { font-size: 6mm; margin: 0 0 2mm; }
+  .nota { font-size: 3.4mm; margin: 0 0 5mm; color: #5b524a; }
+  .grilla { display: grid; grid-template-columns: repeat(7, 24mm); gap: 2mm; justify-content: center; }
+  .ficha { width: 24mm; height: 24mm; border: .3mm dashed #b3a78f; display: grid; place-items: center; }
+  .ficha canvas { width: 20mm; height: 20mm; display: block; }
+  .grandes { display: flex; gap: 8mm; justify-content: center; margin-top: 8mm; }
+  .grandes .ficha { width: 40mm; height: 40mm; }
+  .grandes canvas { width: 36mm; height: 36mm; }
+  .pie { position: absolute; left: 12mm; right: 12mm; bottom: 10mm; font-size: 3.2mm; color: #5b524a; }
+  .instrucciones { max-width: 760px; margin: 16px auto 0; padding: 0 16px; }
+  @media print { body { background: #fff; } .instrucciones { display: none; } .hoja { margin: 0; } }
+</style>
+</head>
+<body>
+  <div class="instrucciones"><p><strong>Fichas A4, doble faz</strong> («girar por el borde largo»). Mejor en cartulina. Recortar por la línea punteada.</p></div>
+  <section class="hoja" id="frente" aria-label="Frente de las fichas">
+    <h2>Fichas · frente</h2>
+    <p class="nota">Recurso de un lado, humo del otro. Al empezar se ponen con el humo hacia arriba.</p>
+    <div class="grilla" id="g-frente"></div>
+    <div class="grandes" id="grandes-frente"></div>
+    <p class="pie">Tierra de los Humos · versión de mesa · CC BY-SA 4.0. Hace falta además un dado común.</p>
+  </section>
+  <section class="hoja" id="dorso" aria-label="Dorso de las fichas">
+    <h2 style="text-align:right">Fichas · dorso</h2>
+    <p class="nota" style="text-align:right">Este lado es el humo: lo que todavía no se exploró.</p>
+    <div class="grilla" id="g-dorso"></div>
+    <div class="grandes" id="grandes-dorso"></div>
+  </section>
+<script src="../arte/fuente/arte.js"></script>
+<script src="../arte/corteza/corteza.js"></script>
+<script src="mesa.js"></script>
+<script>
+(function () {
+  const CZ = TDH_CORTEZA, ARTE = TDH_ARTE, M = TDH_MESA, C = ARTE.COLOR;
+  // Fichas: una por cada lugar del tablero, más repuestos (2 leña, 1 mejillones, 1 pescado)
+  const lista = M.LUGARES.map((l) => l.ficha).concat(['lena', 'lena', 'mejillones', 'pescado']);
+  while (lista.length % 7) lista.push(null); // completar la última fila
+  const T = 240; // px de cada ficha (20 mm a ~300 ppp)
+  function frente(tipo) {
+    const cv = document.createElement('canvas'); cv.width = T; cv.height = T; const x = cv.getContext('2d');
+    if (!tipo) return cv;
+    x.fillStyle = C.i; x.beginPath(); x.arc(T / 2, T / 2, T / 2 - 4, 0, Math.PI * 2); x.fill();
+    x.strokeStyle = C.R; x.lineWidth = 6; x.stroke();
+    const p = CZ.pegatina(M.PEGATINA[tipo], 8); x.imageSmoothingEnabled = false;
+    const e = Math.min((T * 0.7) / p.width, (T * 0.7) / p.height);
+    x.drawImage(p, (T - p.width * e) / 2, (T - p.height * e) / 2 - 8, p.width * e, p.height * e);
+    x.fillStyle = C.I; x.font = '700 26px "Atkinson Hyperlegible", sans-serif'; x.textAlign = 'center'; x.fillText(M.NOMBRE[tipo], T / 2, T - 26);
+    return cv;
+  }
+  function dorso(tipo) {
+    const cv = document.createElement('canvas'); cv.width = T; cv.height = T; const x = cv.getContext('2d');
+    if (!tipo) return cv;
+    x.save(); x.beginPath(); x.arc(T / 2, T / 2, T / 2 - 4, 0, Math.PI * 2); x.clip();
+    x.fillStyle = C.h; x.fillRect(0, 0, T, T);
+    [[60, 80, 70], [170, 70, 62], [120, 150, 80], [40, 190, 55], [200, 180, 60]].forEach(([a, b, r]) => { x.fillStyle = C.H; x.beginPath(); x.arc(a, b, r, 0, Math.PI * 2); x.fill(); x.fillStyle = 'rgba(195,203,202,.6)'; x.beginPath(); x.arc(a - r * 0.2, b - r * 0.25, r * 0.55, 0, Math.PI * 2); x.fill(); });
+    x.restore(); x.strokeStyle = C.h; x.lineWidth = 6; x.beginPath(); x.arc(T / 2, T / 2, T / 2 - 4, 0, Math.PI * 2); x.stroke();
+    return cv;
+  }
+  function poner(id, canvas) { const d = document.createElement('div'); d.className = 'ficha'; d.appendChild(canvas); document.getElementById(id).appendChild(d); }
+  // Frente en orden; dorso con cada fila en espejo, para que coincida al imprimir doble faz
+  lista.forEach((t) => poner('g-frente', frente(t)));
+  for (let i = 0; i < lista.length; i += 7) lista.slice(i, i + 7).reverse().forEach((t) => poner('g-dorso', dorso(t)));
+  // La canoa y la brasa del medidor de fuego
+  const grande = (dib) => { const cv = document.createElement('canvas'); cv.width = 420; cv.height = 420; const x = cv.getContext('2d'); dib(x); return cv; };
+  const canoa = grande((x) => { x.fillStyle = C.B; x.beginPath(); x.arc(210, 210, 200, 0, Math.PI * 2); x.fill(); x.strokeStyle = C.R; x.lineWidth = 8; x.stroke(); CZ.humo(x, 210, 150, 1.6, 2, 0.5, 6, 80); CZ.canoa(x, 210, 270, 3.4, 4, 2.2, 1, false); });
+  const brasa = grande((x) => { x.fillStyle = C.n; x.beginPath(); x.arc(210, 210, 200, 0, Math.PI * 2); x.fill(); CZ.fuego(x, 210, 300, 6, 4, 2.2); });
+  const vacia = () => grande(() => {});
+  poner('grandes-frente', canoa); poner('grandes-frente', brasa);
+  poner('grandes-dorso', brasa.cloneNode ? (() => { const c = grande((x) => x.drawImage(brasa, 0, 0)); return c; })() : vacia());
+  poner('grandes-dorso', grande((x) => x.drawImage(canoa, 0, 0)));
+  document.body.dataset.listo = '1';
+})();
+</script>
+</body>
+</html>

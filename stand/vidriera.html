@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vidriera del stand</title>
+<meta name="description" content="Tierra de los Humos: pantalla que se reproduce sola en el stand de la demo, con la canoa, el mapa de territorios, las cartas de saber, el paso del fuego y el QR para jugar.">
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<link rel="stylesheet" href="../arte/corteza/carta.css">
+<link rel="icon" href="../arte/logo/favicon-32.png" type="image/png">
+<style>
+  :root { --fondo: #0b1015; --texto: #eee5d0; color-scheme: dark; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --fondo: #0b1015; --texto: #eee5d0; } }
+  :root[data-theme="light"] { --fondo: #0b1015; --texto: #eee5d0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--fondo); color: var(--texto); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; }
+  body.quieto { cursor: none; }
+  #escena { position: fixed; inset: 0; }
+  #escena > canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #centro { position: fixed; inset: 0; display: grid; place-items: center; pointer-events: none; padding: 4vh 4vw 20vh; }
+  #centro > * { max-width: 100%; max-height: 100%; }
+  #leyenda { position: fixed; left: 50%; bottom: 5vh; transform: translateX(-50%); width: min(90vw, 1100px); text-align: center; padding: 2.2vh 3vw; font-size: clamp(20px, 3.4vw, 44px); line-height: 1.2; font-weight: 700; color: #28221e; transition: opacity .5s; }
+  #leyenda small { display: block; font-size: .5em; font-weight: 400; margin-top: .4em; color: #5b524a; }
+  .titulo { text-align: center; padding: 3vh 4vw; width: min(52vw, 820px); margin-right: 4vw; }
+  .titulo h1 { margin: 0; font-size: clamp(48px, 9vw, 130px); line-height: .95; color: #28221e; }
+  .titulo p { margin: 1.4vh 0 0; font-size: clamp(18px, 2.6vw, 34px); color: #28221e; }
+  .mapa-vid { padding: 1vh; width: min(80vw, 95vh); }
+  .mapa-vid canvas { width: 100%; height: auto; display: block; border-radius: 12px; }
+  .cartas-vid { display: flex; gap: 3vw; align-items: flex-start; justify-content: center; }
+  .cartas-vid .carta-saber { width: min(40vw, 46vh); max-width: none; }
+  .cierre { display: flex; gap: 4vw; align-items: center; padding: 3vh 4vw; color: #28221e; }
+  .cierre img { width: min(32vh, 36vw); height: auto; border-radius: 10px; }
+  .cierre h2 { margin: 0 0 1.4vh; font-size: clamp(32px, 5vw, 72px); line-height: 1; }
+  .cierre p { margin: .6vh 0; font-size: clamp(16px, 2.2vw, 30px); }
+  .cierre code { font-size: .8em; }
+  #ayuda { position: fixed; top: 10px; right: 12px; font-size: 13px; color: #8e999c; opacity: .6; }
+  @media (prefers-reduced-motion: reduce) { #leyenda { transition: none; } }
+</style>
+</head>
+<body>
+<div id="escena"><canvas id="fondo" aria-hidden="true"></canvas></div>
+<div id="centro" aria-live="polite"></div>
+<div id="leyenda" class="papel" role="status"></div>
+<div id="ayuda">Espacio: pausa · →: siguiente · F: pantalla completa</div>
+
+<script src="../arte/fuente/arte.js"></script>
+<script src="../arte/corteza/corteza.js"></script>
+<script src="../arte/corteza/transiciones.js"></script>
+<script src="../arte/corteza/luz-real.js"></script>
+<script src="../arte/mapa/costas.js"></script>
+<script src="../arte/mapa/mapa.js"></script>
+<script src="../arte/cartas/saberes-borrador.js"></script>
+<script>
+(function () {
+  'use strict';
+  const CZ = TDH_CORTEZA, TR = TDH_TRANSICIONES, { SABERES, ORDEN } = TDH_SABERES;
+  const $ = (id) => document.getElementById(id);
+  const fondo = $('fondo'), centro = $('centro'), leyenda = $('leyenda');
+  let motor = null, extraDibujo = null, pausado = false;
+
+  function leyendaTexto(t, chico) { leyenda.style.opacity = t ? 1 : 0; leyenda.innerHTML = t ? t + (chico ? '<small>' + chico + '</small>' : '') : ''; }
+  function celdaParaPantalla(cols, filas) { return Math.ceil(Math.max(innerWidth / cols, innerHeight / filas)); }
+  function costa(cols, filas, fila, extra) {
+    const mapa = [];
+    for (let y = 0; y < filas; y++) { let f = ''; for (let x = 0; x < cols; x++) { const b = fila + Math.round(Math.sin(x * 0.55) * 0.7); f += y === 0 ? (x % 5 === 2 ? 'L' : 'M') : y < b - 1 ? ((x * 7 + y) % 5 ? 'G' : 'L') : y === b - 1 ? '.' : y === b ? (x % 6 === 3 ? 'k' : ',') : (y > b + 4 ? '~' : '-'); } mapa.push(f); }
+    motor = CZ.crear(fondo, { celda: celdaParaPantalla(cols, filas) });
+    motor.escena(Object.assign({ mapa, objetos: [], estacion: 'otono', clima: 'calma', hora: 'tarde' }, extra || {}));
+  }
+
+  // ── Escenas ─────────────────────────────────────────────────────────────
+  const MAPA_VIAJE = ['MMLMMMLLMMMMLLMMMLLMMM', 'LLLLtLLLpLLLttLLLLGGLL', 'GLLttLLppLGGLLLLGGGLGL', 'GGGGpGGGGpGGGGGGGGGGGG', '...GG.......GGG...G...', ',,k,,,,,r,,,,,,,,,k,,,', '-,,-------------,,----', '~--~~~~~-------~~~~~~~', '~~~~~~~~~~~~~~~~~~~~~~', '----~~~~~~~~~~~~~-----', ',,,k,----~~~---,,,r,k,', '..,,,,,,----,,,,,.....', 'GGL...,,,--,,,..LLGGGt'];
+  const RUTA = [[2, 6], [4, 6], [6, 6], [8, 6], [10, 6], [12, 6], [14, 6], [15, 7], [16, 8], [17, 9], [17, 10], [16, 10], [15, 10], [14, 11], [13, 11]];
+  const ESCENAS = [
+    { dur: 9000, entrar() {
+      const luz = TDH_LUZ_REAL.ahora(); // el título con la luz de hoy en Ushuaia
+      costa(34, 19, 5, { hora: luz.hora, estacion: luz.estacion, humos: [{ x: 14.5, y: 1.4 }, { x: 29.5, y: 1.7 }], objetos: [{ id: 'choza', x: 24, y: 4 }, { id: 'conchal', x: 26, y: 4 }] });
+      extraDibujo = (t) => { // canoa grande abajo a la izquierda, según lo que se ve de la pantalla
+        const x = fondo.getContext('2d'), dpr = fondo.width / fondo.clientWidth || 1, esc = Math.max(innerWidth / fondo.width * dpr, innerHeight / fondo.height * dpr);
+        const vx = innerWidth * 0.24, vy = innerHeight * 0.66, cx = (vx - (innerWidth - fondo.width / dpr * esc) / 2) / esc * dpr, cy = (vy - (innerHeight - fondo.height / dpr * esc) / 2) / esc * dpr, k = Math.min(innerWidth, innerHeight) / 260 / esc * dpr;
+        x.setTransform(1, 0, 0, 1, 0, 0); CZ.humo(x, cx, cy - 34 * k, k, t + 1, 0.8, 8, 120); CZ.canoa(x, cx, cy, k, 4, t, 1, false); };
+      centro.innerHTML = '<div class="titulo rotulo papel" style="position:relative"><h1>Tierra de los Humos</h1><p>Un viaje en canoa por los canales fueguinos</p></div>';
+      centro.style.placeItems = 'center end'; leyendaTexto('Cuando el fuego se apaga, lo aprendido pasa a la siguiente generación.', luz.texto);
+    } },
+    { dur: 15000, entrar() {
+      const visto = new Set(), revelar = (cx, cy) => { for (let y = 0; y < MAPA_VIAJE.length; y++) for (let x = 0; x < MAPA_VIAJE[0].length; x++) { const dx = (x - cx) / 1.8, dy = (y - cy) / 1.45; if (dx * dx + dy * dy < 14) visto.add(x + ',' + y); } };
+      const canoa = { x: 2, y: 6, fuego: 4, mira: 1, remando: true }; revelar(2, 6);
+      motor = CZ.crear(fondo, { celda: celdaParaPantalla(22, 13) });
+      const esc = (clima) => motor.escena({ mapa: MAPA_VIAJE, canoa, clima, hora: 'tarde', estacion: 'verano', explorado: (x, y) => visto.has(x + ',' + y),
+        objetos: [{ id: 'choza', x: 8, y: 4 }, { id: 'conchal', x: 10, y: 4 }, { id: 'lena', x: 6, y: 4 }, { id: 'mejillones', x: 16, y: 4 }, { id: 'lobo-marino', x: 8, y: 5 }, { id: 'cormoran', x: 18, y: 10 }, { id: 'pato-vapor', x: 5, y: 9 }, { id: 'saber', x: 16, y: 11 }, { id: 'ballena-varada', x: 20, y: 11 }],
+        humos: [{ x: 20.5, y: 1.6 }] });
+      esc('calma'); let i = 0;
+      extraDibujo = null; centro.innerHTML = ''; leyendaTexto('El fuego es tu vida.', 'El viento y la lluvia lo gastan; la leña lo sostiene.');
+      this.reloj = setInterval(() => {
+        if (pausado) return; i = Math.min(RUTA.length - 1, i + 1);
+        const [x, y] = RUTA[i]; canoa.mira = x < canoa.x ? -1 : x > canoa.x ? 1 : canoa.mira; canoa.x = x; canoa.y = y; revelar(x, y);
+        if (i === 6) { esc('viento'); canoa.fuego = 3; leyendaTexto('Se levanta viento del oeste.', 'Cruzar el canal hondo gasta más fuego.'); }
+        else if (i === 11) { canoa.fuego = 2; esc('lluvia'); leyendaTexto('Lo que tiene borde de papel, se junta.', 'Leña, mariscos, hongos, pirita y saberes.'); }
+        else esc(i > 10 ? 'lluvia' : i > 5 ? 'viento' : 'calma');
+      }, 850);
+    }, salir() { clearInterval(this.reloj); } },
+    { dur: 10000, entrar() {
+      costa(34, 19, 4, { hora: 'dia', estacion: 'verano' }); extraDibujo = null;
+      centro.style.placeItems = 'center'; centro.innerHTML = '<figure class="mapa-vid papel" style="margin:0"><canvas id="mapa-vid"></canvas></figure>';
+      TDH_MAPA.dibujar($('mapa-vid'), { ancho: 1200, territorios: true, nombres: true, hoy: true, destacar: 'yagan' });
+      leyendaTexto('Los canales del sur, territorio del pueblo yagán.', 'Zonas aproximadas, según Cooper (1946) y Bird (1946), Handbook of South American Indians.');
+    } },
+    { dur: 14000, entrar() {
+      costa(34, 19, 6, { hora: 'dia', estacion: 'verano' }); extraDibujo = null; centro.style.placeItems = 'center';
+      const elegir = () => { const k = ORDEN.slice().sort(() => Math.random() - 0.5).slice(0, 2); return k; };
+      const mostrar = (claves) => {
+        centro.innerHTML = '<div class="cartas-vid">' + claves.map((k) => { const c = SABERES[k]; return '<article class="carta-saber papel"><p class="carta-saber__tipo">Saber · Yagán · ' + c.tipo + '</p><canvas class="carta-saber__ilus" aria-hidden="true"></canvas><h3 class="carta-saber__titulo">' + c.titulo + '</h3><p><span class="etiqueta etiqueta--dato">Dato</span>' + c.dato + '</p><p><span class="etiqueta etiqueta--juego">En el juego</span>' + c.juego + '</p><p class="carta-saber__fuente">Fuente: ' + c.fuente + '</p></article>'; }).join('') + '</div>';
+        centro.querySelectorAll('.carta-saber').forEach((el, j) => { const c = SABERES[claves[j]], cv = el.querySelector('canvas'), m = CZ.crear(cv, { celda: 52, dpr: 2 }); m.escena(Object.assign({ mapa: c.mapa, objetos: [], estacion: 'verano', clima: 'calma', hora: 'dia' }, c.extra || {})); m.dibujar(1.6); setTimeout(() => TR.cartaEntra(el), j * 250); });
+      };
+      mostrar(elegir()); this.reloj = setTimeout(() => mostrar(elegir()), 7000);
+      leyendaTexto('Cada saber tiene su fuente.', 'La carta separa lo que es dato de lo que es recurso de juego.');
+    }, salir() { clearTimeout(this.reloj); } },
+    { dur: 7500, entrar() {
+      costa(34, 19, 6, { hora: 'noche' }); extraDibujo = null; centro.innerHTML = ''; leyendaTexto('');
+      TR.pasoDelFuego($('escena'), { desde: 1, hasta: 2, saberes: ORDEN.slice(0, 3).map((k) => SABERES[k].titulo), ms: 5600 });
+    }, salir() { [...$('escena').children].forEach((c) => { if (c !== fondo) c.remove(); }); } },
+    { dur: 12000, entrar() {
+      costa(34, 19, 5, { hora: 'tarde', estacion: 'otono', canoa: { x: 6, y: 9, fuego: 4 }, humos: [{ x: 20.5, y: 1.6 }] }); extraDibujo = null;
+      centro.style.placeItems = 'center';
+      centro.innerHTML = '<div class="cierre rotulo papel"><img src="qr-juego.svg" alt="Código QR para abrir el juego en el celular"><div><h2>Jugalo en tu celular</h2><p>Escaneá el código o entrá a:</p><p><code>facunique.github.io/Tierra-de-los-Humos</code></p><p style="margin-top:2vh">Los pueblos fueguinos están vivos. Esta es una forma más de escucharlos.</p></div></div>';
+      leyendaTexto('');
+    } },
+  ];
+
+  // ── Bucle ───────────────────────────────────────────────────────────────
+  let actual = -1, finEscena = Infinity; // la primera escena la arranca siguiente(), no el bucle
+  async function siguiente() {
+    if (actual >= 0 && ESCENAS[actual].salir) ESCENAS[actual].salir();
+    await TR.humoCubre(document.body, 500);
+    actual = (actual + 1) % ESCENAS.length; centro.style.placeItems = 'center';
+    ESCENAS[actual].entrar();
+    finEscena = performance.now() + ESCENAS[actual].dur;
+    await TR.humoDescubre(document.body, 600);
+  }
+  let ultimo = 0, enCambio = false;
+  function cuadro(ms) {
+    if (!pausado && ms - ultimo > 40) {
+      ultimo = ms;
+      if (motor) motor.dibujar(ms / 1000);
+      if (extraDibujo) extraDibujo(ms / 1000);
+      if (!enCambio && ms > finEscena) { enCambio = true; siguiente().then(() => (enCambio = false)); }
+    }
+    if (pausado) finEscena += 16;
+    requestAnimationFrame(cuadro);
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === ' ') { e.preventDefault(); pausado = !pausado; }
+    if (e.key === 'ArrowRight') finEscena = 0;
+    if (e.key === 'f' || e.key === 'F') { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+  });
+  // Esconder el cursor y la ayuda si nadie toca nada; pedir que la pantalla no se apague.
+  let quieto; const mover = () => { document.body.classList.remove('quieto'); $('ayuda').style.opacity = 0.6; clearTimeout(quieto); quieto = setTimeout(() => { document.body.classList.add('quieto'); $('ayuda').style.opacity = 0; }, 3000); };
+  addEventListener('mousemove', mover); mover();
+  try { if (navigator.wakeLock) navigator.wakeLock.request('screen').catch(() => {}); } catch (e) { /* no hace falta */ }
+  addEventListener('resize', () => { finEscena = 0; });
+  document.fonts.ready.then(() => { enCambio = true; siguiente().then(() => (enCambio = false)); requestAnimationFrame(cuadro); });
+})();
+</script>
+</body>
+</html>

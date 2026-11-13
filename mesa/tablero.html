@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tablero de mesa</title>
+<meta name="description" content="Tierra de los Humos de mesa: tablero A3 para imprimir, con el canal, los lugares de las fichas, el medidor de fuego y la tabla del clima.">
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<style>
+  :root { --fondo: #e9dfc8; --texto: #28221e; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; } }
+  :root[data-theme="dark"] { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; }
+  @page { size: A3 landscape; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; }
+  .hoja { width: 420mm; height: 297mm; margin: 12px auto; background: #1d2e38; position: relative; overflow: hidden; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .papel { background: #eee5d0; color: #28221e; border-radius: 4mm 5mm 3.5mm 5.5mm / 5mm 3.5mm 5.5mm 4mm; box-shadow: 2mm 2.5mm 0 rgba(15,26,33,.55); }
+  #tablero { position: absolute; left: 34mm; top: 30mm; width: 352mm; height: 220mm; border-radius: 3mm; }
+  .titulo { position: absolute; left: 34mm; top: 7mm; padding: 2.5mm 6mm; display: flex; gap: 5mm; align-items: baseline; }
+  .titulo b { font-size: 9mm; line-height: 1; }
+  .titulo span { font-size: 4mm; color: #973a25; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .clima { position: absolute; right: 34mm; top: 6mm; padding: 2mm 5mm; font-size: 3.6mm; display: flex; gap: 5mm; align-items: center; }
+  .clima b { font-size: 3.6mm; color: #973a25; text-transform: uppercase; letter-spacing: .08em; }
+  .fuego { position: absolute; left: 34mm; right: 34mm; bottom: 8mm; height: 32mm; padding: 3mm 5mm; display: flex; gap: 4mm; align-items: center; }
+  .fuego .rotulo { font-size: 4.2mm; font-weight: 700; width: 30mm; line-height: 1.15; }
+  .fuego .casillas { flex: 1; display: grid; grid-template-columns: repeat(17, 1fr); gap: 1.4mm; }
+  .fuego .casilla { height: 18mm; border: .5mm solid #5e412c; border-radius: 2mm; background: #f7f1e3; display: grid; place-items: center; font-size: 5mm; font-weight: 700; position: relative; }
+  .fuego .casilla.nivel { background: #ffd47c; }
+  .fuego .casilla.cero { background: #463f3b; color: #eee5d0; }
+  .fuego .casilla small { position: absolute; bottom: .6mm; font-size: 2.4mm; font-weight: 400; }
+  .coord { position: absolute; font-size: 4mm; font-weight: 700; color: #eee5d0; text-align: center; }
+  .instrucciones { max-width: 760px; margin: 16px auto 0; padding: 0 16px; }
+  @media print { body { background: #fff; } .instrucciones { display: none; } .hoja { margin: 0; } }
+</style>
+</head>
+<body>
+  <div class="instrucciones"><p><strong>Tablero A3 apaisado.</strong> Se imprime en una hoja A3 (o en dos A4 unidas con cinta). Las reglas están en <code>mesa/reglas.html</code>.</p></div>
+  <section class="hoja" aria-label="Tablero">
+    <div class="titulo papel"><b>Tierra de los Humos</b><span>versión de mesa</span></div>
+    <div class="clima papel"><b>Clima (1 dado)</b><span>1, 2, 3: calma</span><span>4, 5: viento</span><span>6: lluvia</span></div>
+    <canvas id="tablero" role="img" aria-label="Tablero: un canal de oeste a este, con la choza de partida al oeste, la ballena varada al este, playas, rocas, cachiyuyo y los lugares de las fichas."></canvas>
+    <div id="coords"></div>
+    <div class="fuego papel"><div class="rotulo">Fuego<br><span style="font-weight:400;font-size:3.4mm">poné la brasa en el número</span></div><div class="casillas" id="casillas"></div></div>
+  </section>
+<script src="../arte/fuente/arte.js"></script>
+<script src="../arte/corteza/corteza.js"></script>
+<script src="mesa.js"></script>
+<script>
+(function () {
+  const CZ = TDH_CORTEZA, ARTE = TDH_ARTE, M = TDH_MESA, C = ARTE.COLOR;
+  const cv = document.getElementById('tablero');
+  const celda = 88; // 16 × 88 = 1408 px de ancho para 352 mm
+  const motor = CZ.crear(cv, { celda, dpr: 2 });
+  motor.escena({ mapa: M.MAPA, objetos: M.FIJOS, estacion: 'verano', clima: 'calma', hora: 'dia' });
+  motor.dibujar(2.2);
+  const x = cv.getContext('2d'); x.setTransform(2, 0, 0, 2, 0, 0);
+  // Grilla suave para contar casillas
+  x.strokeStyle = 'rgba(238,242,239,.28)'; x.lineWidth = 1.5;
+  for (let i = 1; i < 16; i++) { x.beginPath(); x.moveTo(i * celda, 0); x.lineTo(i * celda, 10 * celda); x.stroke(); }
+  for (let j = 1; j < 10; j++) { x.beginPath(); x.moveTo(0, j * celda); x.lineTo(16 * celda, j * celda); x.stroke(); }
+  // Lugares de fichas: círculo punteado de papel
+  M.LUGARES.forEach((l) => {
+    const cx = (l.x + 0.5) * celda, cy = (l.y + 0.5) * celda;
+    x.fillStyle = 'rgba(238,229,208,.55)'; x.beginPath(); x.arc(cx, cy, celda * 0.34, 0, Math.PI * 2); x.fill();
+    x.setLineDash([6, 6]); x.strokeStyle = '#28221e'; x.lineWidth = 2.5; x.beginPath(); x.arc(cx, cy, celda * 0.34, 0, Math.PI * 2); x.stroke(); x.setLineDash([]);
+  });
+  // Partida y llegada
+  const marca = (gx, gy, texto) => {
+    const cx = (gx + 0.5) * celda, cy = (gy + 0.5) * celda;
+    x.font = '700 22px "Atkinson Hyperlegible", sans-serif'; const w = x.measureText(texto).width + 24;
+    x.fillStyle = 'rgba(15,26,33,.55)'; x.beginPath(); x.roundRect(cx - w / 2 + 3, cy - 18 + 4, w, 34, 10); x.fill();
+    x.fillStyle = '#ffd47c'; x.beginPath(); x.roundRect(cx - w / 2, cy - 18, w, 34, 10); x.fill();
+    x.fillStyle = '#28221e'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(texto, cx, cy);
+  };
+  marca(M.INICIO.x, M.INICIO.y + 0.05, 'Partida');
+  marca(12.6, 9.25, 'Llegada: la ballena varada');
+  // Coordenadas alrededor
+  const co = document.getElementById('coords'), mm = 22;
+  for (let i = 0; i < 16; i++) co.insertAdjacentHTML('beforeend', '<div class="coord" style="left:' + (34 + i * mm) + 'mm;width:' + mm + 'mm;top:251mm">' + M.COLUMNAS[i] + '</div>');
+  for (let j = 0; j < 10; j++) co.insertAdjacentHTML('beforeend', '<div class="coord" style="left:25mm;width:8mm;top:' + (30 + j * mm + 9) + 'mm">' + (j + 1) + '</div>');
+  // Medidor de fuego 0 a 16
+  const cas = document.getElementById('casillas');
+  for (let n = 0; n <= 16; n++) cas.insertAdjacentHTML('beforeend', '<div class="casilla' + (n === 0 ? ' cero' : n % 4 === 0 ? ' nivel' : '') + '">' + n + (n === 0 ? '<small>se apaga</small>' : n % 4 === 0 ? '<small>' + '🔥'.repeat(n / 4) + '</small>' : '') + '</div>');
+  document.body.dataset.listo = '1';
+})();
+</script>
+</body>
+</html>

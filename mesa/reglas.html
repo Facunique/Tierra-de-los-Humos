@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reglas de mesa</title>
+<meta name="description" content="Tierra de los Humos de mesa: reglas de una página y el Libro de la familia, para jugar sin pantallas.">
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<style>
+  :root { --fondo: #e9dfc8; --texto: #28221e; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; } }
+  :root[data-theme="dark"] { --fondo: #0b1015; --texto: #e7ecea; color-scheme: dark; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; }
+  .hoja { width: 210mm; height: 297mm; margin: 12px auto; background: #eee5d0; color: #28221e; padding: 13mm 14mm; position: relative; break-after: page; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hoja:last-child { break-after: auto; page-break-after: auto; }
+  .encabezado { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: .6mm dashed #977250; padding-bottom: 3mm; margin-bottom: 4mm; }
+  h1 { margin: 0; font-size: 9.5mm; line-height: 1; }
+  .sub { font-size: 3.6mm; font-weight: 700; color: #973a25; letter-spacing: .1em; text-transform: uppercase; }
+  .datos { font-size: 3.5mm; text-align: right; }
+  h2 { font-size: 4.8mm; margin: 4mm 0 1.5mm; color: #973a25; }
+  p, li { font-size: 3.65mm; line-height: 1.42; margin: 0 0 1.4mm; }
+  ol, ul { margin: 0; padding-left: 5.5mm; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; }
+  .caja { background: #f7f1e3; border-radius: 3mm; padding: 3mm 4mm; border: .3mm solid #cdbf9f; }
+  .ficha-ico { display: inline-block; width: 4.5mm; height: 4.5mm; vertical-align: -1mm; margin-right: 1mm; image-rendering: pixelated; }
+  table { width: 100%; border-collapse: collapse; margin-top: 3mm; }
+  th, td { border: .3mm solid #977250; padding: 2mm; font-size: 3.6mm; text-align: left; vertical-align: top; }
+  th { background: #f7f1e3; }
+  td { height: 22mm; }
+  .pie { position: absolute; left: 14mm; right: 14mm; bottom: 9mm; font-size: 3mm; color: #5b524a; }
+  .instrucciones { max-width: 760px; margin: 16px auto 0; padding: 0 16px; }
+  @media print { body { background: #fff; } .instrucciones { display: none; } .hoja { margin: 0; } }
+</style>
+</head>
+<body>
+<div class="instrucciones"><p><strong>Reglas (A4) y Libro de la familia.</strong> Los números son de prueba: se ajustan al jugar.</p></div>
+
+<section class="hoja" aria-label="Reglas">
+  <div class="encabezado">
+    <div><div class="sub">Versión de mesa</div><h1>Tierra de los Humos</h1></div>
+    <div class="datos">1 a 4 personas · desde 9 años · 20 minutos<br>Juegan todos juntos: son una familia.</div>
+  </div>
+  <p><b>Qué hace falta:</b> el tablero, las fichas, las 9 cartas de saber (<code>arte/cartas/cartas-para-imprimir.pdf</code>), un dado común y el Libro de la familia (al dorso).</p>
+  <p><b>El objetivo:</b> llevar la canoa desde la <b>Partida</b> hasta la <b>ballena varada</b> con el fuego encendido.</p>
+  <div class="dos">
+    <div>
+      <h2>Preparación</h2>
+      <ol>
+        <li>Mezclen las fichas de recursos y pongan una en cada círculo punteado, <b>con el humo hacia arriba</b>.</li>
+        <li>La canoa va en la Partida. Empiezan con 1 leña.</li>
+        <li>La brasa va en el <b>12</b> del medidor de fuego, más 1 por cada saber que heredaron (ver el Libro de la familia), hasta 16.</li>
+        <li>Mezclen las cartas de saber boca abajo.</li>
+      </ol>
+      <h2>Cada ronda</h2>
+      <ol>
+        <li><b>Clima:</b> tiren el dado. 1, 2 o 3: calma. 4 o 5: viento. 6: lluvia.</li>
+        <li><b>Remar:</b> muevan la canoa hasta 3 casillas, solo por agua y sin ir en diagonal. Cada casilla gasta 1 de fuego. Con viento, el canal hondo (azul oscuro) gasta 2. Con lluvia, al final de la ronda el fuego baja 1 más.</li>
+        <li><b>Explorar:</b> den vuelta las fichas que quedan al lado de la canoa, también en diagonal.</li>
+        <li><b>Juntar:</b> pueden tomar las fichas descubiertas que estén al lado de la canoa.</li>
+      </ol>
+      <h2>En vez de remar: amarrar</h2>
+      <p>Si la canoa está en el cachiyuyo, al lado de una playa, pueden pasar la noche: esa ronda no gastan fuego y el clima vuelve a calma.</p>
+    </div>
+    <div>
+      <h2>Las fichas</h2>
+      <ul style="list-style:none;padding-left:0">
+        <li><canvas class="ficha-ico" data-icono="icono-lena"></canvas><b>Leña:</b> en cualquier momento, gastar 1 sube el fuego 5 (hasta 16).</li>
+        <li><canvas class="ficha-ico" data-icono="icono-comida"></canvas><canvas class="ficha-ico" data-icono="icono-pez"></canvas><canvas class="ficha-ico" data-icono="icono-hongo"></canvas><b>Comida</b> (mejillones, pescado, hongos): gastar 1 da 2 casillas más de remo esa ronda.</li>
+        <li><canvas class="ficha-ico" data-icono="icono-pirita"></canvas><b>Pirita:</b> si el fuego llega a 0, vuelve a 4. Solo una vez.</li>
+        <li><canvas class="ficha-ico" data-icono="icono-saber"></canvas><b>Saber:</b> saquen una carta de saber, <b>léanla en voz alta</b> y guárdenla.</li>
+      </ul>
+      <h2>El final</h2>
+      <p><b>Si llegan a la ballena con el fuego encendido,</b> lo lograron. Otras familias ven el humo y se acercan: un varamiento reunía a muchas familias para compartir (Cooper, 1946, p. 99).</p>
+      <p><b>Si el fuego llega a 0,</b> el viaje termina. Pero lo aprendido no se pierde: anoten en el Libro de la familia las cartas que juntaron. La próxima partida la juega la generación siguiente.</p>
+      <div class="caja" style="margin-top:3mm">
+        <p style="margin:0"><b>Qué es dato y qué es juego.</b> Cada carta separa el <b>dato</b> (con su fuente y página) del <b>recurso de juego</b>. El tablero, la familia y los números (fuego, remo, dado) son recursos de juego. La mujer remaba y manejaba la canoa y el fuego; el hombre iba adelante con las armas (Cooper, 1946, p. 88 y 96). En esta versión, todas las personas que juegan deciden juntas, como una familia.</p>
+      </div>
+    </div>
+  </div>
+  <p class="pie">Tierra de los Humos · SoberaníaTech 2026 · Juego y textos CC BY-SA 4.0. Los números son de prueba. Los saberes son un borrador que revisa la investigación del equipo con las fuentes y la comunidad.</p>
+</section>
+
+<section class="hoja" aria-label="Libro de la familia">
+  <div class="encabezado">
+    <div><div class="sub">Lo que se hereda</div><h1>Libro de la familia</h1></div>
+    <div class="datos">Una fila por generación.<br>Cada saber guardado abriga:<br>+1 de fuego inicial, hasta 16.</div>
+  </div>
+  <p>En el juego, morir y volver a empezar no es un castigo: es <b>memoria que se transmite</b>. Anoten acá qué aprendió cada generación. La siguiente empieza sabiendo lo mismo.</p>
+  <table>
+    <thead><tr><th style="width:15%">Generación</th><th style="width:15%">Fecha</th><th style="width:16%">¿Llegaron a la ballena?</th><th>Saberes que guardaron</th><th style="width:16%">Fuego inicial de la próxima</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td></td><td></td><td></td><td>12 + saberes =</td></tr>
+      <tr><td>2</td><td></td><td></td><td></td><td>12 + saberes =</td></tr>
+      <tr><td>3</td><td></td><td></td><td></td><td>12 + saberes =</td></tr>
+      <tr><td>4</td><td></td><td></td><td></td><td>12 + saberes =</td></tr>
+      <tr><td>5</td><td></td><td></td><td></td><td>12 + saberes =</td></tr>
+      <tr><td>6</td><td></td><td></td><td></td><td>12 + saberes =</td></tr>
+      <tr><td>7</td><td></td><td></td><td></td><td>12 + saberes =</td></tr>
+      <tr><td>8</td><td></td><td></td><td></td><td>12 + saberes =</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:4mm">Las familias y comunidades yaganes siguen acá, hoy. Este juego cuenta saberes que aparecen en las fuentes, y se arma consultando a la comunidad.</p>
+  <p class="pie">Tierra de los Humos · versión de mesa · CC BY-SA 4.0</p>
+</section>
+<script src="../arte/fuente/arte.js"></script>
+<script>
+  document.querySelectorAll('[data-icono]').forEach((c) => { const s = TDH_ARTE.aCanvas(c.dataset.icono, 0, 'verano', 3); c.width = s.width; c.height = s.height; c.getContext('2d').drawImage(s, 0, 0); });
+  document.body.dataset.listo = '1';
+</script>
+</body>
+</html>
