@@ -13,7 +13,7 @@
 
 | Fecha | Qué |
 |---|---|
-| 14/11, 11:00 | Reunión en persona con Víctor, referente de la comunidad yagán. Ver `comunicaciones.md`. |
+| 14/11, 11:00 | Reunión en persona con el referente de la comunidad yagán. Ver `comunicaciones.md`. |
 | 14/11 | Primer avance documentado (obligatorio). Meta: esqueleto jugable. |
 | 17/11, 20:00 | Entrega final: se cierran los repositorios. Meta interna: terminar el 16. |
 | 19/11 | Demo pública en Fábrica de Talento, Ushuaia (al menos 2 integrantes). |
@@ -52,8 +52,8 @@ El detalle de cada conversación está en [`comunicaciones.md`](comunicaciones.m
 
 | Quién | Relación con el proyecto | Estado |
 |---|---|---|
-| Víctor, referente de la comunidad yagán | Interlocutor principal para validar. | Reunión en persona el 14/11 a las 11:00. |
-| Comunidad Yagán Paiakoala (Ushuaia) | Comunidad yagán viva. | Encontrada. Confirmar si es la comunidad de Víctor. |
+| Referente de la comunidad yagán | Interlocutor principal para validar. | Reunión en persona el 14/11 a las 11:00. |
+| Comunidad Yagán Paiakoala (Ushuaia) | Comunidad yagán viva. | Encontrada. Confirmar si es la comunidad del referente. |
 | Mónica Alvarado | Fundadora del parque Yatana. Convivió con Cristina Calderón. Conocida de un integrante. | Hay que ver si se la puede contactar. |
 
 ## Glosario y convenciones

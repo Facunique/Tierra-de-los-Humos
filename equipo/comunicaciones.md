@@ -14,8 +14,8 @@
 
 | Quién | Tipo | Estado | Se puede nombrar en público | Último contacto |
 |---|---|---|---|---|
-| Víctor, referente de la comunidad yagán (Tierra del Fuego) | Persona / comunidad | 📨 Reunión acordada: 14/11, 11:00, en persona | A preguntar en la reunión | 14/11 (programado) |
-| Comunidad Yagán Paiakoala (Ushuaia) | Comunidad | 🟡 Confirmar si es la comunidad de Víctor | A preguntar | — |
+| Referente de la comunidad yagán (Tierra del Fuego) | Persona / comunidad | 📨 Reunión acordada: 14/11, 11:00, en persona | A preguntar en la reunión | 14/11 (programado) |
+| Comunidad Yagán Paiakoala (Ushuaia) | Comunidad | 🟡 Confirmar si es la comunidad del referente | A preguntar | — |
 | Mónica Alvarado (parque Yatana) | Persona | 🟡 Ver si se la puede contactar | A preguntar | — |
 
 Estados: 🟡 pendiente · 📨 contactada, esperando respuesta · 🟢 en diálogo · ✅ validó · ⚪ no respondió · 🔴 no quiere participar.
@@ -34,7 +34,7 @@ Lo que necesitamos preguntar. Cuando haya respuesta, se tacha y se anota en la e
 
 ## Historial
 
-### 14/11/2026, 11:00 · Víctor, referente de la comunidad yagán · En persona (programada)
+### 14/11/2026, 11:00 · Referente de la comunidad yagán · En persona (programada)
 
 - **Quién registra:** Facu (Persona B).
 - **Participantes:** ✏️ quiénes del equipo van (conviene que esté la Persona C).
@@ -42,7 +42,7 @@ Lo que necesitamos preguntar. Cuando haya respuesta, se tacha y se anota en la e
 - **Qué llevar:** el concepto en una hoja, el juego o la maqueta en un celular, y algunas cartas de saber para que vea cómo citamos las fuentes. Una libreta para anotar sus palabras tal cual.
 - **Qué nos dijeron:** ✏️ completar el mismo día.
 - **Correcciones al juego:** ✏️
-- **Permisos:** ✏️ si autoriza que lo nombremos con su nombre. Si no, en este archivo pasa a figurar solo como "referente de la comunidad yagán".
+- **Permisos:** ✏️ si autoriza que lo nombremos con su nombre. Hasta que lo autorice, en el repo figura solo como "referente de la comunidad yagán".
 - **Próximo paso:** ✏️
 
 ### 9/11/2026 · Contactos identificados
