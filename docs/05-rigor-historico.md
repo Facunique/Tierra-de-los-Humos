@@ -14,7 +14,7 @@
 
 ### Fuente regional a cotejar: Goodall
 
-**Goodall, R. N. P. (1979).** *Tierra del Fuego*. 3.ª edición, bilingüe (castellano e inglés), 329 páginas. Buenos Aires: Ediciones Shanamaiim. Natalie Goodall vivió en la estancia Harberton, sobre el canal Beagle, y escribió e ilustró este libro, que es una guía de referencia de la provincia: el territorio, la historia, la naturaleza.
+**Goodall, R. N. P. (1978 o 1979).** *Tierra del Fuego*. 3.ª edición, bilingüe (castellano e inglés), 329 páginas. 🔍 El año: Open Library registra la 3.ª edición en 1978 y la Biblioteca del Scott Polar Research Institute fecha la primera en 1975; se confirma con la tapa y la página de créditos del ejemplar que consiga el equipo. Buenos Aires: Ediciones Shanamaiim. Natalie Goodall vivió en la estancia Harberton, sobre el canal Beagle, y escribió e ilustró este libro, que es una guía de referencia de la provincia: el territorio, la historia, la naturaleza.
 
 **No está disponible libre en internet** (tiene derechos vigentes), así que todavía no se cotejó. Se puede encontrar en bibliotecas de Ushuaia y de Río Grande, en el Museo del Fin del Mundo o en manos de algún integrante. Si alguien del equipo lo tiene, alcanza con sacar fotos de las páginas sobre los yámana y la naturaleza para cargar lo que diga, con página, en la tabla:
 

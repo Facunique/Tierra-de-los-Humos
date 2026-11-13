@@ -113,7 +113,7 @@ Trabajo interno del equipo:
 - Spears, J. R. (1895). *The Gold Diggings of Cape Horn*. Nueva York: Putnam.
 - Museo Marítimo de Ushuaia. *La canoa yagán* (reconstrucción de una canoa de corteza).
 - Multequina n.º 10 (IADIZA-CONICET), sobre los bosques de *Nothofagus* de Tierra del Fuego.
-- Goodall, R. N. P. (1979). *Tierra del Fuego*. Buenos Aires: Ediciones Shanamaiim. *(En proceso de cotejo.)*
+- Goodall, R. N. P. (1978 o 1979, 3.ª ed.). *Tierra del Fuego*. Buenos Aires: Ediciones Shanamaiim. *(En proceso de cotejo; el año y la edición se confirman con la tapa del ejemplar.)*
 
 ## Recursos de terceros
 

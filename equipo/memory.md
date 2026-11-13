@@ -73,7 +73,7 @@ Datos ya chequeados o aclarados en el equipo. Lo que no tiene fuente confirmada 
   - el fuego se hacía con pirita y pedernal (p. 91);
   - las chozas eran de domo o cónicas, con la puerta hacia el mar (p. 85-86);
   - el perro no está documentado antes de 1823 (p. 83).
-- **A cotejar:** Goodall, R. N. P. (1979), *Tierra del Fuego*, Ediciones Shanamaiim. No está libre en línea; ver la lista de qué buscar en `docs/05`.
+- **A cotejar:** Goodall, R. N. P. (1978 o 1979, 3.ª ed. 🔍 confirmar con el ejemplar), *Tierra del Fuego*, Ediciones Shanamaiim. No está libre en línea; ver la lista de qué buscar en `docs/05`.
 - **Para el arte (12/11, Persona D):** la canoa yagán era de corteza de coigüe de Magallanes (guindo), en tres piezas cosidas, con el fuego en el centro; la vivienda, de varas cubiertas con cueros, ramas y cortezas, con salida para el humo. Fuentes y detalle en `docs/04-direccion-de-arte.md`, secciones 1 y 2 (las fuentes son divulgativas: la Persona C las contrasta con Gusinde y Chapman). 🔍
 - **El nombre:** las fuentes registran "Tierra de los Humos" y "Tierra de los Fuegos" desde temprano; la anécdota de Carlos V cambiando el nombre no tiene respaldo claro (Billiken). 🔍 fuente primaria.
 
