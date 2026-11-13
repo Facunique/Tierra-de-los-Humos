@@ -43,7 +43,7 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 | `mesa/` | Versión de mesa para imprimir (tablero, fichas, reglas) |
 | `escuelas/` | Guía para docentes: una actividad por carta (`actividades.js`), en A4 |
 | `presentacion/` y `stand/` | Pitch en HTML y PDF; vidriera y cartel para la demo del 19/11 |
-| `equipo/` | Trabajo interno del equipo: memoria del proyecto, registro de comunicaciones con comunidades y plan de comunicación (video, pitch, demo) |
+| `equipo/` | Trabajo interno del equipo: memoria del proyecto, reparto de tareas (`tareas.md`), registro de comunicaciones con comunidades y plan de comunicación (video, pitch, demo) |
 | `AGENTS.md` | Este archivo |
 | `README.md` | Presentación pública del proyecto (lo evalúa el jurado) |
 
