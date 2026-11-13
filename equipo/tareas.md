@@ -19,13 +19,14 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 
 - **Hecho por D (PR 2):** estilo Corteza con su motor de dibujo, paleta, sprites, sonido, maqueta navegable de todas las pantallas (`arte/pantallas/`), 9 borradores de cartas, pitch, stand, versión de mesa y guía para docentes.
 - **Todavía no hay código del juego.** A y B arrancan ahora, sobre los módulos que ya dejó D. La tabla de módulos y cómo se usan está en [`memory.md`](memory.md#estado-actual).
-- **Sin decidir:** el stack, el destino del viaje y el alcance del MVP (`docs/02-alcance-mvp.md`).
+- **Stack decidido (13/11):** JavaScript sin build, con `<script>` clásicos, en GitHub Pages (ver [`memory.md`](memory.md#decisiones)).
+- **Sin decidir:** el destino del viaje y el alcance del MVP (`docs/02-alcance-mvp.md`).
 
 ---
 
 ## Persona A: Programación núcleo (Mati)
 
-- [ ] Decidir el stack con B (propuesta: HTML + JS con Canvas, sin build, para que funcione abriendo el archivo y sin internet).
+- [x] Decidir el stack con B: JavaScript sin build (13/11).
 - [ ] Acordar con B la estructura de carpetas del juego, para no pisarse.
 - [ ] Motor por turnos con grilla. Dibujar con el motor Corteza (`TDH_CORTEZA.crear(canvas).escena({...})`), no desde cero. Ver `docs/04-direccion-de-arte.md`, sección 6.
 - [ ] Mapa de agua e islas generado al azar, que se revela a medida que se avanza (el humo del motor tapa lo no explorado).
@@ -38,7 +39,8 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 ## Persona B: Programación de interfaz, contenido y deploy (Facu)
 
 - [ ] **14/11, 11:00:** reunión con el referente de la comunidad yagán. Registrarla el mismo día en `equipo/comunicaciones.md` (la entrada ya está armada, con huecos ✏️).
-- [ ] Decidir el stack con A y acordar la estructura de carpetas.
+- [x] Decidir el stack: JavaScript sin build (13/11).
+- [ ] Acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (propuesta en `memory.md`, *Por decidir*).
 - [ ] Definir la estructura de datos de cartas de saber y especies, para que la Persona C solo cargue contenido. Partir de `arte/cartas/saberes-borrador.js`, que ya usa `tipo`, `titulo`, `dato`, `juego` y `fuente`.
 - [ ] Pantalla de carta de saber, con la fuente citada visible. La maqueta (`arte/pantallas/`) y `arte/corteza/carta.css` ya tienen el diseño.
 - [ ] Herencia entre partidas (localStorage): los saberes pasan a la siguiente generación del mismo pueblo.
@@ -99,7 +101,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 
 - [ ] Escribir `docs/02-alcance-mvp.md` (cuántas etapas, cuántos peligros). Sin eso, A y B no tienen contra qué medir.
 - [ ] Escribir `docs/03-contenido-cultural.md` (Persona C).
-- [ ] Decidir el stack (Personas A y B).
+- [x] Decidir el stack: JavaScript sin build (13/11).
 - [x] Decidir el estilo visual: Corteza (12/11).
 - [x] Asignar las letras a cada integrante (ver la tabla de arriba).
 - [ ] Completar la sección **Integrantes** del README con los nombres que el equipo quiera publicar, y decir quién es la persona referente.

@@ -95,7 +95,10 @@ Trabajo interno del equipo:
 
 ## Tecnologías
 
-- **Juego web** en HTML, CSS y JavaScript, dibujado en Canvas 2D. Sin librerías externas. ✏️ *Stack final y publicación en GitHub Pages: Persona B.*
+- **Juego web** en HTML, CSS y JavaScript, dibujado en Canvas 2D. **Sin build y sin librerías externas:** cada archivo se carga con `<script>`, así que el juego también se abre con doble clic en `index.html`, sin internet.
+- **Publicación:** GitHub Pages, desde la rama `main` (carpeta raíz). ✏️ *Enlace final: Persona B.*
+- **Datos:** las cartas de saber y las especies están en archivos JavaScript con su fuente citada. Lo que se hereda entre partidas se guarda en el navegador (`localStorage`).
+- **Pruebas:** con el comando `node --test`, que ya viene con Node.js.
 - **Arte:** motor de dibujo propio, «Corteza» (`arte/corteza/corteza.js`), y pegatinas pixel definidas como texto (`arte/fuente/arte.js`).
 - **Sonido:** sintetizado con Web Audio (`sonido/ambiente.js`), sin archivos de audio. Las cartas se leen con la voz del dispositivo (Web Speech, `sonido/voz.js`).
 - **Luz real:** la posición del sol en Ushuaia se calcula en el navegador, sin internet, con el algoritmo de la [NOAA](https://gml.noaa.gov/grad/solcalc/calcdetails.html) (`arte/corteza/luz-real.js`).
@@ -133,6 +136,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Presentación, cartas impresas y video (12/11):** Claude Code armó la presentación del pitch (`presentacion/`), las cartas para imprimir (`arte/cartas/`) y el storyboard del video (`equipo/video/`), y redactó este README con huecos marcados (✏️) para que los complete el equipo.
 - **Luz real, sonido por lugar y guía docente (12/11):** Claude Code escribió el cálculo de la luz real de Ushuaia (`arte/corteza/luz-real.js`), las capas de sonido de bosque y playa (`sonido/ambiente.js`) y la guía para docentes con una actividad por carta (`escuelas/`). Las actividades parten solo de los datos citados en las cartas y las revisa el equipo.
 - **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
+- **Stack (13/11):** a pedido de la Persona B, Claude Code comparó opciones (JavaScript sin build, módulos ES, Vite, Phaser y Preact o Svelte) contra el código que ya existía y los criterios de la hackatón, y recomendó seguir sin build. La decisión fue de la Persona B.
 
 ## Integrantes
 

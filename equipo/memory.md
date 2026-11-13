@@ -6,6 +6,7 @@
 
 - **Fecha de la última actualización:** 13/11/2026 (día 5 de desarrollo).
 - **Fase:** arranca la programación. Todavía no hay código del juego, pero el motor de dibujo (`arte/corteza/corteza.js`) y los módulos de abajo ya están listos para usar. Quién hace qué está en [`tareas.md`](tareas.md).
+- **13/11:** se decidió el stack: JavaScript sin build, con `<script>` clásicos, en GitHub Pages (ver *Decisiones*).
 - **13/11:** se mergeó el trabajo de arte de la Persona D (PR 2), se agendó la reunión del 14/11 con el referente de la comunidad yagán y se actualizó el reparto de tareas con los nombres.
 - **Hecho:** `docs/00-guia-hackathon.md`, `docs/01-concepto.md`, `docs/04-direccion-de-arte.md` (con tres propuestas de estilo en `arte/propuestas/`), paleta y primer set de 42 sprites (`arte/`), sonido generado por código (`sonido/`), logo, plan de comunicación (`equipo/comunicacion.md`) y borrador del avance del 14/11 (`equipo/avance-14-11.md`).
 - **También hecho (12/11):** estilo **Corteza** con motor de dibujo, vitrina, cartas, HUD, logo e imagen para compartir; auditoría histórica del arte contra el *Handbook of South American Indians* (`docs/05-rigor-historico.md`).
@@ -23,7 +24,7 @@
   | `arte/postal/postal.js` | Postal del viaje en PNG | `TDH_POSTAL.dibujar(canvas, datos)` |
   | `arte/cartas/saberes-borrador.js` | Las 9 cartas, con fuente y página | `TDH_SABERES.SABERES` |
 
-- **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md`, elegir el stack, cotejar el libro de Goodall.
+- **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md`, acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (ver *Por decidir*), cotejar el libro de Goodall.
 
 ## Fechas clave
 
@@ -38,6 +39,7 @@
 
 | Fecha | Decisión | Motivo |
 |---|---|---|
+| 13/11 | **Stack: HTML, CSS y JavaScript sin build**, con `<script>` clásicos que cuelgan globales `TDH_*`, igual que los módulos de la Persona D. Dibujo con Corteza en Canvas 2D, sin librerías externas. El juego va en `index.html`, en la raíz del repo. **Deploy:** GitHub Pages desde `main`, carpeta raíz, con `.nojekyll`. **Datos** de cartas y especies en archivos `.js`, no JSON ni Markdown. **Herencia** en `localStorage` con número de versión, guardando solo los `id` de las cartas. **Sin internet:** service worker en Pages (desde el 16/11) y, como plan B, la carpeta copiada con doble clic. **Pruebas** con `node --test`, sin dependencias. Sin linter ni formateador hasta después del 17/11. | Es lo único que anda con doble clic y sin internet sin configurar nada, y reusa todo lo que ya existe sin reescribirlo. Pesa unos 230 KB, bien para el celular con mala conexión. El QR del stand y la guía para docentes ya apuntan a la raíz de Pages. Se descartaron los módulos ES y Vite (no andan en `file://` y suman configuración), Phaser y Kaboom (se quedan con el canvas de Corteza) y Preact y Svelte (la maqueta ya resuelve las pantallas). Lo decidió la Persona B; pasar a módulos o a Vite más adelante es mecánico. |
 | 13/11 | **Roles asignados:** A Mati, B Facu, C Dani, D Nacho (ver *Equipo* y `tareas.md`). | Cada persona sabe qué le toca y los documentos pueden seguir usando la letra. |
 | 13/11 | Hasta que lo autorice, el referente de la comunidad yagán figura en el repo **solo por su rol**, sin su nombre. | El repo es público y todavía no le preguntamos. |
 | 12/11 | **Estilo visual: B · Corteza.** El paisaje va en papel recortado, y lo que se junta (leña, mejillones, hongos, pirita, saberes) va como pegatina en pixel art. Todo lo dibujado se audita contra las fuentes etnográficas (`docs/05-rigor-historico.md`). | Lo eligió el equipo entre tres propuestas (`arte/propuestas/`). Más sereno, cuenta mejor el territorio, y las pegatinas dejan ver de un vistazo qué se puede agarrar. |
@@ -50,7 +52,7 @@
 
 ## Por decidir
 
-- **Stack.** Propuesta: HTML + JavaScript con Canvas, con Vite o sin build, en GitHub Pages. Falta confirmarlo.
+- **Estructura de carpetas y contrato entre núcleo e interfaz.** Propuesta de B, falta acordarla con A: `juego/nucleo/` (A, sin DOM ni `localStorage`, se prueba con Node), `juego/interfaz/` (B), `datos/` (C con B) y `pruebas/`. El núcleo expone `TDH_PARTIDA.nueva({ semilla, saberes })`, `partida.estado` con la forma que espera `motor.escena` y `partida.hacer(accion)`, que devuelve una lista de eventos (`fuego`, `junto`, `saber`, `fin`). Los datos de cartas suman `id`, `pueblo`, `alt` y `estado` a los campos de `arte/cartas/saberes-borrador.js`.
 - **Destino del viaje.** Tiene que ser un motivo real y documentado. **Ya hay base documental:** un grupo yagán podía entrar al territorio de otro para comer una ballena varada, para buscar piedras de fuego (pirita) o corteza buena para canoas (que solo se hallaban en ciertos lugares), por hambre o para hacer trueque (Cooper 1946, p. 94-95). Los varamientos reunían a muchas familias (p. 99). Falta que el equipo elija uno con la Persona C.
 - **Integrantes para el README:** los roles ya están (ver *Equipo*). Falta decidir qué nombres publicar y quién es la persona referente.
 - **Qué módulos de la Persona D entran al juego final** (luz real, sonido por lugar, voz, postal, alto contraste). La propuesta es sumarlos todos: ya andan en la maqueta y no cambian el diseño. Lo deciden A y B según el tiempo.
