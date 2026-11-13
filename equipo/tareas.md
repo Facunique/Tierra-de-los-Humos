@@ -41,7 +41,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [ ] **14/11, 11:00:** reunión con el referente de la comunidad yagán. Registrarla el mismo día en `equipo/comunicaciones.md` (la entrada ya está armada, con huecos ✏️).
 - [x] Decidir el stack: JavaScript sin build (13/11).
 - [ ] Acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (propuesta en `memory.md`, *Por decidir*).
-- [ ] Definir la estructura de datos de cartas de saber y especies, para que la Persona C solo cargue contenido. Partir de `arte/cartas/saberes-borrador.js`, que ya usa `tipo`, `titulo`, `dato`, `juego` y `fuente`.
+- [ ] Definir la estructura de datos de cartas de saber y especies, para que la Persona C solo cargue contenido. **Cartas:** hecho en `datos/saberes.js` (suma `id`, `pueblo`, `alt` y `estado`, con plantilla para cargar sin programar). Faltan las especies.
 - [ ] Pantalla de carta de saber, con la fuente citada visible. La maqueta (`arte/pantallas/`) y `arte/corteza/carta.css` ya tienen el diseño.
 - [ ] Herencia entre partidas (localStorage): los saberes pasan a la siguiente generación del mismo pueblo.
 - [ ] Códice (modo museo) separado por pueblo, que se pueda recorrer sin jugar.
@@ -60,7 +60,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [ ] Registrar cada contacto el mismo día en `equipo/comunicaciones.md` (sin teléfonos, mails ni datos personales; es un repo público).
 - [ ] Escribir `docs/03-contenido-cultural.md` con las fuentes verificadas (Gusinde, Chapman, Calderón y Zárraga, Cooper, museos, CADIC).
 - [ ] Resolver los puntos marcados con 🔍, en especial el **destino del viaje**. Ya hay base documental: la ballena varada, la pirita o la corteza para canoas (Cooper 1946, p. 94-99; ver `memory.md`).
-- [ ] Revisar los 9 borradores de cartas que dejó D (`arte/cartas/saberes-borrador.js`) y sumar las que falten: texto breve, qué es dato y qué es recurso de juego, y fuente citada.
+- [ ] Revisar los 9 borradores de cartas que dejó D (ahora en `datos/saberes.js`, con plantilla arriba para cargar cartas nuevas; `node --test` revisa que no falte nada) y sumar las que falten: texto breve, qué es dato y qué es recurso de juego, y fuente citada.
 - [ ] Revisar las actividades de la guía para docentes (`escuelas/actividades.js`).
 - [ ] Redactar el cierre del códice, en presente, mencionando las comunidades vivas.
 - [ ] Armar la sección **Fuentes** del README (D dejó las que usó el arte).

@@ -251,7 +251,7 @@
 <script src="../corteza/transiciones.js"></script>
 <script src="../corteza/luz-real.js"></script>
 <script src="../postal/postal.js"></script>
-<script src="../cartas/saberes-borrador.js"></script>
+<script src="../../datos/saberes.js"></script>
 <script src="../../sonido/ambiente.js"></script>
 <script src="../../sonido/voz.js"></script>
 <script>
@@ -261,7 +261,7 @@
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (id) => document.getElementById(id);
 
-  // Saberes: borrador compartido en arte/cartas/saberes-borrador.js
+  // Saberes: datos compartidos en datos/saberes.js
   const { COOPER, SABERES } = window.TDH_SABERES;
   const ORDEN = Object.keys(SABERES);
   const memoria = new Set(); // lo que sabe el linaje yagán (pasa de generación en generación)

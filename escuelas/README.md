@@ -28,7 +28,7 @@ Una guía para docentes que quieran usar el juego en clase. Está pensada para s
 
 ## Cómo actualizarla
 
-1. Si cambia el texto de una carta, se corrige en [`arte/cartas/saberes-borrador.js`](../arte/cartas/saberes-borrador.js) y la guía lo toma sola.
+1. Si cambia el texto de una carta, se corrige en [`datos/saberes.js`](../datos/saberes.js) y la guía lo toma sola.
 2. Si se suma una carta, hay que agregar su actividad en `actividades.js` con la misma clave. Si falta, la guía la muestra como «Actividad pendiente».
 3. Para regenerar el PDF, desde la raíz del repositorio:
 

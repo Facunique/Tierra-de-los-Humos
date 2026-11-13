@@ -226,7 +226,7 @@ Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 18 KB): vie
 - [x] Cámara que sigue a la canoa en el celular, con zonas táctiles grandes.
 - [x] Tipografía para baja visión.
 - [x] **Modo alto contraste** (opción `altoContraste` del motor): costa con franja blanca y contorno que se ve también de noche, noche que nunca tapa del todo, humo con contorno, pegatinas con borde oscuro, anillo en la canoa y sin grano de papel. Botón en la vitrina y en el título de la maqueta.
-- [ ] Textos alternativos de cada carta (Persona B, con los textos de la Persona C).
+- [x] Textos alternativos de cada carta (campo `alt` en `datos/saberes.js`). Describen solo lo que está dibujado; los revisa la Persona C.
 - [ ] Probar en un celular de gama baja y en el proyector.
 
 ## 14. Líneas rojas aplicadas al arte
