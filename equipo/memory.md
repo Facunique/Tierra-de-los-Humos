@@ -4,8 +4,9 @@
 
 ## Estado actual
 
-- **Fecha de la última actualización:** 12/11/2026 (día 4 de desarrollo).
-- **Fase:** diseño y producción de arte. Todavía no hay código del juego, pero el motor de dibujo (`arte/corteza/corteza.js`) ya está listo para usar.
+- **Fecha de la última actualización:** 13/11/2026 (día 5 de desarrollo).
+- **Fase:** arranca la programación. Todavía no hay código del juego, pero el motor de dibujo (`arte/corteza/corteza.js`) y los módulos de abajo ya están listos para usar. Quién hace qué está en [`tareas.md`](tareas.md).
+- **13/11:** se mergeó el trabajo de arte de la Persona D (PR 2), se agendó la reunión del 14/11 con el referente de la comunidad yagán y se actualizó el reparto de tareas con los nombres.
 - **Hecho:** `docs/00-guia-hackathon.md`, `docs/01-concepto.md`, `docs/04-direccion-de-arte.md` (con tres propuestas de estilo en `arte/propuestas/`), paleta y primer set de 42 sprites (`arte/`), sonido generado por código (`sonido/`), logo, plan de comunicación (`equipo/comunicacion.md`) y borrador del avance del 14/11 (`equipo/avance-14-11.md`).
 - **También hecho (12/11):** estilo **Corteza** con motor de dibujo, vitrina, cartas, HUD, logo e imagen para compartir; auditoría histórica del arte contra el *Handbook of South American Indians* (`docs/05-rigor-historico.md`).
 - **También hecho (12/11, noche):** maqueta navegable de las pantallas (`arte/pantallas/`), elementos nuevos con fuente, 9 borradores de cartas (`arte/cartas/saberes-borrador.js`) con su versión para imprimir, presentación del pitch (`presentacion/`), storyboard del video (`equipo/video/`) y README con huecos ✏️.
@@ -37,6 +38,8 @@
 
 | Fecha | Decisión | Motivo |
 |---|---|---|
+| 13/11 | **Roles asignados:** A Mati, B Facu, C Dani, D Nacho (ver *Equipo* y `tareas.md`). | Cada persona sabe qué le toca y los documentos pueden seguir usando la letra. |
+| 13/11 | Hasta que lo autorice, el referente de la comunidad yagán figura en el repo **solo por su rol**, sin su nombre. | El repo es público y todavía no le preguntamos. |
 | 12/11 | **Estilo visual: B · Corteza.** El paisaje va en papel recortado, y lo que se junta (leña, mejillones, hongos, pirita, saberes) va como pegatina en pixel art. Todo lo dibujado se audita contra las fuentes etnográficas (`docs/05-rigor-historico.md`). | Lo eligió el equipo entre tres propuestas (`arte/propuestas/`). Más sereno, cuenta mejor el territorio, y las pegatinas dejan ver de un vistazo qué se puede agarrar. |
 | 9/11 | Los personajes van **sin nombre propio** hasta consultar a la comunidad. | Usar nombres en lengua originaria sin permiso puede ser una falta de respeto. |
 | 9/11 | Hay que **preguntar a la comunidad** si se puede jugar "como" alguien de su pueblo. Si dicen que no, el enfoque cambia (acompañar en vez de encarnar). | Respeto y requisito del eje 04. |
@@ -49,7 +52,7 @@
 
 - **Stack.** Propuesta: HTML + JavaScript con Canvas, con Vite o sin build, en GitHub Pages. Falta confirmarlo.
 - **Destino del viaje.** Tiene que ser un motivo real y documentado. **Ya hay base documental:** un grupo yagán podía entrar al territorio de otro para comer una ballena varada, para buscar piedras de fuego (pirita) o corteza buena para canoas (que solo se hallaban en ciertos lugares), por hambre o para hacer trueque (Cooper 1946, p. 94-95). Los varamientos reunían a muchas familias (p. 99). Falta que el equipo elija uno con la Persona C.
-- **Integrantes y roles** para el README.
+- **Integrantes para el README:** los roles ya están (ver *Equipo*). Falta decidir qué nombres publicar y quién es la persona referente.
 - **Qué módulos de la Persona D entran al juego final** (luz real, sonido por lugar, voz, postal, alto contraste). La propuesta es sumarlos todos: ya andan en la maqueta y no cambian el diseño. Lo deciden A y B según el tiempo.
 - **Revisión de la guía para docentes** (`escuelas/`) por la Persona C y, si se puede, por docentes.
 
@@ -99,9 +102,9 @@ Los documentos se refieren a cada integrante por letra.
 
 | Letra | Integrante | Área |
 |---|---|---|
-| A | Mati | Programación |
-| B | Facu | Programación |
+| A | Mati | Programación núcleo: motor, mapa, fuego, ciclo de partida |
+| B | Facu | Programación de interfaz, contenido y deploy: cartas, códice, accesibilidad, GitHub Pages |
 | C | Dani | Consulta a la comunidad e investigación cultural |
 | D | Nacho | Arte, sonido y comunicación |
 
-🔍 Las áreas salen de cómo las usan los documentos del 12/11. Falta sumar acá el archivo de división de tareas del equipo.
+Las tareas de cada uno, el cronograma y los pendientes del repo están en [`tareas.md`](tareas.md).
