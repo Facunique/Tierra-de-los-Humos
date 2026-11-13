@@ -47,7 +47,7 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 | `AGENTS.md` | Este archivo |
 | `README.md` | Presentación pública del proyecto (lo evalúa el jurado) |
 
-El código del juego todavía no existe. Stack propuesto: HTML + JavaScript con Canvas, desplegado en GitHub Pages (pendiente de confirmar; ver `equipo/memory.md`).
+El código del juego todavía no existe. **Stack decidido (13/11):** HTML, CSS y JavaScript **sin build**, con `<script>` clásicos que cuelgan globales `TDH_*`, como `arte/corteza/corteza.js`. Nada de `import`/`export`, `fetch` de archivos locales ni librerías externas: el juego tiene que abrir con doble clic (`file://`) y sin internet. Se publica en GitHub Pages desde `main`, carpeta raíz. Detalle en `equipo/memory.md`.
 
 ## Cómo trabajar
 
