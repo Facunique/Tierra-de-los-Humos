@@ -90,6 +90,13 @@ test('lo que se escribe en la fuente no puede colar HTML en la carta', () => {
   assert.match(libro.fuente, /<i>&lt;img/, 'la obra conserva su <i> pero el texto va escapado');
 });
 
+test('Vargas Filgueira (2019) sale con el mismo formato que las cartas', () => {
+  const c = ED.armar(Object.assign({}, base, { tipoFuente: 'vargas', pagina: '33' }));
+  assert.equal(c.fuente, ED.VARGAS + ', p. 33 del visor del PDF.');
+  assert.match(SABERES.amarre.fuente, /Vargas Filgueira, Víctor \(2019\)\. Mi sangre yagán \(ahua saapa yagan\)\. Primera edición digital\. Editora Cultural Tierra del Fuego, p\. 33 del visor del PDF\./);
+  assert.match(ED.revisar(ED.armar(Object.assign({}, base, { tipoFuente: 'vargas', pagina: '' })), Object.assign({}, base, { tipoFuente: 'vargas', pagina: '' }), SABERES).map((a) => a.texto).join(' '), /visor/);
+});
+
 test('las ilustraciones solo usan dibujos que existen en el estilo Corteza', () => {
   const corteza = require('fs').readFileSync(require('path').join(__dirname, '../arte/corteza/corteza.js'), 'utf8');
   for (const id of Object.keys(ED.OBJETOS).filter(Boolean)) {

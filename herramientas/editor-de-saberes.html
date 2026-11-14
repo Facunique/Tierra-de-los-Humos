@@ -111,7 +111,7 @@
       <div class="opciones" role="radiogroup" aria-label="Tipo de fuente" id="tipos-fuente"></div>
 
       <div id="f-cooper">
-        <label for="pagina">Página <span class="ayuda">Por ejemplo: 84, o 88 y 91.</span></label>
+        <label for="pagina">Página <span class="ayuda">Por ejemplo: 84, o 88 y 91. En Vargas Filgueira (2019), la página del visor del PDF.</span></label>
         <input type="text" id="pagina" name="pagina" autocomplete="off">
       </div>
       <div id="f-libro" class="oculto">
@@ -272,7 +272,7 @@
     $('copiar').disabled = hayError; $('bajar').disabled = hayError;
     $('codigo').textContent = ED.codigo(carta, f);
     // Mostrar solo los campos de la fuente elegida
-    ['cooper', 'libro', 'oral'].forEach((t) => $('f-' + t).classList.toggle('oculto', f.tipoFuente !== t));
+    ['cooper', 'libro', 'oral'].forEach((t) => $('f-' + t).classList.toggle('oculto', f.tipoFuente !== t && !(t === 'cooper' && f.tipoFuente === 'vargas')));
     $('f-nombre').classList.toggle('oculto', !f.permisoNombre);
     try { localStorage.setItem(BORRADOR, JSON.stringify(Object.assign(f, { altTocado, idTocado }))); } catch (e) { /* sin almacenamiento: no pasa nada */ }
     return { carta, f, hayError };

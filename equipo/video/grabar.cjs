@@ -11,6 +11,7 @@
  * Uso, desde la raíz del repo:
  *   node equipo/video/grabar.cjs                          # el juego (index.html) y el núcleo
  *   node equipo/video/grabar.cjs --viaje pruebas/nucleo.html
+ *   node equipo/video/grabar.cjs --solo-subtitulos        # solo subtitulos.srt, sin grabar
  * Necesita Playwright (npm i -D playwright). Licencia: MIT.
  *
  * Los clips quedan en equipo/video/clips/ (en .webm, 1920 × 1080). No se suben
@@ -49,6 +50,7 @@ function subtitulos() {
 
 (async () => {
   console.log('Subtítulos: ' + subtitulos() + ' tramos en equipo/video/subtitulos.srt');
+  if (args.includes('--solo-subtitulos')) return;
   const nav = await chromium.launch({ args: ['--autoplay-policy=no-user-gesture-required'] });
   const TAM = { width: 1920, height: 1080 };
 

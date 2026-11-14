@@ -4,7 +4,7 @@
 
 Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de Tierra del Fuego. Lo desarrolla el equipo **Tierra de los Humos** para la hackatón [SoberaníaTech 2026](https://soberaniatech.com.ar/), organizada por la Agencia de Innovación de Tierra del Fuego.
 
-> 🚧 **En desarrollo** (9 al 18 de noviembre de 2026). Ya están el estilo visual, el motor de dibujo, el sonido y una maqueta navegable de todas las pantallas; el código del juego se suma durante la hackatón.
+> 🚧 **En desarrollo** (9 al 18 de noviembre de 2026). El viaje ya se juega de punta a punta: elegir pueblo, remar, cuidar el fuego, encontrar saberes y heredarlos. Las cartas siguen en revisión con la consulta, y los números del juego se ajustan hasta la entrega del 18/11.
 
 **Jugalo:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/) (el viaje completo, en el celular o en la compu; también abre con doble clic en `index.html`, sin internet) · **Video:** ✏️ *[enlace]* · **Presentación:** [`presentacion/`](presentacion/index.html) ([PDF](presentacion/pitch.pdf))
 
@@ -39,9 +39,9 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 
 | El viaje | Una carta de saber | Fin del viaje y herencia |
 |---|---|---|
-| ![El viaje: la canoa con su fuego rema por el canal; en la playa hay una choza, leña y un saber como pegatinas; a la derecha, humo](equipo/video/04-viaje.jpg) | ![Carta «Piedras de fuego» con su dato, su recurso de juego y la fuente con página](equipo/video/05-carta.jpg) | ![Pantalla «El viaje termina acá»: lo aprendido pasa a la siguiente generación](equipo/video/06-fin.jpg) |
+| ![El viaje en el juego: la canoa con su fuego rema por el canal, con «Fuego 2 de 4» arriba; hay pescado para juntar como pegatinas, aves en el agua y humo sobre lo que falta explorar](equipo/video/04-viaje.jpg) | ![Carta «El fuego viaja en la canoa» con su dato, su recurso de juego y la fuente: Cooper (1946), p. 88 y 91](equipo/video/05-carta.jpg) | ![Pantalla «El viaje termina acá»: el fuego se apagó con el viento del canal y el saber encontrado pasa a la generación 2](equipo/video/06-fin.jpg) |
 
-*Capturas de la maqueta de pantallas. Se reemplazan por capturas del juego antes del avance del 16/11.*
+*Capturas del juego (`index.html`), en la compu. La familia y el mapa son ficción; el dato de la carta sale de su fuente.*
 
 ## Documentación
 
@@ -169,6 +169,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Luz real, sonido por lugar y guía docente (12/11):** Claude Code escribió el cálculo de la luz real de Ushuaia (`arte/corteza/luz-real.js`), las capas de sonido de bosque y playa (`sonido/ambiente.js`) y la guía para docentes con una actividad por carta (`escuelas/`). Las actividades parten solo de los datos citados en las cartas y las revisa el equipo.
 - **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
 - **Narrador y prueba de punta a punta (13/11):** a pedido de la persona a cargo del arte, Claude Code escribió el narrador (`sonido/narrador.js`), que describe el viaje en voz alta, y una prueba que juega partidas enteras en varios celulares tocando los botones (`pruebas/de-punta-a-punta.cjs`), con sus pruebas.
+- **Textos al día con la consulta y el juego (14/11):** a pedido de la persona a cargo del arte, Claude Code revisó las piezas de arte, sonido y comunicación contra la entrevista del 13/11, la auditoría de la Persona C, las decisiones de la memoria y el juego de la Persona B. Reescribió las voces del video (sin citas textuales, con «familia ficticia» y el lema «Lo aprendido se transmite»), sumó el narrador y el editor al pitch, agregó Vargas Filgueira (2019) como fuente lista en el editor de saberes, usó nombres generales («un delfín», «un pato») donde la especie sigue sin confirmar, y reemplazó las capturas de la maqueta por capturas del juego. No agregó datos culturales nuevos ni cambió el código de A, B o C.
 - **Piezas de D después de la auditoría cultural (14/11):** a pedido de la persona a cargo del arte, Claude Code aplicó en el cartel, la vidriera, el pitch y las reglas de mesa los textos que propuso la Persona C en su auditoría (fuente del dato, aviso de ficción, alcance de la consulta), preparó apagados los rótulos del mapa con los nombres del libro de Vargas Filgueira (2019) hasta que haya permiso, y regeneró los PDF.
 - **Editor de saberes (13/11):** a pedido de la persona a cargo del arte, Claude Code armó el editor de saberes (`herramientas/`), con sus pruebas. Las reglas que revisa son las del repositorio; las cartas que se escriban con él las revisa la Persona C.
 - **Sonido y postal conectados al núcleo (13/11):** a pedido de la persona a cargo del arte, Claude Code escribió `sonido/juego.js`, que hace sonar cada evento de la partida con su subtítulo, y `TDH_POSTAL.datosDe`, que arma la postal con el estado de la partida, con sus pruebas (`pruebas/sonido-juego.test.cjs`). También armó la hoja para la reunión del 14/11 (`equipo/reunion-14-11/`) y puso al día el avance del 14/11.

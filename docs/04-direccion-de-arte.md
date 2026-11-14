@@ -38,7 +38,7 @@
 | Playas | Canto rodado y grava. | Capa clara con piedras. | Observación. |
 | Fauna | Lobo marino, cormorán, pato vapor, ballena. | Papel, descansando. **Nunca enemigos ni escenas de caza.** | Cooper (1946), p. 84. |
 | Clima | Ráfagas violentas, cambios bruscos, nieve incluso en verano. | Viento, lluvia y nieve en cualquier estación. | Cooper (1946), p. 81. |
-| El nombre | Los fuegos y el humo que los navegantes vieron en la costa. El fuego se usaba también para hacer señales. | El humo cubre lo no explorado; los fogones lejanos se ven como columnas de humo. | Billiken (origen del nombre); Cooper (1946), p. 91. |
+| El nombre | El fuego se usaba también para hacer señales (Cooper, 1946, p. 91). La historia de que el nombre viene del humo que vieron los navegantes no tiene fuente primaria: 🔍, y no se cuenta como hecho (auditoría del paso 5, P04). | El humo cubre lo no explorado; los fogones lejanos se ven como columnas de humo. | Cooper (1946), p. 91. Origen del nombre: 🔍 (solo Billiken, divulgación). |
 
 ## 2. Lo que miramos de la vida yagán
 

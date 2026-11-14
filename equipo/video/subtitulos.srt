@@ -1,0 +1,35 @@
+1
+00:00:00,000 --> 00:00:12,000
+Cada partida acompaña a una familia ficticia por los canales fueguinos. El fuego sostiene el viaje y las cartas guardan lo aprendido.
+
+2
+00:00:12,000 --> 00:00:25,000
+Los pueblos fueguinos siguen acá. Este juego acerca fuentes sobre sus saberes a jóvenes y escuelas, en presente.
+
+3
+00:00:25,000 --> 00:00:40,000
+Tierra de los Humos es un juego web por turnos. Cada partida es un viaje en canoa por los canales, acompañando a una familia yagán ficticia.
+
+4
+00:00:40,000 --> 00:01:15,000
+El fuego es tu vida. El viento, la lluvia y la noche lo gastan; la leña y el amarre en el cachiyuyo lo sostienen.
+
+5
+00:01:15,000 --> 00:01:40,000
+En el viaje aparecen saberes. Cada carta separa lo que es dato de lo que es recurso de juego, y cita su fuente.
+
+6
+00:01:40,000 --> 00:02:05,000
+Si el fuego se apaga, el viaje termina. Lo aprendido se transmite: pasa a la siguiente generación.
+
+7
+00:02:05,000 --> 00:02:25,000
+Todas las cartas se juntan en un códice que se puede recorrer sin jugar. Para las escuelas hay una guía para docentes, una versión de mesa sin pantallas y un editor para sumar saberes.
+
+8
+00:02:25,000 --> 00:02:45,000
+Consultamos a Víctor Vargas Filgueira, referente de la comunidad yagán y autor de Mi sangre yagán. Revisamos las cartas con sus fuentes, y la consulta sigue abierta.
+
+9
+00:02:45,000 --> 00:03:00,000
+Se juega desde el navegador, también en el celular. Las fuentes y la consulta están en el repositorio. Lo aprendido se transmite.
