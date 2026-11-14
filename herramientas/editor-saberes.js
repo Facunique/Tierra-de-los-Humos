@@ -71,13 +71,14 @@
 
   /** La fuente como texto (con <i> para el título de la obra), y si es de memoria, con 🔍. */
   function fuenteDe(f) {
-    const pag = limpio(f.pagina) ? ', p. ' + limpio(f.pagina).replace(/^p\.?\s*/i, '') : '';
+    // Todo lo que escribe la persona se escapa: la fuente se muestra como HTML en el juego (por la <i> de la obra).
+    const pag = limpio(f.pagina) ? ', p. ' + html(limpio(f.pagina).replace(/^p\.?\s*/i, '')) : '';
     let texto;
     if (f.tipoFuente === 'cooper') texto = COOPER + pag + '.';
     else if (f.tipoFuente === 'oral') {
       // Sin permiso, la persona figura solo por su rol (AGENTS.md: privacidad).
-      const quien = f.permisoNombre && limpio(f.nombrePersona) ? limpio(f.nombrePersona) + ', ' + (limpio(f.rolPersona) || 'integrante de la comunidad') : (limpio(f.rolPersona) || 'Integrante de la comunidad');
-      texto = 'Relato de ' + quien + (limpio(f.comunidad) ? ', ' + limpio(f.comunidad) : '') + (limpio(f.fecha) ? ', ' + limpio(f.fecha) : '') + '. Publicado con su permiso.';
+      const quien = f.permisoNombre && limpio(f.nombrePersona) ? html(f.nombrePersona) + ', ' + (html(f.rolPersona) || 'integrante de la comunidad') : (html(f.rolPersona) || 'Integrante de la comunidad');
+      texto = 'Relato de ' + quien + (limpio(f.comunidad) ? ', ' + html(f.comunidad) : '') + (limpio(f.fecha) ? ', ' + html(f.fecha) : '') + '. Publicado con su permiso.';
       texto = texto.charAt(0).toUpperCase() + texto.slice(1);
     } else {
       const partes = [];
@@ -106,7 +107,7 @@
     const id = limpio(f.id) || idDe(f.titulo);
     return {
       id, pueblo: f.pueblo || 'yagan', estado: 'borrador',
-      tipo: limpio(f.tipo) || 'Territorio',
+      tipo: html(f.tipo) || 'Territorio',
       titulo: html(f.titulo), dato: html(f.dato), juego: html(f.juego),
       fuente: fuenteDe(f),
       alt: html(limpio(f.alt) || altSugerido(f)),

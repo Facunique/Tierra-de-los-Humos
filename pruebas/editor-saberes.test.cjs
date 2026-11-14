@@ -78,6 +78,18 @@ test('lo escrito no se interpreta como HTML ni rompe el texto generado', () => {
   assert.equal(leida.dato, c.dato);
 });
 
+test('lo que se escribe en la fuente no puede colar HTML en la carta', () => {
+  const malo = '<img src=x onerror=alert(1)>';
+  const oral = ED.armar(Object.assign({}, base, { tipoFuente: 'oral', permisoPublicar: true, permisoNombre: true, nombrePersona: malo, rolPersona: malo, comunidad: malo, fecha: malo }));
+  const cooper = ED.armar(Object.assign({}, base, { pagina: malo }));
+  const libro = ED.armar(Object.assign({}, base, { tipoFuente: 'libro', autor: malo, obra: malo, editorial: malo, pagina: malo, tipo: malo }));
+  for (const c of [oral, cooper, libro]) {
+    assert.ok(!/<img/i.test(c.fuente), 'la fuente quedó con una etiqueta: ' + c.fuente);
+    assert.ok(!/<img/i.test(c.tipo));
+  }
+  assert.match(libro.fuente, /<i>&lt;img/, 'la obra conserva su <i> pero el texto va escapado');
+});
+
 test('las ilustraciones solo usan dibujos que existen en el estilo Corteza', () => {
   const corteza = require('fs').readFileSync(require('path').join(__dirname, '../arte/corteza/corteza.js'), 'utf8');
   for (const id of Object.keys(ED.OBJETOS).filter(Boolean)) {
