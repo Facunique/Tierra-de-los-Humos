@@ -97,7 +97,7 @@ Trabajo interno del equipo:
 - **El códice** junta todas las cartas de saber, separadas por pueblo, y se puede recorrer sin jugar. «Empezar de cero» borra la memoria de la familia en ese dispositivo.
 - **Opciones** (en la pantalla de título): sonido con subtítulos, narrador para jugar sin ver, alto contraste y luz real de Ushuaia.
 
-✏️ *Completar con los números finales del juego (Personas A y B).*
+✏️ *Completar con los números finales del juego (Personas A y B).* Los de hoy están en [`juego/nucleo/reglas.js`](juego/nucleo/reglas.js) y qué entra en la entrega, en [`docs/02-alcance-mvp.md`](docs/02-alcance-mvp.md) (propuesta, falta acordarla).
 
 ## Tecnologías
 
@@ -109,7 +109,7 @@ Trabajo interno del equipo:
 - **Arte:** motor de dibujo propio, «Corteza» (`arte/corteza/corteza.js`), y pegatinas pixel definidas como texto (`arte/fuente/arte.js`).
 - **Sonido:** sintetizado con Web Audio (`sonido/ambiente.js`), sin archivos de audio. Las cartas se leen con la voz del dispositivo (Web Speech, `sonido/voz.js`).
 - **Luz real:** la posición del sol en Ushuaia se calcula en el navegador, sin internet, con el algoritmo de la [NOAA](https://gml.noaa.gov/grad/solcalc/calcdetails.html) (`arte/corteza/luz-real.js`).
-- **Sin internet:** todo, tipografía incluida, se sirve desde el repositorio.
+- **Sin internet:** todo, tipografía incluida, se sirve desde el repositorio. Con doble clic en `index.html` ya anda sin conexión. En Pages, la primera visita guarda el juego en el navegador (`sw.js`, primero la red y, si no contesta, lo guardado) y se puede sumar a la pantalla de inicio del celular (`manifest.webmanifest`).
 - **Herramientas de apoyo** (solo para regenerar imágenes): Node.js y Playwright.
 
 ## Fuentes
@@ -151,6 +151,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Datos de las cartas (13/11):** a pedido de la Persona B, Claude Code pasó las cartas a `datos/saberes.js` con `id`, `pueblo`, `estado` y una plantilla para cargarlas sin programar, escribió el texto alternativo de cada ilustración (describe solo lo dibujado) y las pruebas de `pruebas/datos.test.cjs`. No cambió ningún texto cultural: los revisa la Persona C.
 - **Pantalla de carta (13/11):** a pedido de la Persona B, Claude Code escribió la pantalla de carta de saber (`juego/interfaz/carta.js` y `juego.css`), una partida falsa para probarla mientras se programa el núcleo (`pruebas/partida-falsa.js`, con su página `pruebas/carta.html`) y las pruebas del contrato entre núcleo e interfaz.
 - **Núcleo del juego (13/11):** a pedido de la Persona A, Claude Code escribió el núcleo (`juego/nucleo/`): el generador del mapa con semilla, que valida que haya camino por agua hasta el destino; el fuego, los recursos, el clima, la hora, el amarre y las condiciones de victoria y de derrota; los números en `reglas.js`, iguales a los de la versión de mesa salvo la leña. Pasó a datos aparte (`juego/nucleo/territorio/`) lo que hay en el territorio, dónde va, qué hace y de qué fuente sale, con la fuente tomada de `docs/05-rigor-historico.md`, y el destino del viaje. También escribió las pruebas (`pruebas/nucleo*.test.cjs`), dos jugadores automáticos para medir el balance (`pruebas/bots.cjs`) y una página para jugar el viaje entero (`pruebas/nucleo.html`, con un modo revisión). No cambió ningún texto cultural de las cartas. La Persona A revisa y decide los números.
+- **Juego sin internet y alcance (14/11):** a pedido de la Persona B, Claude Code escribió `sw.js` y `manifest.webmanifest` para que el juego publicado abra sin internet, con su prueba (`pruebas/sin-internet.test.cjs`), y lo probó apagando el servidor. También redactó la propuesta de alcance (`docs/02-alcance-mvp.md`) a partir de las propuestas de la Persona A, la decisión de nomadismo de la Persona C y el cronograma de la organización; la acuerdan A y B, y C confirma lo cultural.
 - **El juego conectado (13/11):** a pedido de la Persona B, Claude Code armó el juego en `index.html`: las pantallas de la maqueta conectadas al núcleo (`juego/interfaz/juego.js` y `pantallas.css`), la herencia guardada en el navegador (`juego/interfaz/herencia.js`), el códice por pueblo, los controles táctiles y de teclado, y el sonido, los subtítulos, el narrador, la postal, el alto contraste y la luz real que ya existían. Escribió las pruebas (`pruebas/herencia.test.cjs` y `pruebas/juego.test.cjs`) y jugó partidas enteras en el navegador, en el celular parado y acostado y en la compu. Los textos de las pantallas son de juego (qué pasó en el viaje); los datos culturales salen de las cartas y de los datos del territorio, sin cambios.
 
 ## Integrantes
