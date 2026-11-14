@@ -96,13 +96,22 @@
 
   // ── Grano de papel (se calcula una vez) ─────────────────────────────────
   let granoCache = null;
+  const GRANO = { claro: 14, oscuro: 5, fibra: 0.03 };
   function grano() {
     if (granoCache) return granoCache;
+    // Se mezcla de forma normal (source-over), que en el celular es casi gratis: la mezcla «overlay»
+    // sobre toda la pantalla costaba un cuarto de cada cuadro. Por eso el grano es de motas claras
+    // y oscuras muy transparentes, calibradas para que se vea igual que antes.
     const n = 256, c = lienzo(n, n), x = c.getContext('2d'), img = x.createImageData(n, n);
-    for (let i = 0; i < img.data.length; i += 4) { const v = 110 + Math.random() * 145; img.data[i] = img.data[i + 1] = img.data[i + 2] = v; img.data[i + 3] = 26; }
+    for (let i = 0; i < img.data.length; i += 4) {
+      const g = (110 + Math.random() * 145) / 255; // el mismo ruido de antes
+      const claro = g >= 0.62;
+      img.data[i] = img.data[i + 1] = img.data[i + 2] = claro ? 255 : 0;
+      img.data[i + 3] = Math.round(claro ? (g - 0.62) / 0.38 * GRANO.claro : (0.62 - g) / 0.19 * GRANO.oscuro);
+    }
     x.putImageData(img, 0, 0);
     // fibras largas, como en el papel hecho a mano
-    x.strokeStyle = 'rgba(255,255,255,0.10)'; x.lineWidth = 1;
+    x.strokeStyle = 'rgba(255,255,255,' + GRANO.fibra + ')'; x.lineWidth = 1;
     for (let i = 0; i < 70; i++) {
       const a = Math.random() * TAU, l = 6 + Math.random() * 18, px = Math.random() * n, py = Math.random() * n;
       x.beginPath(); x.moveTo(px, py); x.quadraticCurveTo(px + Math.cos(a) * l * 0.5 + 3, py + Math.sin(a) * l * 0.5, px + Math.cos(a) * l, py + Math.sin(a) * l); x.stroke();
@@ -507,6 +516,16 @@
       c.fillStyle = rgba(C.N, 0.55); c.beginPath(); nubes.forEach(([x, y, r]) => circulo(c, x - r * 0.2, y - r * 0.28, r * 0.6)); c.fill();
     }
 
+    // Copia al canvas el pedazo de una capa (base, niebla, costa) que empieza en (sx, sy), en píxeles reales.
+    // Igual que dibujarla entera corrida, pero sin pedirle al navegador que procese lo que queda afuera.
+    function recortar(img, sx, sy) {
+      let dx = 0, dy = 0;
+      if (sx < 0) { dx = -sx; sx = 0; }
+      if (sy < 0) { dy = -sy; sy = 0; }
+      const w = Math.min(canvas.width - dx, img.width - sx), h = Math.min(canvas.height - dy, img.height - sy);
+      if (w > 0 && h > 0) ctx.drawImage(img, sx, sy, w, h, dx, dy, w, h);
+    }
+
     function asegurarCaches() {
       const kb = E.mapa.join('|') + E.estacion + T + dpr + !!E.altoContraste;
       let cambio = false;
@@ -526,7 +545,7 @@
     }
 
     // Luz en escalones, como capas de papel de calco alrededor del fuego.
-    function luz(t) {
+    function luz(t, ctx) {
       const amb = { dia: 0.95, tarde: 0.72, noche: 0.2 }[E.hora] - (E.clima === 'lluvia' ? 0.14 : 0) - (E.clima === 'nieve' ? 0.05 : 0);
       const osc = Math.max(0, (1 - amb) * (E.altoContraste ? 0.55 : 0.92)); // en alto contraste la noche nunca tapa del todo
       const W = E.ancho * T, H = E.alto * T;
@@ -550,6 +569,23 @@
       // tibieza del fuego: anillos anaranjados muy suaves (solo cuando oscurece)
       const a = osc * 0.09;
       for (let i = 1; i <= 3; i++) { ctx.fillStyle = rgba(C.y, a); ctx.beginPath(); circulo(ctx, cx, cy, radio * (0.15 + i * 0.15) * (1 + Math.sin(t * 8 + i) * 0.02)); ctx.fill(); }
+    }
+
+    // La luz del fuego se mueve despacio: se arma en una capa aparte 12 veces por segundo y,
+    // entre una y otra, se reusa. Mezclar la capa es lo mismo que dibujarla directo (source-over).
+    let capaLuz = null, claveLuz = '';
+    function luzConCache(t, ox, oy) {
+      const can = E.canoa || {};
+      const clave = [E.hora, E.clima, !!E.altoContraste, can.fuego, can.x, can.y, ox, oy, T, dpr, canvas.width, canvas.height, Math.floor(t * 12)].join('|');
+      if (clave !== claveLuz) {
+        if (!capaLuz || capaLuz.width !== canvas.width || capaLuz.height !== canvas.height) capaLuz = lienzo(canvas.width, canvas.height);
+        const cl = capaLuz.getContext('2d');
+        cl.setTransform(1, 0, 0, 1, 0, 0); cl.clearRect(0, 0, capaLuz.width, capaLuz.height);
+        cl.setTransform(dpr, 0, 0, dpr, -ox * dpr, -oy * dpr);
+        luz(Math.floor(t * 12) / 12, cl);
+        claveLuz = clave;
+      }
+      ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(capaLuz, 0, 0); ctx.restore();
     }
 
     function clima(t) {
@@ -605,12 +641,17 @@
         const mundo = () => ctx.setTransform(dpr, 0, 0, dpr, -ox * dpr, -oy * dpr);
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.fillStyle = C.C; ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(base, Math.round(-ox * dpr), Math.round(-oy * dpr));
+        recortar(base, Math.round(ox * dpr), Math.round(oy * dpr), 0, 0);
         mundo();
+        // Solo se dibuja lo que entra en la cámara (más un margen): en el celular se ve una parte chica del mapa.
+        const vv = E.vista || { x: 0, y: 0, ancho: E.ancho, alto: E.alto };
+        const X0 = Math.max(0, Math.floor(vv.x) - 1), X1 = Math.min(E.ancho, Math.ceil(vv.x + vv.ancho) + 1);
+        const Y0 = Math.max(0, Math.floor(vv.y) - 1), Y1 = Math.min(E.alto, Math.ceil(vv.y + vv.alto) + 1);
+        const seVe = (x, y, margen) => x >= X0 - margen && x < X1 + margen && y >= Y0 - margen && y < Y1 + margen;
         // Olas: cortes de papel claro que se mueven despacio
         const vel = E.clima === 'viento' ? 2.2 : 1;
         ctx.strokeStyle = rgba(C.E, 0.45); ctx.lineWidth = 2 * s; ctx.lineCap = 'round'; ctx.beginPath();
-        for (let y = 0; y < E.alto; y++) for (let x = 0; x < E.ancho; x++) {
+        for (let y = Y0; y < Y1; y++) for (let x = X0; x < X1; x++) {
           const tp = tipo(x, y); if (!tp.agua || tp.roca) continue;
           for (let k = 0; k < (tp.hondo ? 2 : 1); k++) {
             const px = (x + 0.1 + hash(x, y, k + 90) * 0.6) * T + Math.sin(t * 0.5 * vel + x + k) * 4 * s, py = (y + 0.2 + hash(x, y, k + 95) * 0.6) * T;
@@ -620,7 +661,7 @@
         }
         ctx.stroke();
         // Cachiyuyo y rocas
-        for (let y = 0; y < E.alto; y++) for (let x = 0; x < E.ancho; x++) {
+        for (let y = Y0; y < Y1; y++) for (let x = X0; x < X1; x++) {
           const tp = tipo(x, y), cx = (x + 0.5) * T, cy = (y + 0.5) * T;
           if (tp.algas) { // cachiyuyo: cintas que flotan en la superficie, con sus flotadores dorados
             for (let i = 0; i < 4; i++) {
@@ -639,7 +680,7 @@
           }
         }
         // Objetos: primero el paisaje (vector), después lo que se junta (pegatinas pixel), por fila
-        const objs = (E.objetos || []).slice().sort((a, b) => a.y - b.y);
+        const objs = (E.objetos || []).filter((o) => seVe(o.x, o.y, 3)).sort((a, b) => a.y - b.y);
         for (const o of objs) {
           const x = (o.x + 0.5) * T, y = (o.y + (tipo(o.x, o.y).roca ? 0.52 : 0.78)) * T;
           if (FIGURAS[o.id]) {
@@ -674,18 +715,18 @@
         // Niebla (humo de lo no explorado), con una deriva mínima. Va antes de la luz: de noche también se oscurece.
         const dx = Math.sin(t * 0.25) * 3 * s;
         ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.drawImage(niebla, Math.round((-T / 2 + dx - ox) * dpr), Math.round((-T / 2 - oy) * dpr));
+        recortar(niebla, Math.round((T / 2 - dx + ox) * dpr), Math.round((T / 2 + oy) * dpr), 0, 0);
         mundo();
-        for (const h of E.humos || []) humo(ctx, h.x * T, h.y * T, s * 1.2, t + h.x, viento, 8, 110);
-        luz(t);
+        for (const h of E.humos || []) if (seVe(Math.floor(h.x), Math.floor(h.y), 4)) humo(ctx, h.x * T, h.y * T, s * 1.2, t + h.x, viento, 8, 110);
+        luzConCache(t, ox, oy);
         if (E.altoContraste) { // la costa y lo que se junta se ven siempre, aunque sea de noche
-          if (costaVisible) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 0.9; ctx.drawImage(costaVisible, Math.round(-ox * dpr), Math.round(-oy * dpr)); ctx.globalAlpha = 1; mundo(); }
+          if (costaVisible) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 0.9; recortar(costaVisible, Math.round(ox * dpr), Math.round(oy * dpr), 0, 0); ctx.globalAlpha = 1; mundo(); }
           for (const o of objs) if (!FIGURAS[o.id] && (PEGATINAS[o.id] || ARTE.SPRITES[o.id]) && explorado(o.x, o.y)) dibujarPegatina(o, (o.x + 0.5) * T, t, s);
         }
         clima(t);
         // Grano de papel encima de todo (no en alto contraste: ensucia la lectura)
         if (!E.altoContraste) {
-          ctx.save(); ctx.globalCompositeOperation = 'overlay'; ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
           ctx.fillStyle = ctx.createPattern(grano(), 'repeat'); ctx.fillRect(0, 0, canvas.width, canvas.height);
           ctx.restore();
         }

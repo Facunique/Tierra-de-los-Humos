@@ -67,6 +67,61 @@
     motor.escena(Object.assign({ mapa, objetos: [], estacion: 'otono', clima: 'calma', hora: 'tarde' }, extra || {}));
   }
 
+  // ── El núcleo del juego, si ya está en el repositorio ────────────────────
+  // Se carga de a un archivo; si falta el primero, la vidriera sigue con la escena armada.
+  const NUCLEO = ['../juego/nucleo/partida.js', '../juego/nucleo/azar.js', '../juego/nucleo/reglas.js', '../juego/nucleo/territorio/elementos.js', '../juego/nucleo/territorio/destinos.js', '../juego/nucleo/territorio/pueblos.js', '../juego/nucleo/mapa.js', '../sonido/juego.js'];
+  let hayNucleo = false;
+  (async function cargar() {
+    const uno = (src) => new Promise((ok) => { const sc = document.createElement('script'); sc.src = src; sc.onload = () => ok(true); sc.onerror = () => { sc.remove(); ok(false); }; document.head.appendChild(sc); });
+    // partida.js primero, solo para saber si existe; después todo en el orden que pide el núcleo.
+    if (!(await uno(NUCLEO[0]))) return;
+    delete window.TDH_PARTIDA; document.querySelectorAll('script[src="' + NUCLEO[0] + '"]').forEach((x) => x.remove());
+    for (const src of NUCLEO.slice(1).concat(NUCLEO[0])) if (!(await uno(src))) return;
+    hayNucleo = !!(window.TDH_PARTIDA && window.TDH_MAPA && window.TDH_MAPA.camino);
+  })();
+
+  // Una partida de verdad, jugada sola, con lo que pasa como subtítulo.
+  function jugarSolo(escena) {
+    const luz = TDH_LUZ_REAL.ahora();
+    const p = TDH_PARTIDA.nueva({ semilla: Math.floor(Math.random() * 1e6), saberes: ORDEN.slice(), hora: luz.hora, estacion: luz.estacion });
+    const M = p.estado.mapa, filas = Math.min(M.length, 11), cols = Math.min(M[0].length, Math.max(9, Math.round(filas * innerWidth / innerHeight)));
+    motor = CZ.crear(fondo, { celda: celdaParaPantalla(cols, filas) });
+    const lim = (v, max) => Math.max(0, Math.min(max, v));
+    const pintar = () => { const c = p.estado.canoa; motor.escena(Object.assign({}, p.estado, { vista: { x: lim(c.x + 0.5 - cols / 2, M[0].length - cols), y: lim(c.y + 0.5 - filas / 2, M.length - filas), ancho: cols, alto: filas } })); };
+    pintar(); extraDibujo = null; centro.innerHTML = '';
+    leyendaTexto('Una partida de verdad, jugándose sola.', 'Llevá el fuego hasta ' + p.estado.destino.nombre + '.');
+    let acampo = false, quieto = 0;
+    escena.reloj = setInterval(() => {
+      if (pausado || p.terminada) return;
+      const e = p.estado, pu = p.puede();
+      let acc = null;
+      if (pu.juntar) acc = { tipo: 'juntar' };
+      else if (pu.avivar && e.canoa.fuego <= 2) acc = { tipo: 'avivar' };
+      else if (pu.amarrar && e.hora === 'noche' && !acampo) { acc = { tipo: 'amarrar' }; acampo = true; }
+      else {
+        acampo = false;
+        const d = e.destino; let ruta = null;
+        // Si falta leña o comida, ir a buscar la que esté cerca (como haría una familia con cuidado).
+        const EL = window.TDH_ELEMENTOS ? TDH_ELEMENTOS.ELEMENTOS : {};
+        const falta = (e.recursos.lena < 2 || (e.recursos.comida < 1 && e.hora !== 'dia'));
+        if (falta) {
+          const cerca = (e.objetos || []).filter((o) => { const el = EL[o.junta || o.elemento]; return el && el.tipo === 'recurso' && Math.abs(o.x - e.canoa.x) + Math.abs(o.y - e.canoa.y) <= 7; });
+          for (const o of cerca) { const r = TDH_MAPA.camino(e.mapa, e.canoa, (x, y) => Math.abs(x - o.x) + Math.abs(y - o.y) <= 1); if (r && r.length && (!ruta || r.length < ruta.length)) ruta = r; }
+        }
+        if (!ruta) for (const [dx, dy] of [[0, 0], [-1, 0], [0, 1], [0, -1], [1, 0]]) { ruta = TDH_MAPA.camino(e.mapa, e.canoa, (x, y) => x === d.x + dx && y === d.y + dy); if (ruta && ruta.length) break; }
+        if (!ruta || !ruta.length) { if (++quieto > 3) finEscena = performance.now() + 1500; return; }
+        acc = { tipo: 'remar', dx: ruta[0].x - e.canoa.x, dy: ruta[0].y - e.canoa.y };
+        e.canoa.remando = true; setTimeout(() => (e.canoa.remando = false), 400);
+      }
+      const evs = p.hacer(acc); pintar();
+      const saber = evs.find((v) => v.tipo === 'saber');
+      const fin = evs.find((v) => v.tipo === 'fin');
+      if (saber && SABERES[saber.id]) leyendaTexto('Saber nuevo: ' + SABERES[saber.id].titulo, 'Fuente: ' + SABERES[saber.id].fuente.replace(/<[^>]+>/g, ''));
+      else if (fin) { leyendaTexto(fin.gano ? 'Llegaron con el fuego encendido.' : 'El fuego se apagó.', 'Lo aprendido pasa a la generación siguiente.'); finEscena = performance.now() + 5000; }
+      else { const t = window.TDH_SONIDO_JUEGO ? TDH_SONIDO_JUEGO.efectosDe(evs, { saberes: SABERES }).filter((x) => x.efecto !== 'remo').pop() : null; if (t) leyendaTexto(t.texto, 'Fuego ' + p.estado.canoa.fuego + ' de 4'); }
+    }, 700);
+  }
+
   // ── Escenas ─────────────────────────────────────────────────────────────
   const MAPA_VIAJE = ['MMLMMMLLMMMMLLMMMLLMMM', 'LLLLtLLLpLLLttLLLLGGLL', 'GLLttLLppLGGLLLLGGGLGL', 'GGGGpGGGGpGGGGGGGGGGGG', '...GG.......GGG...G...', ',,k,,,,,r,,,,,,,,,k,,,', '-,,-------------,,----', '~--~~~~~-------~~~~~~~', '~~~~~~~~~~~~~~~~~~~~~~', '----~~~~~~~~~~~~~-----', ',,,k,----~~~---,,,r,k,', '..,,,,,,----,,,,,.....', 'GGL...,,,--,,,..LLGGGt'];
   const RUTA = [[2, 6], [4, 6], [6, 6], [8, 6], [10, 6], [12, 6], [14, 6], [15, 7], [16, 8], [17, 9], [17, 10], [16, 10], [15, 10], [14, 11], [13, 11]];
@@ -82,6 +137,7 @@
       centro.style.placeItems = 'center end'; leyendaTexto('Cuando el fuego se apaga, lo aprendido pasa a la siguiente generación.', luz.texto);
     } },
     { dur: 15000, entrar() {
+      if (hayNucleo) { this.dur = 45000; finEscena = performance.now() + this.dur; return jugarSolo(this); }
       const visto = new Set(), revelar = (cx, cy) => { for (let y = 0; y < MAPA_VIAJE.length; y++) for (let x = 0; x < MAPA_VIAJE[0].length; x++) { const dx = (x - cx) / 1.8, dy = (y - cy) / 1.45; if (dx * dx + dy * dy < 14) visto.add(x + ',' + y); } };
       const canoa = { x: 2, y: 6, fuego: 4, mira: 1, remando: true }; revelar(2, 6);
       motor = CZ.crear(fondo, { celda: celdaParaPantalla(22, 13) });
@@ -101,7 +157,7 @@
     { dur: 10000, entrar() {
       costa(34, 19, 4, { hora: 'dia', estacion: 'verano' }); extraDibujo = null;
       centro.style.placeItems = 'center'; centro.innerHTML = '<figure class="mapa-vid papel" style="margin:0"><canvas id="mapa-vid"></canvas></figure>';
-      TDH_MAPA.dibujar($('mapa-vid'), { ancho: 1200, territorios: true, nombres: true, hoy: true, destacar: 'yagan' });
+      TDH_TERRITORIOS.dibujar($('mapa-vid'), { ancho: 1200, territorios: true, nombres: true, hoy: true, destacar: 'yagan' });
       leyendaTexto('Los canales del sur, territorio del pueblo yagán.', 'Zonas aproximadas, según Cooper (1946) y Bird (1946), Handbook of South American Indians.');
     } },
     { dur: 14000, entrar() {

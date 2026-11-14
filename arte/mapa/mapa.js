@@ -10,7 +10,10 @@
  *   <script src="arte/fuente/arte.js"></script>
  *   <script src="arte/mapa/costas.js"></script>
  *   <script src="arte/mapa/mapa.js"></script>
- *   TDH_MAPA.dibujar(canvas, { ancho: 900, territorios: true, hoy: true, nombres: true, destacar: 'yagan' });
+ *   TDH_TERRITORIOS.dibujar(canvas, { ancho: 900, territorios: true, hoy: true, nombres: true, destacar: 'yagan' });
+ *
+ * Se llama TDH_TERRITORIOS (y no TDH_MAPA) para no chocar con el mapa del núcleo
+ * del juego (juego/nucleo/mapa.js), que usa TDH_MAPA: la postal y el juego cargan los dos.
  *
  * No se dibujan límites entre países. Nombres según la toponimia oficial.
  * Licencia: código MIT; el mapa, CC BY-SA 4.0. Costas: Natural Earth (dominio público).
@@ -151,5 +154,5 @@
   }
 
   const api = { dibujar, TERRITORIOS, LUGARES };
-  if (typeof module !== 'undefined' && module.exports) module.exports = api; else raiz.TDH_MAPA = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = api; else raiz.TDH_TERRITORIOS = api;
 })(typeof window !== 'undefined' ? window : globalThis);

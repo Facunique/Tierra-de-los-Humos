@@ -26,3 +26,6 @@ desktop.ini
 *.psd
 *.kra~
 *.aseprite~
+
+# Clips del video: se graban con equipo/video/grabar.cjs y pesan mucho
+equipo/video/clips/

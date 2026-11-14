@@ -8,6 +8,19 @@ Este archivo es para cualquier asistente de IA (Claude Code, Copilot, Codex, etc
 2. Leé [`docs/01-concepto.md`](docs/01-concepto.md) para entender el juego.
 3. Si la tarea toca contenido cultural, leé también las líneas rojas de [`docs/00-guia-hackathon.md`](docs/00-guia-hackathon.md#líneas-rojas-cuidado-cultural) y el registro de [`equipo/comunicaciones.md`](equipo/comunicaciones.md).
 
+## Coordinación: acoplarse a lo que hacen los demás (regla)
+
+Cuatro personas trabajan en paralelo, cada una con sus asistentes. Para que nadie tenga que avisar todo a mano:
+
+1. **Antes de empezar cualquier tarea**, y de nuevo antes de subir cambios, corré `node herramientas/novedades.cjs`. Muestra qué hizo el resto del equipo desde la última vez y qué conviene hacer por eso.
+2. **Acoplate a lo nuevo:**
+   - si cambiaron las cartas, regenerá lo que depende de ellas;
+   - si el juego avanzó, probá que lo tuyo siga andando con lo de ellos;
+   - si la comunidad corrigió algo, aplicalo en tu parte;
+   - si una señal de `equipo/ideas.md` se cumplió, proponé la idea.
+3. **Si algo tuyo choca con lo de otra persona, adaptá lo tuyo.** Lo de otra persona no se toca: se le avisa (en `equipo/memory.md` o en su PR, si tu persona lo pide) con el problema y una propuesta.
+4. **Antes de abrir o actualizar un PR,** fijate que no tenga conflictos con `main` ni con los PR abiertos del equipo.
+
 ## El proyecto en tres líneas
 
 Roguelike web por turnos para la hackatón SoberaníaTech 2026 (eje 04, Memoria y Cultura). Cada partida es un viaje en canoa por los canales fueguinos acompañando a una familia **Yagán**; el fuego es la vida y lo aprendido pasa a la siguiente generación como saberes con fuente citada. Entrega final: **17/11/2026, 20:00**.
@@ -41,12 +54,13 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 | `arte/` | Arte propio. Estilo **Corteza**: `corteza/corteza.js` es el motor de dibujo del juego; `fuente/arte.js` tiene la paleta y las pegatinas pixel (`node arte/generar.cjs` genera los PNG). Ver `arte/README.md` |
 | `datos/` | Datos del juego en `.js`: las cartas de saber (`saberes.js`, con plantilla para cargar cartas sin programar) |
 | `juego/` | El juego: `nucleo/` (Persona A, sin DOM) e `interfaz/` (Persona B: pantallas, cartas, `juego.css`) |
-| `pruebas/` | Pruebas con `node --test` (sin dependencias), desde la raíz del repo, y la partida falsa para probar la interfaz (`carta.html`) |
+| `pruebas/` | Pruebas con `node --test` (sin dependencias), desde la raíz del repo, y la partida falsa para probar la interfaz (`carta.html`). `de-punta-a-punta.cjs` juega partidas enteras en cinco pantallas con Playwright |
 | `sonido/` | Sonido generado por código (Web Audio), sin archivos de audio: ambiente según el lugar, efectos y voz para leer las cartas. Ver `sonido/README.md` |
 | `mesa/` | Versión de mesa para imprimir (tablero, fichas, reglas) |
 | `escuelas/` | Guía para docentes: una actividad por carta (`actividades.js`), en A4 |
+| `herramientas/` | Páginas de apoyo, como el editor de saberes: escribir o corregir una carta sin programar |
 | `presentacion/` y `stand/` | Pitch en HTML y PDF; vidriera y cartel para la demo del 19/11 |
-| `equipo/` | Trabajo interno del equipo: memoria del proyecto, reparto de tareas (`tareas.md`), registro de comunicaciones con comunidades y plan de comunicación (video, pitch, demo) |
+| `equipo/` | Trabajo interno del equipo: memoria del proyecto, reparto de tareas (`tareas.md`), ideas para más adelante de todo el equipo (`ideas.md`), registro de comunicaciones con comunidades y plan de comunicación (video, pitch, demo) |
 | `AGENTS.md` | Este archivo |
 | `README.md` | Presentación pública del proyecto (lo evalúa el jurado) |
 

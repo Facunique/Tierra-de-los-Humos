@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editor de saberes</title>
+<meta name="description" content="Tierra de los Humos: escribí o corregí una carta de saber sin programar. Se ve como en el juego, se revisa con las mismas reglas y sale lista para sumar al juego.">
+<link rel="icon" href="../arte/logo/favicon-32.png" type="image/png">
+<link rel="stylesheet" href="../arte/tipografia/atkinson.css">
+<link rel="stylesheet" href="../arte/corteza/carta.css">
+<style>
+  :root {
+    --fondo: #1d2e38; --panel: #eee5d0; --tinta: #28221e; --suave: #5b524a; --borde: #b8a98a; --acento: #973a25; --luz: #f2c46d; --texto-fondo: #eee5d0;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo: #0b1015; color-scheme: dark; } }
+  :root[data-theme="dark"] { --fondo: #0b1015; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto-fondo); font-family: "Atkinson Hyperlegible", system-ui, sans-serif; line-height: 1.45; }
+  a { color: var(--luz); }
+  header { max-width: 1180px; margin: 0 auto; padding: 24px 16px 8px; }
+  header h1 { margin: 0 0 6px; font-size: clamp(28px, 5vw, 40px); line-height: 1.05; }
+  header p { margin: 0 0 8px; max-width: 760px; }
+  .sub { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--luz); }
+  main { max-width: 1180px; margin: 0 auto; padding: 8px 16px 48px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 24px; align-items: start; }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; } }
+
+  form { background: var(--panel); color: var(--tinta); border-radius: 14px; padding: 18px 18px 8px; box-shadow: 4px 6px 0 rgba(0,0,0,.35); }
+  fieldset { border: 0; border-top: 2px dashed var(--borde); margin: 0 0 14px; padding: 12px 0 0; min-width: 0; }
+  fieldset:first-of-type { border-top: 0; padding-top: 0; }
+  legend { font-weight: 700; font-size: 18px; color: var(--acento); padding: 0; margin-bottom: 4px; }
+  label { display: block; font-weight: 700; font-size: 15px; margin: 10px 0 4px; }
+  .ayuda { font-weight: 400; font-size: 13.5px; color: var(--suave); display: block; margin-top: 2px; }
+  input[type=text], textarea, select { width: 100%; font: inherit; font-size: 16px; color: var(--tinta); background: #fbf7ee; border: 2px solid var(--borde); border-radius: 8px; padding: 9px 10px; min-height: 44px; }
+  textarea { min-height: 92px; resize: vertical; }
+  input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+  .fila { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0 12px; }
+  .opciones { display: grid; gap: 6px; margin-top: 6px; }
+  .opciones label, .casilla { display: flex; gap: 8px; align-items: flex-start; font-weight: 400; margin: 0; min-height: 32px; }
+  .opciones input, .casilla input { width: 20px; height: 20px; margin-top: 2px; flex: none; accent-color: var(--acento); }
+  .contador { font-size: 13px; color: var(--suave); text-align: right; margin-top: 2px; }
+  .oculto { display: none; }
+  .nota { background: #f7f1e3; border-left: 4px solid var(--acento); border-radius: 0 8px 8px 0; padding: 8px 12px; font-size: 14px; margin: 8px 0; }
+
+  aside { position: sticky; top: 12px; display: grid; gap: 14px; }
+  @media (max-width: 860px) { aside { position: static; } }
+  .vista { background: rgba(0,0,0,.18); border-radius: 14px; padding: 14px; }
+  .vista .carta-saber { margin: 0 auto; max-width: 380px; }
+  .vista canvas { width: 100%; height: auto; aspect-ratio: 2 / 1; display: block; }
+  .vista h2 { margin: 0 0 10px; font-size: 16px; color: var(--luz); }
+  .estado-carta { font-size: 13px; color: var(--suave); margin: 0; }
+  .avisos { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .avisos li { border-radius: 8px; padding: 8px 10px; font-size: 14.5px; background: #f7f1e3; color: var(--tinta); border-left: 5px solid #c7772d; }
+  .avisos li.error { border-left-color: #973a25; background: #f6e2da; }
+  .avisos li.bien { border-left-color: #2f5d43; background: #e3eee6; }
+  .botones { display: flex; flex-wrap: wrap; gap: 10px; }
+  .boton-papel { min-height: 44px; }
+  button[disabled] { opacity: .5; cursor: not-allowed; }
+  pre { background: #0b1015; color: #e7ecea; border-radius: 10px; padding: 12px; font-size: 12.5px; line-height: 1.4; overflow-x: auto; white-space: pre-wrap; word-break: break-word; margin: 0; max-height: 320px; }
+  details { background: rgba(0,0,0,.18); border-radius: 14px; padding: 10px 14px; }
+  summary { cursor: pointer; font-weight: 700; min-height: 32px; }
+  .aviso-vivo { position: absolute; left: -9999px; }
+
+  /* Imprimir: solo la carta */
+  @media print {
+    @page { size: A5; margin: 12mm; }
+    body { background: #fff; }
+    header, form, .no-imprimir, details { display: none !important; }
+    main { display: block; padding: 0; }
+    aside { position: static; }
+    .vista { background: none; padding: 0; }
+    .vista h2 { display: none; }
+    .carta-saber { box-shadow: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="sub">Tierra de los Humos · Herramienta</div>
+  <h1>Editor de saberes</h1>
+  <p>Para escribir una carta de saber nueva, o corregir una que ya está, sin programar. Se ve igual que en el juego, se revisa con las mismas reglas y sale lista para sumarla.</p>
+  <p>Pensado para el equipo y para las personas de la comunidad que quieran corregir o sumar saberes. <b>Nada se publica solo:</b> lo que se escribe acá queda en esta compu hasta que alguien del equipo lo suma al juego.</p>
+</header>
+
+<main>
+  <form id="formulario" novalidate>
+    <fieldset>
+      <legend>1. ¿Una carta nueva o corregir una?</legend>
+      <label for="base">Empezar desde</label>
+      <select id="base" name="base"><option value="">Una carta nueva, en blanco</option></select>
+      <span class="ayuda">Elegí una carta del juego para corregirla. La ilustración se conserva.</span>
+    </fieldset>
+
+    <fieldset>
+      <legend>2. El saber</legend>
+      <div class="fila">
+        <div><label for="pueblo">Pueblo</label><select id="pueblo" name="pueblo"></select></div>
+        <div><label for="tipo">Tema</label><select id="tipo" name="tipo"></select></div>
+      </div>
+      <label for="titulo">Título <span class="ayuda">Una frase corta que resuma el saber. Por ejemplo: «Pescar sin anzuelo».</span></label>
+      <input type="text" id="titulo" name="titulo" maxlength="80" autocomplete="off">
+      <label for="dato">Dato <span class="ayuda">Lo que dice la fuente, sin agregar nada. Si no hay fuente, no va.</span></label>
+      <textarea id="dato" name="dato" maxlength="600"></textarea>
+      <div class="contador" id="contador-dato" aria-live="polite"></div>
+      <label for="juego">En el juego <span class="ayuda">Qué hace este saber en el juego. Esto sí es invento nuestro: un recurso de juego.</span></label>
+      <textarea id="juego" name="juego" maxlength="300"></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>3. La fuente</legend>
+      <div class="opciones" role="radiogroup" aria-label="Tipo de fuente" id="tipos-fuente"></div>
+
+      <div id="f-cooper">
+        <label for="pagina">Página <span class="ayuda">Por ejemplo: 84, o 88 y 91.</span></label>
+        <input type="text" id="pagina" name="pagina" autocomplete="off">
+      </div>
+      <div id="f-libro" class="oculto">
+        <div class="fila">
+          <div><label for="autor">Autor o autora</label><input type="text" id="autor" name="autor" placeholder="Apellido, N." autocomplete="off"></div>
+          <div><label for="anio">Año</label><input type="text" id="anio" name="anio" inputmode="numeric" autocomplete="off"></div>
+        </div>
+        <label for="obra">Título de la obra</label><input type="text" id="obra" name="obra" autocomplete="off">
+        <div class="fila">
+          <div><label for="editorial">Editorial o revista</label><input type="text" id="editorial" name="editorial" autocomplete="off"></div>
+          <div><label for="pagina-libro">Página</label><input type="text" id="pagina-libro" name="paginaLibro" autocomplete="off"></div>
+        </div>
+      </div>
+      <div id="f-oral" class="oculto">
+        <p class="nota">Un relato de la comunidad es una fuente tan válida como un libro. Solo se publica con el permiso de quien lo contó, y su nombre solo si lo autoriza. No se anotan teléfonos, mails ni direcciones.</p>
+        <label for="rol-persona">Quién lo contó, por su rol <span class="ayuda">Por ejemplo: «una abuela de la comunidad», «un artesano yagán».</span></label>
+        <input type="text" id="rol-persona" name="rolPersona" autocomplete="off">
+        <div class="fila">
+          <div><label for="comunidad">Comunidad</label><input type="text" id="comunidad" name="comunidad" autocomplete="off"></div>
+          <div><label for="fecha">Cuándo lo contó</label><input type="text" id="fecha" name="fecha" placeholder="noviembre de 2026" autocomplete="off"></div>
+        </div>
+        <div class="opciones">
+          <label class="casilla"><input type="checkbox" id="permiso-publicar" name="permisoPublicar"> Dio permiso para publicar este relato.</label>
+          <label class="casilla"><input type="checkbox" id="permiso-nombre" name="permisoNombre"> Autorizó que figure su nombre.</label>
+        </div>
+        <div id="f-nombre" class="oculto"><label for="nombre-persona">Nombre, como quiere figurar</label><input type="text" id="nombre-persona" name="nombrePersona" autocomplete="off"></div>
+      </div>
+      <label class="casilla" style="margin-top:10px"><input type="checkbox" id="de-memoria" name="deMemoria"> Lo cito de memoria: todavía no lo verifiqué en la fuente.</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>4. La ilustración</legend>
+      <p class="ayuda" style="margin:0">Solo se pueden usar escenas y objetos ya revisados contra las fuentes (docs/05-rigor-historico.md). Si hace falta dibujar otra cosa, se le pide al equipo de arte.</p>
+      <div class="fila">
+        <div><label for="escena">Escena</label><select id="escena" name="escena"></select></div>
+        <div><label for="objeto">Objeto en la escena</label><select id="objeto" name="objeto"></select></div>
+      </div>
+      <div class="fila">
+        <div><label for="estacion">Estación</label><select id="estacion" name="estacion"></select></div>
+        <div><label for="hora">Momento del día</label><select id="hora" name="hora"></select></div>
+      </div>
+      <label for="alt">Texto alternativo <span class="ayuda">Para quien no puede ver la imagen. Se arma solo con lo que se dibuja; se puede corregir.</span></label>
+      <textarea id="alt" name="alt" maxlength="400"></textarea>
+      <label for="id">Identificador <span class="ayuda">Sale solo del título. No se cambia nunca: la herencia lo guarda.</span></label>
+      <input type="text" id="id" name="id" autocomplete="off" spellcheck="false">
+    </fieldset>
+    <div class="botones no-imprimir" style="margin-bottom:12px"><button type="button" class="boton-papel" id="limpiar">Empezar de nuevo</button></div>
+  </form>
+
+  <aside>
+    <section class="vista" aria-labelledby="t-vista">
+      <h2 id="t-vista">Así se ve en el juego</h2>
+      <article class="carta-saber papel" id="carta">
+        <p class="carta-saber__tipo" id="c-tipo"></p>
+        <canvas class="carta-saber__ilus" id="c-ilus" role="img" aria-label=""></canvas>
+        <h3 class="carta-saber__titulo" id="c-titulo"></h3>
+        <p><span class="etiqueta etiqueta--dato">Dato</span> <span id="c-dato"></span></p>
+        <p><span class="etiqueta etiqueta--juego">En el juego</span> <span id="c-juego"></span></p>
+        <p class="carta-saber__fuente" id="c-fuente"></p>
+        <p class="estado-carta">Borrador: lo revisa el equipo de investigación antes de sumarlo.</p>
+      </article>
+    </section>
+
+    <section class="vista no-imprimir" aria-labelledby="t-revision">
+      <h2 id="t-revision">Revisión</h2>
+      <ul class="avisos" id="avisos" aria-live="polite"></ul>
+    </section>
+
+    <div class="botones no-imprimir">
+      <button type="button" class="boton-papel" id="escuchar">🔊 Escuchar la carta</button>
+      <button type="button" class="boton-papel" id="imprimir">Imprimir la carta</button>
+      <button type="button" class="boton-papel boton-papel--fuego" id="copiar">Copiar para el juego</button>
+      <button type="button" class="boton-papel" id="bajar">Guardar en un archivo</button>
+    </div>
+
+    <details class="no-imprimir">
+      <summary>Cómo se suma al juego</summary>
+      <ol style="padding-left:20px;margin:8px 0">
+        <li>«Copiar para el juego» copia la carta con el formato de <code>datos/saberes.js</code>. También se puede guardar en un archivo y mandarlo al equipo.</li>
+        <li>Alguien del equipo la pega en <code>datos/saberes.js</code>, adentro de <code>SABERES</code>, y corre <code>node --test</code>.</li>
+        <li>La Persona C la revisa con la fuente o con la comunidad. Recién entonces su estado pasa de «borrador» a «revisado».</li>
+      </ol>
+      <pre id="codigo" aria-label="La carta con el formato de datos/saberes.js"></pre>
+    </details>
+  </aside>
+</main>
+<p class="aviso-vivo" id="aviso" aria-live="assertive"></p>
+
+<script src="../arte/fuente/arte.js"></script>
+<script src="../arte/corteza/corteza.js"></script>
+<script src="../datos/saberes.js"></script>
+<script src="../sonido/voz.js"></script>
+<script src="editor-saberes.js"></script>
+<script>
+(function () {
+  'use strict';
+  const ED = window.TDH_EDITOR, { SABERES, ORDEN } = window.TDH_SABERES, CZ = window.TDH_CORTEZA;
+  const $ = (id) => document.getElementById(id);
+  const form = $('formulario');
+  const BORRADOR = 'tdh-editor-saberes';
+
+  // ── Opciones de los menús ──
+  const opciones = (sel, obj) => Object.entries(obj).forEach(([v, t]) => sel.add(new Option(typeof t === 'string' ? t : t.nombre, v)));
+  ORDEN.forEach((k) => $('base').add(new Option('Corregir: ' + SABERES[k].titulo, k)));
+  opciones($('pueblo'), ED.PUEBLOS);
+  ED.TIPOS.forEach((t) => $('tipo').add(new Option(t, t)));
+  opciones($('escena'), ED.ESCENAS);
+  opciones($('objeto'), ED.OBJETOS);
+  opciones($('estacion'), ED.ESTACIONES);
+  opciones($('hora'), ED.HORAS);
+  Object.entries(ED.FUENTES).forEach(([v, t], i) => {
+    const l = document.createElement('label');
+    l.innerHTML = '<input type="radio" name="tipoFuente" value="' + v + '"' + (i === 0 ? ' checked' : '') + '> ' + t;
+    $('tipos-fuente').appendChild(l);
+  });
+
+  let editando = null, mapaOriginal = null, extraOriginal = null, altTocado = false, idTocado = false;
+
+  function leer() {
+    const d = new FormData(form), f = {};
+    for (const [k, v] of d.entries()) f[k] = v;
+    ['permisoPublicar', 'permisoNombre', 'deMemoria'].forEach((k) => { f[k] = !!d.get(k); });
+    if (f.tipoFuente === 'libro') f.pagina = f.paginaLibro;
+    if (!altTocado) f.alt = '';
+    if (!idTocado) f.id = '';
+    f.editando = editando; f.mapaOriginal = mapaOriginal; f.extraOriginal = extraOriginal;
+    return f;
+  }
+
+  // ── Vista previa ──
+  let motor = null;
+  function dibujar(carta) {
+    const cv = $('c-ilus'), r = cv.getBoundingClientRect();
+    const celda = Math.max(8, Math.ceil(Math.max((r.width || 340) / carta.mapa[0].length, (r.height || 170) / carta.mapa.length)));
+    motor = CZ.crear(cv, { celda });
+    motor.escena(Object.assign({ mapa: carta.mapa, objetos: [], estacion: 'verano', clima: 'calma', hora: 'dia' }, carta.extra));
+    motor.dibujar(1.6);
+  }
+  function pintar() {
+    const f = leer(), carta = ED.armar(f);
+    if (!altTocado) $('alt').value = ED.altSugerido(f);
+    if (!idTocado) $('id').value = carta.id;
+    // La vista previa usa textContent: lo que se escribe nunca se interpreta como HTML.
+    $('c-tipo').textContent = 'Saber · ' + (ED.PUEBLOS[carta.pueblo] || carta.pueblo) + ' · ' + carta.tipo;
+    $('c-titulo').textContent = f.titulo || 'Título del saber';
+    $('c-dato').textContent = f.dato || 'Lo que dice la fuente.';
+    $('c-juego').textContent = f.juego || 'Qué hace en el juego.';
+    $('c-fuente').textContent = 'Fuente: ' + carta.fuente.replace(/<[^>]+>/g, '');
+    $('c-ilus').setAttribute('aria-label', carta.alt);
+    dibujar(carta);
+    $('contador-dato').textContent = (f.dato || '').length + ' de 320 letras recomendadas';
+    // Revisión
+    const avisos = ED.revisar(carta, f, SABERES), lista = $('avisos');
+    lista.innerHTML = '';
+    if (!avisos.length) avisos.push({ nivel: 'bien', texto: 'Está completa. Falta que la revise el equipo de investigación.' });
+    avisos.forEach((a) => { const li = document.createElement('li'); li.className = a.nivel; li.textContent = (a.nivel === 'error' ? 'Para corregir: ' : a.nivel === 'aviso' ? 'Ojo: ' : 'Bien: ') + a.texto; lista.appendChild(li); });
+    const hayError = avisos.some((a) => a.nivel === 'error');
+    $('copiar').disabled = hayError; $('bajar').disabled = hayError;
+    $('codigo').textContent = ED.codigo(carta, f);
+    // Mostrar solo los campos de la fuente elegida
+    ['cooper', 'libro', 'oral'].forEach((t) => $('f-' + t).classList.toggle('oculto', f.tipoFuente !== t));
+    $('f-nombre').classList.toggle('oculto', !f.permisoNombre);
+    try { localStorage.setItem(BORRADOR, JSON.stringify(Object.assign(f, { altTocado, idTocado }))); } catch (e) { /* sin almacenamiento: no pasa nada */ }
+    return { carta, f, hayError };
+  }
+
+  form.addEventListener('input', (e) => { if (e.target.id === 'alt') altTocado = true; if (e.target.id === 'id') idTocado = true; pintar(); });
+  form.addEventListener('change', pintar);
+
+  // ── Corregir una carta existente ──
+  $('base').addEventListener('change', () => {
+    const k = $('base').value;
+    form.reset(); altTocado = false; idTocado = false; editando = null; mapaOriginal = null; extraOriginal = null;
+    if (k && SABERES[k]) {
+      const f = ED.desdeCarta(SABERES[k]);
+      editando = f.editando; mapaOriginal = f.mapaOriginal; extraOriginal = f.extraOriginal;
+      if (!$('escena').querySelector('option[value="original"]')) $('escena').add(new Option('La ilustración de la carta', 'original'), 0);
+      for (const [campo, v] of Object.entries(f)) { const el = form.elements[campo]; if (el && typeof v === 'string') { if (el.length && el[0] && el[0].type === 'radio') { for (const r of el) r.checked = r.value === v; } else el.value = v; } }
+      altTocado = true; idTocado = true; $('base').value = k;
+    } else { const o = $('escena').querySelector('option[value="original"]'); if (o) o.remove(); }
+    pintar();
+  });
+
+  // ── Botones ──
+  function avisar(t) { $('aviso').textContent = t; }
+  $('copiar').addEventListener('click', async () => {
+    const texto = $('codigo').textContent;
+    try { await navigator.clipboard.writeText(texto); avisar('Copiada. Ya se puede pegar en datos/saberes.js.'); $('copiar').textContent = '¡Copiada!'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents($('codigo')); getSelection().removeAllRanges(); getSelection().addRange(r); document.querySelector('details').open = true; avisar('Quedó seleccionada: copiala con Ctrl + C.'); }
+    setTimeout(() => { $('copiar').textContent = 'Copiar para el juego'; }, 2000);
+  });
+  $('bajar').addEventListener('click', () => {
+    const { carta } = pintar();
+    const texto = '// Carta de saber para datos/saberes.js (pegar adentro de SABERES).\n// Armada con herramientas/editor-de-saberes.html. Estado: borrador.\n' + $('codigo').textContent + '\n';
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([texto], { type: 'text/javascript' })); a.download = 'saber-' + carta.id + '.js';
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  });
+  $('imprimir').addEventListener('click', () => window.print());
+  const voz = window.TDH_VOZ && TDH_VOZ.disponible() ? TDH_VOZ : null;
+  if (!voz) $('escuchar').hidden = true;
+  else $('escuchar').addEventListener('click', () => { const { carta } = pintar(); voz.leerCarta(carta); });
+  $('limpiar').addEventListener('click', () => { try { localStorage.removeItem(BORRADOR); } catch (e) { /* nada */ } $('base').value = ''; $('base').dispatchEvent(new Event('change')); });
+
+  // ── Recuperar el borrador de esta compu ──
+  try {
+    const g = JSON.parse(localStorage.getItem(BORRADOR) || 'null');
+    if (g) {
+      if (g.editando && SABERES[g.editando]) { $('base').value = g.editando; $('base').dispatchEvent(new Event('change')); }
+      for (const [campo, v] of Object.entries(g)) { const el = form.elements[campo]; if (!el || campo === 'base') continue; if (typeof v === 'boolean' && el.type === 'checkbox') el.checked = v; else if (typeof v === 'string') { if (el.length && el[0] && el[0].type === 'radio') { for (const r of el) r.checked = r.value === v; } else el.value = v; } }
+      altTocado = !!g.altTocado; idTocado = !!g.idTocado;
+    }
+  } catch (e) { /* sin almacenamiento o borrador roto: se empieza en blanco */ }
+  pintar();
+  addEventListener('resize', () => pintar());
+  document.body.dataset.listo = '1';
+})();
+</script>
+</body>
+</html>

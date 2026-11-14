@@ -8,12 +8,13 @@
 | Fuente | Qué es | Cómo se consultó |
 |---|---|---|
 | **Cooper, J. M. (1946). «The Yahgan».** En J. H. Steward (ed.), *Handbook of South American Indians*, vol. 1: *The Marginal Tribes*, pp. 81-106. Bureau of American Ethnology, Bulletin 143. Washington: Smithsonian Institution. | El manual de referencia. Resume y cita a Bridges, Hyades y Deniker (1891), Lothrop (1928), Koppers y Gusinde (1937). | Texto completo, edición digital de archive.org (`bulletin14311946smit`). Es de dominio público. |
+| **Bird, J. (1946). «The Alacaluf»** (pp. 55-79) y **«The Archeology of Patagonia»** (pp. 17-24). En el mismo *Handbook of South American Indians*, vol. 1. | Los kawésqar, vecinos de los yaganes, y la arqueología de la región, incluidos los conchales del Beagle. | La misma edición digital del *Handbook*. |
 | **Spears, J. R. (1895).** *The Gold Diggings of Cape Horn*. Nueva York: Putnam. | Testimonio de época, basado en lo que le contaron misioneros que vivían con los yaganes. | Project Gutenberg, libro n.º 39109. Dominio público. |
 | **Museo Marítimo de Ushuaia.** *La canoa yagán* (reconstrucción de una canoa de corteza). | Arqueología experimental: armaron y navegaron una canoa con las técnicas de las fuentes. | Sitio web del museo, leído el 12/11/2026. |
 
 ### Fuente regional a cotejar: Goodall
 
-**Goodall, R. N. P. (1979).** *Tierra del Fuego*. 3.ª edición, bilingüe (castellano e inglés), 329 páginas. Buenos Aires: Ediciones Shanamaiim. Natalie Goodall vivió en la estancia Harberton, sobre el canal Beagle, y escribió e ilustró este libro, que es una guía de referencia de la provincia: el territorio, la historia, la naturaleza.
+**Goodall, R. N. P. (1978 o 1979).** *Tierra del Fuego*. 3.ª edición, bilingüe (castellano e inglés), 329 páginas. 🔍 El año: Open Library registra la 3.ª edición en 1978 y la Biblioteca del Scott Polar Research Institute fecha la primera en 1975; se confirma con la tapa y la página de créditos del ejemplar que consiga el equipo. Buenos Aires: Ediciones Shanamaiim. Natalie Goodall vivió en la estancia Harberton, sobre el canal Beagle, y escribió e ilustró este libro, que es una guía de referencia de la provincia: el territorio, la historia, la naturaleza.
 
 **No está disponible libre en internet** (tiene derechos vigentes), así que todavía no se cotejó. Se puede encontrar en bibliotecas de Ushuaia y de Río Grande, en el Museo del Fin del Mundo o en manos de algún integrante. Si alguien del equipo lo tiene, alcanza con sacar fotos de las páginas sobre los yámana y la naturaleza para cargar lo que diga, con página, en la tabla:
 
@@ -73,7 +74,7 @@ Estado: ✅ coincide con la fuente · 🔧 estaba mal y se corrigió · 🔍 fal
 | Choza cónica | Tipo tipi, de troncos o varas gruesas. Más frecuente hacia el este (Cooper, p. 85-86). | 🔧 **Agregada** (`choza-conica`). |
 | Puerta | Una puerta que mira al mar, o dos: una al mar y otra enfrente (Cooper, p. 86). | 🔧 **El motor la ubica sola:** si el mar queda del otro lado, la choza se ve de espaldas, sin puerta. |
 | Interior | El piso muchas veces se excavaba entre 0,6 y 1 m, y el fuego iba en el centro (Cooper, p. 86). | ✅ El fuego se ve por la puerta. El pozo no se ve desde afuera. |
-| Conchales | Montículos de valvas, sobre todo de mejillón, junto a las viviendas y a veces alrededor. Más del 65 % están a menos de 100 m de la costa (Proyecto Arqueológico Canal Beagle, Orquera y Piana; *Magallania*). 🔍 cita exacta. | ✅ Anillo de valvas cerca de la orilla. |
+| Conchales | En las costas del canal Beagle hay «innumerables» conchales, algunos de más de 3 m de profundidad; sus capas de arriba son yaganes (Bird, J. 1946, «The Archeology of Patagonia», *Handbook*, vol. 1, p. 20-21). Lothrop (1928, p. 197) calculó su edad en unos 2.000 años, citado por Bird (p. 21); los estudios posteriores dan fechas más antiguas 🔍. Que más del 65 % esté a menos de 100 m de la costa sale del Proyecto Arqueológico Canal Beagle (Orquera y Piana) 🔍 cita exacta. | ✅ Anillo de valvas cerca de la orilla. |
 
 ### Qué comían y dónde lo conseguían
 
@@ -94,7 +95,7 @@ También comían los **hongos que crecen en los árboles** (no los del suelo) y 
 | Erizos | Se juntaban con un tenedor de madera de cuatro puntas (Cooper, p. 84). Cuarto grupo de alimentos. | 🔧 **Agregado** (pegatina `erizos`, sobre la roca). 🔍 La especie y el color exactos. |
 | Huevos | Tercer grupo de alimentos, junto con las gaviotas (Cooper, p. 84). Los juntaban las mujeres (p. 96). | 🔧 **Agregado** (pegatina `huevos`). |
 | Gaviota, cauquén, pingüino | Las gaviotas en el tercer grupo; los cauquenes (gansos) y los pingüinos en el cuarto (Cooper, p. 84). | 🔧 **Agregados** como papel, en reposo. 🔍 Especies y nombres oficiales (ver Goodall). |
-| Toninas y marsopas | Las marsopas en el tercer grupo de alimentos (Cooper, p. 84). | 🔧 **Agregadas** (`tonina`), nadando. 🔍 Especie del Beagle. |
+| Toninas y marsopas | Las marsopas en el tercer grupo de alimentos (Cooper, p. 84). Cooper dice *porpoise* sin nombrar la especie. | 🔧 **Agregadas** (`tonina`), nadando. 🔍 **Especie del Beagle.** Pista, sin leer todavía los estudios: el delfín austral (*Lagenorhynchus australis*) figura como uno de los cetáceos más comunes de Tierra del Fuego y hay un trabajo del CADIC sobre su uso del noreste del canal Beagle; la tonina overa (*Cephalorhynchus commersonii*) se cita sobre todo para la costa atlántica y el estrecho de Magallanes. Confirmar con Goodall, que estudió estos delfines en Tierra del Fuego, antes de nombrar una especie. Mientras tanto, el texto dice «delfín» o «tonina» sin especie. |
 | Hongos de árbol | Ver arriba (Cooper, p. 84). Los juntaban las mujeres (p. 96). | 🔧 **Agregados** (pegatina `hongos`). |
 | Calafate | Cooper menciona el calafate (*Berberis*) en el bosque (p. 81), pero entre las bayas que se comían nombra sobre todo la grosella negra silvestre (p. 84). | 🔧 **Lo sacamos del mapa.** El sprite queda guardado, marcado 🔍. |
 | Lobo marino | Se cazaba con lanza o arpón, desde la canoa o desde tierra (Cooper, p. 84). | ✅ Aparece descansando en las rocas. ⛔ Ninguna escena de caza. |
@@ -110,7 +111,7 @@ También comían los **hongos que crecen en los árboles** (no los del suelo) y 
 | Hacer fuego | Golpeando pedernal contra pirita. La yesca era plumón de ave u hongo seco (Cooper, p. 91). | 🔧 **Agregada la pegatina `pirita`**, con su pedernal. |
 | Llevar el fuego | Se llevaba en la canoa; para iluminar usaban antorchas de corteza (Cooper, p. 91). | ✅ Es el corazón del juego. |
 | Humo y señales | El fuego también servía para hacer señales (Cooper, p. 91). | ✅ Las columnas de humo lejanas son otras familias. |
-| Leña | Para un fuego siempre encendido. | ✅ Pegatina `lena`. |
+| Leña | Entre los vecinos kawésqar, mujeres y hombres juntaban leña; casi nunca cortaban la suficiente para toda la noche, y preferían la madera de tepú, que prende bien en un lugar tan húmedo (Bird, J. 1946, «The Alacaluf», *Handbook*, vol. 1, p. 70). Entre los yaganes, cuidar el fuego era tarea de la mujer (Cooper, p. 96). 🔍 Falta una cita yagán propia sobre juntar leña. | ✅ Pegatina `lena`. |
 | Cestos | De junco (*Juncus magellanicus*), en espiral, de forma ovalada y con asa (Cooper, p. 89). | 🔍 Sin dibujo todavía. Preguntar a la comunidad antes de usarlo como ícono, porque hoy lo siguen haciendo. |
 | Baldes | De corteza de guindo, para el agua y para achicar la canoa, que hacía mucha agua. Los hacía la mujer (Cooper, p. 88-89). | 🔍 Posible pegatina. |
 | Cuchillo | Una valva de mejillón atada a un mango (Cooper, p. 91). | 🔍 Posible carta. |

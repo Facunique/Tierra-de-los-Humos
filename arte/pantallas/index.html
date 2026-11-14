@@ -310,7 +310,7 @@
     fondos.ayuda = fondoGrande($('fondo-ayuda'), { hora: 'dia' });
     escenaEn($('ilus-yagan'), ['GGLGGLGG', '..,,,,..', ',,,--,,,'], { canoa: { x: 3, y: 2, fuego: 4 }, hora: 'tarde' });
     escenaEn($('ilus-kawesqar'), ['~~~~~~~~', '~~~~~~~~', '~~~~~~~~'], { explorado: () => false, bordeNiebla: false });
-    if (window.TDH_MAPA) TDH_MAPA.dibujar($('mapa-pueblos'), { ancho: 900, territorios: true, nombres: true, hoy: false, destacar: 'yagan' });
+    if (window.TDH_TERRITORIOS) TDH_TERRITORIOS.dibujar($('mapa-pueblos'), { ancho: 900, territorios: true, nombres: true, hoy: false, destacar: 'yagan' });
   }
 
   // ── Navegación ──────────────────────────────────────────────────────────

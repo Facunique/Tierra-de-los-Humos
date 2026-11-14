@@ -13,6 +13,9 @@ Todo funciona **sin internet**: se abre con doble clic desde la carpeta del repo
 
 ## Cómo usar la vidriera
 
+**Con el juego de verdad:** cuando el núcleo del juego está en el repositorio (`juego/nucleo/`), la escena del viaje es una partida real que se juega sola durante 45 segundos: rema, junta leña, aviva el fuego y acampa. Muestra como subtítulo lo que pasa y cada saber nuevo con su fuente. Cada vez es un mapa distinto, con la luz de ese momento en Ushuaia. Si el núcleo no está, muestra la escena armada de siempre.
+
+
 1. Abrir `stand/vidriera.html` en el navegador de la notebook o del televisor.
 2. Apretar <kbd>F</kbd> para pantalla completa.
 3. Listo: se repite sola. El cursor se esconde a los 3 segundos y la pantalla no se apaga, si el navegador lo permite.

@@ -122,7 +122,8 @@ Es el único elemento que aparece en todas las pantallas, así que es lo más cu
 - **Objetos de papel:** `choza`, `choza-conica`, `conchal`, `arbol-bandera`, `guindo-grande`, `ballena-varada`, `lobo-marino`, `cormoran`, `pato-vapor`, `ballena`, `pinguino`, `cauquen`, `gaviota`, `tonina`.
 - **Pegatinas:** `lena`, `mejillones`, `pescado`, `erizos`, `huevos`, `hongos`, `pirita`, `saber` (y cualquier sprite de `arte.js`).
 - **Cámara para celular:** `motor.centrar(x, y, 10, 9)` muestra 10 × 9 casillas alrededor de la canoa. `motor.casillaEn(clientX, clientY)` convierte un toque en una casilla.
-- **Rendimiento:** el mapa se arma una vez (entre 40 y 120 ms) y se vuelve a armar solo si cambian el mapa, la estación o lo explorado. Cada cuadro reusa esa base.
+- **Rendimiento:** el mapa se arma una vez (entre 40 y 120 ms) y se vuelve a armar solo si cambian el mapa, la estación, la celda o lo explorado. Cada cuadro reusa esa base, copia solo el pedazo que entra en la cámara y dibuja solo las olas, algas, rocas, objetos y humos cercanos. La luz del fuego se arma 12 veces por segundo en una capa aparte, y el grano de papel se mezcla de forma normal, no con «overlay». Medido con el núcleo en un celular simulado 4 veces más lento que una computadora: de 29 a 41 cuadros por segundo, sin cambios visibles (diferencia máxima de 6 sobre 255 niveles de brillo).
+- **Para no perder fluidez:** no cambiar la celda en cada movimiento (`motor.ajustar(celda)` vuelve a armar el mapa entero; conviene calcularla solo al abrir y al cambiar el tamaño de la pantalla).
 - **Para el HUD y las cartas:** `TDH_CORTEZA.fuego(ctx, x, y, escala, nivel, t)`, `TDH_CORTEZA.canoa(...)` y `TDH_CORTEZA.pegatina(idSprite, escala)`. Las clases CSS (`.carta-saber`, `.ficha`, `.codice`, `.boton-papel`) están en `carta.css`.
 - **Luz real:** `TDH_LUZ_REAL.ahora()` devuelve `{ hora, estacion, texto }` para pasarlo a `motor.escena` (ver la sección 4).
 - **Sonido por lugar:** `TDH_SONIDO.lugarDe(mapa, x, y)` devuelve `{ bosque, playa, mar }` para `sonido.ambiente` (ver la sección 12).
@@ -197,6 +198,7 @@ El pixel art de la primera ronda (propuesta A) queda como **capa secundaria**: s
 |---|---|---|
 | Tinta sobre papel | 12,5:1 | AAA |
 | Ocre sobre papel | 5,7:1 | AA |
+| Gris de notas y pies sobre papel (`#5b524a`) | 6,1:1 | AA |
 | Papel sobre noche | 15,2:1 | AAA |
 | Etiqueta «Dato» | 7,9:1 | AAA |
 | Etiqueta «En el juego» | 11,2:1 | AAA |
@@ -214,13 +216,14 @@ Todo el sonido se **genera con código** (`sonido/ambiente.js`, unos 18 KB): vie
 
 ## 13. Accesibilidad
 
-- [x] Contraste AAA en los textos.
+- [x] Contraste AAA en el texto principal y AA como mínimo en etiquetas y notas (ver la tabla de la sección 10).
 - [x] Costa con espuma, para no depender del color.
 - [x] Simulación de daltonismo en la vitrina.
 - [x] El fuego siempre con su número al lado.
 - [x] Las pegatinas tienen un borde claro: se distinguen del paisaje por la forma, no solo por el color.
 - [x] Subtítulos de sonido.
 - [x] **Cartas leídas en voz alta** (`sonido/voz.js`, con la voz del dispositivo), para quien lee con dificultad o ve poco.
+- [x] **Narrador** (`sonido/narrador.js`): describe en voz alta lo que rodea a la canoa y cuenta lo que pasa, para jugar sin ver la pantalla.
 - [x] **El lugar suena distinto** (bosque, playa, canal): el mapa también se puede «leer» con el oído.
 - [x] Movimiento que se puede apagar, y respeta "reducir movimiento".
 - [x] Cámara que sigue a la canoa en el celular, con zonas táctiles grandes.

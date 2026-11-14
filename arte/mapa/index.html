@@ -57,10 +57,10 @@
 <script>
   const capas = { territorios: true, nombres: true, hoy: false };
   const cv = document.getElementById('mapa');
-  function pintar() { TDH_MAPA.dibujar(cv, Object.assign({ ancho: Math.min(1100, Math.max(600, cv.parentElement.clientWidth * 1.4)) }, capas)); }
+  function pintar() { TDH_TERRITORIOS.dibujar(cv, Object.assign({ ancho: Math.min(1100, Math.max(600, cv.parentElement.clientWidth * 1.4)) }, capas)); }
   document.querySelectorAll('[data-capa]').forEach((b) => b.addEventListener('click', () => { capas[b.dataset.capa] = !capas[b.dataset.capa]; b.setAttribute('aria-pressed', String(capas[b.dataset.capa])); pintar(); }));
   const ley = document.getElementById('leyenda');
-  TDH_MAPA.TERRITORIOS.forEach((t) => ley.insertAdjacentHTML('beforeend', '<div class="pueblo"><h2><i style="background:' + t.color + '"></i>' + t.nombre + '</h2><p>' + t.detalle + '.</p><small>Fuente: ' + t.fuente + '.</small></div>'));
+  TDH_TERRITORIOS.TERRITORIOS.forEach((t) => ley.insertAdjacentHTML('beforeend', '<div class="pueblo"><h2><i style="background:' + t.color + '"></i>' + t.nombre + '</h2><p>' + t.detalle + '.</p><small>Fuente: ' + t.fuente + '.</small></div>'));
   document.fonts.ready.then(pintar); pintar();
 </script>
 </body>

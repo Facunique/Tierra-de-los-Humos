@@ -12,11 +12,16 @@
  *   });
  *   TDH_POSTAL.descargar(lienzo, 'tierra-de-los-humos-generacion-2.png');
  *
+ *   // Con la partida del núcleo (juego/nucleo/partida.js), los datos salen solos:
+ *   const datos = TDH_POSTAL.datosDe(partida.estado, { generacion: 2, saberes: TDH_SABERES.SABERES });
+ *   TDH_POSTAL.dibujar(lienzo, datos);
+ *
  * Requiere arte/fuente/arte.js y arte/corteza/corteza.js. Licencia: MIT.
  */
 (function (raiz) {
   'use strict';
-  const CZ = raiz.TDH_CORTEZA, C = raiz.TDH_ARTE.COLOR, rgba = CZ.rgba;
+  // Sin Corteza (por ejemplo, en Node) solo funciona datosDe: dibujar necesita el navegador.
+  const CZ = raiz.TDH_CORTEZA, C = raiz.TDH_ARTE ? raiz.TDH_ARTE.COLOR : null, rgba = CZ ? CZ.rgba : null;
   const W = 1200, H = 800;
 
   function papel(x, a, b, w, h, r, color) {
@@ -59,9 +64,9 @@
     x.restore();
     // Arriba, el título del recorrido; abajo, dónde queda en el mapa real (si está cargado)
     x.fillStyle = C.I; x.font = F(22, 700); x.fillText('El viaje por los canales', mx, my - 34);
-    if (raiz.TDH_MAPA && raiz.TDH_COSTAS) {
+    if (raiz.TDH_TERRITORIOS && raiz.TDH_COSTAS) {
       const iw = 300, mini = document.createElement('canvas');
-      const r = raiz.TDH_MAPA.dibujar(mini, { ancho: iw, territorios: true, nombres: false, hoy: false, destacar: d.pueblo === 'yagán' ? 'yagan' : null, dpr: 2 });
+      const r = raiz.TDH_TERRITORIOS.dibujar(mini, { ancho: iw, territorios: true, nombres: false, hoy: false, destacar: d.pueblo === 'yagán' ? 'yagan' : null, dpr: 2 });
       const iy = my + MH + 34, ih = Math.min(r.alto, H - iy - 26);
       if (ih > 120) {
         papel(x, mx - 8, iy - 8, iw + 16, ih + 16, 12);
@@ -102,6 +107,26 @@
       document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
     }, 'image/png');
   }
-  const api = { dibujar, descargar };
+  // Nombre del pueblo como va en la postal («una familia yagán»).
+  const PUEBLOS = { yagan: 'yagán', kawesqar: 'kawésqar' };
+  /**
+   * Arma los datos de la postal a partir de partida.estado.
+   * opciones: generacion (número), saberes (el catálogo TDH_SABERES.SABERES), fecha.
+   */
+  function datosDe(estado, opciones) {
+    const e = estado || {}, op = opciones || {}, catalogo = op.saberes || {};
+    const ruta = e.ruta && e.ruta.length ? e.ruta : [[e.canoa ? e.canoa.x : 0, e.canoa ? e.canoa.y : 0]];
+    return {
+      mapa: e.mapa, objetos: e.objetos || [], ruta, explorado: e.explorado,
+      generacion: op.generacion || 1,
+      llego: !!e.gano,
+      destino: e.destino && e.destino.nombre ? e.destino.nombre : null,
+      pasos: e.pasos != null ? e.pasos : Math.max(0, ruta.length - 1),
+      saberes: (e.aprendidos || []).map((id) => (catalogo[id] && catalogo[id].titulo) || id),
+      pueblo: PUEBLOS[e.pueblo] || e.pueblo || 'yagán',
+      fecha: op.fecha || new Date(),
+    };
+  }
+  const api = { dibujar, descargar, datosDe };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else raiz.TDH_POSTAL = api;
 })(typeof window !== 'undefined' ? window : globalThis);

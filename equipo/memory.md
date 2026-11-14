@@ -20,10 +20,21 @@
   | `arte/corteza/transiciones.js` | Paso del fuego y aparición de carta | ver `docs/04`, sección 6 |
   | `arte/corteza/luz-real.js` | Hora y estación reales de Ushuaia | `TDH_LUZ_REAL.ahora()` → `{ hora, estacion, texto }` |
   | `sonido/ambiente.js` | Ambiente, efectos y sonido por lugar | `TDH_SONIDO.lugarDe(mapa, x, y)` |
+  | `sonido/narrador.js` | Cuenta el viaje en voz alta, para jugar sin ver | `TDH_NARRADOR.conectar(TDH_VOZ).tras(eventos, partida.estado, partida.puede())` |
+  | `sonido/juego.js` | Conecta el sonido con la partida: cada evento suena con su subtítulo | `TDH_SONIDO_JUEGO.conectar(sonido).eventos(partida.hacer(accion))` |
   | `sonido/voz.js` | Lee las cartas en voz alta | `TDH_VOZ.leerCarta(carta)` |
-  | `arte/postal/postal.js` | Postal del viaje en PNG | `TDH_POSTAL.dibujar(canvas, datos)` |
+  | `arte/postal/postal.js` | Postal del viaje en PNG | `TDH_POSTAL.dibujar(canvas, TDH_POSTAL.datosDe(partida.estado, { generacion, saberes }))` |
   | `datos/saberes.js` | Las 9 cartas, con fuente, página y texto alternativo (antes `arte/cartas/saberes-borrador.js`) | `TDH_SABERES.SABERES` |
 
+- **Editor de saberes (13/11):** `herramientas/editor-de-saberes.html` permite escribir o corregir cartas sin programar, también a partir de un relato de la comunidad (solo con permiso). Se puede mostrar en la reunión del 14/11.
+- **Lo que encontraron las pruebas automáticas (13/11, Persona D)**, para que lo revisen A y B. No se tocó su código:
+  - Se puede acampar noche tras noche sin gastar fuego, así que una partida podría no terminar nunca. ¿Limitar los acampes seguidos o que cada noche gaste algo?
+  - En `pruebas/nucleo.html`, al cerrar una carta la celda cambia en 1 px y el motor vuelve a armar el mapa entero: un tirón de un segundo en un celular lento. Conviene calcular la celda solo al abrir y al cambiar el tamaño de la pantalla.
+  - El cartel de «El viaje termina acá» no tiene margen interno, y en el celular el aviso de arriba tapa los íconos del HUD.
+  - **Choque de nombres, ya resuelto de este lado:** el mapa de territorios (`arte/mapa/mapa.js`) y el mapa del núcleo (`juego/nucleo/mapa.js`) usaban los dos la global `TDH_MAPA`. El de territorios pasó a llamarse `TDH_TERRITORIOS` (lo usan la postal, el mapa, el cartel, la vidriera y la maqueta). El núcleo no tiene que cambiar nada.
+  - **Antes de entregar (16/11):** `node pruebas/de-punta-a-punta.cjs` juega partidas enteras en cinco pantallas tocando los botones y avisa si algo se rompe.
+- **Coordinación (14/11):** regla nueva en `AGENTS.md`. Antes de trabajar y antes de subir, `node herramientas/novedades.cjs` muestra qué hicieron los demás y qué conviene hacer por eso. Cada uno se acopla a lo nuevo, y si algo choca, adapta lo suyo.
+- **Ideas para más adelante:** [`ideas.md`](ideas.md) es el lugar para coordinar ideas que todavía no se hicieron. Cualquiera del equipo puede sumar, acomodar o descartar; cada idea dice qué señal indica cuándo conviene hacerla, quién la propone y a quién le tocaría.
 - **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md`, acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (ver *Por decidir*), cotejar el libro de Goodall.
 
 ## Fechas clave
@@ -73,7 +84,7 @@ Datos ya chequeados o aclarados en el equipo. Lo que no tiene fuente confirmada 
   - el fuego se hacía con pirita y pedernal (p. 91);
   - las chozas eran de domo o cónicas, con la puerta hacia el mar (p. 85-86);
   - el perro no está documentado antes de 1823 (p. 83).
-- **A cotejar:** Goodall, R. N. P. (1979), *Tierra del Fuego*, Ediciones Shanamaiim. No está libre en línea; ver la lista de qué buscar en `docs/05`.
+- **A cotejar:** Goodall, R. N. P. (1978 o 1979, 3.ª ed. 🔍 confirmar con el ejemplar), *Tierra del Fuego*, Ediciones Shanamaiim. No está libre en línea; ver la lista de qué buscar en `docs/05`.
 - **Para el arte (12/11, Persona D):** la canoa yagán era de corteza de coigüe de Magallanes (guindo), en tres piezas cosidas, con el fuego en el centro; la vivienda, de varas cubiertas con cueros, ramas y cortezas, con salida para el humo. Fuentes y detalle en `docs/04-direccion-de-arte.md`, secciones 1 y 2 (las fuentes son divulgativas: la Persona C las contrasta con Gusinde y Chapman). 🔍
 - **El nombre:** las fuentes registran "Tierra de los Humos" y "Tierra de los Fuegos" desde temprano; la anécdota de Carlos V cambiando el nombre no tiene respaldo claro (Billiken). 🔍 fuente primaria.
 
