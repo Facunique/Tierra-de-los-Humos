@@ -56,13 +56,14 @@
     grid-template-areas: "tipo cuerpo" "ilus cuerpo" "titulo cuerpo" "estado fuente" "botones fuente";
   }
   .tdh-carta .carta-saber__tipo { grid-area: tipo; }
-  .tdh-carta .carta-saber__ilus { grid-area: ilus; max-height: 32dvh; }
+  .tdh-carta .carta-saber__ilus { grid-area: ilus; max-height: 24dvh; }
   .tdh-carta .carta-saber__titulo { grid-area: titulo; font-size: 19px; margin-bottom: 4px; }
   .tdh-carta__cuerpo { grid-area: cuerpo; min-height: 0; }
   .tdh-carta .carta-saber__fuente { grid-area: fuente; align-self: end; }
   .tdh-carta__estado { grid-area: estado; }
-  .tdh-carta__botones { grid-area: botones; }
-  .tdh-carta__botones .boton-papel { flex: 1 1 120px; font-size: 15px; padding: 10px 12px; }
+  /* Los dos botones van uno al lado del otro: apilados, no entran en 390 px de alto. */
+  .tdh-carta__botones { grid-area: botones; flex-wrap: nowrap; }
+  .tdh-carta__botones .boton-papel { flex: 1 1 0; min-width: 0; font-size: 14px; padding: 8px 10px; line-height: 1.2; }
 }
 @media (max-width: 380px) {
   .tdh-carta { padding: 14px 14px 12px; }
