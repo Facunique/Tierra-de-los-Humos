@@ -119,7 +119,7 @@ Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la
   - **Balance:** la prueba de punta a punta muestra que el juego no se rompe, pero no mide si es justo. Desde el PR 22, acampar gasta fuego, así que una partida ya no puede durar para siempre. Para ajustar los números hacen falta pruebas con personas de afuera del equipo (al menos tres, una en un celular).
   - **Celulares de la demo:** las pruebas automáticas usan pantallas de celular simuladas. Nos sirve saber qué equipos va a haber el 20/11 para probarlo antes.
 - **Dudas técnicas de A:**
-  - **Cuánto cuesta acampar:** lo pusimos en 2 de fuego por noche (con comida, queda en +1). Es un número de prueba: lo vamos a ajustar con las pruebas con personas, junto con B.
+  - **Cuánto cuesta acampar:** lo pusimos en 2 de energía por noche, medio punto de los 4 de fuego que se ven (con comida, queda en +1 de energía). Es un número de prueba: lo vamos a ajustar con las pruebas con personas, junto con B.
   - **El cierre de la partida:** hoy se gana al llegar al lugar del motivo con el fuego encendido. Falta que C confirme que alcanza para mostrar el nomadismo en la entrega.
   - **Las brasas o los tres tramos:** si queda tiempo después del 17/11, ¿cuál suma más para el jurado? Las brasas son más baratas; los tres tramos se parecen más al ciclo del concepto, pero tocan el mapa, el núcleo y la interfaz.
   - **La versión de mesa:** con el gasto de acampar y el aviso del clima deja de tener las mismas reglas que el juego. La propuesta es presentarla como una versión más simple.
