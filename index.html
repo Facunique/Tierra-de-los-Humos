@@ -11,42 +11,18 @@
 <meta name="theme-color" content="#0b1015">
 <link rel="stylesheet" href="arte/tipografia/atkinson.css">
 <link rel="stylesheet" href="arte/corteza/carta.css">
+<link rel="stylesheet" href="juego/interfaz/juego.css">
+<link rel="stylesheet" href="juego/interfaz/pantallas.css">
 <link rel="icon" href="arte/logo/favicon-32.png" type="image/png">
 <link rel="apple-touch-icon" href="arte/logo/icono-192.png">
-<style>
-  /* Pantalla de título del juego. Sale de la maqueta (arte/pantallas/index.html). */
-  :root { --noche: #0b1015; --texto: #e7ecea; --luz: #ffd47c; --ocre: #973a25; color-scheme: dark; }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; height: 100%; }
-  body { background: var(--noche); color: var(--texto); font: 17px/1.5 "Atkinson Hyperlegible", system-ui, sans-serif; overflow: hidden; }
-  button, a { font: inherit; }
-  :focus-visible { outline: 3px solid var(--luz); outline-offset: 3px; }
-  [tabindex="-1"]:focus { outline: none; }
-
-  .pantalla { position: fixed; inset: 0; overflow: hidden; }
-  .fondo-escena { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-  .capa { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; padding: 16px 16px calc(16px + env(safe-area-inset-bottom)); gap: 14px; overflow-y: auto; }
-  .centro { align-items: center; justify-content: safe center; text-align: center; }
-  .rotulo { padding: 22px 26px 20px; max-width: 560px; position: relative; }
-  .rotulo::before { content: ""; position: absolute; inset: 8px; border-radius: inherit; border: 1.5px dashed rgba(94,65,44,.35); pointer-events: none; }
-  .rotulo h1 { margin: 0; font-size: clamp(36px, 9vw, 64px); line-height: 1; }
-  .rotulo p { margin: 10px 0 0; font-size: 17px; }
-  .sub { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ocre); margin: 0 0 6px !important; }
-  .botones { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 620px; }
-  .boton-papel { min-width: 180px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
-  .aviso-ficcion { font-size: 14px; color: #eee5d0; background: rgba(11,16,21,.7); padding: 6px 12px; border-radius: 8px; max-width: 520px; margin: 0; }
-  .aviso-ficcion span { display: block; margin-top: 4px; opacity: .85; }
-  @media (max-width: 420px) {
-    .rotulo { padding: 18px 18px 16px; }
-    .botones { gap: 10px; }
-    .boton-papel { min-width: 0; flex: 1 1 100%; }
-  }
-</style>
 </head>
-<body>
+<body class="tdh-juego">
 
-<main class="pantalla" id="p-titulo" aria-labelledby="t-titulo">
-  <canvas class="fondo-escena" id="fondo-titulo" aria-hidden="true"></canvas>
+<!-- El juego: una sola página con varias pantallas. La lógica está en juego/interfaz/juego.js. -->
+
+<!-- 1. Título -->
+<section class="pantalla" id="p-titulo" aria-labelledby="t-titulo">
+  <canvas class="fondo-escena" data-fondo="titulo" aria-hidden="true"></canvas>
   <div class="capa centro">
     <div class="rotulo papel">
       <p class="sub">Roguelike fueguino</p>
@@ -54,102 +30,168 @@
       <p>Un viaje en canoa por los canales. Cuando el fuego se apaga, lo aprendido pasa a la siguiente generación.</p>
     </div>
     <div class="botones">
-      <!-- Mientras se programa el juego, «Empezar» abre la maqueta jugable de las pantallas. -->
-      <a class="boton-papel boton-papel--fuego" href="arte/pantallas/index.html">Empezar el viaje</a>
+      <button class="boton-papel boton-papel--fuego" id="b-seguir" type="button" hidden>Seguir el viaje</button>
+      <button class="boton-papel boton-papel--fuego" id="b-empezar" type="button" data-ir="pueblo">Empezar el viaje</button>
+      <button class="boton-papel" type="button" data-ir="codice">Códice</button>
+      <button class="boton-papel" type="button" data-ir="ayuda">Cómo se juega</button>
+    </div>
+    <div class="botones opciones" role="group" aria-label="Opciones">
       <button class="boton-papel" id="b-sonido" type="button" aria-pressed="false">Sonido: no</button>
+      <button class="boton-papel" id="b-narrador" type="button" aria-pressed="false">Narrador: no</button>
       <button class="boton-papel" id="b-contraste" type="button" aria-pressed="false">Alto contraste: no</button>
       <button class="boton-papel" id="b-luz" type="button" aria-pressed="true">Luz real de Ushuaia: sí</button>
     </div>
     <p class="aviso-ficcion">La familia, el mapa y los eventos son ficción. Los saberes, no: cada uno cita su fuente.<span id="aviso-luz" aria-live="polite"></span></p>
-    <p class="aviso-ficcion">Versión en construcción para la hackatón SoberaníaTech 2026. Por ahora, el viaje abre la maqueta de las pantallas.</p>
   </div>
-</main>
+</section>
+
+<!-- 2. Elegir pueblo -->
+<section class="pantalla" id="p-pueblo" aria-labelledby="t-pueblo" hidden>
+  <canvas class="fondo-escena" data-fondo="pueblo" aria-hidden="true"></canvas>
+  <div class="capa centro">
+    <div class="rotulo papel"><h2 id="t-pueblo">¿A quién acompañás?</h2><p>Cada pueblo vive el territorio a su manera, y guarda sus propios saberes.</p></div>
+    <figure class="mapa-pueblos papel"><canvas id="mapa-pueblos" role="img" aria-label="Mapa de Tierra del Fuego con los territorios ancestrales: yagán en el canal Beagle y las islas del sur, selk'nam en la Isla Grande, haush en la península Mitre y kawésqar en los canales del oeste."></canvas><figcaption>Territorios ancestrales, aproximados (Cooper, 1946, p. 81 y 107-108; Bird, 1946, p. 55).</figcaption></figure>
+    <div class="pueblos">
+      <button class="pueblo papel" id="b-yagan" type="button" aria-describedby="d-yagan gen-yagan">
+        <canvas id="ilus-yagan" aria-hidden="true"></canvas>
+        <span class="estado-pueblo estado-pueblo--si">Disponible</span>
+        <span class="pueblo__nombre">Una familia yagán</span>
+        <span class="pueblo__texto" id="d-yagan">Canoeros de los canales del sur: el canal Beagle y las islas hasta el cabo de Hornos.</span>
+        <span class="estado-pueblo estado-pueblo--gen" id="gen-yagan">Generación 1</span>
+      </button>
+      <div class="pueblo papel" aria-disabled="true">
+        <canvas id="ilus-kawesqar" aria-hidden="true"></canvas>
+        <span class="estado-pueblo">Próximamente</span>
+        <span class="pueblo__nombre">Una familia kawésqar</span>
+        <span class="pueblo__texto">Canoeros de los canales del oeste. Se suma solo con la consulta a sus comunidades.</span>
+      </div>
+    </div>
+    <button class="boton-papel" type="button" data-ir="titulo">Volver</button>
+  </div>
+</section>
+
+<!-- 3. Viaje -->
+<section class="pantalla" id="p-viaje" aria-labelledby="t-viaje" hidden>
+  <h2 id="t-viaje" class="solo-lector">Viaje</h2>
+  <div class="marco">
+    <div class="hud-corteza" id="hud" role="group" aria-label="Estado del viaje"></div>
+    <div class="mapa" id="caja-mapa">
+      <canvas id="mapa" role="img" aria-label="Mapa del viaje. Tocá el agua para remar hasta ahí, o usá las flechas."></canvas>
+      <div class="anuncio" id="anuncio" role="status" aria-live="polite"></div>
+      <p class="subtitulo" id="subtitulo" aria-hidden="true"></p>
+    </div>
+    <div class="acciones">
+      <div class="cruz" role="group" aria-label="Remar">
+        <span></span><button class="boton-papel" type="button" data-remar="0,-1" aria-label="Remar hacia el norte">↑</button><span></span>
+        <button class="boton-papel" type="button" data-remar="-1,0" aria-label="Remar hacia el oeste">←</button><button class="boton-papel" type="button" data-remar="0,1" aria-label="Remar hacia el sur">↓</button><button class="boton-papel" type="button" data-remar="1,0" aria-label="Remar hacia el este">→</button>
+      </div>
+      <div class="acciones__botones" role="group" aria-label="Acciones">
+        <button class="boton-papel" id="a-juntar" type="button" disabled>Juntar</button>
+        <button class="boton-papel" id="a-avivar" type="button" disabled>Avivar el fuego</button>
+        <button class="boton-papel" id="a-amarrar" type="button" disabled>Amarrar y acampar</button>
+        <button class="boton-papel" id="a-describir" type="button" hidden>Describir alrededor</button>
+        <button class="boton-papel" id="a-pausa" type="button">Pausa</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Fin del viaje: se apagó el fuego o llegaron -->
+<section class="pantalla fin" id="p-fin" aria-labelledby="t-fin" hidden>
+  <canvas class="fondo-escena" data-fondo="fin" aria-hidden="true"></canvas>
+  <div class="capa centro">
+    <div class="rotulo papel">
+      <p class="sub" id="fin-sub"></p>
+      <h2 id="t-fin"></h2>
+      <p id="fin-texto"></p>
+      <p class="fin__dato" id="fin-dato" hidden></p>
+      <p id="fin-lista-titulo"></p>
+      <ul class="lista-saberes" id="fin-lista"></ul>
+    </div>
+    <div class="botones">
+      <button class="boton-papel boton-papel--fuego" id="b-generacion" type="button">Empezar la generación siguiente</button>
+      <button class="boton-papel" id="b-postal" type="button">Ver la postal del viaje</button>
+      <button class="boton-papel" type="button" data-ir="codice">Ver el códice</button>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Códice: los saberes del linaje, separados por pueblo -->
+<section class="pantalla pantalla--papel" id="p-codice" aria-labelledby="t-codice" hidden>
+  <div class="capa">
+    <div class="encabezado-codice">
+      <h2 id="t-codice">Códice</h2>
+      <div class="pestanas-pueblo" role="tablist" aria-label="Pueblo">
+        <button role="tab" type="button" id="tab-yagan" aria-selected="true" aria-controls="codice">Yagán</button>
+        <button role="tab" type="button" aria-selected="false" disabled>Kawésqar · próximamente</button>
+      </div>
+      <span id="cuenta-codice"></span>
+      <button class="boton-papel" type="button" data-volver>Volver</button>
+    </div>
+    <p class="codice__explica">Lo que la familia aprendió, generación tras generación. Lo que todavía no encontraron sigue en el humo.</p>
+    <div class="codice" id="codice" role="tabpanel" aria-labelledby="tab-yagan"></div>
+    <div class="botones botones--codice">
+      <button class="boton-papel" type="button" data-ir="cierre">Hoy</button>
+      <button class="boton-papel" id="b-borrar" type="button">Empezar de cero</button>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Cierre en presente -->
+<section class="pantalla" id="p-cierre" aria-labelledby="t-cierre" hidden>
+  <canvas class="fondo-escena" data-fondo="cierre" aria-hidden="true"></canvas>
+  <div class="capa centro">
+    <div class="rotulo papel">
+      <p class="sub">Hoy</p>
+      <h2 id="t-cierre">Los fuegos siguen encendidos</h2>
+      <p>El pueblo yagán sigue vivo. Hay familias y comunidades yaganes que hoy cuidan su lengua, su memoria y sus oficios, como la cestería de junco.</p>
+      <p class="borrador">Texto provisorio. Se escribe junto con la comunidad, y solo se la nombra si lo autoriza.</p>
+    </div>
+    <button class="boton-papel" type="button" data-ir="titulo">Volver al inicio</button>
+  </div>
+</section>
+
+<!-- 7. Cómo se juega -->
+<section class="pantalla" id="p-ayuda" aria-labelledby="t-ayuda" hidden>
+  <canvas class="fondo-escena" data-fondo="ayuda" aria-hidden="true"></canvas>
+  <div class="capa centro">
+    <div class="rotulo papel"><h2 id="t-ayuda">Cómo se juega</h2><p>Llegá al destino con el fuego encendido. Si se apaga, lo aprendido pasa a la siguiente generación.</p></div>
+    <div class="ayuda-lista" id="ayuda-lista"></div>
+    <button class="boton-papel" type="button" data-volver>Volver</button>
+  </div>
+</section>
+
+<!-- La postal del viaje (aparece encima) -->
+<div class="tdh-velo postal" id="postal" role="dialog" aria-modal="true" aria-label="Postal del viaje" hidden>
+  <div class="postal__caja">
+    <div id="postal-lienzo"></div>
+    <div class="botones"><button class="boton-papel boton-papel--fuego" id="b-bajar-postal" type="button">Guardar la postal</button><button class="boton-papel" id="b-cerrar-postal" type="button">Cerrar</button></div>
+  </div>
+</div>
+
+<noscript><p class="sin-js">El juego necesita JavaScript. Las cartas de saber, con sus fuentes, también están para imprimir en arte/cartas/imprimir.html.</p></noscript>
 
 <script src="arte/fuente/arte.js"></script>
 <script src="arte/corteza/corteza.js"></script>
+<script src="arte/corteza/transiciones.js"></script>
 <script src="arte/corteza/luz-real.js"></script>
+<script src="arte/mapa/costas.js"></script>
+<script src="arte/mapa/mapa.js"></script>
+<script src="arte/postal/postal.js"></script>
+<script src="datos/saberes.js"></script>
 <script src="sonido/ambiente.js"></script>
-<script>
-(function () {
-  'use strict';
-  const CZ = window.TDH_CORTEZA;
-  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const $ = (id) => document.getElementById(id);
-
-  // Preferencias del jugador: si no hay almacenamiento (modo privado, file://), quedan por defecto.
-  function leer(clave, porDefecto) { try { const v = localStorage.getItem(clave); return v === null ? porDefecto : v === '1'; } catch (e) { return porDefecto; } }
-  function guardar(clave, valor) { try { localStorage.setItem(clave, valor ? '1' : '0'); } catch (e) { /* no pasa nada */ } }
-  let altoContraste = leer('tdh-alto-contraste', false);
-  let luzReal = leer('tdh-luz-real', true);
-
-  // ── Fondo animado: costa con bosque, playa y canales (igual que la maqueta) ──
-  let fondo = null;
-  function luz() { return luzReal && window.TDH_LUZ_REAL ? TDH_LUZ_REAL.ahora() : { hora: 'tarde', estacion: 'verano' }; }
-  function prepararFondo() {
-    const W = Math.max(innerWidth, 320), H = Math.max(innerHeight, 320);
-    const cols = Math.ceil(W / 48) + 1, filas = Math.ceil(H / 48) + 1;
-    const mapa = [];
-    for (let y = 0; y < filas; y++) {
-      let f = '';
-      for (let x = 0; x < cols; x++) {
-        const borde = 3 + Math.round(Math.sin(x * 0.7) * 0.6);
-        f += y === 0 ? (x % 4 === 1 ? 'L' : 'M') : y < borde - 1 ? (x % 3 ? 'G' : 'L') : y === borde - 1 ? '.' : y === borde ? (x % 5 === 2 ? 'k' : ',') : (y > filas - 3 ? '~' : '-');
-      }
-      mapa.push(f);
-    }
-    const l = luz();
-    const m = CZ.crear($('fondo-titulo'), { celda: 48 });
-    m.escena({
-      mapa, estacion: l.estacion, hora: l.hora, clima: 'calma', altoContraste,
-      objetos: [{ id: 'choza', x: Math.floor(cols * 0.62), y: 2 }],
-      canoa: { x: Math.floor(cols * 0.3), y: 5, fuego: 4 },
-      humos: [{ x: cols * 0.75, y: 1.6 }, { x: cols * 0.2, y: 1.4 }],
-    });
-    $('fondo-titulo').style.objectFit = 'cover';
-    fondo = m;
-  }
-
-  // ── Luz real de Ushuaia ──
-  function pintarLuz() {
-    const b = $('b-luz'); b.setAttribute('aria-pressed', String(luzReal)); b.textContent = 'Luz real de Ushuaia: ' + (luzReal ? 'sí' : 'no');
-    const aviso = $('aviso-luz');
-    aviso.textContent = luzReal && window.TDH_LUZ_REAL ? TDH_LUZ_REAL.ahora().texto + ' El viaje empieza con esa luz.' : '';
-    aviso.hidden = !luzReal;
-    if (fondo) { const l = luz(); fondo.escena({ hora: l.hora, estacion: l.estacion }); }
-  }
-  $('b-luz').addEventListener('click', () => { luzReal = !luzReal; guardar('tdh-luz-real', luzReal); pintarLuz(); });
-
-  // ── Alto contraste ──
-  function pintarContraste() { const b = $('b-contraste'); b.setAttribute('aria-pressed', String(altoContraste)); b.textContent = 'Alto contraste: ' + (altoContraste ? 'sí' : 'no'); }
-  $('b-contraste').addEventListener('click', () => {
-    altoContraste = !altoContraste; guardar('tdh-alto-contraste', altoContraste); pintarContraste();
-    if (fondo) fondo.escena({ altoContraste });
-  });
-
-  // ── Sonido: el navegador exige un toque antes de sonar ──
-  const sonido = window.TDH_SONIDO ? TDH_SONIDO.crear() : null;
-  let conSonido = false;
-  if (!sonido) $('b-sonido').hidden = true;
-  $('b-sonido').addEventListener('click', async (e) => {
-    if (!sonido) return;
-    conSonido = !conSonido;
-    e.currentTarget.setAttribute('aria-pressed', String(conSonido)); e.currentTarget.textContent = 'Sonido: ' + (conSonido ? 'sí' : 'no');
-    if (conSonido) { await sonido.iniciar(); sonido.ambiente({ viento: 0.2, mar: 0.5, bosque: 0.5, playa: 0.4, lluvia: 0, fuego: 3 }); } else sonido.pausar();
-  });
-
-  // ── Bucle de dibujo ──
-  let ultimo = 0;
-  function cuadro(ms) {
-    if (ms - ultimo > 40) { ultimo = ms; if (fondo) fondo.dibujar(reducido ? 2 : ms / 1000); }
-    requestAnimationFrame(cuadro);
-  }
-  let espera = 0;
-  addEventListener('resize', () => { clearTimeout(espera); espera = setTimeout(() => { prepararFondo(); pintarLuz(); }, 150); });
-  prepararFondo();
-  pintarLuz();
-  pintarContraste();
-  requestAnimationFrame(cuadro);
-})();
-</script>
+<script src="sonido/voz.js"></script>
+<script src="sonido/juego.js"></script>
+<script src="sonido/narrador.js"></script>
+<script src="juego/nucleo/azar.js"></script>
+<script src="juego/nucleo/reglas.js"></script>
+<script src="juego/nucleo/territorio/elementos.js"></script>
+<script src="juego/nucleo/territorio/destinos.js"></script>
+<script src="juego/nucleo/territorio/pueblos.js"></script>
+<script src="juego/nucleo/mapa.js"></script>
+<script src="juego/nucleo/partida.js"></script>
+<script src="juego/interfaz/herencia.js"></script>
+<script src="juego/interfaz/carta.js"></script>
+<script src="juego/interfaz/juego.js"></script>
 </body>
 </html>

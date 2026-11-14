@@ -1,0 +1,140 @@
+/*
+ * Tierra de los Humos · Pantallas del juego (index.html)
+ * Va después de arte/corteza/carta.css y juego/interfaz/juego.css. Solo la carga
+ * el juego: así no cambia las páginas de prueba (pruebas/nucleo.html, carta.html).
+ * Las pantallas salen de la maqueta (arte/pantallas/index.html).
+ * Licencia: MIT.
+ */
+.tdh-juego {
+  --fondo: #e9dfc8; --panel: #f4ecdb; --borde: #cdbf9f; --texto: #28221e; --texto-2: #5b524a;
+  margin: 0; background: var(--tdh-noche); color: var(--tdh-nieve);
+  font: 17px/1.5 "Atkinson Hyperlegible", system-ui, sans-serif;
+  overflow: hidden; color-scheme: dark;
+}
+html:has(.tdh-juego) { height: 100%; }
+.tdh-juego * { box-sizing: border-box; }
+.tdh-juego button, .tdh-juego a { font: inherit; }
+.tdh-juego :focus-visible { outline: 3px solid var(--tdh-luz); outline-offset: 3px; }
+.tdh-juego [tabindex="-1"]:focus { outline: none; }
+.tdh-juego [hidden] { display: none !important; }
+.solo-lector { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sin-js { position: fixed; inset: auto 16px 16px; z-index: 99; background: var(--tdh-papel); color: var(--tdh-tinta); padding: 12px 16px; border-radius: 10px; }
+
+/* ── Pantallas ── */
+.pantalla { position: fixed; inset: 0; overflow: hidden; }
+.fondo-escena { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.capa { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; gap: 14px; overflow-y: auto;
+  padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom)); }
+.centro { align-items: center; justify-content: safe center; text-align: center; }
+.rotulo { padding: 22px 26px 20px; max-width: 560px; position: relative; flex: none; }
+.rotulo::before { content: ""; position: absolute; inset: 8px; border-radius: inherit; border: 1.5px dashed rgba(94, 65, 44, 0.35); pointer-events: none; }
+.rotulo h1 { margin: 0; font-size: clamp(36px, 9vw, 64px); line-height: 1; }
+.rotulo h2 { margin: 0 0 6px; font-size: clamp(24px, 6vw, 36px); line-height: 1.1; }
+.rotulo p { margin: 10px 0 0; font-size: 17px; }
+.sub { font-size: 13px !important; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tdh-ocre); margin: 0 0 6px !important; }
+.botones { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 640px; flex: none; }
+.tdh-juego .boton-papel { min-height: 44px; min-width: 180px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+.tdh-juego .boton-papel[disabled] { opacity: 0.5; cursor: not-allowed; }
+.opciones .boton-papel { min-width: 0; font-size: 15px; padding: 8px 14px; }
+.aviso-ficcion { font-size: 14px; color: var(--tdh-papel); background: rgba(11, 16, 21, 0.7); padding: 6px 12px; border-radius: 8px; max-width: 520px; margin: 0; flex: none; }
+.aviso-ficcion span { display: block; margin-top: 4px; opacity: 0.85; }
+.borrador { font-size: 12px !important; color: #5b524a; }
+
+/* ── Elegir pueblo ── */
+.mapa-pueblos { margin: 0; padding: 10px; width: min(100%, 620px); flex: none; }
+.mapa-pueblos canvas { width: 100%; height: auto; display: block; border-radius: 10px; }
+.mapa-pueblos figcaption { font-size: 13px; color: #5b524a; margin-top: 6px; text-align: left; }
+.pueblos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; width: min(100%, 900px); flex: none; }
+.pueblo { text-align: left; padding: 18px; border: 0; display: flex; flex-direction: column; gap: 8px; color: var(--tdh-tinta); }
+button.pueblo { cursor: pointer; font: inherit; }
+.pueblo canvas { width: 100%; height: auto; aspect-ratio: 8 / 3; border-radius: 10px; }
+.pueblo__nombre { font-size: 22px; font-weight: 700; line-height: 1.2; }
+.pueblo__texto { font-size: 15px; }
+.pueblo[aria-disabled="true"] { opacity: 0.7; }
+.estado-pueblo { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.estado-pueblo--si { color: var(--tdh-guindo); }
+.estado-pueblo--gen { color: var(--tdh-ocre); }
+
+/* ── Viaje: HUD arriba, mapa en el medio, acciones abajo ── */
+#p-viaje .marco { position: absolute; inset: 0; display: flex; flex-direction: column; }
+#p-viaje .hud-corteza { flex: none; gap: 6px 8px; padding: max(6px, env(safe-area-inset-top)) 8px 6px; }
+#p-viaje .ficha { font-size: 14px; }
+.mapa { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; background: #2d4553; overflow: hidden; }
+#mapa { max-width: 100%; max-height: 100%; cursor: pointer; touch-action: manipulation; }
+.anuncio, .subtitulo { position: absolute; z-index: 4; left: 50%; transform: translateX(-50%); max-width: calc(100% - 24px); text-align: center; pointer-events: none;
+  background: rgba(11, 16, 21, 0.88); color: var(--tdh-nieve); border-radius: 10px; margin: 0; opacity: 0; transition: opacity 0.3s; }
+.anuncio { bottom: 12px; padding: 6px 14px; font-size: 15px; }
+.subtitulo { top: 10px; padding: 2px 10px; font-size: 13px; font-style: italic; }
+.anuncio.visible, .subtitulo.visible { opacity: 1; }
+.acciones { flex: none; display: flex; gap: 10px; align-items: center; justify-content: center;
+  padding: 8px 10px max(8px, env(safe-area-inset-bottom)); background: var(--tdh-mar); }
+.cruz { flex: none; display: grid; grid-template-columns: repeat(3, 48px); grid-template-rows: repeat(2, 44px); gap: 6px; }
+.tdh-juego .cruz .boton-papel { min-width: 0; min-height: 44px; padding: 0; font-size: 20px; }
+.acciones__botones { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.tdh-juego .acciones__botones .boton-papel { min-width: 0; font-size: 15px; padding: 8px 12px; }
+@media (max-width: 600px) {
+  #p-viaje .hud-corteza { gap: 5px; }
+  #p-viaje .ficha { min-height: 32px; padding: 2px 8px 2px 4px; font-size: 13px; gap: 4px; box-shadow: 2px 3px 0 rgba(15, 26, 33, 0.6); }
+  #p-viaje .ficha canvas { width: 22px; height: 22px; }
+  #p-viaje .ficha--fuego canvas { width: 28px; height: 31px; }
+  .acciones { gap: 8px; padding-left: 8px; padding-right: 8px; }
+  .acciones__botones { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .tdh-juego .acciones__botones .boton-papel { font-size: 14px; padding: 6px 8px; line-height: 1.2; }
+}
+/* Celular acostado: las acciones van a la derecha, para que el mapa tenga alto. */
+@media (max-height: 500px) and (min-width: 560px) {
+  #p-viaje .marco { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr); }
+  #p-viaje .hud-corteza { grid-column: 1 / -1; padding-top: 4px; padding-bottom: 4px; }
+  #p-viaje .ficha { min-height: 30px; font-size: 13px; }
+  #p-viaje .ficha canvas { width: 22px; height: 22px; }
+  #p-viaje .ficha--fuego canvas { width: 26px; height: 29px; }
+  .acciones { flex-direction: column; justify-content: center; padding: 6px max(8px, env(safe-area-inset-right)) 6px 8px; width: 240px; overflow-y: auto; }
+  .acciones__botones { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .tdh-juego .acciones__botones .boton-papel { font-size: 13px; padding: 4px 6px; line-height: 1.2; }
+}
+
+/* ── Fin del viaje ── */
+.fin .rotulo { padding: 24px 28px 22px; }
+.fin__dato { font-size: 15px !important; color: var(--texto-2); }
+.lista-saberes { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 6px; text-align: left; }
+.lista-saberes li { background: rgba(255, 212, 124, 0.25); border-radius: 8px; padding: 6px 10px; font-weight: 700; }
+
+/* ── Códice ── */
+.pantalla--papel .capa { background: var(--fondo); color: var(--texto); }
+.encabezado-codice { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; flex: none; }
+.encabezado-codice h2 { margin: 0; font-size: 30px; }
+.pestanas-pueblo { display: flex; flex-wrap: wrap; gap: 6px; }
+.pestanas-pueblo button { min-height: 44px; padding: 6px 14px; border-radius: 10px; border: 1px solid var(--borde); background: var(--panel); color: var(--texto); cursor: pointer; }
+.pestanas-pueblo button[aria-selected="true"] { background: var(--tdh-ocre); color: var(--tdh-papel); font-weight: 700; }
+.pestanas-pueblo button[disabled] { cursor: default; opacity: 0.7; }
+.codice__explica { margin: 0; color: var(--texto-2); flex: none; }
+.codice { flex: none; }
+.codice .carta-saber .borrador { margin: 6px 0 0; }
+.botones--codice { margin: 8px auto 0; }
+
+/* ── Cómo se juega ── */
+.ayuda-lista { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; text-align: left; width: min(100%, 900px); flex: none; }
+.ayuda-lista .papel { padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; color: var(--tdh-tinta); }
+.ayuda-lista canvas { width: 48px; height: 48px; flex: none; image-rendering: pixelated; }
+.ayuda-lista h3 { margin: 0 0 2px; font-size: 17px; }
+.ayuda-lista p { margin: 0; font-size: 15px; }
+.tdh-juego kbd { font: 700 13px/1 "Atkinson Hyperlegible", sans-serif; border: 1px solid #8f897f; border-bottom-width: 3px; border-radius: 5px; padding: 2px 6px; background: #f7f1e3; color: var(--tdh-tinta); }
+
+/* ── Postal ── */
+.postal { z-index: 40; }
+.postal__caja { display: grid; gap: 12px; justify-items: center; width: min(100%, 900px); max-height: 100%; overflow-y: auto; }
+.postal__imagen { width: 100%; height: auto; border-radius: 12px; display: block; }
+
+/* ── Alto contraste ── */
+.alto-contraste .anuncio, .alto-contraste .subtitulo { background: #000; outline: 2px solid var(--tdh-nieve); }
+.alto-contraste .aviso-ficcion { background: #000; }
+.alto-contraste .rotulo::before { border-color: var(--tdh-tinta); }
+.alto-contraste .boton-papel { outline: 2px solid var(--tdh-tinta); }
+
+@media (max-width: 420px) {
+  .rotulo { padding: 18px 18px 16px; }
+  .botones { gap: 10px; }
+  .botones:not(.opciones) .boton-papel { min-width: 0; flex: 1 1 100%; }
+  .opciones .boton-papel { flex: 1 1 45%; }
+}
+@media (prefers-reduced-motion: reduce) { .anuncio, .subtitulo { transition: none; } }
