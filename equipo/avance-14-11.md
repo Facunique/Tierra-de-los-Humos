@@ -41,14 +41,22 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
   - Cartas de saber, victoria y derrota, y herencia entre generaciones.
   - Los datos del territorio están aparte del código, cada uno con su fuente.
   - 49 pruebas automáticas. Un jugador automático que junta y acampa llega al destino el 84 % de las veces; uno que no junta nada no llega nunca.
-- **Interfaz** (Persona B): el núcleo ya está conectado en el `index.html` publicado. Se juega de punta a punta, con varias generaciones seguidas.
+- ✏️ A confirma o actualiza los números del núcleo (pruebas y porcentaje del jugador automático).
+- **Interfaz** (Persona B, [PR 9](https://github.com/Facunique/Tierra-de-los-Humos/pull/9) y [PR 14](https://github.com/Facunique/Tierra-de-los-Humos/pull/14), ya en `main`): el núcleo está conectado en el `index.html` publicado. Se juega de punta a punta, con varias generaciones seguidas.
   - Pantallas de título, elegir pueblo, viaje, fin o llegada, códice, «Hoy» y cómo se juega.
   - Carta de saber con la fuente siempre visible y lectura en voz alta.
-  - La herencia queda guardada en el dispositivo: al volver, la familia sigue en su generación.
-  - Códice separado por pueblo y postal del viaje.
+  - La herencia queda guardada en el dispositivo: al volver, la familia sigue en su generación. Si el navegador no deja guardar, el juego anda igual mientras la página está abierta.
+  - Códice separado por pueblo, que se recorre sin jugar, y postal del viaje.
   - En el celular, se rema tocando el agua o con flechas en pantalla; en la compu, con el teclado.
-  - Accesibilidad: alto contraste, textos alternativos, subtítulos del sonido y narrador para jugar sin ver.
-  - Probado a 375 px, con el celular acostado y en la compu. Pruebas automáticas de la herencia y de la página: con las del resto del equipo, pasan las 87.
+  - Accesibilidad: alto contraste, textos alternativos, el mapa contado en palabras para lector de pantalla, subtítulos del sonido, narrador para jugar sin ver y botones de 44 px.
+  - Conectados al juego los módulos de D: sonido según el lugar, narrador, luz real de Ushuaia y postal.
+- **Prueba de punta a punta** (`pruebas/de-punta-a-punta.cjs`): juega dos partidas enteras tocando los botones en cinco pantallas (tres celulares, uno acostado y una computadora). Con el [PR 16](https://github.com/Facunique/Tierra-de-los-Humos/pull/16) pasa en las cinco, sin errores ni archivos que falten. En `main` falla con el celular acostado: las fuentes de algunas cartas, más largas desde el 14/11, dejan la fuente y el botón «Seguir» fuera de la pantalla. El arreglo está en el PR 16, que espera que A confirme el alcance.
+- **Sin internet en la demo y en las escuelas** ([PR 16](https://github.com/Facunique/Tierra-de-los-Humos/pull/16), en revisión): la primera visita guarda el juego en el navegador y después abre sin conexión. Va primero a la red, así nadie se queda con una versión vieja. Se puede sumar a la pantalla de inicio del celular. Probado apagando el servidor y recargando. Con doble clic ya andaba sin internet.
+- **Arreglos que salieron al probar** (PR 16): un toque durante la transición de humo se perdía, y la transición trababa el juego si el navegador frenaba las animaciones.
+- **Correcciones de la auditoría cultural aplicadas en el juego** ([PR 18](https://github.com/Facunique/Tierra-de-los-Humos/pull/18), ya en `main`): el lema «Lo aprendido se transmite», un cierre «Hoy» que no atribuye prácticas sin fuente y el aviso de que la voz es la automática del dispositivo.
+- **El juego cuenta por qué viajan** ([PR 20](https://github.com/Facunique/Tierra-de-los-Humos/pull/20), ya en `main`): cada viaje empieza con una carta «Por qué viajan», con el dato y la fuente del destino y la aclaración de que la familia es ficción. Es la parte de B del nomadismo en chico. Hoy el destino es siempre la ballena varada; cuando el núcleo lo elija según la estación, el texto cambia solo. La prueba de punta a punta revisa que aparezca en cada partida.
+- **Alcance para la entrega** ([`docs/02-alcance-mvp.md`](https://github.com/Facunique/Tierra-de-los-Humos/blob/juego/sin-internet/docs/02-alcance-mvp.md), propuesta de B en el PR 16): qué cuenta como terminado según los criterios del jurado, qué entra sí o sí para el 17/11 y qué se recorta primero. Espera que A lo confirme.
+- **Pruebas automáticas:** en `main` pasan las 88, de todo el equipo; con el PR 16, 93.
 
 ![El núcleo del juego: la canoa con su fuego rema por el canal, con una playa, el bosque, leña y pescado para juntar, y el humo sobre lo no explorado](reunion-14-11/viaje.jpg)
 
@@ -101,4 +109,8 @@ Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la
 
 - **Consulta abierta:** faltan respuestas sobre representación de la familia, nombres, exclusiones y revisión del juego; también el permiso específico para citas textuales y el alcance de la participación comunitaria. 🔍 Todavía no se registró un pedido concreto de ayuda a la mentoría por parte de C.
 - **Cómo se juega el nomadismo:** el enfoque decidido por Dani combina clima, comida y ambiente. Falta acordar con A y B los objetivos concretos y el cierre de la partida; la ballena varada permanece como un motivo posible. El prototipo todavía termina al llegar a un destino fijo.
-- ✏️ Dudas técnicas de A y B.
+- **Dudas técnicas de B:**
+  - **Cómo se juega el nomadismo:** la propuesta más chica (cada viaje con un motivo documentado y el juego cuenta al empezar por qué viajan) necesita que A elija el destino en el núcleo y que C confirme cada motivo. La parte de B ya está en `main` (PR 20): el juego cuenta el motivo al empezar. Si lo de A no llega, el viaje sigue con un destino fijo y el mismo motivo.
+  - **Balance:** la prueba de punta a punta muestra que el juego no se rompe, pero no mide si es justo. Hoy se puede acampar noche tras noche sin gastar fuego. Para ajustar los números hacen falta pruebas con personas de afuera del equipo (al menos tres, una en un celular).
+  - **Celulares de la demo:** las pruebas automáticas usan pantallas de celular simuladas. Nos sirve saber qué equipos va a haber el 20/11 para probarlo antes.
+- ✏️ Dudas técnicas de A.
