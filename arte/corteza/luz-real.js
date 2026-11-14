@@ -5,7 +5,7 @@
  * (algoritmo de posición solar de la NOAA, precisión de un par de minutos),
  * y lo traduce a la hora y la estación del motor Corteza.
  *
- * Así el juego "respira" con el día real del canal Beagle: en la demo del 19/11
+ * Así el juego "respira" con el día real del canal Beagle: en la demo del 20/11
  * se juega con la luz que hay afuera, y en junio la noche es larga.
  *
  *   const luz = TDH_LUZ_REAL.ahora();            // o TDH_LUZ_REAL.en(new Date(...))

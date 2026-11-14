@@ -4,7 +4,10 @@
 
 ## Estado actual
 
-- **Fecha de la última actualización:** 13/11/2026 (día 5 de desarrollo).
+- **Fecha de la última actualización:** 14/11/2026 (día 6 de desarrollo).
+- **Plataforma de la hackatón (14/11):** las entregas se cargan como links en *Mi equipo* (link personal de Facu, que no va al repo). Avance: repositorio y documento del avance. Final: prototipo, repositorio, README, video y presentación. Todos públicos o compartidos con la organización. El nombre del equipo se puede cambiar hasta el 16/11 a las 23:00. La idea que cargamos al inscribirnos nombra a los Selk'nam, Haush y Yagán; el juego se centra en los Yagán (ver *Decisiones*), y conviene explicarlo en el avance y en el pitch.
+- **Cambio de fechas (14/11):** la organización mandó el cronograma definitivo por mail el 9/11, y el repo lo incorpora hoy. **Avance: 16/11 hasta las 23:00. Entrega final: 18/11 hasta las 21:00. Jurado: 19/11. Cierre presencial: viernes 20/11, de 15:00 a 19:00.** Hay un día más para el avance y uno más para la entrega. Se actualizaron las fechas en todo el repo (ver *Fechas clave*).
+- **Paso 3, cotejo documental (13/11, C):** revisadas las nueve cartas contra las referencias de `docs/05` y las notas de Vargas Filgueira (2019) aportadas por Dani. Se corrigió la promesa de reparar la canoa, la atribución de descripciones y los alt; se incorporaron las referencias de Bird a leña Kawésqar y conchales. Se mantienen los 🔍 de especies y fuentes faltantes. Todas las cartas conservan `borrador`, pendientes de aprobación de Dani. Revisión completa y propuesta de carta de reservas: [`revision-cultural-paso-3.md`](revision-cultural-paso-3.md).
 - **Enfoque del viaje (13/11, Dani):** nomadismo, con motivos de desplazamiento que combinan clima, comida y ambiente. La ballena varada es uno de los motivos posibles. Decisión de diseño registrada abajo y en `docs/01-concepto.md`; A y B deben acordar cómo se traduce en objetivos y cierre de partida. El prototipo todavía termina al llegar a un destino fijo.
 - **Consulta cultural (13/11, Dani):** entrevista realizada a Víctor Vargas Filgueira a las 11:00, en el Museo del Fin del Mundo, Ushuaia. Se completaron el registro y la parte de consulta del avance del 14/11. Dani aportó notas de *Mi sangre yagán (ahua saapa yagan)* (2019, primera edición digital, Editora Cultural Tierra del Fuego). El cotejo con la grabación, las decisiones de contenido y la revisión de las nueve cartas siguen pendientes; no hay validación comunitaria registrada.
 - **Fase:** programación. El núcleo del juego ya está en `main` (`juego/nucleo/`, ver su [README](../juego/nucleo/README.md)) y se juega de punta a punta en `pruebas/nucleo.html`. Falta conectarlo a la interfaz del juego real (Persona B). Quién hace qué está en [`tareas.md`](tareas.md).
@@ -50,9 +53,12 @@
 | Fecha | Qué |
 |---|---|
 | 13/11, 11:00 | Entrevista realizada a Víctor Vargas Filgueira en el Museo del Fin del Mundo, Ushuaia. Dani confirmó esta fecha, que reemplaza la prevista del 14/11. Ver `comunicaciones.md`. |
-| 14/11 | Primer avance documentado (obligatorio). Meta: esqueleto jugable. |
-| 17/11, 20:00 | Entrega final: se cierran los repositorios. Meta interna: terminar el 16. |
-| 19/11 | Demo pública en Fábrica de Talento, Ushuaia (al menos 2 integrantes). |
+| **16/11, hasta las 23:00** | Primer avance documentado (obligatorio). Antes era el 14/11. |
+| **18/11, hasta las 21:00** | Entrega final: se cierran los repositorios. Ensayo de las presentaciones. Meta interna: terminar el 17. Antes era el 17/11 a las 20:00. |
+| 19/11 | Evaluación técnica del jurado. |
+| **20/11 (viernes), 15:00 a 19:00** | Gran cierre en Fábrica de Talento (Av. Maipú 1255, Ushuaia): demos, presentaciones finales y premiación. Al menos 2 integrantes. Antes era el jueves 19/11. |
+
+> Fechas del cronograma definitivo que mandó la organización el 9/11 por mail (ver `docs/00-guia-hackathon.md`, sección 3).
 
 ## Decisiones
 
@@ -77,7 +83,7 @@
 - **Propuestas de mejora del núcleo** (Persona A, en [`juego/nucleo/README.md`](../juego/nucleo/README.md#propuestas-de-mejora)): el viaje en 3 tramos, que cada saber heredado deje un conocimiento concreto, las brasas, el aviso antes de que cambie el clima, el texto de la carta de la corteza y si la versión de mesa se actualiza o queda como versión más simple. Se deciden con `docs/02-alcance-mvp.md`. Ninguna está hecha.
 - **Cómo se juega el nomadismo.** El enfoque está decidido por Dani (ver *Decisiones*). Falta acordar con A y B los objetivos, su relación con el clima, la comida y el ambiente, y cuándo termina una partida. Los episodios aportados por Dani de Vargas Filgueira (2019), pp. 16–17, 23, 31–32 y 53–54 del visor, y los motivos registrados en Cooper (1946), «The Yahgan», pp. 94–95 y 99, sirven como referencias a revisar para cada situación. No se elige la ballena como motivo exclusivo.
 
-- **Integrantes para el README:** los roles ya están (ver *Equipo*). Falta decidir qué nombres publicar y quién es la persona referente.
+- **Integrantes para el README:** los roles ya están (ver *Equipo*). La persona referente ante la organización es **Facu** (Persona B). Falta decidir qué nombres publicar (sin mails ni teléfonos).
 - **Qué módulos de la Persona D entran al juego final** (luz real, sonido por lugar, voz, postal, alto contraste). La propuesta es sumarlos todos: ya andan en la maqueta y no cambian el diseño. Lo deciden A y B según el tiempo.
 - **Revisión de la guía para docentes** (`escuelas/`) por la Persona C y, si se puede, por docentes.
 
@@ -88,6 +94,7 @@
 - **Archivos a revisar por A:** `juego/nucleo/territorio/destinos.js`, `juego/nucleo/territorio/pueblos.js`, `juego/nucleo/mapa.js` y `juego/nucleo/partida.js`. **Por B:** objetivos, avisos y cierre en `juego/interfaz/juego.js`, en coordinación con los textos de `sonido/juego.js` y `sonido/narrador.js`.
 - **Contenido a cargo de C:** aportar para cada motivo el dato y la fuente, distinguir el episodio documentado de la situación ficticia y revisar las cartas. El nomadismo es el enfoque elegido; no se presenta como un lugar al que llegar ni como un dato validado por toda la comunidad.
 - **Estado:** se actualizaron los documentos de diseño. No se cambió el código, los números ni los campos de funcionamiento de los datos. La guía para docentes, la versión de mesa, el pitch y el stand se revisarán según el paso 5 pedido por Dani, antes de modificar sus textos.
+- **Aviso del paso 3:** el texto de la carta `corteza` ya explica el descubrimiento del saber y no promete reparación. El comentario de `efecto: null` en `elementos.js` y el README del núcleo quedaron pendientes de actualización por A. C solo editó `dato` y `fuente` en los archivos de territorio. No se incorporó la carta nueva de reservas al catálogo: está preparada para decidir con Dani y acordar con A y B su integración.
 
 ## Lo que sabemos (y de dónde)
 

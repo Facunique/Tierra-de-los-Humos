@@ -30,7 +30,7 @@ Lo que necesitamos preguntar. Cuando haya respuesta, se tacha y se anota en la e
 4. ¿Por qué se movían las familias de un lugar a otro? ¿Cuál podría ser el destino de un viaje? (Ver `memory.md`, *Por decidir*.)
 5. ¿Hay algo que no debería aparecer en el juego?
 6. ~~¿Podemos nombrar al referente y atribuirle su testimonio como fuente?~~ Sí, sin restricción de medios, según confirmó Dani; ver entrada del 13/11. Sigue pendiente el permiso para citas textuales y para atribuir participación o validación a la comunidad.
-7. ¿Quieren ver el juego antes de la entrega del 17/11 o en la demo del 19/11?
+7. ¿Quieren ver el juego antes de la entrega del 18/11 o en la demo del 20/11?
 8. 🔍 Cotejar con la grabación los términos «Defacel» / «Yefacel» y «óykos», y consultar qué grafías recomienda el autor frente a las variantes del libro.
 9. 🔍 Cotejar cifras, medidas, detalles técnicos y la distinción entre chiejáus y kina. Registrar qué se confirma y qué requiere otra fuente.
 

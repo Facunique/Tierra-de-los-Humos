@@ -8,13 +8,13 @@
 
 En todos los casos hay algo que no puede faltar: **el fuego**. Se gasta con el frío, el viento y la lluvia, y se mantiene con lo que el territorio da. Si el fuego se apaga, el viaje termina. Pero lo aprendido no se pierde: **pasa a la siguiente generación** como *saberes*, cada uno con su fuente citada.
 
-El nombre viene del primer nombre que, según la tradición, los navegantes europeos le dieron a la isla por los fuegos y el humo que veían en la costa. 🔍
+🔍 **Origen del nombre pendiente de verificar:** el equipo lo relaciona con relatos sobre los fuegos y el humo que veían los navegantes europeos en la costa. Falta una fuente histórica con autor, obra, año y página; no se presenta esta explicación como un dato confirmado.
 
 ## Pueblos
 
 | Prioridad | Pueblo | Estado |
 |---|---|---|
-| 1 | **Yagán** | Entra en el MVP. Es el que juega en la demo del 19/11. |
+| 1 | **Yagán** | Entra en el MVP. Es el que juega en la demo del 20/11. |
 | 2 | **Kawésqar** | Extra, si llegamos. Comparte la vida en canoa, así que reutiliza casi todos los sistemas. |
 | Futuro | Selk'nam | Fuera de la hackatón. Pide otro tipo de mapa (a pie, estepa y bosque). |
 | No | Haush | No se incluye: hay muy poca documentación para sostenerlo con rigor. |
@@ -25,9 +25,9 @@ El nombre viene del primer nombre que, según la tradición, los navegantes euro
 | Cómo se mueve | En canoa, con el fuego encendido a bordo | En canoa, con el fuego a bordo |
 | Qué busca | Mariscos (mejillones, cholgas), lobos marinos, aves, leña en la orilla | A confirmar |
 | Riesgo principal | Viento y oleaje en los canales, cruces largos, mantener el fuego en la canoa | A confirmar |
-| Mecánica propia (idea) | Mapa de agua e islas. Remar gasta menos que caminar, pero el clima decide cuándo cruzar | Se define cuando tengamos la investigación |
+| Mecánica propia (idea) | Desplazamiento por agua entre islas. En el prototipo, el clima modifica el gasto del fuego | Se define cuando tengamos la investigación |
 
-🔍 Toda la tabla es un punto de partida con lo que ya sabe el equipo. **Hay que confirmar cada fila** con las fuentes y con las comunidades. La consulta sobre los Kawésqar es aparte: sus comunidades están del lado chileno.
+**Cotejo documental parcial de la columna Yagán:** las referencias ya registradas de Cooper, J. M. (1946), «The Yahgan», *Handbook of South American Indians*, vol. 1, Smithsonian Institution, aportan territorio y clima (p. 81), alimentos (p. 84) y canoa y fuego (pp. 88 y 91). 🔍 La mención de cholgas, los riesgos específicos de cruces y las afirmaciones de la columna Kawésqar requieren su cotejo propio antes de darse por revisadas. La mecánica del gasto es un recurso de juego. Las fuentes escritas no sustituyen las consultas pendientes de representación; la consulta Kawésqar es aparte.
 
 ## Bucle central: explorar, encontrar, volver
 
@@ -49,7 +49,7 @@ Varias vueltas de este ciclo forman **una etapa**, y varias etapas forman **el v
 
 ## Entre partidas: la transmisión
 
-- Cuando un viaje termina, bien o mal, los saberes descubiertos pasan a la **siguiente generación del mismo pueblo**. Cada pueblo tiene su propio linaje y sus propios saberes, porque sus costumbres eran distintas. Un saber yagán no le sirve a una familia kawésqar, ni al revés.
+- En la **mecánica ficticia de herencia**, cuando un viaje termina, bien o mal, los saberes descubiertos pasan a la siguiente generación del mismo pueblo. El juego guarda catálogos separados por pueblo. Esta separación de datos no es una afirmación sobre la utilidad o el intercambio de conocimientos entre pueblos.
 - La partida siguiente empieza con esos saberes, que dan ventajas concretas (por ejemplo: el fuego dura más en la canoa, se reconoce dónde hay mariscos).
 - Cada saber es una **carta** con un texto breve, una aclaración de qué es dato y qué es recurso de juego, y **la fuente citada**.
 - Todas las cartas se juntan en un **códice** (modo museo), separado por pueblo, que se puede recorrer sin jugar. Es la parte pensada para escuelas.
@@ -65,7 +65,7 @@ Así, morir y volver a empezar, que es lo propio del roguelike, deja de ser cast
 
 - **Sereno y respetuoso.** Más cerca de la contemplación que de la acción. El desafío es el clima y el territorio, no un enemigo.
 - **Sin violencia** entre personas ni contra pueblos. Sin seres ceremoniales como monstruos (ver las líneas rojas de la [guía](00-guia-hackathon.md#líneas-rojas-cuidado-cultural)).
-- **En presente.** Los pueblos fueguinos tienen comunidades vivas hoy, como la comunidad yagán Paiakoala en Ushuaia. El juego no los cuenta como "desaparecidos", y el códice debería cerrar con esa realidad actual.
+- **En presente.** El juego reconoce la continuidad del pueblo yagán y el códice debe cerrar con las comunidades de hoy. Dani aportó la referencia a la Comunidad Yagán Paiakoala en los agradecimientos y el epílogo de Vargas Filgueira (2019), *Mi sangre yagán (ahua saapa yagan)*. 🔍 Falta registrar las páginas y confirmar el alcance de su participación en el proyecto antes de redactar ese cierre.
 - **Honesto sobre la ficción.** La familia, el mapa y los eventos son inventados; los saberes no. El juego lo dice.
 - Visual a definir (pixel art u otras propuestas, ver tarea 6), con paleta del paisaje de los canales: mar gris, bosque de lenga, piedra, humo.
 
@@ -75,10 +75,11 @@ Así, morir y volver a empezar, que es lo propio del roguelike, deja de ser cast
 - **La mecánica es el mensaje**: la progresión del roguelike *es* la transmisión entre generaciones, y cada pueblo guarda la suya.
 - **Profundidad antes que cantidad**: un pueblo bien contado y validado vale más que cuatro a medias.
 - **Rigor visible**: cada carta tiene su fuente, y el códice funciona como material para escuelas.
-- **Construido con consulta**: el contacto con la comunidad Paiakoala y con quienes conocieron a la última hablante nativa del yagán es parte del proyecto, no un agregado.
+- **Consulta en curso:** se realizó la entrevista a Víctor Vargas Filgueira (13/11/2026, Museo del Fin del Mundo, Ushuaia), registrada por Dani en `equipo/comunicaciones.md`. Las respuestas y permisos pendientes siguen abiertos; no se presenta esta entrevista como validación de todo el juego por la comunidad.
 
 ## Pendientes que salen de este documento
 
 1. Acordar con A y B cómo se juega el enfoque de nomadismo decidido por Dani; verificar cada motivo concreto con su fuente y definir el cierre de la partida. 🔍
 2. Consultar a la comunidad si podemos jugar como alguien de su pueblo, y si podemos usar nombres.
 3. Confirmar la tabla de pueblos con las fuentes.
+4. 🔍 Verificar el origen del nombre del juego y completar las páginas del epílogo y los agradecimientos de Vargas Filgueira (2019). Las restantes referencias incompletas están en `docs/05-rigor-historico.md` y `equipo/revision-cultural-paso-3.md`.
