@@ -40,8 +40,12 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
   - Fuego, leña, comida, pirita, clima, día y noche, y acampar en el cachiyuyo.
   - Cartas de saber, victoria y derrota, y herencia entre generaciones.
   - Los datos del territorio están aparte del código, cada uno con su fuente.
-  - 49 pruebas automáticas. Un jugador automático que junta y acampa llega al destino el 84 % de las veces; uno que no junta nada no llega nunca.
-- ✏️ A confirma o actualiza los números del núcleo (pruebas y porcentaje del jugador automático).
+  - 39 pruebas automáticas del núcleo. Un jugador automático que junta y acampa llega al destino el 87 % de las veces (en 500 viajes); uno que no junta nada no llega nunca.
+- **Acampar, aviso del clima y motivo del viaje** (Persona A, [PR 22](https://github.com/Facunique/Tierra-de-los-Humos/pull/22), en revisión): las tres tareas del núcleo que dejó el alcance para el 17/11.
+  - Acampar no es gratis: cuidar el fuego toda la noche gasta. Sin comida, cada noche lo baja, así que una partida ya no puede durar para siempre.
+  - Cada cambio de clima se avisa un paso antes. Quien juega puede decidir si acampa o sigue.
+  - El núcleo elige el motivo del viaje según la estación, entre los destinos documentados. Hoy solo entra la ballena varada; los otros esperan que C los confirme.
+  - Con estos cambios, el jugador automático llega el 81 % de las veces (77 % si no le hace caso al aviso). El núcleo pasa a 48 pruebas.
 - **Interfaz** (Persona B, [PR 9](https://github.com/Facunique/Tierra-de-los-Humos/pull/9) y [PR 14](https://github.com/Facunique/Tierra-de-los-Humos/pull/14), ya en `main`): el núcleo está conectado en el `index.html` publicado. Se juega de punta a punta, con varias generaciones seguidas.
   - Pantallas de título, elegir pueblo, viaje, fin o llegada, códice, «Hoy» y cómo se juega.
   - Carta de saber con la fuente siempre visible y lectura en voz alta.
@@ -114,4 +118,8 @@ Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la
   - **Cómo se juega el nomadismo:** la propuesta más chica (cada viaje con un motivo documentado y el juego cuenta al empezar por qué viajan) necesita que A elija el destino en el núcleo y que C confirme cada motivo. La parte de B ya está en `main` (PR 20): el juego cuenta el motivo al empezar. Si lo de A no llega, el viaje sigue con un destino fijo y el mismo motivo.
   - **Balance:** la prueba de punta a punta muestra que el juego no se rompe, pero no mide si es justo. Desde el PR 22, acampar gasta fuego, así que una partida ya no puede durar para siempre. Para ajustar los números hacen falta pruebas con personas de afuera del equipo (al menos tres, una en un celular).
   - **Celulares de la demo:** las pruebas automáticas usan pantallas de celular simuladas. Nos sirve saber qué equipos va a haber el 20/11 para probarlo antes.
-- ✏️ Dudas técnicas de A.
+- **Dudas técnicas de A:**
+  - **Cuánto cuesta acampar:** lo pusimos en 2 de fuego por noche (con comida, queda en +1). Es un número de prueba: lo vamos a ajustar con las pruebas con personas, junto con B.
+  - **El cierre de la partida:** hoy se gana al llegar al lugar del motivo con el fuego encendido. Falta que C confirme que alcanza para mostrar el nomadismo en la entrega.
+  - **Las brasas o los tres tramos:** si queda tiempo después del 17/11, ¿cuál suma más para el jurado? Las brasas son más baratas; los tres tramos se parecen más al ciclo del concepto, pero tocan el mapa, el núcleo y la interfaz.
+  - **La versión de mesa:** con el gasto de acampar y el aviso del clima deja de tener las mismas reglas que el juego. La propuesta es presentarla como una versión más simple.
