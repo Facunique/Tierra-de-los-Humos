@@ -1,7 +1,7 @@
 # Storyboard del video (máximo 3:00)
 
 > Persona D. Versión 1 (12/11/2026). Guion completo y consejos de grabación en [`../comunicacion.md`](../comunicacion.md).
-> Los cuadros salen de la **maqueta de pantallas** (`arte/pantallas/`), de la vitrina del estilo y de la presentación. El 16/11 se reemplazan por tomas del juego real, con la misma composición.
+> Los cuadros salen de la **maqueta de pantallas** (`arte/pantallas/`), de la vitrina del estilo y de la presentación. El 17/11 se reemplazan por tomas del juego real, con la misma composición.
 > 🔍 La Persona C revisa cada frase de la voz antes de grabar.
 
 **Formato:** 1920 × 1080, 30 cuadros por segundo, subtítulos dentro de la imagen. **Sonido:** la voz del equipo y el sonido del propio juego (`sonido/`), sin música de terceros.

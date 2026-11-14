@@ -1,6 +1,6 @@
-# Primer avance documentado · 14/11/2026
+# Primer avance documentado · entrega 16/11/2026, hasta las 23:00
 
-> **Borrador** preparado por la Persona D el 12/11 y puesto al día el 13/11 con lo que hay en el repositorio. Cada persona revisa su parte y completa lo marcado con ✏️ el 14/11 antes de entregar. Lo que no esté hecho se dice tal cual: mostrar el estado real suma más que inflarlo.
+> **Borrador** preparado por la Persona D el 12/11 y puesto al día el 13/11 con lo que hay en el repositorio. Cada persona revisa su parte y completa lo marcado con ✏️ antes de entregar (16/11, 23:00; antes era el 14/11). El archivo conserva su nombre para no romper enlaces. Lo que no esté hecho se dice tal cual: mostrar el estado real suma más que inflarlo.
 
 **Equipo:** Tierra de los Humos · **Eje:** 04, Memoria, Cultura e Innovación Comunitaria
 **Repositorio:** [github.com/Facunique/Tierra-de-los-Humos](https://github.com/Facunique/Tierra-de-los-Humos) · **En línea:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/)
@@ -8,6 +8,10 @@
 ![Tierra de los Humos](../arte/logo/compartir.png)
 
 ## 1. Qué estamos haciendo
+
+**El problema que elegimos:** los saberes de los pueblos fueguinos sobre la vida en el territorio (navegar los canales, recolectar, cuidar el fuego, adaptarse al clima) son poco conocidos por jóvenes y escuelas, y cuando aparecen suelen contarse en pasado, como si esos pueblos ya no existieran.
+
+**Respecto de la inscripción:** la idea que cargamos nombraba a los Selk'nam, Haush y Yagán. Para hacerlo bien y con consulta, el juego se centra en los **Yagán**; los Kawésqar quedan como extra y los Selk'nam para después de la hackatón.
 
 Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada partida es un viaje en canoa por los canales acompañando a una familia **Yagán**. El fuego es la vida: el clima lo gasta y el territorio lo sostiene. Si se apaga, lo aprendido pasa a la siguiente generación como **cartas de saber con fuente citada**.
 
@@ -19,9 +23,13 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 - ✏️ Alcance del MVP (`docs/02-alcance-mvp.md`): todavía no está escrito.
 
 ### Consulta y contenido cultural (Persona C)
-- **Reunión en persona con un referente de la comunidad yagán, el 14/11 a las 11:00.** Llevamos una hoja con el juego y 13 preguntas: si se puede jugar «como» una familia yagán, nombres, cómo se ve, el destino del viaje y permisos ([`reunion-14-11/hoja-A4.pdf`](reunion-14-11/hoja-A4.pdf)). El registro va en [`comunicaciones.md`](comunicaciones.md). Hasta que lo autorice, figura solo por su rol.
-- ✏️ Qué nos respondió y qué cambiamos por eso (completar el mismo 14/11).
-- **9 cartas de saber en borrador** ([`datos/saberes.js`](../datos/saberes.js)), todas con fuente y página: Cooper (1946), «The Yahgan», *Handbook of South American Indians*. Cada carta separa el dato del recurso de juego y tiene texto alternativo. ✏️ Cuántas revisó la Persona C.
+- **Actualización posterior a la auditoría (14/11):** C aprobó «Lo aprendido se transmite» y pidió actualizar la guía docente. Se revisaron actividades y bibliografía, se completó la diapositiva de consulta y se regeneraron guía, reglas de mesa, cartel y pitch. El PDF de Vargas Filgueira (2019), consultado fuera del repositorio, permitió localizar agradecimientos (p. 4), protagonistas (pp. 8–9) y epílogo (pp. 85–86). Quedan 13 observaciones aplicadas, dos parciales y ocho pendientes. Se mantienen los permisos y preguntas abiertos; las páginas del libro no se presentan como nuevas respuestas de la entrevista.
+- **Auditoría de textos realizada (14/11, paso 5):** revisados cartas, sonido, mesa, las nueve actividades docentes, pitch, stand y README, incluidos sus archivos exportados. La primera pasada registró 23 observaciones y cuatro ajustes menores. Las correcciones posteriores están detalladas en [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md); la regeneración del pitch reemplaza su carta de amarre anterior. No se cambian lógica ni números ni se da por validado el juego.
+- **Fuentes organizadas (14/11):** [`docs/03-contenido-cultural.md`](../docs/03-contenido-cultural.md) y la sección Fuentes del README reúnen publicaciones y referencias con páginas, separadas de la consulta. Las fichas incompletas y las obras todavía no consultadas conservan su 🔍. El registro de lugares está en [`docs/06-toponimia.md`](../docs/06-toponimia.md), con el criterio **Onashaga — Canal Beagle**.
+- **Entrevista realizada el 13/11/2026 a las 11:00**, en el Museo del Fin del Mundo, Ushuaia, con **Víctor Vargas Filgueira, referente de la comunidad yagán**. Dani confirmó la fecha, el lugar y el permiso libre para nombrarlo y atribuirle su testimonio como fuente, conforme a sus palabras. Las citas textuales siguen pendientes de permiso específico. Registro: [`comunicaciones.md`](comunicaciones.md#historial).
+- **Síntesis de la entrevista registrada:** navegación, fuego, indumentaria, herramientas y organización. 🔍 Las cifras, medidas, detalles técnicos y grafías siguen pendientes de cotejo con la grabación. Se registraron diferencias de vocabulario y de descripción de ceremonias, sin incorporarlas al juego. La consulta no se presenta como validación comunitaria ni como permiso para representar una familia.
+- **Revisión documental aportada por Dani:** Vargas Filgueira, Víctor (2019), *Mi sangre yagán (ahua saapa yagan)*, primera edición digital, Editora Cultural Tierra del Fuego. Las páginas del visor del PDF de 90 páginas aportan distintos motivos de desplazamiento: ballena varada (pp. 16–17), corteza conservada para reparar una canoa (pp. 31–32; estacionalidad, p. 23) y reservas de grasa para el invierno (pp. 53–54). **Dani decidió el nomadismo como enfoque del viaje**, con motivos que combinan clima, comida y ambiente. Los objetivos y el cierre de partida quedan pendientes con A y B. 🔍 Faltan las páginas de los agradecimientos y el epílogo sobre el vínculo del autor con Paiakoala.
+- **9 cartas cotejadas documentalmente y todavía en borrador** ([`datos/saberes.js`](../datos/saberes.js)), con las referencias de Cooper (1946) registradas por el equipo y las notas de Vargas Filgueira (2019) aportadas por Dani. Se corrigió la promesa de reparar la canoa y se revisaron dato, texto de juego, fuente y alt. **Ninguna pasó a «revisado»: falta la aprobación de Dani.** El cotejo de cada carta y una propuesta nueva sobre reservas están en [`revision-cultural-paso-3.md`](revision-cultural-paso-3.md). Se trasladaron las citas de Bird para conchales y leña, aclarando que esta última trata al pueblo Kawésqar. Especies y fuentes incompletas siguen marcadas 🔍. No se modificaron código ni números del juego.
 
 ### Programación (Personas A y B)
 - **Stack decidido:** HTML, CSS y JavaScript sin build, con Canvas 2D y sin librerías externas. Abre con doble clic y sin internet, pesa poco para el celular y reusa el motor de dibujo y el sonido que ya estaban ([`memory.md`](memory.md#decisiones)).
@@ -67,23 +75,23 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 | Sin música inventada: el sonido es el territorio y el fuego. | Los cantos son patrimonio de la comunidad. |
 | Stack: JavaScript sin build, en GitHub Pages. | Anda con doble clic y sin internet, sin configurar nada, y reusa lo que ya existía. |
 | Los datos del territorio y de las cartas van aparte del código. | Así la investigación corrige contenido sin programar. |
-| El referente de la comunidad figura solo por su rol hasta que autorice su nombre. | El repositorio es público. |
+| Víctor Vargas Filgueira autorizó que se lo nombre y se lo cite como fuente conforme a sus palabras. | Permiso libre confirmado por Dani; citas textuales y validación comunitaria siguen pendientes. |
 | Estilo visual: Corteza (papel recortado y pegatinas pixel). | Más sereno, cuenta mejor el territorio, y se lee bien en el celular. |
 | Todo lo dibujado tiene que coincidir con las fuentes etnográficas. | Rigor (20 puntos) y respeto: auditoría en `docs/05`. |
 
 ## 4. Uso de inteligencia artificial
 
-Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la IA, a pedido de quién y quién decidió. ✏️ Revisar que esté al día el 14/11.
+Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la IA, a pedido de quién y quién decidió. ✏️ Revisar que esté al día antes de entregar.
 
-## 5. Próximos pasos (15 al 17/11)
+## 5. Próximos pasos (hasta la entrega del 18/11)
 
 - **Programación:** conectar el núcleo con la interfaz; herencia guardada en el navegador; códice; pulido y balance jugando con personas; versión sin internet para la demo. ✏️ A y B confirman.
-- **Contenido:** aplicar lo que diga la comunidad, elegir el destino del viaje, revisar las cartas y escribir las que falten, y la revisión cultural final. ✏️ C confirma.
+- **Contenido (C):** aportar las fuentes de cada motivo de desplazamiento para acordar con A y B cómo se juega el nomadismo; revisar la grabación y resolver las consultas pendientes; completar las referencias y aprobaciones de cartas y territorio; resolver con B y D las observaciones de la auditoría de textos y actividades; proponer el cierre del códice. Las fuentes escritas y la consulta ya están documentadas por separado; las aprobaciones de las cartas siguen pendientes.
 - **Arte y sonido:** ajustar el arte con lo que diga la comunidad; integrar el sonido según el lugar en el juego; resolver las tres fuentes pendientes del territorio (leña, conchales y tonina); cotejo con el libro de Goodall.
-- **Comunicación:** README completo con capturas del juego real, video de 3 minutos (16/11) y pitch de 5 minutos con ensayo.
+- **Comunicación:** README completo con capturas del juego real, video de 3 minutos (17/11) y pitch de 5 minutos con ensayo.
 
 ## 6. Dificultades y pedidos a la mentoría
 
-- ✏️ Según cómo salga la reunión: si hace falta, pedir ayuda para seguir la consulta (por ejemplo, con el Museo Marítimo o el CADIC).
-- **El destino del viaje:** hay tres opciones documentadas (Cooper, 1946, p. 94-99). Preguntar a la mentoría si conviene una sola bien hecha o dejar las tres.
+- **Consulta abierta:** faltan respuestas sobre representación de la familia, nombres, exclusiones y revisión del juego; también el permiso específico para citas textuales y el alcance de la participación comunitaria. 🔍 Todavía no se registró un pedido concreto de ayuda a la mentoría por parte de C.
+- **Cómo se juega el nomadismo:** el enfoque decidido por Dani combina clima, comida y ambiente. Falta acordar con A y B los objetivos concretos y el cierre de la partida; la ballena varada permanece como un motivo posible. El prototipo todavía termina al llegar a un destino fijo.
 - ✏️ Dudas técnicas de A y B.

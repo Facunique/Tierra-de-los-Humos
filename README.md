@@ -1,10 +1,10 @@
 # Tierra de los Humos — roguelike fueguino
 
-![Tierra de los Humos: costa fueguina en otoño recortada en papel, con una choza y un conchal, y en primer plano una canoa de corteza con el fuego encendido, el hombre adelante con el arpón y la mujer atrás remando](arte/logo/compartir.png)
+![Tierra de los Humos: costa fueguina recortada en papel, con bosque, una choza y un anillo de conchas. En primer plano, una canoa de corteza con fuego y dos figuras sin rasgos: una lleva un remo y la otra, un arpón en reposo](arte/logo/compartir.png)
 
 Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de Tierra del Fuego. Lo desarrolla el equipo **Tierra de los Humos** para la hackatón [SoberaníaTech 2026](https://soberaniatech.com.ar/), organizada por la Agencia de Innovación de Tierra del Fuego.
 
-> 🚧 **En desarrollo** (9 al 17 de noviembre de 2026). Ya están el estilo visual, el motor de dibujo, el sonido y una maqueta navegable de todas las pantallas; el código del juego se suma durante la hackatón.
+> 🚧 **En desarrollo** (9 al 18 de noviembre de 2026). Ya están el estilo visual, el motor de dibujo, el sonido y una maqueta navegable de todas las pantallas; el código del juego se suma durante la hackatón.
 
 **Jugalo:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/) (el viaje completo, en el celular o en la compu; también abre con doble clic en `index.html`, sin internet) · **Video:** ✏️ *[enlace]* · **Presentación:** [`presentacion/`](presentacion/index.html) ([PDF](presentacion/pitch.pdf))
 
@@ -14,17 +14,19 @@ Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de
 
 ## Problema
 
-Los saberes de los pueblos Selk'nam, Haush y Yagán sobre la vida en el territorio fueguino (navegar los canales, recolectar, cuidar el fuego, adaptarse al clima) son poco conocidos por jóvenes y escuelas. Cuando aparecen, suelen contarse en pasado, como si esos pueblos ya no existieran.
+El desafío del proyecto es acercar a jóvenes y escuelas fuentes sobre los saberes y la vida en el territorio fueguino, reconociendo la continuidad de sus pueblos en el presente. El juego se centra en el pueblo Yagán y distingue las descripciones históricas de las prácticas actuales.
 
 ## Solución propuesta
 
-Un juego web que se juega desde el navegador, también en el celular. Cada partida es un viaje en el que el fuego es tu vida: se gasta con el frío y el viento, y se mantiene con lo que el territorio ofrece. Lo que se aprende en un viaje pasa a la siguiente generación como **cartas de saber**, cada una con su fuente citada. La mecánica del roguelike (morir, volver a empezar, avanzar) representa así la **transmisión de la memoria**.
+Un juego web que se juega desde el navegador, también en el celular. Cada partida es un viaje en el que el fuego es tu vida: se gasta con el frío y el viento, y se mantiene con lo que el territorio ofrece. Lo que se aprende en un viaje pasa a la siguiente generación como **cartas de saber**, cada una con su fuente citada. Terminar un viaje, volver a empezar y conservar lo aprendido representa la **transmisión de la memoria**.
+
+La familia, el mapa, los eventos y la herencia entre partidas son ficción. Los datos culturales conservan su fuente y los puntos pendientes se señalan con 🔍.
 
 Tres ideas lo sostienen:
 
 1. **El fuego es la vida.** Las familias yaganes llevaban el fuego encendido en el medio de la canoa (Cooper, 1946, p. 88 y 91). En el juego, ese fuego es la barra de vida.
-2. **Morir es transmitir.** Cuando el fuego se apaga, los saberes encontrados pasan a la siguiente generación del mismo pueblo.
-3. **Cada saber tiene fuente, y los pueblos están vivos.** Nada inventado presentado como real: cada carta separa el *dato* del *recurso de juego* y cita su fuente con página. Todo se cuenta en presente, con consulta a la comunidad.
+2. **Lo aprendido se transmite.** Cuando el fuego se apaga, termina el viaje y los saberes encontrados pasan a la siguiente generación del mismo pueblo.
+3. **Cada saber tiene fuente, y los pueblos están vivos.** Cada carta separa el *dato* del *recurso de juego* y cita su fuente con página. La consulta está registrada y sigue abierta; su alcance y los permisos pendientes están en [el documento de fuentes](docs/03-contenido-cultural.md#consulta-a-la-comunidad).
 
 El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 
@@ -39,7 +41,7 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 |---|---|---|
 | ![El viaje: la canoa con su fuego rema por el canal; en la playa hay una choza, leña y un saber como pegatinas; a la derecha, humo](equipo/video/04-viaje.jpg) | ![Carta «Piedras de fuego» con su dato, su recurso de juego y la fuente con página](equipo/video/05-carta.jpg) | ![Pantalla «El viaje termina acá»: lo aprendido pasa a la siguiente generación](equipo/video/06-fin.jpg) |
 
-*Capturas de la maqueta de pantallas. Se reemplazan por capturas del juego el 16/11.*
+*Capturas de la maqueta de pantallas. Se reemplazan por capturas del juego antes del avance del 16/11.*
 
 ## Documentación
 
@@ -47,8 +49,10 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 |---|---|
 | [00 · Guía de la hackatón](docs/00-guia-hackathon.md) | Bases, fechas, criterios de evaluación, cuidados culturales y plan por fases |
 | [01 · Concepto](docs/01-concepto.md) | Premisa, pueblos (Yagán primero), bucle central, transmisión entre partidas, tono y aporte al eje |
+| [03 · Contenido cultural y fuentes](docs/03-contenido-cultural.md) | Publicaciones y páginas, consulta a la comunidad y referencias pendientes |
 | [04 · Dirección de arte y sonido](docs/04-direccion-de-arte.md) | El estilo Corteza: principios, motor de dibujo, cartas, paleta, sonido y accesibilidad |
 | [05 · Rigor histórico del arte](docs/05-rigor-historico.md) | Cada elemento dibujado contrastado con las fuentes etnográficas, con página |
+| [06 · Nombres de lugares](docs/06-toponimia.md) | Correspondencias del libro, notas y criterio Onashaga — Canal Beagle |
 
 Arte y sonido:
 
@@ -72,7 +76,7 @@ Trabajo interno del equipo:
 |---|---|
 | [Memoria del proyecto](equipo/memory.md) | Decisiones tomadas, estado actual, pendientes y glosario |
 | [Comunicaciones con comunidades](equipo/comunicaciones.md) | Registro de la consulta a comunidades y personas, con permisos y correcciones |
-| [Comunicación](equipo/comunicacion.md) | Plan del video, el pitch, el avance del 14/11 y la demo del 19/11 |
+| [Comunicación](equipo/comunicacion.md) | Plan del video, el pitch, el avance del 16/11 y la demo del 20/11 |
 | [Storyboard del video](equipo/video/README.md) | Un cuadro por tramo, con la voz y el sonido |
 | [AGENTS.md](AGENTS.md) | Reglas de trabajo para asistentes de IA (y para el equipo) |
 
@@ -114,13 +118,23 @@ Trabajo interno del equipo:
 
 ## Fuentes
 
-✏️ *La lista completa la arma la Persona C en `docs/03-contenido-cultural.md`.* Fuentes ya usadas en el arte y en los borradores de cartas (el detalle, con página, está en [`docs/05-rigor-historico.md`](docs/05-rigor-historico.md)):
+Las referencias completas, sus páginas y los límites de cada uso están en [`docs/03-contenido-cultural.md`](docs/03-contenido-cultural.md). Los nombres de lugares se registran en [`docs/06-toponimia.md`](docs/06-toponimia.md), con el criterio **Onashaga — Canal Beagle**.
 
-- Cooper, J. M. (1946). «The Yahgan». En J. H. Steward (ed.), *Handbook of South American Indians*, vol. 1, pp. 81-106. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143.
-- Spears, J. R. (1895). *The Gold Diggings of Cape Horn*. Nueva York: Putnam.
-- Museo Marítimo de Ushuaia. *La canoa yagán* (reconstrucción de una canoa de corteza).
-- Multequina n.º 10 (IADIZA-CONICET), sobre los bosques de *Nothofagus* de Tierra del Fuego.
-- Goodall, R. N. P. (1978 o 1979, 3.ª ed.). *Tierra del Fuego*. Buenos Aires: Ediciones Shanamaiim. *(En proceso de cotejo; el año y la edición se confirman con la tapa del ejemplar.)*
+### Fuentes escritas
+
+- **Vargas Filgueira, Víctor (2019). *Mi sangre yagán (ahua saapa yagan)*.** Primera edición digital. Editora Cultural Tierra del Fuego. ISBN 978-987-3642-28-9. Pasajes revisados en el PDF aportado por la Persona C: ballena varada (pp. 16–17), corteza (pp. 23 y 31–32), mujeres remando (p. 33), enseñanza y decisiones compartidas (pp. 39 y 46), reservas de invierno (pp. 53–54), encendido (p. 66) y topónimos (notas de pp. 86–88). Agradecimientos (p. 4) y epílogo (pp. 85–86) documentan la referencia del autor a Paiakoala y la continuidad del pueblo yagán. Páginas del visor de 90 páginas; año confirmado por C. El ejemplar se consulta fuera del repositorio y no se redistribuye.
+- **Cooper, J. M. (1946). «The Yahgan».** En J. H. Steward (ed.), *Handbook of South American Indians*, vol. 1: *The Marginal Tribes*, pp. 81–106. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143. Referencias registradas por el equipo: territorio y clima (pp. 81–82), alimentos (p. 84), viviendas (pp. 85–86), canoa y corteza (pp. 88–89), fuego (p. 91), desplazamientos (pp. 94–95), tareas (p. 96) y encuentros por varamientos (p. 99). Para el mapa también se utilizan pp. 107–108 de «The Ona», en el mismo volumen. La mención de Lothrop (1928), p. 32, es una cita indirecta mediante Cooper, p. 84.
+- **Bird, J. (1946). «The Archeology of Patagonia».** En el mismo *Handbook*, vol. 1, pp. 17–24. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143. Conchales del canal Beagle: pp. 20–21.
+- **Bird, J. (1946). «The Alacaluf».** En el mismo *Handbook*, vol. 1, pp. 55–79. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143. Territorio Kawésqar: p. 55; recolección de leña entre los Kawésqar: p. 70. Esta última referencia no se atribuye como práctica yagán.
+- **Spears, J. R. (1895). *The Gold Diggings of Cape Horn*.** Nueva York: Putnam. Testimonio de época registrado por el equipo como referencia del arte: canoa y fogón (pp. 56–57 y 64), pesca (pp. 60–61) y turbales de la Isla de los Estados (p. 149).
+
+### Consulta a la comunidad
+
+**Víctor Vargas Filgueira, referente de la comunidad yagán:** entrevista presencial del **13/11/2026, a las 11:00**, en el Museo del Fin del Mundo, Ushuaia. Nombre y atribución fiel de su testimonio autorizados verbalmente, sin restricción de medios. El permiso para citas textuales y las preguntas sobre representación, nombres y alcance de la participación comunitaria siguen abiertos en [`equipo/comunicaciones.md`](equipo/comunicaciones.md). La entrevista se registra por separado del libro y no se presenta como validación comunitaria de todo el juego.
+
+### Referencias pendientes
+
+🔍 Goodall, los pasajes de museos y la referencia botánica de Multequina requieren completar o verificar edición, año y localización. Gusinde, Chapman, Calderón y Zárraga, Lothrop, Orquera y Piana, y Bridges conservan sus pendientes de consulta o ficha bibliográfica en [`docs/03-contenido-cultural.md`](docs/03-contenido-cultural.md#referencias-pendientes-de-completar-o-consultar). También faltan fuentes de especies y cartografía. Estas referencias no se dan por verificadas al incluirlas en la lista.
 
 ## Recursos de terceros
 
@@ -133,8 +147,19 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 ## Uso de inteligencia artificial
 
+- **Correcciones de la auditoría (14/11):** con aprobación de la Persona C, Codex (OpenAI) aplicó «Lo aprendido se transmite», actualizó los textos de la guía docente y sus actividades y completó las fuentes y la consulta del pitch. Revisó pasajes del PDF de Vargas Filgueira (2019) aportado fuera del repositorio y localizó agradecimientos, protagonistas y epílogo. Actualizó referencias y seguimiento de tareas y regeneró las piezas afectadas. No publicó el libro ni escaneos, no agregó permisos y no cambió la lógica ni los números del juego.
+
+- **Auditoría cultural (14/11, paso 5):** a pedido de la Persona C, Codex (OpenAI) revisó los textos de cartas, sonido, mesa, actividades docentes, pitch, stand y README, junto con sus dependencias y archivos exportados. Registró 23 observaciones con archivo, línea y propuesta en `equipo/auditoria-cultural-paso-5.md`, corrigió cuatro puntos editoriales menores del README y actualizó tareas, memoria y avance. Las propuestas importantes y los cambios en piezas del equipo siguen pendientes. No incorporó datos culturales nuevos ni modificó código, números o reglas.
+
 Las bases piden declararlo (cláusula 7.4).
 
+- **Fuentes culturales (14/11, paso 4):** a pedido de la Persona C, Codex (OpenAI) escribió `docs/03-contenido-cultural.md` y la sección Fuentes de este README con las referencias del repositorio y las notas de lectura compartidas. Separó publicaciones y entrevista, indicó las páginas disponibles y mantuvo con 🔍 las referencias incompletas. Actualizó tareas, memoria y avance. No agregó datos culturales de memoria ni modificó código o números del juego.
+- **Orden de los nombres de lugares (14/11):** la Persona C eligió **Onashaga — Canal Beagle**, con el nombre utilizado por Víctor primero. Codex (OpenAI) registró la decisión en memoria, concepto, revisión y tareas, y dejó los rótulos propuestos para D en `docs/06-toponimia.md`. La implementación del mapa y las verificaciones pendientes conservan su estado; no se modificaron código ni reglas.
+- **Nombres de lugares (14/11):** a pedido de la Persona C, Codex (OpenAI) organizó las referencias compartidas de Vargas Filgueira (2019) en `docs/06-toponimia.md`, conservando grafías, notas, páginas y dudas. Actualizó la revisión y los pendientes. La presentación de los nombres, la verificación cartográfica y su incorporación al juego siguen pendientes; no cambió código, coordenadas ni reglas.
+- **Cambio de fechas (14/11):** a pedido de Facu (Persona B), Claude Code leyó los mails de la organización del 9/11 con el cronograma definitivo y actualizó las fechas en todo el repositorio (avance el 16/11, entrega el 18/11, jurado el 19/11 y cierre presencial el 20/11). Corrió el cronograma de `equipo/tareas.md` para que cada persona revise su fila y volvió a exportar el PDF de la guía para docentes. Con lo que Facu copió de la plataforma de la hackatón, anotó cómo se cargan las entregas y quién es la persona referente.
+- **Cotejo cultural (13/11, paso 3 en curso):** a pedido de Dani (Persona C), Codex (OpenAI) contrastó las nueve cartas y los datos del territorio con las referencias ya registradas en `docs/05` y las notas de *Mi sangre yagán* (2019) aportadas por Dani. Corrigió borradores, fuentes y alt, preparó una propuesta de carta de reservas y registró dudas y avisos para A, B y D. Regeneró los PDF de cartas y guía docente desde los datos. No cotejó los libros completos ni la grabación. La aprobación de Dani sigue pendiente y ninguna carta pasó a `revisado`; no se modificaron código ni números del juego.
+- **Enfoque del viaje (13/11, paso 2 en curso):** a pedido de Dani (Persona C), Codex (OpenAI) documentó su decisión de usar el nomadismo como enfoque del viaje, con motivos que combinan clima, comida y ambiente, y dejó una propuesta de coordinación para A y B en la memoria. Las referencias se toman de las notas aportadas por Dani. No se modificaron código ni números del juego; los objetivos, el cierre de partida y las restantes consultas siguen pendientes.
+- **Registro de la consulta cultural (13/11, paso 1):** a pedido de Dani (Persona C), Codex (OpenAI) organizó sus notas de la entrevista a Víctor Vargas Filgueira y su cotejo de *Mi sangre yagán* (2019), completó el registro y la parte de consulta del avance del 14/11, y actualizó tareas y memoria. Dani confirmó fecha, lugar, edición y permiso de atribución. El asistente no cotejó el libro completo ni la grabación; las dudas quedan marcadas con 🔍. Las decisiones culturales y la aprobación de las cartas siguen a cargo de Dani.
 - **Claude (Anthropic), a través de Claude Code:** se usó para resumir las bases de la hackatón, proponer un plan de trabajo y armar la estructura inicial de este repositorio y de su documentación. El equipo revisa y decide todo el contenido.
 - **Arte y sonido (12/11):** a pedido de la persona a cargo del arte, Claude Code buscó fuentes sobre el paisaje fueguino y la cultura material yagán, y propuso la dirección de arte (`docs/04-direccion-de-arte.md`). También escribió el código que define y genera la paleta, los sprites en pixel art, el logo y la página de propuestas (`arte/`), y el código que sintetiza el sonido (`sonido/`), junto con el plan de video y pitch (`equipo/comunicacion.md`). El equipo revisa los dibujos y elige el estilo. Los datos culturales marcados con 🔍 los verifica la persona de investigación con las fuentes y la comunidad.
 - **Estilo Corteza y rigor histórico (12/11):** el equipo eligió el estilo. Claude Code escribió el motor de dibujo (`arte/corteza/`), las cartas, el HUD y el logo. También leyó el capítulo «The Yahgan» del *Handbook of South American Indians* (Cooper, 1946) y *The Gold Diggings of Cape Horn* (Spears, 1895), auditó cada elemento del arte contra esas fuentes, con página (`docs/05-rigor-historico.md`), y corrigió lo que no coincidía. La validación final es del equipo y de la comunidad.

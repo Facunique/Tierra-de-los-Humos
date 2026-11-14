@@ -23,7 +23,7 @@
 | Cuando se una el núcleo (PR 10) o se conecte a `index.html` | 4, 5, 6, 7, 8, 9 |
 | Si el equipo aprueba una propuesta de Mati (`juego/nucleo/README.md`) | 10, 11, 12, 13, 14 |
 | Cuando lleguen las fotos del libro de Goodall o avance la Persona C | 15, 16, 17 |
-| Cierre: 16 y 17/11 | 18, 19, 20, 21 |
+| Cierre: 17 y 18/11 | 18, 19, 20, 21 |
 | Si el proyecto sigue después de la hackatón | 22 a 27 |
 
 ---
@@ -76,7 +76,7 @@
 
 **8. «Tocá para jugar» en la vidriera del stand.**
 - **Qué:** si alguien toca la pantalla del stand mientras la partida se juega sola, toma el control.
-- **Suma a:** la demo del 19/11.
+- **Suma a:** la demo del 20/11.
 - **Señal:** juego conectado y una pantalla táctil en el stand.
 - **Esfuerzo:** 1 hora.
 
@@ -142,7 +142,7 @@
 - **Señal:** se suma arte nuevo, o alguien más empieza a dibujar.
 - **Esfuerzo:** 1 hora.
 
-## Para el cierre (16 y 17/11)
+## Para el cierre (17 y 18/11)
 
 **18. README final con el juego real.**
 - **Qué:** cambiar las capturas de la maqueta por capturas y el GIF del juego (`node equipo/video/grabar.cjs`), y completar los ✏️.
@@ -153,7 +153,7 @@
 **19. Video con clips del juego real.**
 - **Qué:** volver a correr el grabador sobre `index.html`, grabar las voces y montar.
 - **Suma a:** comunicación (10).
-- **Señal:** 16/11. Ya está en `tareas.md`.
+- **Señal:** 17/11. Ya está en `tareas.md`.
 - **Esfuerzo:** 2 a 3 horas.
 
 **20. Pitch al día.**

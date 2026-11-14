@@ -1,4 +1,4 @@
-# Stand de la demo (19/11, Fábrica de Talento)
+# Stand de la demo (viernes 20/11, de 15:00 a 19:00, Fábrica de Talento)
 
 Todo funciona **sin internet**: se abre con doble clic desde la carpeta del repositorio.
 

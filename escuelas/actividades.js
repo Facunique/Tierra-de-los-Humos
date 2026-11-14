@@ -1,16 +1,17 @@
 /*
  * Tierra de los Humos · Actividades para el aula (una por carta de saber)
  * ----------------------------------------------------------------------
- * Cada actividad parte SOLO del dato de su carta (datos/saberes.js),
- * que cita a Cooper (1946) con página. Lo que no está en la fuente va como
- * pregunta abierta o como "para pensar", nunca como dato.
+ * Cada actividad parte del dato de su carta (datos/saberes.js),
+ * con autor, obra, año y página. Las referencias complementarias se indican
+ * en cada actividad y en la guía. Lo que no está en la fuente va como pregunta
+ * abierta o como "para pensar", nunca como dato.
  *
  * Campos: pregunta · actividad (pasos) · minutos · areas · cuidado (o para pensar).
  * La clave es la misma que la de la carta. Si una carta no tiene actividad,
  * la guía lo muestra como pendiente.
  *
- * Borrador de la Persona D para revisar con la Persona C y, si es posible,
- * con docentes y con la comunidad. Licencia: CC BY-SA 4.0.
+ * Borrador de la Persona D, revisado documentalmente por la Persona C (14/11).
+ * Pendiente de revisión docente y consulta comunitaria. Licencia: CC BY-SA 4.0.
  */
 (function (raiz) {
   'use strict';
@@ -20,44 +21,44 @@
       actividad: [
         'En grupos, dibujen la canoa vista desde arriba y marquen dónde iría el fuego.',
         'Lean el dato. ¿Para qué sirve el lecho de tierra, conchas o piedras debajo del fuego?',
-        'Repasen qué necesita un fuego para seguir encendido: algo que se queme, aire y calor. ¿Qué pasa en la canoa si falta cada uno?',
+        'Comparen los materiales con Vargas Filgueira (2019), Mi sangre yagán, p. 66 del visor: pedernal y plumas conservadas secas. ¿Qué dice cada fuente y qué no explica?',
       ],
       minutos: 20,
       areas: ['Ciencias Naturales', 'Ciencias Sociales'],
-      cuidado: { tipo: 'Para pensar', texto: 'La carta no dice por qué convenía no dejarlo apagar. Una pista está en la carta «Piedras de fuego»: hacer fuego de nuevo no era fácil.' },
+      cuidado: { tipo: 'Para pensar', texto: 'Las fuentes describen materiales para mantener y encender fuego. No deduzcan su dificultad ni su duración a partir del gasto de fuego del juego: ese número es ficción.' },
     },
     amarre: {
-      pregunta: '¿Quién manejaba la canoa?',
+      pregunta: '¿Qué cuenta cada fuente sobre quienes reman?',
       actividad: [
         'Antes de leer la carta, pregunten a la clase quién creen que remaba. Anoten las respuestas.',
-        'Lean el dato. Después, con la misma fuente, armen una tabla de tareas: la mujer remaba, amarraba, cuidaba el fuego, juntaba mejillones, pescaba y hacía cestos; el hombre cazaba, hacía sus armas y la canoa (Cooper, 1946, p. 96).',
-        'Comparen la tabla con lo que habían anotado. ¿Qué los sorprendió?',
+        'Lean el dato y su fuente. Comparen la descripción de Cooper (1946), «The Yahgan», pp. 88 y 96, con las mujeres remando del relato de Vargas Filgueira (2019), Mi sangre yagán, p. 33 del visor.',
+        'Armen una tabla: qué describe cada autor, en qué contexto y qué no podemos saber con ese pasaje. ¿Cómo cambiaron sus respuestas iniciales?',
       ],
       minutos: 20,
       areas: ['Ciencias Sociales', 'ESI'],
-      cuidado: { tipo: 'Cuidado', texto: 'Es lo que registraron observadores de afuera en una época. No lo generalicen a cómo viven hoy las familias yaganes.' },
+      cuidado: { tipo: 'Cuidado', texto: 'Cooper y Vargas Filgueira escriben desde lugares distintos. Estos pasajes no fijan tareas de todas las familias actuales. La página 33 respalda el remo; el amarre en cachiyuyo se toma de Cooper.' },
     },
     mejillones: {
       pregunta: '¿Qué nos puede contar una montaña de valvas?',
       actividad: [
-        'Lean el dato: el mejillón era el alimento más importante, y se juntaba a mano.',
-        'Las valvas que se tiraban junto a la casa formaban montículos: los conchales. Si encontraran uno, ¿qué podrían averiguar? (qué se comía, en qué lugares, si se volvía muchas veces).',
-        'Un «conchal» de la clase: durante una semana, guarden en una caja los envoltorios limpios de la merienda. Al final, ¿qué cuenta la caja sobre ustedes?',
+        'Lean cómo presenta Cooper al mejillón, citando a Lothrop. ¿Qué afirma la carta y de dónde sale esa información?',
+        'Bird (1946), «The Archeology of Patagonia», pp. 20–21, registra conchales en las costas del Beagle. ¿Qué preguntas investigarían sobre alimentación y ocupación de esos lugares?',
+        'Simulación de aula: durante una semana, registren en una tabla las meriendas del grupo. ¿Qué permite preguntar ese registro y qué no? No es un conchal ni explica por sí solo cómo se forma uno.',
       ],
       minutos: 25,
       areas: ['Ciencias Sociales', 'Ciencias Naturales'],
-      cuidado: { tipo: 'Cuidado', texto: 'Los conchales son sitios arqueológicos protegidos por ley (en la Argentina, la Ley 25.743). Si ven uno en la costa, no se saca nada: se mira y se avisa.' },
+      cuidado: { tipo: 'Cuidado', texto: 'Trabajen con registros e imágenes y dejen los materiales de los sitios en su lugar. Las preguntas de la actividad no autorizan excavar ni recolectar piezas.' },
     },
     pescado: {
       pregunta: '¿Se puede pescar sin anzuelo?',
       actividad: [
         'Lean el dato y dibujen la pesca: la línea, la carnada en el nudo y la mano.',
-        'Hagan una tabla con todos los materiales que nombran las cartas: cachiyuyo, tendón y barba de ballena, corteza de guindo, canelo, pirita, pedernal, plumón, hongo seco, pasto, helechos, cueros.',
-        'Para cada material, escriban de dónde sale (mar, costa, bosque o animales) y para qué se usa. ¿Hay algo que venga de lejos?',
+        'Hagan una tabla de los materiales que nombran las cartas, con su uso y la fuente y página que lo documentan.',
+        'Indiquen qué permite saber cada pasaje sobre el origen de los materiales. Marquen con 🔍 lo que no diga; no inventen especies, lugares ni recorridos.',
       ],
       minutos: 25,
       areas: ['Educación Tecnológica', 'Ciencias Naturales'],
-      cuidado: { tipo: 'Cuidado', texto: 'No dibujen anzuelos ni redes: la fuente dice justamente que la pesca era sin anzuelo.' },
+      cuidado: { tipo: 'Cuidado', texto: 'Dibujen el método de esta carta: línea, lazo y mano. No agreguen herramientas que ese pasaje no menciona ni lo conviertan en una regla sobre toda la pesca.' },
     },
     hongos: {
       pregunta: '¿Cómo se guarda comida sin heladera?',
@@ -74,8 +75,8 @@
       pregunta: '¿Qué pasaba si el fuego se apagaba?',
       actividad: [
         'Lean el dato: el fuego se hacía golpeando pirita contra pedernal, con plumón de ave u hongo seco como yesca.',
-        'Busquen qué es la pirita (un mineral de hierro y azufre, brillante como el oro). ¿Por qué sale una chispa al golpearla?',
-        'La pirita solo se hallaba en algunos lugares. En el mapa, imaginen una familia que vive lejos de ella. ¿Qué podría hacer? Anoten las ideas como preguntas para investigar, no como respuestas.',
+        'Busquen una fuente de geología sobre la pirita y el encendido por percusión. Anoten autor, obra, año y página. ¿Qué explica y qué falta investigar?',
+        'Cooper (1946), «The Yahgan», p. 95, sitúa la pirita en ciertos lugares. Imaginen un recorrido ficticio para obtenerla: indiquen qué toman de la fuente y qué inventan para el ejercicio.',
       ],
       minutos: 20,
       areas: ['Ciencias Naturales', 'Ciencias Sociales'],
@@ -95,8 +96,8 @@
     corteza: {
       pregunta: '¿Por qué la corteza de la canoa se sacaba en primavera?',
       actividad: [
-        'Lean el dato: tres tiras de corteza de guindo, sacadas en primavera, cuando sube la savia.',
-        'Busquen qué es la savia y qué le pasa al árbol en primavera. ¿Por qué ahí la corteza se despega mejor?',
+        'Lean la descripción de Cooper (1946), «The Yahgan», p. 88. Comparen con la extracción estacional y la corteza conservada de Vargas Filgueira (2019), Mi sangre yagán, pp. 23 y 31–32 del visor.',
+        'Distingan extraer corteza y recuperar material guardado. ¿Por qué el segundo episodio permite pensar un viaje distinto? No lo presenten como una reparación que ya exista en el juego.',
         'Usen la tabla «El año en los canales» de esta guía: ubiquen la primavera y comparen las horas de luz de Ushuaia con las de su ciudad.',
       ],
       minutos: 25,
@@ -106,13 +107,13 @@
     ballena: {
       pregunta: '¿Qué hace falta para compartir algo muy grande que aparece de golpe?',
       actividad: [
-        'Lean el dato: por una ballena varada, una familia podía entrar al territorio de otra, y el varamiento reunía a muchas familias.',
-        'En grupos, piensen qué acuerdos hacen falta para compartir algo así: quién avisa, quién llega, cómo se reparte.',
-        'Busquen un ejemplo de hoy en su barrio o su ciudad: algo que se comparte entre muchas familias. ¿Qué acuerdos tiene?',
+        'Lean cómo describen los encuentros por una ballena varada Cooper (1946), «The Yahgan», p. 99, y Vargas Filgueira (2019), Mi sangre yagán, pp. 16–17 del visor.',
+        'En grupos, propongan acuerdos para una situación ficticia: quién avisa, quién llega, cómo se comparte. Márquenlos como propuestas de la clase, no como reglas del pueblo yagán.',
+        'Comparen este motivo de viaje con buscar reservas de invierno, en Vargas Filgueira (2019), Mi sangre yagán, pp. 53–54 del visor. ¿Qué preguntas surgen sobre comida, clima y regreso?',
       ],
       minutos: 25,
       areas: ['Formación Ética y Ciudadana', 'Ciencias Sociales'],
-      cuidado: { tipo: 'Cuidado', texto: 'No es una escena de caza: la ballena llegaba sola a la costa. El juego no tiene caza ni peleas.' },
+      cuidado: { tipo: 'Cuidado', texto: 'La carta trata de un varamiento y un encuentro. No recreen caza ni peleas. La ballena es uno de los motivos posibles del viaje, no una explicación completa del nomadismo.' },
     },
   };
   const modulo = { ACTIVIDADES };

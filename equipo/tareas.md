@@ -1,6 +1,6 @@
 # Reparto de tareas · Tierra de los Humos
 
-> Equipo de 4 personas. Fechas clave: **14/11, 11:00** reunión con el referente de la comunidad yagán · **14/11** primer avance documentado · **17/11, 20:00** entrega final (meta interna: terminar el 16) · **19/11** demo en Fábrica de Talento (al menos 2 integrantes).
+> Equipo de 4 personas. Fechas clave: **13/11, 11:00** entrevista realizada con el referente de la comunidad yagán (fecha confirmada por Dani; antes estaba prevista para el 14/11) · **16/11, hasta las 23:00** primer avance documentado · **18/11, hasta las 21:00** entrega final y ensayo (meta interna: terminar el 17) · **19/11** evaluación del jurado · **viernes 20/11, 15:00 a 19:00** demo y premiación en Fábrica de Talento (al menos 2 integrantes). Fechas del cronograma definitivo de la organización (mails del 9/11).
 > Los documentos nombran a cada integrante por su letra. Una persona puede cubrir dos roles si hace falta.
 > **Última actualización:** 13/11/2026.
 
@@ -20,7 +20,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - **Hecho por D (PR 2):** estilo Corteza con su motor de dibujo, paleta, sprites, sonido, maqueta navegable de todas las pantallas (`arte/pantallas/`), 9 borradores de cartas, pitch, stand, versión de mesa y guía para docentes.
 - **Todavía no hay código del juego.** A y B arrancan ahora, sobre los módulos que ya dejó D. La tabla de módulos y cómo se usan está en [`memory.md`](memory.md#estado-actual).
 - **Stack decidido (13/11):** JavaScript sin build, con `<script>` clásicos, en GitHub Pages (ver [`memory.md`](memory.md#decisiones)).
-- **Sin decidir:** el destino del viaje y el alcance del MVP (`docs/02-alcance-mvp.md`).
+- **Enfoque del viaje decidido por C:** nomadismo, con motivos que combinan clima, comida y ambiente. Falta acordar con A y B los objetivos, el cierre y el alcance del MVP (`docs/02-alcance-mvp.md`).
 
 ---
 
@@ -40,7 +40,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 
 ## Persona B: Programación de interfaz, contenido y deploy (Facu)
 
-- [ ] **14/11, 11:00:** reunión con el referente de la comunidad yagán. Registrarla el mismo día en `equipo/comunicaciones.md` (la entrada ya está armada, con huecos ✏️).
+- [x] **13/11, 11:00:** entrevista con el referente de la comunidad yagán (Facu fue con Dani). Dani la registró en `equipo/comunicaciones.md`.
 - [x] Decidir el stack: JavaScript sin build (13/11).
 - [x] Acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (13/11, al mergear el PR 10: ver `memory.md`, *Decisiones*).
 - [x] Definir la estructura de datos de cartas de saber y especies, para que la Persona C solo cargue contenido. **Cartas:** en `datos/saberes.js` (suma `id`, `pueblo`, `alt` y `estado`, con plantilla para cargar sin programar). **Especies:** las armó A en `juego/nucleo/territorio/elementos.js`, también con plantilla (13/11).
@@ -51,25 +51,37 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Controles táctiles y de teclado (13/11): tocar el agua rema hasta ahí (y se frena si el fuego queda en 1 o cae la noche), tocar una pegatina va y la junta, flechas en pantalla, teclas del README.
 - [x] Accesibilidad (13/11): alto contraste, texto alternativo en cartas, códice y postal, el mapa contado en palabras para lector de pantalla, voz para las cartas, narrador, subtítulos del sonido y botones de 44 px. Probado a 375 px, en celular acostado y en la compu. Pesa unos 420 KB sin comprimir.
 - [x] Deploy en GitHub Pages: publicado desde `main`, carpeta raíz.
-- [ ] Versión que funcione sin internet para la demo del 19/11. Ya abre con doble clic; falta el service worker para Pages (decidido para el 16/11).
+- [ ] Versión que funcione sin internet para la demo del 20/11. Ya abre con doble clic; falta el service worker para Pages (decidido para el 16/11).
 - [x] Sección **Tecnologías** del README (13/11).
 - [ ] Correr `node pruebas/de-punta-a-punta.cjs` con el juego (necesita `npm i -D playwright`; se probó a mano en el navegador).
-- [ ] Completar la parte de programación del avance del 14/11 (`equipo/avance-14-11.md`), con A.
+- [ ] Completar la parte de programación del avance (`equipo/avance-14-11.md`), con A, antes del 16/11 a las 23:00.
 
 ## Persona C: Investigación cultural y consulta (Dani)
 
-- [x] Encontrar a quién consultar: hay reunión acordada con el referente de la comunidad yagán (14/11, 11:00).
-- [ ] Ir a la reunión del 14/11 (conviene que esté C) y llevar las 7 preguntas de `equipo/comunicaciones.md`.
+- [x] Encontrar a quién consultar: Víctor Vargas Filgueira, referente de la comunidad yagán.
+- [x] Realizar la entrevista: 13/11/2026, 11:00, Museo del Fin del Mundo, Ushuaia. 🔍 Quedan pendientes el cotejo con la grabación y las respuestas a las preguntas abiertas de `equipo/comunicaciones.md`.
 - [ ] Escribirle a Mónica Alvarado, si se la puede contactar.
-- [ ] Registrar cada contacto el mismo día en `equipo/comunicaciones.md` (sin teléfonos, mails ni datos personales; es un repo público).
-- [ ] Escribir `docs/03-contenido-cultural.md` con las fuentes verificadas (Gusinde, Chapman, Calderón y Zárraga, Cooper, museos, CADIC).
-- [ ] Resolver los puntos marcados con 🔍, en especial el **destino del viaje**. Ya hay base documental: la ballena varada, la pirita o la corteza para canoas (Cooper 1946, p. 94-99; ver `memory.md`).
-- [ ] Revisar los 9 borradores de cartas que dejó D (ahora en `datos/saberes.js`, con plantilla arriba para cargar cartas nuevas; `node --test` revisa que no falte nada) y sumar las que falten: texto breve, qué es dato y qué es recurso de juego, y fuente citada.
-- [ ] Revisar las actividades de la guía para docentes (`escuelas/actividades.js`).
+- [x] Registrar la primera entrevista en `equipo/comunicaciones.md`, con fecha, síntesis, permisos y pendientes (13/11). Registrar los contactos siguientes sigue siendo una tarea continua.
+- [x] Escribir `docs/03-contenido-cultural.md` con las referencias disponibles y sus páginas, separando fuentes escritas y consulta (14/11). Las obras y referencias todavía no verificadas conservan su 🔍.
+- [x] Definir el enfoque del viaje (13/11): **nomadismo**, con motivos combinados según clima, comida y ambiente; la ballena varada es uno de ellos. Decisión de Dani registrada en `memory.md` y `docs/01-concepto.md`.
+- [ ] Resolver los puntos marcados con 🔍 y revisar con A y B la traducción del nomadismo a objetivos y cierre de partida. Verificar por separado la fuente de cada motivo; las notas de Vargas Filgueira (2019) y las referencias de Cooper (1946) están registradas en `comunicaciones.md` y `docs/05-rigor-historico.md`.
+- [x] Cotejar documentalmente las 9 cartas de `datos/saberes.js`, su texto de juego, fuente y alt (13/11). Borradores corregidos y propuesta de carta de reservas en `equipo/revision-cultural-paso-3.md`.
+- [ ] Aprobar con Dani cada carta antes de pasarla a `revisado` y decidir la incorporación de cartas nuevas. Las nueve siguen en `borrador`.
+- [x] Trasladar las referencias de Bird (1946) a los datos del territorio: conchales (pp. 20–21) y leña Kawésqar (p. 70), sin atribuir esta última como práctica yagán.
+- [ ] Completar las fuentes pendientes de leña yagán, especies, botánica y topónimos; la tonina sigue sin identificación documentada.
+- [x] Registrar los nombres de lugares aportados de Vargas Filgueira (2019), con notas y páginas: `docs/06-toponimia.md` (14/11). Se distinguen correspondencias, descripciones y nombres sin equivalencia explícita.
+- [x] Definir la presentación de los topónimos (14/11): **Onashaga — Canal Beagle**, con el nombre utilizado por Víctor primero y su correspondencia después.
+- [ ] Completar la fuente cartográfica y el permiso de uso en el juego; coordinar con D la implementación de los rótulos indicados en `docs/06-toponimia.md`.
+- [x] Revisar las nueve actividades de la guía para docentes (`escuelas/actividades.js`, 14/11). Observaciones y correcciones posteriores registradas en [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md); la revisión docente sigue pendiente.
+- [x] Actualizar los textos de la guía y sus actividades con las referencias disponibles de Vargas Filgueira, Cooper y Bird, distinguiendo datos, hipótesis y ejercicios (14/11, a pedido de C). La revisión docente y la consulta comunitaria siguen pendientes.
+- [x] Localizar las páginas de agradecimientos (p. 4), protagonistas (pp. 8–9) y epílogo (pp. 85–86) en el PDF de Vargas Filgueira (2019) aportado fuera del repositorio; actualizar las referencias sin publicar el ejemplar.
+- [x] Aprobar «Lo aprendido se transmite» como lema (14/11) y actualizar los textos para presentar el apagado del fuego como fin del viaje. Sin cambios de reglas ni números.
+- [x] Regenerar guía docente, reglas de mesa, cartel, nueve diapositivas y PDF del pitch (14/11). La carta de amarre exportada ya usa el texto y las fuentes actuales. Tablero, fichas e ilustraciones se conservan.
 - [ ] Redactar el cierre del códice, en presente, mencionando las comunidades vivas.
-- [ ] Armar la sección **Fuentes** del README (D dejó las que usó el arte).
-- [ ] Revisar todo el contenido contra las líneas rojas de `docs/00-guia-hackathon.md`.
-- [ ] Completar la parte de consulta del avance del 14/11 (`equipo/avance-14-11.md`).
+- [x] Completar la sección **Fuentes** del README (14/11): publicaciones, consulta y referencias pendientes, con enlace a `docs/03-contenido-cultural.md`.
+- [x] Revisar todo el contenido del alcance del paso 5 contra las líneas rojas de `docs/00-guia-hackathon.md` (14/11). Informe con archivo y línea: [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md). Se revisaron textos y archivos exportados; no equivale a validación comunitaria.
+- [ ] Resolver las observaciones restantes de la auditoría con B y D: representación, cierre actual, cartografía, fauna, pronunciación y precisiones de mesa y stand. El lema ya está aprobado; los cambios aplicados y la regeneración de piezas se registran en el informe.
+- [x] Completar la parte de consulta del avance del 14/11 (`equipo/avance-14-11.md`): entrevista y cotejo documental aportado, sin dar las cartas ni el juego por validados.
 
 ## Persona D: Arte, sonido y comunicación (Nacho)
 
@@ -81,9 +93,11 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Presentación del pitch (`presentacion/`) y storyboard del video (`equipo/video/`).
 - [ ] Ayudar a A y B a integrar el motor, el sonido y los demás módulos.
 - [ ] Desde el 15/11: README completo (quedan los huecos ✏️: enlaces, integrantes, números del juego).
-- [ ] Video de hasta 3 minutos con capturas del juego real (el 16/11).
+- [ ] Video de hasta 3 minutos con capturas del juego real (el 17/11).
 - [ ] Ensayar el pitch de hasta 5 minutos.
-- [ ] La persona referente (+18) coordina con la organización, sea cual sea su rol. ✏️ Falta decir quién es.
+- [x] La persona referente (+18) coordina con la organización: es **Facu** (B), según la plataforma de la hackatón.
+- [ ] **16/11, antes de las 23:00 (Facu):** cargar en la plataforma (*Mi equipo*) el link del repositorio y el del documento del avance (`equipo/avance-14-11.md` en GitHub, ya mergeado en `main`).
+- [ ] **18/11, antes de las 21:00 (Facu):** cargar los cinco links de la entrega final: prototipo (GitHub Pages), repositorio, README, video y presentación. Todos públicos.
 
 ---
 
@@ -93,22 +107,26 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 |---|---|---|---|---|
 | **12/11** | Cerrar stack y armar el esqueleto | Cerrar stack, estructura de datos, deploy | Conseguir el contacto con la comunidad ✅ | Propuestas de estilo ✅ |
 | **13/11** | Stack, esqueleto, mapa, fuego y turnos | Stack, estructura de datos, deploy, pantalla de carta | Revisar los borradores de cartas | Arte, sonido y módulos ✅ |
-| **14/11** | Integrar y probar la partida | 11:00 reunión. Integrar y probar | 11:00 reunión. Documentar la consulta | Escribir el avance documentado |
+| **14/11** | Integrar y probar la partida | Integrar y probar | Documentar la consulta (entrevista del 13/11) | Avance documentado (borrador) |
 | **15/11** | Pulido y balance | Herencia, códice y accesibilidad | Cartas restantes y fuentes | Integración, README |
-| **16/11** | Corrección de errores | Versión offline | Revisión cultural final | Video y pitch |
-| **17/11** | Margen. **Entrega antes de las 20:00** | Margen | Margen | Margen |
-| **19/11** | Demo (al menos 2 integrantes presentes) | | | |
+| **16/11** | Corrección de errores. **Avance antes de las 23:00** (cada uno completa su parte) | Versión offline | Revisión de cartas con la consulta | Entregar el avance |
+| **17/11** | Corrección de errores | Pruebas en celulares | Revisión cultural final | Video y pitch |
+| **18/11** | Margen. **Entrega antes de las 21:00** y ensayo | Margen | Margen | Margen |
+| **19/11** | Evalúa el jurado (repos cerrados) | | | |
+| **20/11, 15:00 a 19:00** | Demo y premiación (al menos 2 integrantes presentes) | | | |
+
+✏️ Las filas del 14 al 18/11 se corrieron por el cambio de fechas (14/11). Cada persona revisa la suya.
 
 **Obligatorios de la hackatón:** al menos 1 integrante en el taller del eje y al menos 2 encuentros con la mentoría durante la semana.
 
 ## Pendientes del repo
 
 - [ ] Escribir `docs/02-alcance-mvp.md` (cuántas etapas, cuántos peligros). Sin eso, A y B no tienen contra qué medir.
-- [ ] Escribir `docs/03-contenido-cultural.md` (Persona C).
+- [x] Escribir `docs/03-contenido-cultural.md` (Persona C, 14/11), con bibliografía, páginas, consulta y pendientes.
 - [x] Decidir el stack: JavaScript sin build (13/11).
 - [x] Decidir el estilo visual: Corteza (12/11).
 - [x] Asignar las letras a cada integrante (ver la tabla de arriba).
-- [ ] Completar la sección **Integrantes** del README con los nombres que el equipo quiera publicar, y decir quién es la persona referente.
-- [ ] Completar el avance del 14/11 (`equipo/avance-14-11.md`).
+- [ ] Completar la sección **Integrantes** del README con los nombres que el equipo quiera publicar. La persona referente es Facu.
+- [ ] Completar el avance documentado (`equipo/avance-14-11.md`) antes del 16/11 a las 23:00.
 - [ ] Declarar en el README cualquier aporte nuevo de IA (cláusula 7.4).
 - [ ] Anotar cada decisión nueva en `equipo/memory.md`, con fecha.

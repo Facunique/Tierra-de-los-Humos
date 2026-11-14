@@ -23,7 +23,7 @@ Cuatro personas trabajan en paralelo, cada una con sus asistentes. Para que nadi
 
 ## El proyecto en tres líneas
 
-Roguelike web por turnos para la hackatón SoberaníaTech 2026 (eje 04, Memoria y Cultura). Cada partida es un viaje en canoa por los canales fueguinos acompañando a una familia **Yagán**; el fuego es la vida y lo aprendido pasa a la siguiente generación como saberes con fuente citada. Entrega final: **17/11/2026, 20:00**.
+Roguelike web por turnos para la hackatón SoberaníaTech 2026 (eje 04, Memoria y Cultura). Cada partida es un viaje en canoa por los canales fueguinos acompañando a una familia **Yagán**; el fuego es la vida y lo aprendido pasa a la siguiente generación como saberes con fuente citada. Primer avance: **16/11/2026, hasta las 23:00**. Entrega final: **18/11/2026, hasta las 21:00**. Demo y premiación: **viernes 20/11, de 15:00 a 19:00**.
 
 ## Reglas de contenido cultural (las más importantes)
 
@@ -59,7 +59,7 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 | `mesa/` | Versión de mesa para imprimir (tablero, fichas, reglas) |
 | `escuelas/` | Guía para docentes: una actividad por carta (`actividades.js`), en A4 |
 | `herramientas/` | Páginas de apoyo, como el editor de saberes: escribir o corregir una carta sin programar |
-| `presentacion/` y `stand/` | Pitch en HTML y PDF; vidriera y cartel para la demo del 19/11 |
+| `presentacion/` y `stand/` | Pitch en HTML y PDF; vidriera y cartel para la demo del 20/11 |
 | `equipo/` | Trabajo interno del equipo: memoria del proyecto, reparto de tareas (`tareas.md`), ideas para más adelante de todo el equipo (`ideas.md`), registro de comunicaciones con comunidades y plan de comunicación (video, pitch, demo) |
 | `AGENTS.md` | Este archivo |
 | `README.md` | Presentación pública del proyecto (lo evalúa el jurado) |

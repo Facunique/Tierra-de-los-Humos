@@ -28,23 +28,38 @@ Cambios de integrantes y de eje: hasta el **7/11**.
 | Fecha | Qué pasa | Asistencia |
 |---|---|---|
 | 6/11 23:59 | Cierre de inscripción | — |
-| 7/11 | Confirmación de equipos | — |
-| 9/11 al 14/11 | Talleres preparatorios | **Al menos 1 integrante** en el taller del eje |
-| 9/11 al 16/11 | Desarrollo con mentorías | **Al menos 2 encuentros** con la tutoría |
-| **14/11** | **Primer avance documentado** (obligatorio) | Virtual |
-| **17/11, 20:00** | **Entrega final**: se cierran los repositorios. También hay ensayo del pitch. | Obligatoria |
-| 18/11 | El jurado revisa el repositorio, la documentación y el video | — |
-| **19/11** | Demostración pública y premiación en Fábrica de Talento, Ushuaia | **Al menos 2 integrantes** presentes |
+| 9/11 | Confirmación de equipos | — |
+| 10/11 al 14/11 | Talleres preparatorios y encuentros virtuales | **Al menos 1 integrante** en el taller del eje |
+| 10/11 al 18/11 | Desarrollo con mentorías | **Al menos 2 encuentros** con la tutoría (según las bases) |
+| **16/11, hasta las 23:00** | **Primer avance documentado** (obligatorio) | Virtual |
+| **18/11, hasta las 21:00** | **Entrega final**: se cierran los repositorios. También hay ensayo de las presentaciones. | Obligatoria |
+| 19/11 | Evaluación técnica del jurado: repositorio, documentación y video | — |
+| **20/11 (viernes), 15:00 a 19:00** | Gran cierre: demostraciones públicas, presentaciones finales y premiación en Fábrica de Talento (Av. Maipú 1255, Ushuaia) | **Al menos 2 integrantes** presentes |
 
-⚠️ **Hay una sola semana real de desarrollo (9 al 17/11).** El alcance tiene que ser chico y terminado, no grande y a medias.
+> 📅 **Cronograma definitivo** según los mails de la organización del 9/11/2026 («¡Bienvenidos y bienvenidas a SoberaníaTech 2026!» y «¡Equipos, tenemos el cronograma definitivo!»). Reemplaza el de las bases: el avance pasó del 14 al 16/11, la entrega del 17 al 18/11 y la demo del jueves 19 al viernes 20/11. Las mentorías y el taller del eje salen de las bases; los mails no los repiten.
 
-## 4. Qué hay que entregar (17/11, 20 h)
+⚠️ **El desarrollo va del 9 al 18/11.** El alcance tiene que ser chico y terminado, no grande y a medias.
+
+## 4. Qué hay que entregar
+
+Todo se entrega **cargando links en la plataforma** de la hackatón (*Mi equipo*, con el link personal de la persona referente). Los links tienen que ser **públicos o estar compartidos con la organización**.
+
+**Primer avance (16/11, hasta las 23:00):**
+
+1. **Repositorio** (o carpeta del proyecto).
+2. **Documento del avance**: qué problema eligieron, qué van a hacer y cómo vienen. El nuestro es [`equipo/avance-14-11.md`](../equipo/avance-14-11.md).
+
+**Entrega final (18/11, hasta las 21:00):**
 
 1. **Prototipo funcional**: un enlace navegable es lo ideal (también vale ejecutable o APK).
 2. **Repositorio** con el código fuente.
 3. **README** con: problema, eje, solución, instrucciones de uso, tecnologías, **fuentes citadas**, recursos de terceros y sus licencias, integrantes y **uso de IA** (para qué y cómo; es obligatorio declararlo).
 4. **Video** de hasta 3 minutos mostrando el juego.
-5. **Presentación** para un pitch de hasta 5 minutos.
+5. **Presentación** para un pitch de hasta 5 minutos (para las demostraciones del 20/11).
+
+En la plataforma son cinco links: prototipo, repositorio, README, video (YouTube, Drive u otra, con acceso por link) y presentación.
+
+El **nombre del equipo** se puede cambiar hasta el 16/11 a las 23:00. Es el que la organización usa en las fichas técnicas y en la presentación.
 
 Recomendado por las bases: diseño accesible (contraste, textos alternativos, que funcione en celular), que ande con conexiones lentas, licencias abiertas (código **MIT/GPL-3.0**, contenidos **CC BY-SA 4.0**).
 
@@ -85,16 +100,16 @@ Es el eje natural para la temática de pueblos originarios. Su condición espec�
 **Concepto: "el fuego no se apaga".** Hay un dato histórico que sirve de gancho: según la tradición, los navegantes europeos llamaron a la isla "Tierra de los Humos" y después "Tierra del Fuego" por los fuegos que veían en la costa. Los yámanas, además, llevaban el fuego encendido dentro de sus canoas.
 
 - **Cada partida es un viaje** (en canoa por los canales o a pie por la isla) con un mapa generado al azar.
-- **El fuego es la vida**: se gasta con el frío y el viento, y se recupera juntando leña (lenga, ñire), comida (mejillones, cholgas, guanaco, calafate) y refugio. Si el fuego se apaga, termina la partida (*permadeath*).
+- **El fuego es la vida**: se gasta con el frío y el viento, y se recupera juntando leña (lenga, ñire), comida (mejillones, cholgas, guanaco, calafate) y refugio. Si el fuego se apaga, termina la partida. El fin del viaje no se presenta como la muerte de la familia.
 - **Los peligros son naturales**: tormentas, viento fuerte, mareas, invierno.
 - **La progresión entre partidas es la transmisión de saberes**: lo que se aprende en un viaje pasa a la "siguiente generación" como cartas de conocimiento. Cada carta tiene un texto educativo con su **fuente citada**. La mecánica del roguelike queda unida al tema del eje (*memoria*).
 - **Un códice o "modo museo"** junta todo lo aprendido. Es la parte educativa que se puede usar en escuelas.
 
-Este enfoque sostiene la jugabilidad sin violencia, le da sentido cultural a la muerte y la repetición del roguelike, y produce justo el contenido citado que el jurado evalúa en *rigor*.
+Este enfoque sostiene la jugabilidad sin violencia y une la repetición de viajes con la transmisión de saberes. El contenido citado aporta al criterio de *rigor* del jurado.
 
 ## 8. Tecnología sugerida
 
-- **Juego web** (HTML5): se entrega como enlace navegable, anda en celular y en el proyector del 19/11.
+- **Juego web** (HTML5): se entrega como enlace navegable, anda en celular y en el proyector del 20/11.
 - Opciones: **Phaser 3** o canvas propio con **rot.js** (librería de roguelikes: mapas, campo de visión, turnos). Juego **por turnos y en grilla**, que es más simple y más accesible.
 - Hosting gratis: **GitHub Pages** o **itch.io**.
 - Peso liviano (pocos MB), controles táctiles y de teclado, buen contraste y fuente legible.
@@ -129,19 +144,19 @@ Las bases piden que el proyecto se desarrolle *durante* la hackatón (cláusula 
 - [ ] Practicar con la tecnología elegida (tutoriales, no el juego).
 - [x] Crear el repo vacío con licencia MIT y README base.
 
-### Fase 2 — Desarrollo (9 → 14/11)
+### Fase 2 — Desarrollo (9 → 16/11)
 - [ ] Ir al taller del eje (al menos 1 persona).
 - [ ] Reunirse con la mentoría (al menos 2 veces).
 - [ ] *Vertical slice*: una partida completa jugable (mapa, fuego, recursos, game over, carta de saber).
-- [ ] **14/11: entregar el primer avance documentado.**
+- [ ] **16/11, hasta las 23:00: entregar el primer avance documentado.**
 
-### Fase 3 — Contenido y pulido (15 → 17/11)
+### Fase 3 — Contenido y pulido (16 → 18/11)
 - [ ] Cargar todas las cartas de saber con fuentes, sumar arte y sonido.
 - [ ] Accesibilidad: contraste, controles táctiles, textos.
 - [ ] README completo, video de 3 minutos y diapositivas del pitch.
-- [ ] **17/11 antes de las 20 h: entrega final.** Apuntar a terminar el 16 y dejar el 17 como margen.
+- [ ] **18/11 antes de las 21:00: entrega final.** Apuntar a terminar el 17 y dejar el 18 como margen.
 
-### Fase 4 — Cierre (19/11)
+### Fase 4 — Cierre (20/11, 15:00 a 19:00)
 - [ ] Demo en Fábrica de Talento con al menos 2 integrantes. Llevar el juego también funcionando sin internet, por las dudas.
 
 ## 11. Ideas de nombre de equipo
