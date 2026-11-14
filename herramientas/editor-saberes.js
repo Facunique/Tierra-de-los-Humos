@@ -42,7 +42,7 @@
     'ballena-varada': { nombre: 'Ballena varada', donde: 'playa', alt: 'una ballena varada en la playa' },
     'lobo-marino': { nombre: 'Lobo marino', donde: 'playa', alt: 'un lobo marino' },
     cormoran: { nombre: 'Cormorán', donde: 'playa', alt: 'un cormorán' },
-    'pato-vapor': { nombre: 'Pato vapor', donde: 'agua', alt: 'un pato vapor' },
+    'pato-vapor': { nombre: 'Pato', donde: 'agua', alt: 'un pato' }, // especie 🔍 (docs/05)
     cauquen: { nombre: 'Cauquén', donde: 'playa', alt: 'un cauquén' },
     gaviota: { nombre: 'Gaviota', donde: 'playa', alt: 'una gaviota' },
   };
@@ -54,8 +54,11 @@
   // ── Fuentes ──────────────────────────────────────────────────────────────
   // cooper usa la constante COOPER de datos/saberes.js, igual que las cartas que ya existen.
   const COOPER = 'Cooper, J. M. (1946). «The Yahgan». <i>Handbook of South American Indians</i>, vol. 1. Smithsonian Institution';
+  // Vargas Filgueira (2019), con el mismo formato que usan las cartas de datos/saberes.js y docs/03.
+  const VARGAS = 'Vargas Filgueira, Víctor (2019). Mi sangre yagán (ahua saapa yagan). Primera edición digital. Editora Cultural Tierra del Fuego';
   const FUENTES = {
     cooper: 'Cooper (1946), «The Yahgan»',
+    vargas: 'Vargas Filgueira (2019), «Mi sangre yagán»',
     libro: 'Otro libro, artículo o documento',
     oral: 'Lo contó una persona de la comunidad',
   };
@@ -75,6 +78,7 @@
     const pag = limpio(f.pagina) ? ', p. ' + html(limpio(f.pagina).replace(/^p\.?\s*/i, '')) : '';
     let texto;
     if (f.tipoFuente === 'cooper') texto = COOPER + pag + '.';
+    else if (f.tipoFuente === 'vargas') texto = VARGAS + (pag ? pag + ' del visor del PDF' : '') + '.';
     else if (f.tipoFuente === 'oral') {
       // Sin permiso, la persona figura solo por su rol (AGENTS.md: privacidad).
       const quien = f.permisoNombre && limpio(f.nombrePersona) ? html(f.nombrePersona) + ', ' + (html(f.rolPersona) || 'integrante de la comunidad') : (html(f.rolPersona) || 'Integrante de la comunidad');
@@ -136,6 +140,7 @@
     if (!/^[a-z0-9-]+$/.test(carta.id)) error('El identificador va en minúsculas, sin tildes ni espacios (por ejemplo, «pescar-sin-anzuelo»).');
     if (existentes && existentes[carta.id] && editando !== carta.id) error('Ya hay una carta con el identificador «' + carta.id + '». Cambiá el título o el identificador, o elegí esa carta arriba para corregirla.');
     if (f.tipoFuente === 'cooper' && !limpio(f.pagina)) error('Falta la página de Cooper (1946).');
+    if (f.tipoFuente === 'vargas' && !limpio(f.pagina)) error('Falta la página del visor del PDF de Vargas Filgueira (2019).');
     if (f.tipoFuente === 'libro' && (!limpio(f.autor) || !limpio(f.obra))) error('Falta el autor o el título de la obra.');
     if (f.tipoFuente === 'libro' && !limpio(f.pagina)) aviso('Si se puede, sumá la página.');
     if (f.tipoFuente === 'oral' && !f.permisoPublicar) error('Para publicar un relato hace falta el permiso de quien lo contó.');
@@ -177,7 +182,10 @@
   /** Para corregir una carta que ya existe: lleva sus datos al formulario. */
   function desdeCarta(c) {
     const f = { editando: c.id, id: c.id, pueblo: c.pueblo, tipo: c.tipo, titulo: c.titulo, dato: c.dato, juego: c.juego, alt: c.alt, objeto: '', escena: 'original', estacion: (c.extra && c.extra.estacion) || 'verano', hora: (c.extra && c.extra.hora) || 'dia' };
-    if (c.fuente.indexOf(COOPER) === 0) {
+    if (c.fuente.indexOf(VARGAS) === 0) {
+      f.tipoFuente = 'vargas';
+      f.pagina = c.fuente.slice(VARGAS.length).replace(/^,\s*p\.\s*/, '').replace(/\s*del visor del PDF\.?\s*$/, '').replace(/\.\s*$/, '');
+    } else if (c.fuente.indexOf(COOPER) === 0) {
       f.tipoFuente = 'cooper';
       f.pagina = c.fuente.slice(COOPER.length).replace(/^,\s*p\.\s*/, '').replace(/\.\s*$/, '');
     } else { f.tipoFuente = 'libro'; f.obra = c.fuente.replace(/<[^>]+>/g, ''); }
@@ -185,6 +193,6 @@
     return f;
   }
 
-  const api = { ESCENAS, OBJETOS, ESTACIONES, HORAS, TIPOS, PUEBLOS, FUENTES, COOPER, idDe, fuenteDe, armar, altSugerido, revisar, codigo, desdeCarta };
+  const api = { ESCENAS, OBJETOS, ESTACIONES, HORAS, TIPOS, PUEBLOS, FUENTES, COOPER, VARGAS, idDe, fuenteDe, armar, altSugerido, revisar, codigo, desdeCarta };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else raiz.TDH_EDITOR = api;
 })(typeof window !== 'undefined' ? window : globalThis);
