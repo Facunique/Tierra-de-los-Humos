@@ -147,6 +147,8 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 ## Uso de inteligencia artificial
 
+- **Motivo del viaje (14/11):** a pedido de la Persona B, Claude Code hizo que cada viaje empiece con una carta «Por qué viajan»: muestra el dato y la fuente del destino que entrega el núcleo (`juego/nucleo/territorio/destinos.js`) y aclara que la familia es ficción. Reusó la pantalla de carta y sumó la revisión a la prueba de punta a punta. No escribió datos culturales nuevos: el texto del dato y su fuente son los de la Persona C.
+
 - **Correcciones de la auditoría (14/11):** con aprobación de la Persona C, Codex (OpenAI) aplicó «Lo aprendido se transmite», actualizó los textos de la guía docente y sus actividades y completó las fuentes y la consulta del pitch. Revisó pasajes del PDF de Vargas Filgueira (2019) aportado fuera del repositorio y localizó agradecimientos, protagonistas y epílogo. Actualizó referencias y seguimiento de tareas y regeneró las piezas afectadas. No publicó el libro ni escaneos, no agregó permisos y no cambió la lógica ni los números del juego.
 
 - **Auditoría cultural (14/11, paso 5):** a pedido de la Persona C, Codex (OpenAI) revisó los textos de cartas, sonido, mesa, actividades docentes, pitch, stand y README, junto con sus dependencias y archivos exportados. Registró 23 observaciones con archivo, línea y propuesta en `equipo/auditoria-cultural-paso-5.md`, corrigió cuatro puntos editoriales menores del README y actualizó tareas, memoria y avance. Las propuestas importantes y los cambios en piezas del equipo siguen pendientes. No incorporó datos culturales nuevos ni modificó código, números o reglas.

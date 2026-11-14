@@ -19,6 +19,7 @@
  *   - que la página no se corra de costado (sin scroll horizontal);
  *   - que los botones se puedan tocar con el dedo (44 px; menos de 24 px es error);
  *   - que se vea cuánto fuego queda («Fuego N de 4»);
+ *   - que cada viaje empiece contando su motivo, con el dato y la fuente;
  *   - que cuando aparece una carta, su fuente y sus botones entren en la pantalla;
  *   - que el viaje llegue a un final (se gane o se pierda) y que se pueda
  *     empezar la generación siguiente;
@@ -93,20 +94,22 @@ const MAX_ACCIONES = 400;
     if ((await textoFuego()) == null) r.errores.push('No se ve cuánto fuego queda («Fuego N de 4»).');
 
     // ── Jugar ──
-    let cartasVistas = 0, acampoRecien = false, acampesSeguidos = 0, bloqueadoEste = false, vertical = -1, vueltas = 0, pasosBordeando = 0;
+    let cartasVistas = 0, motivosVistos = 0, acampoRecien = false, acampesSeguidos = 0, bloqueadoEste = false, vertical = -1, vueltas = 0, pasosBordeando = 0;
     for (let n = 0; n < PARTIDAS; n++) {
       let termino = false, acciones = 0;
       while (!termino && acciones < MAX_ACCIONES) {
         acciones++;
         if (await visible(UI.guardarCarta)) {
-          cartasVistas++;
+          // La primera carta de cada viaje es su motivo (no es un saber).
+          const motivo = await p.evaluate(() => !!document.querySelector('.tdh-carta--otra'));
+          if (motivo) motivosVistos++; else cartasVistas++;
           const dentro = await p.evaluate(() => {
             const f = document.querySelector('.carta-saber__fuente'); if (!f) return 'sin fuente';
             const q = f.getBoundingClientRect(); return q.top >= 0 && q.bottom <= innerHeight + 1 ? 'ok' : 'fuera';
           });
           if (dentro === 'sin fuente') r.errores.push('Apareció una carta sin fuente a la vista.');
           else if (dentro === 'fuera') r.errores.push('Apareció una carta con la fuente fuera de la pantalla.');
-          if (cartasVistas === 1) { await revisarPantalla('Con una carta abierta'); await p.screenshot({ path: path.join(SALIDA, nombre + '-carta.png') }); }
+          if (!motivo && cartasVistas === 1) { await revisarPantalla('Con una carta abierta'); await p.screenshot({ path: path.join(SALIDA, nombre + '-carta.png') }); }
           await boton(UI.guardarCarta).click(); await p.waitForTimeout(450);
           continue;
         }
@@ -148,6 +151,7 @@ const MAX_ACCIONES = 400;
       if (!termino) r.errores.push('La partida ' + (n + 1) + ' no terminó después de ' + MAX_ACCIONES + ' acciones.');
     }
     if (!cartasVistas) r.avisos.push('No apareció ninguna carta de saber.');
+    if (motivosVistos < PARTIDAS) r.errores.push('El juego contó el motivo del viaje en ' + motivosVistos + ' de ' + PARTIDAS + ' partidas.');
     if (r.errores.length) { fallo = true; await p.screenshot({ path: path.join(SALIDA, nombre + '-error.png') }); }
     informe.push(r);
     await ctx.close();
