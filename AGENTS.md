@@ -47,7 +47,7 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 | `escuelas/` | Guía para docentes: una actividad por carta (`actividades.js`), en A4 |
 | `herramientas/` | Páginas de apoyo, como el editor de saberes: escribir o corregir una carta sin programar |
 | `presentacion/` y `stand/` | Pitch en HTML y PDF; vidriera y cartel para la demo del 19/11 |
-| `equipo/` | Trabajo interno del equipo: memoria del proyecto, reparto de tareas (`tareas.md`), ideas para más adelante con su señal (`ideas.md`), registro de comunicaciones con comunidades y plan de comunicación (video, pitch, demo) |
+| `equipo/` | Trabajo interno del equipo: memoria del proyecto, reparto de tareas (`tareas.md`), ideas para más adelante de todo el equipo (`ideas.md`), registro de comunicaciones con comunidades y plan de comunicación (video, pitch, demo) |
 | `AGENTS.md` | Este archivo |
 | `README.md` | Presentación pública del proyecto (lo evalúa el jurado) |
 

@@ -1,12 +1,19 @@
-# Ideas para más adelante (Persona D)
+# Ideas para más adelante (todo el equipo)
 
-> Ideas de arte, sonido, comunicación y herramientas que **todavía no se hicieron**, guardadas por si hacen falta. No son tareas asignadas ni decisiones: cada una dice **qué señal indica que conviene hacerla**. Así se revisa a medida que el resto del equipo avanza.
+> Ideas que **todavía no se hicieron**, guardadas por si hacen falta. Es un lugar para coordinar: **cualquiera del equipo puede sumar, acomodar o descartar ideas** a medida que el proyecto avanza. No son tareas asignadas ni decisiones: cada una dice **qué señal indica que conviene hacerla**.
 >
-> **Cómo usarla:** cuando pase algo de la columna «Señal», se mira la idea y se decide con el equipo. Si se hace, se pasa a `tareas.md`, y si es una decisión, a `memory.md`. Lo descartado se tacha, sin borrarlo, con el motivo.
+> **Cómo usarla:**
+> - Cuando pase algo de la señal, se mira la idea y se decide entre todos.
+> - Si se hace, se pasa a `tareas.md` con su responsable. Si es una decisión, va a `memory.md`.
+> - Lo descartado se tacha, sin borrarlo, con el motivo.
+> - Las propuestas de diseño del núcleo están en `juego/nucleo/README.md` (Mati). Acá solo se anota lo que cada una pediría de las otras partes.
 >
-> **Regla:** ninguna idea pisa el trabajo de A, B o C. Las que tocan el núcleo o la interfaz se proponen; no se hacen sin acuerdo. Todo lo cultural pasa antes por la Persona C y, si corresponde, por la comunidad.
+> **Para sumar una idea**, copiar este formato:
+> **N. Nombre.** *Qué:* … *Suma a:* (criterio de evaluación) … *Señal:* qué tiene que pasar … *Propone:* letra … *Le tocaría a:* letra o letras … *Esfuerzo:* aproximado.
 >
-> Última revisión: 14/11/2026. El esfuerzo es aproximado: el tiempo de la Persona D trabajando con IA.
+> **Regla:** nadie avanza sobre la parte de otro sin acordarlo. Todo lo cultural pasa antes por la Persona C y, si corresponde, por la comunidad.
+>
+> Última revisión: 14/11/2026. Las ideas 1 a 27 las propuso la Persona D; salvo que se diga otra cosa, le tocarían a D. El esfuerzo es aproximado.
 
 ## Resumen: qué mirar y cuándo
 
@@ -77,7 +84,8 @@
 - **Qué:** el núcleo ya acepta `hora` y `estacion`; falta que la interfaz le pase `TDH_LUZ_REAL.ahora()` cuando el botón «Luz real» está encendido. Son dos líneas, para la Persona B.
 - **Suma a:** innovación.
 - **Señal:** la Persona B conecta el núcleo a `index.html`.
-- **Esfuerzo:** 15 minutos (se le pasa a B).
+- **Le tocaría a:** B.
+- **Esfuerzo:** 15 minutos.
 
 ## Si el equipo aprueba una propuesta de Mati
 
@@ -85,6 +93,7 @@
 - **Qué:** para la propuesta «Qué deja cada saber heredado». Lo heredado se ve como silueta tenue a través del humo; por ejemplo, la comida para quien heredó el saber de los mejillones. El motor dibujaría `objetos` con `presentido: true`.
 - **Suma a:** pertinencia: la herencia se ve en la pantalla, no solo en un texto.
 - **Señal:** el equipo aprueba la propuesta.
+- **Le tocaría a:** A decide la regla; D, el dibujo en el motor.
 - **Esfuerzo:** 1 a 2 horas en el motor.
 
 **11. Las brasas.**
@@ -109,7 +118,8 @@
 - **Qué:** si la canoa se puede dañar (propuesta de «La carta de la corteza»). Cooper dice que la canoa hacía mucha agua y se achicaba con baldes de corteza que hacía la mujer (p. 88-89; fila «Baldes» de `docs/05`). Se puede sumar la pegatina del balde, el sonido de achicar y una carta.
 - **Suma a:** rigor: la carta deja de prometer algo que no pasa.
 - **Señal:** se decide que la canoa se daña.
-- **Esfuerzo:** 2 horas. La carta la revisa la Persona C.
+- **Le tocaría a:** A, la regla; D, el arte y el sonido; C, la carta.
+- **Esfuerzo:** 2 horas.
 
 ## Cuando avance la investigación
 
@@ -117,6 +127,7 @@
 - **Qué:** especie de la tonina, aves y erizos con nombres oficiales, la lenga y el árbol bandera. La lista de qué buscar está en `docs/05`.
 - **Suma a:** rigor (20).
 - **Señal:** llegan las fotos del libro.
+- **Le tocaría a:** C con D.
 - **Esfuerzo:** 1 a 2 horas.
 
 **16. Bibliografía automática.**
@@ -155,6 +166,7 @@
 - **Qué:** que `node --test` corra solo en cada PR con GitHub Actions (no necesita instalar nada). Es configuración del repositorio, así que se propone a la Persona B.
 - **Suma a:** apertura y documentación.
 - **Señal:** se suman más personas al repo, o se rompe algo sin que nadie lo note.
+- **Le tocaría a:** B.
 - **Esfuerzo:** 30 minutos.
 
 ## Si el proyecto sigue después de la hackatón
