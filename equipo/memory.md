@@ -5,6 +5,7 @@
 ## Estado actual
 
 - **Fecha de la última actualización:** 14/11/2026 (día 6 de desarrollo).
+- **Juego sin internet, motivo del viaje y alcance propuesto (14/11, B):** ya están en `main` el service worker y el manifiesto (PR 16: el juego publicado abre sin conexión después de la primera visita) y la carta «Por qué viajan» al empezar cada viaje, con el dato y la fuente del destino (PR 20). La propuesta de alcance está en [`docs/02-alcance-mvp.md`](../docs/02-alcance-mvp.md) y **todavía no es una decisión**: espera que A la confirme. La prueba de punta a punta pasó en las cinco pantallas con `main` más los PR 16 y 20.
 - **Paso 6 y cartas con Víctor como fuente principal (14/11, C):** propuesta de cierre en `docs/07-cierre-del-codice.md`, basada en Vargas Filgueira (2019), p. 4 y pp. 85–86 del visor. C pidió priorizar su libro en las nueve cartas y usar a Cooper para detalles no confirmados por esos pasajes. Se actualizan dato y fuente sin cambiar IDs, efectos ni ilustraciones. Ocho cartas nuevas completas quedan en `datos/saberes-propuestos.js`, fuera del catálogo activo hasta acordar descubrimientos con A y B. Revisión: `equipo/revision-victor-y-cartas-nuevas.md`. El cierre, la presentación familiar del autor y los nombres siguen pendientes de decisión final; no se inventan respuestas de entrevista ni permisos.
 - **Piezas de D después de la auditoría del paso 5 (14/11, D):** se aplicaron, con los textos que propuso C:
   - **P02** en las reglas de mesa: «Juegan en cooperación y acompañan a una familia ficticia».
@@ -116,7 +117,7 @@
 
 ### Coordinación para A y B: viaje con motivos combinados
 
-- **Problema actual:** `juego/nucleo/territorio/destinos.js` tiene un único `ACTIVO`; `juego/nucleo/partida.js` termina por llegada a un punto del mapa. `juego/interfaz/juego.js` anuncia ese destino al empezar y al llegar. Esto todavía no representa el enfoque decidido por Dani.
+- **Problema actual:** `juego/nucleo/territorio/destinos.js` tiene un único `ACTIVO`; `juego/nucleo/partida.js` termina por llegada a un punto del mapa. `juego/interfaz/juego.js` cuenta al empezar por qué viajan (carta con el dato y la fuente del destino, PR 20) y lo anuncia al llegar. Si A hace que el destino cambie según la estación, la carta cambia sola. Esto todavía no representa todo el enfoque decidido por Dani.
 - **Propuesta para acordar:** evaluar objetivos de viaje vinculados con las condiciones del entorno y los recursos disponibles. Una ballena varada puede motivar un desplazamiento, junto con otras situaciones documentadas. A y B deben proponer cómo se eligen esos objetivos y cuál es el cierre de una partida; no se fijaron cantidades, duración ni reglas nuevas.
 - **Archivos a revisar por A:** `juego/nucleo/territorio/destinos.js`, `juego/nucleo/territorio/pueblos.js`, `juego/nucleo/mapa.js` y `juego/nucleo/partida.js`. **Por B:** objetivos, avisos y cierre en `juego/interfaz/juego.js`, en coordinación con los textos de `sonido/juego.js` y `sonido/narrador.js`.
 - **Contenido a cargo de C:** aportar para cada motivo el dato y la fuente, distinguir el episodio documentado de la situación ficticia y revisar las cartas. El nomadismo es el enfoque elegido; no se presenta como un lugar al que llegar ni como un dato validado por toda la comunidad.

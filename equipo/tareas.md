@@ -51,11 +51,12 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Controles táctiles y de teclado (13/11): tocar el agua rema hasta ahí (y se frena si el fuego queda en 1 o cae la noche), tocar una pegatina va y la junta, flechas en pantalla, teclas del README.
 - [x] Accesibilidad (13/11): alto contraste, texto alternativo en cartas, códice y postal, el mapa contado en palabras para lector de pantalla, voz para las cartas, narrador, subtítulos del sonido y botones de 44 px. Probado a 375 px, en celular acostado y en la compu. Pesa unos 420 KB sin comprimir.
 - [x] Deploy en GitHub Pages: publicado desde `main`, carpeta raíz.
-- [ ] Versión que funcione sin internet para la demo del 20/11. Ya abre con doble clic; falta el service worker para Pages (decidido para el 16/11).
+- [x] Versión que funcione sin internet para la demo del 20/11 (14/11, PR 16): con doble clic ya abría; en Pages, el service worker guarda el juego en la primera visita y después abre sin conexión.
 - [x] Sección **Tecnologías** del README (13/11).
 - [x] Correr `node pruebas/de-punta-a-punta.cjs` con el juego (14/11): pasa en las cinco pantallas, dos partidas enteras en cada una. Resultado en el PR 16.
 - [x] Aplicar en el juego las correcciones de C de la auditoría del paso 5 (14/11): lema en la ayuda (P01), cierre «Hoy» general (P03) y aviso de voz automática (P20). El cierre usa el mismo texto provisorio que la maqueta de D (PR 17); el definitivo lo redacta C.
-- [ ] Completar la parte de programación del avance (`equipo/avance-14-11.md`), con A, antes del 16/11 a las 23:00.
+- [x] El juego cuenta el motivo del viaje al empezar (14/11, PR 20): carta «Por qué viajan» con el dato y la fuente del destino. Es la parte de B del nomadismo en chico; falta que A elija el destino según la estación.
+- [ ] Completar la parte de programación del avance (`equipo/avance-14-11.md`), con A, antes del 16/11 a las 23:00. La parte de B ya está (PR 19); faltan los ✏️ de A.
 
 ## Persona C: Investigación cultural y consulta (Dani)
 
@@ -127,7 +128,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 
 ## Pendientes del repo
 
-- [ ] Escribir `docs/02-alcance-mvp.md` (cuántas etapas, cuántos peligros). Sin eso, A y B no tienen contra qué medir.
+- [x] Escribir `docs/02-alcance-mvp.md` (14/11, PR 16): propuesta de B. ✏️ Falta que A la confirme; cuando la acuerden, se anota en `memory.md` (*Decisiones*).
 - [x] Escribir `docs/03-contenido-cultural.md` (Persona C, 14/11), con bibliografía, páginas, consulta y pendientes.
 - [x] Decidir el stack: JavaScript sin build (13/11).
 - [x] Decidir el estilo visual: Corteza (12/11).

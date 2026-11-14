@@ -20,7 +20,7 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 ### Diseño y documentación
 - Concepto del juego ([`docs/01-concepto.md`](../docs/01-concepto.md)) y guía de la hackatón ([`docs/00-guia-hackathon.md`](../docs/00-guia-hackathon.md)).
 - Memoria de decisiones del equipo ([`equipo/memory.md`](memory.md)) y reparto de tareas con cronograma ([`equipo/tareas.md`](tareas.md)).
-- **Alcance del MVP** (`docs/02-alcance-mvp.md`): propuesta de la Persona B del 14/11, en revisión en la rama `juego/sin-internet`. ✏️ Confirmar si ya se unió antes de entregar.
+- **Alcance del MVP** (`docs/02-alcance-mvp.md`): propuesta de la Persona B del 14/11, ya en `main`. ✏️ Falta que A la confirme.
 
 ### Consulta y contenido cultural (Persona C)
 - **Paso 6 y nuevas cartas (14/11):** redactada la propuesta del cierre en [`docs/07-cierre-del-codice.md`](../docs/07-cierre-del-codice.md), con Paiakoala y páginas verificadas. Las nueve cartas priorizan ahora a Vargas Filgueira (2019); Cooper conserva la atribución de los detalles no documentados en esos pasajes. Se crean ocho cartas nuevas completas en `datos/saberes-propuestos.js`, pendientes de selección e integración con A y B. El catálogo activo sigue en nueve; no cambian reglas, números ni ilustraciones. El cierre y los nombres quedan pendientes de decisión final de C.
@@ -50,13 +50,13 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
   - En el celular, se rema tocando el agua o con flechas en pantalla; en la compu, con el teclado.
   - Accesibilidad: alto contraste, textos alternativos, el mapa contado en palabras para lector de pantalla, subtítulos del sonido, narrador para jugar sin ver y botones de 44 px.
   - Conectados al juego los módulos de D: sonido según el lugar, narrador, luz real de Ushuaia y postal.
-- **Prueba de punta a punta** (`pruebas/de-punta-a-punta.cjs`): juega dos partidas enteras tocando los botones en cinco pantallas (tres celulares, uno acostado y una computadora). Con el [PR 16](https://github.com/Facunique/Tierra-de-los-Humos/pull/16) pasa en las cinco, sin errores ni archivos que falten. En `main` falla con el celular acostado: las fuentes de algunas cartas, más largas desde el 14/11, dejan la fuente y el botón «Seguir» fuera de la pantalla. El arreglo está en el PR 16, que espera que A confirme el alcance.
-- **Sin internet en la demo y en las escuelas** ([PR 16](https://github.com/Facunique/Tierra-de-los-Humos/pull/16), en revisión): la primera visita guarda el juego en el navegador y después abre sin conexión. Va primero a la red, así nadie se queda con una versión vieja. Se puede sumar a la pantalla de inicio del celular. Probado apagando el servidor y recargando. Con doble clic ya andaba sin internet.
+- **Prueba de punta a punta** (`pruebas/de-punta-a-punta.cjs`): juega dos partidas enteras tocando los botones en cinco pantallas (tres celulares, uno acostado y una computadora). Pasa en las cinco, sin errores ni archivos que falten. Con las fuentes más largas del 14/11, el celular acostado dejaba la fuente y el botón «Seguir» de algunas cartas fuera de la pantalla; lo arregló el [PR 16](https://github.com/Facunique/Tierra-de-los-Humos/pull/16), ya en `main`.
+- **Sin internet en la demo y en las escuelas** ([PR 16](https://github.com/Facunique/Tierra-de-los-Humos/pull/16), ya en `main`): la primera visita guarda el juego en el navegador y después abre sin conexión. Va primero a la red, así nadie se queda con una versión vieja. Se puede sumar a la pantalla de inicio del celular. Probado apagando el servidor y recargando. Con doble clic ya andaba sin internet.
 - **Arreglos que salieron al probar** (PR 16): un toque durante la transición de humo se perdía, y la transición trababa el juego si el navegador frenaba las animaciones.
 - **Correcciones de la auditoría cultural aplicadas en el juego** ([PR 18](https://github.com/Facunique/Tierra-de-los-Humos/pull/18), ya en `main`): el lema «Lo aprendido se transmite», un cierre «Hoy» que no atribuye prácticas sin fuente y el aviso de que la voz es la automática del dispositivo.
 - **El juego cuenta por qué viajan** ([PR 20](https://github.com/Facunique/Tierra-de-los-Humos/pull/20), ya en `main`): cada viaje empieza con una carta «Por qué viajan», con el dato y la fuente del destino y la aclaración de que la familia es ficción. Es la parte de B del nomadismo en chico. Hoy el destino es siempre la ballena varada; cuando el núcleo lo elija según la estación, el texto cambia solo. La prueba de punta a punta revisa que aparezca en cada partida.
-- **Alcance para la entrega** ([`docs/02-alcance-mvp.md`](https://github.com/Facunique/Tierra-de-los-Humos/blob/juego/sin-internet/docs/02-alcance-mvp.md), propuesta de B en el PR 16): qué cuenta como terminado según los criterios del jurado, qué entra sí o sí para el 17/11 y qué se recorta primero. Espera que A lo confirme.
-- **Pruebas automáticas:** en `main` pasan las 88, de todo el equipo; con el PR 16, 93.
+- **Alcance para la entrega** ([`docs/02-alcance-mvp.md`](../docs/02-alcance-mvp.md), propuesta de B, ya en `main`): qué cuenta como terminado según los criterios del jurado, qué entra sí o sí para el 17/11 y qué se recorta primero. Espera que A lo confirme.
+- **Pruebas automáticas:** en `main` pasan las 93, de todo el equipo.
 
 ![El núcleo del juego: la canoa con su fuego rema por el canal, con una playa, el bosque, leña y pescado para juntar, y el humo sobre lo no explorado](reunion-14-11/viaje.jpg)
 
@@ -100,7 +100,7 @@ Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la
 
 ## 5. Próximos pasos (hasta la entrega del 18/11)
 
-- **Programación:** ya están conectados el núcleo, la herencia y el códice. Falta: pulido y balance jugando con personas, la versión sin internet (rama `juego/sin-internet`) y cómo se juega el nomadismo que decidió C. ✏️ A y B confirman.
+- **Programación:** ya están conectados el núcleo, la herencia y el códice. Ya están la versión sin internet y el motivo del viaje al empezar. Falta: pulido y balance jugando con personas, y que el destino cambie según la estación (A) para completar el nomadismo en chico. ✏️ A y B confirman.
 - **Contenido (C):** aportar las fuentes de cada motivo de desplazamiento para acordar con A y B cómo se juega el nomadismo; revisar la grabación y resolver las consultas pendientes; completar las referencias y aprobaciones de cartas y territorio; resolver con B y D las observaciones de la auditoría de textos y actividades; proponer el cierre del códice. Las fuentes escritas y la consulta ya están documentadas por separado; las aprobaciones de las cartas siguen pendientes.
 - **Arte y sonido:** el sonido según el lugar, el narrador y la postal ya están en el juego. Falta: el cierre «Hoy» con el texto de C; activar los rótulos del mapa con los nombres del libro de Vargas Filgueira cuando haya permiso; confirmar la especie de la tonina y de las aves (🔍) y cotejar con el libro de Goodall.
 - **Comunicación:** README completo con capturas del juego real, video de 3 minutos (17/11) y pitch de 5 minutos con ensayo.
