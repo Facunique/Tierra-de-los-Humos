@@ -39,7 +39,7 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 
 | El viaje | Una carta de saber | Fin del viaje y herencia |
 |---|---|---|
-| ![El viaje en el juego: la canoa con su fuego rema por el canal, con «Fuego 2 de 4» arriba; hay pescado para juntar como pegatinas, aves en el agua y humo sobre lo que falta explorar](equipo/video/04-viaje.jpg) | ![Carta «El fuego viaja en la canoa» con su dato, su recurso de juego y la fuente: Cooper (1946), p. 88 y 91](equipo/video/05-carta.jpg) | ![Pantalla «El viaje termina acá»: el fuego se apagó con el viento del canal y el saber encontrado pasa a la generación 2](equipo/video/06-fin.jpg) |
+| ![El viaje en el juego: la canoa con su fuego rema por el canal, con «Fuego 3 de 4» arriba; hay pescado para juntar como pegatinas, aves en el agua y humo sobre lo que falta explorar](equipo/video/04-viaje.jpg) | ![Carta «El fuego viaja en la canoa» con su dato, su recurso de juego y la fuente: Cooper (1946), p. 88 y 91](equipo/video/05-carta.jpg) | ![Pantalla «El viaje termina acá»: el fuego se apagó con el viento del canal y el saber encontrado pasa a la generación 2](equipo/video/06-fin.jpg) |
 
 *Capturas del juego (`index.html`), en la compu. La familia y el mapa son ficción; el dato de la carta sale de su fuente.*
 

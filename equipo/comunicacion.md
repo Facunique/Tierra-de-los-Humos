@@ -39,7 +39,7 @@ Tres ideas que se repiten en el video, el pitch y el README:
 |---|---|---|
 | 0:00 a 0:12 | Pantalla de título: la costa de papel, columnas de humo, la canoa con su fuego (`arte/corteza/portada.html`, animada). | "Cada partida acompaña a una familia ficticia por los canales fueguinos. El fuego sostiene el viaje y las cartas guardan lo aprendido." |
 | 0:12 a 0:25 | El humo se abre y aparece la canoa con su fuego. | "Los pueblos fueguinos siguen acá. Este juego acerca fuentes sobre sus saberes a jóvenes y escuelas, en presente." |
-| 0:25 a 0:40 | Pantalla de inicio del juego. | "Tierra de los Humos es un juego web por turnos. Cada partida es un viaje en canoa por los canales, acompañando a una familia yagán ficticia." |
+| 0:25 a 0:40 | ¿A quién acompañás? El mapa de los territorios y la familia yagán para elegir. | "Tierra de los Humos es un juego web por turnos. Cada partida es un viaje en canoa por los canales, acompañando a una familia yagán ficticia." |
 | 0:40 a 1:15 | Partida real: remar, el humo se abre, el viento sube, el fuego del HUD baja, juntar leña y mariscos. | "El fuego es tu vida. El viento, la lluvia y la noche lo gastan; la leña y el amarre en el cachiyuyo lo sostienen." |
 | 1:15 a 1:40 | Aparece una carta de saber. Zoom a las etiquetas *Dato*, *En el juego* y a la fuente. | "En el viaje aparecen saberes. Cada carta separa lo que es dato de lo que es recurso de juego, y cita su fuente." |
 | 1:40 a 2:05 | El fuego se apaga (sonido `apagado`). Fundido. Pantalla de nueva generación, con el saber heredado. | "Si el fuego se apaga, el viaje termina. Lo aprendido se transmite: pasa a la siguiente generación." |
