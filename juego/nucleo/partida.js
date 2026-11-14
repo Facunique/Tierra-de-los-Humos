@@ -20,14 +20,17 @@
  *     estacion   (+) 'verano' | 'otono' | 'invierno' | 'primavera'. Sin ella, sale de la semilla.
  *     hora       (+) 'dia' | 'tarde' | 'noche' (para la luz real de Ushuaia). Sin ella, 'dia'.
  *     pueblo     (+) id de territorio/pueblos.js. Sin él, 'yagan'.
- *     destino    (+) id de territorio/destinos.js. Sin él, el ACTIVO.
+ *     destino    (+) id de territorio/destinos.js. Sin él, el motivo del viaje sale de la semilla
+ *                y la estación entre los destinos del pueblo que no están en 'propuesta' (ver
+ *                TDH_PARTIDA.elegirDestino). Si ninguno sirve, el ACTIVO.
  *     mapa       (+) 'fijo' para usar el mapa de la maqueta. Sin él, se genera con la semilla.
  *
  *   partida.estado   la forma que espera motor.escena de Corteza:
  *     { mapa, objetos, canoa: { x, y, fuego, mira, remando }, explorado, clima, estacion, hora, humos }
  *     (+) recursos: { lena, comida, pirita } (números), energia (0 a 16), pasos,
  *         ruta: [[x, y], ...] (para la postal), aprendidos: [ids de este viaje],
- *         inicio, destino: { x, y, id, nombre }, gano, causa, pueblo
+ *         inicio, destino: { x, y, id, nombre }, gano, causa, pueblo,
+ *         pronostico: null | { clima, faltan } (el cambio de tiempo que ya se anunció)
  *
  *   partida.hacer(accion)  →  lista de eventos, en orden. Acciones:
  *     { tipo: 'remar', dx, dy }   una casilla, sin diagonal. Contra la tierra o el borde: [].
@@ -39,21 +42,31 @@
  *     (+) { tipo: 'remo', x, y }      la canoa avanzó. Siempre es el primero al remar: así una
  *                          lista vacía quiere decir solo «no se puede remar hacia ahí».
  *     { tipo: 'fuego', antes, despues, motivo, causas }   el fuego cambió (0 a 4).
- *                          motivo: 'remar' | 'lena' | 'comida' | 'pirita'.
+ *                          motivo: 'remar' | 'lena' | 'comida' | 'pirita' | (+) 'acampar'.
+ *                          Al acampar sale uno solo, con lo que quedó entre comer y cuidar el
+ *                          fuego toda la noche: 'comida' si subió, 'acampar' si bajó.
  *                          (+) causas, solo al remar: ['viento', 'lluvia', 'noche', 'cerca']
  *     { tipo: 'junto', que, nombre }  se juntó algo: que = id del elemento; (+) nombre, para el texto
  *     { tipo: 'saber', id }           se encontró un saber (id de datos/saberes.js)
  *     { tipo: 'fin', gano, causa, pasos, aprendidos }   terminó el viaje.
  *                          (+) causa: 'llegada' | 'remar' | 'viento' | 'lluvia' | 'noche'
+ *                          ('noche' también si se apagó acampando, sin comida)
  *     (+) { tipo: 'avivo' }                      se gastó una leña en el fuego
+ *     (+) { tipo: 'aviso', antes, clima, faltan } el tiempo va a cambiar en `faltan` pasos
+ *                          («se ven nubes», «se levanta el viento»). Llega CLIMA_AVISO_PASOS antes
+ *                          del evento 'clima'. Acampar lo cancela: pasa la noche y vuelve la calma.
  *     (+) { tipo: 'clima', antes, clima }        cambió el tiempo: 'calma' | 'viento' | 'lluvia'
  *     (+) { tipo: 'hora', antes, hora }          cayó la tarde, la noche o amaneció
  *     (+) { tipo: 'reencendido', con: 'pirita' } el fuego se apagó y volvió a prender
- *     (+) { tipo: 'acampe', comio }              pasaron la noche amarrados
+ *     (+) { tipo: 'acampe', comio }              pasaron la noche amarrados. Cuidar el fuego toda la
+ *                          noche gasta GASTO_ACAMPAR; comer suma COMER_AL_ACAMPAR.
  *
  *   partida.puede()   (+) { juntar: id del elemento | null, avivar: bool, amarrar: bool }, para los botones.
  *   partida.camino(x, y)  (+) casillas por el agua hasta (x, y), o null. Para remar tocando lejos.
  *   partida.terminada     true cuando terminó el viaje.
+ *
+ *   TDH_PARTIDA.elegirDestino({ semilla, estacion, pueblo })  (+) el id del motivo del viaje que
+ *     elegiría nueva() sin `destino`. Sirve para que la interfaz lo cuente antes de empezar.
  *
  * Los textos que ve la persona los pone la interfaz: el núcleo solo dice qué pasó.
  *
@@ -80,13 +93,36 @@
   const ESTACIONES = ['verano', 'otono', 'invierno', 'primavera'];
   const V4 = [[1, 0], [-1, 0], [0, 1], [0, -1]];
   const ELEMENTO = (o) => (o && (o.junta || o.elemento) ? T_ELEMENTOS.ELEMENTOS[o.junta || o.elemento] : null);
+  const estacionDe = (semilla, pedida) => (ESTACIONES.includes(pedida) ? pedida : AZAR.elegir(AZAR.crear(AZAR.derivar(semilla, 'estacion')), ESTACIONES));
+
+  /**
+   * El motivo del viaje (el nomadismo, docs/02-alcance-mvp.md). Entran los destinos del pueblo
+   * que no están en 'propuesta' y que, si tienen `estaciones`, son de esta estación. Entre los
+   * que quedan elige la semilla. Si no queda ninguno, el ACTIVO de destinos.js.
+   * Qué destino pasa de 'propuesta' a 'borrador' lo decide la Persona C (territorio/destinos.js).
+   */
+  function elegirDestino(opciones) {
+    const op = opciones || {};
+    const semilla = op.semilla == null ? 1 : op.semilla;
+    const estacion = estacionDe(semilla, op.estacion);
+    const destinos = op.destinos || T_DESTINOS.DESTINOS;
+    const p = T_PUEBLOS.PUEBLOS[op.pueblo || T_PUEBLOS.POR_DEFECTO];
+    const candidatos = ((p && p.destinos) || Object.keys(destinos)).filter((id) => {
+      const d = destinos[id];
+      return d && d.estado !== 'propuesta' && (!d.estaciones || d.estaciones.includes(estacion));
+    });
+    if (!candidatos.length) return op.activo || T_DESTINOS.ACTIVO;
+    if (candidatos.length === 1) return candidatos[0];
+    return AZAR.elegir(AZAR.crear(AZAR.derivar(semilla, 'motivo')), candidatos);
+  }
 
   function nueva(opciones) {
     const op = opciones || {};
     const R = Object.assign({}, REGLAS, op.reglas || {});
     const semilla = op.semilla == null ? 1 : op.semilla;
     const pueblo = op.pueblo || T_PUEBLOS.POR_DEFECTO;
-    const idDestino = op.destino || T_DESTINOS.ACTIVO;
+    const estacion = estacionDe(semilla, op.estacion);
+    const idDestino = op.destino || elegirDestino({ semilla, estacion, pueblo });
     const m = op.mapa === 'fijo' ? MAPA.fijo() : MAPA.generar(semilla, { pueblo, destino: idDestino });
     const destino = T_DESTINOS.DESTINOS[m.destino.id] || T_DESTINOS.DESTINOS[idDestino];
     const alClima = AZAR.crear(AZAR.derivar(semilla, 'clima'));      // el clima se consume jugando: su propia secuencia
@@ -97,7 +133,6 @@
     const visto = new Set();
     let terminada = false;
 
-    const estacion = ESTACIONES.includes(op.estacion) ? op.estacion : AZAR.elegir(AZAR.crear(AZAR.derivar(semilla, 'estacion')), ESTACIONES);
     const DIA = estacion === 'invierno' ? R.HORA.invierno : R.HORA.normal;
     const horaDe = (p) => (p >= DIA.noche ? 'noche' : p >= DIA.tarde ? 'tarde' : 'dia');
     let pasosDelDia = op.hora === 'noche' ? DIA.noche : op.hora === 'tarde' ? DIA.tarde : 0;
@@ -124,6 +159,7 @@
       gano: null,
       causa: null,
       pueblo,
+      pronostico: null,
       semilla,
       mapaFijo: !!m.fijo,
     };
@@ -187,12 +223,38 @@
       estado.hora = horaDe(pasosDelDia);
       if (estado.hora !== antes) eventos.push({ tipo: 'hora', antes, hora: estado.hora });
       pasosDelClima++;
-      if (pasosDelClima >= R.CLIMA_MIN_PASOS && alClima() < R.CLIMA_PROB_CAMBIO) {
-        const previo = estado.clima;
-        estado.clima = AZAR.ponderado(alClima, R.CLIMA_SIGUIENTE[previo]);
-        pasosDelClima = 0;
-        eventos.push({ tipo: 'clima', antes: previo, clima: estado.clima });
+      const pr = estado.pronostico;
+      if (pr) {
+        // Ya se anunció: cuando se cumple el plazo, cambia.
+        if (--pr.faltan <= 0) cambiarClima(pr.clima, eventos);
+        return;
       }
+      if (pasosDelClima >= R.CLIMA_MIN_PASOS && alClima() < R.CLIMA_PROB_CAMBIO) {
+        const siguiente = AZAR.ponderado(alClima, R.CLIMA_SIGUIENTE[estado.clima]);
+        if (R.CLIMA_AVISO_PASOS > 0) {
+          estado.pronostico = { clima: siguiente, faltan: R.CLIMA_AVISO_PASOS };
+          eventos.push({ tipo: 'aviso', antes: estado.clima, clima: siguiente, faltan: R.CLIMA_AVISO_PASOS });
+        } else cambiarClima(siguiente, eventos);
+      }
+    }
+    function cambiarClima(clima, eventos) {
+      const previo = estado.clima;
+      estado.clima = clima;
+      estado.pronostico = null;
+      pasosDelClima = 0;
+      eventos.push({ tipo: 'clima', antes: previo, clima });
+    }
+    /** El fuego llegó a 0: la pirita lo vuelve a prender, o termina el viaje. Devuelve true si terminó. */
+    function sinFuego(causa, eventos) {
+      if (estado.energia > 0) return false;
+      if (estado.recursos.pirita > 0) {
+        estado.recursos.pirita--;
+        eventos.push({ tipo: 'reencendido', con: 'pirita' });
+        cambiarEnergia(R.PIRITA_REENCIENDE, 'pirita', eventos);
+        return false;
+      }
+      terminar(false, causa, eventos);
+      return true;
     }
 
     // ── Acciones ───────────────────────────────────────────────────────────
@@ -220,18 +282,8 @@
       cambiarEnergia(-gasto, 'remar', eventos, causas);
       pasarElTiempo(eventos);
 
-      if (estado.energia === 0) {
-        if (estado.recursos.pirita > 0) {
-          estado.recursos.pirita--;
-          eventos.push({ tipo: 'reencendido', con: 'pirita' });
-          cambiarEnergia(R.PIRITA_REENCIENDE, 'pirita', eventos);
-        } else {
-          // La causa es lo que más pesó en el último paso.
-          const causa = ['noche', 'lluvia', 'viento'].find((k) => causas.includes(k)) || 'remar';
-          terminar(false, causa, eventos);
-          return eventos;
-        }
-      }
+      // Si se apaga, la causa es lo que más pesó en el último paso.
+      if (sinFuego(['noche', 'lluvia', 'viento'].find((k) => causas.includes(k)) || 'remar', eventos)) return eventos;
       const d = estado.destino;
       if (Math.max(Math.abs(d.x - nx), Math.abs(d.y - ny)) <= 1) {
         saber(destino && destino.carta, eventos);
@@ -270,9 +322,14 @@
       const r = estado.recursos, comio = r.comida > 0;
       const eventos = [{ tipo: 'acampe', comio }];
       saber('amarre', eventos);
-      if (comio) { r.comida--; cambiarEnergia(R.COMER_AL_ACAMPAR, 'comida', eventos); }
+      // Acampar no es gratis: cuidar el fuego toda la noche gasta. Comer lo compensa.
+      if (comio) r.comida--;
+      const delta = (comio ? R.COMER_AL_ACAMPAR : 0) - R.GASTO_ACAMPAR;
+      if (delta) cambiarEnergia(delta, delta > 0 ? 'comida' : 'acampar', eventos);
+      if (sinFuego('noche', eventos)) return eventos;
       if (estado.hora !== 'dia') { eventos.push({ tipo: 'hora', antes: estado.hora, hora: 'dia' }); estado.hora = 'dia'; }
       pasosDelDia = 0;
+      estado.pronostico = null;           // lo anunciado pasó durante la noche
       if (estado.clima !== 'calma') { eventos.push({ tipo: 'clima', antes: estado.clima, clima: 'calma' }); estado.clima = 'calma'; }
       pasosDelClima = 0;
       return eventos;
@@ -304,7 +361,7 @@
     };
   }
 
-  const api = { nueva, ESTACIONES };
+  const api = { nueva, elegirDestino, ESTACIONES };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else raiz.TDH_PARTIDA = api;
 })(typeof window !== 'undefined' ? window : globalThis);
