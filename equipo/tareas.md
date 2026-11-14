@@ -20,7 +20,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - **Hecho por D (PR 2):** estilo Corteza con su motor de dibujo, paleta, sprites, sonido, maqueta navegable de todas las pantallas (`arte/pantallas/`), 9 borradores de cartas, pitch, stand, versión de mesa y guía para docentes.
 - **Todavía no hay código del juego.** A y B arrancan ahora, sobre los módulos que ya dejó D. La tabla de módulos y cómo se usan está en [`memory.md`](memory.md#estado-actual).
 - **Stack decidido (13/11):** JavaScript sin build, con `<script>` clásicos, en GitHub Pages (ver [`memory.md`](memory.md#decisiones)).
-- **Sin decidir:** el destino del viaje y el alcance del MVP (`docs/02-alcance-mvp.md`).
+- **Enfoque del viaje decidido por C:** nomadismo, con motivos que combinan clima, comida y ambiente. Falta acordar con A y B los objetivos, el cierre y el alcance del MVP (`docs/02-alcance-mvp.md`).
 
 ---
 
@@ -44,15 +44,16 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Decidir el stack: JavaScript sin build (13/11).
 - [x] Acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (13/11, al mergear el PR 10: ver `memory.md`, *Decisiones*).
 - [x] Definir la estructura de datos de cartas de saber y especies, para que la Persona C solo cargue contenido. **Cartas:** en `datos/saberes.js` (suma `id`, `pueblo`, `alt` y `estado`, con plantilla para cargar sin programar). **Especies:** las armó A en `juego/nucleo/territorio/elementos.js`, también con plantilla (13/11).
-- [ ] Pantalla de carta de saber, con la fuente citada visible. **Hecha** en `juego/interfaz/carta.js` y probada con la partida falsa (`pruebas/carta.html`); falta conectarla al núcleo de A.
-- [ ] **Conectar el núcleo al juego real:** llevar `pruebas/nucleo.html` (que ya usa `carta.js`) a `juego/interfaz/`, sumarle `sonido/juego.js` y `sonido/narrador.js`, y que «Empezar el viaje» de `index.html` lleve ahí y no a la maqueta.
-- [ ] Herencia entre partidas (localStorage): los saberes pasan a la siguiente generación del mismo pueblo.
-- [ ] Códice (modo museo) separado por pueblo, que se pueda recorrer sin jugar.
-- [ ] Controles táctiles y de teclado (los de la sección *Cómo jugar* del README).
-- [ ] Accesibilidad: contraste, textos alternativos, tipografía legible, funciona en celular y con conexión lenta. Sumar los módulos de D que ya están: modo alto contraste, voz para leer las cartas (`sonido/voz.js`) y subtítulos del sonido.
-- [ ] Deploy en GitHub Pages lo antes posible, aunque sea con una pantalla.
-- [ ] Versión que funcione sin internet para la demo del 19/11.
-- [ ] Sección **Tecnologías** del README (D dejó un borrador; falta el stack final y el enlace de GitHub Pages).
+- [x] Pantalla de carta de saber, con la fuente citada visible (`juego/interfaz/carta.js`), conectada al núcleo en el juego (13/11).
+- [x] **Conectar el núcleo al juego real** (13/11): `index.html` es el juego, con la lógica en `juego/interfaz/juego.js` y los estilos en `pantallas.css`. Título, pueblo, viaje, fin o llegada, postal, códice, «Hoy» y cómo se juega.
+- [x] Herencia entre partidas (13/11, `juego/interfaz/herencia.js`): se guarda en `localStorage` por pueblo, solo los `id`, con versión. Si no hay almacenamiento, anda mientras la página está abierta.
+- [x] Códice (modo museo) separado por pueblo, que se puede recorrer sin jugar, con «Empezar de cero» (13/11).
+- [x] Controles táctiles y de teclado (13/11): tocar el agua rema hasta ahí (y se frena si el fuego queda en 1 o cae la noche), tocar una pegatina va y la junta, flechas en pantalla, teclas del README.
+- [x] Accesibilidad (13/11): alto contraste, texto alternativo en cartas, códice y postal, el mapa contado en palabras para lector de pantalla, voz para las cartas, narrador, subtítulos del sonido y botones de 44 px. Probado a 375 px, en celular acostado y en la compu. Pesa unos 420 KB sin comprimir.
+- [x] Deploy en GitHub Pages: publicado desde `main`, carpeta raíz.
+- [ ] Versión que funcione sin internet para la demo del 19/11. Ya abre con doble clic; falta el service worker para Pages (decidido para el 16/11).
+- [x] Sección **Tecnologías** del README (13/11).
+- [ ] Correr `node pruebas/de-punta-a-punta.cjs` con el juego (necesita `npm i -D playwright`; se probó a mano en el navegador).
 - [ ] Completar la parte de programación del avance del 14/11 (`equipo/avance-14-11.md`), con A.
 
 ## Persona C: Investigación cultural y consulta (Dani)
@@ -62,7 +63,8 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [ ] Escribirle a Mónica Alvarado, si se la puede contactar.
 - [x] Registrar la primera entrevista en `equipo/comunicaciones.md`, con fecha, síntesis, permisos y pendientes (13/11). Registrar los contactos siguientes sigue siendo una tarea continua.
 - [ ] Escribir `docs/03-contenido-cultural.md` con las fuentes verificadas (Gusinde, Chapman, Calderón y Zárraga, Cooper, museos, CADIC).
-- [ ] Resolver los puntos marcados con 🔍, en especial el **destino del viaje**. Ya hay base documental: la ballena varada, la pirita o la corteza para canoas (Cooper 1946, p. 94-99; ver `memory.md`).
+- [x] Definir el enfoque del viaje (13/11): **nomadismo**, con motivos combinados según clima, comida y ambiente; la ballena varada es uno de ellos. Decisión de Dani registrada en `memory.md` y `docs/01-concepto.md`.
+- [ ] Resolver los puntos marcados con 🔍 y revisar con A y B la traducción del nomadismo a objetivos y cierre de partida. Verificar por separado la fuente de cada motivo; las notas de Vargas Filgueira (2019) y las referencias de Cooper (1946) están registradas en `comunicaciones.md` y `docs/05-rigor-historico.md`.
 - [ ] Revisar los 9 borradores de cartas que dejó D (ahora en `datos/saberes.js`, con plantilla arriba para cargar cartas nuevas; `node --test` revisa que no falte nada) y sumar las que falten: texto breve, qué es dato y qué es recurso de juego, y fuente citada.
 - [ ] Revisar las actividades de la guía para docentes (`escuelas/actividades.js`).
 - [ ] Redactar el cierre del códice, en presente, mencionando las comunidades vivas.

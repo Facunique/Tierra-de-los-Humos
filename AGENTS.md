@@ -53,7 +53,7 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 | `docs/` | Diseño del juego: guía de la hackatón, concepto, alcance, contenido cultural, dirección de arte |
 | `arte/` | Arte propio. Estilo **Corteza**: `corteza/corteza.js` es el motor de dibujo del juego; `fuente/arte.js` tiene la paleta y las pegatinas pixel (`node arte/generar.cjs` genera los PNG). Ver `arte/README.md` |
 | `datos/` | Datos del juego en `.js`: las cartas de saber (`saberes.js`, con plantilla para cargar cartas sin programar). Los datos del territorio están en `juego/nucleo/territorio/` |
-| `juego/` | El juego: `nucleo/` (Persona A, sin DOM; el contrato con la interfaz está al principio de `partida.js`), `nucleo/territorio/` (lo que hay en el mapa, las especies y el destino, con su fuente; se editan sin programar) e `interfaz/` (Persona B: pantallas, cartas, `juego.css`) |
+| `juego/` | El juego: `nucleo/` (Persona A, sin DOM; el contrato con la interfaz está al principio de `partida.js`), `nucleo/territorio/` (lo que hay en el mapa, las especies y el destino, con su fuente; se editan sin programar) e `interfaz/` (Persona B: `juego.js` une todo, `herencia.js` guarda lo aprendido, `carta.js`, `juego.css` y `pantallas.css`) |
 | `pruebas/` | Pruebas con `node --test` (sin dependencias), desde la raíz del repo, y la partida falsa para probar la interfaz (`carta.html`). `de-punta-a-punta.cjs` juega partidas enteras en cinco pantallas con Playwright |
 | `sonido/` | Sonido generado por código (Web Audio), sin archivos de audio: ambiente según el lugar, efectos y voz para leer las cartas. Ver `sonido/README.md` |
 | `mesa/` | Versión de mesa para imprimir (tablero, fichas, reglas) |
@@ -64,7 +64,7 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 | `AGENTS.md` | Este archivo |
 | `README.md` | Presentación pública del proyecto (lo evalúa el jurado) |
 
-El núcleo del juego ya está en `juego/nucleo/` (ver su `README.md`) y se juega en `pruebas/nucleo.html`; falta conectarlo a la interfaz del juego real. **Stack decidido (13/11):** HTML, CSS y JavaScript **sin build**, con `<script>` clásicos que cuelgan globales `TDH_*`, como `arte/corteza/corteza.js`. Nada de `import`/`export`, `fetch` de archivos locales ni librerías externas: el juego tiene que abrir con doble clic (`file://`) y sin internet. Se publica en GitHub Pages desde `main`, carpeta raíz. Detalle en `equipo/memory.md`.
+El juego está en `index.html`: el núcleo (`juego/nucleo/`, ver su `README.md`) conectado a la interfaz (`juego/interfaz/juego.js`). `window.TDH_JUEGO` deja mirar la partida para las pruebas. **Stack decidido (13/11):** HTML, CSS y JavaScript **sin build**, con `<script>` clásicos que cuelgan globales `TDH_*`, como `arte/corteza/corteza.js`. Nada de `import`/`export`, `fetch` de archivos locales ni librerías externas: el juego tiene que abrir con doble clic (`file://`) y sin internet. Se publica en GitHub Pages desde `main`, carpeta raíz. Detalle en `equipo/memory.md`.
 
 ## Cómo trabajar
 

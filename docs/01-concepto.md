@@ -1,6 +1,6 @@
 # 01 · Concepto
 
-> Documento de una página para alinear al equipo. Versión 2 (9/11/2026): suma las decisiones del equipo sobre pueblos, herencia y nombres. Lo que está marcado con 🔍 todavía hay que confirmarlo con fuentes y con las comunidades (ver `03-contenido-cultural.md`).
+> Documento para alinear al equipo. Actualizado el 13/11/2026: Dani define el nomadismo como enfoque del viaje, con motivos que combinan clima, comida y ambiente. Su traducción a mecánicas queda pendiente con A y B. Lo que está marcado con 🔍 todavía hay que confirmarlo con fuentes y con las comunidades (ver `03-contenido-cultural.md`).
 
 ## Premisa
 
@@ -35,9 +35,17 @@ El nombre viene del primer nombre que, según la tradición, los navegantes euro
 2. **Encontrar**: leña, comida, refugio, materiales. También *saberes*: momentos en que el viaje te enseña algo (por qué conviene acampar en tal lugar, qué se come en qué estación).
 3. **Volver**: regresar al fuego antes de que se apague o antes de que cambie el clima. Cada paso gasta, así que alejarse es una apuesta.
 
-Varias vueltas de este ciclo forman **una etapa**, y varias etapas forman **el viaje**. Llegar al destino con el fuego encendido es la victoria. Que se apague es la derrota. El detalle (cuántas etapas, cuántos peligros) se define en `02-alcance-mvp.md`.
+Varias vueltas de este ciclo forman **una etapa**, y varias etapas forman **el viaje** en el diseño propuesto. El prototipo actual tiene un solo tramo y termina al llegar a un destino con el fuego encendido o cuando se apaga. Con el enfoque decidido por Dani, A y B deben acordar los objetivos y el cierre de la partida. No se definieron nuevas condiciones de victoria, cantidades de etapas ni duración; se documentarán en `02-alcance-mvp.md`.
 
-**El destino del viaje está por investigar.** Tiene que ser un motivo real y documentado para moverse. La hipótesis es que los traslados seguían a la comida: las temporadas de mariscos, de aves o de lobos marinos, o un varamiento de ballena. 🔍
+### Enfoque del viaje: nomadismo
+
+**Decisión de diseño de Dani (13/11/2026):** el viaje acompaña desplazamientos con motivos que combinan el clima, la comida y el ambiente. La ballena varada es uno de los motivos posibles. Los objetivos concretos y la forma de cerrar una partida quedan pendientes de acuerdo con A y B.
+
+**Base documental aportada:** las notas de lectura de Dani sobre Vargas Filgueira, Víctor (2019), *Mi sangre yagán (ahua saapa yagan)*, primera edición digital, Editora Cultural Tierra del Fuego, señalan episodios de desplazamiento para acudir a una ballena varada (pp. 16–17), recuperar corteza conservada para reparar una canoa (pp. 31–32, con estacionalidad de la extracción en p. 23) y recuperar reservas de grasa para el invierno (pp. 53–54). Las páginas son las del visor del PDF de 90 páginas. El asistente trabaja con ese cotejo aportado por Dani; no leyó el ejemplar completo.
+
+**Dato y recurso de juego:** cada episodio conserva su fuente. La combinación de motivos, la familia, el mapa y las situaciones de cada partida son decisiones de ficción. «Nomadismo» nombra aquí el enfoque elegido por Dani; no se atribuye como expresión del entrevistado ni como descripción de la vida actual de todo el pueblo yagán. 🔍 Completar las páginas y el cotejo de las afirmaciones específicas sobre vientos, mareas y elección de refugio antes de trasladarlas a cartas o datos del territorio.
+
+**Para A y B:** revisar el destino fijo del prototipo, los objetivos y los avisos de llegada según la propuesta registrada en `equipo/memory.md`. Este cambio de documentación todavía no implementa desplazamientos con objetivos variables.
 
 ## Entre partidas: la transmisión
 
@@ -71,6 +79,6 @@ Así, morir y volver a empezar, que es lo propio del roguelike, deja de ser cast
 
 ## Pendientes que salen de este documento
 
-1. Averiguar el destino o motivo de los viajes yaganes. 🔍
+1. Acordar con A y B cómo se juega el enfoque de nomadismo decidido por Dani; verificar cada motivo concreto con su fuente y definir el cierre de la partida. 🔍
 2. Consultar a la comunidad si podemos jugar como alguien de su pueblo, y si podemos usar nombres.
 3. Confirmar la tabla de pueblos con las fuentes.
