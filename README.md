@@ -1,6 +1,6 @@
 # Tierra de los Humos — roguelike fueguino
 
-![Tierra de los Humos: costa fueguina en otoño recortada en papel, con una choza y un conchal, y en primer plano una canoa de corteza con el fuego encendido, el hombre adelante con el arpón y la mujer atrás remando](arte/logo/compartir.png)
+![Tierra de los Humos: costa fueguina recortada en papel, con bosque, una choza y un anillo de conchas. En primer plano, una canoa de corteza con fuego y dos figuras sin rasgos: una lleva un remo y la otra, un arpón en reposo](arte/logo/compartir.png)
 
 Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de Tierra del Fuego. Lo desarrolla el equipo **Tierra de los Humos** para la hackatón [SoberaníaTech 2026](https://soberaniatech.com.ar/), organizada por la Agencia de Innovación de Tierra del Fuego.
 
@@ -14,17 +14,19 @@ Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de
 
 ## Problema
 
-Los saberes de los pueblos Selk'nam, Haush y Yagán sobre la vida en el territorio fueguino (navegar los canales, recolectar, cuidar el fuego, adaptarse al clima) son poco conocidos por jóvenes y escuelas. Cuando aparecen, suelen contarse en pasado, como si esos pueblos ya no existieran.
+El desafío del proyecto es acercar a jóvenes y escuelas fuentes sobre los saberes y la vida en el territorio fueguino, reconociendo la continuidad de sus pueblos en el presente. El juego se centra en el pueblo Yagán y distingue las descripciones históricas de las prácticas actuales.
 
 ## Solución propuesta
 
 Un juego web que se juega desde el navegador, también en el celular. Cada partida es un viaje en el que el fuego es tu vida: se gasta con el frío y el viento, y se mantiene con lo que el territorio ofrece. Lo que se aprende en un viaje pasa a la siguiente generación como **cartas de saber**, cada una con su fuente citada. La mecánica del roguelike (morir, volver a empezar, avanzar) representa así la **transmisión de la memoria**.
 
+La familia, el mapa, los eventos y la herencia entre partidas son ficción. Los datos culturales conservan su fuente y los puntos pendientes se señalan con 🔍.
+
 Tres ideas lo sostienen:
 
 1. **El fuego es la vida.** Las familias yaganes llevaban el fuego encendido en el medio de la canoa (Cooper, 1946, p. 88 y 91). En el juego, ese fuego es la barra de vida.
 2. **Morir es transmitir.** Cuando el fuego se apaga, los saberes encontrados pasan a la siguiente generación del mismo pueblo.
-3. **Cada saber tiene fuente, y los pueblos están vivos.** Nada inventado presentado como real: cada carta separa el *dato* del *recurso de juego* y cita su fuente con página. Todo se cuenta en presente, con consulta a la comunidad.
+3. **Cada saber tiene fuente, y los pueblos están vivos.** Cada carta separa el *dato* del *recurso de juego* y cita su fuente con página. La consulta está registrada y sigue abierta; su alcance y los permisos pendientes están en [el documento de fuentes](docs/03-contenido-cultural.md#consulta-a-la-comunidad).
 
 El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 
@@ -47,8 +49,10 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 |---|---|
 | [00 · Guía de la hackatón](docs/00-guia-hackathon.md) | Bases, fechas, criterios de evaluación, cuidados culturales y plan por fases |
 | [01 · Concepto](docs/01-concepto.md) | Premisa, pueblos (Yagán primero), bucle central, transmisión entre partidas, tono y aporte al eje |
+| [03 · Contenido cultural y fuentes](docs/03-contenido-cultural.md) | Publicaciones y páginas, consulta a la comunidad y referencias pendientes |
 | [04 · Dirección de arte y sonido](docs/04-direccion-de-arte.md) | El estilo Corteza: principios, motor de dibujo, cartas, paleta, sonido y accesibilidad |
 | [05 · Rigor histórico del arte](docs/05-rigor-historico.md) | Cada elemento dibujado contrastado con las fuentes etnográficas, con página |
+| [06 · Nombres de lugares](docs/06-toponimia.md) | Correspondencias del libro, notas y criterio Onashaga — Canal Beagle |
 
 Arte y sonido:
 
@@ -142,6 +146,8 @@ Las referencias completas, sus páginas y los límites de cada uso están en [`d
 El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido son **propios del equipo** (CC BY-SA 4.0). No se usan fotos históricas, ilustraciones, sonidos ni música de terceros. *Se completa si se suma alguna librería o recurso nuevo.*
 
 ## Uso de inteligencia artificial
+
+- **Auditoría cultural (14/11, paso 5):** a pedido de la Persona C, Codex (OpenAI) revisó los textos de cartas, sonido, mesa, actividades docentes, pitch, stand y README, junto con sus dependencias y archivos exportados. Registró 23 observaciones con archivo, línea y propuesta en `equipo/auditoria-cultural-paso-5.md`, corrigió cuatro puntos editoriales menores del README y actualizó tareas, memoria y avance. Las propuestas importantes y los cambios en piezas del equipo siguen pendientes. No incorporó datos culturales nuevos ni modificó código, números o reglas.
 
 Las bases piden declararlo (cláusula 7.4).
 

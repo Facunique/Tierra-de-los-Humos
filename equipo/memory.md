@@ -5,6 +5,7 @@
 ## Estado actual
 
 - **Fecha de la última actualización:** 14/11/2026 (día 6 de desarrollo).
+- **Auditoría cultural, paso 5 (14/11, C):** revisados cartas, textos de sonido, mesa, las nueve actividades docentes, pitch, stand y README, con sus dependencias y archivos exportados. Informe: [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md), con 23 observaciones pendientes y cuatro ajustes editoriales menores aplicados al README. Se confirmó que la diapositiva y página 4 del pitch exportado conservan la carta de amarre anterior. Las decisiones importantes, la aplicación en piezas de B/D y su regeneración siguen pendientes; no se cambió código, reglas, números ni datos del juego.
 - **Fuentes culturales, paso 4 (14/11, C):** escritos `docs/03-contenido-cultural.md` y la sección Fuentes del README. Reúnen Vargas Filgueira (2019), Cooper y Bird (1946), Spears (1895), sus páginas y el alcance de las referencias registradas. La entrevista del 13/11 tiene una sección propia; las obras todavía no consultadas, las fichas incompletas y los permisos pendientes conservan su 🔍. No se incorporaron fuentes nuevas de memoria ni se cambiaron reglas del juego.
 - **Nombres de lugares (14/11, C):** correspondencias y descripciones de Vargas Filgueira (2019), *Mi sangre yagán (ahua saapa yagan)*, registradas en `docs/06-toponimia.md`. C confirmó el orden **Onashaga — Canal Beagle**, con el nombre del libro primero. La documentación adopta ese criterio; la verificación cartográfica, los permisos pendientes y la implementación de los rótulos se mantienen como tareas abiertas. No se cambiaron código ni coordenadas.
 - **Plataforma de la hackatón (14/11):** las entregas se cargan como links en *Mi equipo* (link personal de Facu, que no va al repo). Avance: repositorio y documento del avance. Final: prototipo, repositorio, README, video y presentación. Todos públicos o compartidos con la organización. El nombre del equipo se puede cambiar hasta el 16/11 a las 23:00. La idea que cargamos al inscribirnos nombra a los Selk'nam, Haush y Yagán; el juego se centra en los Yagán (ver *Decisiones*), y conviene explicarlo en el avance y en el pitch.
@@ -48,7 +49,7 @@
   - **Antes de entregar (16/11):** `node pruebas/de-punta-a-punta.cjs` juega partidas enteras en cinco pantallas tocando los botones y avisa si algo se rompe.
 - **Coordinación (14/11):** regla nueva en `AGENTS.md`. Antes de trabajar y antes de subir, `node herramientas/novedades.cjs` muestra qué hicieron los demás y qué conviene hacer por eso. Cada uno se acopla a lo nuevo, y si algo choca, adapta lo suyo.
 - **Ideas para más adelante:** [`ideas.md`](ideas.md) es el lugar para coordinar ideas que todavía no se hicieron. Cualquiera del equipo puede sumar, acomodar o descartar; cada idea dice qué señal indica cuándo conviene hacerla, quién la propone y a quién le tocaría.
-- **Siguiente:** acordar con A y B la traducción a mecánicas del enfoque de nomadismo, completar las referencias pendientes de `docs/03-contenido-cultural.md`, realizar la auditoría de textos del paso 5 y proponer el cierre del códice; revisar el alcance con A y B, probar el juego con personas y completar la consulta de Goodall. La propuesta de bibliografía automática (idea 16) ya tiene su señal cumplida; se propone a C con D como mejora, sin agregar código en esta revisión.
+- **Siguiente:** resolver las observaciones de la auditoría del paso 5 con B y D y proponer el cierre del códice; acordar con A y B la traducción a mecánicas del enfoque de nomadismo, completar las referencias pendientes de `docs/03-contenido-cultural.md`, probar el juego con personas y completar la consulta de Goodall. La propuesta de bibliografía automática (idea 16) ya tiene su señal cumplida; se propone a C con D como mejora, sin agregar código en esta revisión.
 
 ## Fechas clave
 
@@ -88,7 +89,15 @@
 
 - **Integrantes para el README:** los roles ya están (ver *Equipo*). La persona referente ante la organización es **Facu** (Persona B). Falta decidir qué nombres publicar (sin mails ni teléfonos).
 - **Qué módulos de la Persona D entran al juego final** (luz real, sonido por lugar, voz, postal, alto contraste). La propuesta es sumarlos todos: ya andan en la maqueta y no cambian el diseño. Lo deciden A y B según el tiempo.
-- **Revisión de la guía para docentes** (`escuelas/`) por la Persona C y, si se puede, por docentes.
+- **Ajustes de la guía para docentes** (`escuelas/`): C revisó las nueve actividades y registró propuestas en la auditoría del paso 5. Faltan aplicar los cambios acordados con D, regenerar el PDF y, si se puede, recibir una revisión docente.
+- **Tono de la transmisión entre generaciones:** se consultó a C si reemplazar «Morir es transmitir» por «Lo aprendido se transmite». No hay respuesta registrada; la frase se conserva hasta resolverlo. No implica cambiar reglas del juego.
+
+### Coordinación para B y D: observaciones de la auditoría cultural
+
+- **Informe de C:** [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md) detalla cada propuesta, referencia y ubicación. La revisión está hecha; las observaciones no se dan por corregidas ni aprobadas por la comunidad.
+- **Para D:** completar la diapositiva de consulta con lo efectivamente registrado; retirar o fundamentar el relato del origen del nombre; actualizar las fuentes y el contexto de las actividades; resolver los rótulos con docs/06. El pitch PDF y la diapositiva 4 conservan la carta de amarre anterior: regenerar las piezas después de los cambios acordados.
+- **Para B:** coordinar con C el cierre «Hoy», las referencias de fauna del narrador y la lectura automática de palabras en lengua yagán. No hay pronunciación validada ni permiso nuevo de representación.
+- **Decisiones abiertas:** tono de la transmisión, alcance de representar una familia y afirmaciones actuales del cierre. Los cuatro cambios menores del README están cubiertos por la autorización editorial de C para esta sesión; las piezas de otras personas no se modificaron.
 
 ### Coordinación para A y B: viaje con motivos combinados
 
@@ -96,7 +105,7 @@
 - **Propuesta para acordar:** evaluar objetivos de viaje vinculados con las condiciones del entorno y los recursos disponibles. Una ballena varada puede motivar un desplazamiento, junto con otras situaciones documentadas. A y B deben proponer cómo se eligen esos objetivos y cuál es el cierre de una partida; no se fijaron cantidades, duración ni reglas nuevas.
 - **Archivos a revisar por A:** `juego/nucleo/territorio/destinos.js`, `juego/nucleo/territorio/pueblos.js`, `juego/nucleo/mapa.js` y `juego/nucleo/partida.js`. **Por B:** objetivos, avisos y cierre en `juego/interfaz/juego.js`, en coordinación con los textos de `sonido/juego.js` y `sonido/narrador.js`.
 - **Contenido a cargo de C:** aportar para cada motivo el dato y la fuente, distinguir el episodio documentado de la situación ficticia y revisar las cartas. El nomadismo es el enfoque elegido; no se presenta como un lugar al que llegar ni como un dato validado por toda la comunidad.
-- **Estado:** se actualizaron los documentos de diseño. No se cambió el código, los números ni los campos de funcionamiento de los datos. La guía para docentes, la versión de mesa, el pitch y el stand se revisarán según el paso 5 pedido por Dani, antes de modificar sus textos.
+- **Estado:** se actualizaron los documentos de diseño. No se cambió el código, los números ni los campos de funcionamiento de los datos. La guía para docentes, la versión de mesa, el pitch y el stand ya se revisaron en el paso 5; sus propuestas de corrección están en la auditoría y siguen pendientes de aplicación acordada.
 - **Aviso del paso 3:** el texto de la carta `corteza` ya explica el descubrimiento del saber y no promete reparación. El comentario de `efecto: null` en `elementos.js` y el README del núcleo quedaron pendientes de actualización por A. C solo editó `dato` y `fuente` en los archivos de territorio. No se incorporó la carta nueva de reservas al catálogo: está preparada para decidir con Dani y acordar con A y B su integración.
 
 ## Lo que sabemos (y de dónde)
