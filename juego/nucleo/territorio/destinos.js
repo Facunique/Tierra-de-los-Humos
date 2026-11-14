@@ -33,8 +33,8 @@
       id: 'ballena', nombre: 'la ballena varada', dibujo: 'ballena-varada',
       donde: 'playa', costa: 'sur', zona: { desde: 0.84, hasta: 0.94 },
       carta: 'ballena', humos: true,
-      dato: 'Cooper describe encuentros de familias para aprovechar una ballena varada como alimento. Vargas Filgueira relata un desplazamiento para acudir a un varamiento. Es uno de los motivos documentados que se consideran para el enfoque de nomadismo del juego.',
-      fuente: COOPER + ', p. 84, 94-95 y 99. Vargas Filgueira, Víctor (2019). Mi sangre yagán (ahua saapa yagan). Primera edición digital. Editora Cultural Tierra del Fuego, p. 16-17 del visor del PDF. La combinación de motivos es una decisión de diseño de Dani.',
+      dato: 'Cooper describe encuentros de familias para aprovechar una ballena varada como alimento. Vargas Filgueira relata un desplazamiento para acudir a un varamiento.',
+      fuente: COOPER + ', p. 84, 94-95 y 99. Vargas Filgueira, Víctor (2019). Mi sangre yagán (ahua saapa yagan). Primera edición digital. Editora Cultural Tierra del Fuego, p. 16-17 del visor del PDF.',
       estado: 'borrador',
     },
     corteza: {

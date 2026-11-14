@@ -122,7 +122,7 @@
       id: 'ballena', pueblo: 'yagan', estado: 'borrador',
       tipo: 'Encuentro', titulo: 'La ballena varada',
       dato: 'Cooper describe cómo una ballena varada reúne a varias familias para aprovecharla como alimento. Vargas Filgueira relata un desplazamiento para acudir a un varamiento.',
-      juego: 'En este prototipo, llegar a la ballena con el fuego encendido completa el viaje. Es uno de los motivos posibles del enfoque de nomadismo acordado.',
+      juego: 'Una ballena varada es uno de los motivos del viaje. En esta versión, llegar con el fuego encendido completa la partida.',
       fuente: COOPER + ', p. 84, 94-95 y 99. Vargas Filgueira, Víctor (2019). Mi sangre yagán (ahua saapa yagan). Primera edición digital. Editora Cultural Tierra del Fuego, p. 16-17 del visor del PDF.',
       alt: 'Una ballena sobre la playa, al pie del bosque. Por encima de los árboles se ven columnas de humo.',
       mapa: ['GGLGGGLG', '........', ',,,,,,,,'], extra: { objetos: [{ id: 'ballena-varada', x: 4, y: 1 }], humos: [{ x: 1.5, y: 0.6 }, { x: 7.2, y: 0.8 }] },
