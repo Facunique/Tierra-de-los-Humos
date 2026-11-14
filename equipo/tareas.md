@@ -27,7 +27,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 ## Persona A: Programación núcleo (Mati)
 
 - [x] Decidir el stack con B: JavaScript sin build (13/11).
-- [ ] Acordar con B la estructura de carpetas del juego, para no pisarse. **Propuesta en [`juego/nucleo/README.md`](../juego/nucleo/README.md):** el contrato de la partida falsa, ampliado sin romperlo.
+- [x] Acordar con B la estructura de carpetas del juego, para no pisarse (13/11, al mergear el PR 10: ver `memory.md`, *Decisiones*). El contrato es el de la partida falsa, ampliado sin romperlo ([`juego/nucleo/README.md`](../juego/nucleo/README.md)).
 - [x] Motor por turnos con grilla (13/11, `juego/nucleo/partida.js`). Dibujar con el motor Corteza (`TDH_CORTEZA.crear(canvas).escena({...})`), no desde cero. Ver `docs/04-direccion-de-arte.md`, sección 6.
 - [x] Mapa de agua e islas generado al azar (13/11, `juego/nucleo/mapa.js`), que se revela a medida que se avanza (el humo del motor tapa lo no explorado).
 - [x] Sistema del fuego: se gasta con frío (de noche), viento y lluvia (13/11).
@@ -42,9 +42,10 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 
 - [ ] **14/11, 11:00:** reunión con el referente de la comunidad yagán. Registrarla el mismo día en `equipo/comunicaciones.md` (la entrada ya está armada, con huecos ✏️).
 - [x] Decidir el stack: JavaScript sin build (13/11).
-- [ ] Acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (propuesta en `memory.md`, *Por decidir*).
-- [ ] Definir la estructura de datos de cartas de saber y especies, para que la Persona C solo cargue contenido. **Cartas:** hecho en `datos/saberes.js` (suma `id`, `pueblo`, `alt` y `estado`, con plantilla para cargar sin programar). Faltan las especies.
+- [x] Acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (13/11, al mergear el PR 10: ver `memory.md`, *Decisiones*).
+- [x] Definir la estructura de datos de cartas de saber y especies, para que la Persona C solo cargue contenido. **Cartas:** en `datos/saberes.js` (suma `id`, `pueblo`, `alt` y `estado`, con plantilla para cargar sin programar). **Especies:** las armó A en `juego/nucleo/territorio/elementos.js`, también con plantilla (13/11).
 - [ ] Pantalla de carta de saber, con la fuente citada visible. **Hecha** en `juego/interfaz/carta.js` y probada con la partida falsa (`pruebas/carta.html`); falta conectarla al núcleo de A.
+- [ ] **Conectar el núcleo al juego real:** llevar `pruebas/nucleo.html` (que ya usa `carta.js`) a `juego/interfaz/`, sumarle `sonido/juego.js` y `sonido/narrador.js`, y que «Empezar el viaje» de `index.html` lleve ahí y no a la maqueta.
 - [ ] Herencia entre partidas (localStorage): los saberes pasan a la siguiente generación del mismo pueblo.
 - [ ] Códice (modo museo) separado por pueblo, que se pueda recorrer sin jugar.
 - [ ] Controles táctiles y de teclado (los de la sección *Cómo jugar* del README).
