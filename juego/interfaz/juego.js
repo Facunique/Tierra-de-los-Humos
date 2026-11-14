@@ -63,12 +63,17 @@
   // Entre pantallas, el humo tapa y destapa (si la persona no pidió menos movimiento).
   let enTransicion = false;
   async function irConHumo(nombre) {
-    if (enTransicion) return;
+    // Un toque mientras el humo todavía tapa o destapa no se pierde: espera a que termine.
+    while (enTransicion) await new Promise((r) => setTimeout(r, 50));
+    if (actual === nombre && nombre !== 'viaje') return;
     if (reducido || !window.TDH_TRANSICIONES) { ir(nombre); return; }
     enTransicion = true;
-    try { await TDH_TRANSICIONES.humoCubre(document.body, 380); ir(nombre); await TDH_TRANSICIONES.humoDescubre(document.body, 460); }
+    try { await conTope(TDH_TRANSICIONES.humoCubre(document.body, 380), 900); ir(nombre); await conTope(TDH_TRANSICIONES.humoDescubre(document.body, 460), 1000); }
     finally { enTransicion = false; }
   }
+  // Si el navegador frena las animaciones (pestaña en segundo plano, celular que ahorra batería),
+  // la transición no traba el juego: pasado el tope, se sigue igual.
+  const conTope = (promesa, ms) => Promise.race([promesa, new Promise((r) => setTimeout(r, ms))]);
   document.addEventListener('click', (e) => {
     const b = e.target.closest('[data-ir], [data-volver]');
     if (!b) return;
@@ -380,7 +385,7 @@
       if (oido) oido.generacion();
       if (window.TDH_TRANSICIONES && !reducido && ultimo) {
         enTransicion = true;
-        try { await TDH_TRANSICIONES.pasoDelFuego(document.body, { desde: ultimo.generacion, hasta: l.generacion, saberes: l.saberes.map((id) => SABERES[id].titulo) }); }
+        try { await conTope(TDH_TRANSICIONES.pasoDelFuego(document.body, { desde: ultimo.generacion, hasta: l.generacion, saberes: l.saberes.map((id) => SABERES[id].titulo) }), 6500); }
         finally { enTransicion = false; }
       }
       partida = null;
@@ -523,6 +528,19 @@
     clearTimeout(espera);
     espera = setTimeout(() => { prepararFondo(actual); if (actual === 'viaje' && partida) medir(); }, 150);
   });
+
+  // ── Sin internet ──────────────────────────────────────────────────────────
+  // Publicado (http o https), el navegador guarda el juego para abrirlo sin conexión (sw.js) y se
+  // puede sumar a la pantalla de inicio (manifest.webmanifest). Con doble clic (file://) no hace falta.
+  if (/^https?:$/.test(location.protocol)) {
+    const m = document.createElement('link'); m.rel = 'manifest'; m.href = 'manifest.webmanifest';
+    document.head.appendChild(m);
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').then(() => navigator.serviceWorker.ready).then(() => {
+        $('aviso-offline').hidden = false;
+      }).catch(() => { /* sin service worker, el juego anda igual con internet */ });
+    }
+  }
 
   // Para las pruebas automáticas y el grabador del video: mirar la partida, sin tocarla.
   window.TDH_JUEGO = { get partida() { return partida; }, get pantalla() { return actual; }, herencia };
