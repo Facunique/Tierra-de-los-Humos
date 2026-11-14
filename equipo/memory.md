@@ -5,7 +5,12 @@
 ## Estado actual
 
 - **Fecha de la última actualización:** 13/11/2026 (día 5 de desarrollo).
-- **Fase:** programación. El núcleo del juego ya está en `main` (`juego/nucleo/`, ver su [README](../juego/nucleo/README.md)) y se juega de punta a punta en `pruebas/nucleo.html`. Falta conectarlo a la interfaz del juego real (Persona B). Quién hace qué está en [`tareas.md`](tareas.md).
+- **Fase:** programación. El juego se juega de punta a punta en `index.html`: el núcleo de A (`juego/nucleo/`) conectado a la interfaz de B (`juego/interfaz/`), con la herencia guardada en el navegador, el códice y los módulos de D. Quién hace qué está en [`tareas.md`](tareas.md).
+- **13/11 (Persona B):** el juego conectado. Detalle en [`tareas.md`](tareas.md#persona-b-programación-de-interfaz-contenido-y-deploy-facu). Lo que hay que saber:
+  - Con «Luz real de Ushuaia» encendida, el viaje empieza con la hora y la estación de ahora. **De noche se empieza gastando el doble**: el juego lo avisa al arrancar y sugiere amarrar. El bot cuidadoso de A llega igual el 70 al 74 % de las veces empezando de noche (88 % de día). Si en las pruebas con personas resulta muy difícil, se decide con A.
+  - Al remar tocando lejos, la canoa se frena sola si el fuego queda en 1 o cae la noche.
+  - `window.TDH_JUEGO` deja mirar la partida (sin tocarla) para las pruebas automáticas y el grabador del video.
+  - Lo de las pruebas de D que tocaba a la interfaz quedó resuelto en el juego: la celda se calcula solo al entrar y al cambiar el tamaño, el aviso va abajo del mapa y no tapa el HUD, y el cartel del final tiene margen. `pruebas/nucleo.html` (de A) sigue como estaba.
 - **13/11:** se mergearon el núcleo de la Persona A (PR 10) y el trabajo de la Persona D del 13/11 (PR 11). Juntos pasan las 74 pruebas. Con eso quedaron acordados la estructura de carpetas y el contrato entre núcleo e interfaz (ver *Decisiones*).
 - **13/11:** se decidió el stack: JavaScript sin build, con `<script>` clásicos, en GitHub Pages (ver *Decisiones*).
 - **13/11:** se mergeó el trabajo de arte de la Persona D (PR 2), se agendó la reunión del 14/11 con el referente de la comunidad yagán y se actualizó el reparto de tareas con los nombres.
@@ -36,7 +41,7 @@
   - **Antes de entregar (16/11):** `node pruebas/de-punta-a-punta.cjs` juega partidas enteras en cinco pantallas tocando los botones y avisa si algo se rompe.
 - **Coordinación (14/11):** regla nueva en `AGENTS.md`. Antes de trabajar y antes de subir, `node herramientas/novedades.cjs` muestra qué hicieron los demás y qué conviene hacer por eso. Cada uno se acopla a lo nuevo, y si algo choca, adapta lo suyo.
 - **Ideas para más adelante:** [`ideas.md`](ideas.md) es el lugar para coordinar ideas que todavía no se hicieron. Cualquiera del equipo puede sumar, acomodar o descartar; cada idea dice qué señal indica cuándo conviene hacerla, quién la propone y a quién le tocaría.
-- **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md` (A y B, para decidir las propuestas de mejora del núcleo), conectar el núcleo a la interfaz del juego (B), cotejar el libro de Goodall.
+- **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md` (A y B, para decidir las propuestas de mejora del núcleo), probar el juego con personas (A y B), la versión sin internet en Pages (B, 16/11), cotejar el libro de Goodall.
 
 ## Fechas clave
 

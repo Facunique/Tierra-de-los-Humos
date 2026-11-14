@@ -44,15 +44,16 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Decidir el stack: JavaScript sin build (13/11).
 - [x] Acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (13/11, al mergear el PR 10: ver `memory.md`, *Decisiones*).
 - [x] Definir la estructura de datos de cartas de saber y especies, para que la Persona C solo cargue contenido. **Cartas:** en `datos/saberes.js` (suma `id`, `pueblo`, `alt` y `estado`, con plantilla para cargar sin programar). **Especies:** las armó A en `juego/nucleo/territorio/elementos.js`, también con plantilla (13/11).
-- [ ] Pantalla de carta de saber, con la fuente citada visible. **Hecha** en `juego/interfaz/carta.js` y probada con la partida falsa (`pruebas/carta.html`); falta conectarla al núcleo de A.
-- [ ] **Conectar el núcleo al juego real:** llevar `pruebas/nucleo.html` (que ya usa `carta.js`) a `juego/interfaz/`, sumarle `sonido/juego.js` y `sonido/narrador.js`, y que «Empezar el viaje» de `index.html` lleve ahí y no a la maqueta.
-- [ ] Herencia entre partidas (localStorage): los saberes pasan a la siguiente generación del mismo pueblo.
-- [ ] Códice (modo museo) separado por pueblo, que se pueda recorrer sin jugar.
-- [ ] Controles táctiles y de teclado (los de la sección *Cómo jugar* del README).
-- [ ] Accesibilidad: contraste, textos alternativos, tipografía legible, funciona en celular y con conexión lenta. Sumar los módulos de D que ya están: modo alto contraste, voz para leer las cartas (`sonido/voz.js`) y subtítulos del sonido.
-- [ ] Deploy en GitHub Pages lo antes posible, aunque sea con una pantalla.
-- [ ] Versión que funcione sin internet para la demo del 19/11.
-- [ ] Sección **Tecnologías** del README (D dejó un borrador; falta el stack final y el enlace de GitHub Pages).
+- [x] Pantalla de carta de saber, con la fuente citada visible (`juego/interfaz/carta.js`), conectada al núcleo en el juego (13/11).
+- [x] **Conectar el núcleo al juego real** (13/11): `index.html` es el juego, con la lógica en `juego/interfaz/juego.js` y los estilos en `pantallas.css`. Título, pueblo, viaje, fin o llegada, postal, códice, «Hoy» y cómo se juega.
+- [x] Herencia entre partidas (13/11, `juego/interfaz/herencia.js`): se guarda en `localStorage` por pueblo, solo los `id`, con versión. Si no hay almacenamiento, anda mientras la página está abierta.
+- [x] Códice (modo museo) separado por pueblo, que se puede recorrer sin jugar, con «Empezar de cero» (13/11).
+- [x] Controles táctiles y de teclado (13/11): tocar el agua rema hasta ahí (y se frena si el fuego queda en 1 o cae la noche), tocar una pegatina va y la junta, flechas en pantalla, teclas del README.
+- [x] Accesibilidad (13/11): alto contraste, texto alternativo en cartas, códice y postal, el mapa contado en palabras para lector de pantalla, voz para las cartas, narrador, subtítulos del sonido y botones de 44 px. Probado a 375 px, en celular acostado y en la compu. Pesa unos 420 KB sin comprimir.
+- [x] Deploy en GitHub Pages: publicado desde `main`, carpeta raíz.
+- [ ] Versión que funcione sin internet para la demo del 19/11. Ya abre con doble clic; falta el service worker para Pages (decidido para el 16/11).
+- [x] Sección **Tecnologías** del README (13/11).
+- [ ] Correr `node pruebas/de-punta-a-punta.cjs` con el juego (necesita `npm i -D playwright`; se probó a mano en el navegador).
 - [ ] Completar la parte de programación del avance del 14/11 (`equipo/avance-14-11.md`), con A.
 
 ## Persona C: Investigación cultural y consulta (Dani)
