@@ -25,15 +25,21 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 
 ### Programación (Personas A y B)
 - **Stack decidido:** HTML, CSS y JavaScript sin build, con Canvas 2D y sin librerías externas. Abre con doble clic y sin internet, pesa poco para el celular y reusa el motor de dibujo y el sonido que ya estaban ([`memory.md`](memory.md#decisiones)).
-- **Publicado en GitHub Pages:** la pantalla de título, con luz real de Ushuaia, sonido y alto contraste.
-- **Núcleo del juego** (Persona A, [PR 10](https://github.com/Facunique/Tierra-de-los-Humos/pull/10), en revisión): se juega un viaje de punta a punta en `pruebas/nucleo.html`.
+- **Publicado en GitHub Pages** desde `main`: el juego entero, que también abre con doble clic y sin internet.
+- **Núcleo del juego** (Persona A, [PR 10](https://github.com/Facunique/Tierra-de-los-Humos/pull/10), ya en `main`): las reglas de un viaje de punta a punta.
   - Mapa al azar en cada partida, con humo sobre lo no explorado.
   - Fuego, leña, comida, pirita, clima, día y noche, y acampar en el cachiyuyo.
   - Cartas de saber, victoria y derrota, y herencia entre generaciones.
   - Los datos del territorio están aparte del código, cada uno con su fuente.
   - 49 pruebas automáticas. Un jugador automático que junta y acampa llega al destino el 84 % de las veces; uno que no junta nada no llega nunca.
-- **Interfaz** (Persona B): pantalla de carta de saber con la fuente siempre visible y lectura en voz alta, probada con una partida de prueba ([`pruebas/carta.html`](../pruebas/carta.html)). Pruebas que revisan que cada carta tenga fuente, texto alternativo e identificador.
-- ✏️ Falta conectar el núcleo con la interfaz en el `index.html` publicado (A y B).
+- **Interfaz** (Persona B): el núcleo ya está conectado en el `index.html` publicado. Se juega de punta a punta, con varias generaciones seguidas.
+  - Pantallas de título, elegir pueblo, viaje, fin o llegada, códice, «Hoy» y cómo se juega.
+  - Carta de saber con la fuente siempre visible y lectura en voz alta.
+  - La herencia queda guardada en el dispositivo: al volver, la familia sigue en su generación.
+  - Códice separado por pueblo y postal del viaje.
+  - En el celular, se rema tocando el agua o con flechas en pantalla; en la compu, con el teclado.
+  - Accesibilidad: alto contraste, textos alternativos, subtítulos del sonido y narrador para jugar sin ver.
+  - Probado a 375 px, con el celular acostado y en la compu. Pruebas automáticas de la herencia y de la página: con las del resto del equipo, pasan las 87.
 
 ![El núcleo del juego: la canoa con su fuego rema por el canal, con una playa, el bosque, leña y pescado para juntar, y el humo sobre lo no explorado](reunion-14-11/viaje.jpg)
 

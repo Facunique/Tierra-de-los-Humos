@@ -6,7 +6,7 @@ Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de
 
 > 🚧 **En desarrollo** (9 al 17 de noviembre de 2026). Ya están el estilo visual, el motor de dibujo, el sonido y una maqueta navegable de todas las pantallas; el código del juego se suma durante la hackatón.
 
-**Jugalo:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/) (por ahora, la pantalla de título y la maqueta jugable) · **Video:** ✏️ *[enlace]* · **Presentación:** [`presentacion/`](presentacion/index.html) ([PDF](presentacion/pitch.pdf))
+**Jugalo:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/) (el viaje completo, en el celular o en la compu; también abre con doble clic en `index.html`, sin internet) · **Video:** ✏️ *[enlace]* · **Presentación:** [`presentacion/`](presentacion/index.html) ([PDF](presentacion/pitch.pdf))
 
 ## Eje
 
@@ -82,15 +82,20 @@ Trabajo interno del equipo:
 
 | Qué | En el celular | Con teclado |
 |---|---|---|
-| Remar | Tocar una casilla de agua al lado de la canoa | Flechas o <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> |
-| Juntar (leña, comida, pirita, saberes) | Botón «Juntar» | <kbd>Enter</kbd> |
+| Remar | Tocar el agua: la canoa rema hasta ahí. O las flechas de la pantalla | Flechas o <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> |
+| Juntar (leña, comida, pirita, saberes) | Botón «Juntar», o tocar la pegatina | <kbd>Enter</kbd> o <kbd>J</kbd> |
 | Avivar el fuego con leña | Botón «Avivar el fuego» | <kbd>F</kbd> |
 | Amarrar en el cachiyuyo y acampar | Botón «Amarrar y acampar» | <kbd>M</kbd> |
+| Describir lo que rodea a la canoa (con el narrador) | Botón «Describir alrededor» | <kbd>N</kbd> |
+| Pausa | Botón «Pausa» | <kbd>Esc</kbd> |
 
-- **El fuego** se gasta al remar, y más con viento en el canal hondo o con lluvia. Siempre se muestra su número («Fuego 3 de 4»).
+- **El fuego** se gasta al remar, y más con viento en el canal hondo, con lluvia o de noche. Cerca de una choza se gasta menos. Siempre se muestra su número («Fuego 3 de 4»).
 - **Lo que tiene borde de papel (las pegatinas) se puede juntar.** El resto es paisaje.
 - **El humo** cubre lo que todavía no exploraste.
-- **El códice** junta todas las cartas de saber, separadas por pueblo, y se puede recorrer sin jugar.
+- **Al remar tocando lejos**, la canoa se frena sola si el fuego queda en 1 o cae la noche, para que haya tiempo de avivarlo o de acampar.
+- **La herencia** se guarda en el dispositivo: al volver a abrir el juego, la familia sigue en la generación en que iba.
+- **El códice** junta todas las cartas de saber, separadas por pueblo, y se puede recorrer sin jugar. «Empezar de cero» borra la memoria de la familia en ese dispositivo.
+- **Opciones** (en la pantalla de título): sonido con subtítulos, narrador para jugar sin ver, alto contraste y luz real de Ushuaia.
 
 ✏️ *Completar con los números finales del juego (Personas A y B).*
 
@@ -98,7 +103,8 @@ Trabajo interno del equipo:
 
 - **Juego web** en HTML, CSS y JavaScript, dibujado en Canvas 2D. **Sin build y sin librerías externas:** cada archivo se carga con `<script>`, así que el juego también se abre con doble clic en `index.html`, sin internet.
 - **Publicación:** GitHub Pages, desde la rama `main` (carpeta raíz), en [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/). El archivo `.nojekyll` evita que GitHub procese el sitio con Jekyll.
-- **Datos:** las cartas de saber y las especies están en archivos JavaScript con su fuente citada. Lo que se hereda entre partidas se guarda en el navegador (`localStorage`).
+- **Estructura:** el núcleo (`juego/nucleo/`) tiene solo las reglas del viaje, sin pantalla, y se prueba con Node. La interfaz (`juego/interfaz/`) dibuja con el motor Corteza y muestra lo que el núcleo cuenta que pasó. Todo se une en `index.html`.
+- **Datos:** las cartas de saber (`datos/saberes.js`) y lo que hay en el territorio, las especies y el destino (`juego/nucleo/territorio/`) están en archivos JavaScript con su fuente citada, y se editan sin programar. Lo que se hereda entre partidas se guarda en el navegador (`localStorage`): solo los identificadores de las cartas, con número de versión (`juego/interfaz/herencia.js`).
 - **Pruebas:** con el comando `node --test`, que ya viene con Node.js.
 - **Arte:** motor de dibujo propio, «Corteza» (`arte/corteza/corteza.js`), y pegatinas pixel definidas como texto (`arte/fuente/arte.js`).
 - **Sonido:** sintetizado con Web Audio (`sonido/ambiente.js`), sin archivos de audio. Las cartas se leen con la voz del dispositivo (Web Speech, `sonido/voz.js`).
@@ -145,6 +151,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Datos de las cartas (13/11):** a pedido de la Persona B, Claude Code pasó las cartas a `datos/saberes.js` con `id`, `pueblo`, `estado` y una plantilla para cargarlas sin programar, escribió el texto alternativo de cada ilustración (describe solo lo dibujado) y las pruebas de `pruebas/datos.test.cjs`. No cambió ningún texto cultural: los revisa la Persona C.
 - **Pantalla de carta (13/11):** a pedido de la Persona B, Claude Code escribió la pantalla de carta de saber (`juego/interfaz/carta.js` y `juego.css`), una partida falsa para probarla mientras se programa el núcleo (`pruebas/partida-falsa.js`, con su página `pruebas/carta.html`) y las pruebas del contrato entre núcleo e interfaz.
 - **Núcleo del juego (13/11):** a pedido de la Persona A, Claude Code escribió el núcleo (`juego/nucleo/`): el generador del mapa con semilla, que valida que haya camino por agua hasta el destino; el fuego, los recursos, el clima, la hora, el amarre y las condiciones de victoria y de derrota; los números en `reglas.js`, iguales a los de la versión de mesa salvo la leña. Pasó a datos aparte (`juego/nucleo/territorio/`) lo que hay en el territorio, dónde va, qué hace y de qué fuente sale, con la fuente tomada de `docs/05-rigor-historico.md`, y el destino del viaje. También escribió las pruebas (`pruebas/nucleo*.test.cjs`), dos jugadores automáticos para medir el balance (`pruebas/bots.cjs`) y una página para jugar el viaje entero (`pruebas/nucleo.html`, con un modo revisión). No cambió ningún texto cultural de las cartas. La Persona A revisa y decide los números.
+- **El juego conectado (13/11):** a pedido de la Persona B, Claude Code armó el juego en `index.html`: las pantallas de la maqueta conectadas al núcleo (`juego/interfaz/juego.js` y `pantallas.css`), la herencia guardada en el navegador (`juego/interfaz/herencia.js`), el códice por pueblo, los controles táctiles y de teclado, y el sonido, los subtítulos, el narrador, la postal, el alto contraste y la luz real que ya existían. Escribió las pruebas (`pruebas/herencia.test.cjs` y `pruebas/juego.test.cjs`) y jugó partidas enteras en el navegador, en el celular parado y acostado y en la compu. Los textos de las pantallas son de juego (qué pasó en el viaje); los datos culturales salen de las cartas y de los datos del territorio, sin cambios.
 
 ## Integrantes
 
