@@ -144,6 +144,7 @@
       if (ev.tipo === 'fuego' && ev.despues < ev.antes) anunciar(ev.despues === 0 ? 'El fuego se apagó.' : 'El fuego baja a ' + ev.despues + (ev.causas && ev.causas.length ? ' (' + ev.causas.filter((c) => c !== 'choza').join(', ') + ')' : '') + '.');
       if (ev.tipo === 'avivo') anunciar('El fuego se aviva.');
       if (ev.tipo === 'junto') anunciar('Juntaste ' + ev.nombre + '.');
+      if (ev.tipo === 'aviso') anunciar({ calma: 'Parece que el tiempo va a calmar.', viento: 'Viene viento: ¿acampar o seguir?', lluvia: 'Se ven nubes: viene lluvia. ¿Acampar o seguir?' }[ev.clima]);
       if (ev.tipo === 'clima') anunciar({ calma: 'El tiempo se calma.', viento: 'Se levanta viento.', lluvia: 'Empieza a llover.' }[ev.clima]);
       if (ev.tipo === 'hora') anunciar({ dia: 'Amanece.', tarde: 'Cae la tarde.', noche: 'Se hace de noche: el frío gasta el fuego.' }[ev.hora]);
       if (ev.tipo === 'reencendido') anunciar('Con la pirita, el fuego vuelve a prender.');

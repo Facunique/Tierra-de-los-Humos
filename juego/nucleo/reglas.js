@@ -35,6 +35,8 @@
     RECURSOS_MAX: { lena: 5, comida: 5, pirita: 1 },   // con el máximo, lo que se junta queda en el mapa
     AVIVAR: 6,                    // energía que suma una leña (en la mesa, 5; el mapa es el doble de ancho que el tablero)
     COMER_AL_ACAMPAR: 3,          // energía que suma comer al pasar la noche
+    GASTO_ACAMPAR: 2,             // energía que gasta cuidar el fuego toda la noche: acampar no es gratis
+                                  // (con comida queda en +1; sin comida, cada noche lo baja)
     PIRITA_REENCIENDE: 4,         // energía con la que vuelve el fuego (fuego 1)
 
     // ── El día ────────────────────────────────────────────────────────────
@@ -48,6 +50,7 @@
     // ── El clima ──────────────────────────────────────────────────────────
     CLIMA_MIN_PASOS: 4,           // un clima dura al menos estos pasos
     CLIMA_PROB_CAMBIO: 0.12,      // después, en cada paso puede cambiar con esta chance
+    CLIMA_AVISO_PASOS: 1,         // el cambio se anuncia estos pasos antes («se ven nubes»); 0 = sin aviso
     CLIMA_SIGUIENTE: {            // a qué clima pasa, con su peso
       calma: { viento: 3, lluvia: 2 },
       viento: { calma: 3, lluvia: 1 },

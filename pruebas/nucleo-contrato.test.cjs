@@ -8,7 +8,7 @@ const { ORDEN } = require('../datos/saberes.js');
 const NUCLEO = require('../juego/nucleo/partida.js');
 
 // Los de la partida falsa, más los que suma el núcleo (ver el encabezado de juego/nucleo/partida.js).
-const TIPOS = new Set(['fuego', 'junto', 'saber', 'fin', 'remo', 'avivo', 'clima', 'hora', 'reencendido', 'acampe']);
+const TIPOS = new Set(['fuego', 'junto', 'saber', 'fin', 'remo', 'avivo', 'clima', 'hora', 'reencendido', 'acampe', 'aviso']);
 
 const VARIANTES = [
   ['mapa generado', (op) => NUCLEO.nueva(op)],

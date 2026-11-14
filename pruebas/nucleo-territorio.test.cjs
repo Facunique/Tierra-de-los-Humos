@@ -65,6 +65,11 @@ test('cada destino está completo, y el activo existe', () => {
     assert.ok(hayDibujo(d.dibujo), `el dibujo «${d.dibujo}» del destino «${clave}» no existe en Corteza`);
     assert.ok(LUGARES.includes(d.donde) && d.donde !== 'campamento', `el lugar «${d.donde}» del destino «${clave}» no sirve`);
     assert.ok(['borrador', 'revisado', 'propuesta'].includes(d.estado), `el estado del destino «${clave}» no es válido`);
+    if (d.estaciones != null) {
+      const { ESTACIONES } = require('../juego/nucleo/partida.js');
+      assert.ok(Array.isArray(d.estaciones) && d.estaciones.length, `las estaciones del destino «${clave}» tienen que ser una lista con algo`);
+      for (const e of d.estaciones) assert.ok(ESTACIONES.includes(e), `el destino «${clave}» nombra la estación «${e}», que no existe (${ESTACIONES.join(', ')})`);
+    }
     revisarTextos(`el destino «${clave}»`, d);
   }
 });
