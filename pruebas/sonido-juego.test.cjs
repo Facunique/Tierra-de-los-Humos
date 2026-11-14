@@ -56,6 +56,7 @@ test('cada evento del contrato suena con un efecto que existe y un subtítulo', 
     { tipo: 'acampe', comio: true },
     { tipo: 'clima', antes: 'calma', clima: 'lluvia' },
     { tipo: 'hora', antes: 'tarde', hora: 'noche' },
+    { tipo: 'aviso', antes: 'calma', clima: 'viento', faltan: 1 },
     { tipo: 'fin', gano: false, causa: 'viento' },
     { tipo: 'fin', gano: true, causa: 'llegada' },
   ];
@@ -69,8 +70,9 @@ test('cada evento del contrato suena con un efecto que existe y un subtítulo', 
   assert.equal(lista[3].efecto, 'comida');
   assert.equal(lista[4].efecto, 'piedra');
   assert.match(lista[6].texto, /El fuego viaja en la canoa/);
-  assert.equal(lista[11].texto, 'El viento apagó el fuego');
-  assert.equal(lista[12].efecto, 'llegada');
+  assert.equal(lista[11].texto, 'Se ve venir el viento');
+  assert.equal(lista[12].texto, 'El viento apagó el fuego');
+  assert.equal(lista[13].efecto, 'llegada');
 });
 
 test('lo que no tiene sonido no suena, y un remo sin viento no hace ola', () => {

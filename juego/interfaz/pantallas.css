@@ -61,6 +61,8 @@ button.pueblo { cursor: pointer; font: inherit; }
 #p-viaje .marco { position: absolute; inset: 0; display: flex; flex-direction: column; }
 #p-viaje .hud-corteza { flex: none; gap: 6px 8px; padding: max(6px, env(safe-area-inset-top)) 8px 6px; }
 #p-viaje .ficha { font-size: 14px; }
+/* El cambio de tiempo que ya se anunció: con borde de tinta punteado, para que no se confunda con el clima de ahora. */
+#p-viaje .ficha--aviso { outline: 2px dashed var(--tdh-tinta); outline-offset: -5px; }
 .mapa { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; background: #2d4553; overflow: hidden; }
 #mapa { max-width: 100%; max-height: 100%; cursor: pointer; touch-action: manipulation; }
 .anuncio, .subtitulo { position: absolute; z-index: 4; left: 50%; transform: translateX(-50%); max-width: calc(100% - 24px); text-align: center; pointer-events: none;

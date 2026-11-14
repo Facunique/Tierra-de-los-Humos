@@ -55,6 +55,7 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 - **Arreglos que salieron al probar** (PR 16): un toque durante la transición de humo se perdía, y la transición trababa el juego si el navegador frenaba las animaciones.
 - **Correcciones de la auditoría cultural aplicadas en el juego** ([PR 18](https://github.com/Facunique/Tierra-de-los-Humos/pull/18), ya en `main`): el lema «Lo aprendido se transmite», un cierre «Hoy» que no atribuye prácticas sin fuente y el aviso de que la voz es la automática del dispositivo.
 - **El juego cuenta por qué viajan** ([PR 20](https://github.com/Facunique/Tierra-de-los-Humos/pull/20), ya en `main`): cada viaje empieza con una carta «Por qué viajan», con el dato y la fuente del destino y la aclaración de que la familia es ficción. Es la parte de B del nomadismo en chico. Hoy el destino es siempre la ballena varada; cuando el núcleo lo elija según la estación, el texto cambia solo. La prueba de punta a punta revisa que aparezca en cada partida.
+- **El aviso del clima y el costo de acampar, en la interfaz** (en revisión): cuando el núcleo anuncia un cambio de tiempo, el juego lo dice («Se ven nubes: viene lluvia»), lo muestra en el HUD hasta que llega, suena con subtítulo y lo cuenta el narrador. La ayuda y el subtítulo de acampar dicen que cuidar el fuego toda la noche gasta, y que comer lo compensa.
 - **Alcance para la entrega** ([`docs/02-alcance-mvp.md`](../docs/02-alcance-mvp.md), propuesta de B, ya en `main`): qué cuenta como terminado según los criterios del jurado, qué entra sí o sí para el 17/11 y qué se recorta primero. Espera que A lo confirme.
 - **Pruebas automáticas:** en `main` pasan las 93, de todo el equipo.
 
@@ -100,7 +101,7 @@ Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la
 
 ## 5. Próximos pasos (hasta la entrega del 18/11)
 
-- **Programación:** ya están conectados el núcleo, la herencia y el códice. Ya están la versión sin internet y el motivo del viaje al empezar. Falta: pulido y balance jugando con personas, y que el destino cambie según la estación (A) para completar el nomadismo en chico. ✏️ A y B confirman.
+- **Programación:** ya están conectados el núcleo, la herencia y el códice. Ya están la versión sin internet, el motivo del viaje según la estación y el aviso del clima. Falta: pulido y balance jugando con personas. ✏️ A y B confirman.
 - **Contenido (C):** aportar las fuentes de cada motivo de desplazamiento para acordar con A y B cómo se juega el nomadismo; revisar la grabación y resolver las consultas pendientes; completar las referencias y aprobaciones de cartas y territorio; resolver con B y D las observaciones de la auditoría de textos y actividades; proponer el cierre del códice. Las fuentes escritas y la consulta ya están documentadas por separado; las aprobaciones de las cartas siguen pendientes.
 - **Arte y sonido:** el sonido según el lugar, el narrador y la postal ya están en el juego. Falta: el cierre «Hoy» con el texto de C; activar los rótulos del mapa con los nombres del libro de Vargas Filgueira cuando haya permiso; confirmar la especie de la tonina y de las aves (🔍) y cotejar con el libro de Goodall.
 - **Comunicación:** README completo con capturas del juego real, video de 3 minutos (17/11) y pitch de 5 minutos con ensayo.
@@ -111,6 +112,6 @@ Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la
 - **Cómo se juega el nomadismo:** el enfoque decidido por Dani combina clima, comida y ambiente. Falta acordar con A y B los objetivos concretos y el cierre de la partida; la ballena varada permanece como un motivo posible. El prototipo todavía termina al llegar a un destino fijo.
 - **Dudas técnicas de B:**
   - **Cómo se juega el nomadismo:** la propuesta más chica (cada viaje con un motivo documentado y el juego cuenta al empezar por qué viajan) necesita que A elija el destino en el núcleo y que C confirme cada motivo. La parte de B ya está en `main` (PR 20): el juego cuenta el motivo al empezar. Si lo de A no llega, el viaje sigue con un destino fijo y el mismo motivo.
-  - **Balance:** la prueba de punta a punta muestra que el juego no se rompe, pero no mide si es justo. Hoy se puede acampar noche tras noche sin gastar fuego. Para ajustar los números hacen falta pruebas con personas de afuera del equipo (al menos tres, una en un celular).
+  - **Balance:** la prueba de punta a punta muestra que el juego no se rompe, pero no mide si es justo. Desde el PR 22, acampar gasta fuego, así que una partida ya no puede durar para siempre. Para ajustar los números hacen falta pruebas con personas de afuera del equipo (al menos tres, una en un celular).
   - **Celulares de la demo:** las pruebas automáticas usan pantallas de celular simuladas. Nos sirve saber qué equipos va a haber el 20/11 para probarlo antes.
 - ✏️ Dudas técnicas de A.

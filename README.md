@@ -150,6 +150,8 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 ## Uso de inteligencia artificial
 
+- **Aviso del clima y costo de acampar en la interfaz (14/11):** a pedido de la Persona B, Claude Code conectó al juego el aviso del clima del núcleo de la Persona A: el texto, una ficha en el HUD, el sonido con subtítulo y el narrador. También cambió la ayuda y el subtítulo de acampar para que digan que cuidar el fuego toda la noche gasta. Son textos de juego: no agregó datos culturales.
+
 - **Motivo del viaje (14/11):** a pedido de la Persona B, Claude Code hizo que cada viaje empiece con una carta «Por qué viajan»: muestra el dato y la fuente del destino que entrega el núcleo (`juego/nucleo/territorio/destinos.js`) y aclara que la familia es ficción. Reusó la pantalla de carta y sumó la revisión a la prueba de punta a punta. No escribió datos culturales nuevos: el texto del dato y su fuente son los de la Persona C.
 
 - **Cierre y cartas con Víctor como fuente principal (14/11, paso 6):** a pedido de la Persona C, Codex (OpenAI) redactó una propuesta de cierre con Vargas Filgueira (2019), revisó dato y fuente de las nueve cartas y preparó ocho cartas nuevas con páginas verificadas del PDF aportado. Separó publicación y entrevista, mantuvo los nombres pendientes y dejó las cartas nuevas fuera del catálogo hasta acordar sus eventos con A y B. Actualizó documentación y regeneró los materiales afectados, con un PDF separado de propuestas. No publicó el libro ni escaneos, no incorporó permisos nuevos y no cambió la lógica ni los números del juego.

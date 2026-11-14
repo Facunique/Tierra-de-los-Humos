@@ -5,6 +5,7 @@
 ## Estado actual
 
 - **Fecha de la última actualización:** 14/11/2026 (día 6 de desarrollo).
+- **Acampar, aviso del clima y motivo según la estación (14/11, A y B):** con el PR 22 de A, acampar gasta fuego, cada cambio de clima se avisa un paso antes y el núcleo elige el destino según la estación (hoy solo entra la ballena: los otros esperan que C los pase a `'borrador'`). B sumó en la interfaz el texto, el sonido y el narrador del aviso, y que la ayuda de acampar diga que gasta (en revisión).
 - **Juego sin internet, motivo del viaje y alcance propuesto (14/11, B):** ya están en `main` el service worker y el manifiesto (PR 16: el juego publicado abre sin conexión después de la primera visita) y la carta «Por qué viajan» al empezar cada viaje, con el dato y la fuente del destino (PR 20). La propuesta de alcance está en [`docs/02-alcance-mvp.md`](../docs/02-alcance-mvp.md) y **todavía no es una decisión**: espera que A la confirme. La prueba de punta a punta pasa en `main` en las cinco pantallas (14/11).
 - **Paso 6 y cartas con Víctor como fuente principal (14/11, C):** propuesta de cierre en `docs/07-cierre-del-codice.md`, basada en Vargas Filgueira (2019), p. 4 y pp. 85–86 del visor. C pidió priorizar su libro en las nueve cartas y usar a Cooper para detalles no confirmados por esos pasajes. Se actualizan dato y fuente sin cambiar IDs, efectos ni ilustraciones. Ocho cartas nuevas completas quedan en `datos/saberes-propuestos.js`, fuera del catálogo activo hasta acordar descubrimientos con A y B. Revisión: `equipo/revision-victor-y-cartas-nuevas.md`. El cierre, la presentación familiar del autor y los nombres siguen pendientes de decisión final; no se inventan respuestas de entrevista ni permisos.
 - **Piezas de D después de la auditoría del paso 5 (14/11, D):** se aplicaron, con los textos que propuso C:
@@ -57,7 +58,7 @@
 
 - **Editor de saberes (13/11):** `herramientas/editor-de-saberes.html` permite escribir o corregir cartas sin programar, también a partir de un relato de la comunidad (solo con permiso). Se puede mostrar en la reunión del 14/11.
 - **Lo que encontraron las pruebas automáticas (13/11, Persona D)**, para que lo revisen A y B. No se tocó su código:
-  - Se puede acampar noche tras noche sin gastar fuego, así que una partida podría no terminar nunca. ¿Limitar los acampes seguidos o que cada noche gaste algo?
+  - Se puede acampar noche tras noche sin gastar fuego, así que una partida podría no terminar nunca. ¿Limitar los acampes seguidos o que cada noche gaste algo? **Resuelto (14/11, PR 22):** cada noche gasta fuego.
   - En `pruebas/nucleo.html`, al cerrar una carta la celda cambia en 1 px y el motor vuelve a armar el mapa entero: un tirón de un segundo en un celular lento. Conviene calcular la celda solo al abrir y al cambiar el tamaño de la pantalla.
   - El cartel de «El viaje termina acá» no tiene margen interno, y en el celular el aviso de arriba tapa los íconos del HUD.
   - **Choque de nombres, ya resuelto de este lado:** el mapa de territorios (`arte/mapa/mapa.js`) y el mapa del núcleo (`juego/nucleo/mapa.js`) usaban los dos la global `TDH_MAPA`. El de territorios pasó a llamarse `TDH_TERRITORIOS` (lo usan la postal, el mapa, el cartel, la vidriera y la maqueta). El núcleo no tiene que cambiar nada.
@@ -101,7 +102,7 @@
 
 ## Por decidir
 
-- **Propuestas de mejora del núcleo** (Persona A, en [`juego/nucleo/README.md`](../juego/nucleo/README.md#propuestas-de-mejora)): el viaje en 3 tramos, que cada saber heredado deje un conocimiento concreto, las brasas, el aviso antes de que cambie el clima, el texto de la carta de la corteza y si la versión de mesa se actualiza o queda como versión más simple. Se deciden con `docs/02-alcance-mvp.md`. Ninguna está hecha.
+- **Propuestas de mejora del núcleo** (Persona A, en [`juego/nucleo/README.md`](../juego/nucleo/README.md#propuestas-de-mejora)): el viaje en 3 tramos, que cada saber heredado deje un conocimiento concreto, las brasas, el aviso antes de que cambie el clima, el texto de la carta de la corteza y si la versión de mesa se actualiza o queda como versión más simple. Se deciden con `docs/02-alcance-mvp.md`. El aviso del clima ya está (PR 22); las demás, no.
 - **Cómo se juega el nomadismo.** El enfoque está decidido por Dani (ver *Decisiones*). Falta acordar con A y B los objetivos, su relación con el clima, la comida y el ambiente, y cuándo termina una partida. Los episodios aportados por Dani de Vargas Filgueira (2019), pp. 16–17, 23, 31–32 y 53–54 del visor, y los motivos registrados en Cooper (1946), «The Yahgan», pp. 94–95 y 99, sirven como referencias a revisar para cada situación. No se elige la ballena como motivo exclusivo.
 
 - **Integrantes para el README:** los roles ya están (ver *Equipo*). La persona referente ante la organización es **Facu** (Persona B). Falta decidir qué nombres publicar (sin mails ni teléfonos).
@@ -117,7 +118,7 @@
 
 ### Coordinación para A y B: viaje con motivos combinados
 
-- **Problema actual:** `juego/nucleo/territorio/destinos.js` tiene un único `ACTIVO`; `juego/nucleo/partida.js` termina por llegada a un punto del mapa. `juego/interfaz/juego.js` cuenta al empezar por qué viajan (carta con el dato y la fuente del destino, PR 20) y lo anuncia al llegar. Si A hace que el destino cambie según la estación, la carta cambia sola. Esto todavía no representa todo el enfoque decidido por Dani.
+- **Problema actual:** el núcleo elige el destino según la estación entre los de `juego/nucleo/territorio/destinos.js` que no están en `'propuesta'` (PR 22); hoy solo entra la ballena. `juego/nucleo/partida.js` termina por llegada a un punto del mapa. `juego/interfaz/juego.js` cuenta al empezar por qué viajan (carta con el dato y la fuente del destino, PR 20) y lo anuncia al llegar; la carta cambia sola con el destino. Esto todavía no representa todo el enfoque decidido por Dani.
 - **Propuesta para acordar:** evaluar objetivos de viaje vinculados con las condiciones del entorno y los recursos disponibles. Una ballena varada puede motivar un desplazamiento, junto con otras situaciones documentadas. A y B deben proponer cómo se eligen esos objetivos y cuál es el cierre de una partida; no se fijaron cantidades, duración ni reglas nuevas.
 - **Archivos a revisar por A:** `juego/nucleo/territorio/destinos.js`, `juego/nucleo/territorio/pueblos.js`, `juego/nucleo/mapa.js` y `juego/nucleo/partida.js`. **Por B:** objetivos, avisos y cierre en `juego/interfaz/juego.js`, en coordinación con los textos de `sonido/juego.js` y `sonido/narrador.js`.
 - **Contenido a cargo de C:** aportar para cada motivo el dato y la fuente, distinguir el episodio documentado de la situación ficticia y revisar las cartas. El nomadismo es el enfoque elegido; no se presenta como un lugar al que llegar ni como un dato validado por toda la comunidad.
