@@ -9,6 +9,10 @@
 
 ## 1. Qué estamos haciendo
 
+**El problema que elegimos:** los saberes de los pueblos fueguinos sobre la vida en el territorio (navegar los canales, recolectar, cuidar el fuego, adaptarse al clima) son poco conocidos por jóvenes y escuelas, y cuando aparecen suelen contarse en pasado, como si esos pueblos ya no existieran.
+
+**Respecto de la inscripción:** la idea que cargamos nombraba a los Selk'nam, Haush y Yagán. Para hacerlo bien y con consulta, el juego se centra en los **Yagán**; los Kawésqar quedan como extra y los Selk'nam para después de la hackatón.
+
 Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada partida es un viaje en canoa por los canales acompañando a una familia **Yagán**. El fuego es la vida: el clima lo gasta y el territorio lo sostiene. Si se apaga, lo aprendido pasa a la siguiente generación como **cartas de saber con fuente citada**.
 
 ## 2. Qué hicimos esta semana

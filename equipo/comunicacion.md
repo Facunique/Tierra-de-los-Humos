@@ -119,8 +119,9 @@ Checklist de lo que piden las bases, con quién lo escribe:
 
 Lo que coordina con la organización, sea cual sea su rol:
 
-- [ ] Confirmar el formato del avance del 16/11 y dónde se entrega (¿en la plataforma de la hackatón, sección *Mi equipo*?).
-- [ ] Preguntar el formato del video (dónde se sube) y de la presentación.
+- [x] Formato del avance: se cargan en la plataforma (*Mi equipo*) dos links, el repositorio y el documento del avance, antes del 16/11 a las 23:00.
+- [x] Formato de la entrega final: cinco links en la plataforma (prototipo, repositorio, README, video y presentación), antes del 18/11 a las 21:00.
+- [x] Video: YouTube, Drive u otra plataforma, con acceso por link. Presentación: un link (puede ser el PDF del repo o la versión HTML en GitHub Pages).
 - [ ] Preguntar si en Fábrica de Talento hay proyector, HDMI, internet y enchufes.
 - [ ] Confirmar el horario del ensayo del 18/11 y quiénes van a la demo del 20/11 (15:00 a 19:00).
 - [ ] Confirmar la asistencia al taller del eje y los 2 encuentros con la mentoría (obligatorios). Pedirle a la mentoría que nos conecte con la comunidad o con un museo si la consulta se demora.

@@ -84,7 +84,9 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [ ] Desde el 15/11: README completo (quedan los huecos ✏️: enlaces, integrantes, números del juego).
 - [ ] Video de hasta 3 minutos con capturas del juego real (el 17/11).
 - [ ] Ensayar el pitch de hasta 5 minutos.
-- [ ] La persona referente (+18) coordina con la organización, sea cual sea su rol. ✏️ Falta decir quién es.
+- [x] La persona referente (+18) coordina con la organización: es **Facu** (B), según la plataforma de la hackatón.
+- [ ] **16/11, antes de las 23:00 (Facu):** cargar en la plataforma (*Mi equipo*) el link del repositorio y el del documento del avance (`equipo/avance-14-11.md` en GitHub, ya mergeado en `main`).
+- [ ] **18/11, antes de las 21:00 (Facu):** cargar los cinco links de la entrega final: prototipo (GitHub Pages), repositorio, README, video y presentación. Todos públicos.
 
 ---
 
@@ -113,7 +115,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Decidir el stack: JavaScript sin build (13/11).
 - [x] Decidir el estilo visual: Corteza (12/11).
 - [x] Asignar las letras a cada integrante (ver la tabla de arriba).
-- [ ] Completar la sección **Integrantes** del README con los nombres que el equipo quiera publicar, y decir quién es la persona referente.
+- [ ] Completar la sección **Integrantes** del README con los nombres que el equipo quiera publicar. La persona referente es Facu.
 - [ ] Completar el avance documentado (`equipo/avance-14-11.md`) antes del 16/11 a las 23:00.
 - [ ] Declarar en el README cualquier aporte nuevo de IA (cláusula 7.4).
 - [ ] Anotar cada decisión nueva en `equipo/memory.md`, con fecha.

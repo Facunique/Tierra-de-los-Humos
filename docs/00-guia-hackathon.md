@@ -40,13 +40,26 @@ Cambios de integrantes y de eje: hasta el **7/11**.
 
 ⚠️ **El desarrollo va del 9 al 18/11.** El alcance tiene que ser chico y terminado, no grande y a medias.
 
-## 4. Qué hay que entregar (18/11, hasta las 21:00)
+## 4. Qué hay que entregar
+
+Todo se entrega **cargando links en la plataforma** de la hackatón (*Mi equipo*, con el link personal de la persona referente). Los links tienen que ser **públicos o estar compartidos con la organización**.
+
+**Primer avance (16/11, hasta las 23:00):**
+
+1. **Repositorio** (o carpeta del proyecto).
+2. **Documento del avance**: qué problema eligieron, qué van a hacer y cómo vienen. El nuestro es [`equipo/avance-14-11.md`](../equipo/avance-14-11.md).
+
+**Entrega final (18/11, hasta las 21:00):**
 
 1. **Prototipo funcional**: un enlace navegable es lo ideal (también vale ejecutable o APK).
 2. **Repositorio** con el código fuente.
 3. **README** con: problema, eje, solución, instrucciones de uso, tecnologías, **fuentes citadas**, recursos de terceros y sus licencias, integrantes y **uso de IA** (para qué y cómo; es obligatorio declararlo).
 4. **Video** de hasta 3 minutos mostrando el juego.
-5. **Presentación** para un pitch de hasta 5 minutos.
+5. **Presentación** para un pitch de hasta 5 minutos (para las demostraciones del 20/11).
+
+En la plataforma son cinco links: prototipo, repositorio, README, video (YouTube, Drive u otra, con acceso por link) y presentación.
+
+El **nombre del equipo** se puede cambiar hasta el 16/11 a las 23:00. Es el que la organización usa en las fichas técnicas y en la presentación.
 
 Recomendado por las bases: diseño accesible (contraste, textos alternativos, que funcione en celular), que ande con conexiones lentas, licencias abiertas (código **MIT/GPL-3.0**, contenidos **CC BY-SA 4.0**).
 
