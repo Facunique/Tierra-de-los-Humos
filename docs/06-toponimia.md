@@ -64,17 +64,19 @@ Fuente: la misma edición, notas de las páginas 86–88 del visor.
 - **Akakaia** y **Akaraia** se conservan por separado. Las notas aportadas no establecen que sean variantes del mismo nombre.
 - Los nombres sin equivalencia precisa no reciben coordenadas inventadas ni se asignan a otro lugar por semejanza de escritura.
 
-## Presentación en el proyecto: pendiente de decisión
+## Presentación en el proyecto
 
-Está pendiente confirmar qué nombre se mostrará primero y si se usará una denominación doble. Un formato posible para revisar es **Canal Beagle — Onashaga**, con atribución a Vargas Filgueira (2019), nota 1, pp. 86–88 del visor. Es un ejemplo editorial; no declara oficial al nombre del libro ni aprueba su incorporación al juego.
+**Criterio confirmado por la Persona C el 14/11/2026:** primero el nombre utilizado por Víctor y después la correspondencia: **Onashaga — Canal Beagle**. Fuente de esta correspondencia: Vargas Filgueira (2019), nota 1, pp. 86–88 del visor.
+
+Se aplica el orden **nombre del libro — lugar identificado**, cuando la equivalencia está documentada. Los nombres sin equivalencia explícita conservan su forma; las identificaciones descriptivas mantienen sus límites y dudas. Esta elección editorial no determina por sí sola la condición oficial de un topónimo.
 
 La guía del proyecto pide denominaciones oficiales en los mapas (`docs/00-guia-hackathon.md`, líneas rojas). 🔍 Sigue pendiente la verificación cartográfica con el IGN y las referencias pertinentes para cada lugar. También sigue pendiente el alcance de la autorización para incorporar nombres en lengua yagán a los contenidos del juego; el permiso de atribución del testimonio no responde por sí solo esa consulta.
 
 ## Dónde se aplica
 
-| Archivo | Qué revisar cuando se defina la presentación |
+| Archivo | Cómo aplicar el criterio confirmado |
 |---|---|
-| `arte/mapa/mapa.js` | Rótulos de Canal Beagle, Isla Navarino, Isla Hoste y Puerto Williams, presentes en la tabla aportada. Los cambios de código y arte se proponen a D; no se modifican posiciones ni se agregan lugares sin fuente. |
+| `arte/mapa/mapa.js` | Proponer a D los rótulos **Onashaga — Canal Beagle** (nota 1), **Uceniaka — Isla Navarino** (nota 12), **Usín — Isla Hoste** (nota 23) y **Ushpasún — Puerto Williams** (nota 13). Las notas son de pp. 86–88 del visor. Los rótulos y su disposición requieren implementación por D, una vez resueltas las verificaciones y permisos pendientes; no se modifican posiciones ni se agregan lugares sin fuente. |
 | `arte/mapa/index.html` | Descripción del mapa y afirmación sobre toponimia oficial. Cambios pendientes de la revisión del paso 5. |
 | `docs/01-concepto.md` y `docs/05-rigor-historico.md` | Referencias geográficas y distinción entre la denominación del libro y la cartográfica. |
 | `juego/nucleo/territorio/elementos.js` | Menciones al canal Beagle en datos y fuentes. No se cambia el texto de una cita como si el autor hubiera usado otro nombre. |

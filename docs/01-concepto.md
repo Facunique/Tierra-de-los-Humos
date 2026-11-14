@@ -21,13 +21,15 @@ En todos los casos hay algo que no puede faltar: **el fuego**. Se gasta con el f
 
 | | Yagán | Kawésqar (extra) |
 |---|---|---|
-| Dónde | Canales del sur: Beagle, islas hasta el cabo de Hornos | Canales e islas del oeste, desde el estrecho de Magallanes hacia el norte (hoy en territorio chileno) |
+| Dónde | Canales del sur: Onashaga — Canal Beagle, islas hasta el cabo de Hornos | Canales e islas del oeste, desde el estrecho de Magallanes hacia el norte (hoy en territorio chileno) |
 | Cómo se mueve | En canoa, con el fuego encendido a bordo | En canoa, con el fuego a bordo |
 | Qué busca | Mariscos (mejillones, cholgas), lobos marinos, aves, leña en la orilla | A confirmar |
 | Riesgo principal | Viento y oleaje en los canales, cruces largos, mantener el fuego en la canoa | A confirmar |
 | Mecánica propia (idea) | Desplazamiento por agua entre islas. En el prototipo, el clima modifica el gasto del fuego | Se define cuando tengamos la investigación |
 
 **Cotejo documental parcial de la columna Yagán:** las referencias ya registradas de Cooper, J. M. (1946), «The Yahgan», *Handbook of South American Indians*, vol. 1, Smithsonian Institution, aportan territorio y clima (p. 81), alimentos (p. 84) y canoa y fuego (pp. 88 y 91). 🔍 La mención de cholgas, los riesgos específicos de cruces y las afirmaciones de la columna Kawésqar requieren su cotejo propio antes de darse por revisadas. La mecánica del gasto es un recurso de juego. Las fuentes escritas no sustituyen las consultas pendientes de representación; la consulta Kawésqar es aparte.
+
+**Nombres de lugares:** se presenta primero el nombre utilizado por Víctor y luego su correspondencia, según el criterio confirmado por la Persona C el 14/11: **Onashaga — Canal Beagle**. Fuente: Vargas Filgueira, Víctor (2019), *Mi sangre yagán (ahua saapa yagan)*, primera edición digital, Editora Cultural Tierra del Fuego, nota 1, pp. 86–88 del visor. Las demás correspondencias, las verificaciones cartográficas y los permisos pendientes están en [`06-toponimia.md`](06-toponimia.md).
 
 ## Bucle central: explorar, encontrar, volver
 

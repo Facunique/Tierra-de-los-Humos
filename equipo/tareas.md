@@ -70,7 +70,8 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Trasladar las referencias de Bird (1946) a los datos del territorio: conchales (pp. 20–21) y leña Kawésqar (p. 70), sin atribuir esta última como práctica yagán.
 - [ ] Completar las fuentes pendientes de leña yagán, especies, botánica y topónimos; la tonina sigue sin identificación documentada.
 - [x] Registrar los nombres de lugares aportados de Vargas Filgueira (2019), con notas y páginas: `docs/06-toponimia.md` (14/11). Se distinguen correspondencias, descripciones y nombres sin equivalencia explícita.
-- [ ] Definir la presentación de los topónimos y completar la fuente cartográfica y el permiso de uso en el juego antes de proponer cambios de rótulos a D.
+- [x] Definir la presentación de los topónimos (14/11): **Onashaga — Canal Beagle**, con el nombre utilizado por Víctor primero y su correspondencia después.
+- [ ] Completar la fuente cartográfica y el permiso de uso en el juego; coordinar con D la implementación de los rótulos indicados en `docs/06-toponimia.md`.
 - [ ] Revisar las actividades de la guía para docentes (`escuelas/actividades.js`).
 - [ ] Redactar el cierre del códice, en presente, mencionando las comunidades vivas.
 - [ ] Armar la sección **Fuentes** del README (D dejó las que usó el arte).

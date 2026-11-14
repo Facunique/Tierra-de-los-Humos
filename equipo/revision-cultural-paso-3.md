@@ -240,4 +240,4 @@ Se contrastaron los alt con las nueve ilustraciones existentes y con sus mapas y
 
 ## Nombres de lugares: referencias aportadas el 14/11
 
-Las correspondencias, descripciones y grafías de Vargas Filgueira (2019), notas de pp. 86–88 del visor y páginas de los episodios, están registradas en [docs/06-toponimia.md](../docs/06-toponimia.md). Esa referencia documenta el uso del autor; la presentación de los rótulos y la verificación cartográfica oficial siguen pendientes. No se reemplazaron nombres del mapa ni de las citas.
+Las correspondencias, descripciones y grafías de Vargas Filgueira (2019), notas de pp. 86–88 del visor y páginas de los episodios, están registradas en [docs/06-toponimia.md](../docs/06-toponimia.md). La Persona C confirmó el orden **Onashaga — Canal Beagle**, con el nombre del libro primero. La verificación cartográfica oficial, los permisos pendientes y la implementación del mapa siguen abiertos. No se reemplazaron nombres dentro de citas ni se modificó código.
