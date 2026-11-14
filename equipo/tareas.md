@@ -53,7 +53,8 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Deploy en GitHub Pages: publicado desde `main`, carpeta raíz.
 - [ ] Versión que funcione sin internet para la demo del 20/11. Ya abre con doble clic; falta el service worker para Pages (decidido para el 16/11).
 - [x] Sección **Tecnologías** del README (13/11).
-- [ ] Correr `node pruebas/de-punta-a-punta.cjs` con el juego (necesita `npm i -D playwright`; se probó a mano en el navegador).
+- [x] Correr `node pruebas/de-punta-a-punta.cjs` con el juego (14/11): pasa en las cinco pantallas, dos partidas enteras en cada una. Resultado en el PR 16.
+- [x] Aplicar en el juego las correcciones de C de la auditoría del paso 5 (14/11): lema en la ayuda (P01), cierre «Hoy» general (P03) y aviso de voz automática (P20). El cierre usa el mismo texto provisorio que la maqueta de D (PR 17); el definitivo lo redacta C.
 - [ ] Completar la parte de programación del avance (`equipo/avance-14-11.md`), con A, antes del 16/11 a las 23:00.
 
 ## Persona C: Investigación cultural y consulta (Dani)
