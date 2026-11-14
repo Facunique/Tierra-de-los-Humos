@@ -13,7 +13,7 @@
 >
 > **Regla:** nadie avanza sobre la parte de otro sin acordarlo. Todo lo cultural pasa antes por la Persona C y, si corresponde, por la comunidad.
 >
-> Última revisión: 14/11/2026. Las ideas 1 a 27 las propuso la Persona D; salvo que se diga otra cosa, le tocarían a D. El esfuerzo es aproximado.
+> Última revisión: 14/11/2026, a la noche (se marcó lo que ya se hizo o cambió con el avance del equipo). Las ideas 1 a 27 las propuso la Persona D; salvo que se diga otra cosa, le tocarían a D. El esfuerzo es aproximado.
 
 ## Resumen: qué mirar y cuándo
 
@@ -30,13 +30,13 @@
 
 ## Después de la reunión con la comunidad
 
-**1. Aplicar lo que diga la comunidad, en todo a la vez.**
+**1. Aplicar lo que diga la comunidad, en todo a la vez.** *En curso:* la auditoría de C (`auditoria-cultural-paso-5.md`) ya ordena qué cambiar; D aplicó su parte el 14/11 (ver `memory.md`).
 - **Qué:** si cambia algo, se corrige en todos lados el mismo día. Por ejemplo: jugar «como» o «acompañando», las siluetas, quién rema, nombres, colores u objetos que no van, la pantalla del presente. Hay que tocar el arte (`arte/corteza/corteza.js`), las cartas, el pitch, el storyboard, la guía para docentes, la versión de mesa, la vidriera y el cartel.
 - **Suma a:** pertinencia (25) y rigor (20).
 - **Señal:** la entrada de la reunión en `comunicaciones.md` tiene una corrección.
 - **Esfuerzo:** de 1 a 3 horas, según el cambio.
 
-**2. La pantalla «Hoy», escrita con la comunidad.**
+**2. La pantalla «Hoy», escrita con la comunidad.** *Espera a C:* es la observación P03 de la auditoría.
 - **Qué:** el cierre del códice en presente ya tiene lugar en la maqueta, con texto provisorio. Si la comunidad comparte qué quiere decir (y si autoriza nombrarse), armar el diseño con sus palabras tal cual. Puede llevar imágenes propias de la comunidad, nunca fotos históricas.
 - **Suma a:** pertinencia, que también desempata.
 - **Señal:** la comunidad dice qué quiere mostrar, o lo escribe la Persona C con su permiso.
@@ -74,13 +74,13 @@
 - **Señal:** alguien prueba en un celular de gama baja y anda lento.
 - **Esfuerzo:** 1 hora.
 
-**8. «Tocá para jugar» en la vidriera del stand.**
+**8. «Tocá para jugar» en la vidriera del stand.** *Señal cumplida en parte:* el juego ya está conectado y la vidriera muestra partidas reales del núcleo; falta saber si el stand tiene pantalla táctil.
 - **Qué:** si alguien toca la pantalla del stand mientras la partida se juega sola, toma el control.
 - **Suma a:** la demo del 20/11.
 - **Señal:** juego conectado y una pantalla táctil en el stand.
 - **Esfuerzo:** 1 hora.
 
-**9. Conectar la luz real al arranque de la partida.**
+**9. ~~Conectar la luz real al arranque de la partida.~~ Hecha por B el 13/11** (`juego/interfaz/juego.js`): el viaje empieza con la luz de Ushuaia, junto con el sonido, el narrador y la postal.
 - **Qué:** el núcleo ya acepta `hora` y `estacion`; falta que la interfaz le pase `TDH_LUZ_REAL.ahora()` cuando el botón «Luz real» está encendido. Son dos líneas, para la Persona B.
 - **Suma a:** innovación.
 - **Señal:** la Persona B conecta el núcleo a `index.html`.
@@ -130,7 +130,7 @@
 - **Le tocaría a:** C con D.
 - **Esfuerzo:** 1 a 2 horas.
 
-**16. Bibliografía automática.**
+**16. Bibliografía automática.** *Señal cumplida:* C escribió `docs/03-contenido-cultural.md` y la sección Fuentes del README; falta que C diga si la quiere.
 - **Qué:** un script que junte todas las fuentes (cartas, territorio, arte, mapa) en una sola lista para el README, y una pantalla «Fuentes» en el juego. Así no se olvida ninguna.
 - **Suma a:** rigor y documentación.
 - **Señal:** la Persona C escribe `docs/03-contenido-cultural.md`, o la sección Fuentes del README.
