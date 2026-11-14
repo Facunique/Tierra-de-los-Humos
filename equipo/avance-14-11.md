@@ -53,8 +53,9 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 - **Sin internet en la demo y en las escuelas** ([PR 16](https://github.com/Facunique/Tierra-de-los-Humos/pull/16), en revisión): la primera visita guarda el juego en el navegador y después abre sin conexión. Va primero a la red, así nadie se queda con una versión vieja. Se puede sumar a la pantalla de inicio del celular. Probado apagando el servidor y recargando. Con doble clic ya andaba sin internet.
 - **Arreglos que salieron al probar** (PR 16): un toque durante la transición de humo se perdía, y la transición trababa el juego si el navegador frenaba las animaciones.
 - **Correcciones de la auditoría cultural aplicadas en el juego** ([PR 18](https://github.com/Facunique/Tierra-de-los-Humos/pull/18), ya en `main`): el lema «Lo aprendido se transmite», un cierre «Hoy» que no atribuye prácticas sin fuente y el aviso de que la voz es la automática del dispositivo.
+- **El juego cuenta por qué viajan** ([PR 20](https://github.com/Facunique/Tierra-de-los-Humos/pull/20), ya en `main`): cada viaje empieza con una carta «Por qué viajan», con el dato y la fuente del destino y la aclaración de que la familia es ficción. Es la parte de B del nomadismo en chico. Hoy el destino es siempre la ballena varada; cuando el núcleo lo elija según la estación, el texto cambia solo. La prueba de punta a punta revisa que aparezca en cada partida.
 - **Alcance para la entrega** ([`docs/02-alcance-mvp.md`](https://github.com/Facunique/Tierra-de-los-Humos/blob/juego/sin-internet/docs/02-alcance-mvp.md), propuesta de B en el PR 16): qué cuenta como terminado según los criterios del jurado, qué entra sí o sí para el 17/11 y qué se recorta primero. Espera que A lo confirme.
-- **Pruebas automáticas:** en `main` pasan las 87, de todo el equipo; con el PR 16, 92.
+- **Pruebas automáticas:** en `main` pasan las 88, de todo el equipo; con el PR 16, 93.
 
 ![El núcleo del juego: la canoa con su fuego rema por el canal, con una playa, el bosque, leña y pescado para juntar, y el humo sobre lo no explorado](reunion-14-11/viaje.jpg)
 
@@ -102,7 +103,7 @@ Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la
 - **Consulta abierta:** faltan respuestas sobre representación de la familia, nombres, exclusiones y revisión del juego; también el permiso específico para citas textuales y el alcance de la participación comunitaria. 🔍 Todavía no se registró un pedido concreto de ayuda a la mentoría por parte de C.
 - **Cómo se juega el nomadismo:** el enfoque decidido por Dani combina clima, comida y ambiente. Falta acordar con A y B los objetivos concretos y el cierre de la partida; la ballena varada permanece como un motivo posible. El prototipo todavía termina al llegar a un destino fijo.
 - **Dudas técnicas de B:**
-  - **Cómo se juega el nomadismo:** la propuesta más chica (cada viaje con un motivo documentado y el juego cuenta al empezar por qué viajan) necesita que A elija el destino en el núcleo y que C confirme cada motivo. Calculamos medio día de trabajo. Si no llega, el viaje sigue con un destino fijo.
+  - **Cómo se juega el nomadismo:** la propuesta más chica (cada viaje con un motivo documentado y el juego cuenta al empezar por qué viajan) necesita que A elija el destino en el núcleo y que C confirme cada motivo. La parte de B ya está en `main` (PR 20): el juego cuenta el motivo al empezar. Si lo de A no llega, el viaje sigue con un destino fijo y el mismo motivo.
   - **Balance:** la prueba de punta a punta muestra que el juego no se rompe, pero no mide si es justo. Hoy se puede acampar noche tras noche sin gastar fuego. Para ajustar los números hacen falta pruebas con personas de afuera del equipo (al menos tres, una en un celular).
   - **Celulares de la demo:** las pruebas automáticas usan pantallas de celular simuladas. Nos sirve saber qué equipos va a haber el 20/11 para probarlo antes.
 - ✏️ Dudas técnicas de A.
