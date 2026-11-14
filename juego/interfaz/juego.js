@@ -173,10 +173,39 @@
     if (!partida || partida.terminada) {
       nuevoViaje();
       medir(); pintar();
-      // Con la luz real, el viaje puede empezar de noche: que se sepa por qué el fuego baja rápido.
-      const deNoche = partida.estado.hora === 'noche' ? ' Es de noche: el frío gasta más el fuego. Amarrá en el cachiyuyo, junto a una playa, para pasar la noche.' : '';
-      anunciar('Generación ' + generacion + '. Llevá el fuego hasta ' + partida.estado.destino.nombre + ', hacia el este.' + deNoche);
+      contarMotivo(partida);
     } else { medir(); pintar(); }
+  }
+  /**
+   * Al empezar, el juego cuenta por qué viajan: el motivo es el destino que
+   * eligió el núcleo, con su dato y su fuente (juego/nucleo/territorio/destinos.js).
+   * Si el destino cambia (por ejemplo, según la estación), el texto cambia solo.
+   */
+  function motivoDe(destino) {
+    const d = (window.TDH_DESTINOS && TDH_DESTINOS.DESTINOS[destino.id]) || null;
+    if (!d || !d.dato || !d.fuente) return null;
+    const saber = d.carta && SABERES[d.carta];
+    return {
+      titulo: 'Por qué viajan',
+      dato: d.dato,
+      juego: 'La familia de este viaje es ficción. Va en canoa hacia ' + destino.nombre + ', al este del canal. Llevá el fuego encendido hasta ahí.',
+      fuente: d.fuente,
+      estado: d.estado,
+      // La ilustración: la de la carta del destino, o su dibujo en una playa.
+      mapa: saber && saber.mapa ? saber.mapa : ['GGLGGGLG', '........', ',,,,,,,,'],
+      extra: saber && saber.mapa ? saber.extra : { objetos: d.dibujo ? [{ id: d.dibujo, x: 4, y: 1 }] : [] },
+    };
+  }
+  async function contarMotivo(esta) {
+    // Que el humo de la pantalla anterior termine de abrirse antes de mostrar la carta.
+    while (enTransicion) await new Promise((r) => setTimeout(r, 50));
+    if (partida !== esta || actual !== 'viaje') return;
+    const motivo = motivoDe(esta.estado.destino);
+    if (motivo) await TDH_CARTA.mostrar(motivo, { nueva: false, rotulo: 'Motivo del viaje · Yagán', altoContraste });
+    if (partida !== esta) return;
+    // Con la luz real, el viaje puede empezar de noche: que se sepa por qué el fuego baja rápido.
+    const deNoche = esta.estado.hora === 'noche' ? ' Es de noche: el frío gasta más el fuego. Amarrá en el cachiyuyo, junto a una playa, para pasar la noche.' : '';
+    anunciar('Generación ' + generacion + '. Llevá el fuego hasta ' + esta.estado.destino.nombre + ', hacia el este.' + deNoche);
   }
   /**
    * El tamaño de la celda se calcula solo al entrar al viaje y al cambiar el

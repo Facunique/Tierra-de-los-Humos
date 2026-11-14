@@ -8,6 +8,10 @@
  *   await TDH_CARTA.mostrar(carta, { nueva: true, altoContraste: false });
  *   TDH_CARTA.abierta()   // true mientras se ve una carta
  *
+ * Con { rotulo: 'Motivo del viaje · Yagán' } la misma pantalla muestra algo que
+ * no es un saber (el motivo del viaje al empezar): cambia el renglón de arriba
+ * y lo que lee la voz, y la carta lleva la clase tdh-carta--otra.
+ *
  * - La fuente queda siempre a la vista: si el texto no entra, se desplaza el
  *   cuerpo de la carta (dato y en el juego), no la fuente ni los botones.
  * - La ilustración se dibuja con Corteza y lleva el texto alternativo (carta.alt).
@@ -70,8 +74,8 @@
       velo.setAttribute('aria-labelledby', 'tdh-carta-titulo-' + n);
       velo.setAttribute('aria-describedby', 'tdh-carta-cuerpo-' + n);
 
-      const art = el('article', 'carta-saber papel tdh-carta');
-      art.appendChild(el('p', 'carta-saber__tipo', (op.nueva ? 'Saber nuevo · ' : 'Saber · ') + pueblo + ' · ' + carta.tipo));
+      const art = el('article', 'carta-saber papel tdh-carta' + (op.rotulo ? ' tdh-carta--otra' : ''));
+      art.appendChild(el('p', 'carta-saber__tipo', op.rotulo || ((op.nueva ? 'Saber nuevo · ' : 'Saber · ') + pueblo + ' · ' + carta.tipo)));
       const ilus = el('canvas', 'carta-saber__ilus');
       ilus.setAttribute('role', 'img');
       ilus.setAttribute('aria-label', carta.alt || 'Ilustración de la carta');
@@ -108,7 +112,7 @@
       if (escuchar) escuchar.addEventListener('click', async () => {
         if (escuchar.getAttribute('aria-pressed') === 'true') { voz.detener(); vozLista(); return; }
         escuchar.setAttribute('aria-pressed', 'true'); escuchar.textContent = '⏹ Detener la lectura';
-        await voz.leerCarta(carta);
+        await (op.rotulo ? voz.leer([op.rotulo + '.', carta.titulo + '.', 'Dato: ' + carta.dato, 'En el juego: ' + carta.juego, 'Fuente: ' + carta.fuente].join(' ').replace(/<[^>]+>/g, '')) : voz.leerCarta(carta));
         if (velo.isConnected) vozLista();
       });
 
