@@ -450,8 +450,8 @@
     fila(ARTE.aCanvas('icono-comida', 0, 'verano', 3), 'Lo que tiene borde de papel, se junta', 'Acercá la canoa y tocá «Juntar»: leña, comida, pirita y saberes. Con pirita, el fuego apagado vuelve a prender una vez.');
     fila(ARTE.aCanvas('icono-remo', 0, 'verano', 3), 'Remar', 'Tocá el agua y la canoa rema hasta ahí; si tocás algo que se junta, va y lo junta. También con las flechas, o con <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>. <kbd>Enter</kbd> junta, <kbd>F</kbd> aviva, <kbd>M</kbd> amarra y <kbd>Esc</kbd> pone pausa.');
     fila(ARTE.aCanvas('icono-refugio', 0, 'verano', 3), 'Amarrar y acampar', 'En el cachiyuyo, junto a una playa, pasan la noche: comen lo que juntaron, amanece y vuelve la calma.');
-    fila(ARTE.aCanvas('icono-viento', 0, 'verano', 3), 'Escuchá y mirá el lugar', 'Con «Luz real de Ushuaia», el viaje empieza con la luz y la estación de ahora en el canal Beagle. Con sonido, el bosque, la playa y el canal suenan distinto, con subtítulos. Con el narrador, el viaje se cuenta en voz alta; <kbd>N</kbd> describe lo que rodea a la canoa.');
-    fila(ARTE.aCanvas('icono-generacion', 0, 'verano', 3), 'Lo aprendido se hereda', 'Cada saber que encontrás queda en la memoria de la familia y pasa a la siguiente generación. Se guarda en este dispositivo y se ve en el códice.');
+    fila(ARTE.aCanvas('icono-viento', 0, 'verano', 3), 'Escuchá y mirá el lugar', 'Con «Luz real de Ushuaia», el viaje empieza con la luz y la estación de ahora en el canal Beagle. Con sonido, el bosque, la playa y el canal suenan distinto, con subtítulos. Con el narrador, el viaje se cuenta en voz alta; <kbd>N</kbd> describe lo que rodea a la canoa. La voz es la que trae tu dispositivo: es automática y su pronunciación no la revisó la comunidad.');
+    fila(ARTE.aCanvas('icono-generacion', 0, 'verano', 3), 'Lo aprendido se transmite', 'Cada saber que encontrás queda en la memoria de la familia y pasa a la siguiente generación. Se guarda en este dispositivo y se ve en el códice.');
   }
 
   // ── Sonido, subtítulos y narrador ─────────────────────────────────────────
