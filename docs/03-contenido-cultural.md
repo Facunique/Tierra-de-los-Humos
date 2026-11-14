@@ -7,7 +7,7 @@ Este documento reúne las referencias que respaldan los contenidos del proyecto 
 ## Cómo se usan las fuentes
 
 - Cada dato conserva autor, obra, año y página. Las páginas de los capítulos del *Handbook* y de Spears son las que registra la investigación del equipo; las de Vargas Filgueira corresponden al **visor del PDF de 90 páginas**.
-- Las notas de lectura aportadas de Vargas Filgueira se distinguen de su entrevista. El asistente trabajó con esas notas y con las referencias del repositorio; no consultó los libros completos ni la grabación en esta revisión.
+- Las notas de lectura y el libro de Vargas Filgueira se distinguen de su entrevista. El 14/11 se localizó el PDF de 90 páginas aportado por la Persona C, fuera del repositorio, y se revisaron directamente los pasajes citados aquí, los protagonistas, los agradecimientos y el epílogo. No se revisó la grabación ni se declaran leídas directamente las demás obras completas.
 - Una descripción histórica se atribuye a su fuente. No se convierte en una regla de la vida actual de todas las familias ni en una única distribución de tareas.
 - La familia, el mapa, los eventos, el gasto del fuego y la herencia entre partidas son recursos de juego. El enfoque de nomadismo combina motivos documentados por decisión de diseño; esa combinación no se atribuye como una respuesta del entrevistado.
 - 🔍 indica una referencia, identificación o permiso pendiente. Una referencia escrita y una aprobación editorial del equipo son instancias distintas de la participación o validación de una comunidad.
@@ -18,10 +18,12 @@ Este documento reúne las referencias que respaldan los contenidos del proyecto 
 
 **Vargas Filgueira, Víctor (2019). *Mi sangre yagán (ahua saapa yagan)*. Primera edición digital. Editora Cultural Tierra del Fuego.**
 
-Se utiliza la referencia de esta edición y los pasajes indicados en las notas de lectura compartidas. No se presenta el libro completo como leído por el asistente. Sus relatos aportan situaciones históricas para revisar los motivos del viaje; cada episodio mantiene su contexto.
+Se utiliza la referencia de esta edición confirmada por la Persona C y los pasajes de su PDF. El año 2019 fue aportado por C; no se deduce de la fecha técnica de creación del archivo. La ficha editorial de la página 2 confirma autor, título, editorial, primera edición digital e ISBN 978-987-3642-28-9. El libro y sus escaneos no se redistribuyen. Sus relatos aportan situaciones históricas para revisar los motivos del viaje; cada episodio mantiene su contexto.
 
 | Contenido aportado | Página del visor | Aplicación y límite |
 |---|---|---|
+| Agradecimientos a la Comunidad Yagán Paiakoala de Ushuaia | 4 | Documenta el vínculo que el autor expresa en el libro; no prueba participación o validación del juego por toda la comunidad. |
+| Lista de protagonistas | 8–9 | Identifica personas concretas del relato. No autoriza trasladar sus nombres a la familia ficticia ni traducirlos como roles genéricos. |
 | Desplazamiento para acudir a una ballena varada | 16–17 | Carta `ballena` y dato del destino. Es uno de los motivos posibles del viaje. |
 | Estacionalidad de la extracción de corteza | 23 | Referencias del territorio y revisión de la carta de corteza. |
 | Recuperación de corteza conservada para reparar una canoa | 31–32 | Dato de `corteza` en el territorio. Se distingue de extraerla de un árbol y de una mecánica de reparación, que el juego no tiene. |
@@ -32,10 +34,13 @@ Se utiliza la referencia de esta edición y los pasajes indicados en las notas d
 | Pedernal y plumas conservadas secas para encender fuego | 66 | Referencia para revisar el encendido. Este pasaje no se usa por sí solo como confirmación de la pirita ni de la base del fogón. |
 | Nombres y correspondencias de lugares | 86–88, notas numeradas | Registro en `docs/06-toponimia.md`. Por ejemplo, **Onashaga — Canal Beagle**, nota 1. |
 | Vocabulario y distinción de contenidos ceremoniales | 47–48 y 88, notas 31–32 | Material de revisión documental; los contenidos ceremoniales quedan fuera del juego. |
+| Epílogo: continuidad del pueblo yagán y Comunidad Yagán Paiakoala en Ushuaia | 85–86 | El autor afirma la continuidad y relata la conformación de la comunidad en 2014. Su firma de entonces no confirma un cargo actual en 2026. Base escrita para proponer el cierre, separada de la entrevista. |
 
 Otros lugares se registran por sus episodios: Wulaia (p. 16), Tekenika (p. 23), Awaiakirrh y Ukika (p. 53), Yendegaia (p. 55), Akaraia (p. 56), Leiwaia (p. 57) e Imiwaia (p. 66). Sus descripciones y límites están en [toponimia](06-toponimia.md); no se les asignan coordenadas ni equivalencias nuevas.
 
-🔍 Faltan las páginas de los agradecimientos y el epílogo que vinculan al autor con la Comunidad Yagán Paiakoala. Esa referencia queda pendiente para fundamentar el cierre del códice y precisar el alcance de la participación comunitaria.
+**Nombres de personas, roles y lugares:** los protagonistas de pp. 8–9 son personas identificadas por el libro. El juego mantiene una familia ficticia sin nombres propios y usa descripciones en castellano, como «la familia» o «la abuela»; no se inventan sus traducciones al yagán. Los nombres de lugares tienen otro registro, en docs/06. La existencia de un término en una publicación no equivale a permiso para representar a una persona o comunidad.
+
+**Alcance del presente:** las pp. 4 y 85–86 respaldan la referencia de la obra a Paiakoala y a la continuidad del pueblo yagán. No verifican por sí solas la cestería de junco, la situación lingüística ni un cargo o actividad específica en 2026. 🔍 Se conserva la consulta sobre la participación comunitaria y las afirmaciones actuales más específicas.
 
 ### Cooper (1946): síntesis etnográfica
 
@@ -125,7 +130,7 @@ Esta lista conserva las pistas de investigación del repositorio. **No se las pr
 
 - Especies y distribución local de tonina, cormorán, pato vapor, otras aves, erizos y hongos cuando se pretenda nombrarlos por especie.
 - Fuente yagán específica sobre recolección de leña; fuente histórica del origen del nombre del juego; referencias botánicas y arqueológicas incompletas.
-- Páginas de los agradecimientos y el epílogo de Vargas Filgueira (2019), necesarias para completar el cierre del códice y la referencia a las comunidades actuales.
-- Permisos y respuestas pendientes de la consulta, y revisión final de los textos que se ven o se escuchan, prevista en el paso 5.
+- Propuesta y aprobación del cierre del códice, con las pp. 4 y 85–86 ya localizadas; fuentes o respuestas específicas si se quieren atribuir prácticas actuales concretas.
+- Permisos y respuestas pendientes de la consulta, y resolución de las observaciones de la auditoría del paso 5.
 
 La bibliografía no convierte estos pendientes en datos confirmados. Los documentos del proyecto se actualizan cuando llega una fuente o una respuesta nueva; la referencia original se conserva para poder revisar cada cambio.

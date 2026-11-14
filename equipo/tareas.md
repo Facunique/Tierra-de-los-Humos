@@ -72,11 +72,15 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Registrar los nombres de lugares aportados de Vargas Filgueira (2019), con notas y páginas: `docs/06-toponimia.md` (14/11). Se distinguen correspondencias, descripciones y nombres sin equivalencia explícita.
 - [x] Definir la presentación de los topónimos (14/11): **Onashaga — Canal Beagle**, con el nombre utilizado por Víctor primero y su correspondencia después.
 - [ ] Completar la fuente cartográfica y el permiso de uso en el juego; coordinar con D la implementación de los rótulos indicados en `docs/06-toponimia.md`.
-- [x] Revisar las nueve actividades de la guía para docentes (`escuelas/actividades.js`, 14/11). Observaciones por actividad y propuestas en [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md); su aplicación y revisión docente siguen pendientes.
+- [x] Revisar las nueve actividades de la guía para docentes (`escuelas/actividades.js`, 14/11). Observaciones y correcciones posteriores registradas en [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md); la revisión docente sigue pendiente.
+- [x] Actualizar los textos de la guía y sus actividades con las referencias disponibles de Vargas Filgueira, Cooper y Bird, distinguiendo datos, hipótesis y ejercicios (14/11, a pedido de C). La revisión docente y la consulta comunitaria siguen pendientes.
+- [x] Localizar las páginas de agradecimientos (p. 4), protagonistas (pp. 8–9) y epílogo (pp. 85–86) en el PDF de Vargas Filgueira (2019) aportado fuera del repositorio; actualizar las referencias sin publicar el ejemplar.
+- [x] Aprobar «Lo aprendido se transmite» como lema (14/11) y actualizar los textos para presentar el apagado del fuego como fin del viaje. Sin cambios de reglas ni números.
+- [x] Regenerar guía docente, reglas de mesa, cartel, nueve diapositivas y PDF del pitch (14/11). La carta de amarre exportada ya usa el texto y las fuentes actuales. Tablero, fichas e ilustraciones se conservan.
 - [ ] Redactar el cierre del códice, en presente, mencionando las comunidades vivas.
 - [x] Completar la sección **Fuentes** del README (14/11): publicaciones, consulta y referencias pendientes, con enlace a `docs/03-contenido-cultural.md`.
 - [x] Revisar todo el contenido del alcance del paso 5 contra las líneas rojas de `docs/00-guia-hackathon.md` (14/11). Informe con archivo y línea: [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md). Se revisaron textos y archivos exportados; no equivale a validación comunitaria.
-- [ ] Resolver las 23 observaciones pendientes de la auditoría con B y D; acordar el tono de «Morir es transmitir», completar fuentes y permisos, y regenerar las piezas después de los cambios. Cuatro ajustes editoriales menores del README ya están aplicados.
+- [ ] Resolver las observaciones restantes de la auditoría con B y D: representación, cierre actual, cartografía, fauna, pronunciación y precisiones de mesa y stand. El lema ya está aprobado; los cambios aplicados y la regeneración de piezas se registran en el informe.
 - [x] Completar la parte de consulta del avance del 14/11 (`equipo/avance-14-11.md`): entrevista y cotejo documental aportado, sin dar las cartas ni el juego por validados.
 
 ## Persona D: Arte, sonido y comunicación (Nacho)

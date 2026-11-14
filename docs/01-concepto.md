@@ -43,7 +43,7 @@ Varias vueltas de este ciclo forman **una etapa**, y varias etapas forman **el v
 
 **Decisión de diseño de Dani (13/11/2026):** el viaje acompaña desplazamientos con motivos que combinan el clima, la comida y el ambiente. La ballena varada es uno de los motivos posibles. Los objetivos concretos y la forma de cerrar una partida quedan pendientes de acuerdo con A y B.
 
-**Base documental aportada:** las notas de lectura de Dani sobre Vargas Filgueira, Víctor (2019), *Mi sangre yagán (ahua saapa yagan)*, primera edición digital, Editora Cultural Tierra del Fuego, señalan episodios de desplazamiento para acudir a una ballena varada (pp. 16–17), recuperar corteza conservada para reparar una canoa (pp. 31–32, con estacionalidad de la extracción en p. 23) y recuperar reservas de grasa para el invierno (pp. 53–54). Las páginas son las del visor del PDF de 90 páginas. El asistente trabaja con ese cotejo aportado por Dani; no leyó el ejemplar completo.
+**Base documental aportada:** Vargas Filgueira, Víctor (2019), *Mi sangre yagán (ahua saapa yagan)*, primera edición digital, Editora Cultural Tierra del Fuego, relata desplazamientos para acudir a una ballena varada (pp. 16–17), recuperar corteza conservada para reparar una canoa (pp. 31–32, con estacionalidad de extracción en p. 23) y recuperar reservas de grasa para el invierno (pp. 53–54). Las páginas son las del visor de 90 páginas. Las notas iniciales de la Persona C se contrastaron con esos pasajes del PDF aportado, localizado el 14/11 fuera del repositorio.
 
 **Dato y recurso de juego:** cada episodio conserva su fuente. La combinación de motivos, la familia, el mapa y las situaciones de cada partida son decisiones de ficción. «Nomadismo» nombra aquí el enfoque elegido por Dani; no se atribuye como expresión del entrevistado ni como descripción de la vida actual de todo el pueblo yagán. 🔍 Completar las páginas y el cotejo de las afirmaciones específicas sobre vientos, mareas y elección de refugio antes de trasladarlas a cartas o datos del territorio.
 
@@ -56,7 +56,7 @@ Varias vueltas de este ciclo forman **una etapa**, y varias etapas forman **el v
 - Cada saber es una **carta** con un texto breve, una aclaración de qué es dato y qué es recurso de juego, y **la fuente citada**.
 - Todas las cartas se juntan en un **códice** (modo museo), separado por pueblo, que se puede recorrer sin jugar. Es la parte pensada para escuelas.
 
-Así, morir y volver a empezar, que es lo propio del roguelike, deja de ser castigo y se vuelve **memoria que se transmite**.
+**Lo aprendido se transmite.** Al terminar un viaje y empezar otro, la generación siguiente conserva los saberes. El fin de la partida no se presenta como la muerte de la familia.
 
 ## Personajes
 
@@ -67,7 +67,7 @@ Así, morir y volver a empezar, que es lo propio del roguelike, deja de ser cast
 
 - **Sereno y respetuoso.** Más cerca de la contemplación que de la acción. El desafío es el clima y el territorio, no un enemigo.
 - **Sin violencia** entre personas ni contra pueblos. Sin seres ceremoniales como monstruos (ver las líneas rojas de la [guía](00-guia-hackathon.md#líneas-rojas-cuidado-cultural)).
-- **En presente.** El juego reconoce la continuidad del pueblo yagán y el códice debe cerrar con las comunidades de hoy. Dani aportó la referencia a la Comunidad Yagán Paiakoala en los agradecimientos y el epílogo de Vargas Filgueira (2019), *Mi sangre yagán (ahua saapa yagan)*. 🔍 Falta registrar las páginas y confirmar el alcance de su participación en el proyecto antes de redactar ese cierre.
+- **En presente.** El juego reconoce la continuidad del pueblo yagán y el códice debe cerrar con las comunidades de hoy. Vargas Filgueira (2019), *Mi sangre yagán (ahua saapa yagan)*, agradecimientos, p. 4, y epílogo, pp. 85–86 del visor, documenta su referencia a la Comunidad Yagán Paiakoala de Ushuaia y la continuidad de su pueblo. 🔍 La participación comunitaria en el proyecto y las prácticas actuales específicas requieren su propia confirmación; el libro no sustituye esa consulta.
 - **Honesto sobre la ficción.** La familia, el mapa y los eventos son inventados; los saberes no. El juego lo dice.
 - Visual a definir (pixel art u otras propuestas, ver tarea 6), con paleta del paisaje de los canales: mar gris, bosque de lenga, piedra, humo.
 

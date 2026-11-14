@@ -18,14 +18,14 @@ El desafío del proyecto es acercar a jóvenes y escuelas fuentes sobre los sabe
 
 ## Solución propuesta
 
-Un juego web que se juega desde el navegador, también en el celular. Cada partida es un viaje en el que el fuego es tu vida: se gasta con el frío y el viento, y se mantiene con lo que el territorio ofrece. Lo que se aprende en un viaje pasa a la siguiente generación como **cartas de saber**, cada una con su fuente citada. La mecánica del roguelike (morir, volver a empezar, avanzar) representa así la **transmisión de la memoria**.
+Un juego web que se juega desde el navegador, también en el celular. Cada partida es un viaje en el que el fuego es tu vida: se gasta con el frío y el viento, y se mantiene con lo que el territorio ofrece. Lo que se aprende en un viaje pasa a la siguiente generación como **cartas de saber**, cada una con su fuente citada. Terminar un viaje, volver a empezar y conservar lo aprendido representa la **transmisión de la memoria**.
 
 La familia, el mapa, los eventos y la herencia entre partidas son ficción. Los datos culturales conservan su fuente y los puntos pendientes se señalan con 🔍.
 
 Tres ideas lo sostienen:
 
 1. **El fuego es la vida.** Las familias yaganes llevaban el fuego encendido en el medio de la canoa (Cooper, 1946, p. 88 y 91). En el juego, ese fuego es la barra de vida.
-2. **Morir es transmitir.** Cuando el fuego se apaga, los saberes encontrados pasan a la siguiente generación del mismo pueblo.
+2. **Lo aprendido se transmite.** Cuando el fuego se apaga, termina el viaje y los saberes encontrados pasan a la siguiente generación del mismo pueblo.
 3. **Cada saber tiene fuente, y los pueblos están vivos.** Cada carta separa el *dato* del *recurso de juego* y cita su fuente con página. La consulta está registrada y sigue abierta; su alcance y los permisos pendientes están en [el documento de fuentes](docs/03-contenido-cultural.md#consulta-a-la-comunidad).
 
 El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
@@ -122,7 +122,7 @@ Las referencias completas, sus páginas y los límites de cada uso están en [`d
 
 ### Fuentes escritas
 
-- **Vargas Filgueira, Víctor (2019). *Mi sangre yagán (ahua saapa yagan)*.** Primera edición digital. Editora Cultural Tierra del Fuego. Notas de lectura aportadas para la investigación: ballena varada (pp. 16–17), corteza (pp. 23 y 31–32), mujeres remando (p. 33), enseñanza y decisiones compartidas (pp. 39 y 46), reservas de invierno (pp. 53–54), encendido del fuego (p. 66) y topónimos (notas de pp. 86–88). Páginas del visor del PDF de 90 páginas; el asistente no consultó el ejemplar completo.
+- **Vargas Filgueira, Víctor (2019). *Mi sangre yagán (ahua saapa yagan)*.** Primera edición digital. Editora Cultural Tierra del Fuego. ISBN 978-987-3642-28-9. Pasajes revisados en el PDF aportado por la Persona C: ballena varada (pp. 16–17), corteza (pp. 23 y 31–32), mujeres remando (p. 33), enseñanza y decisiones compartidas (pp. 39 y 46), reservas de invierno (pp. 53–54), encendido (p. 66) y topónimos (notas de pp. 86–88). Agradecimientos (p. 4) y epílogo (pp. 85–86) documentan la referencia del autor a Paiakoala y la continuidad del pueblo yagán. Páginas del visor de 90 páginas; año confirmado por C. El ejemplar se consulta fuera del repositorio y no se redistribuye.
 - **Cooper, J. M. (1946). «The Yahgan».** En J. H. Steward (ed.), *Handbook of South American Indians*, vol. 1: *The Marginal Tribes*, pp. 81–106. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143. Referencias registradas por el equipo: territorio y clima (pp. 81–82), alimentos (p. 84), viviendas (pp. 85–86), canoa y corteza (pp. 88–89), fuego (p. 91), desplazamientos (pp. 94–95), tareas (p. 96) y encuentros por varamientos (p. 99). Para el mapa también se utilizan pp. 107–108 de «The Ona», en el mismo volumen. La mención de Lothrop (1928), p. 32, es una cita indirecta mediante Cooper, p. 84.
 - **Bird, J. (1946). «The Archeology of Patagonia».** En el mismo *Handbook*, vol. 1, pp. 17–24. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143. Conchales del canal Beagle: pp. 20–21.
 - **Bird, J. (1946). «The Alacaluf».** En el mismo *Handbook*, vol. 1, pp. 55–79. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143. Territorio Kawésqar: p. 55; recolección de leña entre los Kawésqar: p. 70. Esta última referencia no se atribuye como práctica yagán.
@@ -134,7 +134,7 @@ Las referencias completas, sus páginas y los límites de cada uso están en [`d
 
 ### Referencias pendientes
 
-🔍 Goodall, los pasajes de museos y la referencia botánica de Multequina requieren completar o verificar edición, año y localización. Gusinde, Chapman, Calderón y Zárraga, Lothrop, Orquera y Piana, y Bridges conservan sus pendientes de consulta o ficha bibliográfica en [`docs/03-contenido-cultural.md`](docs/03-contenido-cultural.md#referencias-pendientes-de-completar-o-consultar). También faltan fuentes de especies, cartografía y páginas del epílogo de Vargas Filgueira. Estas referencias no se dan por verificadas al incluirlas en la lista.
+🔍 Goodall, los pasajes de museos y la referencia botánica de Multequina requieren completar o verificar edición, año y localización. Gusinde, Chapman, Calderón y Zárraga, Lothrop, Orquera y Piana, y Bridges conservan sus pendientes de consulta o ficha bibliográfica en [`docs/03-contenido-cultural.md`](docs/03-contenido-cultural.md#referencias-pendientes-de-completar-o-consultar). También faltan fuentes de especies y cartografía. Estas referencias no se dan por verificadas al incluirlas en la lista.
 
 ## Recursos de terceros
 
@@ -146,6 +146,8 @@ Las referencias completas, sus páginas y los límites de cada uso están en [`d
 El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido son **propios del equipo** (CC BY-SA 4.0). No se usan fotos históricas, ilustraciones, sonidos ni música de terceros. *Se completa si se suma alguna librería o recurso nuevo.*
 
 ## Uso de inteligencia artificial
+
+- **Correcciones de la auditoría (14/11):** con aprobación de la Persona C, Codex (OpenAI) aplicó «Lo aprendido se transmite», actualizó los textos de la guía docente y sus actividades y completó las fuentes y la consulta del pitch. Revisó pasajes del PDF de Vargas Filgueira (2019) aportado fuera del repositorio y localizó agradecimientos, protagonistas y epílogo. Actualizó referencias y seguimiento de tareas y regeneró las piezas afectadas. No publicó el libro ni escaneos, no agregó permisos y no cambió la lógica ni los números del juego.
 
 - **Auditoría cultural (14/11, paso 5):** a pedido de la Persona C, Codex (OpenAI) revisó los textos de cartas, sonido, mesa, actividades docentes, pitch, stand y README, junto con sus dependencias y archivos exportados. Registró 23 observaciones con archivo, línea y propuesta en `equipo/auditoria-cultural-paso-5.md`, corrigió cuatro puntos editoriales menores del README y actualizó tareas, memoria y avance. Las propuestas importantes y los cambios en piezas del equipo siguen pendientes. No incorporó datos culturales nuevos ni modificó código, números o reglas.
 

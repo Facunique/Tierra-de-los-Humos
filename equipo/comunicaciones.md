@@ -15,7 +15,7 @@
 | Quién | Tipo | Estado | Se puede nombrar en público | Último contacto |
 |---|---|---|---|---|
 | Víctor Vargas Filgueira, referente de la comunidad yagán | Persona | 🟢 Entrevista realizada; cotejo y consulta abiertos | Sí: nombre y atribución como fuente, sin restricción de medios, según confirmó Dani. Citas textuales: permiso específico pendiente. | 13/11/2026, 11:00 |
-| Comunidad Yagán Paiakoala (Ushuaia) | Comunidad | 🟡 Vínculo del autor mencionado en el libro según las notas de Dani; confirmar rol actual y alcance de participación | 🔍 Pendiente de permiso para atribuir participación o validación del proyecto a la comunidad | — |
+| Comunidad Yagán Paiakoala (Ushuaia) | Comunidad | 🟡 Vínculo del autor documentado en Vargas Filgueira (2019), p. 4 y pp. 85–86 del visor; confirmar rol actual y alcance de participación | 🔍 Pendiente de permiso para atribuir participación o validación del proyecto a la comunidad | — |
 | Mónica Alvarado (parque Yatana) | Persona | 🟡 Ver si se la puede contactar | A preguntar | — |
 
 Estados: 🟡 pendiente · 📨 contactada, esperando respuesta · 🟢 en diálogo · ✅ validó · ⚪ no respondió · 🔴 no quiere participar.
@@ -37,6 +37,14 @@ Lo que necesitamos preguntar. Cuando haya respuesta, se tacha y se anota en la e
 La lectura del libro aporta posibles motivos para la pregunta 4, pero no equivale a una respuesta del entrevistado sobre el diseño del juego. Las preguntas 1 a 5 y 7 siguen abiertas. Las ceremonias y los seres espirituales quedan fuera del juego conforme a sus reglas.
 
 ## Historial
+
+### 14/11/2026 · Actualización documental del registro
+
+- **Qué se revisó:** se localizó el PDF de *Mi sangre yagán (ahua saapa yagan)*, Vargas Filgueira, Víctor (2019), primera edición digital, Editora Cultural Tierra del Fuego, aportado por la Persona C fuera del repositorio. Se revisaron sus pasajes pertinentes; no hubo una nueva entrevista.
+- **Referencias completadas:** agradecimientos, p. 4, y epílogo, pp. 85–86 del visor de 90 páginas, para el vínculo del autor con la Comunidad Yagán Paiakoala y la continuidad del pueblo yagán. El epílogo relata su conformación en 2014; la firma de esa edición no confirma un cargo actual.
+- **Nombres:** pp. 8–9 identifican personas concretas del relato, no una lista de roles genéricos para nombrar a la familia ficticia. El juego sigue sin nombres propios; los topónimos se registran aparte en docs/06.
+- **Permisos y preguntas:** sin cambios. Leer la publicación no incorpora respuestas de la entrevista ni permisos de representación, vocabulario o citas textuales. Las preguntas abiertas anteriores se conservan.
+- **Publicación:** no se incorporan el libro, escaneos, grabaciones ni datos personales al repositorio.
 
 ### 13/11/2026, 11:00 · Víctor Vargas Filgueira, referente de la comunidad yagán · Entrevista en persona
 

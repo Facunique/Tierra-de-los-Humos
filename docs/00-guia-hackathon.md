@@ -100,12 +100,12 @@ Es el eje natural para la temática de pueblos originarios. Su condición espec�
 **Concepto: "el fuego no se apaga".** Hay un dato histórico que sirve de gancho: según la tradición, los navegantes europeos llamaron a la isla "Tierra de los Humos" y después "Tierra del Fuego" por los fuegos que veían en la costa. Los yámanas, además, llevaban el fuego encendido dentro de sus canoas.
 
 - **Cada partida es un viaje** (en canoa por los canales o a pie por la isla) con un mapa generado al azar.
-- **El fuego es la vida**: se gasta con el frío y el viento, y se recupera juntando leña (lenga, ñire), comida (mejillones, cholgas, guanaco, calafate) y refugio. Si el fuego se apaga, termina la partida (*permadeath*).
+- **El fuego es la vida**: se gasta con el frío y el viento, y se recupera juntando leña (lenga, ñire), comida (mejillones, cholgas, guanaco, calafate) y refugio. Si el fuego se apaga, termina la partida. El fin del viaje no se presenta como la muerte de la familia.
 - **Los peligros son naturales**: tormentas, viento fuerte, mareas, invierno.
 - **La progresión entre partidas es la transmisión de saberes**: lo que se aprende en un viaje pasa a la "siguiente generación" como cartas de conocimiento. Cada carta tiene un texto educativo con su **fuente citada**. La mecánica del roguelike queda unida al tema del eje (*memoria*).
 - **Un códice o "modo museo"** junta todo lo aprendido. Es la parte educativa que se puede usar en escuelas.
 
-Este enfoque sostiene la jugabilidad sin violencia, le da sentido cultural a la muerte y la repetición del roguelike, y produce justo el contenido citado que el jurado evalúa en *rigor*.
+Este enfoque sostiene la jugabilidad sin violencia y une la repetición de viajes con la transmisión de saberes. El contenido citado aporta al criterio de *rigor* del jurado.
 
 ## 8. Tecnología sugerida
 

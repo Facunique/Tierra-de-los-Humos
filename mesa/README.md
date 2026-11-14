@@ -16,7 +16,7 @@ Además hace falta un dado común.
 - **El fuego es la vida.** Se lleva en el medidor del tablero. Remar lo gasta, y más con viento en el canal hondo o con lluvia. La leña lo aviva.
 - **El humo se explora.** Las fichas empiezan con el humo hacia arriba y se dan vuelta cuando la canoa llega al lado.
 - **Cada saber se lee en voz alta** y se guarda.
-- **Morir es transmitir.** Si el fuego se apaga, la familia anota en el Libro de la familia los saberes que juntó. La generación siguiente empieza con 1 de fuego más por cada saber heredado.
+- **Lo aprendido se transmite.** Si el fuego se apaga, termina el viaje y la familia anota en el Libro de la familia los saberes que juntó. La generación siguiente empieza con 1 de fuego más por cada saber heredado.
 
 Las reglas completas entran en una página: [`reglas.html`](reglas.html).
 

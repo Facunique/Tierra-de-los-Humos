@@ -10,7 +10,7 @@
 Tres ideas que se repiten en el video, el pitch y el README:
 
 1. **El fuego es la vida.** Las familias yaganes llevaban el fuego encendido en la canoa. En el juego, es tu barra de vida.
-2. **Morir es transmitir.** Lo propio del roguelike (perder y volver a empezar) se vuelve memoria que pasa de generación en generación.
+2. **Lo aprendido se transmite.** Al terminar un viaje y empezar otro, lo aprendido pasa de generación en generación. No se atribuye la muerte a la familia.
 3. **Cada saber tiene fuente, y los pueblos están vivos.** Nada inventado presentado como real, y todo contado en presente, con consulta a la comunidad.
 
 ## Calendario
@@ -81,7 +81,7 @@ Todo el equipo habla: es parte del criterio. Cada bloque tiene una persona y una
 | ¿La comunidad está de acuerdo? ¿Qué les dijeron? | C |
 | ¿Qué pasa si una fuente está mal? | C: cada carta cita su fuente y el códice se puede corregir; las correcciones quedan registradas. |
 | ¿Cómo saben que el dibujo es fiel? | D: cada objeto está contrastado con la fuente y su página (`docs/05`). Por ejemplo, la mujer rema atrás y el hombre va adelante con el arpón, como describen Cooper y Spears. |
-| ¿Por qué un roguelike? | D: la mecánica de morir y volver a empezar es la transmisión entre generaciones. |
+| ¿Por qué un roguelike? | D: cada viaje permite aprender saberes que se conservan para la generación siguiente. |
 | ¿Funciona sin internet? ¿En celulares viejos? | B |
 | ¿Cuánto hizo la IA? | Quien sea referente: lo declarado en el README (cláusula 7.4). El arte, el sonido y los textos los revisó y decidió el equipo. |
 | ¿Cómo sigue después de la hackatón? | D |
