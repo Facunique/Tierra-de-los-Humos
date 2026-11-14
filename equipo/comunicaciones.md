@@ -38,6 +38,14 @@ La lectura del libro aporta posibles motivos para la pregunta 4, pero no equival
 
 ## Historial
 
+### 14/11/2026 · Confirmación de la Persona C sobre la entrevista del 13/11
+
+- **Qué confirma:** C ratifica que Víctor Vargas Filgueira afirmó oralmente el uso de pirita, su escasez y la relación de esa escasez con mantener una fogata encendida durante los viajes en canoa. Es una paráfrasis de la entrevista del 13/11/2026, a las 11:00, en el Museo del Fin del Mundo, Ushuaia; no hubo una nueva entrevista.
+- **Referencia anterior:** el apartado «Obtención del fuego» ya anotaba escasez de pirita y transporte de cenizas. La confirmación actual respalda el uso de pirita y la conservación del fuego en la canoa; no confirma automáticamente el detalle de cenizas envueltas, el término «fricción», la composición de la base del fogón ni las cifras de otros apartados.
+- **Aplicación:** se actualiza la carta `pirita` y se registra la fuente oral separada del libro. Cooper (1946), «The Yahgan», pp. 91 y 95, conserva su atribución para los materiales del encendido. El pasaje del libro de 2019, p. 66, no se presenta como prueba de la pirita.
+- **Permisos:** se conserva la autorización de nombre y paráfrasis fieles ya registrada. No se publican citas textuales ni se añaden permisos de representación, nombres o validación comunitaria.
+- **Pendiente documental:** localizar el pasaje en la grabación para facilitar su revisión, sin inventar una marca de tiempo. Las restantes preguntas y datos con 🔍 siguen abiertos.
+
 ### 14/11/2026 · Actualización documental del registro
 
 - **Qué se revisó:** se localizó el PDF de *Mi sangre yagán (ahua saapa yagan)*, Vargas Filgueira, Víctor (2019), primera edición digital, Editora Cultural Tierra del Fuego, aportado por la Persona C fuera del repositorio. Se revisaron sus pasajes pertinentes; no hubo una nueva entrevista.
@@ -55,7 +63,7 @@ La lectura del libro aporta posibles motivos para la pregunta 4, pero no equival
 - **Material previsto:** concepto en una hoja, juego o maqueta en un celular y cartas de saber. 🔍 No se confirmó aquí qué materiales se mostraron efectivamente.
 - **Qué nos dijeron:** síntesis inicial aportada por Dani. Es una paráfrasis, no una transcripción literal. Fuente oral: Vargas Filgueira, Víctor (2026), entrevista del 13/11 en el Museo del Fin del Mundo, Ushuaia. 🔍 Pendiente de cotejo con la grabación y de referencias temporales para cada afirmación. Los apartados siguientes registran relatos sobre prácticas históricas; no describen por sí solos las prácticas actuales de todo el pueblo yagán.
 
-🔍 Los apartados 1 a 4 conservan la síntesis inicial como material pendiente de cotejo, en particular sus cifras, medidas, términos en lengua yagán y detalles técnicos. No se trasladan al juego como datos verificados.
+🔍 Los apartados 1 a 4 conservan la síntesis inicial como material pendiente de revisión, en particular cifras, medidas, términos en lengua yagán y detalles técnicos. La excepción es la confirmación de C del 14/11 sobre uso y escasez de pirita y conservación del fuego en la canoa, registrada arriba. El resto no se traslada al juego como dato verificado.
 
 ***1. Navegación y territorio***
 **Zona de navegación**

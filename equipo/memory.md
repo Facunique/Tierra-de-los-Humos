@@ -5,6 +5,7 @@
 ## Estado actual
 
 - **Fecha de la última actualización:** 14/11/2026 (día 6 de desarrollo).
+- **Redacción directa y pirita confirmada por C (14/11):** C pidió quitar las fórmulas sobre el autor y su familia del campo `dato`. Se revisan las nueve cartas activas, las ocho propuestas y los motivos de ballena y pirita, conservando autor y referencias en `fuente`. C confirmó que Víctor afirmó en la entrevista del 13/11 el uso y la escasez de pirita y su relación con mantener una fogata encendida en la canoa. Se incorpora esa paráfrasis como fuente oral de `pirita`, separada del libro. El resto de las notas de entrevista conserva sus pendientes. Sin cambios de lógica, IDs, estados, efectos, ilustraciones ni números.
 - **Juego sin internet, motivo del viaje y alcance propuesto (14/11, B):** ya están en `main` el service worker y el manifiesto (PR 16: el juego publicado abre sin conexión después de la primera visita) y la carta «Por qué viajan» al empezar cada viaje, con el dato y la fuente del destino (PR 20). La propuesta de alcance está en [`docs/02-alcance-mvp.md`](../docs/02-alcance-mvp.md) y **todavía no es una decisión**: espera que A la confirme. La prueba de punta a punta pasa en `main` en las cinco pantallas (14/11).
 - **Paso 6 y cartas con Víctor como fuente principal (14/11, C):** propuesta de cierre en `docs/07-cierre-del-codice.md`, basada en Vargas Filgueira (2019), p. 4 y pp. 85–86 del visor. C pidió priorizar su libro en las nueve cartas y usar a Cooper para detalles no confirmados por esos pasajes. Se actualizan dato y fuente sin cambiar IDs, efectos ni ilustraciones. Ocho cartas nuevas completas quedan en `datos/saberes-propuestos.js`, fuera del catálogo activo hasta acordar descubrimientos con A y B. Revisión: `equipo/revision-victor-y-cartas-nuevas.md`. El cierre, la presentación familiar del autor y los nombres siguen pendientes de decisión final; no se inventan respuestas de entrevista ni permisos.
 - **Piezas de D después de la auditoría del paso 5 (14/11, D):** se aplicaron, con los textos que propuso C:
@@ -82,6 +83,7 @@
 
 | Fecha | Decisión | Motivo |
 |---|---|---|
+| 14/11 | **Datos de cartas y motivos con redacción directa.** Se quitan del cuerpo las fórmulas sobre Víctor, su familia o su relato; la atribución permanece en `fuente`. Se conserva el contexto de prácticas históricas documentadas, sin convertirlo en una regla de todas las comunidades actuales. | Pedido expreso de C al probar el juego. También confirma de la entrevista el uso y la escasez de pirita y la conservación del fuego en la canoa; no confirma por extensión otros detalles ni otorga permisos nuevos. |
 | 14/11 | **Víctor Vargas Filgueira como fuente principal de las cartas.** Se priorizan los pasajes verificados de *Mi sangre yagán* (2019) y se mantienen atribuidos a Cooper los detalles que esos pasajes no documentan. La entrevista y la obra se registran por separado. | Pedido expreso de C. No se sustituye el nombre del autor por el de un antepasado ni se inventa una denominación familiar. Las ocho cartas nuevas se preparan con fuente y página; su integración requiere acordar los eventos con A y B. |
 | 14/11 | **«Lo aprendido se transmite» reemplaza el lema anterior.** El apagado del fuego marca el fin del viaje; no se presenta como la muerte de la familia. Se aplica en README, concepto, comunicación, mesa, pitch y cartel, sin cambiar mecánicas ni números. | Aprobación expresa de la Persona C después de la auditoría del paso 5. Es una decisión editorial del equipo, no una afirmación ni una autorización atribuida al referente. |
 | 14/11 | **Presentación de lugares: nombre utilizado por Víctor primero, seguido de su correspondencia.** Ejemplo confirmado por C: **Onashaga — Canal Beagle**. Se conservan las grafías de la edición y los límites de cada identificación; no se inventan equivalencias para los nombres que no las tienen. | Elección editorial de la Persona C. Fuente de la correspondencia: Vargas Filgueira, Víctor (2019), *Mi sangre yagán (ahua saapa yagan)*, primera edición digital, Editora Cultural Tierra del Fuego, nota 1, pp. 86–88 del visor. Registro y propuestas para D en `docs/06-toponimia.md`; cartografía oficial, permisos e implementación del mapa siguen pendientes. |
@@ -123,6 +125,14 @@
 - **Contenido a cargo de C:** aportar para cada motivo el dato y la fuente, distinguir el episodio documentado de la situación ficticia y revisar las cartas. El nomadismo es el enfoque elegido; no se presenta como un lugar al que llegar ni como un dato validado por toda la comunidad.
 - **Estado:** se actualizaron los documentos de diseño. No se cambió el código, los números ni los campos de funcionamiento de los datos. La guía para docentes, la versión de mesa, el pitch y el stand ya se revisaron en el paso 5; sus propuestas de corrección están en la auditoría y siguen pendientes de aplicación acordada.
 - **Aviso del paso 3:** el texto de la carta `corteza` ya explica el descubrimiento del saber y no promete reparación. El comentario de `efecto: null` en `elementos.js` y el README del núcleo quedaron pendientes de actualización por A. C solo editó `dato` y `fuente` en los archivos de territorio. No se incorporó la carta nueva de reservas al catálogo: está preparada para decidir con Dani y acordar con A y B su integración.
+
+### Coordinación con A: redacción del motivo de corteza
+
+El PR #22 de A añade la estacionalidad junto al dato del destino `corteza`. Para conservar su trabajo sin incorporar mecánicas de otra rama, C deja ese dato sin cambios en esta revisión y prepara el texto directo para A:
+
+> Buscar corteza adecuada para las canoas puede motivar un viaje. Extraerla del árbol y recuperar corteza conservada en un turbal son actividades distintas.
+
+Fuentes que conserva el destino: Cooper (1946), «The Yahgan», pp. 94–95; Vargas Filgueira (2019), *Mi sangre yagán*, pp. 23 y 31–32 del visor. La tarjeta de saber `corteza` ya tiene redacción directa. Solo queda aplicar este texto al motivo propuesto en coordinación con A, sin resolver por inferencia la estación de recuperar material guardado.
 
 ## Lo que sabemos (y de dónde)
 

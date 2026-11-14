@@ -8,6 +8,7 @@ Este documento reúne las referencias que respaldan los contenidos del proyecto 
 
 - Cada dato conserva autor, obra, año y página. Las páginas de los capítulos del *Handbook* y de Spears son las que registra la investigación del equipo; las de Vargas Filgueira corresponden al **visor del PDF de 90 páginas**.
 - **Prioridad confirmada por C el 14/11:** Vargas Filgueira es la fuente principal de las cartas. Cooper documenta los detalles que no confirman los pasajes de Vargas; cada carta distingue el alcance de ambos. La entrevista sigue separada del libro. Revisión actual: [`revision-victor-y-cartas-nuevas.md`](../equipo/revision-victor-y-cartas-nuevas.md).
+- **Redacción directa confirmada por C el 14/11:** el campo `dato` presenta el saber sin fórmulas sobre el autor, su familia o su relato. El nombre y la referencia completa se mantienen en `fuente`. Se describen prácticas de la vida canoera histórica documentada; no se las convierte en reglas de todas las comunidades actuales ni se agregan especies, cantidades o técnicas sin respaldo.
 - Las notas de lectura y el libro de Vargas Filgueira se distinguen de su entrevista. El 14/11 se localizó el PDF de 90 páginas aportado por la Persona C, fuera del repositorio, y se revisaron directamente los pasajes citados aquí, los protagonistas, los agradecimientos y el epílogo. No se revisó la grabación ni se declaran leídas directamente las demás obras completas.
 - Una descripción histórica se atribuye a su fuente. No se convierte en una regla de la vida actual de todas las familias ni en una única distribución de tareas.
 - La familia, el mapa, los eventos, el gasto del fuego y la herencia entre partidas son recursos de juego. El enfoque de nomadismo combina motivos documentados por decisión de diseño; esa combinación no se atribuye como una respuesta del entrevistado.
@@ -105,6 +106,8 @@ El equipo registra su consulta mediante Project Gutenberg, libro n.º 39109, en 
 **Vargas Filgueira, Víctor (2026). Entrevista presencial del 13 de noviembre, a las 11:00, en el Museo del Fin del Mundo, Ushuaia.** Registro de la Persona C en [`equipo/comunicaciones.md`](../equipo/comunicaciones.md#historial).
 
 La consulta está abierta. El registro reúne una síntesis sobre navegación, fuego, indumentaria, herramientas y organización. Las cifras, medidas, grafías y detalles técnicos señalados con 🔍 siguen pendientes de revisión con la grabación y de una localización temporal de cada afirmación. No se les asignan páginas del libro como si fueran respuestas de la entrevista.
+
+**Confirmación específica de C, 14/11:** Víctor afirmó en la entrevista el uso y la escasez de pirita, y relacionó esa escasez con mantener una fogata encendida en la canoa. Esta paráfrasis se usa como fuente oral en la carta `pirita`. Sigue pendiente localizar el pasaje en la grabación; no se inventa su minuto ni se extiende la confirmación a las cenizas envueltas o a los otros detalles de la síntesis. El libro de 2019, p. 66, sigue documentando pedernal y plumas secas, sin verificar por sí solo la pirita.
 
 | Alcance | Estado registrado |
 |---|---|
