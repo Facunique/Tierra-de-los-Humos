@@ -88,7 +88,7 @@ La síntesis destaca el respeto a las personas mayores, la experiencia y la coop
 
 #### Revisión documental posterior a la entrevista
 
-Dani aportó un cotejo de **Vargas Filgueira, Víctor (2019). *Mi sangre yagán (ahua saapa yagan)*. Primera edición digital. Editora Cultural Tierra del Fuego.** Las páginas indicadas corresponden al visor de un PDF de 90 páginas. El asistente trabajó con las notas y referencias aportadas por Dani; no cotejó el ejemplar completo.
+**Vargas Filgueira, Víctor (2019). *Mi sangre yagán (ahua saapa yagan)*. Primera edición digital. Editora Cultural Tierra del Fuego.**
 
 El cotejo aporta tres posibles motivos del viaje:
 
@@ -103,8 +103,8 @@ Según las notas aportadas, los agradecimientos y el epílogo vinculan al autor 
 Continúan pendientes de cotejo con la grabación las cifras, medidas y detalles técnicos de la síntesis inicial. Esta revisión documental no incorpora nuevas respuestas ni autorizaciones del entrevistado.
 
 - **Correcciones al juego:** propuestas pendientes de aprobación. Revisar las cartas y los datos del territorio con las fuentes aportadas. Corregir la promesa de «arreglar la canoa» en `datos/saberes.js`, porque esa acción no existe en el juego. Todavía no se modificaron las cartas ni los datos del territorio en esta revisión.
-- **Permisos:** Dani confirmó que el permiso verbal para mencionar a Víctor Vargas Filgueira es libre: se puede publicar su nombre y nombrarlo como fuente conforme a sus palabras, sin restricción de medios. Esto habilita la atribución de paráfrasis fieles; las citas textuales siguen pendientes de permiso específico. No implica autorización de nombres en lengua yagán, de representación de una familia, de ceremonias ni validación comunitaria del proyecto.
-- **Próximo paso propuesto:** cotejar la grabación, completar las páginas de los agradecimientos y el epílogo, consultar las preguntas pendientes y presentar a Dani las opciones de destino antes de cambiar los contenidos. 🔍 Falta acordar con el entrevistado la fecha y modalidad de una próxima revisión.
+- **Permisos:** Se confirmó que el permiso verbal para mencionar a Víctor Vargas Filgueira es libre: se puede publicar su nombre y nombrarlo como fuente conforme a sus palabras, sin restricción de medios. Esto habilita la atribución de paráfrasis fieles; las citas textuales siguen pendientes de permiso específico. No implica autorización de nombres en lengua yagán, de representación de una familia, de ceremonias ni validación comunitaria del proyecto.
+- **Próximo paso propuesto:** cotejar la grabación, completar las páginas de los agradecimientos y el epílogo, consultar las preguntas pendientes y presentar las opciones de destino antes de cambiar los contenidos. 🔍 Falta acordar con el entrevistado la fecha y modalidad de una próxima revisión.
 
 ### 9/11/2026 · Contactos identificados
 
