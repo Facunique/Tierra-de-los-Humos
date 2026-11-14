@@ -77,7 +77,7 @@ Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la
 
 ## 5. Próximos pasos (15 al 17/11)
 
-- **Programación:** pulido y balance jugando con personas; versión sin internet en Pages para la demo (service worker); prueba de punta a punta en varios celulares antes de entregar. ✏️ A confirma lo suyo.
+- **Programación:** conectar el núcleo con la interfaz; herencia guardada en el navegador; códice; pulido y balance jugando con personas; versión sin internet para la demo. ✏️ A y B confirman.
 - **Contenido:** aplicar lo que diga la comunidad, elegir el destino del viaje, revisar las cartas y escribir las que falten, y la revisión cultural final. ✏️ C confirma.
 - **Arte y sonido:** ajustar el arte con lo que diga la comunidad; integrar el sonido según el lugar en el juego; resolver las tres fuentes pendientes del territorio (leña, conchales y tonina); cotejo con el libro de Goodall.
 - **Comunicación:** README completo con capturas del juego real, video de 3 minutos (16/11) y pitch de 5 minutos con ensayo.

@@ -5,13 +5,13 @@
 ## Estado actual
 
 - **Fecha de la última actualización:** 13/11/2026 (día 5 de desarrollo).
-- **Fase:** programación. El juego se juega de punta a punta en `index.html`: el núcleo de A (`juego/nucleo/`) conectado a la interfaz de B (`juego/interfaz/`), con la herencia guardada en el navegador, el códice y los módulos de D. Quién hace qué está en [`tareas.md`](tareas.md).
-- **13/11 (Persona B):** el juego conectado. Detalle en [`tareas.md`](tareas.md#persona-b-programación-de-interfaz-contenido-y-deploy-facu). Lo que hay que saber:
+- **Fase:** programación. El núcleo del juego ya está en `main` (`juego/nucleo/`, ver su [README](../juego/nucleo/README.md)) y se juega de punta a punta en `pruebas/nucleo.html`. Falta conectarlo a la interfaz del juego real (Persona B). Quién hace qué está en [`tareas.md`](tareas.md).
+- **13/11:** se mergearon el núcleo de la Persona A (PR 10) y el trabajo de la Persona D del 13/11 (PR 11). Juntos pasan las 74 pruebas. Con eso quedaron acordados la estructura de carpetas y el contrato entre núcleo e interfaz (ver *Decisiones*).
+- **13/11 (Persona B): el juego conectado.** Ya se juega de punta a punta en `index.html`: el núcleo de A conectado a la interfaz de B, con la herencia guardada en el navegador, el códice y los módulos de D (lo de «falta conectarlo» de la *Fase* ya está hecho). Detalle en [`tareas.md`](tareas.md#persona-b-programación-de-interfaz-contenido-y-deploy-facu). Lo que hay que saber:
   - Con «Luz real de Ushuaia» encendida, el viaje empieza con la hora y la estación de ahora. **De noche se empieza gastando el doble**: el juego lo avisa al arrancar y sugiere amarrar. El bot cuidadoso de A llega igual el 70 al 74 % de las veces empezando de noche (88 % de día). Si en las pruebas con personas resulta muy difícil, se decide con A.
   - Al remar tocando lejos, la canoa se frena sola si el fuego queda en 1 o cae la noche.
   - `window.TDH_JUEGO` deja mirar la partida (sin tocarla) para las pruebas automáticas y el grabador del video.
   - Lo de las pruebas de D que tocaba a la interfaz quedó resuelto en el juego: la celda se calcula solo al entrar y al cambiar el tamaño, el aviso va abajo del mapa y no tapa el HUD, y el cartel del final tiene margen. `pruebas/nucleo.html` (de A) sigue como estaba.
-- **13/11:** se mergearon el núcleo de la Persona A (PR 10) y el trabajo de la Persona D del 13/11 (PR 11). Juntos pasan las 74 pruebas. Con eso quedaron acordados la estructura de carpetas y el contrato entre núcleo e interfaz (ver *Decisiones*).
 - **13/11:** se decidió el stack: JavaScript sin build, con `<script>` clásicos, en GitHub Pages (ver *Decisiones*).
 - **13/11:** se mergeó el trabajo de arte de la Persona D (PR 2), se agendó la reunión del 14/11 con el referente de la comunidad yagán y se actualizó el reparto de tareas con los nombres.
 - **Hecho:** `docs/00-guia-hackathon.md`, `docs/01-concepto.md`, `docs/04-direccion-de-arte.md` (con tres propuestas de estilo en `arte/propuestas/`), paleta y primer set de 42 sprites (`arte/`), sonido generado por código (`sonido/`), logo, plan de comunicación (`equipo/comunicacion.md`) y borrador del avance del 14/11 (`equipo/avance-14-11.md`).
