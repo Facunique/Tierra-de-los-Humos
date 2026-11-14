@@ -34,6 +34,8 @@ html:has(.tdh-juego) { height: 100%; }
 .sub { font-size: 13px !important; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tdh-ocre); margin: 0 0 6px !important; }
 .botones { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 640px; flex: none; }
 .tdh-juego .boton-papel { min-height: 44px; min-width: 180px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+/* Los botones de la carta los ubica juego.css: sin ancho mínimo, para que no tapen la fuente. */
+.tdh-juego .tdh-carta__botones .boton-papel { min-width: 0; }
 .tdh-juego .boton-papel[disabled] { opacity: 0.5; cursor: not-allowed; }
 .opciones .boton-papel { min-width: 0; font-size: 15px; padding: 8px 14px; }
 .aviso-ficcion { font-size: 14px; color: var(--tdh-papel); background: rgba(11, 16, 21, 0.7); padding: 6px 12px; border-radius: 8px; max-width: 520px; margin: 0; flex: none; }
