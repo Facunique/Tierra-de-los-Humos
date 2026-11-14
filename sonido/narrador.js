@@ -40,6 +40,7 @@
   };
   const HORA = { dia: 'Es de día', tarde: 'Cae la tarde', noche: 'Es de noche' };
   const CLIMA = { calma: 'hay calma', viento: 'hay viento', lluvia: 'llueve', nieve: 'nieva' };
+  const AVISO = { calma: 'El tiempo va a mejorar', viento: 'Se ve venir el viento', lluvia: 'Se ven nubes: viene lluvia' };
 
   const letra = (e, x, y) => (y >= 0 && y < e.mapa.length && x >= 0 && x < e.mapa[0].length ? e.mapa[y][x] : null);
   const visto = (e, x, y) => !e.explorado || e.explorado(x, y);
@@ -88,6 +89,7 @@
     const partes = ['Fuego ' + e.canoa.fuego + ' de 4.'];
     if (e.recursos) partes.push('Llevan ' + (r.lena || 0) + ' de leña y ' + (r.comida || 0) + ' de comida' + (r.pirita ? ', y pirita' : '') + '.');
     if (e.hora || e.clima) partes.push((HORA[e.hora] || 'Es de día') + ' y ' + (CLIMA[e.clima] || 'hay calma') + '.');
+    if (e.pronostico && AVISO[e.pronostico.clima]) partes.push(AVISO[e.pronostico.clima] + '.');
     partes.push(mayus(frasesAlrededor(e, false).join('; ')) + '.');
     const se = [];
     if (puede && puede.juntar) se.push('juntar ' + (COSAS[puede.juntar] || 'algo'));
@@ -110,6 +112,7 @@
           if (ev.motivo === 'lena') break; // lo dice «avivo»
           if (ev.despues !== ev.antes && ev.motivo === 'remar') frases.push(ev.despues === 0 ? 'El fuego se apagó.' : 'Fuego ' + ev.despues + ' de 4.');
           else if (ev.despues > ev.antes) frases.push('El fuego sube a ' + ev.despues + '.');
+          else if (ev.despues < ev.antes) frases.push(ev.despues === 0 ? 'El fuego se apagó.' : 'El fuego baja a ' + ev.despues + '.');
           break;
         case 'junto': frases.push('Juntaste ' + (ev.nombre || COSAS[ev.que] || ev.que) + '.'); break;
         case 'avivo': frases.push(conLena ? 'Avivaste el fuego: sube a ' + conLena.despues + '.' : 'Avivaste el fuego.'); break;
@@ -117,6 +120,7 @@
         case 'reencendido': frases.push('Con la pirita, el fuego vuelve a prender.'); break;
         case 'acampe': frases.push('Amarraron en el cachiyuyo y pasaron la noche.'); break;
         case 'clima': frases.push(mayus(CLIMA[ev.clima] || 'cambia el tiempo') + '.'); break;
+        case 'aviso': if (AVISO[ev.clima]) frases.push(AVISO[ev.clima] + '.'); break;
         case 'hora': frases.push((HORA[ev.hora] || 'Cambia la luz') + '.'); break;
         case 'fin': frases.push(ev.gano ? 'Llegaron con el fuego encendido.' : 'El viaje termina. Lo aprendido pasa a la generación siguiente.'); break;
         default: break;

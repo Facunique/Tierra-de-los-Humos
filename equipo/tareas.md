@@ -55,7 +55,8 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Sección **Tecnologías** del README (13/11).
 - [x] Correr `node pruebas/de-punta-a-punta.cjs` con el juego (14/11): pasa en las cinco pantallas, dos partidas enteras en cada una. Resultado en el PR 16.
 - [x] Aplicar en el juego las correcciones de C de la auditoría del paso 5 (14/11): lema en la ayuda (P01), cierre «Hoy» general (P03) y aviso de voz automática (P20). El cierre usa el mismo texto provisorio que la maqueta de D (PR 17); el definitivo lo redacta C.
-- [x] El juego cuenta el motivo del viaje al empezar (14/11, PR 20): carta «Por qué viajan» con el dato y la fuente del destino. Es la parte de B del nomadismo en chico; falta que A elija el destino según la estación.
+- [x] El juego cuenta el motivo del viaje al empezar (14/11, PR 20): carta «Por qué viajan» con el dato y la fuente del destino. Es la parte de B del nomadismo en chico. Con el PR 22 de A, el núcleo ya elige el destino según la estación.
+- [x] El aviso del clima y el costo de acampar en el juego (14/11, PR 25): texto del aviso, ficha «Viene lluvia» en el HUD, sonido con subtítulo, narrador, y la ayuda y el subtítulo de acampar dicen que cuidar el fuego toda la noche gasta. Remar tocando lejos se frena si se ve venir viento o lluvia.
 - [ ] Completar la parte de programación del avance (`equipo/avance-14-11.md`), con A, antes del 16/11 a las 23:00. La parte de B ya está (PR 19); faltan los ✏️ de A.
 
 ## Persona C: Investigación cultural y consulta (Dani)
@@ -85,7 +86,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Crear ocho cartas nuevas completas con fuente y página en `datos/saberes-propuestos.js`: reservas, reparo, luz, aprendizaje, rumbo, marea, agua y corteza guardada. Son borradores fuera del catálogo activo.
 - [ ] Decidir con A y B qué cartas nuevas integrar y sus eventos de descubrimiento; completar actividades y arte al incorporarlas. No se agregan efectos ni cartas imposibles de encontrar al códice actual.
 - [x] Definir la redacción de los datos de las cartas (14/11): directa, sin fórmulas sobre el autor o su familia; Víctor conserva su nombre en la fuente. La elección y autorización de nombres de personajes siguen abiertas.
-- [x] Aplicar la redacción directa en las nueve cartas activas, ocho propuestas y los motivos de viaje de ballena y pirita, conservando sus fuentes y el alcance histórico.
+- [x] Aplicar la redacción directa en las nueve cartas activas, ocho propuestas y los motivos de viaje de ballena, corteza y pirita, conservando sus fuentes y el alcance histórico.
 - [x] Registrar la confirmación de C sobre uso y escasez de pirita y conservación del fuego en la canoa, atribuida a la entrevista del 13/11; actualizar la carta y separar este testimonio del libro.
 - [x] Completar la sección **Fuentes** del README (14/11): publicaciones, consulta y referencias pendientes, con enlace a `docs/03-contenido-cultural.md`.
 - [x] Revisar todo el contenido del alcance del paso 5 contra las líneas rojas de `docs/00-guia-hackathon.md` (14/11). Informe con archivo y línea: [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md). Se revisaron textos y archivos exportados; no equivale a validación comunitaria.

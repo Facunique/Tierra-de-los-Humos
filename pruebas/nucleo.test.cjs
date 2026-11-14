@@ -135,6 +135,129 @@ test('amarrar en el cachiyuyo: pasan la noche y vuelve la calma', () => {
   assert.equal(p.estado.recursos.comida, 0);
 });
 
+test('acampar no es gratis: sin comida baja el fuego, y con comida sube menos', () => {
+  const R = require('../juego/nucleo/reglas.js');
+  const sin = fija();
+  sin.hacer({ tipo: 'remar', dx: 0, dy: -1 });
+  const antes = sin.estado.energia;
+  const ev = sin.hacer({ tipo: 'amarrar' });
+  assert.equal(sin.estado.energia, antes - R.GASTO_ACAMPAR);
+  assert.ok(ev.every((e) => e.tipo !== 'fuego' || e.motivo === 'acampar'));
+
+  const con = fija();
+  con.hacer({ tipo: 'remar', dx: 0, dy: -1 });
+  con.estado.recursos.comida = 1;
+  const antesCon = con.estado.energia;
+  con.hacer({ tipo: 'amarrar' });
+  assert.equal(con.estado.energia, antesCon + R.COMER_AL_ACAMPAR - R.GASTO_ACAMPAR);
+});
+
+test('acampar una noche tras otra sin comida termina el viaje: la partida no puede durar para siempre', () => {
+  const p = fija();
+  p.hacer({ tipo: 'remar', dx: 0, dy: -1 });
+  let fin = null;
+  for (let i = 0; i < 50 && !p.terminada; i++) fin = p.hacer({ tipo: 'amarrar' }).find((e) => e.tipo === 'fin') || fin;
+  assert.ok(p.terminada, 'después de 50 noches sigue el viaje');
+  assert.equal(fin.gano, false);
+  assert.equal(fin.causa, 'noche');
+});
+
+test('acampar sin comida con el fuego al mínimo usa la pirita', () => {
+  const p = fija();
+  p.hacer({ tipo: 'remar', dx: 0, dy: -1 });
+  p.estado.recursos.pirita = 1; p.estado.energia = 1;
+  const ev = p.hacer({ tipo: 'amarrar' });
+  assert.ok(ev.some((e) => e.tipo === 'reencendido'));
+  assert.equal(p.terminada, false);
+  assert.equal(p.estado.hora, 'dia');
+});
+
+/** El camino por el agua hasta el lado del destino (el destino está en tierra). */
+const alDestino = (p) => { const d = p.estado.destino; return MAPA.camino(p.estado.mapa, p.estado.canoa, (x, y) => Math.max(Math.abs(x - d.x), Math.abs(y - d.y)) <= 1); };
+
+test('cada cambio de clima se anuncia un paso antes', () => {
+  const R = require('../juego/nucleo/reglas.js');
+  let cambios = 0;
+  for (let s = 1; s <= 200; s++) {
+    const p = TDH_PARTIDA.nueva({ semilla: s, saberes: ORDEN });
+    let anunciado = null;
+    for (let i = 0; i < 80 && !p.terminada; i++) {
+      const sig = (alDestino(p) || [])[0];
+      if (!sig) break;
+      p.estado.energia = R.ENERGIA_MAX;                       // que no se apague: acá se mira solo el clima
+      const ev = p.hacer({ tipo: 'remar', dx: sig.x - p.estado.canoa.x, dy: sig.y - p.estado.canoa.y });
+      const clima = ev.find((e) => e.tipo === 'clima'), aviso = ev.find((e) => e.tipo === 'aviso');
+      if (clima) {
+        cambios++;
+        assert.ok(anunciado, `semilla ${s}: el clima cambió a «${clima.clima}» sin aviso`);
+        assert.equal(clima.clima, anunciado.clima, `semilla ${s}: se anunció «${anunciado.clima}» y llegó «${clima.clima}»`);
+        anunciado = null;
+      }
+      if (aviso) {
+        assert.equal(aviso.faltan, R.CLIMA_AVISO_PASOS);
+        assert.equal(aviso.antes, p.estado.clima);
+        assert.deepEqual(p.estado.pronostico, { clima: aviso.clima, faltan: aviso.faltan });
+        anunciado = aviso;
+      }
+    }
+  }
+  console.log(`  clima: ${cambios} cambios, todos anunciados`);
+  assert.ok(cambios > 20, 'casi no cambió el clima: la prueba no está mirando nada');
+});
+
+test('sin aviso (CLIMA_AVISO_PASOS: 0) el clima cambia de golpe, como antes', () => {
+  const p = TDH_PARTIDA.nueva({ semilla: 3, saberes: ORDEN, reglas: { CLIMA_AVISO_PASOS: 0 } });
+  const todos = [];
+  for (let i = 0; i < 80 && !p.terminada; i++) {
+    const sig = (alDestino(p) || [])[0];
+    if (!sig) break;
+    p.estado.energia = 16;
+    todos.push(...p.hacer({ tipo: 'remar', dx: sig.x - p.estado.canoa.x, dy: sig.y - p.estado.canoa.y }));
+  }
+  assert.ok(!todos.some((e) => e.tipo === 'aviso'));
+});
+
+test('acampar cancela lo anunciado: pasa la noche y amanece en calma', () => {
+  const p = fija();
+  p.hacer({ tipo: 'remar', dx: 0, dy: -1 });
+  p.estado.pronostico = { clima: 'lluvia', faltan: 1 };
+  p.hacer({ tipo: 'amarrar' });
+  assert.equal(p.estado.pronostico, null);
+  assert.equal(p.estado.clima, 'calma');
+  const ev = p.hacer({ tipo: 'remar', dx: 0, dy: 1 });
+  assert.ok(!ev.some((e) => e.tipo === 'clima'), 'llegó la lluvia anunciada antes de acampar');
+});
+
+// ── El motivo del viaje (nomadismo) ───────────────────────────────────────
+test('el motivo del viaje: solo entran los destinos que no están en «propuesta»', () => {
+  const T_DESTINOS = require('../juego/nucleo/territorio/destinos.js');
+  for (let s = 1; s <= 50; s++) {
+    const id = TDH_PARTIDA.elegirDestino({ semilla: s });
+    assert.notEqual(T_DESTINOS.DESTINOS[id].estado, 'propuesta', `semilla ${s}: salió «${id}», que es una propuesta`);
+    assert.equal(TDH_PARTIDA.nueva({ semilla: s, saberes: ORDEN }).estado.destino.id, id);
+  }
+});
+
+test('el motivo del viaje depende de la estación cuando el destino la tiene', () => {
+  const D = {
+    ballena: { estado: 'borrador' },
+    corteza: { estado: 'borrador', estaciones: ['primavera'] },
+    pirita: { estado: 'propuesta' },
+  };
+  const vistos = { primavera: new Set(), invierno: new Set() };
+  for (let s = 1; s <= 60; s++) for (const estacion of ['primavera', 'invierno']) vistos[estacion].add(TDH_PARTIDA.elegirDestino({ semilla: s, estacion, destinos: D }));
+  assert.deepEqual([...vistos.invierno], ['ballena'], 'en invierno no hay corteza');
+  assert.deepEqual([...vistos.primavera].sort(), ['ballena', 'corteza'], 'en primavera salen los dos');
+  assert.equal(TDH_PARTIDA.elegirDestino({ semilla: 9, estacion: 'otono', destinos: D }), TDH_PARTIDA.elegirDestino({ semilla: 9, estacion: 'otono', destinos: D }), 'misma semilla, mismo motivo');
+});
+
+test('si ningún destino sirve, el viaje va al ACTIVO; y el destino pedido manda', () => {
+  const T_DESTINOS = require('../juego/nucleo/territorio/destinos.js');
+  const D = { ballena: { estado: 'propuesta' }, corteza: { estado: 'propuesta' }, pirita: { estado: 'propuesta' } };
+  assert.equal(TDH_PARTIDA.elegirDestino({ semilla: 1, destinos: D }), T_DESTINOS.ACTIVO);
+  assert.equal(TDH_PARTIDA.nueva({ semilla: 1, saberes: ORDEN, destino: 'pirita' }).estado.destino.id, 'pirita');
+});
+
 test('la pirita vuelve a prender el fuego una sola vez', () => {
   const p = fija();
   p.estado.recursos.pirita = 1; p.estado.energia = 1;

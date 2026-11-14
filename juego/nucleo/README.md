@@ -2,7 +2,7 @@
 
 Es la parte que hace funcionar el viaje: el mapa, el fuego, lo que se junta, el clima y cómo termina. No dibuja pantallas ni guarda nada en el navegador: eso es de la interfaz. La interfaz le pregunta al núcleo qué pasó y lo muestra.
 
-**Última actualización:** 13/11/2026.
+**Última actualización:** 14/11/2026.
 
 ---
 
@@ -15,10 +15,11 @@ Es la parte que hace funcionar el viaje: el mapa, el fuego, lo que se junta, el 
 - **El fuego es la vida.** Se gasta al remar, y más con viento en el canal hondo, con lluvia y de noche. Cerca de una choza se gasta menos. Si llega a cero, el viaje termina.
 - **Se junta** leña, comida (mejillones, pescado y hongos), pirita, el saber de la choza y la corteza del guindo grande.
 - **La leña aviva el fuego**, y la pirita lo vuelve a prender una vez cuando se apaga.
-- **Amarrar y acampar** en el cachiyuyo, al lado de una playa: pasan la noche, vuelve la calma y comen lo que juntaron.
+- **Amarrar y acampar** en el cachiyuyo, al lado de una playa: pasan la noche, vuelve la calma y comen lo que juntaron. **Acampar no es gratis:** cuidar el fuego toda la noche gasta, así que sin comida cada noche lo baja y una partida no puede durar para siempre.
 - **El día pasa:** día, tarde y noche. En invierno los días son más cortos.
-- **El clima cambia solo:** calma, viento y lluvia.
+- **El clima cambia solo:** calma, viento y lluvia. **Cada cambio se avisa un paso antes** («se ven nubes»), para decidir si acampar o seguir.
 - **Las cartas de saber** salen la primera vez que se junta cada cosa, la primera vez que se acampa y al llegar al destino.
+- **El motivo del viaje** sale de la semilla y de la estación, entre los destinos documentados que no están en «propuesta» (ver *Los datos del territorio*). Hoy solo entra la ballena varada: las otras dos esperan a la Persona C.
 - **Ganar** es llegar al destino con el fuego encendido. **Perder** es que se apague. En los dos casos se sabe por qué terminó y qué se aprendió.
 - **La herencia:** lo aprendido pasa a la generación siguiente. Esas cartas no vuelven a salir, y cada saber heredado suma un poco de fuego al arrancar, como en la versión de mesa.
 
@@ -47,7 +48,7 @@ Todo lo que puede cambiar con la investigación está **aparte del código**, en
 
 Cada entrada separa el **dato** (lo que dice la fuente) del **juego** (dónde va, cuántas hay y qué hace, que son recursos de juego). Lo que todavía no tiene fuente está marcado con 🔍.
 
-**Destino actual:** la ballena varada (Cooper, 1946, p. 84, 94-95 y 99). Quedan cargados como propuesta, también de Cooper (p. 94-95), la corteza buena para canoas y las piedras de fuego. El juego funciona con los tres.
+**Destinos:** cada viaje elige su motivo entre los destinos del pueblo que **no** están en `'propuesta'` y que son de la estación del viaje (campo `estaciones`, opcional y solo con fuente). Hoy entra solo la ballena varada (Cooper, 1946, p. 84, 94-95 y 99). Quedan como propuesta, también de Cooper (p. 94-95), la corteza buena para canoas (solo en primavera, Cooper, 1946, p. 88) y las piedras de fuego. Para sumarlos, la Persona C los pasa a `'borrador'`: no hay que programar nada. El juego funciona con los tres.
 
 ### Los números
 
@@ -61,16 +62,18 @@ Están todos en [`reglas.js`](reglas.js). Son recursos de juego y se ajustan jug
 | Cerca de una choza | Gasta 1 menos |
 | Leña | Cada atado da 2; avivar el fuego con una suma 6. Se lleva hasta 5 |
 | Comida | Se lleva hasta 5. Al acampar se come 1 y suma 3 de fuego |
+| Acampar | Cuidar el fuego toda la noche gasta 2 (con comida, queda en +1) |
 | Pirita | Se lleva 1. Si el fuego se apaga, vuelve a 4 |
 | El día | Cae la tarde a las 12 casillas y la noche a las 18. En invierno, a las 8 y a las 12 |
+| El clima | Dura al menos 4 pasos; después cambia con 12 % de chance por paso, y se avisa 1 paso antes |
 
-Son los mismos números de la versión de mesa, salvo la leña: el mapa es el doble de ancho que el tablero.
+Son los mismos números de la versión de mesa, salvo la leña (el mapa es el doble de ancho que el tablero), el gasto de acampar y el aviso del clima, que la mesa no tiene (`docs/02-alcance-mvp.md`, *La versión de mesa*).
 
 ### Qué se revisa solo
 
 Al correr `node --test` en la raíz del repo se revisa:
 
-- **Que el juego se pueda ganar.** Un jugador automático que junta y acampa llega el 84 % de las veces, y uno que va derecho sin juntar nada no llega nunca. Esto se mide con cada destino.
+- **Que el juego se pueda ganar.** Un jugador automático que junta, acampa y hace caso al aviso de lluvia llega el 81 % de las veces (en 500 viajes; sin el aviso, el 77 %), y uno que va derecho sin juntar nada no llega nunca. Esto se mide con cada destino.
 - **Que cada mapa sea jugable.** Se prueban 500 mapas: todos tienen camino por agua hasta el destino, todo lo que se junta queda al alcance de la canoa y hay lugares para amarrar. Salen 500 mapas distintos.
 - **Que los datos del territorio sean consistentes:**
   - cada cosa tiene fuente (o 🔍), dibujo en el estilo Corteza y un lugar válido;
@@ -78,12 +81,12 @@ Al correr `node --test` en la raíz del repo se revisa:
   - nada dice «extinguido» ni «desaparecido».
 - **Que un cambio en los datos no mueva el resto.** Sacar un elemento no cambia las costas ni dónde está la leña.
 - **Que la misma semilla dé siempre el mismo mapa.** Si un cambio en el código los altera, la prueba avisa.
+- **Que acampar cueste y que el clima avise:** acampar sin comida baja el fuego y, noche tras noche, termina el viaje; cada cambio de clima llega después de su aviso; acampar cancela lo anunciado.
+- **Que el motivo del viaje respete los datos:** nunca sale un destino en «propuesta», la estación manda cuando el destino la tiene y, si ninguno sirve, va al `ACTIVO`.
 - **Que el contrato con la interfaz se cumpla:** las mismas pruebas de la partida falsa, corridas contra el núcleo.
 
 ### Lo que todavía no está
 
-- **No está conectado al juego real.** Se juega en la página de prueba; falta conectarlo a la interfaz, en lugar de la partida falsa.
-- **La herencia no se guarda** al cerrar el navegador: eso es de la interfaz. La página de prueba la recuerda solo mientras está abierta.
 - **La corteza no tiene efecto en el juego:** su carta dice que permite arreglar la canoa, pero la canoa no se daña.
 - **El viaje es un solo tramo**, no tiene etapas.
 
@@ -110,8 +113,6 @@ Nada de esto está hecho. Son ideas para charlar en el grupo.
 - **Qué deja cada saber heredado.** Hoy, cuando una generación termina, cada saber que aprendió le da a la siguiente un poco más de fuego al arrancar. La propuesta es que cada saber deje un conocimiento concreto. Por ejemplo, quien heredó el de los mejillones ve dónde hay comida aunque esté tapada por el humo, y quien heredó el del amarre ve dónde se puede acampar. Va más con la idea de que lo que pasa de generación en generación es la memoria. Si se aprueba, hay que ajustar el texto «En el juego» de algunas cartas.
 
 - **Las brasas.** Hoy, cuando el fuego llega a cero, el viaje termina de golpe. La propuesta es que quede unos pasos en brasas y que, si se aviva a tiempo con leña, vuelva. Es menos frustrante y ya existe el dibujo de las brasas.
-
-- **El aviso antes de que cambie el clima.** Hoy el viento y la lluvia aparecen sin aviso y gastan más fuego. La propuesta es avisar un paso antes («se ven nubes», «se levanta el viento»), para que quien juega pueda decidir si acampa o sigue. Así perder se siente justo y no de mala suerte.
 
 - **El destino del viaje.** Hoy la familia viaja hacia una ballena varada. Hay otras dos opciones documentadas en Cooper (1946, p. 94-95): buscar corteza buena para canoas o buscar piedras de fuego (pirita), que solo se encontraban en algunos lugares. El juego ya está preparado para cambiar de destino sin reprogramar nada. Falta elegir cuál, idealmente con lo que diga la comunidad.
 

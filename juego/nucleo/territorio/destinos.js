@@ -4,7 +4,12 @@
  * A dónde va la familia y por qué. Tiene que ser un motivo real y documentado
  * (equipo/memory.md, *Por decidir*). Lo elige la Persona C con la comunidad.
  *
- * Para cambiar el destino del juego: cambiá ACTIVO por el id de otro destino.
+ * El motivo del viaje (nomadismo, docs/02-alcance-mvp.md): cada viaje elige, con la semilla,
+ * entre los destinos del pueblo que NO están en 'propuesta' y que son de la estación del viaje
+ * (si tienen `estaciones`). Para que un destino entre al juego, pasalo de 'propuesta' a
+ * 'borrador'. Si ninguno sirve, el viaje va al ACTIVO.
+ *
+ * Para cambiar el destino por defecto: cambiá ACTIVO por el id de otro destino.
  * Para sumar uno: copiá una entrada y completala. `node --test` revisa que su
  * dibujo y su carta existan y que el viaje se pueda ganar con él.
  *
@@ -17,6 +22,8 @@
  *      zona: { desde: 0.84, hasta: 0.94 },   // al final del canal
  *      carta: 'ballena',          // id de datos/saberes.js que sale al llegar, o null
  *      humos: true,               // fogones de otras familias cerca del destino
+ *      estaciones: ['primavera'], // opcional: solo sale en esas estaciones, y solo si hay fuente.
+ *                                 // Sin el campo, sale en cualquiera.
  *      dato: '…', fuente: '…',
  *      estado: 'borrador',        // 'propuesta' si todavía no se eligió
  *    },
@@ -41,7 +48,10 @@
       id: 'corteza', nombre: 'el guindo de buena corteza', dibujo: 'guindo-grande',
       donde: 'bosque-costa', zona: { desde: 0.84, hasta: 0.97 },
       carta: 'corteza', humos: false,
-      dato: 'Cooper menciona desplazamientos para buscar corteza adecuada para canoas. Vargas Filgueira relata la recuperación de corteza conservada para reparar una embarcación; ese episodio es distinto de la extracción de corteza de un árbol.',
+      // La corteza de guindo se sacaba en primavera, cuando sube la savia (Cooper, 1946, p. 88;
+      // cotejo de C en equipo/revision-cultural-paso-3.md). ✏️ C confirma antes de sacarlo de 'propuesta'.
+      estaciones: ['primavera'],
+      dato: 'Buscar corteza adecuada para las canoas puede motivar un viaje. Extraerla del árbol y recuperar corteza conservada en un turbal son actividades distintas.',
       fuente: COOPER + ', p. 94-95. Vargas Filgueira, Víctor (2019). Mi sangre yagán (ahua saapa yagan). Primera edición digital. Editora Cultural Tierra del Fuego, p. 23 y 31-32 del visor del PDF.',
       estado: 'propuesta',
     },

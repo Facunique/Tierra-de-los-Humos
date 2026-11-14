@@ -1,6 +1,6 @@
 // Dos jugadores automáticos para medir el balance del núcleo (lo usa balance.test.cjs).
 // - directo: rema derecho al destino y no junta nada.
-// - cuidadoso: junta lo que tiene cerca, aviva el fuego y acampa de noche.
+// - cuidadoso: junta lo que tiene cerca, aviva el fuego y acampa de noche o si llueve (o se anuncia lluvia).
 // No son parte del juego. Licencia: MIT.
 'use strict';
 const TDH_PARTIDA = require('../juego/nucleo/partida.js');
@@ -34,7 +34,8 @@ function cuidadoso(p, maximo) {
     const e = p.estado, c = e.canoa, puede = p.puede();
     if (puede.juntar) { p.hacer({ tipo: 'juntar' }); continue; }
     if (puede.avivar && e.energia <= R.ENERGIA_MAX - R.AVIVAR) { p.hacer({ tipo: 'avivar' }); continue; }
-    if (puede.amarrar && (e.hora === 'noche' || e.clima === 'lluvia' || (e.hora === 'tarde' && e.recursos.comida > 0))) { p.hacer({ tipo: 'amarrar' }); continue; }
+    const llueve = e.clima === 'lluvia' || (e.pronostico && e.pronostico.clima === 'lluvia');   // el aviso deja acampar antes
+    if (puede.amarrar && (e.hora === 'noche' || llueve || (e.hora === 'tarde' && e.recursos.comida > 0))) { p.hacer({ tipo: 'amarrar' }); continue; }
     // A dónde ir: si cae la noche, a un amarre cercano; si no, a lo que se junta cerca; si no, al destino.
     let ruta = null;
     if (e.hora !== 'dia') {
