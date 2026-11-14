@@ -1,6 +1,6 @@
 # Reparto de tareas · Tierra de los Humos
 
-> Equipo de 4 personas. Fechas clave: **14/11, 11:00** reunión con el referente de la comunidad yagán · **14/11** primer avance documentado · **17/11, 20:00** entrega final (meta interna: terminar el 16) · **19/11** demo en Fábrica de Talento (al menos 2 integrantes).
+> Equipo de 4 personas. Fechas clave: **13/11, 11:00** entrevista realizada con el referente de la comunidad yagán (fecha confirmada por Dani; antes estaba prevista para el 14/11) · **14/11** primer avance documentado · **17/11, 20:00** entrega final (meta interna: terminar el 16) · **19/11** demo en Fábrica de Talento (al menos 2 integrantes).
 > Los documentos nombran a cada integrante por su letra. Una persona puede cubrir dos roles si hace falta.
 > **Última actualización:** 13/11/2026.
 
@@ -57,10 +57,10 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 
 ## Persona C: Investigación cultural y consulta (Dani)
 
-- [x] Encontrar a quién consultar: hay reunión acordada con el referente de la comunidad yagán (14/11, 11:00).
-- [ ] Ir a la reunión del 14/11 (conviene que esté C) y llevar las 7 preguntas de `equipo/comunicaciones.md`.
+- [x] Encontrar a quién consultar: Víctor Vargas Filgueira, referente de la comunidad yagán.
+- [x] Realizar la entrevista: 13/11/2026, 11:00, Museo del Fin del Mundo, Ushuaia. 🔍 Quedan pendientes el cotejo con la grabación y las respuestas a las preguntas abiertas de `equipo/comunicaciones.md`.
 - [ ] Escribirle a Mónica Alvarado, si se la puede contactar.
-- [ ] Registrar cada contacto el mismo día en `equipo/comunicaciones.md` (sin teléfonos, mails ni datos personales; es un repo público).
+- [x] Registrar la primera entrevista en `equipo/comunicaciones.md`, con fecha, síntesis, permisos y pendientes (13/11). Registrar los contactos siguientes sigue siendo una tarea continua.
 - [ ] Escribir `docs/03-contenido-cultural.md` con las fuentes verificadas (Gusinde, Chapman, Calderón y Zárraga, Cooper, museos, CADIC).
 - [ ] Resolver los puntos marcados con 🔍, en especial el **destino del viaje**. Ya hay base documental: la ballena varada, la pirita o la corteza para canoas (Cooper 1946, p. 94-99; ver `memory.md`).
 - [ ] Revisar los 9 borradores de cartas que dejó D (ahora en `datos/saberes.js`, con plantilla arriba para cargar cartas nuevas; `node --test` revisa que no falte nada) y sumar las que falten: texto breve, qué es dato y qué es recurso de juego, y fuente citada.
@@ -68,7 +68,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [ ] Redactar el cierre del códice, en presente, mencionando las comunidades vivas.
 - [ ] Armar la sección **Fuentes** del README (D dejó las que usó el arte).
 - [ ] Revisar todo el contenido contra las líneas rojas de `docs/00-guia-hackathon.md`.
-- [ ] Completar la parte de consulta del avance del 14/11 (`equipo/avance-14-11.md`).
+- [x] Completar la parte de consulta del avance del 14/11 (`equipo/avance-14-11.md`): entrevista y cotejo documental aportado, sin dar las cartas ni el juego por validados.
 
 ## Persona D: Arte, sonido y comunicación (Nacho)
 

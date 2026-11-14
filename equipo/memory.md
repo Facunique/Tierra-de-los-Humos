@@ -5,6 +5,7 @@
 ## Estado actual
 
 - **Fecha de la última actualización:** 13/11/2026 (día 5 de desarrollo).
+- **Consulta cultural (13/11, Dani):** entrevista realizada a Víctor Vargas Filgueira a las 11:00, en el Museo del Fin del Mundo, Ushuaia. Se completaron el registro y la parte de consulta del avance del 14/11. Dani aportó notas de *Mi sangre yagán (ahua saapa yagan)* (2019, primera edición digital, Editora Cultural Tierra del Fuego). El cotejo con la grabación, las decisiones de contenido y la revisión de las nueve cartas siguen pendientes; no hay validación comunitaria registrada.
 - **Fase:** programación. El núcleo del juego ya está en `main` (`juego/nucleo/`, ver su [README](../juego/nucleo/README.md)) y se juega de punta a punta en `pruebas/nucleo.html`. Falta conectarlo a la interfaz del juego real (Persona B). Quién hace qué está en [`tareas.md`](tareas.md).
 - **13/11:** se mergearon el núcleo de la Persona A (PR 10) y el trabajo de la Persona D del 13/11 (PR 11). Juntos pasan las 74 pruebas. Con eso quedaron acordados la estructura de carpetas y el contrato entre núcleo e interfaz (ver *Decisiones*).
 - **13/11:** se decidió el stack: JavaScript sin build, con `<script>` clásicos, en GitHub Pages (ver *Decisiones*).
@@ -42,7 +43,7 @@
 
 | Fecha | Qué |
 |---|---|
-| 14/11, 11:00 | Reunión en persona con el referente de la comunidad yagán. Ver `comunicaciones.md`. |
+| 13/11, 11:00 | Entrevista realizada a Víctor Vargas Filgueira en el Museo del Fin del Mundo, Ushuaia. Dani confirmó esta fecha, que reemplaza la prevista del 14/11. Ver `comunicaciones.md`. |
 | 14/11 | Primer avance documentado (obligatorio). Meta: esqueleto jugable. |
 | 17/11, 20:00 | Entrega final: se cierran los repositorios. Meta interna: terminar el 16. |
 | 19/11 | Demo pública en Fábrica de Talento, Ushuaia (al menos 2 integrantes). |
@@ -51,6 +52,7 @@
 
 | Fecha | Decisión | Motivo |
 |---|---|---|
+| 13/11 | **Permiso para nombrar al referente y atribuirle el testimonio.** Dani confirmó el permiso libre de Víctor Vargas Filgueira para publicar su nombre y nombrarlo como fuente conforme a sus palabras, sin restricción de medios. Las citas textuales siguen pendientes de permiso específico. Actualiza la reserva del nombre registrada antes de la entrevista. | Confirmación de Dani después de la entrevista del 13/11. No implica permiso de nombres en lengua yagán, representación de una familia ni validación comunitaria del proyecto. Ver `comunicaciones.md`. |
 | 13/11 | **Estructura de carpetas y contrato entre núcleo e interfaz.** `juego/nucleo/` es de la Persona A (sin DOM ni `localStorage`, se prueba con Node), `juego/interfaz/` de la B, `datos/` tiene las cartas (C con B) y `pruebas/` las pruebas. El contrato está escrito al principio de `juego/nucleo/partida.js`: es el de la partida falsa, ampliado sin romperlo. En `TDH_PARTIDA.nueva({ semilla, saberes, heredados, … })`, `saberes` es el **catálogo entero** del pueblo y `heredados` es lo que el linaje ya sabe: esas cartas no vuelven a salir. El núcleo solo devuelve eventos; los textos que ve la persona los pone la interfaz. **Los datos del territorio** (qué hay en el mapa, dónde va, qué hace, de qué fuente sale y el destino) se quedan en `juego/nucleo/territorio/` y no pasan a `datos/`. Las especies van ahí, en `elementos.js`. | Lo propuso B y lo armó A en el PR 10. Las pruebas de la partida falsa se corren también contra el núcleo, así que la interfaz que anda con una anda con la otra. Separar el catálogo de lo heredado deja que el núcleo decida qué carta sale sin tocar `localStorage`. A había dejado abiertas las dos opciones para los datos del territorio. Se quedan donde están porque la vidriera, el grabador del video y la prueba de punta a punta ya cargan esas rutas, y moverlos a 4 días de la entrega rompe cosas sin sumar nada. |
 | 13/11 | **Stack: HTML, CSS y JavaScript sin build**, con `<script>` clásicos que cuelgan globales `TDH_*`, igual que los módulos de la Persona D. Dibujo con Corteza en Canvas 2D, sin librerías externas. El juego va en `index.html`, en la raíz del repo. **Deploy:** GitHub Pages desde `main`, carpeta raíz, con `.nojekyll`. **Datos** de cartas y especies en archivos `.js`, no JSON ni Markdown. **Herencia** en `localStorage` con número de versión, guardando solo los `id` de las cartas. **Sin internet:** service worker en Pages (desde el 16/11) y, como plan B, la carpeta copiada con doble clic. **Pruebas** con `node --test`, sin dependencias. Sin linter ni formateador hasta después del 17/11. | Es lo único que anda con doble clic y sin internet sin configurar nada, y reusa todo lo que ya existe sin reescribirlo. Pesa unos 230 KB, bien para el celular con mala conexión. El QR del stand y la guía para docentes ya apuntan a la raíz de Pages. Se descartaron los módulos ES y Vite (no andan en `file://` y suman configuración), Phaser y Kaboom (se quedan con el canvas de Corteza) y Preact y Svelte (la maqueta ya resuelve las pantallas). Lo decidió la Persona B; pasar a módulos o a Vite más adelante es mecánico. |
 | 13/11 | **Roles asignados:** A Mati, B Facu, C Dani, D Nacho (ver *Equipo* y `tareas.md`). | Cada persona sabe qué le toca y los documentos pueden seguir usando la letra. |
@@ -96,8 +98,8 @@ El detalle de cada conversación está en [`comunicaciones.md`](comunicaciones.m
 
 | Quién | Relación con el proyecto | Estado |
 |---|---|---|
-| Referente de la comunidad yagán | Interlocutor principal para validar. | Reunión en persona el 14/11 a las 11:00. |
-| Comunidad Yagán Paiakoala (Ushuaia) | Comunidad yagán viva. | Encontrada. Confirmar si es la comunidad del referente. |
+| Víctor Vargas Filgueira, referente de la comunidad yagán | Interlocutor de la consulta cultural. | Entrevista realizada el 13/11 a las 11:00. Nombre y atribución como fuente autorizados; cotejo y consulta abiertos. |
+| Comunidad Yagán Paiakoala (Ushuaia) | Comunidad yagán viva. | El vínculo del autor figura en las notas de lectura aportadas por Dani; 🔍 faltan páginas, confirmar rol actual y alcance de participación en el proyecto. |
 | Mónica Alvarado | Fundadora del parque Yatana. Convivió con Cristina Calderón. Conocida de un integrante. | Hay que ver si se la puede contactar. |
 
 ## Glosario y convenciones

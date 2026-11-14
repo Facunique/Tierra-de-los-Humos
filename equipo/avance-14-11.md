@@ -19,9 +19,10 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 - ✏️ Alcance del MVP (`docs/02-alcance-mvp.md`): todavía no está escrito.
 
 ### Consulta y contenido cultural (Persona C)
-- **Reunión en persona con un referente de la comunidad yagán, el 14/11 a las 11:00.** Llevamos una hoja con el juego y 13 preguntas: si se puede jugar «como» una familia yagán, nombres, cómo se ve, el destino del viaje y permisos ([`reunion-14-11/hoja-A4.pdf`](reunion-14-11/hoja-A4.pdf)). El registro va en [`comunicaciones.md`](comunicaciones.md). Hasta que lo autorice, figura solo por su rol.
-- ✏️ Qué nos respondió y qué cambiamos por eso (completar el mismo 14/11).
-- **9 cartas de saber en borrador** ([`datos/saberes.js`](../datos/saberes.js)), todas con fuente y página: Cooper (1946), «The Yahgan», *Handbook of South American Indians*. Cada carta separa el dato del recurso de juego y tiene texto alternativo. ✏️ Cuántas revisó la Persona C.
+- **Entrevista realizada el 13/11/2026 a las 11:00**, en el Museo del Fin del Mundo, Ushuaia, con **Víctor Vargas Filgueira, referente de la comunidad yagán**. Dani confirmó la fecha, el lugar y el permiso libre para nombrarlo y atribuirle su testimonio como fuente, conforme a sus palabras. Las citas textuales siguen pendientes de permiso específico. Registro: [`comunicaciones.md`](comunicaciones.md#historial).
+- **Síntesis de la entrevista registrada:** navegación, fuego, indumentaria, herramientas y organización. 🔍 Las cifras, medidas, detalles técnicos y grafías siguen pendientes de cotejo con la grabación. Se registraron diferencias de vocabulario y de descripción de ceremonias, sin incorporarlas al juego. La consulta no se presenta como validación comunitaria ni como permiso para representar una familia.
+- **Revisión documental aportada por Dani:** Vargas Filgueira, Víctor (2019), *Mi sangre yagán (ahua saapa yagan)*, primera edición digital, Editora Cultural Tierra del Fuego. Las páginas del visor del PDF de 90 páginas aportan tres propuestas de destino: ballena varada (pp. 16–17), corteza conservada para reparar una canoa (pp. 31–32; estacionalidad, p. 23) y reservas de grasa para el invierno (pp. 53–54). La elección sigue pendiente. 🔍 Faltan las páginas de los agradecimientos y el epílogo sobre el vínculo del autor con Paiakoala.
+- **9 cartas de saber en borrador** ([`datos/saberes.js`](../datos/saberes.js)), con referencias a Cooper (1946), «The Yahgan», *Handbook of South American Indians*. Cada carta separa el dato del recurso de juego y tiene texto alternativo. **Ninguna pasó a «revisado» en esta revisión.** No se modificaron textos ni números del juego al registrar la consulta. Está detectada la promesa de reparar la canoa en la carta de corteza, que requiere corrección porque esa acción no existe en el juego.
 
 ### Programación (Personas A y B)
 - **Stack decidido:** HTML, CSS y JavaScript sin build, con Canvas 2D y sin librerías externas. Abre con doble clic y sin internet, pesa poco para el celular y reusa el motor de dibujo y el sonido que ya estaban ([`memory.md`](memory.md#decisiones)).
@@ -61,7 +62,7 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 | Sin música inventada: el sonido es el territorio y el fuego. | Los cantos son patrimonio de la comunidad. |
 | Stack: JavaScript sin build, en GitHub Pages. | Anda con doble clic y sin internet, sin configurar nada, y reusa lo que ya existía. |
 | Los datos del territorio y de las cartas van aparte del código. | Así la investigación corrige contenido sin programar. |
-| El referente de la comunidad figura solo por su rol hasta que autorice su nombre. | El repositorio es público. |
+| Víctor Vargas Filgueira autorizó que se lo nombre y se lo cite como fuente conforme a sus palabras. | Permiso libre confirmado por Dani; citas textuales y validación comunitaria siguen pendientes. |
 | Estilo visual: Corteza (papel recortado y pegatinas pixel). | Más sereno, cuenta mejor el territorio, y se lee bien en el celular. |
 | Todo lo dibujado tiene que coincidir con las fuentes etnográficas. | Rigor (20 puntos) y respeto: auditoría en `docs/05`. |
 
@@ -72,12 +73,12 @@ Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la
 ## 5. Próximos pasos (15 al 17/11)
 
 - **Programación:** conectar el núcleo con la interfaz; herencia guardada en el navegador; códice; pulido y balance jugando con personas; versión sin internet para la demo. ✏️ A y B confirman.
-- **Contenido:** aplicar lo que diga la comunidad, elegir el destino del viaje, revisar las cartas y escribir las que falten, y la revisión cultural final. ✏️ C confirma.
+- **Contenido (C):** elegir el destino con Dani; cotejar la grabación y resolver las consultas pendientes; revisar las nueve cartas, el territorio y las actividades docentes; documentar fuentes escritas y consulta por separado; proponer el cierre del códice y realizar la revisión cultural final. Las aprobaciones de contenido siguen pendientes.
 - **Arte y sonido:** ajustar el arte con lo que diga la comunidad; integrar el sonido según el lugar en el juego; resolver las tres fuentes pendientes del territorio (leña, conchales y tonina); cotejo con el libro de Goodall.
 - **Comunicación:** README completo con capturas del juego real, video de 3 minutos (16/11) y pitch de 5 minutos con ensayo.
 
 ## 6. Dificultades y pedidos a la mentoría
 
-- ✏️ Según cómo salga la reunión: si hace falta, pedir ayuda para seguir la consulta (por ejemplo, con el Museo Marítimo o el CADIC).
+- **Consulta abierta:** faltan respuestas sobre representación de la familia, nombres, exclusiones y revisión del juego; también el permiso específico para citas textuales y el alcance de la participación comunitaria. 🔍 Todavía no se registró un pedido concreto de ayuda a la mentoría por parte de C.
 - **El destino del viaje:** hay tres opciones documentadas (Cooper, 1946, p. 94-99). Preguntar a la mentoría si conviene una sola bien hecha o dejar las tres.
 - ✏️ Dudas técnicas de A y B.
