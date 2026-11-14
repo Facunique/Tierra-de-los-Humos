@@ -241,6 +241,7 @@
   const fuegoHud = document.createElement('canvas'); fuegoHud.width = 80; fuegoHud.height = 88; fuegoHud.setAttribute('aria-hidden', 'true');
   const CLIMA = { calma: ['icono-calma', 'Calma'], viento: ['icono-viento', 'Viento'], lluvia: ['icono-lluvia', 'Lluvia'] };
   const HORA = { dia: 'Día', tarde: 'Tarde', noche: 'Noche' };
+  const PRONOSTICO = { calma: 'Va a mejorar', viento: 'Viene viento', lluvia: 'Viene lluvia' };
   function ficha(icono, texto, clase) {
     const f = document.createElement('span'); f.className = 'ficha' + (clase ? ' ' + clase : '');
     if (icono) f.appendChild(typeof icono === 'string' ? ARTE.aCanvas(icono, 0, 'verano', 1) : icono);
@@ -255,6 +256,8 @@
     hud.appendChild(ficha('icono-comida', 'Comida ' + e.recursos.comida));
     if (e.recursos.pirita) hud.appendChild(ficha('icono-pirita', 'Pirita'));
     hud.appendChild(ficha(CLIMA[e.clima][0], CLIMA[e.clima][1]));
+    // El cambio de tiempo que ya se anunció queda a la vista hasta que llega (o hasta acampar).
+    if (e.pronostico && PRONOSTICO[e.pronostico.clima]) hud.appendChild(ficha(CLIMA[e.pronostico.clima][0], PRONOSTICO[e.pronostico.clima], 'ficha--aviso'));
     hud.appendChild(ficha(null, HORA[e.hora]));
     hud.appendChild(ficha('icono-generacion', 'Gen. ' + generacion));
     const p = partida.puede();
@@ -288,9 +291,12 @@
       case 'avivo': return 'El fuego se aviva.';
       case 'junto': return 'Juntaste ' + ev.nombre + '.';
       case 'clima': return { calma: 'El tiempo se calma.', viento: 'Se levanta viento.', lluvia: 'Empieza a llover.' }[ev.clima] || '';
+      // El aviso llega un paso antes del cambio: da tiempo de decidir si acampar o seguir.
+      case 'aviso': return { calma: 'El tiempo va a mejorar.', viento: 'Se ve venir el viento. Para esperar que pase, amarrá y acampá.', lluvia: 'Se ven nubes: viene lluvia. Para esperar que pase, amarrá y acampá.' }[ev.clima] || '';
       case 'hora': return { dia: 'Amanece.', tarde: 'Cae la tarde.', noche: 'Se hace de noche: el frío gasta más el fuego.' }[ev.hora] || '';
       case 'reencendido': return 'Con la pirita, el fuego vuelve a prender.';
-      case 'acampe': return 'Amarraron la canoa en el cachiyuyo y pasaron la noche' + (ev.comio ? ', comiendo lo que juntaron.' : '. No había comida.');
+      // Acampar no es gratis: cuidar el fuego toda la noche lo gasta, y comer lo repone.
+      case 'acampe': return 'Amarraron la canoa en el cachiyuyo y pasaron la noche cuidando el fuego' + (ev.comio ? ', y comieron lo que juntaron.' : '. No había comida: el fuego bajó.');
       default: return '';
     }
   }
@@ -322,13 +328,14 @@
     return eventos;
   }
   // Tocar lejos: rema casilla por casilla por el agua. Se corta si aparece una carta, si termina el
-  // viaje, si el fuego queda en 1 o si cae la noche: así siempre hay tiempo de avivarlo o de acampar.
+  // viaje, si el fuego queda en 1, si cae la noche o si se ve venir viento o lluvia: así siempre hay
+  // tiempo de avivarlo o de acampar.
   async function seguirCola(alFinal) {
     while (cola.length && partida && !partida.terminada) {
       const p = cola.shift(), c = partida.estado.canoa;
       const eventos = await hacer({ tipo: 'remar', dx: p.x - c.x, dy: p.y - c.y });
       if (!eventos) { cola = []; return; }
-      const aviso = eventos.some((ev) => (ev.tipo === 'fuego' && ev.despues <= 1 && ev.despues < ev.antes) || (ev.tipo === 'hora' && ev.hora === 'noche'));
+      const aviso = eventos.some((ev) => (ev.tipo === 'fuego' && ev.despues <= 1 && ev.despues < ev.antes) || (ev.tipo === 'hora' && ev.hora === 'noche') || (ev.tipo === 'aviso' && ev.clima !== 'calma'));
       if (aviso && cola.length) { cola = []; return; }
       await new Promise((r) => setTimeout(r, reducido ? 0 : 150));
     }
@@ -483,7 +490,7 @@
     fila(ARTE.aCanvas('icono-lena', 0, 'verano', 3), 'Avivar el fuego', 'Usá leña para que el fuego crezca. La leña está en las playas.');
     fila(ARTE.aCanvas('icono-comida', 0, 'verano', 3), 'Lo que tiene borde de papel, se junta', 'Acercá la canoa y tocá «Juntar»: leña, comida, pirita y saberes. Con pirita, el fuego apagado vuelve a prender una vez.');
     fila(ARTE.aCanvas('icono-remo', 0, 'verano', 3), 'Remar', 'Tocá el agua y la canoa rema hasta ahí; si tocás algo que se junta, va y lo junta. También con las flechas, o con <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>. <kbd>Enter</kbd> junta, <kbd>F</kbd> aviva, <kbd>M</kbd> amarra y <kbd>Esc</kbd> pone pausa.');
-    fila(ARTE.aCanvas('icono-refugio', 0, 'verano', 3), 'Amarrar y acampar', 'En el cachiyuyo, junto a una playa, pasan la noche: comen lo que juntaron, amanece y vuelve la calma.');
+    fila(ARTE.aCanvas('icono-refugio', 0, 'verano', 3), 'Amarrar y acampar', 'En el cachiyuyo, junto a una playa, pasan la noche. Cuidar el fuego toda la noche lo gasta; comer lo que juntaron lo compensa. Amanece y vuelve la calma: si se ve venir viento o lluvia, acampar es la forma de esperar que pase.');
     fila(ARTE.aCanvas('icono-viento', 0, 'verano', 3), 'Escuchá y mirá el lugar', 'Con «Luz real de Ushuaia», el viaje empieza con la luz y la estación de ahora en el canal Beagle. Con sonido, el bosque, la playa y el canal suenan distinto, con subtítulos. Con el narrador, el viaje se cuenta en voz alta; <kbd>N</kbd> describe lo que rodea a la canoa. La voz es la que trae tu dispositivo: es automática y su pronunciación no la revisó la comunidad.');
     fila(ARTE.aCanvas('icono-generacion', 0, 'verano', 3), 'Lo aprendido se transmite', 'Cada saber que encontrás queda en la memoria de la familia y pasa a la siguiente generación. Se guarda en este dispositivo y se ve en el códice.');
   }

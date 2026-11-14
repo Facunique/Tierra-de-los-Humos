@@ -90,3 +90,12 @@ test('conectar habla con la voz y puede repetir', () => {
   assert.equal(dicho.length, 2);
   assert.equal(dicho[0], dicho[1]);
 });
+
+test('el narrador cuenta el aviso del clima, lo que ya se anunció y el fuego que baja al acampar', () => {
+  const t = N.contar([{ tipo: 'acampe', comio: false }, { tipo: 'fuego', antes: 3, despues: 2, motivo: 'acampar' }, { tipo: 'aviso', antes: 'calma', clima: 'lluvia', faltan: 1 }]);
+  assert.match(t, /El fuego baja a 2\./);
+  assert.match(t, /Se ven nubes: viene lluvia\./);
+  const d = N.describir(Object.assign({}, base, { pronostico: { clima: 'viento', faltan: 1 } }), {});
+  assert.match(d, /Se ve venir el viento\./);
+  assert.doesNotMatch(N.describir(base, {}), /Se ve venir/);
+});

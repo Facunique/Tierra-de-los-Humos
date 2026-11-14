@@ -34,6 +34,8 @@
   const PIEDRA = ['pirita'];
   const VIENTO = { calma: 0.15, viento: 0.85, lluvia: 0.35, nieve: 0.25 };
   const TEXTO_CLIMA = { calma: 'Vuelve la calma', viento: 'Se levanta el viento', lluvia: 'Empieza a llover', nieve: 'Empieza a nevar' };
+  // El aviso suena como el cambio de tiempo (una ráfaga que pasa), con su propio subtítulo.
+  const TEXTO_AVISO = { calma: 'El tiempo va a mejorar', viento: 'Se ve venir el viento', lluvia: 'Se ven nubes: viene lluvia' };
   const TEXTO_HORA = { dia: 'Amanece', tarde: 'Cae la tarde', noche: 'Cae la noche' };
   const TEXTO_APAGADO = {
     viento: 'El viento apagó el fuego',
@@ -88,8 +90,9 @@
           break;
         }
         case 'reencendido': sumar('chispa', 'La pirita vuelve a encender el fuego'); break;
-        case 'acampe': sumar('acampe', ev.comio ? 'Amarran la canoa, comen y pasan la noche' : 'Amarran la canoa y pasan la noche'); break;
+        case 'acampe': sumar('acampe', ev.comio ? 'Amarran la canoa, comen y pasan la noche cuidando el fuego' : 'Amarran la canoa y pasan la noche cuidando el fuego, sin comida'); break;
         case 'clima': if (TEXTO_CLIMA[ev.clima]) sumar('clima', TEXTO_CLIMA[ev.clima]); break;
+        case 'aviso': if (TEXTO_AVISO[ev.clima]) sumar('clima', TEXTO_AVISO[ev.clima]); break;
         case 'hora': if (TEXTO_HORA[ev.hora]) sumar('hora', TEXTO_HORA[ev.hora]); break;
         case 'fin':
           if (ev.gano) sumar('llegada', 'Llegaron con el fuego encendido');
