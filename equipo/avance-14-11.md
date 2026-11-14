@@ -41,7 +41,7 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
   - Cartas de saber, victoria y derrota, y herencia entre generaciones.
   - Los datos del territorio están aparte del código, cada uno con su fuente.
   - 39 pruebas automáticas del núcleo. Un jugador automático que junta y acampa llega al destino el 87 % de las veces (en 500 viajes); uno que no junta nada no llega nunca.
-- **Acampar, aviso del clima y motivo del viaje** (Persona A, [PR 22](https://github.com/Facunique/Tierra-de-los-Humos/pull/22), en revisión): las tres tareas del núcleo que dejó el alcance para el 17/11.
+- **Acampar, aviso del clima y motivo del viaje** (Persona A, [PR 22](https://github.com/Facunique/Tierra-de-los-Humos/pull/22), ya en `main`): las tres tareas del núcleo que dejó el alcance para el 17/11.
   - Acampar no es gratis: cuidar el fuego toda la noche gasta. Sin comida, cada noche lo baja, así que una partida ya no puede durar para siempre.
   - Cada cambio de clima se avisa un paso antes. Quien juega puede decidir si acampa o sigue.
   - El núcleo elige el motivo del viaje según la estación, entre los destinos documentados. Hoy solo entra la ballena varada; los otros esperan que C los confirme.
@@ -59,9 +59,9 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 - **Arreglos que salieron al probar** (PR 16): un toque durante la transición de humo se perdía, y la transición trababa el juego si el navegador frenaba las animaciones.
 - **Correcciones de la auditoría cultural aplicadas en el juego** ([PR 18](https://github.com/Facunique/Tierra-de-los-Humos/pull/18), ya en `main`): el lema «Lo aprendido se transmite», un cierre «Hoy» que no atribuye prácticas sin fuente y el aviso de que la voz es la automática del dispositivo.
 - **El juego cuenta por qué viajan** ([PR 20](https://github.com/Facunique/Tierra-de-los-Humos/pull/20), ya en `main`): cada viaje empieza con una carta «Por qué viajan», con el dato y la fuente del destino y la aclaración de que la familia es ficción. Es la parte de B del nomadismo en chico. Hoy el destino es siempre la ballena varada; cuando el núcleo lo elija según la estación, el texto cambia solo. La prueba de punta a punta revisa que aparezca en cada partida.
-- **El aviso del clima y el costo de acampar, en la interfaz** ([PR 25](https://github.com/Facunique/Tierra-de-los-Humos/pull/25), en revisión): cuando el núcleo anuncia un cambio de tiempo, el juego lo dice («Se ven nubes: viene lluvia»), lo muestra en el HUD hasta que llega, suena con subtítulo y lo cuenta el narrador. La ayuda y el subtítulo de acampar dicen que cuidar el fuego toda la noche gasta, y que comer lo compensa.
+- **El aviso del clima y el costo de acampar, en la interfaz** ([PR 25](https://github.com/Facunique/Tierra-de-los-Humos/pull/25), ya en `main`): cuando el núcleo anuncia un cambio de tiempo, el juego lo dice («Se ven nubes: viene lluvia»), lo muestra en el HUD hasta que llega, suena con subtítulo y lo cuenta el narrador. La ayuda y el subtítulo de acampar dicen que cuidar el fuego toda la noche gasta, y que comer lo compensa.
 - **Alcance para la entrega** ([`docs/02-alcance-mvp.md`](../docs/02-alcance-mvp.md), propuesta de B, ya en `main`): qué cuenta como terminado según los criterios del jurado, qué entra sí o sí para el 17/11 y qué se recorta primero. Espera que A lo confirme.
-- **Pruebas automáticas:** en `main` pasan las 93, de todo el equipo.
+- **Pruebas automáticas:** en `main` pasan las 103, de todo el equipo.
 
 ![El núcleo del juego: la canoa con su fuego rema por el canal, con una playa, el bosque, leña y pescado para juntar, y el humo sobre lo no explorado](reunion-14-11/viaje.jpg)
 
