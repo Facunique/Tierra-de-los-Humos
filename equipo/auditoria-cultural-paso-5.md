@@ -4,17 +4,19 @@ Fecha: 14/11/2026. Responsable: Persona C.
 
 **Resultado de la primera pasada:** 23 observaciones y cuatro ajustes menores del README. **Actualización posterior, también del 14/11:** con la aprobación de C del lema «Lo aprendido se transmite» y su pedido de actualizar la guía, se aplican las correcciones indicadas abajo. No se modifican lógica, reglas, números ni ilustraciones. Se mantienen las consultas y permisos abiertos; una corrección editorial no equivale a validación comunitaria.
 
-## Estado después de las correcciones aprobadas
+## Estado después de las correcciones y del trabajo reciente de D
+
+La rama de esta revisión se apoya en el trabajo del PR #17 de D. Se conservan sus correcciones; esto no equivale a incorporar permisos nuevos de la comunidad. El PR #18 de B se revisa por separado y no se da por integrado aquí.
 
 | Estado | Observaciones | Qué cambió o qué falta |
 |---|---|---|
-| Aplicadas | P01, P04, P05, P06, P08, P09, P10, P11, P12, P14, P15, P21 y P23 | Lema y fin del viaje; apertura y consulta del pitch; bibliografía, contexto y pautas de la guía; ejercicios con fuentes e hipótesis separadas; regeneración de las piezas afectadas. Se retiró la afirmación jurídica sin referencia, sin proponer una interpretación nueva. |
-| Parciales | P07 y P22 | Se actualizan la guía y el pitch; quedan las formulaciones de tareas y consulta en `mesa/reglas.html`. |
-| Pendientes | P02, P03, P13, P16, P17, P18, P19 y P20 | Representación de la familia, cierre «Hoy», cartografía, fuente y ficción del stand, alcance de voz colectiva, fauna y pronunciación. |
+| Aplicadas | P01, P04, P05, P06, P07, P08, P09, P10, P11, P12, P14, P15, P16, P17, P18, P21, P22 y P23 | Se conservan las correcciones anteriores y las de D en mesa, stand, pitch, ficción y atribución de la consulta. Los materiales dependientes de las cartas se regeneran con la revisión actual. |
+| Parciales | P02, P03 y P19 | P02: mesa ya propone acompañar una familia ficticia; la consulta de representación sigue abierta. P03: cierre escrito en docs/07, pendiente de aprobación e integración. P19: D usa nombres generales provisionales; sigue pendiente la identificación documentada de especies. |
+| Pendientes | P13 y P20 | Cartografía y permiso de los rótulos; revisión de pronunciación con la consulta. Los rótulos del libro están preparados pero apagados en el trabajo de D. |
 
-**Fuentes ya localizadas para P03:** Vargas Filgueira (2019), *Mi sangre yagán*, agradecimientos p. 4 y epílogo pp. 85–86 del visor de 90 páginas. El cierre aún no se cambió: esos pasajes no verifican por sí solos cestería, situación lingüística, un cargo actual ni permiso de representación. Las pp. 8–9 identifican protagonistas del relato, no roles genéricos para nombrar a la familia ficticia.
+**Fuentes ya localizadas para P03:** Vargas Filgueira (2019), *Mi sangre yagán*, agradecimientos p. 4 y epílogo pp. 85–86 del visor de 90 páginas. El cierre propuesto está en docs/07 y aún no se integró: esos pasajes no verifican por sí solos cestería, situación lingüística, un cargo actual ni permiso de representación. Las pp. 8–9 identifican protagonistas del relato, no roles genéricos para nombrar a la familia ficticia.
 
-**Autorización:** C aprobó el lema y pidió actualizar la guía docente. Se mantienen las preguntas de `equipo/comunicaciones.md`. No se publica el PDF del libro ni se incorporan respuestas de entrevista a partir de su lectura.
+**Autorización:** C aprobó el lema, pidió actualizar la guía docente y luego priorizar a Víctor en las cartas, crear cartas nuevas y preparar el cierre del paso 6. Se mantienen las preguntas de `equipo/comunicaciones.md`. No se publica el PDF del libro ni se incorporan respuestas de entrevista a partir de su lectura.
 
 ## Criterios y fuentes
 
@@ -271,6 +273,6 @@ Las referencias de los PDF a una fuente no convierten las pautas de aula o las h
 ## Próximas acciones
 
 1. Resolver el alcance de representación y preparar el cierre del paso 6 con las páginas ya localizadas, sin atribuir prácticas actuales específicas sin respaldo.
-2. Coordinar con B y D los ocho puntos pendientes y las dos correcciones parciales: mapa, stand, mesa, fauna y pronunciación.
+2. Coordinar con B y D los dos puntos pendientes y los tres parciales: representación, cierre, mapa, fauna y pronunciación. No dar por integrado el PR #18 hasta que se incorpore.
 3. Mantener revisión docente y consulta comunitaria abiertas. La lectura del libro y la aprobación editorial de C no incorporan permisos nuevos.
 4. Después de cada cambio posterior, regenerar las piezas que dependan de él y verificar fuentes y legibilidad.

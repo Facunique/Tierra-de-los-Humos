@@ -53,6 +53,7 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 | [04 · Dirección de arte y sonido](docs/04-direccion-de-arte.md) | El estilo Corteza: principios, motor de dibujo, cartas, paleta, sonido y accesibilidad |
 | [05 · Rigor histórico del arte](docs/05-rigor-historico.md) | Cada elemento dibujado contrastado con las fuentes etnográficas, con página |
 | [06 · Nombres de lugares](docs/06-toponimia.md) | Correspondencias del libro, notas y criterio Onashaga — Canal Beagle |
+| [07 · Propuesta de cierre del códice](docs/07-cierre-del-codice.md) | Continuidad del pueblo yagán y Paiakoala, con fuente; pendiente de aprobación e integración |
 
 Arte y sonido:
 
@@ -120,6 +121,8 @@ Trabajo interno del equipo:
 
 Las referencias completas, sus páginas y los límites de cada uso están en [`docs/03-contenido-cultural.md`](docs/03-contenido-cultural.md). Los nombres de lugares se registran en [`docs/06-toponimia.md`](docs/06-toponimia.md), con el criterio **Onashaga — Canal Beagle**.
 
+Las nueve cartas priorizan a **Víctor Vargas Filgueira** y los pasajes verificados de su libro. Siete se sostienen con la obra; amarre y pirita conservan a Cooper para sus detalles técnicos y distinguen el contexto documentado por Vargas. La entrevista se registra aparte. Ocho cartas nuevas están en [`datos/saberes-propuestos.js`](datos/saberes-propuestos.js) y en un [PDF de propuestas](arte/cartas/cartas-propuestas-victor.pdf), todavía fuera del catálogo activo: su selección y sus eventos se acuerdan con A y B. La [revisión actual](equipo/revision-victor-y-cartas-nuevas.md) detalla fuentes y propuestas.
+
 ### Fuentes escritas
 
 - **Vargas Filgueira, Víctor (2019). *Mi sangre yagán (ahua saapa yagan)*.** Primera edición digital. Editora Cultural Tierra del Fuego. ISBN 978-987-3642-28-9. Pasajes revisados en el PDF aportado por la Persona C: ballena varada (pp. 16–17), corteza (pp. 23 y 31–32), mujeres remando (p. 33), enseñanza y decisiones compartidas (pp. 39 y 46), reservas de invierno (pp. 53–54), encendido (p. 66) y topónimos (notas de pp. 86–88). Agradecimientos (p. 4) y epílogo (pp. 85–86) documentan la referencia del autor a Paiakoala y la continuidad del pueblo yagán. Páginas del visor de 90 páginas; año confirmado por C. El ejemplar se consulta fuera del repositorio y no se redistribuye.
@@ -146,6 +149,8 @@ Las referencias completas, sus páginas y los límites de cada uso están en [`d
 El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido son **propios del equipo** (CC BY-SA 4.0). No se usan fotos históricas, ilustraciones, sonidos ni música de terceros. *Se completa si se suma alguna librería o recurso nuevo.*
 
 ## Uso de inteligencia artificial
+
+- **Cierre y cartas con Víctor como fuente principal (14/11, paso 6):** a pedido de la Persona C, Codex (OpenAI) redactó una propuesta de cierre con Vargas Filgueira (2019), revisó dato y fuente de las nueve cartas y preparó ocho cartas nuevas con páginas verificadas del PDF aportado. Separó publicación y entrevista, mantuvo los nombres pendientes y dejó las cartas nuevas fuera del catálogo hasta acordar sus eventos con A y B. Actualizó documentación y regeneró los materiales afectados, con un PDF separado de propuestas. No publicó el libro ni escaneos, no incorporó permisos nuevos y no cambió la lógica ni los números del juego.
 
 - **Correcciones de la auditoría (14/11):** con aprobación de la Persona C, Codex (OpenAI) aplicó «Lo aprendido se transmite», actualizó los textos de la guía docente y sus actividades y completó las fuentes y la consulta del pitch. Revisó pasajes del PDF de Vargas Filgueira (2019) aportado fuera del repositorio y localizó agradecimientos, protagonistas y epílogo. Actualizó referencias y seguimiento de tareas y regeneró las piezas afectadas. No publicó el libro ni escaneos, no agregó permisos y no cambió la lógica ni los números del juego.
 

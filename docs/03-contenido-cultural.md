@@ -7,6 +7,7 @@ Este documento reúne las referencias que respaldan los contenidos del proyecto 
 ## Cómo se usan las fuentes
 
 - Cada dato conserva autor, obra, año y página. Las páginas de los capítulos del *Handbook* y de Spears son las que registra la investigación del equipo; las de Vargas Filgueira corresponden al **visor del PDF de 90 páginas**.
+- **Prioridad confirmada por C el 14/11:** Vargas Filgueira es la fuente principal de las cartas. Cooper documenta los detalles que no confirman los pasajes de Vargas; cada carta distingue el alcance de ambos. La entrevista sigue separada del libro. Revisión actual: [`revision-victor-y-cartas-nuevas.md`](../equipo/revision-victor-y-cartas-nuevas.md).
 - Las notas de lectura y el libro de Vargas Filgueira se distinguen de su entrevista. El 14/11 se localizó el PDF de 90 páginas aportado por la Persona C, fuera del repositorio, y se revisaron directamente los pasajes citados aquí, los protagonistas, los agradecimientos y el epílogo. No se revisó la grabación ni se declaran leídas directamente las demás obras completas.
 - Una descripción histórica se atribuye a su fuente. No se convierte en una regla de la vida actual de todas las familias ni en una única distribución de tareas.
 - La familia, el mapa, los eventos, el gasto del fuego y la herencia entre partidas son recursos de juego. El enfoque de nomadismo combina motivos documentados por decisión de diseño; esa combinación no se atribuye como una respuesta del entrevistado.
@@ -32,6 +33,14 @@ Se utiliza la referencia de esta edición confirmada por la Persona C y los pasa
 | Decisiones compartidas | 46 | Referencia para revisar generalizaciones sobre tareas y organización. |
 | Recuperación de reservas de grasa para el invierno | 53–54 | Propuesta de carta de reservas preparada en la revisión del paso 3, todavía fuera del catálogo. |
 | Pedernal y plumas conservadas secas para encender fuego | 66 | Referencia para revisar el encendido. Este pasaje no se usa por sí solo como confirmación de la pirita ni de la base del fogón. |
+| Mariscos y recolección durante la marea baja | 30 y 44 | Fuente principal del contexto de recolección; no demuestra por sí sola la identificación científica de cada marisco ni el orden de importancia alimentaria. |
+| Cruce de una zona de algas con marea alta | 61 | Carta nueva propuesta; se conserva el alcance de ese episodio, sin deducir una regla para todo paso costero. |
+| Pesca y alimento para el campamento | 30 y 39 | Contexto de la carta de pescado; no prueba el método de línea, lazo y mano descrito por Cooper. |
+| Hongos de los árboles durante un invierno difícil | 54 | Contexto de la carta de hongos; la conservación en seco sigue documentada por Cooper. |
+| Luz disponible y recorridos por tramos cortos | 33 y 44 | Carta nueva propuesta; se distinguen planificación del recorrido y cantidades de turnos de ficción. |
+| Consejo de mayores y elección del viaje | 50, junto con 46 | Carta nueva propuesta; no se interpreta la cooperación como ausencia absoluta de autoridades. |
+| Bahía que protege del viento del oeste | 56 | Carta nueva propuesta; no se deduce una regla para todas las bahías ni se asignan coordenadas. |
+| Búsqueda de agua cuando se secan cursos pequeños | 46 y 61 | Carta nueva propuesta; el prototipo no tiene un recurso de agua ni un sistema de potabilidad. |
 | Nombres y correspondencias de lugares | 86–88, notas numeradas | Registro en `docs/06-toponimia.md`. Por ejemplo, **Onashaga — Canal Beagle**, nota 1. |
 | Vocabulario y distinción de contenidos ceremoniales | 47–48 y 88, notas 31–32 | Material de revisión documental; los contenidos ceremoniales quedan fuera del juego. |
 | Epílogo: continuidad del pueblo yagán y Comunidad Yagán Paiakoala en Ushuaia | 85–86 | El autor afirma la continuidad y relata la conformación de la comunidad en 2014. Su firma de entonces no confirma un cargo actual en 2026. Base escrita para proponer el cierre, separada de la entrevista. |
@@ -130,7 +139,8 @@ Esta lista conserva las pistas de investigación del repositorio. **No se las pr
 
 - Especies y distribución local de tonina, cormorán, pato vapor, otras aves, erizos y hongos cuando se pretenda nombrarlos por especie.
 - Fuente yagán específica sobre recolección de leña; fuente histórica del origen del nombre del juego; referencias botánicas y arqueológicas incompletas.
-- Propuesta y aprobación del cierre del códice, con las pp. 4 y 85–86 ya localizadas; fuentes o respuestas específicas si se quieren atribuir prácticas actuales concretas.
+- Aprobación e integración del cierre del códice; fuentes o respuestas específicas si se quieren atribuir prácticas actuales concretas.
+- La propuesta del cierre ya está escrita en [`07-cierre-del-codice.md`](07-cierre-del-codice.md); quedan su aprobación final y la integración. Ocho cartas nuevas con la plantilla completa están en `datos/saberes-propuestos.js`, fuera del catálogo activo hasta acordar sus eventos con A y B.
 - Permisos y respuestas pendientes de la consulta, y resolución de las observaciones de la auditoría del paso 5.
 
 La bibliografía no convierte estos pendientes en datos confirmados. Los documentos del proyecto se actualizan cuando llega una fuente o una respuesta nueva; la referencia original se conserva para poder revisar cada cambio.

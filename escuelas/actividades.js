@@ -20,7 +20,7 @@
       pregunta: '¿Cómo se lleva un fuego encendido dentro de una canoa de corteza sin que la canoa se queme?',
       actividad: [
         'En grupos, dibujen la canoa vista desde arriba y marquen dónde iría el fuego.',
-        'Lean el dato. ¿Para qué sirve el lecho de tierra, conchas o piedras debajo del fuego?',
+        'Comparen la carta con Cooper (1946), «The Yahgan», pp. 88 y 91: ¿qué materiales describe para la base del fogón?',
         'Comparen los materiales con Vargas Filgueira (2019), Mi sangre yagán, p. 66 del visor: pedernal y plumas conservadas secas. ¿Qué dice cada fuente y qué no explica?',
       ],
       minutos: 20,
@@ -41,7 +41,7 @@
     mejillones: {
       pregunta: '¿Qué nos puede contar una montaña de valvas?',
       actividad: [
-        'Lean cómo presenta Cooper al mejillón, citando a Lothrop. ¿Qué afirma la carta y de dónde sale esa información?',
+        'Lean la recolección con marea baja de Vargas Filgueira en la carta. Comparen con Cooper (1946), «The Yahgan», p. 84, que cita a Lothrop sobre el mejillón. ¿Qué afirma cada fuente?',
         'Bird (1946), «The Archeology of Patagonia», pp. 20–21, registra conchales en las costas del Beagle. ¿Qué preguntas investigarían sobre alimentación y ocupación de esos lugares?',
         'Simulación de aula: durante una semana, registren en una tabla las meriendas del grupo. ¿Qué permite preguntar ese registro y qué no? No es un conchal ni explica por sí solo cómo se forma uno.',
       ],
@@ -52,18 +52,18 @@
     pescado: {
       pregunta: '¿Se puede pescar sin anzuelo?',
       actividad: [
-        'Lean el dato y dibujen la pesca: la línea, la carnada en el nudo y la mano.',
+        'Lean la carta y comparen con el método de Cooper (1946), «The Yahgan», pp. 84 y 96. Dibujen su descripción: línea, carnada en un lazo y mano.',
         'Hagan una tabla de los materiales que nombran las cartas, con su uso y la fuente y página que lo documentan.',
         'Indiquen qué permite saber cada pasaje sobre el origen de los materiales. Marquen con 🔍 lo que no diga; no inventen especies, lugares ni recorridos.',
       ],
       minutos: 25,
       areas: ['Educación Tecnológica', 'Ciencias Naturales'],
-      cuidado: { tipo: 'Cuidado', texto: 'Dibujen el método de esta carta: línea, lazo y mano. No agreguen herramientas que ese pasaje no menciona ni lo conviertan en una regla sobre toda la pesca.' },
+      cuidado: { tipo: 'Cuidado', texto: 'El método de línea, lazo y mano corresponde al pasaje de Cooper, no a una técnica detallada por Vargas. No agreguen herramientas ni lo conviertan en una regla sobre toda la pesca.' },
     },
     hongos: {
       pregunta: '¿Cómo se guarda comida sin heladera?',
       actividad: [
-        'Lean el dato: los hongos de los árboles se guardaban secos.',
+        'Lean la carta y comparen con la conservación en seco que registra Cooper (1946), «The Yahgan», p. 84. Vargas menciona los hongos como alimento, sin detallar esa técnica.',
         'Experimento: dejen secar al aire una rodaja de manzana y guarden otra igual en un frasco cerrado con una gota de agua. Obsérvenlas una semana y anoten qué cambia.',
         '¿Por qué lo seco dura más? Conversen sobre qué necesitan los hongos y las bacterias para crecer.',
       ],
@@ -85,7 +85,7 @@
     choza: {
       pregunta: '¿Por qué la puerta de la choza miraba al mar?',
       actividad: [
-        'Lean el dato: varas flexibles dobladas en domo, cubiertas con pasto, helechos, ramas, corteza o cueros; el fuego en el centro.',
+        'Lean la carta y comparen con Cooper (1946), «The Yahgan», pp. 85–86: varas en domo, cubiertas con distintos materiales, con fuego en el centro.',
         'Armen una maqueta con ramitas o palitos flexibles y papel. Pongan el fuego en el medio y la puerta hacia un «mar» de papel.',
         'La carta no dice por qué la puerta miraba al mar. Escriban hipótesis (ver la canoa, salir rápido al agua, el viento) y márquenlas como hipótesis, no como datos.',
       ],
