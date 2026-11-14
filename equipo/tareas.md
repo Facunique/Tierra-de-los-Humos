@@ -69,6 +69,8 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [ ] Aprobar con Dani cada carta antes de pasarla a `revisado` y decidir la incorporación de cartas nuevas. Las nueve siguen en `borrador`.
 - [x] Trasladar las referencias de Bird (1946) a los datos del territorio: conchales (pp. 20–21) y leña Kawésqar (p. 70), sin atribuir esta última como práctica yagán.
 - [ ] Completar las fuentes pendientes de leña yagán, especies, botánica y topónimos; la tonina sigue sin identificación documentada.
+- [x] Registrar los nombres de lugares aportados de Vargas Filgueira (2019), con notas y páginas: `docs/06-toponimia.md` (14/11). Se distinguen correspondencias, descripciones y nombres sin equivalencia explícita.
+- [ ] Definir la presentación de los topónimos y completar la fuente cartográfica y el permiso de uso en el juego antes de proponer cambios de rótulos a D.
 - [ ] Revisar las actividades de la guía para docentes (`escuelas/actividades.js`).
 - [ ] Redactar el cierre del códice, en presente, mencionando las comunidades vivas.
 - [ ] Armar la sección **Fuentes** del README (D dejó las que usó el arte).

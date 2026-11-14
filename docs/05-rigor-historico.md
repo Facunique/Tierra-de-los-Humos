@@ -144,7 +144,7 @@ También comían los **hongos que crecen en los árboles** (no los del suelo) y 
 | Sin fronteras | Había contacto, trueque y casamientos entre vecinos (Cooper, p. 82 y 107). | ✅ Las zonas son manchas suaves, sin líneas. Tampoco se dibujan límites entre países. |
 | Paisaje | Al norte y al este de la Isla Grande, estepa ondulada; al sur y al oeste, montaña y bosque, que empieza al sur de los ríos Grande y del Fuego (Cooper, «The Ona», p. 107). | ✅ Degradé de estepa a bosque, y la cordillera con nieve. |
 | Costas | Natural Earth, escala 1:10 millones (dominio público). | ✅ Costas reales, simplificadas a unos 500 m. |
-| Nombres | Toponimia oficial: Canal Beagle, Isla Grande de Tierra del Fuego, Isla Navarino, Isla Hoste, Cabo de Hornos, Península Mitre, Isla de los Estados. | 🔍 Cotejar con la cartografía del IGN (línea de la guía de la hackatón). |
+| Nombres | El mapa usa rótulos como Canal Beagle, Isla Grande de Tierra del Fuego, Isla Navarino, Isla Hoste, Cabo de Hornos, Península Mitre e Isla de los Estados. Vargas Filgueira (2019), notas de pp. 86–88 del visor, identifica nombres como Onashaga para Canal Beagle (nota 1), Uceniaka para Isla Navarino (nota 12) y Usín para Isla Hoste (nota 23). Registro completo en [`06-toponimia.md`](06-toponimia.md). | Se registraron las correspondencias del libro. 🔍 La denominación oficial actual, el criterio de presentación y los permisos para usar nombres en el juego siguen pendientes; la equivalencia del libro no sustituye la verificación cartográfica. |
 
 ## Hallazgos para todo el equipo
 
@@ -180,7 +180,7 @@ El detalle de las nueve cartas, los once elementos y los tres destinos está en 
 | Cestos | Consulta sobre el uso de la representación como ícono. La descripción de Cooper (p. 89) no equivale a un permiso. |
 | Guindo y otros detalles del museo | Año y localización exacta de los pasajes, en especial dimensiones y período de extracción. |
 | Lenga y árbol bandera | Referencia botánica completa para el follaje; fuente para el árbol bandera. |
-| Topónimos y mapa | Cotejo con cartografía del IGN, sin darlo por realizado a partir de Natural Earth. |
+| Topónimos y mapa | Correspondencias del libro registradas en `docs/06-toponimia.md`, con notas y páginas. Falta confirmar la presentación, el alcance de los permisos y la cartografía del IGN; Natural Earth y las notas del libro no resuelven por sí solos esa verificación. |
 | Goodall | Confirmar ejemplar, edición y año antes de citar páginas. |
 | Entrevista | Cotejar grafías, cifras, medidas y detalles técnicos; mantener las consultas y permisos abiertos de `comunicaciones.md`. |
 
