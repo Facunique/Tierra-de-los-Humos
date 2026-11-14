@@ -33,6 +33,7 @@
   - El cartel de «El viaje termina acá» no tiene margen interno, y en el celular el aviso de arriba tapa los íconos del HUD.
   - **Choque de nombres, ya resuelto de este lado:** el mapa de territorios (`arte/mapa/mapa.js`) y el mapa del núcleo (`juego/nucleo/mapa.js`) usaban los dos la global `TDH_MAPA`. El de territorios pasó a llamarse `TDH_TERRITORIOS` (lo usan la postal, el mapa, el cartel, la vidriera y la maqueta). El núcleo no tiene que cambiar nada.
   - **Antes de entregar (16/11):** `node pruebas/de-punta-a-punta.cjs` juega partidas enteras en cinco pantallas tocando los botones y avisa si algo se rompe.
+- **Coordinación (14/11):** regla nueva en `AGENTS.md`. Antes de trabajar y antes de subir, `node herramientas/novedades.cjs` muestra qué hicieron los demás y qué conviene hacer por eso. Cada uno se acopla a lo nuevo, y si algo choca, adapta lo suyo.
 - **Ideas para más adelante:** [`ideas.md`](ideas.md) es el lugar para coordinar ideas que todavía no se hicieron. Cualquiera del equipo puede sumar, acomodar o descartar; cada idea dice qué señal indica cuándo conviene hacerla, quién la propone y a quién le tocaría.
 - **Siguiente:** elegir el destino del viaje con los hallazgos de `docs/05` (lo decide la Persona C), `docs/03-contenido-cultural.md` (fuentes y consulta), `docs/02-alcance-mvp.md`, acordar con A la estructura de carpetas y el contrato entre núcleo e interfaz (ver *Por decidir*), cotejar el libro de Goodall.
 

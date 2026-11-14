@@ -1,6 +1,14 @@
 # Herramientas
 
-Páginas de apoyo que no son el juego. Se abren con doble clic, sin internet.
+Páginas y scripts de apoyo que no son el juego. Las páginas se abren con doble clic, sin internet.
+
+## Novedades del equipo
+
+`node herramientas/novedades.cjs` trae lo nuevo de GitHub y muestra qué hizo cada persona desde la última vez (commits, ramas nuevas o unidas) y **qué conviene hacer por eso**: qué regenerar, qué probar, qué idea de `equipo/ideas.md` mirar. Solo lee; no cambia nada. Es la regla de coordinación de `AGENTS.md`: correrlo antes de empezar y antes de subir cambios.
+
+- `--todo`: las últimas 48 horas, aunque ya se hayan visto.
+- `--no-marcar`: mostrar sin marcar como visto.
+- `--mias`: incluir también la rama propia.
 
 ## Editor de saberes
 
