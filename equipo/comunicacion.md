@@ -37,17 +37,17 @@ Tres ideas que se repiten en el video, el pitch y el README:
 
 | Tiempo | Imagen | Voz (borrador, que suene natural) |
 |---|---|---|
-| 0:00 a 0:12 | Pantalla de título: la costa de papel, columnas de humo, la canoa con su fuego (`arte/corteza/portada.html`, animada). | "Hace más de 500 años, los navegantes que pasaron por el estrecho vieron humo en la costa. Eran los fuegos de los pueblos de esta tierra." |
-| 0:12 a 0:25 | El humo se abre y aparece la canoa con su fuego. | "Esos pueblos siguen acá. Pero lo que saben del territorio casi siempre se cuenta en pasado." |
-| 0:25 a 0:40 | Pantalla de inicio: elegir pueblo (Yagán). | "Tierra de los Humos es un juego web por turnos. Cada partida es un viaje en canoa por los canales, acompañando a una familia yagán." |
-| 0:40 a 1:15 | Partida real: remar, el humo se abre, el viento sube, el fuego del HUD baja, juntar leña y mariscos. | "El fuego es tu vida. El viento y la lluvia lo gastan; la leña y el refugio lo sostienen. Alejarse del campamento es una apuesta." |
+| 0:00 a 0:12 | Pantalla de título: la costa de papel, columnas de humo, la canoa con su fuego (`arte/corteza/portada.html`, animada). | "Cada partida acompaña a una familia ficticia por los canales fueguinos. El fuego sostiene el viaje y las cartas guardan lo aprendido." |
+| 0:12 a 0:25 | El humo se abre y aparece la canoa con su fuego. | "Los pueblos fueguinos siguen acá. Este juego acerca fuentes sobre sus saberes a jóvenes y escuelas, en presente." |
+| 0:25 a 0:40 | ¿A quién acompañás? El mapa de los territorios y la familia yagán para elegir. | "Tierra de los Humos es un juego web por turnos. Cada partida es un viaje en canoa por los canales, acompañando a una familia yagán ficticia." |
+| 0:40 a 1:15 | Partida real: remar, el humo se abre, el viento sube, el fuego del HUD baja, juntar leña y mariscos. | "El fuego es tu vida. El viento, la lluvia y la noche lo gastan; la leña y el amarre en el cachiyuyo lo sostienen." |
 | 1:15 a 1:40 | Aparece una carta de saber. Zoom a las etiquetas *Dato*, *En el juego* y a la fuente. | "En el viaje aparecen saberes. Cada carta separa lo que es dato de lo que es recurso de juego, y cita su fuente." |
-| 1:40 a 2:05 | El fuego se apaga (sonido `apagado`). Fundido. Pantalla de nueva generación, con el saber heredado. | "Si el fuego se apaga, el viaje termina. Pero lo aprendido no se pierde: pasa a la siguiente generación." |
-| 2:05 a 2:25 | Recorrido por el códice. | "Todas las cartas se juntan en un códice que se puede recorrer sin jugar. Para las escuelas hay una guía para docentes y una versión de mesa, sin pantallas." |
-| 2:25 a 2:45 | Imágenes del equipo trabajando y, **solo si la comunidad lo autoriza**, de la consulta. Si no, texto en pantalla. | "Lo hicimos consultando a [comunidad o persona, solo con permiso]. Lo que nos corrigieron, lo cambiamos." |
-| 2:45 a 3:00 | El juego en un celular. Logo, enlace y nombres del equipo. Cierre del códice, en presente. | "Se juega desde el navegador, también en el celular, sin instalar nada. Los pueblos fueguinos están vivos. Esta es una forma más de escucharlos." |
+| 1:40 a 2:05 | El fuego se apaga (sonido `apagado`). Fundido. Pantalla de nueva generación, con el saber heredado. | "Si el fuego se apaga, el viaje termina. Lo aprendido se transmite: pasa a la siguiente generación." |
+| 2:05 a 2:25 | Recorrido por el códice. | "Todas las cartas se juntan en un códice que se puede recorrer sin jugar. Para las escuelas hay una guía para docentes, una versión de mesa sin pantallas y un editor para sumar saberes." |
+| 2:25 a 2:45 | Imágenes del equipo trabajando. De la entrevista, ni imágenes ni citas textuales: el permiso registrado es para el nombre y la atribución (`comunicaciones.md`). Si no, texto en pantalla. | "Consultamos a Víctor Vargas Filgueira, referente de la comunidad yagán y autor de Mi sangre yagán. Revisamos las cartas con sus fuentes, y la consulta sigue abierta." |
+| 2:45 a 3:00 | El juego en un celular. Logo, enlace y nombres del equipo. Cierre del códice, en presente. | "Se juega desde el navegador, también en el celular. Las fuentes y la consulta están en el repositorio. Lo aprendido se transmite." |
 
-🔍 **Antes de grabar, la Persona C revisa cada frase de la voz** (por ejemplo, el dato del humo visto desde el mar y la fecha).
+🔍 **Antes de grabar, la Persona C revisa cada frase de la voz.** Se sacó la historia del origen del nombre: no tiene fuente con autor y página (auditoría del paso 5, P04).
 
 **Cómo grabarlo (gratis):**
 
@@ -64,13 +64,13 @@ Todo el equipo habla: es parte del criterio. Cada bloque tiene una persona y una
 
 | Tiempo | Quién | Diapositiva | Qué decir |
 |---|---|---|---|
-| 0:00 a 0:40 | **D** | 1. Portada con humo · 2. El problema | El gancho del humo (como en el video). El problema: los saberes de los pueblos fueguinos se cuentan en pasado y a los jóvenes les llegan poco. |
-| 0:40 a 1:30 | **C** | 3. La consulta · 4. Una carta de saber, ampliada | Con quién hablamos y qué nos corrigieron (solo lo autorizado). Cómo se arma una carta: dato, recurso de juego, fuente. Las líneas rojas que respetamos. **El arte también está auditado:** la canoa, las chozas y lo que se junta siguen el *Handbook of South American Indians* (Cooper, 1946), con página (`docs/05`). |
+| 0:00 a 0:40 | **D** | 1. Portada con humo · 2. El problema | Presentar el juego: cada partida acompaña a una familia ficticia por los canales fueguinos. El problema como propósito: acercar fuentes sobre los saberes del territorio a jóvenes y escuelas, en presente. Sin la historia del nombre, que no tiene fuente. |
+| 0:40 a 1:30 | **C** | 3. La consulta · 4. Una carta de saber, ampliada | La entrevista a Víctor Vargas Filgueira (13/11) y su libro *Mi sangre yagán* (2019): qué revisamos con esas fuentes y que la consulta sigue abierta. Sin citas textuales ni validación que no esté registrada. Cómo se arma una carta: dato, recurso de juego, fuente. Las líneas rojas que respetamos. **El arte también está auditado:** la canoa, las chozas y lo que se junta siguen el *Handbook of South American Indians* (Cooper, 1946), con página (`docs/05`). |
 | 1:30 a 3:00 | **A** | 5. Demo en vivo | Una partida corta y preparada: remar, el viento, el fuego que baja, una carta, el fuego que se apaga, la nueva generación. **Si algo falla, pasar al video sin dudar.** |
-| 3:00 a 4:00 | **B** | 6. Herencia y códice · 7. Para todos | El códice. Celular, cartas en voz alta, alto contraste, tipografía para baja visión y subtítulos de sonido. El sonido cuenta el lugar y la luz es la de Ushuaia en ese momento. Código MIT y contenido CC BY-SA. |
-| 4:00 a 5:00 | **D** | 8. Qué sigue · 9. Cierre | Kawésqar y Selk'nam, solo con sus comunidades. Llevarlo a escuelas de Ushuaia, Tolhuin y Río Grande, con la guía para docentes y la versión de mesa. Cierre: "cuando el fuego se apaga, lo aprendido no se pierde". Enlace y QR. |
+| 3:00 a 4:00 | **B** | 6. Herencia y códice · 7. Para todos | El códice. Celular, cartas en voz alta, un narrador para jugar sin ver, alto contraste, tipografía para baja visión y subtítulos de sonido. El sonido cuenta el lugar y la luz es la de Ushuaia en ese momento. Código MIT y contenido CC BY-SA. |
+| 4:00 a 5:00 | **D** | 8. Qué sigue · 9. Cierre | Kawésqar y Selk'nam, solo con sus comunidades. Llevarlo a escuelas de Ushuaia, Tolhuin y Río Grande, con la guía para docentes y la versión de mesa. Que la comunidad pueda corregir y sumar saberes: ya hay un editor. Seguir la consulta abierta. Cierre: "cuando el fuego se apaga, lo aprendido no se pierde". Enlace (facunique.github.io/Tierra-de-los-Humos) y QR. |
 
-**Diapositivas:** ya están armadas en [`presentacion/index.html`](../presentacion/index.html), en estilo Corteza y sin internet. Con <kbd>←</kbd> <kbd>→</kbd> se pasa, con <kbd>N</kbd> se ven las notas del orador y con <kbd>F</kbd> se pone pantalla completa. El respaldo está en `presentacion/pitch.pdf`. Faltan los huecos marcados en amarillo: consulta, enlace y nombres. Se arman el 16/11 con capturas reales del juego. Pueden hacerse en HTML para que anden sin internet, con el mismo arte.
+**Diapositivas:** ya están armadas en [`presentacion/index.html`](../presentacion/index.html), en estilo Corteza y sin internet. Con <kbd>←</kbd> <kbd>→</kbd> se pasa, con <kbd>N</kbd> se ven las notas del orador y con <kbd>F</kbd> se pone pantalla completa. El respaldo está en `presentacion/pitch.pdf`. Falta el hueco marcado en amarillo: los nombres. Se completa el 17/11, con capturas reales del juego. Pueden hacerse en HTML para que anden sin internet, con el mismo arte.
 
 **Ensayo:** dos pasadas completas con reloj el 17/11, una el 18/11 en el ensayo oficial. Si un bloque se pasa de tiempo, se recorta texto, no la demo.
 

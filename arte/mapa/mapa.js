@@ -15,7 +15,14 @@
  * Se llama TDH_TERRITORIOS (y no TDH_MAPA) para no chocar con el mapa del núcleo
  * del juego (juego/nucleo/mapa.js), que usa TDH_MAPA: la postal y el juego cargan los dos.
  *
- * No se dibujan límites entre países. Nombres según la toponimia oficial.
+ * No se dibujan límites entre países. Nombres en castellano de uso corriente;
+ * 🔍 falta verificarlos con la cartografía oficial del IGN (docs/06-toponimia.md).
+ *
+ * nombresDelLibro (por defecto, false): rotula «nombre del libro — lugar», como
+ * «Onashaga — Canal Beagle», con las correspondencias de Vargas Filgueira (2019),
+ * Mi sangre yagán, notas de las pp. 86-88 del visor (docs/06). Está apagado hasta
+ * que se resuelvan el permiso para usar nombres en lengua yagán y la verificación
+ * cartográfica (auditoría cultural, P13). Para activarlo: { nombresDelLibro: true }.
  * Licencia: código MIT; el mapa, CC BY-SA 4.0. Costas: Natural Earth (dominio público).
  */
 (function (raiz) {
@@ -37,22 +44,23 @@
     { id: 'kawesqar', nombre: 'Kawésqar', detalle: 'Los canales del oeste, desde las islas al oeste de Tierra del Fuego hasta el golfo de Penas', fuente: 'Bird (1946), p. 55',
       manchas: [[-72.4, -53.8, 0.8, 0.5], [-72.6, -54.4, 0.5, 0.25], [-71.9, -53.2, 0.5, 0.35]], color: C.Q, rotulo: [-72.35, -54.05] },
   ];
-  // Nombres de lugares (toponimia oficial). tipo: agua · tierra · hoy (ciudades de hoy)
+  // Nombres de lugares, en castellano de uso corriente. tipo: agua · tierra · hoy (ciudades de hoy)
+  // libro y nota: nombre utilizado por Vargas Filgueira (2019) y número de nota (pp. 86-88 del visor).
   const LUGARES = [
-    { n: 'Canal Beagle', p: [-69.35, -54.9], tipo: 'agua', rot: -0.03 },
+    { n: 'Canal Beagle', p: [-69.35, -54.9], tipo: 'agua', rot: -0.03, libro: 'Onashaga', nota: 1 },
     { n: 'Estrecho de Magallanes', p: [-70.3, -52.62], tipo: 'agua', rot: -0.25 },
     { n: 'Océano Atlántico', p: [-65.2, -53.2], tipo: 'agua' },
     { n: 'Océano Pacífico', p: [-71.9, -55.75], tipo: 'agua' },
     { n: 'Isla Grande de Tierra del Fuego', p: [-68.75, -54.12], tipo: 'tierra' },
-    { n: 'Isla Navarino', p: [-67.6, -55.12], tipo: 'tierra' },
-    { n: 'Isla Hoste', p: [-69.4, -55.3], tipo: 'tierra' },
+    { n: 'Isla Navarino', p: [-67.6, -55.12], tipo: 'tierra', libro: 'Uceniaka', nota: 12 },
+    { n: 'Isla Hoste', p: [-69.4, -55.3], tipo: 'tierra', libro: 'Usín', nota: 23 },
     { n: 'Cabo de Hornos', p: [-67.27, -55.98], tipo: 'tierra', punto: true },
     { n: 'Península Mitre', p: [-65.55, -54.72], tipo: 'tierra' },
     { n: 'Isla de los Estados', p: [-64.4, -54.95], tipo: 'tierra' },
     { n: 'Península Brecknock', p: [-71.55, -54.6], tipo: 'tierra' },
     { n: 'Bahía Inútil', p: [-69.75, -53.45], tipo: 'agua' },
     { n: 'Ushuaia', p: [-68.3, -54.8], tipo: 'hoy' },
-    { n: 'Puerto Williams', p: [-67.61, -54.93], tipo: 'hoy' },
+    { n: 'Puerto Williams', p: [-67.61, -54.93], tipo: 'hoy', libro: 'Ushpasún', nota: 13 },
     { n: 'Tolhuin', p: [-67.19, -54.51], tipo: 'hoy' },
     { n: 'Río Grande', p: [-67.7, -53.79], tipo: 'hoy' },
   ];
@@ -114,20 +122,22 @@
     // Nombres de lugares
     const fuente = (px, peso, it) => (it ? 'italic ' : '') + (peso || 400) + ' ' + Math.round(px * s) + 'px "Atkinson Hyperlegible", system-ui, sans-serif';
     x.textAlign = 'center'; x.textBaseline = 'middle';
+    // «Onashaga — Canal Beagle»: primero el nombre del libro, después el lugar (criterio de C, docs/06).
+    const rotulo = (l) => (op.nombresDelLibro && l.libro ? l.libro + ' — ' + l.n : l.n);
     if (op.nombres) LUGARES.filter((l) => l.tipo !== 'hoy').forEach((l) => {
       const [a, b] = P(l.p[0], l.p[1]);
       x.save(); x.translate(a, b); if (l.rot) x.rotate(l.rot);
       if (l.punto) { x.fillStyle = C.I; x.beginPath(); x.arc(0, -8 * s, 2.5 * s, 0, Math.PI * 2); x.fill(); }
       x.font = fuente(l.tipo === 'agua' ? 14 : 13, l.tipo === 'agua' ? 400 : 700, l.tipo === 'agua');
-      x.lineWidth = 3.5 * s; x.strokeStyle = l.tipo === 'agua' ? rgba(C.B, 0.8) : rgba(C.i, 0.85); x.strokeText(l.n, 0, 0);
-      x.fillStyle = l.tipo === 'agua' ? C.N : C.I; x.fillText(l.n, 0, 0);
+      x.lineWidth = 3.5 * s; x.strokeStyle = l.tipo === 'agua' ? rgba(C.B, 0.8) : rgba(C.i, 0.85); x.strokeText(rotulo(l), 0, 0);
+      x.fillStyle = l.tipo === 'agua' ? C.N : C.I; x.fillText(rotulo(l), 0, 0);
       x.restore();
     });
     if (op.hoy) LUGARES.filter((l) => l.tipo === 'hoy').forEach((l) => {
       const [a, b] = P(l.p[0], l.p[1]);
       x.fillStyle = C.I; x.strokeStyle = C.i; x.lineWidth = 2 * s; x.beginPath(); x.rect(a - 3.5 * s, b - 3.5 * s, 7 * s, 7 * s); x.fill(); x.stroke();
       x.font = fuente(13, 700); x.textAlign = 'left';
-      x.lineWidth = 3.5 * s; x.strokeStyle = rgba(C.i, 0.9); x.strokeText(l.n, a + 7 * s, b); x.fillStyle = C.I; x.fillText(l.n, a + 7 * s, b);
+      x.lineWidth = 3.5 * s; x.strokeStyle = rgba(C.i, 0.9); x.strokeText(rotulo(l), a + 7 * s, b); x.fillStyle = C.I; x.fillText(rotulo(l), a + 7 * s, b);
       x.textAlign = 'center';
     });
     // Rótulos de los pueblos, en papel

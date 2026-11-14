@@ -67,7 +67,7 @@ Varias vueltas de este ciclo forman **una etapa**, y varias etapas forman **el v
 
 - **Sereno y respetuoso.** Más cerca de la contemplación que de la acción. El desafío es el clima y el territorio, no un enemigo.
 - **Sin violencia** entre personas ni contra pueblos. Sin seres ceremoniales como monstruos (ver las líneas rojas de la [guía](00-guia-hackathon.md#líneas-rojas-cuidado-cultural)).
-- **En presente.** El juego reconoce la continuidad del pueblo yagán y el códice debe cerrar con las comunidades de hoy. Vargas Filgueira (2019), *Mi sangre yagán (ahua saapa yagan)*, agradecimientos, p. 4, y epílogo, pp. 85–86 del visor, documenta su referencia a la Comunidad Yagán Paiakoala de Ushuaia y la continuidad de su pueblo. 🔍 La participación comunitaria en el proyecto y las prácticas actuales específicas requieren su propia confirmación; el libro no sustituye esa consulta.
+- **En presente.** El juego reconoce la continuidad del pueblo yagán y el códice debe cerrar con las comunidades de hoy. Vargas Filgueira (2019), *Mi sangre yagán (ahua saapa yagan)*, agradecimientos, p. 4, y epílogo, pp. 85–86 del visor, documenta su referencia a la Comunidad Yagán Paiakoala de Ushuaia y la continuidad de su pueblo. La propuesta está en [`07-cierre-del-codice.md`](07-cierre-del-codice.md), pendiente de aprobación e integración. 🔍 La participación comunitaria en el proyecto y las prácticas actuales específicas requieren su propia confirmación; el libro no sustituye esa consulta.
 - **Honesto sobre la ficción.** La familia, el mapa y los eventos son inventados; los saberes no. El juego lo dice.
 - Visual a definir (pixel art u otras propuestas, ver tarea 6), con paleta del paisaje de los canales: mar gris, bosque de lenga, piedra, humo.
 

@@ -34,6 +34,8 @@
   .cierre p { margin: .6vh 0; font-size: clamp(16px, 2.2vw, 30px); }
   .cierre code { font-size: .8em; }
   #ayuda { position: fixed; top: 10px; right: 12px; font-size: 13px; color: #8e999c; opacity: .6; }
+  /* Aviso fijo: la vidriera se ve sola, en bucle, sin el resto del juego al lado */
+  #aviso-ficcion { position: fixed; top: 10px; left: 12px; z-index: 5; font-size: clamp(12px, 1.3vw, 18px); color: #eee5d0; background: rgba(11,16,21,.72); padding: 4px 10px; border-radius: 8px; }
   @media (prefers-reduced-motion: reduce) { #leyenda { transition: none; } }
 </style>
 </head>
@@ -42,6 +44,7 @@
 <div id="centro" aria-live="polite"></div>
 <div id="leyenda" class="papel" role="status"></div>
 <div id="ayuda">Espacio: pausa · →: siguiente · F: pantalla completa</div>
+<div id="aviso-ficcion">La familia, el mapa y los eventos son ficción. Cada dato cultural conserva su fuente.</div>
 
 <script src="../arte/fuente/arte.js"></script>
 <script src="../arte/corteza/corteza.js"></script>
@@ -177,7 +180,7 @@
     { dur: 12000, entrar() {
       costa(34, 19, 5, { hora: 'tarde', estacion: 'otono', canoa: { x: 6, y: 9, fuego: 4 }, humos: [{ x: 20.5, y: 1.6 }] }); extraDibujo = null;
       centro.style.placeItems = 'center';
-      centro.innerHTML = '<div class="cierre rotulo papel"><img src="qr-juego.svg" alt="Código QR para abrir el juego en el celular"><div><h2>Jugalo en tu celular</h2><p>Escaneá el código o entrá a:</p><p><code>facunique.github.io/Tierra-de-los-Humos</code></p><p style="margin-top:2vh">Los pueblos fueguinos están vivos. Esta es una forma más de escucharlos.</p></div></div>';
+      centro.innerHTML = '<div class="cierre rotulo papel"><img src="qr-juego.svg" alt="Código QR para abrir el juego en el celular"><div><h2>Jugalo en tu celular</h2><p>Escaneá el código o entrá a:</p><p><code>facunique.github.io/Tierra-de-los-Humos</code></p><p style="margin-top:2vh">Conocé las fuentes y la consulta que acompañan este proyecto: están en el repositorio, <code>github.com/Facunique/Tierra-de-los-Humos</code>.</p></div></div>';
       leyendaTexto('');
     } },
   ];

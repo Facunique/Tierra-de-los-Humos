@@ -77,7 +77,12 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Localizar las páginas de agradecimientos (p. 4), protagonistas (pp. 8–9) y epílogo (pp. 85–86) en el PDF de Vargas Filgueira (2019) aportado fuera del repositorio; actualizar las referencias sin publicar el ejemplar.
 - [x] Aprobar «Lo aprendido se transmite» como lema (14/11) y actualizar los textos para presentar el apagado del fuego como fin del viaje. Sin cambios de reglas ni números.
 - [x] Regenerar guía docente, reglas de mesa, cartel, nueve diapositivas y PDF del pitch (14/11). La carta de amarre exportada ya usa el texto y las fuentes actuales. Tablero, fichas e ilustraciones se conservan.
-- [ ] Redactar el cierre del códice, en presente, mencionando las comunidades vivas.
+- [x] Redactar la propuesta del cierre del códice en presente, con Paiakoala y referencias: [`docs/07-cierre-del-codice.md`](../docs/07-cierre-del-codice.md) (14/11, paso 6).
+- [ ] Aprobar el cierre propuesto y coordinar su integración con B y D; no se incorporan respuestas ni autorizaciones nuevas de la entrevista.
+- [x] Revisar las fuentes de las nueve cartas priorizando a Vargas Filgueira (2019) y dejando a Cooper los detalles no confirmados por esos pasajes (14/11). Dato y fuente actualizados; IDs, textos de juego e ilustraciones se conservan.
+- [x] Crear ocho cartas nuevas completas con fuente y página en `datos/saberes-propuestos.js`: reservas, reparo, luz, aprendizaje, rumbo, marea, agua y corteza guardada. Son borradores fuera del catálogo activo.
+- [ ] Decidir con A y B qué cartas nuevas integrar y sus eventos de descubrimiento; completar actividades y arte al incorporarlas. No se agregan efectos ni cartas imposibles de encontrar al códice actual.
+- [ ] Resolver cómo presentar la pertenencia familiar del autor y los nombres, conforme al pedido de C. Por ahora se conserva Víctor Vargas Filgueira y la atribución de memoria familiar.
 - [x] Completar la sección **Fuentes** del README (14/11): publicaciones, consulta y referencias pendientes, con enlace a `docs/03-contenido-cultural.md`.
 - [x] Revisar todo el contenido del alcance del paso 5 contra las líneas rojas de `docs/00-guia-hackathon.md` (14/11). Informe con archivo y línea: [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md). Se revisaron textos y archivos exportados; no equivale a validación comunitaria.
 - [ ] Resolver las observaciones restantes de la auditoría con B y D: representación, cierre actual, cartografía, fauna, pronunciación y precisiones de mesa y stand. El lema ya está aprobado; los cambios aplicados y la regeneración de piezas se registran en el informe.

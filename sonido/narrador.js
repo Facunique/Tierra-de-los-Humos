@@ -30,12 +30,13 @@
     '.': 'playa', p: 'pradera', G: 'bosque de guindos', L: 'bosque de lengas', t: 'turbal', M: 'montaña',
   };
   const AGUA = '~-,kr';
-  // Cómo se nombra cada cosa del mapa, con su artículo.
+  // Cómo se nombra cada cosa del mapa, con su artículo. Si la especie todavía no está confirmada
+  // en docs/05 (🔍), se usa un nombre general: «un delfín», «un pato» (auditoría del paso 5, P19).
   const COSAS = {
     lena: 'leña', comida: 'comida', mejillones: 'mejillones', pescado: 'pescado', hongos: 'hongos de árbol', erizos: 'erizos', huevos: 'huevos',
     pirita: 'pirita', saber: 'un saber', choza: 'una choza', 'choza-conica': 'una choza', conchal: 'un conchal', 'guindo-grande': 'un guindo grande',
-    'ballena-varada': 'la ballena varada', 'lobo-marino': 'un lobo marino', cormoran: 'un cormorán', 'pato-vapor': 'un pato vapor',
-    pinguino: 'un pingüino', cauquen: 'un cauquén', gaviota: 'una gaviota', tonina: 'una tonina', ballena: 'una ballena',
+    'ballena-varada': 'la ballena varada', 'lobo-marino': 'un lobo marino', cormoran: 'un cormorán', 'pato-vapor': 'un pato',
+    pinguino: 'un pingüino', cauquen: 'un cauquén', gaviota: 'una gaviota', tonina: 'un delfín', ballena: 'una ballena',
   };
   const HORA = { dia: 'Es de día', tarde: 'Cae la tarde', noche: 'Es de noche' };
   const CLIMA = { calma: 'hay calma', viento: 'hay viento', lluvia: 'llueve', nieve: 'nieva' };

@@ -9,20 +9,21 @@
 
 ## 1. Qué estamos haciendo
 
-**El problema que elegimos:** los saberes de los pueblos fueguinos sobre la vida en el territorio (navegar los canales, recolectar, cuidar el fuego, adaptarse al clima) son poco conocidos por jóvenes y escuelas, y cuando aparecen suelen contarse en pasado, como si esos pueblos ya no existieran.
+**El problema que elegimos:** acercar a jóvenes y escuelas fuentes sobre los saberes y la vida en el territorio fueguino (navegar los canales, recolectar, cuidar el fuego, adaptarse al clima), reconociendo la continuidad de sus pueblos en el presente. El juego distingue las descripciones históricas de las prácticas actuales.
 
 **Respecto de la inscripción:** la idea que cargamos nombraba a los Selk'nam, Haush y Yagán. Para hacerlo bien y con consulta, el juego se centra en los **Yagán**; los Kawésqar quedan como extra y los Selk'nam para después de la hackatón.
 
-Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada partida es un viaje en canoa por los canales acompañando a una familia **Yagán**. El fuego es la vida: el clima lo gasta y el territorio lo sostiene. Si se apaga, lo aprendido pasa a la siguiente generación como **cartas de saber con fuente citada**.
+Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada partida es un viaje en canoa por los canales acompañando a una familia **yagán** ficticia. El fuego es la vida: el clima lo gasta y el territorio lo sostiene. Si se apaga, lo aprendido pasa a la siguiente generación como **cartas de saber con fuente citada**.
 
 ## 2. Qué hicimos esta semana
 
 ### Diseño y documentación
 - Concepto del juego ([`docs/01-concepto.md`](../docs/01-concepto.md)) y guía de la hackatón ([`docs/00-guia-hackathon.md`](../docs/00-guia-hackathon.md)).
 - Memoria de decisiones del equipo ([`equipo/memory.md`](memory.md)) y reparto de tareas con cronograma ([`equipo/tareas.md`](tareas.md)).
-- ✏️ Alcance del MVP (`docs/02-alcance-mvp.md`): todavía no está escrito.
+- **Alcance del MVP** (`docs/02-alcance-mvp.md`): propuesta de la Persona B del 14/11, en revisión en la rama `juego/sin-internet`. ✏️ Confirmar si ya se unió antes de entregar.
 
 ### Consulta y contenido cultural (Persona C)
+- **Paso 6 y nuevas cartas (14/11):** redactada la propuesta del cierre en [`docs/07-cierre-del-codice.md`](../docs/07-cierre-del-codice.md), con Paiakoala y páginas verificadas. Las nueve cartas priorizan ahora a Vargas Filgueira (2019); Cooper conserva la atribución de los detalles no documentados en esos pasajes. Se crean ocho cartas nuevas completas en `datos/saberes-propuestos.js`, pendientes de selección e integración con A y B. El catálogo activo sigue en nueve; no cambian reglas, números ni ilustraciones. El cierre y los nombres quedan pendientes de decisión final de C.
 - **Actualización posterior a la auditoría (14/11):** C aprobó «Lo aprendido se transmite» y pidió actualizar la guía docente. Se revisaron actividades y bibliografía, se completó la diapositiva de consulta y se regeneraron guía, reglas de mesa, cartel y pitch. El PDF de Vargas Filgueira (2019), consultado fuera del repositorio, permitió localizar agradecimientos (p. 4), protagonistas (pp. 8–9) y epílogo (pp. 85–86). Quedan 13 observaciones aplicadas, dos parciales y ocho pendientes. Se mantienen los permisos y preguntas abiertos; las páginas del libro no se presentan como nuevas respuestas de la entrevista.
 - **Auditoría de textos realizada (14/11, paso 5):** revisados cartas, sonido, mesa, las nueve actividades docentes, pitch, stand y README, incluidos sus archivos exportados. La primera pasada registró 23 observaciones y cuatro ajustes menores. Las correcciones posteriores están detalladas en [`auditoria-cultural-paso-5.md`](auditoria-cultural-paso-5.md); la regeneración del pitch reemplaza su carta de amarre anterior. No se cambian lógica ni números ni se da por validado el juego.
 - **Fuentes organizadas (14/11):** [`docs/03-contenido-cultural.md`](../docs/03-contenido-cultural.md) y la sección Fuentes del README reúnen publicaciones y referencias con páginas, separadas de la consulta. Las fichas incompletas y las obras todavía no consultadas conservan su 🔍. El registro de lugares está en [`docs/06-toponimia.md`](../docs/06-toponimia.md), con el criterio **Onashaga — Canal Beagle**.
@@ -62,6 +63,12 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 - **Luz real de Ushuaia:** el juego calcula, sin internet, dónde está el sol en el canal Beagle y empieza con esa luz y esa estación.
 - **Accesibilidad y difusión:** cartas leídas en voz alta, modo alto contraste, postal del viaje para compartir, versión de mesa para imprimir ([`mesa/`](../mesa/README.md)) y guía para docentes con una actividad por carta ([`escuelas/`](../escuelas/README.md)).
 - Logo, ícono y tipografía para baja visión (Atkinson Hyperlegible, licencia OFL), incluida para que funcione sin internet.
+- **13 y 14/11, conectado al juego:** el sonido sigue cada evento de la partida, con su subtítulo; un **narrador** cuenta el viaje en voz alta para jugar sin ver; la postal se arma con la partida. La Persona B los sumó al juego publicado.
+- **Motor más fluido en el celular:** de 29 a 41 cuadros por segundo en un celular simulado 4 veces más lento, sin cambios visibles.
+- **Pruebas:** `pruebas/de-punta-a-punta.cjs` juega partidas enteras tocando los botones en cinco pantallas (tres celulares, uno acostado y una computadora).
+- **Editor de saberes** ([`herramientas/editor-de-saberes.html`](../herramientas/editor-de-saberes.html)): escribir o corregir una carta sin programar, también a partir de un relato de la comunidad, solo con permiso.
+- **Stand:** la vidriera muestra partidas reales que se juegan solas, con cada saber y su fuente. Un grabador arma los clips del video y los subtítulos.
+- **Revisión cultural aplicada (14/11):** el cartel, la vidriera, el pitch y las reglas de mesa siguen las correcciones de la auditoría de C: fuente de cada dato, aviso de ficción y el alcance real de la consulta.
 
 ![Estilo Corteza: islas de papel, choza, conchal, pegatinas de leña y mejillones, y la canoa con su fuego](../docs/img/corteza-escena.jpg)
 
@@ -85,9 +92,9 @@ Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la
 
 ## 5. Próximos pasos (hasta la entrega del 18/11)
 
-- **Programación:** conectar el núcleo con la interfaz; herencia guardada en el navegador; códice; pulido y balance jugando con personas; versión sin internet para la demo. ✏️ A y B confirman.
+- **Programación:** ya están conectados el núcleo, la herencia y el códice. Falta: pulido y balance jugando con personas, la versión sin internet (rama `juego/sin-internet`) y cómo se juega el nomadismo que decidió C. ✏️ A y B confirman.
 - **Contenido (C):** aportar las fuentes de cada motivo de desplazamiento para acordar con A y B cómo se juega el nomadismo; revisar la grabación y resolver las consultas pendientes; completar las referencias y aprobaciones de cartas y territorio; resolver con B y D las observaciones de la auditoría de textos y actividades; proponer el cierre del códice. Las fuentes escritas y la consulta ya están documentadas por separado; las aprobaciones de las cartas siguen pendientes.
-- **Arte y sonido:** ajustar el arte con lo que diga la comunidad; integrar el sonido según el lugar en el juego; resolver las tres fuentes pendientes del territorio (leña, conchales y tonina); cotejo con el libro de Goodall.
+- **Arte y sonido:** el sonido según el lugar, el narrador y la postal ya están en el juego. Falta: el cierre «Hoy» con el texto de C; activar los rótulos del mapa con los nombres del libro de Vargas Filgueira cuando haya permiso; confirmar la especie de la tonina y de las aves (🔍) y cotejar con el libro de Goodall.
 - **Comunicación:** README completo con capturas del juego real, video de 3 minutos (17/11) y pitch de 5 minutos con ensayo.
 
 ## 6. Dificultades y pedidos a la mentoría
