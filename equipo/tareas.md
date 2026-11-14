@@ -62,7 +62,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Realizar la entrevista: 13/11/2026, 11:00, Museo del Fin del Mundo, Ushuaia. 🔍 Quedan pendientes el cotejo con la grabación y las respuestas a las preguntas abiertas de `equipo/comunicaciones.md`.
 - [ ] Escribirle a Mónica Alvarado, si se la puede contactar.
 - [x] Registrar la primera entrevista en `equipo/comunicaciones.md`, con fecha, síntesis, permisos y pendientes (13/11). Registrar los contactos siguientes sigue siendo una tarea continua.
-- [ ] Escribir `docs/03-contenido-cultural.md` con las fuentes verificadas (Gusinde, Chapman, Calderón y Zárraga, Cooper, museos, CADIC).
+- [x] Escribir `docs/03-contenido-cultural.md` con las referencias disponibles y sus páginas, separando fuentes escritas y consulta (14/11). Las obras y referencias todavía no verificadas conservan su 🔍.
 - [x] Definir el enfoque del viaje (13/11): **nomadismo**, con motivos combinados según clima, comida y ambiente; la ballena varada es uno de ellos. Decisión de Dani registrada en `memory.md` y `docs/01-concepto.md`.
 - [ ] Resolver los puntos marcados con 🔍 y revisar con A y B la traducción del nomadismo a objetivos y cierre de partida. Verificar por separado la fuente de cada motivo; las notas de Vargas Filgueira (2019) y las referencias de Cooper (1946) están registradas en `comunicaciones.md` y `docs/05-rigor-historico.md`.
 - [x] Cotejar documentalmente las 9 cartas de `datos/saberes.js`, su texto de juego, fuente y alt (13/11). Borradores corregidos y propuesta de carta de reservas en `equipo/revision-cultural-paso-3.md`.
@@ -74,7 +74,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [ ] Completar la fuente cartográfica y el permiso de uso en el juego; coordinar con D la implementación de los rótulos indicados en `docs/06-toponimia.md`.
 - [ ] Revisar las actividades de la guía para docentes (`escuelas/actividades.js`).
 - [ ] Redactar el cierre del códice, en presente, mencionando las comunidades vivas.
-- [ ] Armar la sección **Fuentes** del README (D dejó las que usó el arte).
+- [x] Completar la sección **Fuentes** del README (14/11): publicaciones, consulta y referencias pendientes, con enlace a `docs/03-contenido-cultural.md`.
 - [ ] Revisar todo el contenido contra las líneas rojas de `docs/00-guia-hackathon.md`.
 - [x] Completar la parte de consulta del avance del 14/11 (`equipo/avance-14-11.md`): entrevista y cotejo documental aportado, sin dar las cartas ni el juego por validados.
 
@@ -117,7 +117,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 ## Pendientes del repo
 
 - [ ] Escribir `docs/02-alcance-mvp.md` (cuántas etapas, cuántos peligros). Sin eso, A y B no tienen contra qué medir.
-- [ ] Escribir `docs/03-contenido-cultural.md` (Persona C).
+- [x] Escribir `docs/03-contenido-cultural.md` (Persona C, 14/11), con bibliografía, páginas, consulta y pendientes.
 - [x] Decidir el stack: JavaScript sin build (13/11).
 - [x] Decidir el estilo visual: Corteza (12/11).
 - [x] Asignar las letras a cada integrante (ver la tabla de arriba).

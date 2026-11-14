@@ -114,13 +114,23 @@ Trabajo interno del equipo:
 
 ## Fuentes
 
-✏️ *La lista completa la arma la Persona C en `docs/03-contenido-cultural.md`.* Fuentes ya usadas en el arte y en los borradores de cartas (el detalle, con página, está en [`docs/05-rigor-historico.md`](docs/05-rigor-historico.md)):
+Las referencias completas, sus páginas y los límites de cada uso están en [`docs/03-contenido-cultural.md`](docs/03-contenido-cultural.md). Los nombres de lugares se registran en [`docs/06-toponimia.md`](docs/06-toponimia.md), con el criterio **Onashaga — Canal Beagle**.
 
-- Cooper, J. M. (1946). «The Yahgan». En J. H. Steward (ed.), *Handbook of South American Indians*, vol. 1, pp. 81-106. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143.
-- Spears, J. R. (1895). *The Gold Diggings of Cape Horn*. Nueva York: Putnam.
-- Museo Marítimo de Ushuaia. *La canoa yagán* (reconstrucción de una canoa de corteza).
-- Multequina n.º 10 (IADIZA-CONICET), sobre los bosques de *Nothofagus* de Tierra del Fuego.
-- Goodall, R. N. P. (1978 o 1979, 3.ª ed.). *Tierra del Fuego*. Buenos Aires: Ediciones Shanamaiim. *(En proceso de cotejo; el año y la edición se confirman con la tapa del ejemplar.)*
+### Fuentes escritas
+
+- **Vargas Filgueira, Víctor (2019). *Mi sangre yagán (ahua saapa yagan)*.** Primera edición digital. Editora Cultural Tierra del Fuego. Notas de lectura aportadas para la investigación: ballena varada (pp. 16–17), corteza (pp. 23 y 31–32), mujeres remando (p. 33), enseñanza y decisiones compartidas (pp. 39 y 46), reservas de invierno (pp. 53–54), encendido del fuego (p. 66) y topónimos (notas de pp. 86–88). Páginas del visor del PDF de 90 páginas; el asistente no consultó el ejemplar completo.
+- **Cooper, J. M. (1946). «The Yahgan».** En J. H. Steward (ed.), *Handbook of South American Indians*, vol. 1: *The Marginal Tribes*, pp. 81–106. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143. Referencias registradas por el equipo: territorio y clima (pp. 81–82), alimentos (p. 84), viviendas (pp. 85–86), canoa y corteza (pp. 88–89), fuego (p. 91), desplazamientos (pp. 94–95), tareas (p. 96) y encuentros por varamientos (p. 99). Para el mapa también se utilizan pp. 107–108 de «The Ona», en el mismo volumen. La mención de Lothrop (1928), p. 32, es una cita indirecta mediante Cooper, p. 84.
+- **Bird, J. (1946). «The Archeology of Patagonia».** En el mismo *Handbook*, vol. 1, pp. 17–24. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143. Conchales del canal Beagle: pp. 20–21.
+- **Bird, J. (1946). «The Alacaluf».** En el mismo *Handbook*, vol. 1, pp. 55–79. Smithsonian Institution, Bureau of American Ethnology, Bulletin 143. Territorio Kawésqar: p. 55; recolección de leña entre los Kawésqar: p. 70. Esta última referencia no se atribuye como práctica yagán.
+- **Spears, J. R. (1895). *The Gold Diggings of Cape Horn*.** Nueva York: Putnam. Testimonio de época registrado por el equipo como referencia del arte: canoa y fogón (pp. 56–57 y 64), pesca (pp. 60–61) y turbales de la Isla de los Estados (p. 149).
+
+### Consulta a la comunidad
+
+**Víctor Vargas Filgueira, referente de la comunidad yagán:** entrevista presencial del **13/11/2026, a las 11:00**, en el Museo del Fin del Mundo, Ushuaia. Nombre y atribución fiel de su testimonio autorizados verbalmente, sin restricción de medios. El permiso para citas textuales y las preguntas sobre representación, nombres y alcance de la participación comunitaria siguen abiertos en [`equipo/comunicaciones.md`](equipo/comunicaciones.md). La entrevista se registra por separado del libro y no se presenta como validación comunitaria de todo el juego.
+
+### Referencias pendientes
+
+🔍 Goodall, los pasajes de museos y la referencia botánica de Multequina requieren completar o verificar edición, año y localización. Gusinde, Chapman, Calderón y Zárraga, Lothrop, Orquera y Piana, y Bridges conservan sus pendientes de consulta o ficha bibliográfica en [`docs/03-contenido-cultural.md`](docs/03-contenido-cultural.md#referencias-pendientes-de-completar-o-consultar). También faltan fuentes de especies, cartografía y páginas del epílogo de Vargas Filgueira. Estas referencias no se dan por verificadas al incluirlas en la lista.
 
 ## Recursos de terceros
 
@@ -135,6 +145,7 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 Las bases piden declararlo (cláusula 7.4).
 
+- **Fuentes culturales (14/11, paso 4):** a pedido de la Persona C, Codex (OpenAI) escribió `docs/03-contenido-cultural.md` y la sección Fuentes de este README con las referencias del repositorio y las notas de lectura compartidas. Separó publicaciones y entrevista, indicó las páginas disponibles y mantuvo con 🔍 las referencias incompletas. Actualizó tareas, memoria y avance. No agregó datos culturales de memoria ni modificó código o números del juego.
 - **Orden de los nombres de lugares (14/11):** la Persona C eligió **Onashaga — Canal Beagle**, con el nombre utilizado por Víctor primero. Codex (OpenAI) registró la decisión en memoria, concepto, revisión y tareas, y dejó los rótulos propuestos para D en `docs/06-toponimia.md`. La implementación del mapa y las verificaciones pendientes conservan su estado; no se modificaron código ni reglas.
 - **Nombres de lugares (14/11):** a pedido de la Persona C, Codex (OpenAI) organizó las referencias compartidas de Vargas Filgueira (2019) en `docs/06-toponimia.md`, conservando grafías, notas, páginas y dudas. Actualizó la revisión y los pendientes. La presentación de los nombres, la verificación cartográfica y su incorporación al juego siguen pendientes; no cambió código, coordenadas ni reglas.
 - **Cambio de fechas (14/11):** a pedido de Facu (Persona B), Claude Code leyó los mails de la organización del 9/11 con el cronograma definitivo y actualizó las fechas en todo el repositorio (avance el 16/11, entrega el 18/11, jurado el 19/11 y cierre presencial el 20/11). Corrió el cronograma de `equipo/tareas.md` para que cada persona revise su fila y volvió a exportar el PDF de la guía para docentes. Con lo que Facu copió de la plataforma de la hackatón, anotó cómo se cargan las entregas y quién es la persona referente.
