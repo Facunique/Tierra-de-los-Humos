@@ -1,6 +1,6 @@
 # Comunicación: video, pitch, avance y demo
 
-> Plan de la Persona D para todo lo que el jurado **ve y escucha**: el avance del 14/11, el README, el video de 3 minutos, el pitch de 5 minutos y la demo del 19/11. Versión 1 (12/11/2026).
+> Plan de la Persona D para todo lo que el jurado **ve y escucha**: el avance del 16/11, el README, el video de 3 minutos, el pitch de 5 minutos y la demo del 20/11. Versión 1 (12/11/2026).
 > Criterio que guía todo: **Comunicación y pitch** vale 10 puntos, pero el video y el pitch son lo primero que el jurado ve de la **pertinencia** (25) y del **rigor** (20).
 
 ## El mensaje en una línea
@@ -19,12 +19,13 @@ Tres ideas que se repiten en el video, el pitch y el README:
 |---|---|---|
 | 12/11 | Propuestas de estilo, paleta, sprites, sonido, logo. Este plan. | D |
 | 13/11 | Votar el estilo. Ajustes. | Equipo |
-| **14/11** | **Primer avance documentado** (borrador en [`avance-14-11.md`](avance-14-11.md)). | D escribe; A, B y C completan su parte |
 | 15/11 | README completo (ver checklist abajo). Capturas del juego. | D, con B (Tecnologías) y C (Fuentes) |
-| 16/11 mañana | Grabar el video. | D graba, A juega, todos ponen la voz |
-| 16/11 tarde | Completar la presentación (ya armada en [`presentacion/`](../presentacion/index.html)) con capturas reales y **ensayar el pitch dos veces** con reloj. | Equipo |
-| 17/11 | Ensayo del pitch de la organización. **Entrega antes de las 20:00.** | Equipo; la persona referente confirma la entrega |
-| 19/11 | Demo en Fábrica de Talento (mínimo 2 integrantes). | Equipo |
+| **16/11, hasta las 23:00** | **Primer avance documentado** (borrador en [`avance-14-11.md`](avance-14-11.md)). | D escribe; A, B y C completan su parte |
+| 17/11 mañana | Grabar el video. | D graba, A juega, todos ponen la voz |
+| 17/11 tarde | Completar la presentación (ya armada en [`presentacion/`](../presentacion/index.html)) con capturas reales y **ensayar el pitch dos veces** con reloj. | Equipo |
+| **18/11, hasta las 21:00** | Ensayo de las presentaciones de la organización. **Entrega final.** | Equipo; la persona referente confirma la entrega |
+| 19/11 | Evaluación técnica del jurado. | — |
+| **20/11 (viernes), 15:00 a 19:00** | Demo, presentación final y premiación en Fábrica de Talento, Av. Maipú 1255 (mínimo 2 integrantes). | Equipo |
 
 ---
 
@@ -71,7 +72,7 @@ Todo el equipo habla: es parte del criterio. Cada bloque tiene una persona y una
 
 **Diapositivas:** ya están armadas en [`presentacion/index.html`](../presentacion/index.html), en estilo Corteza y sin internet. Con <kbd>←</kbd> <kbd>→</kbd> se pasa, con <kbd>N</kbd> se ven las notas del orador y con <kbd>F</kbd> se pone pantalla completa. El respaldo está en `presentacion/pitch.pdf`. Faltan los huecos marcados en amarillo: consulta, enlace y nombres. Se arman el 16/11 con capturas reales del juego. Pueden hacerse en HTML para que anden sin internet, con el mismo arte.
 
-**Ensayo:** dos pasadas completas con reloj el 16/11, una el 17/11 en el ensayo oficial. Si un bloque se pasa de tiempo, se recorta texto, no la demo.
+**Ensayo:** dos pasadas completas con reloj el 17/11, una el 18/11 en el ensayo oficial. Si un bloque se pasa de tiempo, se recorta texto, no la demo.
 
 **Preguntas probables del jurado (y quién responde):**
 
@@ -85,7 +86,7 @@ Todo el equipo habla: es parte del criterio. Cada bloque tiene una persona y una
 | ¿Cuánto hizo la IA? | Quien sea referente: lo declarado en el README (cláusula 7.4). El arte, el sonido y los textos los revisó y decidió el equipo. |
 | ¿Cómo sigue después de la hackatón? | D |
 
-## Demo del 19/11 (Fábrica de Talento)
+## Demo del 20/11, de 15:00 a 19:00 (Fábrica de Talento, Av. Maipú 1255)
 
 Checklist para llevar:
 
@@ -118,8 +119,8 @@ Checklist de lo que piden las bases, con quién lo escribe:
 
 Lo que coordina con la organización, sea cual sea su rol:
 
-- [ ] Confirmar el formato del avance del 14/11 y dónde se entrega.
+- [ ] Confirmar el formato del avance del 16/11 y dónde se entrega (¿en la plataforma de la hackatón, sección *Mi equipo*?).
 - [ ] Preguntar el formato del video (dónde se sube) y de la presentación.
 - [ ] Preguntar si en Fábrica de Talento hay proyector, HDMI, internet y enchufes.
-- [ ] Confirmar horarios del ensayo del 17/11 y de la demo del 19/11, y quiénes van.
+- [ ] Confirmar el horario del ensayo del 18/11 y quiénes van a la demo del 20/11 (15:00 a 19:00).
 - [ ] Confirmar la asistencia al taller del eje y los 2 encuentros con la mentoría (obligatorios). Pedirle a la mentoría que nos conecte con la comunidad o con un museo si la consulta se demora.

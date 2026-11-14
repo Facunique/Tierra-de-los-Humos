@@ -125,4 +125,4 @@ Nada de esto está hecho. Son ideas para charlar en el grupo.
 
 - **Dónde se guardan los datos del territorio.** Todo lo que puede cambiar con la investigación (qué hay en el mapa, dónde aparece, qué hace, de qué fuente sale y el destino) quedó en unos archivos aparte, que se pueden editar sin programar. Hoy están en la carpeta del motor del juego. Se puede dejar así o pasarlos a la carpeta de datos, junto con las cartas.
 
-- **El alcance del juego.** Falta escribir en un documento qué entra sí o sí para el 17/11 y qué se deja afuera si no llega el tiempo: cuántas partes tiene el viaje, qué peligros hay y qué se recorta primero. Las tareas del equipo ya lo marcan como pendiente, porque sin eso no hay contra qué medir si el juego está terminado.
+- **El alcance del juego.** Falta escribir en un documento qué entra sí o sí para el 18/11 y qué se deja afuera si no llega el tiempo: cuántas partes tiene el viaje, qué peligros hay y qué se recorta primero. Las tareas del equipo ya lo marcan como pendiente, porque sin eso no hay contra qué medir si el juego está terminado.

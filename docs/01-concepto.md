@@ -14,7 +14,7 @@ El nombre viene del primer nombre que, según la tradición, los navegantes euro
 
 | Prioridad | Pueblo | Estado |
 |---|---|---|
-| 1 | **Yagán** | Entra en el MVP. Es el que juega en la demo del 19/11. |
+| 1 | **Yagán** | Entra en el MVP. Es el que juega en la demo del 20/11. |
 | 2 | **Kawésqar** | Extra, si llegamos. Comparte la vida en canoa, así que reutiliza casi todos los sistemas. |
 | Futuro | Selk'nam | Fuera de la hackatón. Pide otro tipo de mapa (a pie, estepa y bosque). |
 | No | Haush | No se incluye: hay muy poca documentación para sostenerlo con rigor. |

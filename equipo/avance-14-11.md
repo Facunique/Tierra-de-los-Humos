@@ -1,6 +1,6 @@
-# Primer avance documentado · 14/11/2026
+# Primer avance documentado · entrega 16/11/2026, hasta las 23:00
 
-> **Borrador** preparado por la Persona D el 12/11 y puesto al día el 13/11 con lo que hay en el repositorio. Cada persona revisa su parte y completa lo marcado con ✏️ el 14/11 antes de entregar. Lo que no esté hecho se dice tal cual: mostrar el estado real suma más que inflarlo.
+> **Borrador** preparado por la Persona D el 12/11 y puesto al día el 13/11 con lo que hay en el repositorio. Cada persona revisa su parte y completa lo marcado con ✏️ antes de entregar (16/11, 23:00; antes era el 14/11). El archivo conserva su nombre para no romper enlaces. Lo que no esté hecho se dice tal cual: mostrar el estado real suma más que inflarlo.
 
 **Equipo:** Tierra de los Humos · **Eje:** 04, Memoria, Cultura e Innovación Comunitaria
 **Repositorio:** [github.com/Facunique/Tierra-de-los-Humos](https://github.com/Facunique/Tierra-de-los-Humos) · **En línea:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/)
@@ -74,14 +74,14 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 
 ## 4. Uso de inteligencia artificial
 
-Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la IA, a pedido de quién y quién decidió. ✏️ Revisar que esté al día el 14/11.
+Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la IA, a pedido de quién y quién decidió. ✏️ Revisar que esté al día antes de entregar.
 
-## 5. Próximos pasos (15 al 17/11)
+## 5. Próximos pasos (hasta la entrega del 18/11)
 
 - **Programación:** conectar el núcleo con la interfaz; herencia guardada en el navegador; códice; pulido y balance jugando con personas; versión sin internet para la demo. ✏️ A y B confirman.
 - **Contenido (C):** aportar las fuentes de cada motivo de desplazamiento para acordar con A y B cómo se juega el nomadismo; cotejar la grabación y resolver las consultas pendientes; revisar las nueve cartas, el territorio y las actividades docentes; documentar fuentes escritas y consulta por separado; proponer el cierre del códice y realizar la revisión cultural final. Las aprobaciones de las cartas siguen pendientes.
 - **Arte y sonido:** ajustar el arte con lo que diga la comunidad; integrar el sonido según el lugar en el juego; resolver las tres fuentes pendientes del territorio (leña, conchales y tonina); cotejo con el libro de Goodall.
-- **Comunicación:** README completo con capturas del juego real, video de 3 minutos (16/11) y pitch de 5 minutos con ensayo.
+- **Comunicación:** README completo con capturas del juego real, video de 3 minutos (17/11) y pitch de 5 minutos con ensayo.
 
 ## 6. Dificultades y pedidos a la mentoría
 

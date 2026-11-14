@@ -4,7 +4,7 @@
 
 Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de Tierra del Fuego. Lo desarrolla el equipo **Tierra de los Humos** para la hackatón [SoberaníaTech 2026](https://soberaniatech.com.ar/), organizada por la Agencia de Innovación de Tierra del Fuego.
 
-> 🚧 **En desarrollo** (9 al 17 de noviembre de 2026). Ya están el estilo visual, el motor de dibujo, el sonido y una maqueta navegable de todas las pantallas; el código del juego se suma durante la hackatón.
+> 🚧 **En desarrollo** (9 al 18 de noviembre de 2026). Ya están el estilo visual, el motor de dibujo, el sonido y una maqueta navegable de todas las pantallas; el código del juego se suma durante la hackatón.
 
 **Jugalo:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/) (el viaje completo, en el celular o en la compu; también abre con doble clic en `index.html`, sin internet) · **Video:** ✏️ *[enlace]* · **Presentación:** [`presentacion/`](presentacion/index.html) ([PDF](presentacion/pitch.pdf))
 
@@ -39,7 +39,7 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 |---|---|---|
 | ![El viaje: la canoa con su fuego rema por el canal; en la playa hay una choza, leña y un saber como pegatinas; a la derecha, humo](equipo/video/04-viaje.jpg) | ![Carta «Piedras de fuego» con su dato, su recurso de juego y la fuente con página](equipo/video/05-carta.jpg) | ![Pantalla «El viaje termina acá»: lo aprendido pasa a la siguiente generación](equipo/video/06-fin.jpg) |
 
-*Capturas de la maqueta de pantallas. Se reemplazan por capturas del juego el 16/11.*
+*Capturas de la maqueta de pantallas. Se reemplazan por capturas del juego antes del avance del 16/11.*
 
 ## Documentación
 
@@ -72,7 +72,7 @@ Trabajo interno del equipo:
 |---|---|
 | [Memoria del proyecto](equipo/memory.md) | Decisiones tomadas, estado actual, pendientes y glosario |
 | [Comunicaciones con comunidades](equipo/comunicaciones.md) | Registro de la consulta a comunidades y personas, con permisos y correcciones |
-| [Comunicación](equipo/comunicacion.md) | Plan del video, el pitch, el avance del 14/11 y la demo del 19/11 |
+| [Comunicación](equipo/comunicacion.md) | Plan del video, el pitch, el avance del 16/11 y la demo del 20/11 |
 | [Storyboard del video](equipo/video/README.md) | Un cuadro por tramo, con la voz y el sonido |
 | [AGENTS.md](AGENTS.md) | Reglas de trabajo para asistentes de IA (y para el equipo) |
 
@@ -135,6 +135,7 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 Las bases piden declararlo (cláusula 7.4).
 
+- **Cambio de fechas (14/11):** a pedido de Facu (Persona B), Claude Code leyó los mails de la organización del 9/11 con el cronograma definitivo y actualizó las fechas en todo el repositorio (avance el 16/11, entrega el 18/11, jurado el 19/11 y cierre presencial el 20/11). Corrió el cronograma de `equipo/tareas.md` para que cada persona revise su fila y volvió a exportar el PDF de la guía para docentes.
 - **Enfoque del viaje (13/11, paso 2 en curso):** a pedido de Dani (Persona C), Codex (OpenAI) documentó su decisión de usar el nomadismo como enfoque del viaje, con motivos que combinan clima, comida y ambiente, y dejó una propuesta de coordinación para A y B en la memoria. Las referencias se toman de las notas aportadas por Dani. No se modificaron código ni números del juego; los objetivos, el cierre de partida y las restantes consultas siguen pendientes.
 - **Registro de la consulta cultural (13/11, paso 1):** a pedido de Dani (Persona C), Codex (OpenAI) organizó sus notas de la entrevista a Víctor Vargas Filgueira y su cotejo de *Mi sangre yagán* (2019), completó el registro y la parte de consulta del avance del 14/11, y actualizó tareas y memoria. Dani confirmó fecha, lugar, edición y permiso de atribución. El asistente no cotejó el libro completo ni la grabación; las dudas quedan marcadas con 🔍. Las decisiones culturales y la aprobación de las cartas siguen a cargo de Dani.
 - **Claude (Anthropic), a través de Claude Code:** se usó para resumir las bases de la hackatón, proponer un plan de trabajo y armar la estructura inicial de este repositorio y de su documentación. El equipo revisa y decide todo el contenido.
