@@ -56,7 +56,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Correr `node pruebas/de-punta-a-punta.cjs` con el juego (14/11): pasa en las cinco pantallas, dos partidas enteras en cada una. Resultado en el PR 16.
 - [x] Aplicar en el juego las correcciones de C de la auditoría del paso 5 (14/11): lema en la ayuda (P01), cierre «Hoy» general (P03) y aviso de voz automática (P20). El cierre usa el mismo texto provisorio que la maqueta de D (PR 17); el definitivo lo redacta C.
 - [x] El juego cuenta el motivo del viaje al empezar (14/11, PR 20): carta «Por qué viajan» con el dato y la fuente del destino. Es la parte de B del nomadismo en chico. Con el PR 22 de A, el núcleo ya elige el destino según la estación.
-- [x] El aviso del clima y el costo de acampar en el juego (14/11, en revisión): texto del aviso, ficha «Viene lluvia» en el HUD, sonido con subtítulo, narrador, y la ayuda y el subtítulo de acampar dicen que cuidar el fuego toda la noche gasta. Remar tocando lejos se frena si se ve venir viento o lluvia.
+- [x] El aviso del clima y el costo de acampar en el juego (14/11, PR 25): texto del aviso, ficha «Viene lluvia» en el HUD, sonido con subtítulo, narrador, y la ayuda y el subtítulo de acampar dicen que cuidar el fuego toda la noche gasta. Remar tocando lejos se frena si se ve venir viento o lluvia.
 - [ ] Completar la parte de programación del avance (`equipo/avance-14-11.md`), con A, antes del 16/11 a las 23:00. La parte de B ya está (PR 19); faltan los ✏️ de A.
 
 ## Persona C: Investigación cultural y consulta (Dani)
