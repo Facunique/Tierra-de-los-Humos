@@ -107,6 +107,7 @@
 
 - **Integrantes para el README:** los roles ya están (ver *Equipo*). La persona referente ante la organización es **Facu** (Persona B). Falta decidir qué nombres publicar (sin mails ni teléfonos).
 - **Qué módulos de la Persona D entran al juego final** (luz real, sonido por lugar, voz, postal, alto contraste). La propuesta es sumarlos todos: ya andan en la maqueta y no cambian el diseño. Lo deciden A y B según el tiempo.
+- **Uso de IA en el README, para D (aviso del 15/11, Persona B):** falta la entrada de la grabación del video desde el juego real (`equipo/video/grabar.cjs`, commit `c2e36c6` del 14/11). Como es aporte de D, la suma D en la sección *Uso de inteligencia artificial*.
 - **Ajustes de la guía para docentes** (`escuelas/`): C revisó las nueve actividades y registró propuestas en la auditoría del paso 5. Faltan aplicar los cambios acordados con D, regenerar el PDF y, si se puede, recibir una revisión docente.
 
 ### Coordinación para B y D: observaciones de la auditoría cultural

@@ -1,6 +1,6 @@
 # Primer avance documentado · entrega 16/11/2026, hasta las 23:00
 
-> **Borrador** preparado por la Persona D el 12/11 y puesto al día el 13/11 con lo que hay en el repositorio. Cada persona revisa su parte y completa lo marcado con ✏️ antes de entregar (16/11, 23:00; antes era el 14/11). El archivo conserva su nombre para no romper enlaces. Lo que no esté hecho se dice tal cual: mostrar el estado real suma más que inflarlo.
+> **Estado al 15/11/2026.** Lo preparó la Persona D el 12/11 y cada integrante lo puso al día con lo que hay en el repositorio. El archivo conserva su nombre para no romper enlaces. Lo que no está hecho se dice tal cual: mostrar el estado real suma más que inflarlo.
 
 **Equipo:** Tierra de los Humos · **Eje:** 04, Memoria, Cultura e Innovación Comunitaria
 **Repositorio:** [github.com/Facunique/Tierra-de-los-Humos](https://github.com/Facunique/Tierra-de-los-Humos) · **En línea:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/)
@@ -20,7 +20,7 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 ### Diseño y documentación
 - Concepto del juego ([`docs/01-concepto.md`](../docs/01-concepto.md)) y guía de la hackatón ([`docs/00-guia-hackathon.md`](../docs/00-guia-hackathon.md)).
 - Memoria de decisiones del equipo ([`equipo/memory.md`](memory.md)) y reparto de tareas con cronograma ([`equipo/tareas.md`](tareas.md)).
-- **Alcance del MVP** (`docs/02-alcance-mvp.md`): propuesta de la Persona B del 14/11, ya en `main`. ✏️ Falta que A la confirme.
+- **Alcance del MVP** (`docs/02-alcance-mvp.md`): propuesta de la Persona B del 14/11, ya en `main`. La Persona A implementó en el PR 22 la parte del núcleo: el viaje elige su motivo, acampar gasta y el clima avisa antes. Siguen abiertos los puntos que el alcance marca para C y D: confirmar cada motivo, el cierre de la partida y la versión de mesa.
 
 ### Consulta y contenido cultural (Persona C)
 - **Paso 6 y nuevas cartas (14/11):** redactada la propuesta del cierre en [`docs/07-cierre-del-codice.md`](../docs/07-cierre-del-codice.md), con Paiakoala y páginas verificadas. Las nueve cartas priorizan ahora a Vargas Filgueira (2019); Cooper conserva la atribución de los detalles no documentados en esos pasajes. Se crean ocho cartas nuevas completas en `datos/saberes-propuestos.js`, pendientes de selección e integración con A y B. El catálogo activo sigue en nueve; no cambian reglas, números ni ilustraciones. El cierre y los nombres quedan pendientes de decisión final de C.
@@ -101,11 +101,11 @@ Un roguelike web por turnos sobre los saberes de los pueblos fueguinos. Cada par
 
 ## 4. Uso de inteligencia artificial
 
-Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la IA, a pedido de quién y quién decidió. ✏️ Revisar que esté al día antes de entregar.
+Declarado en el README (cláusula 7.4), con una entrada por aporte: qué hizo la IA, a pedido de quién y quién decidió. Se usaron **Claude Code** (Anthropic) y **Codex** (OpenAI) para código, documentación, arte por código, revisión de fuentes y auditoría de textos. Las decisiones de diseño, las fuentes y la consulta con la comunidad son del equipo: la IA propone y el equipo revisa y decide.
 
 ## 5. Próximos pasos (hasta la entrega del 18/11)
 
-- **Programación:** ya están conectados el núcleo, la herencia y el códice. Ya están la versión sin internet, el motivo del viaje según la estación y el aviso del clima. Falta: pulido y balance jugando con personas. ✏️ A y B confirman.
+- **Programación:** ya están conectados el núcleo, la herencia y el códice. Ya están la versión sin internet, el motivo del viaje según la estación y el aviso del clima. Falta: pulido y balance jugando con personas. El detalle está en las dudas técnicas de A y B (sección 6).
 - **Contenido (C):** aportar las fuentes de cada motivo de desplazamiento para acordar con A y B cómo se juega el nomadismo; revisar la grabación y resolver las consultas pendientes; completar las referencias y aprobaciones de cartas y territorio; resolver con B y D las observaciones de la auditoría de textos y actividades; proponer el cierre del códice. Las fuentes escritas y la consulta ya están documentadas por separado; las aprobaciones de las cartas siguen pendientes.
 - **Arte y sonido:** el sonido según el lugar, el narrador y la postal ya están en el juego. Falta: el cierre «Hoy» con el texto de C; activar los rótulos del mapa con los nombres del libro de Vargas Filgueira cuando haya permiso; confirmar la especie de la tonina y de las aves (🔍) y cotejar con el libro de Goodall.
 - **Comunicación:** README completo con capturas del juego real, video de 3 minutos (17/11) y pitch de 5 minutos con ensayo.
