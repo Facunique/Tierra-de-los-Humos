@@ -201,12 +201,10 @@ Equipo **Tierra de los Humos**:
 
 | Integrante | Rol |
 |---|---|
-| ✏️ *[nombre]* | Programación núcleo: motor, mapa, fuego, ciclo de partida |
-| ✏️ *[nombre]* | Programación de interfaz, contenido y publicación |
-| ✏️ *[nombre]* | Investigación cultural y consulta con comunidades |
-| ✏️ *[nombre]* | Arte, sonido y comunicación |
-
-✏️ *Indicar quién es la persona referente.*
+| Matías Sarasola Araque | Programación núcleo: motor, mapa, fuego, ciclo de partida |
+| Facundo Zamora (persona referente) | Programación de interfaz, contenido y publicación |
+| Daniela Marchisoney | Investigación cultural y consulta con comunidades |
+| Ignacio Sarasola Araque | Arte, sonido y comunicación |
 
 ## Licencias
 
