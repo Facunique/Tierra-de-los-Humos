@@ -1,6 +1,6 @@
 # Minijuegos
 
-Antes de juntar algo, avivar el fuego o amarrar la canoa, se juega un momento corto. Si sale bien, la acción se hace igual que siempre: el núcleo no cambia, con los mismos números y las mismas reglas. Si no sale, se puede probar de nuevo o volver al viaje, y no se pierde nada.
+Antes de juntar algo, avivar el fuego o amarrar la canoa, se juega un momento corto. Si sale bien, la acción se hace igual que siempre: el núcleo no cambia, con los mismos números y las mismas reglas. Si no sale (se acaban los intentos o el tiempo, o se vuelve después de errar), se pierde el turno: se les fue el tiempo y el fuego baja como al remar, sin moverse (`{ tipo: 'demora' }` del núcleo). Volver al viaje antes de probar no cuesta nada.
 
 | Acción | Minijuego | Dónde |
 |---|---|---|
@@ -36,6 +36,6 @@ if (TDH_MINIJUEGOS.cual('juntar', 'mejillones')) {
 
 El gancho está en `juego/interfaz/juego.js` (función `minijuego`). Para sumar un minijuego, copiá una entrada de `JUEGOS` en `minijuegos.js`. `node --test` revisa que tenga textos, escena, dibujo y fuente, y que no use anzuelos, redes ni escenas de caza (`pruebas/minijuegos.test.cjs`). `pruebas/de-punta-a-punta.cjs` los juega tocando, como una persona.
 
-**Por decidir (Persona A):** hoy fallar no cuesta nada. Si se quiere que cueste, por ejemplo una casilla de fuego, se decide con los números del núcleo.
+**Fallar cuesta (18/11, decisión del equipo):** si no sale, el núcleo hace `{ tipo: 'demora' }`: gasta lo mismo que una remada (más con lluvia o de noche) y pasa el tiempo, pero la canoa no se mueve. El número lo puede ajustar A en `demora()` de `juego/nucleo/partida.js`.
 
 Licencia: MIT (el código); CC BY-SA 4.0 (los textos).

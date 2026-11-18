@@ -158,10 +158,12 @@
   // ── El viaje ──────────────────────────────────────────────────────────────
   let partida = null, motor = null, vista = null, medida = null;
   let generacion = 1, cola = [], ocupado = false, ultimo = null;
+  let diario = [];   // todos los eventos del viaje, para la crónica del final (cronica.js)
 
   function nuevoViaje() {
     const linaje = herencia.leer(PUEBLO);
     generacion = linaje.generacion;
+    diario = [];
     const l = luz();
     const semilla = params.has('semilla') ? Number(params.get('semilla')) + generacion - 1 : Math.floor(Math.random() * 1e9);
     partida = TDH_PARTIDA.nueva({
@@ -284,12 +286,13 @@
   function texto(ev) {
     switch (ev.tipo) {
       case 'fuego': {
-        if (ev.motivo !== 'remar') return '';
+        if (ev.motivo !== 'remar' && ev.motivo !== 'demora') return '';
         if (ev.despues === 0) return 'El fuego se apagó.';
         const pesa = (ev.causas || []).filter((c) => CAUSA[c]).map((c) => CAUSA[c]);
         return 'El fuego baja a ' + ev.despues + (pesa.length ? ': ' + pesa.join(' y ') + ' lo gasta' + (pesa.length > 1 ? 'n' : '') + ' más.' : '.');
       }
       case 'avivo': return 'El fuego se aviva.';
+      case 'demora': return 'No salió: se les fue el tiempo.';
       case 'junto': return 'Juntaste ' + ev.nombre + '.';
       case 'clima': return { calma: 'El tiempo se calma.', viento: 'Se levanta viento.', lluvia: 'Empieza a llover.' }[ev.clima] || '';
       // El aviso llega un paso antes del cambio: da tiempo de decidir si acampar o seguir.
@@ -313,7 +316,8 @@
     }
   }
   // Antes de juntar, avivar o amarrar, un minijuego corto (minijuegos/minijuegos.js, de la Persona D).
-  // Si sale bien, la acción se hace igual que siempre; si la persona vuelve al viaje, no se hace.
+  // Si sale bien, la acción se hace igual que siempre; si la persona vuelve al viaje sin probar, no se hace.
+  // Si no sale ('fallo'), se pierde el turno: el núcleo hace { tipo: 'demora' } y el fuego baja (18/11).
   // Con el narrador encendido no hay minijuegos: son para ver.
   async function minijuego(accion) {
     const MJ = window.TDH_MINIJUEGOS, p = partida.puede();
@@ -326,12 +330,17 @@
   }
   async function hacer(accion) {
     if (ocupado || enTransicion || actual !== 'viaje' || !partida || partida.terminada || TDH_CARTA.abierta()) return false;
-    if (accion.tipo !== 'remar' && !(await minijuego(accion))) return false;
+    if (accion.tipo !== 'remar') {
+      const salio = await minijuego(accion);
+      if (salio === 'fallo') accion = { tipo: 'demora' };
+      else if (!salio) return false;
+    }
     if (!partida || partida.terminada || actual !== 'viaje') return false;
     // Lo que cambió (leña, comida, pirita, fuego) sube un momento sobre la canoa (motor Corteza, D).
     const foto = () => Object.assign({ fuego: partida.estado.canoa.fuego }, partida.estado.recursos);
     const antes = foto();
     const eventos = partida.hacer(accion);
+    diario.push(...eventos);
     if (eventos.length && motor && motor.flotar && CZ.cambios) motor.flotar(CZ.cambios(antes, foto()));
     if (!eventos.length) { if (accion.tipo === 'remar') anunciar('La canoa solo va por el agua.'); return false; }
     const c = partida.estado.canoa;
@@ -418,9 +427,12 @@
     const mayus = (s) => s.charAt(0).toUpperCase() + s.slice(1);
     $('fin-sub').textContent = ev.gano ? 'Llegaron con el fuego encendido' : 'El fuego se apagó';
     $('t-fin').textContent = ev.gano ? mayus(e.destino.nombre) : 'El viaje termina acá';
-    $('fin-texto').textContent = ev.gano
-      ? 'Llegaron a ' + e.destino.nombre + ' después de ' + e.pasos + ' casillas.'
-      : 'El fuego se apagó ' + (APAGADO[e.causa] || '') + ', después de ' + e.pasos + ' casillas. Pero lo aprendido no se pierde.';
+    // La crónica cuenta lo que pasó en este viaje (juego/interfaz/cronica.js). Sin ella, el texto corto de antes.
+    $('fin-texto').textContent = window.TDH_CRONICA
+      ? TDH_CRONICA.armar(diario, e, { apagado: APAGADO[e.causa] })
+      : ev.gano
+        ? 'Llegaron a ' + e.destino.nombre + ' después de ' + e.pasos + ' casillas.'
+        : 'El fuego se apagó ' + (APAGADO[e.causa] || '') + ', después de ' + e.pasos + ' casillas. Pero lo aprendido no se pierde.';
     // Al llegar, el dato del destino con su fuente (juego/nucleo/territorio/destinos.js).
     $('fin-dato').hidden = !(ev.gano && d);
     if (ev.gano && d) $('fin-dato').textContent = d.dato + ' (' + d.fuente + ')';

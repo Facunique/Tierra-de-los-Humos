@@ -307,3 +307,18 @@ for (const destino of T_PUEBLOS.PUEBLOS.yagan.destinos) {
     assert.ok(directo.tasa <= 0.1, `yendo derecho sin juntar se llega el ${Math.round(directo.tasa * 100)} %: no hace falta el territorio`);
   });
 }
+
+test('demora: un minijuego que no salió gasta como remar, pasa el tiempo y no mueve la canoa', () => {
+  const p = fija();
+  const { x, y } = p.estado.canoa;
+  const antes = p.estado.energia;
+  const ev = p.hacer({ tipo: 'demora' });
+  assert.equal(ev[0].tipo, 'demora');
+  assert.deepEqual([p.estado.canoa.x, p.estado.canoa.y], [x, y], 'la canoa no se mueve');
+  assert.ok(p.estado.energia < antes, 'el fuego gasta');
+  assert.equal(p.estado.pasos, 0, 'no cuenta como casilla remada');
+  // Si se repite, el fuego se apaga y el viaje termina.
+  let fin = null;
+  for (let i = 0; i < 40 && !fin; i++) fin = p.hacer({ tipo: 'demora' }).find((e) => e.tipo === 'fin') || null;
+  assert.ok(fin && fin.gano === false, 'demorarse mucho apaga el fuego');
+});

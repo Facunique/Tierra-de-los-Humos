@@ -37,6 +37,8 @@
  *     { tipo: 'juntar' }     (+)  lo que esté al lado de la canoa. Si no hay nada, o ya no entra: [].
  *     { tipo: 'avivar' }     (+)  gasta 1 leña. Sin leña o con el fuego lleno: [].
  *     { tipo: 'amarrar' }    (+)  en el cachiyuyo, al lado de una playa: pasan la noche.
+ *     { tipo: 'demora' }     (+)  un minijuego no salió: pasa el tiempo y el fuego gasta como al remar,
+ *                                 pero la canoa no se mueve. Evento: { tipo: 'demora' }. (18/11, B)
  *
  *   Eventos:
  *     (+) { tipo: 'remo', x, y }      la canoa avanzó. Siempre es el primero al remar: así una
@@ -317,6 +319,21 @@
       return eventos;
     }
 
+    /** Un minijuego no salió (interfaz): se les fue el tiempo. Gasta como remar, sin moverse. */
+    function demora() {
+      const eventos = [{ tipo: 'demora' }];
+      const causas = [];
+      let gasto = R.GASTO_REMAR;
+      if (estado.clima === 'lluvia') { gasto += R.GASTO_LLUVIA; causas.push('lluvia'); }
+      if (estado.hora === 'noche') { gasto += R.GASTO_NOCHE; causas.push('noche'); }
+      const ahorro = ahorroCerca();
+      if (ahorro) { gasto = Math.max(0, gasto - ahorro); causas.push('cerca'); }
+      cambiarEnergia(-gasto, 'demora', eventos, causas);
+      pasarElTiempo(eventos);
+      sinFuego(['noche', 'lluvia'].find((k) => causas.includes(k)) || 'remar', eventos);
+      return eventos;
+    }
+
     function amarrar() {
       if (!puedeAmarrar()) return [];
       const r = estado.recursos, comio = r.comida > 0;
@@ -346,6 +363,7 @@
           case 'juntar': return juntar();
           case 'avivar': return avivar();
           case 'amarrar': return amarrar();
+          case 'demora': return demora();
           default: return [];
         }
       },

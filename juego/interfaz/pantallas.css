@@ -100,6 +100,8 @@ button.pueblo { cursor: pointer; font: inherit; }
 /* ── Fin del viaje ── */
 .fin .rotulo { padding: 24px 28px 22px; }
 .fin__dato { font-size: 15px !important; color: var(--texto-2); }
+.fin__cronica-titulo { font-size: 13px !important; letter-spacing: 0.08em; text-transform: uppercase; color: var(--texto-2); margin-bottom: 2px !important; }
+.fin__cronica { text-align: left; line-height: 1.5; }
 .lista-saberes { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 6px; text-align: left; }
 .lista-saberes li { background: rgba(255, 212, 124, 0.25); border-radius: 8px; padding: 6px 10px; font-weight: 700; }
 
