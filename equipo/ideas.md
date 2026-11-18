@@ -183,6 +183,22 @@
 
 **27. El mapa del juego sobre el mapa real.** Al final del viaje, mostrar en qué parte de los canales reales podría estar un viaje así, sin decir que es un lugar exacto (el mapa del juego es ficción). *Señal:* el equipo quiere reforzar el vínculo con el territorio.
 
+## Ritmo y ganas de jugar otra vez (18/11, D)
+
+Lo que hace volver a un roguelike: cada acción se siente, cada viaje deja un número para superar y empezar otra vez cuesta un toque. Ya están: la canoa que se desliza, los minijuegos, la racha de los minijuegos y los números que suben sobre la canoa («+2 leña», «−1 fuego»). Lo que sigue toca la parte de A o de B, por eso queda acá.
+
+**28. Viaje del día.** Un botón que usa la fecha como semilla (`?semilla=` ya existe): todas las personas reman el mismo mapa ese día y pueden comparar cuán lejos llegaron. En la escuela, toda la clase juega el mismo viaje. *Le toca a B (título).* *Señal:* se usa en una clase o en el stand.
+
+**29. Lo más lejos que llegó la familia.** En el final del viaje: «Llegaron a 18 casillas de la ballena. La generación 2 llegó más cerca que nunca». Un récord por linaje, guardado junto a la herencia. *Le toca a B (pantalla del final y `herencia.js`).* *Señal:* las personas que prueban vuelven a jugar.
+
+**30. Otra vez con un toque.** En el final del viaje, <kbd>Enter</kbd> empieza la generación siguiente y el foco queda en ese botón. *Le toca a B.* *Señal:* en las pruebas con personas se ve que buscan cómo seguir.
+
+**31. Cuánto falta.** En el HUD, una tira chica con el camino hasta el destino y la canoa encima: la meta siempre a la vista. *Le toca a B (HUD).* *Señal:* alguien pregunta «¿y ahora adónde voy?».
+
+**32. Que fallar un minijuego cueste algo.** Hoy fallar no cuesta nada. Si cuesta, por ejemplo un poco de fuego, el minijuego pesa más. *Le toca a A (números del núcleo).* *Señal:* los minijuegos se sienten de trámite.
+
+**33. Viajes más largos.** Hoy, con la luz real de noche, un viaje dura unas 14 acciones y casi no se llega a las cosas para juntar. *Le toca a A (balance).* *Señal:* en la prueba de punta a punta o con personas, el viaje termina antes de juntar algo.
+
 ---
 
 ## Descartadas o en espera

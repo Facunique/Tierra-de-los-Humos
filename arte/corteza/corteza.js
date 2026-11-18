@@ -634,7 +634,34 @@
       return suave;
     }
 
+    // Números que suben sobre la canoa después de una acción («+2 leña», «−1 fuego»): se ve al
+    // instante qué cambió. Duran algo más de un segundo; con movimiento reducido no suben.
+    const flotantes = [];
+    const DURA = 1.3;
+    function dibujarFlotantes(s) {
+      if (!flotantes.length || !E.canoa) return;
+      const ahora = (typeof performance !== 'undefined' ? performance.now() : Date.now()) / 1000;
+      for (let i = flotantes.length - 1; i >= 0; i--) if (ahora - flotantes[i].t0 > DURA) flotantes.splice(i, 1);
+      ctx.save();
+      ctx.font = '700 ' + Math.round(17 * s * 1.2) + 'px "Atkinson Hyperlegible", system-ui, sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+      flotantes.forEach((f, i) => {
+        const k = Math.min(1, (ahora - f.t0) / DURA), sube = QUIETO ? 0 : k * 26 * s;
+        const x = (E.canoa.x + 0.5) * T, y = (E.canoa.y + 0.66) * T - 62 * s - i * 20 * s - sube;
+        ctx.globalAlpha = k < 0.7 ? 1 : 1 - (k - 0.7) / 0.3;
+        ctx.lineWidth = 5 * s; ctx.strokeStyle = C.z; ctx.strokeText(f.texto, x, y);
+        ctx.fillStyle = f.bueno ? C.Y : C.W; ctx.fillText(f.texto, x, y);
+      });
+      ctx.restore();
+    }
+
     const api = {
+      /** Muestra textos que suben sobre la canoa: [{ texto: '+2 leña', bueno: true }] (ver cambios). */
+      flotar(lista) {
+        const ahora = (typeof performance !== 'undefined' ? performance.now() : Date.now()) / 1000;
+        (lista || []).forEach((f) => flotantes.push({ texto: f.texto, bueno: f.bueno, t0: ahora }));
+        return api;
+      },
       /** Define o actualiza la escena. Solo hace falta pasar lo que cambia. */
       escena(e) {
         E = Object.assign(E || { estacion: 'verano', clima: 'calma', hora: 'dia', objetos: [], humos: [], canoa: null }, e);
@@ -772,6 +799,7 @@
           for (const o of objs) if (!FIGURAS[o.id] && (PEGATINAS[o.id] || ARTE.SPRITES[o.id]) && explorado(o.x, o.y)) dibujarPegatina(o, (o.x + 0.5) * T, t, s);
         }
         clima(t);
+        dibujarFlotantes(s);
         // Grano de papel encima de todo (no en alto contraste: ensucia la lectura)
         if (!E.altoContraste) {
           ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -783,7 +811,23 @@
     return api;
   }
 
-  const modulo = { crear, pegatina, fuego, humo, canoa, figuras: FIGURAS, PEGATINAS, ESTACIONES, rgba };
+  /**
+   * Qué cambió entre dos momentos de la partida, para mostrarlo sobre la canoa.
+   * antes y despues: { fuego, lena, comida, pirita }. Devuelve [{ texto, bueno }].
+   */
+  const NOMBRES = { fuego: 'fuego', lena: 'leña', comida: 'comida', pirita: 'pirita' };
+  function cambios(antes, despues) {
+    const lista = [];
+    for (const k of Object.keys(NOMBRES)) {
+      const d = (despues[k] || 0) - (antes[k] || 0);
+      if (!d) continue;
+      if (k === 'pirita') lista.push({ texto: d > 0 ? '+ pirita' : '− pirita', bueno: d > 0 });
+      else lista.push({ texto: (d > 0 ? '+' : '−') + Math.abs(d) + ' ' + NOMBRES[k], bueno: d > 0 });
+    }
+    return lista;
+  }
+
+  const modulo = { crear, pegatina, fuego, humo, canoa, cambios, figuras: FIGURAS, PEGATINAS, ESTACIONES, rgba };
   if (typeof module !== 'undefined' && module.exports) module.exports = modulo;
   else raiz.TDH_CORTEZA = modulo;
 })(typeof window !== 'undefined' ? window : globalThis);

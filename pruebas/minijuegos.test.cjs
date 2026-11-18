@@ -43,15 +43,16 @@ test('qué minijuego va antes de cada acción', () => {
 test('los datos citan su fuente con año y página, y la mecánica se presenta como recurso de juego', () => {
   for (const [id, j] of Object.entries(MJ.JUEGOS)) {
     if (j.dato == null) { assert.equal(id, 'lena', 'solo la leña va sin dato: falta una cita yagán'); continue; }
-    assert.match(j.dato, /(Cooper|Vargas Filgueira)/, id + ': el dato no dice de quién es');
-    assert.match(j.dato, /\((1946|2019), pp?\. \d/, id + ': falta el año o la página');
+    // Redacción directa (decisión de C, 14/11): el autor va en la fuente, no en el dato.
+    assert.doesNotMatch(j.dato, /Cooper|Vargas|relata|describe|menciona|documenta/, id + ': el dato habla del autor');
+    assert.match(j.fuente, /^(Cooper|Vargas Filgueira) \((1946|2019)\), pp?\. \d/, id + ': falta el autor, el año o la página');
   }
   assert.match(MJ.RECURSO, /recurso de juego/);
 });
 
 test('los textos respetan las líneas rojas del repositorio', () => {
   const todo = Object.values(MJ.JUEGOS).map((j) => [j.titulo, j.pide, j.dato, j.boton, j.zonaNombre].join(' ')).join(' ') + ' ' + MJ.RECURSO;
-  assert.doesNotMatch(todo.replace(/sin anzuelo/g, ''), /anzuelo/i, 'nada de anzuelos (docs/05)');
+  assert.doesNotMatch(todo.replace(/(sin|no usa) anzuelo/g, ''), /anzuelo/i, 'nada de anzuelos (docs/05)');
   assert.doesNotMatch(todo, /\b(red|redes|perro|perros|cazar|caza|arpón|matar)\b/i, 'sin redes, perros ni escenas de caza');
   assert.doesNotMatch(todo, /extingui|desaparecid/i, 'los pueblos van en presente');
 });
@@ -100,4 +101,21 @@ test('sin pantalla (Node), jugar no bloquea: devuelve que sí', async () => {
   assert.equal(await MJ.jugar('juntar', 'lena'), true);
   assert.equal(await MJ.jugar('juntar', 'saber'), true);
   assert.equal(MJ.abierto(), false);
+});
+
+test('la racha suma al primer intento y se corta al fallar', () => {
+  MJ.anotar(false);
+  assert.equal(MJ.anotar(true).racha, 1);
+  const r = MJ.anotar(true);
+  assert.equal(r.racha, 2);
+  assert.ok(r.mejor >= 2);
+  assert.equal(MJ.anotar(false).racha, 0);
+  assert.ok(MJ.racha.mejor >= 2, 'la mejor racha se conserva');
+});
+
+test('lo que cambió en una acción se cuenta en corto, con su signo', () => {
+  assert.deepEqual(CZ.cambios({ fuego: 3, lena: 1, comida: 0, pirita: 0 }, { fuego: 3, lena: 3, comida: 0, pirita: 0 }), [{ texto: '+2 leña', bueno: true }]);
+  assert.deepEqual(CZ.cambios({ fuego: 3, lena: 1 }, { fuego: 2, lena: 0 }), [{ texto: '−1 fuego', bueno: false }, { texto: '−1 leña', bueno: false }]);
+  assert.deepEqual(CZ.cambios({ pirita: 0 }, { pirita: 1 }), [{ texto: '+ pirita', bueno: true }]);
+  assert.deepEqual(CZ.cambios({ fuego: 2 }, { fuego: 2 }), []);
 });

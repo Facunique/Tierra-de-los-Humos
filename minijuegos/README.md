@@ -14,6 +14,10 @@ Antes de juntar algo, avivar el fuego o amarrar la canoa, se juega un momento co
 
 Cada minijuego muestra el dato de las fuentes que lo acompaña, el mismo de las cartas y de los elementos del territorio. También aclara que la mecánica es recurso de juego. Qué dibuja cada uno y de qué fuente sale está en [`docs/05-rigor-historico.md`](../docs/05-rigor-historico.md#los-minijuegos-minijuegos-1811-d).
 
+## Racha
+
+Cada minijuego que sale al primer intento suma a la racha; fallar, tocar una piedra común o volver al viaje la corta. La racha se ve arriba del minijuego, y la mejor se guarda en el dispositivo. Es un reto propio: no cambia nada del viaje.
+
 ## Para todos
 
 - Se juegan con el dedo, el mouse o el teclado. Las cosas para juntar son botones (<kbd>Tab</kbd> y <kbd>Enter</kbd>); en los de tiempo, alcanza con la barra espaciadora. <kbd>Esc</kbd> vuelve al viaje.

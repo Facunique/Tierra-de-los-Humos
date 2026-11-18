@@ -328,7 +328,11 @@
     if (ocupado || enTransicion || actual !== 'viaje' || !partida || partida.terminada || TDH_CARTA.abierta()) return false;
     if (accion.tipo !== 'remar' && !(await minijuego(accion))) return false;
     if (!partida || partida.terminada || actual !== 'viaje') return false;
+    // Lo que cambió (leña, comida, pirita, fuego) sube un momento sobre la canoa (motor Corteza, D).
+    const foto = () => Object.assign({ fuego: partida.estado.canoa.fuego }, partida.estado.recursos);
+    const antes = foto();
     const eventos = partida.hacer(accion);
+    if (eventos.length && motor && motor.flotar && CZ.cambios) motor.flotar(CZ.cambios(antes, foto()));
     if (!eventos.length) { if (accion.tipo === 'remar') anunciar('La canoa solo va por el agua.'); return false; }
     const c = partida.estado.canoa;
     if (accion.tipo === 'remar') { c.remando = true; setTimeout(() => { c.remando = false; }, 400); }

@@ -45,8 +45,9 @@
 
   /**
    * Los minijuegos. `banda` es la franja de la escena donde aparecen las cosas (en
-   * fracciones del alto: arriba 0, abajo 1). `dato` repite, en corto, lo que dicen las
-   * cartas y los elementos con su fuente; null si no hay una cita yagán específica.
+   * fracciones del alto: arriba 0, abajo 1). `dato` repite, en corto y con redacción
+   * directa, lo que dicen las cartas (sin fórmulas sobre el autor: decisión de C del 14/11);
+   * la atribución va en `fuente`. null si no hay una cita yagán específica.
    */
   const JUEGOS = {
     lena: {
@@ -59,40 +60,46 @@
       modo: 'juntar', tierra: true, escena: 'orilla', objeto: 'mejillones', cantidad: 4, segundos: 13, banda: [0.4, 0.74], marea: true,
       titulo: 'Bajan a tierra con la marea baja',
       pide: 'Juntá cuatro mejillones a mano. Cuando el agua vuelve a subir, esperá a que baje.',
-      dato: 'Vargas Filgueira relata la recolección de mariscos aprovechando la marea baja (2019, pp. 30 y 44 del visor del PDF). Cooper describe la recolección del mejillón a mano (1946, p. 84).',
+      dato: 'La marea baja permite recolectar mariscos en la costa. El mejillón se junta a mano.',
+      fuente: 'Vargas Filgueira (2019), pp. 30 y 44 del visor del PDF; Cooper (1946), p. 84.',
     },
     hongos: {
       modo: 'juntar', tierra: true, escena: 'bosque', objeto: 'hongos', cantidad: 3, segundos: 10, banda: [0.08, 0.46],
       titulo: 'Bajan a tierra, al borde del bosque',
       pide: 'Juntá tres hongos de los árboles.',
-      dato: 'Vargas Filgueira menciona los hongos de los árboles entre los alimentos de un invierno difícil (2019, p. 54 del visor del PDF).',
+      dato: 'Los hongos de los árboles complementan los alimentos durante un invierno difícil.',
+      fuente: 'Vargas Filgueira (2019), p. 54 del visor del PDF.',
     },
     pirita: {
       modo: 'juntar', tierra: true, escena: 'playa', objeto: 'pirita', cantidad: 2, segundos: 12, banda: [0.3, 0.7], piedras: 5,
       titulo: 'Bajan a tierra a buscar piedras de fuego',
       pide: 'Encontrá las dos piedras de fuego, las doradas, entre las piedras de la playa.',
-      dato: 'Cooper documenta el encendido del fuego con pirita y yesca (1946, pp. 91 y 95).',
+      dato: 'La pirita se usa junto con el pedernal para encender el fuego.',
+      fuente: 'Cooper (1946), pp. 91 y 95.',
     },
     pescado: {
       modo: 'tiempo', tierra: false, escena: 'canal', objeto: 'pescado', intentos: 3, ancho: 0.2, vueltas: 0.42,
       titulo: 'Pescar desde la canoa',
       pide: 'La carnada va atada en un lazo, sin anzuelo. Cuando el pez llegue a la carnada, levantá la línea.',
       boton: 'Levantar la línea', zonaNombre: 'carnada',
-      dato: 'Cooper describe una pesca con línea sin anzuelo: la carnada va en un lazo y el pez se toma con la mano (1946, pp. 84 y 96).',
+      dato: 'La pesca con línea no usa anzuelo: la carnada va en un lazo y el pez se toma con la mano.',
+      fuente: 'Cooper (1946), pp. 84 y 96.',
     },
     avivar: {
       modo: 'tiempo', tierra: false, escena: 'canal', objeto: 'lena', intentos: 3, ancho: 0.26, vueltas: 0.5,
       titulo: 'Avivar el fuego',
       pide: 'Sumá la leña cuando la llama esté baja, sin ahogarla.',
       boton: 'Sumar la leña', zonaNombre: 'llama baja',
-      dato: 'En el relato de Vargas Filgueira, el fuego viaja en la canoa (2019, p. 33 del visor del PDF).',
+      dato: 'El fuego se lleva encendido en la canoa.',
+      fuente: 'Vargas Filgueira (2019), p. 33 del visor del PDF.',
     },
     amarrar: {
       modo: 'tiempo', tierra: false, escena: 'cachiyuyo', objeto: 'canoa', intentos: 3, ancho: 0.24, vueltas: 0.38,
       titulo: 'Amarrar en el cachiyuyo',
       pide: 'Cuando la canoa pase sobre el cachiyuyo, amarrala.',
       boton: 'Amarrar', zonaNombre: 'cachiyuyo',
-      dato: 'Cooper documenta el amarre de la canoa lejos de la orilla, en el cachiyuyo (1946, pp. 88 y 96).',
+      dato: 'Para detenerse, la canoa se asegura entre el cachiyuyo, lejos de la orilla.',
+      fuente: 'Cooper (1946), pp. 88 y 96.',
     },
   };
   const RECURSO = 'El minijuego es recurso de juego: el tiempo, la marea que sube y la marca que va y viene no salen de las fuentes.';
@@ -181,6 +188,18 @@
 
   let actual = null; // el minijuego abierto: { ganar(), cerrar() }
 
+  // Racha: cuántos minijuegos seguidos salieron al primer intento (sin fallar ni tocar una piedra
+  // común). Es solo un reto propio: no cambia nada del viaje. La mejor se guarda en el dispositivo.
+  let racha = 0, mejor = 0;
+  try { mejor = Number(raiz.localStorage && raiz.localStorage.getItem('tdh-mejor-racha')) || 0; } catch (e) { /* sin almacenamiento */ }
+  /** Suma a la racha si salió al primer intento, o la corta. Devuelve { racha, mejor, record }. */
+  function anotar(limpio) {
+    racha = limpio ? racha + 1 : 0;
+    const record = racha > mejor && racha >= 2;
+    if (racha > mejor) { mejor = racha; try { raiz.localStorage.setItem('tdh-mejor-racha', String(mejor)); } catch (e) { /* nada */ } }
+    return { racha, mejor, record };
+  }
+
   function crear(tag, clase, padre, texto) {
     const n = document.createElement(tag);
     if (clase) n.className = clase;
@@ -213,7 +232,7 @@
       const capa = crear('div', 'mj', document.body);
       capa.setAttribute('role', 'dialog'); capa.setAttribute('aria-modal', 'true'); capa.setAttribute('aria-labelledby', 'mj-titulo');
       const papel = crear('div', 'mj__papel papel', capa);
-      crear('p', 'mj__sub', papel, j.tierra ? 'Bajan a tierra' : 'En la canoa');
+      crear('p', 'mj__sub', papel, (j.tierra ? 'Bajan a tierra' : 'En la canoa') + (racha >= 2 ? ' · Racha de ' + racha : ''));
       const h = crear('h2', null, papel, j.titulo); h.id = 'mj-titulo';
       crear('p', 'mj__pide', papel, j.pide);
       const escena = crear('div', 'mj__escena', papel);
@@ -221,7 +240,7 @@
       const estado = crear('p', 'mj__estado', papel); estado.setAttribute('aria-live', 'polite');
       const reloj = crear('div', 'mj__tiempo', papel); const arena = crear('div', null, reloj);
       if (op.reducido || j.modo === 'tiempo') reloj.hidden = true;
-      if (j.dato) crear('p', 'mj__dato', papel, 'Dato: ' + j.dato);
+      if (j.dato) crear('p', 'mj__dato', papel, 'Dato: ' + j.dato + ' Fuente: ' + j.fuente);
       crear('p', 'mj__recurso', papel, j.dato ? RECURSO : RECURSO + ' Falta una cita yagán sobre la recolección de leña 🔍.');
       const botones = crear('div', 'mj__botones', papel);
 
@@ -238,6 +257,7 @@
       const segundos = () => (performance.now() - t0) / 1000;
       function cerrar(ok) {
         if (fin) return; fin = true;
+        if (ok === false && !terminado) anotar(false); // volver al viaje sin terminar corta la racha
         cancelAnimationFrame(cuadroId);
         document.removeEventListener('keydown', teclas, true);
         capa.remove(); actual = null;
@@ -247,12 +267,14 @@
       function ganar() {
         if (terminado) return;
         terminado = 'bien';
-        estado.textContent = '¡Listo!';
+        const r = anotar(limpio);
+        estado.textContent = r.racha >= 2 ? '¡Listo! ' + r.racha + ' seguidos al primer intento.' + (r.record ? ' ¡Tu mejor racha!' : '') : '¡Listo!';
         setTimeout(() => cerrar(true), op.reducido ? 300 : 650);
       }
       function perder(texto) {
         if (terminado) return;
         terminado = 'mal';
+        anotar(false);
         estado.textContent = texto + ' Podés probar de nuevo o volver al viaje.';
         botones.textContent = '';
         const otra = crear('button', 'boton-papel boton-papel--fuego', botones, 'Probar de nuevo'); otra.type = 'button';
@@ -263,7 +285,7 @@
       }
 
       // ── Juntar: cada cosa es un botón ──
-      let pulsar = null, marca = null, zona = null, marea = null, fallas = 0, mover = () => {};
+      let pulsar = null, marca = null, zona = null, marea = null, fallas = 0, limpio = true, mover = () => {};
       const cosas = [];
       if (j.modo === 'juntar') {
         const img = imagen(j.objeto, op);
@@ -278,7 +300,7 @@
           else { crear('span', 'mj__piedra', b); b.setAttribute('aria-label', 'Una piedra gris'); }
           b.addEventListener('click', () => {
             if (terminado || b.disabled) return;
-            if (!es) { estado.textContent = 'Esa es una piedra común. Las de fuego son doradas.'; b.disabled = true; b.classList.add('juntado'); return; }
+            if (!es) { limpio = false; estado.textContent = 'Esa es una piedra común. Las de fuego son doradas.'; b.disabled = true; b.classList.add('juntado'); return; }
             b.disabled = true; b.classList.add('juntado'); juntados++; contar();
             if (juntados >= j.cantidad) ganar();
           });
@@ -316,7 +338,7 @@
           if (terminado) return;
           const pos = marcaEn(segundos(), vueltas);
           if (dentro(pos, zona)) { ganar(); return; }
-          fallas++;
+          fallas++; limpio = false;
           if (fallas >= j.intentos) perder('No salió esta vez.');
           else estado.textContent = 'Todavía no. Te ' + (j.intentos - fallas === 1 ? 'queda 1 intento.' : 'quedan ' + (j.intentos - fallas) + ' intentos.');
         };
@@ -353,7 +375,10 @@
   }
 
   const api = {
-    JUEGOS, ESCENAS, RECURSO, cual, jugar, marcaEn, dentro, lugares, azar, zonaDe, mareaAlta, LINEA_MAREA,
+    JUEGOS, ESCENAS, RECURSO, cual, jugar, anotar,
+    /** La racha actual y la mejor (para mostrarlas en otra pantalla). */
+    get racha() { return { racha, mejor }; },
+    marcaEn, dentro, lugares, azar, zonaDe, mareaAlta, LINEA_MAREA,
     /** ¿Hay un minijuego abierto? */
     abierto: () => !!actual,
     /** Para las pruebas automáticas: da por ganado el minijuego abierto. */
