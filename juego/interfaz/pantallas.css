@@ -37,6 +37,18 @@ html:has(.tdh-juego) { height: 100%; }
 /* Los botones de la carta los ubica juego.css: sin ancho mínimo, para que no tapen la fuente. */
 .tdh-juego .tdh-carta__botones .boton-papel { min-width: 0; }
 .tdh-juego .boton-papel[disabled] { opacity: 0.5; cursor: not-allowed; }
+/* Al pasar el mouse: un tono apenas más oscuro de la paleta y un poco más grande (18/11).
+   Solo con mouse (en el celular el «hover» queda pegado); con movimiento reducido, solo el color. */
+@media (hover: hover) and (pointer: fine) {
+  .tdh-juego .boton-papel, .tdh-juego .pueblo { transition: transform 0.12s ease-out, background-color 0.12s ease-out; }
+  .tdh-juego .boton-papel:not([disabled]):hover { background: #e7ddcb; transform: scale(1.05); }   /* w de la paleta */
+  .tdh-juego .boton-papel--fuego:not([disabled]):hover { background: #f39a2c; }                    /* y de la paleta */
+  .tdh-juego .boton-papel:not([disabled]):active { transform: translate(2px, 3px); }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  .tdh-juego .boton-papel:not([disabled]):hover { transform: none; }
+}
+.tdh-juego .boton-papel.cargando { cursor: progress; opacity: 0.85; }
 .opciones .boton-papel { min-width: 0; font-size: 15px; padding: 8px 14px; }
 .aviso-ficcion { font-size: 14px; color: var(--tdh-papel); background: rgba(11, 16, 21, 0.7); padding: 6px 12px; border-radius: 8px; max-width: 520px; margin: 0; flex: none; }
 .aviso-ficcion span { display: block; margin-top: 4px; opacity: 0.85; }
