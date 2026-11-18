@@ -167,9 +167,11 @@
    *  - adelante del fuego, el hombre con sus armas; atrás, la mujer, que rema y maneja la canoa;
    *  - remo de una pieza, pala larga lanceolada, sin travesaño.
    */
-  function canoa(ctx, x, y, s, nivelFuego, t, mira, remando) {
+  function canoa(ctx, x, y, s, nivelFuego, t, mira, remando, quieto) {
     const L = 50 * s;
-    ctx.save(); ctx.translate(x, y); ctx.scale(mira || 1, 1);
+    // Se mece con el agua: sube y baja un poco y se inclina apenas (18/11). Con movimiento reducido, quieta.
+    const mece = quieto ? 0 : Math.sin(t * 1.7) * 1.3 * s, inclina = quieto ? 0 : Math.sin(t * 1.1 + 0.6) * 0.03;
+    ctx.save(); ctx.translate(x, y + mece); ctx.rotate(inclina); ctx.scale(mira || 1, 1);
     // estela y sombra en el agua
     ctx.fillStyle = SOMBRA; ctx.beginPath(); elipse(ctx, 3 * s, 7 * s, L * 0.52, 4.5 * s); ctx.fill();
     ctx.strokeStyle = rgba(C.E, 0.7); ctx.lineWidth = 1.6 * s; ctx.lineCap = 'round';
@@ -638,6 +640,26 @@
     // instante qué cambió. Duran algo más de un segundo; con movimiento reducido no suben.
     const flotantes = [];
     const DURA = 1.3;
+
+    // Estela: al moverse, la canoa deja ondas en el agua que se abren y se borran (18/11).
+    // Con movimiento reducido no hay estela.
+    const estela = [], ESTELA_DURA = 1.4;
+    let canoaAntes = null;
+    function dibujarEstela(t, s) {
+      if (!E.canoa) { estela.length = 0; canoaAntes = null; return; }
+      const cx = (E.canoa.x + 0.5) * T, cy = (E.canoa.y + 0.66) * T;
+      if (estela.length && estela[estela.length - 1].t0 > t) estela.length = 0;   // otro reloj: se empieza de cero
+      const seMovio = canoaAntes && Math.abs(cx - canoaAntes.x) + Math.abs(cy - canoaAntes.y) > 0.4;
+      if (seMovio && !QUIETO && (!estela.length || t - estela[estela.length - 1].t0 > 0.05)) estela.push({ x: canoaAntes.x, y: canoaAntes.y + 5 * s, t0: t });
+      canoaAntes = { x: cx, y: cy };
+      while (estela.length && t - estela[0].t0 > ESTELA_DURA) estela.shift();
+      ctx.lineWidth = 2.2 * s; ctx.lineCap = 'round';
+      for (const o of estela) {
+        const k = (t - o.t0) / ESTELA_DURA;
+        ctx.strokeStyle = rgba(C.E, 0.8 * (1 - k) * (1 - k));
+        ctx.beginPath(); elipse(ctx, o.x, o.y, (10 + k * 26) * s, (3 + k * 8) * s); ctx.stroke();
+      }
+    }
     function dibujarFlotantes(s) {
       if (!flotantes.length || !E.canoa) return;
       const ahora = (typeof performance !== 'undefined' ? performance.now() : Date.now()) / 1000;
@@ -785,7 +807,8 @@
           ctx.lineWidth = 5 * s; ctx.strokeStyle = C.z; ctx.beginPath(); elipse(ctx, ax, ay, 0.62 * T, 0.36 * T); ctx.stroke();
           ctx.lineWidth = 2.5 * s; ctx.strokeStyle = C.Y; ctx.beginPath(); elipse(ctx, ax, ay, 0.62 * T, 0.36 * T); ctx.stroke();
         }
-        if (E.canoa) canoa(ctx, (E.canoa.x + 0.5) * T, (E.canoa.y + 0.66) * T, s * 1.2, E.canoa.fuego, t, E.canoa.mira || 1, E.canoa.remando);
+        dibujarEstela(t, s);
+        if (E.canoa) canoa(ctx, (E.canoa.x + 0.5) * T, (E.canoa.y + 0.66) * T, s * 1.2, E.canoa.fuego, t, E.canoa.mira || 1, E.canoa.remando, QUIETO);
         if (E.canoa && E.canoa.fuego > 0) humo(ctx, (E.canoa.x + 0.5) * T, (E.canoa.y + 0.66) * T - 30 * s, s * 0.8, t, viento, 6, 70);
         // Niebla (humo de lo no explorado), con una deriva mínima. Va antes de la luz: de noche también se oscurece.
         const dx = Math.sin(t * 0.25) * 3 * s;

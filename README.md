@@ -154,6 +154,7 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 ## Uso de inteligencia artificial
 
+- **Canoa que se mece y deja estela (18/11):** a pedido de Facu (Persona B), Claude Code sumó al motor Corteza de la Persona D un balanceo suave de la canoa y una estela de ondas al remar, que se apagan con movimiento reducido. Es animación: no agregó dibujos ni datos nuevos.
 - **Viajes más largos (18/11):** a pedido de Facu (Persona B), Claude Code midió con los jugadores automáticos cuánto dura un viaje y ajustó tres números del núcleo (fuego inicial, leña al salir y que la noche termine sola), con sus pruebas. Son reglas de juego: no agregó datos culturales.
 - **Costo al fallar y crónica del viaje (18/11):** a pedido de Facu (Persona B), Claude Code hizo que fallar un minijuego cueste un turno (una acción `demora` en el núcleo, con su prueba) y sumó la crónica del final, que cuenta lo que pasó en la partida. Son textos y reglas de juego: no agregó datos culturales.
 - **Datos directos y confirmación de pirita (14/11):** a pedido de la Persona C, Codex (OpenAI) reescribió los datos de las nueve cartas activas, ocho propuestas y los motivos de ballena, corteza y pirita, quitando fórmulas sobre el autor o su familia y conservando las fuentes. Registró la confirmación de C del testimonio de Víctor sobre la pirita y el fuego transportado, actualizó la referencia oral y regeneró los PDF y el pitch dependientes. No agregó datos de memoria, permisos, lógica, efectos ni números del juego.
