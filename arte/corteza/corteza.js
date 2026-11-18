@@ -664,7 +664,9 @@
       get enMovimiento() { return !!(suave && E.canoa && (suave.cx !== E.canoa.x || suave.cy !== E.canoa.y)); },
       /** Convierte coordenadas de un toque o clic (en el canvas) a casilla del mapa. */
       casillaEn(clientX, clientY) {
-        const r = canvas.getBoundingClientRect(), v = E.vista || { x: 0, y: 0, ancho: E.ancho, alto: E.alto };
+        // Con la cámara que se ve: si todavía se está deslizando, la de ese momento (no la de destino).
+        const r = canvas.getBoundingClientRect(), v0 = E.vista || { x: 0, y: 0, ancho: E.ancho, alto: E.alto };
+        const v = suave && E.vista ? Object.assign({}, v0, { x: suave.vx, y: suave.vy }) : v0;
         return { x: Math.floor(v.x + (clientX - r.left) / r.width * v.ancho), y: Math.floor(v.y + (clientY - r.top) / r.height * v.alto) };
       },
       /** Centra la cámara en una casilla sin salirse del mapa. Devuelve la vista. */
