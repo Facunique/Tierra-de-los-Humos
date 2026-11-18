@@ -122,6 +122,20 @@ También comían los **hongos que crecen en los árboles** (no los del suelo) y 
 | Arco y flecha | Tenían un lugar muy secundario y probablemente lo tomaron de los selk'nam (Cooper, p. 91). | ⛔ No se dibuja. |
 | Cerámica y tejido | No existían (Cooper, p. 89). | ⛔ |
 
+### Los minijuegos (`minijuegos/`, 18/11, D)
+
+Antes de juntar, avivar o amarrar, se juega un momento corto. Lo que se dibuja sale de pegatinas y escenas que ya están en esta tabla. La mecánica (el tiempo, la marea que sube, la marca que va y viene) es recurso de juego y lo dice en pantalla. No se dibujan personas en los minijuegos.
+
+| Minijuego | Qué se ve | Fuente | Estado |
+|---|---|---|---|
+| Bajar a tierra a juntar leña | Ramas en la playa; la canoa espera en el agua. | 🔍 Falta una cita yagán sobre la recolección de leña (ver «Leña»). | En pantalla dice que es recurso de juego y que falta la cita. |
+| Mejillones con la marea baja | Mejillones en la costa; el agua sube y baja. | Vargas Filgueira (2019, pp. 30 y 44 del visor del PDF): recolección de mariscos con la marea baja. Cooper (1946, p. 84): el mejillón se junta a mano. | ✅ |
+| Hongos de los árboles | Hongos sobre el bosque, no en el suelo. | Vargas Filgueira (2019, p. 54 del visor del PDF); Cooper (1946, p. 84). | ✅ |
+| Piedras de fuego | Pirita dorada entre piedras grises de la playa. | Cooper (1946, pp. 91 y 95). | ✅ Dónde se encontraba la pirita no se afirma: la escena es recurso de juego. |
+| Pescar desde la canoa | El pez y la «carnada» en una pista; no se dibuja la línea. | Cooper (1946, pp. 84 y 96): línea sin anzuelo, carnada en un lazo, el pez se toma con la mano. | ✅ ⛔ Sin anzuelos ni redes (lo revisa `pruebas/minijuegos.test.cjs`). |
+| Avivar el fuego | La leña y la «llama baja» en una pista. | Vargas Filgueira (2019, p. 33 del visor del PDF): el fuego viaja en la canoa. | ✅ |
+| Amarrar en el cachiyuyo | La canoa pasa sobre el cachiyuyo. | Cooper (1946, pp. 88 y 96): amarre lejos de la orilla, en el cachiyuyo. | ✅ |
+
 ### El paisaje
 
 | Elemento | Qué dice la fuente | Estado |

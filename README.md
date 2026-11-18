@@ -32,14 +32,15 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 
 ### Para todos, también en el aula
 
+- **Con las manos:** antes de juntar, avivar el fuego o amarrar, se juega un [minijuego](minijuegos/README.md) corto. Para juntar en la costa, la familia baja a tierra: ramas, mejillones con la marea baja, hongos de los árboles y piedras de fuego. Desde la canoa se pesca con línea sin anzuelo, se aviva el fuego y se amarra en el cachiyuyo. Cada uno muestra el dato de su fuente y lleva la cuenta de la racha al primer intento. Al remar, la canoa se desliza de casilla en casilla, y lo que se junta o se gasta sube un momento sobre ella («+2 leña»).
 - **Accesible:** un narrador cuenta el viaje en voz alta para jugar sin ver la pantalla, las cartas se escuchan en voz alta, hay modo alto contraste, tipografía para baja visión, colores probados para daltonismo y subtítulos para cada sonido.
 - **El territorio se siente:** la luz del juego es la de Ushuaia en ese momento (de día, al atardecer o de noche, y en su estación), y el sonido cambia según el lugar: el bosque, la playa y el canal abierto suenan distinto.
 - **Algo para llevarse:** al terminar, una postal del viaje con el recorrido y los saberes aprendidos.
 - **En la escuela:** una [guía para docentes](escuelas/README.md) con una actividad por carta, y una [versión de mesa](mesa/README.md) para jugar sin pantallas.
 
-| El viaje | Una carta de saber | Fin del viaje y herencia |
-|---|---|---|
-| ![El viaje en el juego: la canoa con su fuego rema por el canal, con «Fuego 3 de 4» arriba; hay pescado para juntar como pegatinas, aves en el agua y humo sobre lo que falta explorar](equipo/video/04-viaje.jpg) | ![Carta «El fuego viaja en la canoa» con su dato, su recurso de juego y la fuente: Cooper (1946), p. 88 y 91](equipo/video/05-carta.jpg) | ![Pantalla «El viaje termina acá»: el fuego se apagó con el viento del canal y el saber encontrado pasa a la generación 2](equipo/video/06-fin.jpg) |
+| El viaje | Un minijuego | Una carta de saber | Fin del viaje y herencia |
+|---|---|---|---|
+| ![El viaje en el juego: la canoa con su fuego rema por el canal, con «Fuego 3 de 4» arriba; hay pescado para juntar como pegatinas, aves en el agua y humo sobre lo que falta explorar](equipo/video/04-viaje.jpg) | ![Minijuego «Bajan a tierra con la marea baja»: mejillones en la costa para tocar, la canoa espera en el agua, y abajo el dato con su fuente (Vargas Filgueira, 2019; Cooper, 1946)](equipo/video/04b-minijuego.jpg) | ![Carta «El fuego viaja en la canoa» con su dato, su recurso de juego y la fuente: Cooper (1946), p. 88 y 91](equipo/video/05-carta.jpg) | ![Pantalla «El viaje termina acá»: el fuego se apagó con el viento del canal y el saber encontrado pasa a la generación 2](equipo/video/06-fin.jpg) |
 
 *Capturas del juego (`index.html`), en la compu. La familia y el mapa son ficción; el dato de la carta sale de su fuente.*
 
@@ -88,12 +89,13 @@ Trabajo interno del equipo:
 | Qué | En el celular | Con teclado |
 |---|---|---|
 | Remar | Tocar el agua: la canoa rema hasta ahí. O las flechas de la pantalla | Flechas o <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> |
-| Juntar (leña, comida, pirita, saberes) | Botón «Juntar», o tocar la pegatina | <kbd>Enter</kbd> o <kbd>J</kbd> |
+| Juntar (leña, comida, pirita, saberes) | Botón «Juntar», o tocar la pegatina. Después, el minijuego | <kbd>Enter</kbd> o <kbd>J</kbd>. En el minijuego, <kbd>Tab</kbd> y <kbd>Enter</kbd>, o la barra espaciadora |
 | Avivar el fuego con leña | Botón «Avivar el fuego» | <kbd>F</kbd> |
 | Amarrar en el cachiyuyo y acampar | Botón «Amarrar y acampar» | <kbd>M</kbd> |
 | Describir lo que rodea a la canoa (con el narrador) | Botón «Describir alrededor» | <kbd>N</kbd> |
 | Pausa | Botón «Pausa» | <kbd>Esc</kbd> |
 
+- **Los minijuegos** salen antes de juntar, avivar y amarrar. Si sale bien, la acción se hace; si no, se puede probar de nuevo o volver al viaje, sin perder nada. Se apagan en el título (Minijuegos: no), y con el narrador encendido no aparecen.
 - **El fuego** se gasta al remar, y más con viento en el canal hondo, con lluvia o de noche. Cerca de una choza se gasta menos. Siempre se muestra su número («Fuego 3 de 4»).
 - **Lo que tiene borde de papel (las pegatinas) se puede juntar.** El resto es paisaje.
 - **El humo** cubre lo que todavía no exploraste.
@@ -182,6 +184,7 @@ Las bases piden declararlo (cláusula 7.4).
 - **Luz real, sonido por lugar y guía docente (12/11):** Claude Code escribió el cálculo de la luz real de Ushuaia (`arte/corteza/luz-real.js`), las capas de sonido de bosque y playa (`sonido/ambiente.js`) y la guía para docentes con una actividad por carta (`escuelas/`). Las actividades parten solo de los datos citados en las cartas y las revisa el equipo.
 - **Pantallas y elementos nuevos (12/11):** Claude Code armó la maqueta navegable de las pantallas (`arte/pantallas/`) y dibujó los elementos nuevos con su fuente: ballena varada, guindo de corteza, aves, toninas, pescado, erizos y huevos. También redactó borradores de cartas de saber a partir de Cooper (1946), con página, que revisa la persona de investigación.
 - **Narrador y prueba de punta a punta (13/11):** a pedido de la persona a cargo del arte, Claude Code escribió el narrador (`sonido/narrador.js`), que describe el viaje en voz alta, y una prueba que juega partidas enteras en varios celulares tocando los botones (`pruebas/de-punta-a-punta.cjs`), con sus pruebas.
+- **Minijuegos y movimiento suave (18/11):** a pedido de la persona a cargo del arte, Claude Code escribió los minijuegos (`minijuegos/`), con escenas del motor Corteza y sus pruebas, y el deslizamiento de la canoa y la cámara al remar (`arte/corteza/corteza.js`). En el juego de la Persona B sumó solo el gancho antes de cada acción, la opción del título y la carga del archivo. Los datos que muestra cada minijuego repiten, en corto, los de las cartas y los elementos, con su fuente; la mecánica se presenta como recurso de juego. No cambió reglas ni números del núcleo. Sumó la tabla de los minijuegos a `docs/05-rigor-historico.md` y enseñó a la prueba de punta a punta y al grabador del video a jugarlos tocando. Después sumó la racha de los minijuegos y los números que suben sobre la canoa, y pasó los datos de los minijuegos a redacción directa, como pidió la Persona C para las cartas.
 - **Textos al día con la consulta y el juego (14/11):** a pedido de la persona a cargo del arte, Claude Code revisó las piezas de arte, sonido y comunicación contra la entrevista del 13/11, la auditoría de la Persona C, las decisiones de la memoria y el juego de la Persona B. Reescribió las voces del video (sin citas textuales, con «familia ficticia» y el lema «Lo aprendido se transmite»), sumó el narrador y el editor al pitch, agregó Vargas Filgueira (2019) como fuente lista en el editor de saberes, usó nombres generales («un delfín», «un pato») donde la especie sigue sin confirmar, y reemplazó las capturas de la maqueta por capturas del juego. No agregó datos culturales nuevos ni cambió el código de A, B o C.
 - **Piezas de D después de la auditoría cultural (14/11):** a pedido de la persona a cargo del arte, Claude Code aplicó en el cartel, la vidriera, el pitch y las reglas de mesa los textos que propuso la Persona C en su auditoría (fuente del dato, aviso de ficción, alcance de la consulta), preparó apagados los rótulos del mapa con los nombres del libro de Vargas Filgueira (2019) hasta que haya permiso, y regeneró los PDF.
 - **Editor de saberes (13/11):** a pedido de la persona a cargo del arte, Claude Code armó el editor de saberes (`herramientas/`), con sus pruebas. Las reglas que revisa son las del repositorio; las cartas que se escriban con él las revisa la Persona C.

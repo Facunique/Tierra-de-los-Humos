@@ -41,6 +41,7 @@
   let altoContraste = leerPref('tdh-alto-contraste', false);
   let luzReal = leerPref('tdh-luz-real', true);
   let conNarrador = leerPref('tdh-narrador', false);
+  let conMinijuegos = leerPref('tdh-minijuegos', true);
   const luz = () => (luzReal && window.TDH_LUZ_REAL ? TDH_LUZ_REAL.ahora() : { hora: 'dia', estacion: 'verano' });
 
   // ── Pantallas ─────────────────────────────────────────────────────────────
@@ -311,9 +312,27 @@
       if (ev.tipo === 'fin') { cola = []; terminar(ev); }
     }
   }
+  // Antes de juntar, avivar o amarrar, un minijuego corto (minijuegos/minijuegos.js, de la Persona D).
+  // Si sale bien, la acción se hace igual que siempre; si la persona vuelve al viaje, no se hace.
+  // Con el narrador encendido no hay minijuegos: son para ver.
+  async function minijuego(accion) {
+    const MJ = window.TDH_MINIJUEGOS, p = partida.puede();
+    if (!MJ || !conMinijuegos || conNarrador || !p[accion.tipo]) return true;
+    const que = accion.tipo === 'juntar' ? p.juntar : accion.tipo;
+    if (!MJ.cual(accion.tipo, que)) return true;
+    ocupado = true; cola = [];
+    try { return await MJ.jugar(accion.tipo, que, { estacion: partida.estado.estacion, altoContraste, reducido, fuego: partida.estado.canoa.fuego }); }
+    finally { ocupado = false; }
+  }
   async function hacer(accion) {
     if (ocupado || enTransicion || actual !== 'viaje' || !partida || partida.terminada || TDH_CARTA.abierta()) return false;
+    if (accion.tipo !== 'remar' && !(await minijuego(accion))) return false;
+    if (!partida || partida.terminada || actual !== 'viaje') return false;
+    // Lo que cambió (leña, comida, pirita, fuego) sube un momento sobre la canoa (motor Corteza, D).
+    const foto = () => Object.assign({ fuego: partida.estado.canoa.fuego }, partida.estado.recursos);
+    const antes = foto();
     const eventos = partida.hacer(accion);
+    if (eventos.length && motor && motor.flotar && CZ.cambios) motor.flotar(CZ.cambios(antes, foto()));
     if (!eventos.length) { if (accion.tipo === 'remar') anunciar('La canoa solo va por el agua.'); return false; }
     const c = partida.estado.canoa;
     if (accion.tipo === 'remar') { c.remando = true; setTimeout(() => { c.remando = false; }, 400); }
@@ -517,6 +536,8 @@
     poner('b-narrador', conNarrador, 'Narrador');
     poner('b-contraste', altoContraste, 'Alto contraste');
     poner('b-luz', luzReal, 'Luz real de Ushuaia');
+    poner('b-minijuegos', conMinijuegos, 'Minijuegos');
+    $('b-minijuegos').hidden = !window.TDH_MINIJUEGOS;
     $('b-sonido').hidden = !sonido;
     $('b-narrador').hidden = !narrador;
     const aviso = $('aviso-luz');
@@ -538,6 +559,7 @@
     Object.values(fondos).forEach((m) => m.escena({ altoContraste }));
     if (partida && motor) escena();
   });
+  $('b-minijuegos').addEventListener('click', () => { conMinijuegos = !conMinijuegos; guardarPref('tdh-minijuegos', conMinijuegos); pintarOpciones(); });
   $('b-luz').addEventListener('click', () => {
     luzReal = !luzReal; guardarPref('tdh-luz-real', luzReal); pintarOpciones();
     if (actual === 'titulo') prepararFondo('titulo');

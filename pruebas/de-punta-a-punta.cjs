@@ -61,7 +61,7 @@ const MAX_ACCIONES = 400;
   const informe = [];
   let fallo = false;
   for (const [nombre, disp] of PANTALLAS) {
-    const r = { pantalla: nombre, errores: [], avisos: [], partidas: [], tiempos: [] };
+    const r = { pantalla: nombre, errores: [], avisos: [], partidas: [], tiempos: [], minijuegos: {} };
     const ctx = await nav.newContext(Object.assign({}, disp, { reducedMotion: 'reduce' }));
     const p = await ctx.newPage();
     p.on('pageerror', (e) => r.errores.push('Error de JavaScript: ' + e.message));
@@ -99,6 +99,28 @@ const MAX_ACCIONES = 400;
       let termino = false, acciones = 0;
       while (!termino && acciones < MAX_ACCIONES) {
         acciones++;
+        // Minijuego (minijuegos/minijuegos.js): se juega como una persona. Para juntar, se tocan las
+        // cosas (no las piedras grises); para los de tiempo, se toca cuando la marca está en la zona.
+        if (await p.locator('.mj').count()) {
+          const titulo = ((await p.locator('#mj-titulo').textContent()) || '').trim();
+          r.minijuegos[titulo] = (r.minijuegos[titulo] || 0) + 1;
+          if (r.minijuegos[titulo] === 1) { await revisarPantalla('En el minijuego «' + titulo + '»'); await p.screenshot({ path: path.join(SALIDA, nombre + '-minijuego-' + Object.keys(r.minijuegos).length + '.png') }); }
+          const t0 = Date.now();
+          while ((await p.locator('.mj').count()) && Date.now() - t0 < 25000) {
+            const cosas = p.locator('.mj__cosa:not(:disabled):has(img)');
+            if (await cosas.count()) { await cosas.first().click(); await p.waitForTimeout(120); continue; }
+            if (await visible(/^Probar de nuevo$/)) { await boton(/^Probar de nuevo$/).click(); await p.waitForTimeout(300); continue; }
+            await p.evaluate(() => {
+              const z = document.querySelector('.mj__zona'), m = document.querySelector('.mj__marca'); if (!z || !m) return;
+              const a = z.getBoundingClientRect(), b = m.getBoundingClientRect(), c = b.left + b.width / 2;
+              if (c > a.left + 6 && c < a.right - 6) document.querySelector('.mj__botones .boton-papel--fuego').click();
+            });
+            await p.waitForTimeout(25);
+          }
+          if (await p.locator('.mj').count()) { r.errores.push('El minijuego «' + titulo + '» no se pudo terminar en 25 segundos.'); await p.keyboard.press('Escape'); }
+          await p.waitForTimeout(700);
+          continue;
+        }
         if (await visible(UI.guardarCarta)) {
           // La primera carta de cada viaje es su motivo (no es un saber).
           const motivo = await p.evaluate(() => !!document.querySelector('.tdh-carta--otra'));
@@ -163,6 +185,8 @@ const MAX_ACCIONES = 400;
   for (const r of informe) {
     const prom = r.tiempos.length ? Math.round(r.tiempos.reduce((a, b) => a + b, 0) / r.tiempos.length) : 0;
     console.log((r.errores.length ? '✗ ' : '✓ ') + r.pantalla + ': ' + r.partidas.length + ' partida(s) ' + r.partidas.map((x) => '«' + x.final + '» en ' + x.acciones + ' acciones').join(', ') + ' · cada toque tarda ' + prom + ' ms en promedio');
+    const mj = Object.entries(r.minijuegos);
+    if (mj.length) console.log('    minijuegos: ' + mj.map(([t, n]) => t + ' (' + n + ')').join(', '));
     r.errores.forEach((e) => console.log('    error: ' + e));
     [...new Set(r.avisos)].slice(0, 6).forEach((e) => console.log('    aviso: ' + e));
   }

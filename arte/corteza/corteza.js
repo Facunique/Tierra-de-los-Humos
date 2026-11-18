@@ -616,7 +616,52 @@
       ctx.restore();
     }
 
+    // Movimiento suave: al remar, la canoa y la cámara se deslizan hasta la casilla nueva en vez de
+    // saltar. Si el salto es grande (otro viaje, otra escena), o la persona pidió menos movimiento,
+    // o la escena trae suave: false, se ubican de una.
+    const QUIETO = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let suave = null;
+    function deslizar() {
+      const c = E.canoa, v = E.vista;
+      if (!c) { suave = null; return null; }
+      const ahora = typeof performance !== 'undefined' ? performance.now() : Date.now();
+      const meta = { cx: c.x, cy: c.y, vx: v ? v.x : 0, vy: v ? v.y : 0 };
+      const lejos = suave && (Math.abs(meta.cx - suave.cx) + Math.abs(meta.cy - suave.cy) > 3 || Math.abs(meta.vx - suave.vx) + Math.abs(meta.vy - suave.vy) > 4);
+      if (!suave || lejos || QUIETO || E.suave === false) { suave = Object.assign({ ms: ahora }, meta); return suave; }
+      const dt = Math.min(0.1, (ahora - suave.ms) / 1000), k = 1 - Math.exp(-dt * 14);
+      suave.ms = ahora;
+      for (const q of ['cx', 'cy', 'vx', 'vy']) { suave[q] += (meta[q] - suave[q]) * k; if (Math.abs(meta[q] - suave[q]) < 0.01) suave[q] = meta[q]; }
+      return suave;
+    }
+
+    // Números que suben sobre la canoa después de una acción («+2 leña», «−1 fuego»): se ve al
+    // instante qué cambió. Duran algo más de un segundo; con movimiento reducido no suben.
+    const flotantes = [];
+    const DURA = 1.3;
+    function dibujarFlotantes(s) {
+      if (!flotantes.length || !E.canoa) return;
+      const ahora = (typeof performance !== 'undefined' ? performance.now() : Date.now()) / 1000;
+      for (let i = flotantes.length - 1; i >= 0; i--) if (ahora - flotantes[i].t0 > DURA) flotantes.splice(i, 1);
+      ctx.save();
+      ctx.font = '700 ' + Math.round(17 * s * 1.2) + 'px "Atkinson Hyperlegible", system-ui, sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+      flotantes.forEach((f, i) => {
+        const k = Math.min(1, (ahora - f.t0) / DURA), sube = QUIETO ? 0 : k * 26 * s;
+        const x = (E.canoa.x + 0.5) * T, y = (E.canoa.y + 0.66) * T - 62 * s - i * 20 * s - sube;
+        ctx.globalAlpha = k < 0.7 ? 1 : 1 - (k - 0.7) / 0.3;
+        ctx.lineWidth = 5 * s; ctx.strokeStyle = C.z; ctx.strokeText(f.texto, x, y);
+        ctx.fillStyle = f.bueno ? C.Y : C.W; ctx.fillText(f.texto, x, y);
+      });
+      ctx.restore();
+    }
+
     const api = {
+      /** Muestra textos que suben sobre la canoa: [{ texto: '+2 leña', bueno: true }] (ver cambios). */
+      flotar(lista) {
+        const ahora = (typeof performance !== 'undefined' ? performance.now() : Date.now()) / 1000;
+        (lista || []).forEach((f) => flotantes.push({ texto: f.texto, bueno: f.bueno, t0: ahora }));
+        return api;
+      },
       /** Define o actualiza la escena. Solo hace falta pasar lo que cambia. */
       escena(e) {
         E = Object.assign(E || { estacion: 'verano', clima: 'calma', hora: 'dia', objetos: [], humos: [], canoa: null }, e);
@@ -633,6 +678,36 @@
       },
       /** Dibuja un cuadro. t en segundos (para las animaciones). */
       dibujar(t) {
+        // Se dibuja con la canoa y la cámara donde van pasando (ver deslizar), y después se dejan como estaban.
+        const sv = deslizar(), canoaReal = E.canoa, vistaReal = E.vista;
+        if (sv) {
+          E.canoa = Object.assign({}, canoaReal, { x: sv.cx, y: sv.cy });
+          if (vistaReal) E.vista = Object.assign({}, vistaReal, { x: sv.vx, y: sv.vy });
+        }
+        try { cuadro(t); } finally { E.canoa = canoaReal; E.vista = vistaReal; }
+        return api;
+      },
+      /** ¿Sigue deslizándose la canoa? (para las pruebas y el grabador) */
+      get enMovimiento() { return !!(suave && E.canoa && (suave.cx !== E.canoa.x || suave.cy !== E.canoa.y)); },
+      /** Convierte coordenadas de un toque o clic (en el canvas) a casilla del mapa. */
+      casillaEn(clientX, clientY) {
+        // Con la cámara que se ve: si todavía se está deslizando, la de ese momento (no la de destino).
+        const r = canvas.getBoundingClientRect(), v0 = E.vista || { x: 0, y: 0, ancho: E.ancho, alto: E.alto };
+        const v = suave && E.vista ? Object.assign({}, v0, { x: suave.vx, y: suave.vy }) : v0;
+        return { x: Math.floor(v.x + (clientX - r.left) / r.width * v.ancho), y: Math.floor(v.y + (clientY - r.top) / r.height * v.alto) };
+      },
+      /** Centra la cámara en una casilla sin salirse del mapa. Devuelve la vista. */
+      centrar(cx, cy, ancho, alto) {
+        const a = Math.min(ancho, E.ancho), h = Math.min(alto, E.alto);
+        E.vista = { x: Math.max(0, Math.min(E.ancho - a, cx + 0.5 - a / 2)), y: Math.max(0, Math.min(E.alto - h, cy + 0.5 - h / 2)), ancho: a, alto: h };
+        api.ajustar();
+        return E.vista;
+      },
+      get celda() { return T; },
+    };
+
+    /** Dibuja un cuadro. t en segundos (para las animaciones). */
+    function cuadro(t) {
         t = t || 0;
         asegurarCaches();
         const est = ESTACIONES[E.estacion] || ESTACIONES.verano, s = T / 48, viento = E.clima === 'viento' ? 2.4 : 0.6;
@@ -724,6 +799,7 @@
           for (const o of objs) if (!FIGURAS[o.id] && (PEGATINAS[o.id] || ARTE.SPRITES[o.id]) && explorado(o.x, o.y)) dibujarPegatina(o, (o.x + 0.5) * T, t, s);
         }
         clima(t);
+        dibujarFlotantes(s);
         // Grano de papel encima de todo (no en alto contraste: ensucia la lectura)
         if (!E.altoContraste) {
           ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -731,25 +807,27 @@
           ctx.restore();
         }
         ctx.setTransform(1, 0, 0, 1, 0, 0);
-      },
-      /** Convierte coordenadas de un toque o clic (en el canvas) a casilla del mapa. */
-      casillaEn(clientX, clientY) {
-        const r = canvas.getBoundingClientRect(), v = E.vista || { x: 0, y: 0, ancho: E.ancho, alto: E.alto };
-        return { x: Math.floor(v.x + (clientX - r.left) / r.width * v.ancho), y: Math.floor(v.y + (clientY - r.top) / r.height * v.alto) };
-      },
-      /** Centra la cámara en una casilla sin salirse del mapa. Devuelve la vista. */
-      centrar(cx, cy, ancho, alto) {
-        const a = Math.min(ancho, E.ancho), h = Math.min(alto, E.alto);
-        E.vista = { x: Math.max(0, Math.min(E.ancho - a, cx + 0.5 - a / 2)), y: Math.max(0, Math.min(E.alto - h, cy + 0.5 - h / 2)), ancho: a, alto: h };
-        api.ajustar();
-        return E.vista;
-      },
-      get celda() { return T; },
-    };
+    }
     return api;
   }
 
-  const modulo = { crear, pegatina, fuego, humo, canoa, figuras: FIGURAS, PEGATINAS, ESTACIONES, rgba };
+  /**
+   * Qué cambió entre dos momentos de la partida, para mostrarlo sobre la canoa.
+   * antes y despues: { fuego, lena, comida, pirita }. Devuelve [{ texto, bueno }].
+   */
+  const NOMBRES = { fuego: 'fuego', lena: 'leña', comida: 'comida', pirita: 'pirita' };
+  function cambios(antes, despues) {
+    const lista = [];
+    for (const k of Object.keys(NOMBRES)) {
+      const d = (despues[k] || 0) - (antes[k] || 0);
+      if (!d) continue;
+      if (k === 'pirita') lista.push({ texto: d > 0 ? '+ pirita' : '− pirita', bueno: d > 0 });
+      else lista.push({ texto: (d > 0 ? '+' : '−') + Math.abs(d) + ' ' + NOMBRES[k], bueno: d > 0 });
+    }
+    return lista;
+  }
+
+  const modulo = { crear, pegatina, fuego, humo, canoa, cambios, figuras: FIGURAS, PEGATINAS, ESTACIONES, rgba };
   if (typeof module !== 'undefined' && module.exports) module.exports = modulo;
   else raiz.TDH_CORTEZA = modulo;
 })(typeof window !== 'undefined' ? window : globalThis);
