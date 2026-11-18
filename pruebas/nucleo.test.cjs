@@ -283,7 +283,8 @@ test('llegar a la ballena con el fuego encendido gana y da la carta de la ballen
 
 test('lo heredado no vuelve a salir como carta y abriga el fuego inicial', () => {
   const p = fija({ heredados: ['fuego', 'amarre'] });
-  assert.equal(p.estado.energia, 14);
+  const R = require('../juego/nucleo/reglas.js');
+  assert.equal(p.estado.energia, Math.min(R.ENERGIA_MAX, R.ENERGIA_INICIAL + 2 * R.ENERGIA_POR_HEREDADO));
   const ev = p.hacer({ tipo: 'remar', dx: 1, dy: 0 });
   assert.ok(!ev.some((e) => e.tipo === 'saber'), 'la carta del fuego ya la sabían');
 });
@@ -321,4 +322,13 @@ test('demora: un minijuego que no salió gasta como remar, pasa el tiempo y no m
   let fin = null;
   for (let i = 0; i < 40 && !fin; i++) fin = p.hacer({ tipo: 'demora' }).find((e) => e.tipo === 'fin') || null;
   assert.ok(fin && fin.gano === false, 'demorarse mucho apaga el fuego');
+});
+
+test('la noche termina sola: sin acampar, amanece', () => {
+  const R = require('../juego/nucleo/reglas.js');
+  const p = fija({ hora: 'noche', estacion: 'verano' });
+  assert.equal(p.estado.hora, 'noche');
+  const horas = [];
+  for (let i = 0; i < R.HORA.normal.amanece - R.HORA.normal.noche && !p.terminada; i++) horas.push(...p.hacer({ tipo: 'demora' }).filter((e) => e.tipo === 'hora').map((e) => e.hora));
+  assert.ok(p.terminada || horas.includes('dia'), 'después de la noche, amanece');
 });

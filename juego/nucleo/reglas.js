@@ -19,7 +19,7 @@
     // ── El fuego ──────────────────────────────────────────────────────────
     ENERGIA_MAX: 16,
     ENERGIA_POR_FUEGO: 4,         // 16 de energía = fuego 4 de 4
-    ENERGIA_INICIAL: 12,          // como en la mesa: la brasa empieza en 12…
+    ENERGIA_INICIAL: 14,          // la brasa empieza en 14 (en la mesa, 12): con 12 se apagaba a las pocas remadas (18/11)…
     ENERGIA_POR_HEREDADO: 1,      // …más 1 por cada saber heredado, hasta ENERGIA_MAX
 
     // Gasto por cada casilla remada
@@ -31,7 +31,7 @@
 
     // ── Recursos ──────────────────────────────────────────────────────────
     // Cuánto suma cada cosa que se junta está en su elemento (territorio/elementos.js, `efecto`).
-    RECURSOS_INICIALES: { lena: 1, comida: 0, pirita: 0 },
+    RECURSOS_INICIALES: { lena: 2, comida: 0, pirita: 0 },   // 2 leñas (antes 1): da tiempo de llegar a juntar (18/11)
     RECURSOS_MAX: { lena: 5, comida: 5, pirita: 1 },   // con el máximo, lo que se junta queda en el mapa
     AVIVAR: 6,                    // energía que suma una leña (en la mesa, 5; el mapa es el doble de ancho que el tablero)
     COMER_AL_ACAMPAR: 3,          // energía que suma comer al pasar la noche
@@ -40,11 +40,13 @@
     PIRITA_REENCIENDE: 4,         // energía con la que vuelve el fuego (fuego 1)
 
     // ── El día ────────────────────────────────────────────────────────────
-    // Pasos remados desde que amanece hasta que cae la tarde y la noche.
-    // En invierno los días son más cortos.
+    // Pasos remados desde que amanece hasta que cae la tarde, la noche y vuelve a amanecer.
+    // En invierno los días son más cortos y las noches, más largas. Acampar hace amanecer enseguida;
+    // sin acampar, la noche dura hasta `amanece` (18/11: antes duraba hasta acampar, y empezar de
+    // noche con la luz real apagaba el fuego en unas 6 casillas).
     HORA: {
-      normal: { tarde: 12, noche: 18 },
-      invierno: { tarde: 8, noche: 12 },
+      normal: { tarde: 12, noche: 18, amanece: 22 },
+      invierno: { tarde: 8, noche: 12, amanece: 18 },
     },
 
     // ── El clima ──────────────────────────────────────────────────────────

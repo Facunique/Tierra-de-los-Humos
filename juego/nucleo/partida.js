@@ -222,6 +222,7 @@
     function pasarElTiempo(eventos) {
       const antes = estado.hora;
       pasosDelDia++;
+      if (DIA.amanece && pasosDelDia >= DIA.amanece) pasosDelDia = 0;   // la noche también termina sin acampar (18/11)
       estado.hora = horaDe(pasosDelDia);
       if (estado.hora !== antes) eventos.push({ tipo: 'hora', antes, hora: estado.hora });
       pasosDelClima++;
