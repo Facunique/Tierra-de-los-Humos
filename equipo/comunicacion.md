@@ -23,7 +23,7 @@ Tres ideas que se repiten en el video, el pitch y el README:
 | **16/11, hasta las 23:00** | **Primer avance documentado** (borrador en [`avance-14-11.md`](avance-14-11.md)). | D escribe; A, B y C completan su parte |
 | 17/11 mañana | Grabar el video. | D graba, A juega, todos ponen la voz |
 | 17/11 tarde | Completar la presentación (ya armada en [`presentacion/`](../presentacion/index.html)) con capturas reales y **ensayar el pitch dos veces** con reloj. | Equipo |
-| **18/11, hasta las 21:00** | Ensayo de las presentaciones de la organización. **Entrega final.** | Equipo; la persona referente confirma la entrega |
+| **19/11, hasta las 15:00** | **Entrega final** (se corrió desde el 18/11 a las 21:00). El ensayo de las presentaciones de la organización estaba previsto para el 18/11. | Equipo; la persona referente confirma la entrega |
 | 19/11 | Evaluación técnica del jurado. | — |
 | **20/11 (viernes), 15:00 a 19:00** | Demo, presentación final y premiación en Fábrica de Talento, Av. Maipú 1255 (mínimo 2 integrantes). | Equipo |
 
@@ -120,7 +120,7 @@ Checklist de lo que piden las bases, con quién lo escribe:
 Lo que coordina con la organización, sea cual sea su rol:
 
 - [x] Formato del avance: se cargan en la plataforma (*Mi equipo*) dos links, el repositorio y el documento del avance, antes del 16/11 a las 23:00.
-- [x] Formato de la entrega final: cinco links en la plataforma (prototipo, repositorio, README, video y presentación), antes del 18/11 a las 21:00.
+- [x] Formato de la entrega final: cinco links en la plataforma (prototipo, repositorio, README, video y presentación), antes del 19/11 a las 15:00 (antes era el 18/11 a las 21:00).
 - [x] Video: YouTube, Drive u otra plataforma, con acceso por link. Presentación: un link (puede ser el PDF del repo o la versión HTML en GitHub Pages).
 - [ ] Preguntar si en Fábrica de Talento hay proyector, HDMI, internet y enchufes.
 - [ ] Confirmar el horario del ensayo del 18/11 y quiénes van a la demo del 20/11 (15:00 a 19:00).

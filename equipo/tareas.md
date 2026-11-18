@@ -107,7 +107,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [ ] Ensayar el pitch de hasta 5 minutos.
 - [x] La persona referente (+18) coordina con la organización: es **Facu** (B), según la plataforma de la hackatón.
 - [ ] **16/11, antes de las 23:00 (Facu):** cargar en la plataforma (*Mi equipo*) el link del repositorio y el del documento del avance (`equipo/avance-14-11.md` en GitHub, ya mergeado en `main`).
-- [ ] **18/11, antes de las 21:00 (Facu):** cargar los cinco links de la entrega final: prototipo (GitHub Pages), repositorio, README, video y presentación. Todos públicos.
+- [ ] **19/11, antes de las 15:00 (Facu):** cargar los cinco links de la entrega final: prototipo (GitHub Pages), repositorio, README, video y presentación. Todos públicos.
 
 ---
 

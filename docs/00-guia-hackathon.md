@@ -32,7 +32,7 @@ Cambios de integrantes y de eje: hasta el **7/11**.
 | 10/11 al 14/11 | Talleres preparatorios y encuentros virtuales | **Al menos 1 integrante** en el taller del eje |
 | 10/11 al 18/11 | Desarrollo con mentorías | **Al menos 2 encuentros** con la tutoría (según las bases) |
 | **16/11, hasta las 23:00** | **Primer avance documentado** (obligatorio) | Virtual |
-| **18/11, hasta las 21:00** | **Entrega final**: se cierran los repositorios. También hay ensayo de las presentaciones. | Obligatoria |
+| **19/11, hasta las 15:00** | **Entrega final**: se cierran los repositorios. El ensayo de las presentaciones estaba previsto para el 18/11. La entrega se corrió el 18/11: antes era el 18/11 a las 21:00. | Obligatoria |
 | 19/11 | Evaluación técnica del jurado: repositorio, documentación y video | — |
 | **20/11 (viernes), 15:00 a 19:00** | Gran cierre: demostraciones públicas, presentaciones finales y premiación en Fábrica de Talento (Av. Maipú 1255, Ushuaia) | **Al menos 2 integrantes** presentes |
 
@@ -49,7 +49,7 @@ Todo se entrega **cargando links en la plataforma** de la hackatón (*Mi equipo*
 1. **Repositorio** (o carpeta del proyecto).
 2. **Documento del avance**: qué problema eligieron, qué van a hacer y cómo vienen. El nuestro es [`equipo/avance-14-11.md`](../equipo/avance-14-11.md).
 
-**Entrega final (18/11, hasta las 21:00):**
+**Entrega final (19/11, hasta las 15:00; antes era el 18/11 a las 21:00):**
 
 1. **Prototipo funcional**: un enlace navegable es lo ideal (también vale ejecutable o APK).
 2. **Repositorio** con el código fuente.
@@ -154,7 +154,7 @@ Las bases piden que el proyecto se desarrolle *durante* la hackatón (cláusula 
 - [ ] Cargar todas las cartas de saber con fuentes, sumar arte y sonido.
 - [ ] Accesibilidad: contraste, controles táctiles, textos.
 - [ ] README completo, video de 3 minutos y diapositivas del pitch.
-- [ ] **18/11 antes de las 21:00: entrega final.** Apuntar a terminar el 17 y dejar el 18 como margen.
+- [ ] **19/11 antes de las 15:00: entrega final** (se corrió desde el 18/11 a las 21:00). Apuntar a terminar el 17 y dejar el 18 como margen.
 
 ### Fase 4 — Cierre (20/11, 15:00 a 19:00)
 - [ ] Demo en Fábrica de Talento con al menos 2 integrantes. Llevar el juego también funcionando sin internet, por las dudas.

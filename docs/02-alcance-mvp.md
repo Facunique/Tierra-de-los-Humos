@@ -10,7 +10,7 @@
 |---|---|
 | 16/11, hasta las 23:00 | Primer avance documentado |
 | **17/11** | **Meta interna: el juego congelado.** Desde acá, solo arreglos |
-| **18/11, hasta las 21:00** | **Entrega final**: prototipo, repositorio, README, video y presentación |
+| **19/11, hasta las 15:00** | **Entrega final**: prototipo, repositorio, README, video y presentación (antes, 18/11 a las 21:00) |
 | 20/11, de 15:00 a 19:00 | Demo en Fábrica de Talento |
 
 ## Qué cuenta como terminado
