@@ -74,7 +74,7 @@
     pirita: {
       pregunta: '¿Qué pasaba si el fuego se apagaba?',
       actividad: [
-        'Lean el dato: el fuego se hacía golpeando pirita contra pedernal, con plumón de ave u hongo seco como yesca.',
+        'Lean la carta: la escasez de pirita ayuda a explicar por qué se conserva el fuego durante los viajes en canoa. Distingan la fuente oral de la escrita.',
         'Busquen una fuente de geología sobre la pirita y el encendido por percusión. Anoten autor, obra, año y página. ¿Qué explica y qué falta investigar?',
         'Cooper (1946), «The Yahgan», p. 95, sitúa la pirita en ciertos lugares. Imaginen un recorrido ficticio para obtenerla: indiquen qué toman de la fuente y qué inventan para el ejercicio.',
       ],

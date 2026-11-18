@@ -40,7 +40,7 @@
       id: 'ballena', nombre: 'la ballena varada', dibujo: 'ballena-varada',
       donde: 'playa', costa: 'sur', zona: { desde: 0.84, hasta: 0.94 },
       carta: 'ballena', humos: true,
-      dato: 'Cooper describe encuentros de familias para aprovechar una ballena varada como alimento. Vargas Filgueira relata un desplazamiento para acudir a un varamiento.',
+      dato: 'Una ballena varada reúne a varias familias para compartir alimento. Acudir al varamiento puede motivar un viaje y un encuentro.',
       fuente: COOPER + ', p. 84, 94-95 y 99. Vargas Filgueira, Víctor (2019). Mi sangre yagán (ahua saapa yagan). Primera edición digital. Editora Cultural Tierra del Fuego, p. 16-17 del visor del PDF.',
       estado: 'borrador',
     },
@@ -51,7 +51,7 @@
       // La corteza de guindo se sacaba en primavera, cuando sube la savia (Cooper, 1946, p. 88;
       // cotejo de C en equipo/revision-cultural-paso-3.md). ✏️ C confirma antes de sacarlo de 'propuesta'.
       estaciones: ['primavera'],
-      dato: 'Cooper menciona desplazamientos para buscar corteza adecuada para canoas. Vargas Filgueira relata la recuperación de corteza conservada para reparar una embarcación; ese episodio es distinto de la extracción de corteza de un árbol.',
+      dato: 'Buscar corteza adecuada para las canoas puede motivar un viaje. Extraerla del árbol y recuperar corteza conservada en un turbal son actividades distintas.',
       fuente: COOPER + ', p. 94-95. Vargas Filgueira, Víctor (2019). Mi sangre yagán (ahua saapa yagan). Primera edición digital. Editora Cultural Tierra del Fuego, p. 23 y 31-32 del visor del PDF.',
       estado: 'propuesta',
     },
@@ -59,7 +59,7 @@
       id: 'pirita', nombre: 'las piedras de fuego', dibujo: 'pirita',
       donde: 'playa', zona: { desde: 0.84, hasta: 0.94 },
       carta: 'pirita', humos: false,
-      dato: 'Cooper menciona desplazamientos para buscar piedras de fuego (pirita), disponibles en ciertos lugares.',
+      dato: 'Las piedras de fuego se encuentran en ciertos lugares. Buscar pirita para el encendido puede motivar un desplazamiento.',
       fuente: COOPER + ', p. 94-95.',
       estado: 'propuesta',
     },

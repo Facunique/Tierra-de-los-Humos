@@ -8,11 +8,11 @@ La Persona C pidió priorizar a Víctor y usar a Cooper para lo que no pueda con
 
 La entrevista del 13/11/2026 se mantiene separada: las notas todavía señaladas con 🔍 no se convierten en confirmaciones por estar relacionadas con el libro. No se publican citas textuales ni respuestas nuevas atribuidas al referente.
 
-Para presentar la perspectiva, se propone «Víctor Vargas Filgueira, autor yagán» y «en su memoria familiar, Vargas Filgueira relata…». Las pp. 8 y 85–86 documentan el vínculo del relato con su familia. No se lo renombra con el nombre de su bisabuelo ni se inventa un apellido, clan o denominación familiar. La elección final de esa presentación y los nombres de personajes quedan pendientes, como pidió C.
+**Criterio actualizado por C:** los datos se escriben de forma directa, sin mencionar al autor, su familia o su relato dentro de `dato`. Víctor conserva su nombre en `fuente`, con la referencia de cada pasaje. Las pp. 8 y 85–86 documentan el vínculo de la obra con su familia; no se usan para renombrarlo con el nombre de un antepasado ni para asignar nombres a personajes. La redacción refiere a prácticas históricas documentadas y no fija reglas para todas las comunidades actuales.
 
 ## Las nueve cartas actuales
 
-Se actualizan `dato`, `fuente` y tres títulos, manteniendo IDs, estado, textos de juego, mapas e ilustraciones. Las nueve siguen en `borrador`: revisar fuentes no equivale a aprobación comunitaria. Siete cartas se sostienen con Vargas; amarre y pirita conservan a Cooper para el dato técnico que Vargas no documenta. Ambas también citan los pasajes pertinentes de Vargas, con su alcance separado.
+Se actualizaron `dato`, `fuente` y tres títulos, manteniendo IDs, estado, textos de juego, mapas e ilustraciones. En la revisión posterior de redacción cambian los 17 datos, y la fuente de pirita incorpora la confirmación oral de C. Las nueve activas y ocho propuestas siguen en `borrador`: revisar fuentes no equivale a aprobación comunitaria. Siete activas se sostienen con el libro de Vargas; amarre conserva a Cooper para su técnica. Pirita usa la confirmación de la entrevista y conserva la referencia técnica de Cooper.
 
 La referencia complementaria es **Cooper, J. M. (1946), «The Yahgan», *Handbook of South American Indians*, vol. 1, Smithsonian Institution, pp. 81–106**, según los pasajes registrados por el equipo. No se atribuyen sus detalles al relato de Vargas.
 
@@ -23,7 +23,7 @@ La referencia complementaria es **Cooper, J. M. (1946), «The Yahgan», *Handboo
 | Mejillones | pp. 30 y 44: recolección de mariscos con marea baja; título «Recolectar en la costa» | La carta usa Vargas. La actividad cita p. 84, según Lothrop (1928), p. 32. No se equiparan nombres de especies por intuición. |
 | Pescado | pp. 30 y 39: pesca para el campamento; título «Pescar para el campamento» | La carta usa Vargas. La actividad cita pp. 84 y 96 para línea, lazo y mano, sin atribuir esa técnica al relato de Vargas. |
 | Hongos | p. 54: hongos de los árboles como alimento en un invierno difícil | La carta usa Vargas. La actividad conserva p. 84 para la técnica de conservación en seco. |
-| Pirita | p. 66: pedernal y plumas conservadas secas | pp. 91 y 95: pirita, percusión, yesca y disponibilidad. El libro no confirma por sí solo la pirita. |
+| Pirita | Entrevista del 13/11/2026, confirmada por C el 14/11: uso y escasez de pirita, y conservación del fuego en la canoa | pp. 91 y 95: materiales del encendido. La fuente oral se distingue del libro, cuya p. 66 no confirma por sí sola la pirita. |
 | Choza | pp. 30 y 33: armado y desarmado de campamentos; título «Preparar el campamento» | La carta usa Vargas. La actividad conserva pp. 85–86 para construcción y orientación. |
 | Corteza | pp. 23 y 31–32: extracción estacional y material conservado | La carta usa Vargas. La actividad conserva p. 88 para comparar la descripción técnica. No se agrega una reparación al juego. |
 | Ballena | pp. 16–17: viaje, alimento y encuentro de familias | La carta ya se sostiene con Vargas. Cooper permanece en la bibliografía para los otros usos registrados. |

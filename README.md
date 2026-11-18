@@ -121,7 +121,7 @@ Trabajo interno del equipo:
 
 Las referencias completas, sus páginas y los límites de cada uso están en [`docs/03-contenido-cultural.md`](docs/03-contenido-cultural.md). Los nombres de lugares se registran en [`docs/06-toponimia.md`](docs/06-toponimia.md), con el criterio **Onashaga — Canal Beagle**.
 
-Las nueve cartas priorizan a **Víctor Vargas Filgueira** y los pasajes verificados de su libro. Siete se sostienen con la obra; amarre y pirita conservan a Cooper para sus detalles técnicos y distinguen el contexto documentado por Vargas. La entrevista se registra aparte. Ocho cartas nuevas están en [`datos/saberes-propuestos.js`](datos/saberes-propuestos.js) y en un [PDF de propuestas](arte/cartas/cartas-propuestas-victor.pdf), todavía fuera del catálogo activo: su selección y sus eventos se acuerdan con A y B. La [revisión actual](equipo/revision-victor-y-cartas-nuevas.md) detalla fuentes y propuestas.
+Las nueve cartas priorizan a **Víctor Vargas Filgueira**. Siete se sostienen con su libro; amarre conserva a Cooper para su técnica y pirita incorpora la confirmación oral de Víctor, con referencia complementaria a Cooper para los materiales. Los datos se redactan de forma directa y la atribución queda en **Fuente**. Describen prácticas de la vida canoera histórica documentada; no fijan reglas para todas las comunidades actuales. Ocho cartas nuevas están en [`datos/saberes-propuestos.js`](datos/saberes-propuestos.js) y en un [PDF de propuestas](arte/cartas/cartas-propuestas-victor.pdf), todavía fuera del catálogo activo. La [revisión actual](equipo/revision-victor-y-cartas-nuevas.md) detalla fuentes y propuestas.
 
 ### Fuentes escritas
 
@@ -134,6 +134,8 @@ Las nueve cartas priorizan a **Víctor Vargas Filgueira** y los pasajes verifica
 ### Consulta a la comunidad
 
 **Víctor Vargas Filgueira, referente de la comunidad yagán:** entrevista presencial del **13/11/2026, a las 11:00**, en el Museo del Fin del Mundo, Ushuaia. Nombre y atribución fiel de su testimonio autorizados verbalmente, sin restricción de medios. El permiso para citas textuales y las preguntas sobre representación, nombres y alcance de la participación comunitaria siguen abiertos en [`equipo/comunicaciones.md`](equipo/comunicaciones.md). La entrevista se registra por separado del libro y no se presenta como validación comunitaria de todo el juego.
+
+La Persona C confirmó el 14/11 el testimonio oral sobre uso y escasez de pirita y conservación del fuego en la canoa. Ese punto se incorpora a la carta de pirita como paráfrasis, sin citas textuales y sin extender la confirmación al resto de las notas de la entrevista.
 
 ### Referencias pendientes
 
@@ -149,6 +151,8 @@ Las nueve cartas priorizan a **Víctor Vargas Filgueira** y los pasajes verifica
 El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido son **propios del equipo** (CC BY-SA 4.0). No se usan fotos históricas, ilustraciones, sonidos ni música de terceros. *Se completa si se suma alguna librería o recurso nuevo.*
 
 ## Uso de inteligencia artificial
+
+- **Datos directos y confirmación de pirita (14/11):** a pedido de la Persona C, Codex (OpenAI) reescribió los datos de las nueve cartas activas, ocho propuestas y los motivos de ballena, corteza y pirita, quitando fórmulas sobre el autor o su familia y conservando las fuentes. Registró la confirmación de C del testimonio de Víctor sobre la pirita y el fuego transportado, actualizó la referencia oral y regeneró los PDF y el pitch dependientes. No agregó datos de memoria, permisos, lógica, efectos ni números del juego.
 
 - **Aviso del clima y costo de acampar en la interfaz (14/11):** a pedido de la Persona B, Claude Code conectó al juego el aviso del clima del núcleo de la Persona A: el texto, una ficha en el HUD, el sonido con subtítulo y el narrador. También cambió la ayuda y el subtítulo de acampar para que digan que cuidar el fuego toda la noche gasta. Son textos de juego: no agregó datos culturales.
 
