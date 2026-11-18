@@ -55,6 +55,7 @@ El repositorio es **público**. No subas teléfonos, mails, direcciones ni datos
 | `datos/` | Datos del juego en `.js`: las cartas de saber (`saberes.js`, con plantilla para cargar cartas sin programar). Los datos del territorio están en `juego/nucleo/territorio/` |
 | `juego/` | El juego: `nucleo/` (Persona A, sin DOM; el contrato con la interfaz está al principio de `partida.js`), `nucleo/territorio/` (lo que hay en el mapa, las especies y el destino, con su fuente; se editan sin programar) e `interfaz/` (Persona B: `juego.js` une todo, `herencia.js` guarda lo aprendido, `carta.js`, `juego.css` y `pantallas.css`) |
 | `pruebas/` | Pruebas con `node --test` (sin dependencias), desde la raíz del repo, y la partida falsa para probar la interfaz (`carta.html`). `de-punta-a-punta.cjs` juega partidas enteras en cinco pantallas con Playwright |
+| `minijuegos/` | Minijuegos antes de juntar, avivar y amarrar (Persona D). Ver `minijuegos/README.md` |
 | `sonido/` | Sonido generado por código (Web Audio), sin archivos de audio: ambiente según el lugar, efectos y voz para leer las cartas. Ver `sonido/README.md` |
 | `mesa/` | Versión de mesa para imprimir (tablero, fichas, reglas) |
 | `escuelas/` | Guía para docentes: una actividad por carta (`actividades.js`), en A4 |

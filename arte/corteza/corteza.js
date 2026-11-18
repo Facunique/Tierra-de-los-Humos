@@ -616,6 +616,24 @@
       ctx.restore();
     }
 
+    // Movimiento suave: al remar, la canoa y la cámara se deslizan hasta la casilla nueva en vez de
+    // saltar. Si el salto es grande (otro viaje, otra escena), o la persona pidió menos movimiento,
+    // o la escena trae suave: false, se ubican de una.
+    const QUIETO = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let suave = null;
+    function deslizar() {
+      const c = E.canoa, v = E.vista;
+      if (!c) { suave = null; return null; }
+      const ahora = typeof performance !== 'undefined' ? performance.now() : Date.now();
+      const meta = { cx: c.x, cy: c.y, vx: v ? v.x : 0, vy: v ? v.y : 0 };
+      const lejos = suave && (Math.abs(meta.cx - suave.cx) + Math.abs(meta.cy - suave.cy) > 3 || Math.abs(meta.vx - suave.vx) + Math.abs(meta.vy - suave.vy) > 4);
+      if (!suave || lejos || QUIETO || E.suave === false) { suave = Object.assign({ ms: ahora }, meta); return suave; }
+      const dt = Math.min(0.1, (ahora - suave.ms) / 1000), k = 1 - Math.exp(-dt * 14);
+      suave.ms = ahora;
+      for (const q of ['cx', 'cy', 'vx', 'vy']) { suave[q] += (meta[q] - suave[q]) * k; if (Math.abs(meta[q] - suave[q]) < 0.01) suave[q] = meta[q]; }
+      return suave;
+    }
+
     const api = {
       /** Define o actualiza la escena. Solo hace falta pasar lo que cambia. */
       escena(e) {
@@ -633,6 +651,34 @@
       },
       /** Dibuja un cuadro. t en segundos (para las animaciones). */
       dibujar(t) {
+        // Se dibuja con la canoa y la cámara donde van pasando (ver deslizar), y después se dejan como estaban.
+        const sv = deslizar(), canoaReal = E.canoa, vistaReal = E.vista;
+        if (sv) {
+          E.canoa = Object.assign({}, canoaReal, { x: sv.cx, y: sv.cy });
+          if (vistaReal) E.vista = Object.assign({}, vistaReal, { x: sv.vx, y: sv.vy });
+        }
+        try { cuadro(t); } finally { E.canoa = canoaReal; E.vista = vistaReal; }
+        return api;
+      },
+      /** ¿Sigue deslizándose la canoa? (para las pruebas y el grabador) */
+      get enMovimiento() { return !!(suave && E.canoa && (suave.cx !== E.canoa.x || suave.cy !== E.canoa.y)); },
+      /** Convierte coordenadas de un toque o clic (en el canvas) a casilla del mapa. */
+      casillaEn(clientX, clientY) {
+        const r = canvas.getBoundingClientRect(), v = E.vista || { x: 0, y: 0, ancho: E.ancho, alto: E.alto };
+        return { x: Math.floor(v.x + (clientX - r.left) / r.width * v.ancho), y: Math.floor(v.y + (clientY - r.top) / r.height * v.alto) };
+      },
+      /** Centra la cámara en una casilla sin salirse del mapa. Devuelve la vista. */
+      centrar(cx, cy, ancho, alto) {
+        const a = Math.min(ancho, E.ancho), h = Math.min(alto, E.alto);
+        E.vista = { x: Math.max(0, Math.min(E.ancho - a, cx + 0.5 - a / 2)), y: Math.max(0, Math.min(E.alto - h, cy + 0.5 - h / 2)), ancho: a, alto: h };
+        api.ajustar();
+        return E.vista;
+      },
+      get celda() { return T; },
+    };
+
+    /** Dibuja un cuadro. t en segundos (para las animaciones). */
+    function cuadro(t) {
         t = t || 0;
         asegurarCaches();
         const est = ESTACIONES[E.estacion] || ESTACIONES.verano, s = T / 48, viento = E.clima === 'viento' ? 2.4 : 0.6;
@@ -731,21 +777,7 @@
           ctx.restore();
         }
         ctx.setTransform(1, 0, 0, 1, 0, 0);
-      },
-      /** Convierte coordenadas de un toque o clic (en el canvas) a casilla del mapa. */
-      casillaEn(clientX, clientY) {
-        const r = canvas.getBoundingClientRect(), v = E.vista || { x: 0, y: 0, ancho: E.ancho, alto: E.alto };
-        return { x: Math.floor(v.x + (clientX - r.left) / r.width * v.ancho), y: Math.floor(v.y + (clientY - r.top) / r.height * v.alto) };
-      },
-      /** Centra la cámara en una casilla sin salirse del mapa. Devuelve la vista. */
-      centrar(cx, cy, ancho, alto) {
-        const a = Math.min(ancho, E.ancho), h = Math.min(alto, E.alto);
-        E.vista = { x: Math.max(0, Math.min(E.ancho - a, cx + 0.5 - a / 2)), y: Math.max(0, Math.min(E.alto - h, cy + 0.5 - h / 2)), ancho: a, alto: h };
-        api.ajustar();
-        return E.vista;
-      },
-      get celda() { return T; },
-    };
+    }
     return api;
   }
 

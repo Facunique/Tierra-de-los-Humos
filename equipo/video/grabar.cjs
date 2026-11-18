@@ -95,16 +95,35 @@ function subtitulos() {
     await p.locator('#b-yagan').click(); await p.waitForTimeout(1600);
   }
 
+  // Juega el minijuego abierto (minijuegos/minijuegos.js) como una persona: toca lo que se junta o
+  // espera a que la marca pase por la zona.
+  async function jugarMinijuego(p) {
+    const t0 = Date.now();
+    while ((await p.locator('.mj').count()) && Date.now() - t0 < 25000) {
+      const cosas = p.locator('.mj__cosa:not(:disabled):has(img)');
+      if (await cosas.count()) { await p.waitForTimeout(soloFotos ? 50 : 450); await cosas.first().click(); continue; }
+      if (await visible(p, /^Probar de nuevo$/)) { await boton(p, /^Probar de nuevo$/).click(); await p.waitForTimeout(300); continue; }
+      await p.evaluate(() => {
+        const z = document.querySelector('.mj__zona'), m = document.querySelector('.mj__marca'); if (!z || !m) return;
+        const a = z.getBoundingClientRect(), b = m.getBoundingClientRect(), c = b.left + b.width / 2;
+        if (c > a.left + 8 && c < a.right - 8) document.querySelector('.mj__botones .boton-papel--fuego').click();
+      });
+      await p.waitForTimeout(25);
+    }
+    await p.waitForTimeout(700);
+  }
+
   // Rema hacia el este (ahí está el destino) y, si la costa lo impide, la bordea.
   function remero(p) {
     let bloq = false, vert = -1;
     return async (pausa, cuidarFuego) => {
+      if (await p.locator('.mj').count()) { if (!p.minijuegoVisto) { p.minijuegoVisto = true; await p.foto('04b-minijuego.jpg'); } await jugarMinijuego(p); return 'minijuego'; }
       if (await visible(p, CARTA)) return 'carta';
       // Mientras el humo cubre y descubre la pantalla, el juego no toma clics: se espera.
       if (await visible(p, FIN)) { await p.waitForTimeout(1200); return 'fin'; }
       const fuego = Number(((await p.textContent('body')).match(/Fuego (\d) de 4/) || [])[1] || 4);
-      if (await boton(p, /^Juntar/).isEnabled()) { await boton(p, /^Juntar/).click(); await espera(p, pausa); return 'junto'; }
-      if (cuidarFuego && fuego <= 2 && (await boton(p, /^Avivar el fuego$/).isEnabled())) { await boton(p, /^Avivar el fuego$/).click(); await espera(p, pausa); return 'avivo'; }
+      if (await boton(p, /^Juntar/).isEnabled()) { await boton(p, /^Juntar/).click(); await espera(p, pausa); if (await p.locator('.mj').count()) await jugarMinijuego(p); return 'junto'; }
+      if (cuidarFuego && fuego <= 2 && (await boton(p, /^Avivar el fuego$/).isEnabled())) { await boton(p, /^Avivar el fuego$/).click(); await espera(p, pausa); if (await p.locator('.mj').count()) await jugarMinijuego(p); return 'avivo'; }
       const t = bloq ? (vert < 0 ? 'ArrowUp' : 'ArrowDown') : 'ArrowRight';
       await p.keyboard.press(t); await p.waitForTimeout(Math.max(250, soloFotos ? 300 : pausa));
       const choco = /solo va por el agua|no se puede remar/i.test((await p.textContent('[role=status]').catch(() => '')) || '');
