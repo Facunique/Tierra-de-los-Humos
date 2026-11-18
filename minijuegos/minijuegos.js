@@ -217,7 +217,9 @@
 
   /**
    * Abre un minijuego. Devuelve una promesa: true si salió bien (y hay que hacer la
-   * acción), false si la persona volvió al viaje.
+   * acción), false si la persona volvió al viaje sin probar, y 'fallo' si no salió:
+   * se acabaron los intentos o el tiempo, o volvió después de errar. Con 'fallo' la
+   * interfaz hace { tipo: 'demora' }: se les fue el tiempo y el fuego baja (18/11, B).
    */
   function jugar(tipo, que, opciones) {
     const j = cual(tipo, que);
@@ -258,6 +260,7 @@
       function cerrar(ok) {
         if (fin) return; fin = true;
         if (ok === false && !terminado) anotar(false); // volver al viaje sin terminar corta la racha
+        if (ok === false && !limpio) ok = 'fallo';     // volver después de errar también cuesta
         cancelAnimationFrame(cuadroId);
         document.removeEventListener('keydown', teclas, true);
         capa.remove(); actual = null;
@@ -275,13 +278,11 @@
         if (terminado) return;
         terminado = 'mal';
         anotar(false);
-        estado.textContent = texto + ' Podés probar de nuevo o volver al viaje.';
+        estado.textContent = texto + ' Se les fue el tiempo: el fuego baja un poco.';
         botones.textContent = '';
-        const otra = crear('button', 'boton-papel boton-papel--fuego', botones, 'Probar de nuevo'); otra.type = 'button';
-        otra.addEventListener('click', () => { cerrar(null); });
-        const volver = crear('button', 'boton-papel', botones, 'Volver al viaje'); volver.type = 'button';
-        volver.addEventListener('click', () => cerrar(false));
-        otra.focus();
+        const seguir = crear('button', 'boton-papel boton-papel--fuego', botones, 'Seguir el viaje'); seguir.type = 'button';
+        seguir.addEventListener('click', () => cerrar('fallo'));
+        seguir.focus();
       }
 
       // ── Juntar: cada cosa es un botón ──

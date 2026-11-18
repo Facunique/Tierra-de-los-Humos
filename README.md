@@ -95,7 +95,7 @@ Trabajo interno del equipo:
 | Describir lo que rodea a la canoa (con el narrador) | Botón «Describir alrededor» | <kbd>N</kbd> |
 | Pausa | Botón «Pausa» | <kbd>Esc</kbd> |
 
-- **Los minijuegos** salen antes de juntar, avivar y amarrar. Si sale bien, la acción se hace; si no, se puede probar de nuevo o volver al viaje, sin perder nada. Se apagan en el título (Minijuegos: no), y con el narrador encendido no aparecen.
+- **Los minijuegos** salen antes de juntar, avivar y amarrar. Si sale bien, la acción se hace; si no sale, se pierde el turno y el fuego baja un poco, como al remar. Se apagan en el título (Minijuegos: no), y con el narrador encendido no aparecen.
 - **El fuego** se gasta al remar, y más con viento en el canal hondo, con lluvia o de noche. Cerca de una choza se gasta menos. Siempre se muestra su número («Fuego 3 de 4»).
 - **Lo que tiene borde de papel (las pegatinas) se puede juntar.** El resto es paisaje.
 - **El humo** cubre lo que todavía no exploraste.
@@ -154,6 +154,7 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 ## Uso de inteligencia artificial
 
+- **Costo al fallar y crónica del viaje (18/11):** a pedido de Facu (Persona B), Claude Code hizo que fallar un minijuego cueste un turno (una acción `demora` en el núcleo, con su prueba) y sumó la crónica del final, que cuenta lo que pasó en la partida. Son textos y reglas de juego: no agregó datos culturales.
 - **Datos directos y confirmación de pirita (14/11):** a pedido de la Persona C, Codex (OpenAI) reescribió los datos de las nueve cartas activas, ocho propuestas y los motivos de ballena, corteza y pirita, quitando fórmulas sobre el autor o su familia y conservando las fuentes. Registró la confirmación de C del testimonio de Víctor sobre la pirita y el fuego transportado, actualizó la referencia oral y regeneró los PDF y el pitch dependientes. No agregó datos de memoria, permisos, lógica, efectos ni números del juego.
 
 - **Aviso del clima y costo de acampar en la interfaz (14/11):** a pedido de la Persona B, Claude Code conectó al juego el aviso del clima del núcleo de la Persona A: el texto, una ficha en el HUD, el sonido con subtítulo y el narrador. También cambió la ayuda y el subtítulo de acampar para que digan que cuidar el fuego toda la noche gasta. Son textos de juego: no agregó datos culturales.

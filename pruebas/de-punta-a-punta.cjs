@@ -109,7 +109,8 @@ const MAX_ACCIONES = 400;
           while ((await p.locator('.mj').count()) && Date.now() - t0 < 25000) {
             const cosas = p.locator('.mj__cosa:not(:disabled):has(img)');
             if (await cosas.count()) { await cosas.first().click(); await p.waitForTimeout(120); continue; }
-            if (await visible(/^Probar de nuevo$/)) { await boton(/^Probar de nuevo$/).click(); await p.waitForTimeout(300); continue; }
+            // Si no salió, se pierde el turno (18/11): se sigue el viaje y el fuego baja.
+            if (await visible(/^Seguir el viaje$/)) { r.fallos = (r.fallos || 0) + 1; await boton(/^Seguir el viaje$/).click(); await p.waitForTimeout(300); continue; }
             await p.evaluate(() => {
               const z = document.querySelector('.mj__zona'), m = document.querySelector('.mj__marca'); if (!z || !m) return;
               const a = z.getBoundingClientRect(), b = m.getBoundingClientRect(), c = b.left + b.width / 2;
