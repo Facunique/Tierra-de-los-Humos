@@ -4,7 +4,9 @@
 
 ## Estado actual
 
-- **Fecha de la última actualización:** 18/11/2026 (día de la entrega).
+- **Fecha de la última actualización:** 18/11/2026.
+- **La entrega final se corrió (18/11):** ahora es el **jueves 19/11 hasta las 15:00** (antes, 18/11 a las 21:00). Lo avisó Facu.
+- **Cierre del códice aprobado (18/11, C y B):** Dani aprobó el texto de `docs/07-cierre-del-codice.md`, y B lo puso en la pantalla «Hoy» del juego (`index.html`), con la fuente visible, en lugar del texto provisorio. **Para D (Nacho):** la maqueta `arte/pantallas/index.html` sigue con el texto provisorio.
 - **Prueba de punta a punta, capturas y clips al día (18/11, B):** con los PR 31 a 34 en `main`, `node pruebas/de-punta-a-punta.cjs` pasa en las cinco pantallas. Los viajes duran de 27 a 60 acciones (antes, unas 14) y se juegan seis de los siete minijuegos. Se regeneraron los cuadros del storyboard (`equipo/video/*.jpg`, menos `04b-minijuego.jpg`, que es de D) y las capturas del README, donde ya se ve la crónica del final. Los clips se volvieron a grabar en `equipo/video/clips/`: no se suben al repo, y quien edite el video los tiene que grabar en su compu con `node equipo/video/grabar.cjs`. El pitch no cambia: dibuja sus escenas en vivo.
 - **La canoa se mece y deja estela (18/11, B, en el motor de D):** en `arte/corteza/corteza.js`, la canoa sube, baja y se inclina apenas con el agua, y al remar deja ondas que se abren y se borran. Con movimiento reducido no hay ni una cosa ni la otra. Es para que se vea menos «cuadrado» (charla del 16/11). **Para D (Nacho):** son la función `dibujarEstela` y el parámetro `quieto` de `canoa()`; si no te gusta, se ajusta o se saca ahí.
 - **Viajes más largos (18/11, B, idea 33):** el fuego arranca en 14 (antes 12) y con 2 leñas (antes 1), y la noche termina sola: amanece después de 4 pasos de noche (6 en invierno), aunque no acampen. Antes, empezar de noche con la luz real apagaba el fuego en unas 6 casillas si no se juntaba nada; ahora, en unas 10, y de día en 13 en vez de 12. El jugador automático cuidadoso llega del 80 al 89 % de las veces (antes, del 46 al 77 %), y el que va derecho sin juntar sigue sin llegar nunca. **Para A (Mati):** los números están en `reglas.js`; el amanecer, en `pasarElTiempo` de `partida.js`. **Para quien lleve la mesa:** `mesa/reglas.html` sigue con 12 de fuego y 1 leña; queda distinta a propósito hasta que se decida.
@@ -80,7 +82,7 @@
 |---|---|
 | 13/11, 11:00 | Entrevista realizada a Víctor Vargas Filgueira en el Museo del Fin del Mundo, Ushuaia. Dani confirmó esta fecha, que reemplaza la prevista del 14/11. Ver `comunicaciones.md`. |
 | **16/11, hasta las 23:00** | Primer avance documentado (obligatorio). Antes era el 14/11. |
-| **18/11, hasta las 21:00** | Entrega final: se cierran los repositorios. Ensayo de las presentaciones. Meta interna: terminar el 17. Antes era el 17/11 a las 20:00. |
+| **19/11, hasta las 15:00** | Entrega final: se cierran los repositorios. Se corrió el 18/11 (antes, 18/11 a las 21:00; y antes, 17/11 a las 20:00). |
 | 19/11 | Evaluación técnica del jurado. |
 | **20/11 (viernes), 15:00 a 19:00** | Gran cierre en Fábrica de Talento (Av. Maipú 1255, Ushuaia): demos, presentaciones finales y premiación. Al menos 2 integrantes. Antes era el jueves 19/11. |
 
