@@ -146,9 +146,20 @@
     });
   }
   // Empezar otro viaje con uno a medias: termina este, y lo aprendido igual pasa a la generación siguiente.
+  // Se confirma en el mismo botón (primer toque avisa, el segundo confirma): confirm() puede estar
+  // bloqueado en algunos navegadores y entonces el botón no hacía nada (18/11).
+  let confirmarOtro = null;
   $('b-empezar').addEventListener('click', (e) => {
     if (!viajeEnCurso()) return;
-    if (!confirm('Si empezás otro viaje, este termina acá. Lo que aprendieron pasa a la generación siguiente.')) { e.stopImmediatePropagation(); return; }
+    if (!confirmarOtro) {
+      e.stopImmediatePropagation();
+      const b = $('b-empezar');
+      b.textContent = '¿Seguro? Tocá de nuevo';
+      anunciar('Si empezás otro viaje, este termina acá. Lo que aprendieron pasa a la generación siguiente. Tocá de nuevo para confirmar.');
+      confirmarOtro = setTimeout(() => { confirmarOtro = null; pintarTitulo(); }, 4000);
+      return;
+    }
+    clearTimeout(confirmarOtro); confirmarOtro = null;
     herencia.cerrarViaje(PUEBLO, partida.estado.aprendidos, { gano: false });
     partida = null;
   }, true);
@@ -445,6 +456,9 @@
   $('b-generacion').addEventListener('click', async () => {
     if (pasando) return;
     pasando = true;
+    // Aviso enseguida: la animación del paso del fuego dura unos 5 segundos y el botón no tiene que parecer trabado.
+    const bg = $('b-generacion'), textoAntes = bg.textContent;
+    bg.textContent = 'Preparando el viaje…'; bg.setAttribute('aria-busy', 'true'); bg.classList.add('cargando');
     try {
       // Si el humo de la pantalla anterior todavía se está abriendo, se espera a que termine.
       while (enTransicion) await new Promise((r) => setTimeout(r, 50));
@@ -457,7 +471,7 @@
       }
       partida = null;
       ir('viaje');
-    } finally { pasando = false; }
+    } finally { pasando = false; bg.textContent = textoAntes; bg.removeAttribute('aria-busy'); bg.classList.remove('cargando'); }
   });
 
   // ── Postal ────────────────────────────────────────────────────────────────
