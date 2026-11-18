@@ -52,7 +52,7 @@
     fuego: {
       id: 'fuego', pueblo: 'yagan', estado: 'borrador',
       tipo: 'Fuego', titulo: 'El fuego viaja en la canoa',
-      dato: 'En el relato de Vargas Filgueira, el fuego viaja en la canoa y se acomoda junto con las pertenencias antes de partir.',
+      dato: 'El fuego se lleva encendido en la canoa. Antes de partir, se acomoda junto con las pertenencias del viaje.',
       juego: 'Avivá el fuego con leña para seguir el viaje.',
       fuente: VARGAS + ', p. 33 del visor del PDF.',
       alt: 'Una canoa de corteza frente a una playa con bosque. En el centro arde el fuego y sube humo. Van dos personas sin rasgos: una lleva un arpón en reposo y la otra, un remo.',
@@ -61,7 +61,7 @@
     amarre: {
       id: 'amarre', pueblo: 'yagan', estado: 'borrador',
       tipo: 'Canoa', titulo: 'Amarrar en el cachiyuyo',
-      dato: 'Vargas Filgueira relata a mujeres remando durante el viaje. Cooper documenta el amarre de la canoa lejos de la orilla, en el cachiyuyo.',
+      dato: 'El manejo de la canoa incluye el remo y el amarre. Para detenerse, se asegura entre el cachiyuyo, lejos de la orilla.',
       juego: 'Para acampar, amarrá la canoa en el cachiyuyo, cerca de una playa.',
       fuente: COOPER + ', p. 88 y 96 (amarre en cachiyuyo). ' + VARGAS + ', p. 33 del visor del PDF.',
       alt: 'La canoa, con el fuego encendido y dos personas en silueta, está quieta entre las algas del cachiyuyo, en el agua frente a una playa con bosque.',
@@ -70,7 +70,7 @@
     mejillones: {
       id: 'mejillones', pueblo: 'yagan', estado: 'borrador',
       tipo: 'Alimento', titulo: 'Recolectar en la costa',
-      dato: 'Vargas Filgueira relata la recolección de mariscos aprovechando la marea baja, después de preparar el campamento.',
+      dato: 'La marea baja permite recolectar mariscos en la costa. Después de preparar el campamento, se aprovecha ese momento para reunir alimento.',
       juego: 'Juntá mejillones en la playa para sumar comida.',
       fuente: VARGAS + ', p. 30 y 44 del visor del PDF.',
       alt: 'Una playa al pie del bosque, con dos rocas en el agua. Sobre la playa hay dos pegatinas de mejillones con borde de papel.',
@@ -79,7 +79,7 @@
     pescado: {
       id: 'pescado', pueblo: 'yagan', estado: 'borrador',
       tipo: 'Alimento', titulo: 'Pescar para el campamento',
-      dato: 'Vargas Filgueira relata cómo la pesca forma parte del abastecimiento del campamento. En uno de los episodios, las mujeres salen a pescar mientras otras personas trabajan la corteza.',
+      dato: 'La pesca aporta alimento al campamento. Mientras parte del grupo sale a pescar, otras personas trabajan la corteza para fabricar canoas.',
       juego: 'El pescado se junta en el agua baja.',
       fuente: VARGAS + ', p. 30 y 39 del visor del PDF.',
       alt: 'Agua frente a una playa con bosque. En el agua hay una pegatina de pescado con borde de papel.',
@@ -88,7 +88,7 @@
     hongos: {
       id: 'hongos', pueblo: 'yagan', estado: 'borrador',
       tipo: 'Alimento', titulo: 'Hongos de los árboles',
-      dato: 'Vargas Filgueira menciona los hongos de los árboles y las raíces entre los alimentos a los que recurre el grupo durante un invierno difícil.',
+      dato: 'Los hongos de los árboles y las raíces complementan los alimentos disponibles durante un invierno difícil.',
       juego: 'Los hongos se juntan en la orilla del bosque.',
       fuente: VARGAS + ', p. 54 del visor del PDF.',
       alt: 'Árboles rojos y verdes junto a una playa. Sobre la playa hay una pegatina de hongos amarillos y anaranjados sobre una rama, con borde de papel.',
@@ -97,16 +97,16 @@
     pirita: {
       id: 'pirita', pueblo: 'yagan', estado: 'borrador',
       tipo: 'Fuego', titulo: 'Piedras de fuego',
-      dato: 'Vargas Filgueira relata el uso de pedernal y plumas secas. Cooper documenta pirita, percusión y yesca de plumón u hongo seco.',
+      dato: 'La pirita se usa junto con el pedernal para encender el fuego. Como escasea, se mantiene una fogata encendida en la canoa durante los viajes.',
       juego: 'Si llevás pirita, el juego la usa automáticamente para volver a encender el fuego una vez.',
-      fuente: COOPER + ', p. 91 y 95 (pirita y yesca). ' + VARGAS + ', p. 66 del visor del PDF.',
+      fuente: COOPER + ', p. 91 y 95 (materiales). Vargas Filgueira, Víctor (2026). Entrevista del 13/11/2026 (escasez y transporte del fuego), confirmada por C el 14/11.',
       alt: 'Una playa al pie del bosque, con una roca en la orilla. Sobre la playa hay una pegatina de una piedra dorada junto a una piedra gris, con borde de papel.',
       mapa: ['GGGGLLGG', '..r.....', ',,,,,,,,'], extra: { objetos: [{ id: 'pirita', x: 3, y: 1 }] },
     },
     choza: {
       id: 'choza', pueblo: 'yagan', estado: 'borrador',
       tipo: 'Refugio', titulo: 'Preparar el campamento',
-      dato: 'En el relato, el grupo arma sus viviendas al detenerse y las desarma antes de continuar. El campamento forma parte del recorrido.',
+      dato: 'Las viviendas del campamento se arman al detenerse y se desarman antes de continuar. El campamento forma parte del recorrido.',
       juego: 'Junto a una choza, el fuego se gasta más despacio.',
       fuente: VARGAS + ', p. 30 y 33 del visor del PDF.',
       alt: 'Una choza de domo en un claro junto a la playa. Sale humo de arriba y se ve fuego por la puerta. Más cerca del agua hay un anillo de conchas claras.',
@@ -115,7 +115,7 @@
     corteza: {
       id: 'corteza', pueblo: 'yagan', estado: 'borrador',
       tipo: 'Canoa', titulo: 'Una canoa de corteza',
-      dato: 'El grupo busca corteza en la época en que se afloja. En otro episodio, recupera corteza conservada en un turbal para reparar una canoa.',
+      dato: 'La corteza se busca en la época en que se afloja. También se conserva en el agua de un turbal para recuperarla cuando hace falta reparar una canoa.',
       juego: 'La primera vez que juntás corteza, descubrís este saber.',
       fuente: VARGAS + ', p. 23 y 31-32 del visor del PDF.',
       alt: 'Un árbol de tronco recto con una franja clara en la corteza, en una playa entre el bosque y el canal.',
@@ -124,7 +124,7 @@
     ballena: {
       id: 'ballena', pueblo: 'yagan', estado: 'borrador',
       tipo: 'Encuentro', titulo: 'La ballena varada',
-      dato: 'En la memoria familiar de Vargas Filgueira, el viaje hacia una ballena varada permite compartir alimento y reencontrarse con otras familias.',
+      dato: 'Una ballena varada reúne a varias familias para compartir alimento y reencontrarse. Acudir al varamiento puede motivar un viaje.',
       juego: 'Una ballena varada es uno de los motivos del viaje. En esta versión, llegar con el fuego encendido completa la partida.',
       fuente: VARGAS + ', p. 16-17 del visor del PDF.',
       alt: 'Una ballena sobre la playa, al pie del bosque. Por encima de los árboles se ven columnas de humo.',

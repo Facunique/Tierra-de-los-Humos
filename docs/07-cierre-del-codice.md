@@ -21,7 +21,7 @@ El pueblo yagán sigue presente. En Ushuaia, la Comunidad Yagán Paiakoala es pa
 
 La entrevista del 13/11/2026 se reconoce en su registro propio. No hay una respuesta específica registrada sobre este cierre ni sobre prácticas actuales concretas: no se la inventa a partir del libro. Se mantienen las preguntas y permisos abiertos de `equipo/comunicaciones.md`.
 
-Se conserva **Víctor Vargas Filgueira**, el nombre del autor en la obra y autorizado para atribuirle su testimonio. Para presentar la perspectiva, se propone «autor yagán» o «en su memoria familiar, Vargas Filgueira relata…». No se sustituye su nombre por el de un antepasado ni se inventa un nombre de familia o clan.
+Se conserva **Víctor Vargas Filgueira**, el nombre del autor en la obra y autorizado para atribuirle su testimonio. C eligió redactar los datos de las cartas de forma directa, dejando al autor en la fuente. No se sustituye su nombre por el de un antepasado ni se inventa un nombre de familia o clan. Este criterio de las cartas no modifica todavía el texto de cierre propuesto arriba.
 
 La consulta sobre cómo quiere presentar su pertenencia familiar queda abierta. No se asignan nombres en lengua yagán a personajes. La obra y la entrevista son fuentes distintas; tampoco se asigna el libro a una voz colectiva sin autorización.
 
