@@ -48,7 +48,8 @@
   let actual = 'titulo';
   let volverA = 'titulo';                 // a dónde vuelven el códice y la ayuda
   function ir(nombre) {
-    if (nombre === 'codice' || nombre === 'ayuda') { if (actual !== 'codice' && actual !== 'ayuda' && actual !== 'cierre') volverA = actual; }
+    const consulta = (n) => n === 'codice' || n === 'ayuda' || n === 'fuentes' || n === 'cierre';
+    if (consulta(nombre) && nombre !== 'cierre') { if (!consulta(actual)) volverA = actual; }
     document.querySelectorAll('.pantalla').forEach((p) => { p.hidden = p.id !== 'p-' + nombre; });
     actual = nombre;
     if (nombre === 'titulo') pintarTitulo();
@@ -56,6 +57,7 @@
     if (nombre === 'viaje') entrarAlViaje();
     if (nombre === 'codice') pintarCodice();
     if (nombre === 'ayuda') pintarAyuda();
+    if (nombre === 'fuentes') pintarFuentes();
     prepararFondo(nombre);
     const foco = document.querySelector('#p-' + nombre + ' h1, #p-' + nombre + ' h2');
     if (foco) { foco.setAttribute('tabindex', '-1'); foco.focus({ preventScroll: true }); }
@@ -497,11 +499,7 @@
         : 'El fuego se apagó ' + (APAGADO[e.causa] || '') + ', después de ' + e.pasos + ' casillas. Pero lo aprendido no se pierde.';
     // Al llegar, el dato del destino con su fuente en corto (la completa está en la carta y en el códice).
     $('fin-dato').hidden = !(ev.gano && d);
-    if (ev.gano && d) {
-      const fd = $('fin-dato'); fd.textContent = d.dato;
-      fd.appendChild(document.createElement('br'));
-      fd.appendChild(document.createTextNode('Fuente: ' + fuenteCorta(d.fuente)));
-    }
+    if (ev.gano && d) $('fin-dato').textContent = d.dato;   // la fuente está en «Fuentes», en el menú
     $('fin-lista-titulo').textContent = e.aprendidos.length ? 'Pasan a la generación ' + linaje.generacion + ':' : 'Esta vez no aprendieron nada nuevo.';
     pintarMarcas(e);
     const lista = $('fin-lista'); lista.textContent = '';
@@ -588,7 +586,7 @@
         const a = document.createElement('article'); a.className = 'carta-saber papel';
         a.innerHTML = '<p class="carta-saber__tipo">Saber · Yagán · ' + c.tipo + '</p><canvas class="carta-saber__ilus" role="img"></canvas><h3 class="carta-saber__titulo">' + c.titulo + '</h3>' +
           '<p><span class="etiqueta etiqueta--dato">Dato</span> ' + c.dato + '</p><p><span class="etiqueta etiqueta--juego">En el juego</span> ' + c.juego + '</p>' +
-          '<p class="carta-saber__fuente">Fuente: ' + fuenteCorta(c.fuente) + '</p>' + (c.estado === 'borrador' ? '<p class="borrador">Texto en revisión con las fuentes.</p>' : '');
+          (c.estado === 'borrador' ? '<p class="borrador">Texto en revisión con las fuentes.</p>' : '');
         const cv = a.querySelector('canvas'); cv.setAttribute('aria-label', c.alt || 'Ilustración de la carta');
         cont.appendChild(a); dibujar.push([cv, c.mapa, c.extra]);
       } else {
@@ -599,14 +597,6 @@
       }
     }
     requestAnimationFrame(() => dibujar.forEach(([cv, mapa, extra]) => { if (mapa) escenaEn(cv, mapa, extra); }));
-    // Las obras citadas, completas y una sola vez (las cartas las citan en corto).
-    const obras = $('codice-obras');
-    if (obras && window.TDH_FUENTE) {
-      const lista = TDH_FUENTE.obras(ids.filter((id) => sabe.has(id)).map((id) => SABERES[id].fuente));
-      obras.hidden = !lista.length;
-      const ul = obras.querySelector('ul'); ul.textContent = '';
-      for (const o of lista) { const li = document.createElement('li'); li.textContent = o; ul.appendChild(li); }
-    }
     $('b-borrar').hidden = !l.saberes.length && l.generacion === 1;
   }
   $('b-borrar').addEventListener('click', () => {
@@ -616,6 +606,33 @@
     pintarCodice();
     $('t-codice').focus();
   });
+
+  // ── Fuentes ───────────────────────────────────────────────────────────────
+  // Todas las fuentes juntas (19/11): las cartas ya no las muestran. Primero, de dónde sale
+  // cada saber y cada motivo del viaje, en corto; después, las obras completas.
+  function pintarFuentes() {
+    const cont = $('fuentes-lista'); if (!cont || cont.children.length) return;
+    const destinos = window.TDH_DESTINOS ? Object.values(TDH_DESTINOS.DESTINOS).filter((d) => d.estado !== 'propuesta') : [];
+    const grupo = (titulo, filas) => {
+      const s = document.createElement('section'); s.className = 'fuentes__grupo papel';
+      const h = document.createElement('h3'); h.textContent = titulo; s.appendChild(h);
+      const dl = document.createElement('dl');
+      for (const [nombre, fuente] of filas) {
+        const dt = document.createElement('dt'); dt.innerHTML = nombre;   // títulos del repo (datos/saberes.js)
+        const dd = document.createElement('dd'); dd.textContent = fuenteCorta(fuente);
+        dl.appendChild(dt); dl.appendChild(dd);
+      }
+      s.appendChild(dl); cont.appendChild(s);
+    };
+    grupo('Los saberes', catalogoDe(PUEBLO).map((id) => [SABERES[id].titulo, SABERES[id].fuente]));
+    if (destinos.length) grupo('Los motivos del viaje', destinos.map((d) => [d.nombre.charAt(0).toUpperCase() + d.nombre.slice(1), d.fuente]));
+    const todas = catalogoDe(PUEBLO).map((id) => SABERES[id].fuente).concat(destinos.map((d) => d.fuente));
+    const s = document.createElement('section'); s.className = 'fuentes__grupo fuentes__obras papel';
+    const h = document.createElement('h3'); h.textContent = 'Obras citadas'; s.appendChild(h);
+    const ul = document.createElement('ul');
+    for (const o of (window.TDH_FUENTE ? TDH_FUENTE.obras(todas) : [])) { const li = document.createElement('li'); li.textContent = o; ul.appendChild(li); }
+    s.appendChild(ul); cont.appendChild(s);
+  }
 
   // ── Cómo se juega ─────────────────────────────────────────────────────────
   function pintarAyuda() {

@@ -12,11 +12,10 @@
  * no es un saber (el motivo del viaje al empezar): cambia el renglón de arriba
  * y la carta lleva la clase tdh-carta--otra.
  *
- * - La fuente queda siempre a la vista: si el texto no entra, se desplaza el
- *   cuerpo de la carta (dato y en el juego), no la fuente ni los botones.
+ * - Si el texto no entra, se desplaza el cuerpo de la carta (dato y en el juego), no los botones.
  * - La ilustración se dibuja con Corteza y lleva el texto alternativo (carta.alt).
- * - La fuente va en corto (autor, año y página) con juego/interfaz/fuente.js; la
- *   referencia completa está al final del códice. Sin fuente.js, va entera.
+ * - La carta no muestra la fuente: todas están en la pantalla «Fuentes» del menú
+ *   (juego/interfaz/juego.js, pintarFuentes). El dato sigue con su fuente en datos/saberes.js.
  * - Sin botón de voz desde el 19/11: la voz del dispositivo sonaba robótica. Un lector
  *   de pantalla la lee igual, y el narrador del viaje sigue en las opciones.
  * - Teclado: el foco queda adentro de la carta; Escape la cierra. Al cerrar, el
@@ -93,7 +92,7 @@
       cuerpo.appendChild(el('p', null, '<span class="etiqueta etiqueta--juego">En el juego</span> ' + carta.juego));
       art.appendChild(cuerpo);
 
-      art.appendChild(el('p', 'carta-saber__fuente', 'Fuente: ' + (raiz.TDH_FUENTE ? raiz.TDH_FUENTE.corta(carta.fuente) : carta.fuente)));
+      // La fuente no va en la carta (19/11, pedido de Mati): todas están juntas en «Fuentes», en el menú.
       // «Texto en revisión» es una nota del equipo: en el viaje no se muestra (19/11); sigue en el códice.
 
       const botones = el('div', 'tdh-carta__botones');

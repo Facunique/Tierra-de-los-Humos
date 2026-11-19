@@ -34,3 +34,14 @@ test('lo que no entiende lo deja como está', () => {
   assert.equal(F.corta('🔍 Fuente pendiente.'), '🔍 Fuente pendiente.');
   assert.deepEqual(F.obras(['🔍 Fuente pendiente.']), []);
 });
+
+test('las fuentes están en su pantalla del menú, y las cartas no las muestran (19/11)', () => {
+  const fs = require('fs'), path = require('path');
+  const leer = (r) => fs.readFileSync(path.join(__dirname, '..', r), 'utf8');
+  const html = leer('index.html');
+  assert.match(html, /data-ir="fuentes">Fuentes</, 'falta el botón «Fuentes» en el menú');
+  assert.match(html, /id="p-fuentes"/);
+  assert.doesNotMatch(leer('juego/interfaz/carta.js'), /carta-saber__fuente/, 'la carta del viaje no muestra la fuente');
+  assert.doesNotMatch(leer('juego/interfaz/juego.js'), /carta-saber__fuente/, 'el códice no muestra la fuente');
+  assert.match(leer('juego/interfaz/juego.js'), /function pintarFuentes/);
+});

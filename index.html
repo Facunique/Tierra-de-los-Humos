@@ -35,6 +35,7 @@
       <button class="boton-papel boton-papel--fuego" id="b-empezar" type="button" data-ir="pueblo">Empezar el viaje</button>
       <button class="boton-papel" type="button" data-ir="codice">Códice</button>
       <button class="boton-papel" type="button" data-ir="ayuda">Cómo se juega</button>
+      <button class="boton-papel" type="button" data-ir="fuentes">Fuentes</button>
     </div>
     <div class="botones opciones" role="group" aria-label="Opciones">
       <button class="boton-papel" id="b-sonido" type="button" aria-pressed="false">Sonido: no</button>
@@ -43,7 +44,7 @@
       <button class="boton-papel" id="b-luz" type="button" aria-pressed="true">Luz real de Ushuaia: sí</button>
       <button class="boton-papel" id="b-minijuegos" type="button" aria-pressed="true">Minijuegos: sí</button>
     </div>
-    <p class="aviso-ficcion">La familia, el mapa y los eventos son ficción. Los saberes, no: cada uno cita su fuente.<span id="aviso-luz" aria-live="polite"></span><span id="aviso-offline" hidden>Listo para jugar sin internet en este dispositivo.</span></p>
+    <p class="aviso-ficcion">La familia, el mapa y los eventos son ficción. Los saberes, no: sus fuentes están en «Fuentes».<span id="aviso-luz" aria-live="polite"></span><span id="aviso-offline" hidden>Listo para jugar sin internet en este dispositivo.</span></p>
   </div>
 </section>
 
@@ -117,6 +118,7 @@
       <button class="boton-papel boton-papel--fuego" id="b-generacion" type="button">Empezar la generación siguiente</button>
       <button class="boton-papel" id="b-postal" type="button">Ver la postal del viaje</button>
       <button class="boton-papel" type="button" data-ir="codice">Ver el códice</button>
+      <button class="boton-papel" type="button" data-ir="fuentes">Fuentes</button>
       <button class="boton-papel" id="b-menu" type="button" data-ir="titulo">Volver al menú</button>
     </div>
   </div>
@@ -136,7 +138,6 @@
     </div>
     <p class="codice__explica">Lo que la familia aprendió, generación tras generación. Lo que todavía no encontraron sigue en el humo.</p>
     <div class="codice" id="codice" role="tabpanel" aria-labelledby="tab-yagan"></div>
-    <section class="codice__obras papel" id="codice-obras" aria-labelledby="t-obras" hidden><h3 id="t-obras">Obras citadas</h3><ul></ul></section>
     <div class="botones botones--codice">
       <button class="boton-papel" type="button" data-ir="cierre">Hoy</button>
       <button class="boton-papel" id="b-borrar" type="button">Empezar de cero</button>
@@ -156,6 +157,18 @@
       <p class="fin__dato">Fuente: Vargas Filgueira, Víctor (2019). <i>Mi sangre yagán (ahua saapa yagan)</i>. Primera edición digital. Editora Cultural Tierra del Fuego. Agradecimientos, p. 4; epílogo, pp. 85–86 del visor del PDF.</p>
     </div>
     <button class="boton-papel" type="button" data-ir="titulo">Volver al inicio</button>
+  </div>
+</section>
+
+<!-- 6b. Fuentes: de dónde sale cada saber (las cartas no las muestran) -->
+<section class="pantalla pantalla--papel" id="p-fuentes" aria-labelledby="t-fuentes" hidden>
+  <div class="capa">
+    <div class="encabezado-codice">
+      <h2 id="t-fuentes">Fuentes</h2>
+      <button class="boton-papel" type="button" data-volver>Volver</button>
+    </div>
+    <p class="codice__explica">De dónde sale cada saber del juego. La familia, el mapa y los eventos son ficción.</p>
+    <div class="fuentes" id="fuentes-lista"></div>
   </div>
 </section>
 

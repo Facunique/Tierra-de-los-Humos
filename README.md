@@ -26,7 +26,7 @@ Tres ideas lo sostienen:
 
 1. **El fuego es la vida.** Las familias yaganes llevaban el fuego encendido en el medio de la canoa (Cooper, 1946, p. 88 y 91). En el juego, ese fuego es la barra de vida.
 2. **Lo aprendido se transmite.** Cuando el fuego se apaga, termina el viaje y los saberes encontrados pasan a la siguiente generación del mismo pueblo.
-3. **Cada saber tiene fuente, y los pueblos están vivos.** Cada carta separa el *dato* del *recurso de juego* y cita su fuente con página. La consulta está registrada y sigue abierta; su alcance y los permisos pendientes están en [el documento de fuentes](docs/03-contenido-cultural.md#consulta-a-la-comunidad).
+3. **Cada saber tiene fuente, y los pueblos están vivos.** Cada carta separa el *dato* del *recurso de juego*. La fuente de cada una, con página, está en la pantalla **Fuentes** del menú, junto con las obras completas. La consulta está registrada y sigue abierta; su alcance y los permisos pendientes están en [el documento de fuentes](docs/03-contenido-cultural.md#consulta-a-la-comunidad).
 
 El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 

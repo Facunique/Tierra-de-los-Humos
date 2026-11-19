@@ -153,12 +153,12 @@ const MAX_ACCIONES = 400;
           // La primera carta de cada viaje es su motivo (no es un saber).
           const motivo = await p.evaluate(() => !!document.querySelector('.tdh-carta--otra'));
           if (motivo) motivosVistos++; else cartasVistas++;
+          // La carta no lleva fuente (19/11): están todas en «Fuentes». Se revisa que el botón quede a la vista.
           const dentro = await p.evaluate(() => {
-            const f = document.querySelector('.carta-saber__fuente'); if (!f) return 'sin fuente';
-            const q = f.getBoundingClientRect(); return q.top >= 0 && q.bottom <= innerHeight + 1 ? 'ok' : 'fuera';
+            const b = document.querySelector('.tdh-carta .boton-papel--fuego'); if (!b) return 'sin botón';
+            const q = b.getBoundingClientRect(); return q.top >= 0 && q.bottom <= innerHeight + 1 ? 'ok' : 'fuera';
           });
-          if (dentro === 'sin fuente') r.errores.push('Apareció una carta sin fuente a la vista.');
-          else if (dentro === 'fuera') r.errores.push('Apareció una carta con la fuente fuera de la pantalla.');
+          if (dentro !== 'ok') r.errores.push('Apareció una carta con el botón para seguir fuera de la pantalla.');
           if (!motivo && cartasVistas === 1) { await revisarPantalla('Con una carta abierta'); await p.screenshot({ path: path.join(SALIDA, nombre + '-carta.png') }); }
           await boton(UI.guardarCarta).click(); await p.waitForTimeout(450);
           continue;
