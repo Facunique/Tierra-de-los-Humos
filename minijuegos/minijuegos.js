@@ -194,7 +194,9 @@
       const sonar = (n, t) => { try { if (op.sonido) op.sonido.efecto(n, t); } catch (e) { /* sin sonido */ } };
 
       function cerrar(ok) {
-        if (fin) return; fin = true;
+        if (fin) return;
+        if (ok === false && terminado === 'bien') return;   // ya salió: se cierra solo en un momento, con lo ganado
+        fin = true;
         if (ok === false && !terminado) anotar(false);   // volver sin terminar corta la racha
         if (ok === false && jugando && !limpio) ok = 'fallo';   // volver después de errar también cuesta
         cancelAnimationFrame(cuadroId);
@@ -267,18 +269,23 @@
         fondo(mapa) { if (motor) try { motor.escena({ mapa }); } catch (e) { /* queda el de antes */ } },
         ganar, perder,
       };
-      const mec = M[j.mecanica](c);
+      let mec;
+      try { mec = M[j.mecanica](c); } catch (e) {
+        // Si una mecánica no se puede armar, el viaje no se traba: la acción se hace sin minijuego.
+        capa.remove(); actual = null; fin = true; resolver(true); return;
+      }
 
+      // En «Volver al viaje» o «Seguir el viaje», Enter y la barra hacen lo de siempre: apretar ese botón.
+      const enBotonComun = () => { const f = document.activeElement; return !!(f && f.closest && f.closest('.mj__botones') && !f.classList.contains('mj__mantener')); };
       function teclaBaja(e) {
         if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); cerrar(false); return; }
         e.stopPropagation();   // que las teclas del viaje no muevan la canoa por detrás
-        // En «Volver al viaje» o «Seguir el viaje», Enter y la barra hacen lo de siempre: apretar ese botón.
-        const f = document.activeElement;
-        if (f && f.closest && f.closest('.mj__botones') && !f.classList.contains('mj__mantener')) return;
+        if (enBotonComun()) return;
         if (!terminado && mec.tecla && mec.tecla(e, true)) e.preventDefault();
       }
       function teclaSube(e) {
         e.stopPropagation();
+        if (enBotonComun()) return;
         if (!terminado && mec.tecla && mec.tecla(e, false)) e.preventDefault();
       }
       document.addEventListener('keydown', teclaBaja, true);

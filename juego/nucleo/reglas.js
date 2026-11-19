@@ -17,7 +17,8 @@
 
   const REGLAS = {
     // ── El fuego ──────────────────────────────────────────────────────────
-    // 19/11: todo el fuego ×1,5 (antes: 16, 4, 14, 6). Había que avivarlo cada pocas remadas y cansaba.
+    // 19/11: el fuego ×1,5 (máximo 16 → 24, leña 6 → 9). Había que avivarlo cada pocas remadas y cansaba.
+    // El inicial queda en 18 (no 21): el saber del fuego heredado suma 3 y lo lleva a 21.
     ENERGIA_MAX: 24,
     ENERGIA_POR_FUEGO: 6,         // 24 de energía = fuego 4 de 4
     ENERGIA_INICIAL: 18,          // fuego 3 de 4 al salir; heredar el saber del fuego lo sube a 4

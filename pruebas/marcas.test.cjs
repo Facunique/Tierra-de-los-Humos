@@ -28,6 +28,11 @@ test('sin almacenamiento, o con lo guardado roto, anda igual', () => {
   assert.equal(M.crear(null).anotar('yagan', 'ballena', [{ id: 'llegaron', logrado: true }]).mejor, 1);
   const a = almacen(); a.setItem('tdh-marcas', '{roto');
   assert.equal(M.crear(a).anotar('yagan', 'ballena', [{ id: 'tiempo', logrado: true }]).mejor, 1);
+  // JSON válido pero con otra forma: un número, una lista, ids que no existen.
+  for (const raro of ['5', '[1,2]', 'null', '{"yagan":5}', '{"yagan":{"ballena":["x","y","z","w"]}}']) {
+    const b = almacen(); b.setItem('tdh-marcas', raro);
+    assert.equal(M.crear(b).anotar('yagan', 'ballena', [{ id: 'llegaron', logrado: true }]).mejor, 1, raro);
+  }
 });
 
 test('los nombres son cortos y dicen el límite', () => {

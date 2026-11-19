@@ -61,12 +61,12 @@
     // Las brasas (19/11): cada vez que el fuego quedó en 0 y lo salvaron a tiempo.
     const enBrasas = ev.filter((x) => x.tipo === 'brasas');
     const entrada = enBrasas.length ? Math.max(...enBrasas.map((x) => x.quedan)) : 0;   // el primer aviso de cada vez
-    const salvadas = enBrasas.filter((x) => x.quedan === entrada).length - (e.gano === false && e.brasas != null ? 1 : 0);
+    const salvadas = enBrasas.filter((x) => x.quedan === entrada).length - (e.brasas != null ? 1 : 0);   // las que siguen vivas al final no se salvaron
     if (salvadas > 0) frases.push((salvadas === 1 ? 'Una vez' : mayus(veces(salvadas))) + ' el fuego quedó en brasas y lo salvaron.');
     const perfectos = ev.filter((x) => x.extra).length;
     if (perfectos) frases.push(mayus(veces(perfectos)) + ' les salió perfecto.');
 
-    if (e.gano) frases.push('Llegaron a ' + (e.destino && e.destino.nombre ? e.destino.nombre : 'destino') + ' con el fuego encendido.');
+    if (e.gano) frases.push('Llegaron a ' + (e.destino && e.destino.nombre ? e.destino.nombre : 'destino') + (e.brasas != null ? ' con las brasas todavía vivas.' : ' con el fuego encendido.'));
     else frases.push('El fuego se apagó' + (op.apagado ? ' ' + op.apagado : '') + '. Pero lo aprendido no se pierde.');
 
     return frases.join(' ');

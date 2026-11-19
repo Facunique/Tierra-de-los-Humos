@@ -12,7 +12,7 @@ Es la parte que hace funcionar el viaje: el mapa, el fuego, lo que se junta, el 
 
 - **Un viaje completo**, de la salida al destino, en un canal que va de oeste a este, como el Beagle.
 - **El mapa cambia en cada partida**, con costas, islas, playas, bosque, cachiyuyo y rocas. Lo que no se exploró queda tapado por el humo y se descubre al remar.
-- **El fuego es la vida.** Se gasta al remar, y más con viento en el canal hondo, con lluvia y de noche. Cerca de una choza se gasta menos. Si llega a cero, el viaje termina.
+- **El fuego es la vida.** Se gasta al remar, y más con viento en el canal hondo, con lluvia y de noche. Cerca de una choza se gasta menos. Si llega a cero, quedan brasas unas remadas; si no se aviva, el viaje termina.
 - **Se junta** leña, comida (mejillones, pescado y hongos), pirita, el saber de la choza y la corteza del guindo grande.
 - **La leña aviva el fuego**, y la pirita lo vuelve a prender una vez cuando se apaga.
 - **Amarrar y acampar** en el cachiyuyo, al lado de una playa: pasan la noche, vuelve la calma y comen lo que juntaron. **Acampar no es gratis:** cuidar el fuego toda la noche gasta, así que sin comida cada noche lo baja y una partida no puede durar para siempre.
@@ -83,7 +83,7 @@ Están todos en [`reglas.js`](reglas.js). Son recursos de juego y se ajustan jug
 | Pescar para el campamento | El pescado se ve a través del humo |
 | Hongos de los árboles | Sale con 1 de comida |
 | Piedras de fuego | La pirita reenciende más alto |
-| Preparar el campamento | Cerca de la choza casi no se gasta |
+| Preparar el campamento | Cerca de la choza no se gasta, ni de noche ni con lluvia |
 | Una canoa de corteza | El viento del canal hondo no gasta de más |
 | La ballena varada | El destino se ve desde el principio |
 

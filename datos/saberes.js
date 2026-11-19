@@ -111,7 +111,7 @@
       id: 'choza', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Refugio', titulo: 'Preparar el campamento',
       dato: 'Las viviendas del campamento se arman al detenerse y se desarman antes de continuar. El campamento forma parte del recorrido.',
-      juego: 'Junto a una choza, el fuego se gasta más despacio. Heredado: cerca de la choza, casi no se gasta.',
+      juego: 'Junto a una choza, el fuego se gasta más despacio. Heredado: cerca de la choza no se gasta, ni de noche.',
       fuente: VARGAS + ', p. 30 y 33 del visor del PDF.',
       alt: 'Una choza de domo en un claro junto a la playa. Sale humo de arriba y se ve fuego por la puerta. Más cerca del agua hay un anillo de conchas claras.',
       mapa: ['LLGGLLGL', 'Gp..p.GG', '........', ',,,,,,,,'], extra: { objetos: [{ id: 'choza', x: 3, y: 1 }, { id: 'conchal', x: 5, y: 2 }] },

@@ -27,11 +27,25 @@
     return id;
   }
 
+  const IDS = ['llegaron', 'comida', 'tiempo'];
+  const esObjeto = (x) => !!x && typeof x === 'object' && !Array.isArray(x);
+  /** Lo guardado, limpio: { pueblo: { destino: [ids conocidos] } }. Lo que no tenga esa forma se descarta. */
+  function limpiar(d) {
+    const todo = {};
+    if (!esObjeto(d)) return todo;
+    for (const [pueblo, destinos] of Object.entries(d)) {
+      if (!esObjeto(destinos)) continue;
+      todo[pueblo] = {};
+      for (const [destino, ids] of Object.entries(destinos)) if (Array.isArray(ids)) todo[pueblo][destino] = [...new Set(ids.filter((id) => IDS.includes(id)))];
+    }
+    return todo;
+  }
+
   function crear(almacen) {
     let memoria = {};
     function leerTodo() {
-      try { const t = almacen && almacen.getItem(CLAVE); if (t) return JSON.parse(t) || {}; } catch (e) { /* roto: de cero */ }
-      return memoria;
+      try { const t = almacen && almacen.getItem(CLAVE); if (t) return limpiar(JSON.parse(t)); } catch (e) { /* roto: de cero */ }
+      return limpiar(memoria);
     }
     function guardar(todo) {
       memoria = todo;
@@ -44,7 +58,7 @@
         const todo = leerTodo();
         const delPueblo = todo[pueblo] && typeof todo[pueblo] === 'object' ? todo[pueblo] : {};
         const antes = new Set(Array.isArray(delPueblo[destino]) ? delPueblo[destino] : []);
-        const lista = (marcas || []).map((m) => ({ id: m.id, logrado: !!m.logrado, nueva: !!m.logrado && !antes.has(m.id) }));
+        const lista = (marcas || []).filter((m) => m && IDS.includes(m.id)).map((m) => ({ id: m.id, logrado: !!m.logrado, nueva: !!m.logrado && !antes.has(m.id) }));
         for (const m of lista) if (m.logrado) antes.add(m.id);
         delPueblo[destino] = [...antes];
         todo[pueblo] = delPueblo;

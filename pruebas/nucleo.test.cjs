@@ -316,21 +316,24 @@ test('los hongos heredados dan comida al salir; la pirita heredada reenciende m�
 
 test('con la corteza heredada, el viento del canal hondo no gasta de más; nada gasta más que el tope', () => {
   const R = require('../juego/nucleo/reglas.js');
-  for (const [her, esperado] of [[[], 'viento'], [['corteza'], null]]) {
-    const p = TDH_PARTIDA.nueva({ semilla: 7, saberes: ORDEN, heredados: her, reglas: { CLIMA_PROB_CAMBIO: 0 } });
-    p.estado.clima = 'viento'; p.estado.hora = 'noche';
-    const e = p.estado, c = e.canoa;
-    const ruta = MAPA.camino(e.mapa, c, (x, y) => e.mapa[y][x] === '~');
-    if (!ruta) continue;
-    for (const paso of ruta.slice(0, -1)) p.hacer({ tipo: 'remar', dx: paso.x - e.canoa.x, dy: paso.y - e.canoa.y });
-    e.energia = 20; e.hora = 'noche'; e.clima = 'viento'; e.pronostico = null;
-    const ult = ruta[ruta.length - 1];
-    const ev = p.hacer({ tipo: 'remar', dx: ult.x - e.canoa.x, dy: ult.y - e.canoa.y });
-    const f = ev.find((x) => x.tipo === 'fuego');
-    assert.ok(20 - e.energia <= R.GASTO_TOPE, 'una remada no gasta más que el tope');
-    if (esperado) assert.ok(!f || f.causas.includes('viento') || 20 - e.energia === R.GASTO_TOPE);
-    else assert.ok(!f || !f.causas.includes('viento'), 'con la corteza, el viento no pesa');
+  // Una casilla de agua al lado del canal hondo, lejos de la choza, en el mapa de la semilla 7.
+  const base = TDH_PARTIDA.nueva({ semilla: 7, saberes: ORDEN });
+  const M = base.estado.mapa, choza = base.estado.objetos.find((o) => o.id === 'choza');
+  let desde = null, dx = 0, dy = 0;
+  for (let y = 0; y < M.length && !desde; y++) for (let x = 0; x < M[0].length && !desde; x++) {
+    if (!MAPA.navegable(M, x, y) || M[y][x] === '~' || (choza && Math.abs(choza.x - x) + Math.abs(choza.y - y) < 6)) continue;
+    for (const [a, b] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) if ((M[y + b] || '')[x + a] === '~') { desde = { x, y }; dx = a; dy = b; break; }
   }
+  assert.ok(desde, 'el mapa de prueba tiene canal hondo');
+  const gasto = (heredados, hora) => {
+    const p = TDH_PARTIDA.nueva({ semilla: 7, saberes: ORDEN, heredados, reglas: { CLIMA_PROB_CAMBIO: 0 } });
+    Object.assign(p.estado.canoa, desde); p.estado.clima = 'viento'; p.estado.hora = hora; p.estado.energia = 20;
+    p.hacer({ tipo: 'remar', dx, dy });
+    return 20 - p.estado.energia;
+  };
+  assert.equal(gasto([], 'dia'), R.GASTO_REMAR + R.GASTO_VIENTO_HONDO, 'sin la corteza, el viento pesa');
+  assert.equal(gasto(['corteza'], 'dia'), R.GASTO_REMAR, 'con la corteza, no');
+  assert.equal(gasto([], 'noche'), R.GASTO_TOPE, 'viento y noche juntos no pasan del tope');
 });
 
 test('brasas: con el fuego en 0 quedan unas remadas; avivar lo vuelve a prender', () => {

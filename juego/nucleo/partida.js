@@ -48,7 +48,7 @@
  *     (+) { tipo: 'remo', x, y }      la canoa avanzó. Siempre es el primero al remar: así una
  *                          lista vacía quiere decir solo «no se puede remar hacia ahí».
  *     { tipo: 'fuego', antes, despues, motivo, causas }   el fuego cambió (0 a 4).
- *                          motivo: 'remar' | 'lena' | 'comida' | 'pirita' | (+) 'acampar'.
+ *                          motivo: 'remar' | 'lena' | 'comida' | 'pirita' | (+) 'acampar' | (+) 'demora'.
  *                          Al acampar sale uno solo, con lo que quedó entre comer y cuidar el
  *                          fuego toda la noche: 'comida' si subió, 'acampar' si bajó.
  *                          (+) causas, solo al remar: ['viento', 'lluvia', 'noche', 'cerca']
@@ -71,7 +71,7 @@
  *
  *   partida.puede()   (+) { juntar: id del elemento | null, avivar: bool, amarrar: bool }, para los botones.
  *   partida.camino(x, y)  (+) casillas por el agua hasta (x, y), o null. Para remar tocando lejos.
- *   partida.marcas()      (+) las tres marcas del viaje: [{ id: 'llegaron' | 'fuego' | 'tiempo', logrado }].
+ *   partida.marcas()      (+) las tres marcas del viaje: [{ id: 'llegaron' | 'comida' | 'tiempo', logrado }].
  *   partida.terminada     true cuando terminó el viaje.
  *
  *   TDH_PARTIDA.elegirDestino({ semilla, estacion, pueblo })  (+) el id del motivo del viaje que
@@ -148,7 +148,7 @@
     let pasosDelClima = 0;
     const fuegoDe = (e) => Math.ceil(e / R.ENERGIA_POR_FUEGO);
     // Lo que deja cada saber heredado (R.HERENCIA): solo los que el linaje sabe y tienen efecto.
-    const herencia = [...heredados].filter((id) => R.HERENCIA && R.HERENCIA[id]);
+    const herencia = [...heredados].filter((id) => R.HERENCIA && Object.prototype.hasOwnProperty.call(R.HERENCIA, id));
     const deja = (campo) => herencia.map((id) => R.HERENCIA[id][campo]).filter((v) => v != null);
     const suma = (campo) => deja(campo).reduce((a, b) => a + b, 0);
     const energia = Math.min(R.ENERGIA_MAX, R.ENERGIA_INICIAL + heredados.size * R.ENERGIA_POR_HEREDADO + suma('energia'));
@@ -432,7 +432,7 @@
       },
       /**
        * Las tres marcas del viaje (19/11), para el final: [{ id, logrado }].
-       *   llegaron: llegar al destino · fuego: llegar con el fuego en 3 o más ·
+       *   llegaron: llegar al destino · comida: llegar con MARCA_COMIDA de comida o más ·
        *   tiempo: llegar en `estado.limite` remadas o menos (1,6 veces el camino más corto).
        */
       marcas() {

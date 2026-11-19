@@ -138,9 +138,9 @@ button.pueblo { cursor: pointer; font: inherit; }
 .lista-saberes li { background: rgba(255, 212, 124, 0.25); border-radius: 8px; padding: 6px 10px; font-weight: 700; }
 /* Las tres marcas del viaje (19/11): un fuego encendido por cada una lograda. */
 .fin__marcas { list-style: none; padding: 0; margin: 14px 0 4px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.marca { display: grid; justify-items: center; gap: 2px; padding: 6px 4px 8px; border-radius: 10px; background: rgba(40, 34, 30, 0.08); font-size: 13px; font-weight: 700; line-height: 1.2; text-align: center; opacity: 0.7; }
+.marca { display: grid; justify-items: center; gap: 2px; padding: 6px 4px 8px; border-radius: 10px; background: rgba(40, 34, 30, 0.08); font-size: 13px; font-weight: 700; line-height: 1.2; text-align: center; color: var(--texto-2); }
 .marca canvas { width: 36px; height: 39px; }
-.marca--si { opacity: 1; background: rgba(255, 212, 124, 0.35); }
+.marca--si { color: inherit; background: rgba(255, 212, 124, 0.35); }
 .marca--nueva { box-shadow: 0 0 0 3px var(--tdh-ocre) inset; }
 @media (prefers-reduced-motion: no-preference) { .marca--nueva { animation: tdh-latido 1.2s ease-in-out 3; } }
 .fin__mejor { font-size: 14px !important; color: var(--texto-2); margin-top: 2px !important; }

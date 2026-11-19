@@ -249,9 +249,8 @@
   }
   // Lo que deja cada saber heredado (juego/nucleo/reglas.js, HERENCIA), en corto.
   const RECUERDA = {
-    fuego: 'cómo llevar el fuego alto', amarre: 'dónde amarrar', mejillones: 'dónde hay mejillones', pescado: 'dónde hay pescado',
-    hongos: 'cómo guardar comida', pirita: 'cómo prender con pirita', choza: 'el abrigo de la choza', corteza: 'cómo hacer la canoa firme',
-    ballena: 'el camino',
+    fuego: 'el fuego alto', amarre: 'los amarres', mejillones: 'los mejillones', pescado: 'el pescado',
+    hongos: 'la comida guardada', pirita: 'la pirita', choza: 'la choza', corteza: 'el viento del canal hondo', ballena: 'el camino',
   };
   const lista = (l) => (l.length <= 1 ? l.join('') : l.slice(0, -1).join(', ') + ' y ' + l[l.length - 1]);
   async function contarMotivo(esta) {
@@ -263,8 +262,8 @@
     if (partida !== esta) return;
     // Con la luz real, el viaje puede empezar de noche: que se sepa por qué el fuego baja rápido.
     const deNoche = esta.estado.hora === 'noche' ? ' Es de noche: buscá un cachiyuyo para acampar.' : '';
-    const recuerda = (esta.estado.herencia || []).map((id) => RECUERDA[id]).filter(Boolean);
-    anunciar('Generación ' + generacion + ' · Hasta ' + esta.estado.destino.nombre + '.' + (recuerda.length ? ' La familia recuerda ' + lista(recuerda) + '.' : '') + deNoche);
+    const recuerda = (esta.estado.herencia || []).filter((id) => Object.prototype.hasOwnProperty.call(RECUERDA, id)).map((id) => RECUERDA[id]);
+    anunciar('Generación ' + generacion + ' · Hasta ' + esta.estado.destino.nombre + '.' + (recuerda.length ? ' La familia recuerda: ' + lista(recuerda) + '.' : '') + deNoche);
   }
   /**
    * El tamaño de la celda se calcula solo al entrar al viaje y al cambiar el
@@ -488,7 +487,7 @@
     ultimo = { estado: e, gano: ev.gano, generacion: desde, hasta: linaje.generacion };
     const d = (window.TDH_DESTINOS && TDH_DESTINOS.DESTINOS[e.destino.id]) || null;
     const mayus = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-    $('fin-sub').textContent = ev.gano ? 'Llegaron con el fuego encendido' : 'El fuego se apagó';
+    $('fin-sub').textContent = ev.gano ? (e.energia > 0 ? 'Llegaron con el fuego encendido' : 'Llegaron con las brasas vivas') : 'El fuego se apagó';
     $('t-fin').textContent = ev.gano ? mayus(e.destino.nombre) : 'El viaje termina acá';
     // La crónica cuenta lo que pasó en este viaje (juego/interfaz/cronica.js). Sin ella, el texto corto de antes.
     $('fin-texto').textContent = window.TDH_CRONICA
@@ -498,7 +497,7 @@
         : 'El fuego se apagó ' + (APAGADO[e.causa] || '') + ', después de ' + e.pasos + ' casillas. Pero lo aprendido no se pierde.';
     // Al llegar, el dato del destino con su fuente en corto (la completa está en la carta y en el códice).
     $('fin-dato').hidden = !(ev.gano && d);
-    if (ev.gano && d) $('fin-dato').textContent = d.dato + ' (' + fuenteCorta(d.fuente) + ')';
+    if (ev.gano && d) $('fin-dato').textContent = d.dato + ' · ' + fuenteCorta(d.fuente);
     $('fin-lista-titulo').textContent = e.aprendidos.length ? 'Pasan a la generación ' + linaje.generacion + ':' : 'Esta vez no aprendieron nada nuevo.';
     pintarMarcas(e);
     const lista = $('fin-lista'); lista.textContent = '';
