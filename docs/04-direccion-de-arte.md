@@ -34,7 +34,7 @@
 | Bosque de **guindo** | *Nothofagus betuloides*, de hoja perenne. Domina hacia la costa. Es el árbol de la corteza de las canoas. | Matas densas y oscuras, iguales todo el año. **No es un pino**: no se dibuja en punta. | Cooper (1946), p. 81 y 88; Multequina n.º 10 (IADIZA-CONICET). |
 | Bosque de **lenga** y **ñire** | Pierden la hoja en otoño. | Copas redondas: verdes en verano, rojas y anaranjadas en otoño, grises con nieve en invierno. | Multequina n.º 10. Cooper (p. 81) llama «siempreverde» a la lenga; seguimos la botánica actual (ver `05`). |
 | Turbales | Musgo *Sphagnum* que retiene agua como una esponja. | Cojines rojizos con charcos. | Multequina n.º 10; Spears (1895), p. 149. |
-| Cachiyuyo | Algas grandes en el agua baja. Ahí se amarraba la canoa. | Cintas con flotadores dorados sobre el agua. | Cooper (1946), p. 88. |
+| Cachiyuyo | Nombre del recurso de juego. La afirmación histórica sobre el amarre se limita a bancos de grandes algas marinas, sin identificar especie. | Cintas con flotadores dorados sobre el agua. | Cooper (1946), p. 88 impresa; alcance en docs/03, sección Cooper. |
 | Playas | Canto rodado y grava. | Capa clara con piedras. | Observación. |
 | Fauna | Lobo marino, cormorán, pato vapor, ballena. | Papel, descansando. **Nunca enemigos ni escenas de caza.** | Cooper (1946), p. 84. |
 | Clima | Ráfagas violentas, cambios bruscos, nieve incluso en verano. | Viento, lluvia y nieve en cualquier estación. | Cooper (1946), p. 81. |

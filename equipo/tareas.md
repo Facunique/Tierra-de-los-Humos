@@ -69,7 +69,7 @@ El 40 % del puntaje (pertinencia + rigor) depende del trabajo de la Persona C. N
 - [x] Definir el enfoque del viaje (13/11): **nomadismo**, con motivos combinados según clima, comida y ambiente; la ballena varada es uno de ellos. Decisión de Dani registrada en `memory.md` y `docs/01-concepto.md`.
 - [ ] Resolver los puntos marcados con 🔍 y revisar con A y B la traducción del nomadismo a objetivos y cierre de partida. Verificar por separado la fuente de cada motivo; las notas de Vargas Filgueira (2019) y las referencias de Cooper (1946) están registradas en `comunicaciones.md` y `docs/05-rigor-historico.md`.
 - [x] Cotejar documentalmente las 9 cartas de `datos/saberes.js`, su texto de juego, fuente y alt (13/11). Borradores corregidos y propuesta de carta de reservas en `equipo/revision-cultural-paso-3.md`.
-- [ ] Aprobar con Dani cada carta antes de pasarla a `revisado` y decidir la incorporación de cartas nuevas. Las nueve siguen en `borrador`.
+- [x] Dani aprobó las nueve cartas originales, que pasan a `revisado` (18/11). Las ocho nuevas siguen pendientes de acuerdo e implementación.
 - [x] Trasladar las referencias de Bird (1946) a los datos del territorio: conchales (pp. 20–21) y leña Kawésqar (p. 70), sin atribuir esta última como práctica yagán.
 - [ ] Completar las fuentes pendientes de leña yagán, especies, botánica y topónimos; la tonina sigue sin identificación documentada.
 - [x] Registrar los nombres de lugares aportados de Vargas Filgueira (2019), con notas y páginas: `docs/06-toponimia.md` (14/11). Se distinguen correspondencias, descripciones y nombres sin equivalencia explícita.

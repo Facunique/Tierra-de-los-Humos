@@ -20,7 +20,7 @@ Es la parte que hace funcionar el viaje: el mapa, el fuego, lo que se junta, el 
 - **Fallar un minijuego cuesta un turno** (acción `demora`): el fuego gasta como al remar y pasa el tiempo, pero la canoa no se mueve. Los minijuegos son de la Persona D (`minijuegos/`); el núcleo solo pone el costo.
 - **El clima cambia solo:** calma, viento y lluvia. **Cada cambio se avisa un paso antes** («se ven nubes»), para decidir si acampar o seguir.
 - **Las cartas de saber** salen la primera vez que se junta cada cosa, la primera vez que se acampa y al llegar al destino.
-- **El motivo del viaje** sale de la semilla y de la estación, entre los destinos documentados que no están en «propuesta» (ver *Los datos del territorio*). Hoy solo entra la ballena varada: las otras dos esperan a la Persona C.
+- **El motivo del viaje** sale de la semilla y de la estación, entre los destinos documentados que no están en «propuesta» (ver *Los datos del territorio*). Pueden salir la ballena varada o las piedras de fuego (pirita). Dani habilitó este último motivo el 18/11. La corteza sigue como propuesta.
 - **Ganar** es llegar al destino con el fuego encendido. **Perder** es que se apague. En los dos casos se sabe por qué terminó y qué se aprendió.
 - **La herencia:** lo aprendido pasa a la generación siguiente. Esas cartas no vuelven a salir, y cada saber heredado suma un poco de fuego al arrancar, como en la versión de mesa.
 
@@ -49,7 +49,7 @@ Todo lo que puede cambiar con la investigación está **aparte del código**, en
 
 Cada entrada separa el **dato** (lo que dice la fuente) del **juego** (dónde va, cuántas hay y qué hace, que son recursos de juego). Lo que todavía no tiene fuente está marcado con 🔍.
 
-**Destinos:** cada viaje elige su motivo entre los destinos del pueblo que **no** están en `'propuesta'` y que son de la estación del viaje (campo `estaciones`, opcional y solo con fuente). Hoy entra solo la ballena varada (Cooper, 1946, p. 84, 94-95 y 99). Quedan como propuesta, también de Cooper (p. 94-95), la corteza buena para canoas (solo en primavera, Cooper, 1946, p. 88) y las piedras de fuego. Para sumarlos, la Persona C los pasa a `'borrador'`: no hay que programar nada. El juego funciona con los tres.
+**Destinos:** cada viaje elige su motivo entre los destinos del pueblo que **no** están en `'propuesta'` y que son de la estación del viaje (campo `estaciones`, opcional y solo con fuente). Entran la ballena varada (Cooper, 1946, p. 84, 94-95 y 99) y las piedras de fuego (Cooper, 1946, p. 94-95), habilitadas por Dani el 18/11 a pedido de Mati en el PR 39. La corteza buena para canoas sigue como propuesta (Cooper, p. 94-95; solo en primavera, p. 88). Para sumarla, la Persona C la pasa a `'borrador'`: no hay que programar nada. El juego funciona con los tres.
 
 ### Los números
 
@@ -119,7 +119,7 @@ Son ideas para charlar en el grupo. El aviso del clima ya está (PR 22).
 | Qué deja cada saber heredado | Para después de la hackatón: cambia las cartas y el dibujo | El equipo |
 | Las brasas | No entra: con los viajes más largos ya no hace tanta falta, y le suma trabajo a D el último día | El equipo |
 | La carta de la corteza | Resuelta: C cambió el texto y la carta ya no promete arreglar la canoa. La canoa no se daña (`docs/02-alcance-mvp.md`, *Queda afuera*) | — |
-| El destino del viaje | Que la pirita pase a `'borrador'`: C ya la confirmó con la entrevista del 13/11 y el núcleo la elige solo. Así la ballena deja de ser el único motivo, sin programar | C (`territorio/destinos.js`) |
+| El destino del viaje | Resuelto el 18/11: Dani habilitó la pirita como motivo del viaje, junto con la ballena, pasando ese destino a `'borrador'` | — |
 | El juego de mesa | Se presenta como una versión más simple, con sus propios números | El equipo |
 | Dónde se guardan los datos del territorio | Se quedan donde están: moverlos ahora no suma y puede romper algo | El equipo |
 
@@ -131,7 +131,7 @@ El detalle de cada una:
 
 - **Las brasas.** Hoy, cuando el fuego llega a cero, el viaje termina de golpe. La propuesta es que quede unos pasos en brasas y que, si se aviva a tiempo con leña, vuelva. Es menos frustrante y ya existe el dibujo de las brasas.
 
-- **El destino del viaje.** Hoy la familia viaja hacia una ballena varada. Hay otras dos opciones documentadas en Cooper (1946, p. 94-95): buscar corteza buena para canoas o buscar piedras de fuego (pirita), que solo se encontraban en algunos lugares. El juego ya está preparado para cambiar de destino sin reprogramar nada. Falta elegir cuál, idealmente con lo que diga la comunidad.
+- **El destino del viaje.** La ballena varada y la búsqueda de piedras de fuego (pirita) están habilitadas. La corteza buena para canoas sigue como propuesta. Cada motivo conserva su fuente en [`territorio/destinos.js`](territorio/destinos.js).
 
 - ~~**La carta de la corteza.**~~ Resuelta: C cambió el texto «En el juego» de la carta. Lo que decía antes: la carta decía que encontrar un guindo grande «permite arreglar la canoa», pero en el juego la canoa nunca se rompe. Así la carta promete algo que no pasa. Hay dos caminos: cambiar el texto de la carta o agregar que la canoa se pueda dañar, por ejemplo al chocar con rocas.
 

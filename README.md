@@ -4,7 +4,7 @@
 
 Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de Tierra del Fuego. Lo desarrolla el equipo **Tierra de los Humos** para la hackatón [SoberaníaTech 2026](https://soberaniatech.com.ar/), organizada por la Agencia de Innovación de Tierra del Fuego.
 
-> 🚧 **En desarrollo** (9 al 18 de noviembre de 2026). El viaje ya se juega de punta a punta: elegir pueblo, remar, cuidar el fuego, encontrar saberes y heredarlos. Las cartas siguen en revisión con la consulta, y los números del juego se ajustan hasta la entrega del 18/11.
+> 🚧 **En desarrollo** (9 al 18 de noviembre de 2026). El viaje ya se juega de punta a punta: elegir pueblo, remar, cuidar el fuego, encontrar saberes y heredarlos. Dani aprobó las nueve cartas originales el 18/11; la consulta comunitaria sigue abierta y los números del juego se ajustan hasta la entrega.
 
 **Jugalo:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/) (el viaje completo, en el celular o en la compu; también abre con doble clic en `index.html`, sin internet) · **Video:** ✏️ *[enlace]* · **Presentación:** [facunique.github.io/Tierra-de-los-Humos/presentacion](https://facunique.github.io/Tierra-de-los-Humos/presentacion/) ([PDF](https://facunique.github.io/Tierra-de-los-Humos/presentacion/pitch.pdf))
 
@@ -169,6 +169,7 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 ## Uso de inteligencia artificial
 
+- **Empezar otro viaje y transiciones (19/11):** a pedido de Facu (Persona B), Claude Code hizo que «Empezar otro viaje» vaya directo al viaje nuevo con el paso del fuego, y encontró y arregló por qué no se veían las transiciones entre pantallas. Es interfaz: no agregó datos culturales.
 - **Números del juego en el README (18/11):** a pedido de Facu (Persona B), Claude Code completó la tabla de números de *Cómo se juega* con los valores de `reglas.js`, `elementos.js` y los minijuegos, y el balance que midió la Persona A. No agregó datos culturales.
 - **Mapa de los pueblos (18/11):** a pedido de Facu (Persona B), Claude Code hizo que la etiqueta «Yagán» del mapa de «¿A quién acompañás?» también elija, y que el territorio se ilumine al pasar el mouse por la tarjeta. Usa la opción de destacar del mapa de la Persona D, sin cambiar su dibujo. No agregó datos culturales.
 - **Pitch: rigor y nombres (18/11):** a pedido de Facu (Persona B), Claude Code cambió en la presentación de la Persona D la línea de la diapositiva de rigor que mostraba una ruta del repositorio, puso los nombres del equipo en el cierre y volvió a exportar las imágenes y el PDF. No agregó datos culturales.
