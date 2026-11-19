@@ -57,7 +57,7 @@ Están todos en [`reglas.js`](reglas.js). Son recursos de juego y se ajustan jug
 
 | Qué | Cuánto |
 |---|---|
-| Fuego al empezar | 14 de 16 (se ve como «Fuego 3 de 4»), más 1 por cada saber heredado, hasta 16 |
+| Fuego al empezar | 14 de 16 (se ve como «Fuego 4 de 4»), más 1 por cada saber heredado, hasta 16 |
 | Al salir se lleva | 2 atados de leña |
 | Remar una casilla | Gasta 1 |
 | Fallar un minijuego | Gasta como remar una casilla, sin moverse |
