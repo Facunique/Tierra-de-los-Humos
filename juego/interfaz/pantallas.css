@@ -91,6 +91,10 @@ button.pueblo { cursor: pointer; font: inherit; }
 #p-viaje .ficha { font-size: 14px; }
 /* El cambio de tiempo que ya se anunció: con borde de tinta punteado, para que no se confunda con el clima de ahora. */
 #p-viaje .ficha--aviso { outline: 2px dashed var(--tdh-tinta); outline-offset: -5px; }
+/* Brasas (19/11): el fuego en 0 late en ocre hasta que se aviva. La meta va con borde de tinta. */
+#p-viaje .ficha--brasas { background: var(--tdh-ocre); color: var(--tdh-nieve); }
+@media (prefers-reduced-motion: no-preference) { #p-viaje .ficha--brasas { animation: tdh-latido 0.8s ease-in-out infinite; } }
+#p-viaje .ficha--meta { box-shadow: 0 0 0 2px var(--tdh-tinta) inset, 3px 4px 0 var(--tdh-sombra); }
 .mapa { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; background: #2d4553; overflow: hidden; }
 #mapa { max-width: 100%; max-height: 100%; cursor: pointer; touch-action: manipulation; }
 .anuncio, .subtitulo { position: absolute; z-index: 4; left: 50%; transform: translateX(-50%); max-width: calc(100% - 24px); text-align: center; pointer-events: none;
@@ -132,6 +136,14 @@ button.pueblo { cursor: pointer; font: inherit; }
 .fin__cronica { text-align: left; line-height: 1.5; }
 .lista-saberes { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 6px; text-align: left; }
 .lista-saberes li { background: rgba(255, 212, 124, 0.25); border-radius: 8px; padding: 6px 10px; font-weight: 700; }
+/* Las tres marcas del viaje (19/11): un fuego encendido por cada una lograda. */
+.fin__marcas { list-style: none; padding: 0; margin: 14px 0 4px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.marca { display: grid; justify-items: center; gap: 2px; padding: 6px 4px 8px; border-radius: 10px; background: rgba(40, 34, 30, 0.08); font-size: 13px; font-weight: 700; line-height: 1.2; text-align: center; opacity: 0.7; }
+.marca canvas { width: 36px; height: 39px; }
+.marca--si { opacity: 1; background: rgba(255, 212, 124, 0.35); }
+.marca--nueva { box-shadow: 0 0 0 3px var(--tdh-ocre) inset; }
+@media (prefers-reduced-motion: no-preference) { .marca--nueva { animation: tdh-latido 1.2s ease-in-out 3; } }
+.fin__mejor { font-size: 14px !important; color: var(--texto-2); margin-top: 2px !important; }
 
 /* ── Códice ── */
 .pantalla--papel .capa { background: var(--fondo); color: var(--texto); }

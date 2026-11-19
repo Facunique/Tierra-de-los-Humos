@@ -10,6 +10,8 @@
  * Cooper (1946) documenta los detalles que el pasaje de Vargas no confirma.
  * La entrevista se registra aparte; no se inventan respuestas ni permisos.
  * Las nueve cartas originales fueron revisadas y aprobadas por Dani (18/11/2026).
+ * 19/11: «En el juego» suma qué deja cada saber al heredarse (juego/nucleo/reglas.js, HERENCIA).
+ * Es recurso de juego; el dato y la fuente no cambiaron.
  * Es revisión de contenido del equipo; la consulta comunitaria sigue abierta.
  * Ver docs/03 y docs/05. Las ocho propuestas nuevas siguen en otro archivo.
  *
@@ -55,7 +57,7 @@
       id: 'fuego', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Fuego', titulo: 'El fuego viaja en la canoa',
       dato: 'El fuego se lleva encendido en la canoa. Antes de partir, se acomoda junto con las pertenencias del viaje.',
-      juego: 'Avivá el fuego con leña para seguir el viaje.',
+      juego: 'Avivá el fuego con leña para seguir el viaje. Heredado: el fuego sale más alto.',
       fuente: VARGAS + ', p. 33 del visor del PDF.',
       alt: 'Una canoa de corteza frente a una playa con bosque. En el centro arde el fuego y sube humo. Van dos personas sin rasgos: una lleva un arpón en reposo y la otra, un remo.',
       mapa: ['GGLGGLGG', '..,,,,..', ',,,--,,,'], extra: { canoa: { x: 3, y: 2, fuego: 4 }, hora: 'tarde' },
@@ -64,7 +66,7 @@
       id: 'amarre', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Canoa', titulo: 'Amarrar en el cachiyuyo',
       dato: 'El manejo de la canoa incluye el remo y el amarre. Para detenerse, la canoa se amarra en bancos de grandes algas marinas, fuera de la orilla.',
-      juego: 'Para acampar, amarrá la canoa en el cachiyuyo, cerca de una playa.',
+      juego: 'Para acampar, amarrá la canoa en el cachiyuyo, cerca de una playa. Heredado: los amarres se ven a través del humo.',
       fuente: COOPER + ', p. 88 (paginación impresa; amarre). Referencia complementaria para mujeres remando: ' + VARGAS + ', p. 33 del visor del PDF.',
       alt: 'La canoa, con el fuego encendido y dos personas en silueta, está quieta entre las algas del cachiyuyo, en el agua frente a una playa con bosque.',
       mapa: ['GGLLGGGG', '........', ',,k,k,,,'], extra: { canoa: { x: 3, y: 2, fuego: 2 } },
@@ -73,7 +75,7 @@
       id: 'mejillones', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Alimento', titulo: 'Recolectar en la costa',
       dato: 'La marea baja permite recolectar mariscos en la costa. Después de preparar el campamento, se aprovecha ese momento para reunir alimento.',
-      juego: 'Juntá mejillones en la playa para sumar comida.',
+      juego: 'Juntá mejillones en la playa para sumar comida. Heredado: los mejillones se ven a través del humo.',
       fuente: VARGAS + ', p. 30 y 44 del visor del PDF.',
       alt: 'Una playa al pie del bosque, con dos rocas en el agua. Sobre la playa hay dos pegatinas de mejillones con borde de papel.',
       mapa: ['GGGGLLGG', '........', ',,r,,r,,'], extra: { objetos: [{ id: 'mejillones', x: 3, y: 1 }, { id: 'mejillones', x: 5, y: 1 }] },
@@ -82,7 +84,7 @@
       id: 'pescado', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Alimento', titulo: 'Pescar para el campamento',
       dato: 'La pesca aporta alimento al campamento. Mientras parte del grupo sale a pescar, otras personas trabajan la corteza para fabricar canoas.',
-      juego: 'El pescado se junta en el agua baja.',
+      juego: 'El pescado se junta en el agua baja. Heredado: el pescado se ve a través del humo.',
       fuente: VARGAS + ', p. 30 y 39 del visor del PDF.',
       alt: 'Agua frente a una playa con bosque. En el agua hay una pegatina de pescado con borde de papel.',
       mapa: ['GGLLGGGG', '........', ',,,,,,,,'], extra: { objetos: [{ id: 'pescado', x: 4, y: 2 }] },
@@ -91,7 +93,7 @@
       id: 'hongos', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Alimento', titulo: 'Hongos de los árboles',
       dato: 'Los hongos de los árboles y las raíces complementan los alimentos disponibles durante un invierno difícil.',
-      juego: 'Los hongos se juntan en la orilla del bosque.',
+      juego: 'Los hongos se juntan en la orilla del bosque. Heredado: el viaje empieza con comida guardada.',
       fuente: VARGAS + ', p. 54 del visor del PDF.',
       alt: 'Árboles rojos y verdes junto a una playa. Sobre la playa hay una pegatina de hongos amarillos y anaranjados sobre una rama, con borde de papel.',
       mapa: ['LLGLLGLL', 'p......p', ',,,,,,,,'], extra: { objetos: [{ id: 'hongos', x: 3, y: 1 }], estacion: 'otono' },
@@ -100,7 +102,7 @@
       id: 'pirita', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Fuego', titulo: 'Piedras de fuego',
       dato: 'La pirita se usa junto con el pedernal para encender el fuego. Como escasea, se mantiene una fogata encendida en la canoa durante los viajes.',
-      juego: 'Si llevás pirita, el juego la usa automáticamente para volver a encender el fuego una vez.',
+      juego: 'Si llevás pirita, vuelve a encender el fuego una vez. Heredado: el fuego vuelve más alto.',
       fuente: COOPER + ', p. 91 y 95 (materiales). Vargas Filgueira, Víctor (2026). Entrevista del 13/11/2026 (escasez y transporte del fuego), confirmada por C el 14/11.',
       alt: 'Una playa al pie del bosque, con una roca en la orilla. Sobre la playa hay una pegatina de una piedra dorada junto a una piedra gris, con borde de papel.',
       mapa: ['GGGGLLGG', '..r.....', ',,,,,,,,'], extra: { objetos: [{ id: 'pirita', x: 3, y: 1 }] },
@@ -109,7 +111,7 @@
       id: 'choza', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Refugio', titulo: 'Preparar el campamento',
       dato: 'Las viviendas del campamento se arman al detenerse y se desarman antes de continuar. El campamento forma parte del recorrido.',
-      juego: 'Junto a una choza, el fuego se gasta más despacio.',
+      juego: 'Junto a una choza, el fuego se gasta más despacio. Heredado: cerca de la choza, casi no se gasta.',
       fuente: VARGAS + ', p. 30 y 33 del visor del PDF.',
       alt: 'Una choza de domo en un claro junto a la playa. Sale humo de arriba y se ve fuego por la puerta. Más cerca del agua hay un anillo de conchas claras.',
       mapa: ['LLGGLLGL', 'Gp..p.GG', '........', ',,,,,,,,'], extra: { objetos: [{ id: 'choza', x: 3, y: 1 }, { id: 'conchal', x: 5, y: 2 }] },
@@ -118,7 +120,7 @@
       id: 'corteza', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Canoa', titulo: 'Una canoa de corteza',
       dato: 'La corteza se busca en la época en que se afloja. También se conserva en el agua de un turbal para recuperarla cuando hace falta reparar una canoa.',
-      juego: 'La primera vez que juntás corteza, descubrís este saber.',
+      juego: 'La primera vez que juntás corteza, descubrís este saber. Heredado: con viento, el canal hondo no gasta de más.',
       fuente: VARGAS + ', p. 23 y 31-32 del visor del PDF.',
       alt: 'Un árbol de tronco recto con una franja clara en la corteza, en una playa entre el bosque y el canal.',
       mapa: ['GGGGGGGG', 'GG....GG', ',,,,,,,,'], extra: { objetos: [{ id: 'guindo-grande', x: 3, y: 1 }] },
@@ -127,7 +129,7 @@
       id: 'ballena', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Encuentro', titulo: 'La ballena varada',
       dato: 'Una ballena varada reúne a varias familias para compartir alimento y reencontrarse. Acudir al varamiento puede motivar un viaje.',
-      juego: 'Una ballena varada es uno de los motivos del viaje. En esta versión, llegar con el fuego encendido completa la partida.',
+      juego: 'Una ballena varada es uno de los motivos del viaje: llegar con el fuego encendido completa la partida. Heredado: el destino se ve desde el principio.',
       fuente: VARGAS + ', p. 16-17 del visor del PDF.',
       alt: 'Una ballena sobre la playa, al pie del bosque. Por encima de los árboles se ven columnas de humo.',
       mapa: ['GGLGGGLG', '........', ',,,,,,,,'], extra: { objetos: [{ id: 'ballena-varada', x: 4, y: 1 }], humos: [{ x: 1.5, y: 0.6 }, { x: 7.2, y: 0.8 }] },

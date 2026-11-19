@@ -90,6 +90,7 @@
           break;
         }
         case 'reencendido': sumar('chispa', 'La pirita vuelve a encender el fuego'); break;
+        case 'brasas': sumar('apagado', 'Quedan brasas: hay que avivar el fuego'); break;
         case 'acampe': sumar('acampe', ev.comio ? 'Amarran la canoa, comen y pasan la noche cuidando el fuego' : 'Amarran la canoa y pasan la noche cuidando el fuego, sin comida'); break;
         case 'clima': if (TEXTO_CLIMA[ev.clima]) sumar('clima', TEXTO_CLIMA[ev.clima]); break;
         case 'aviso': if (TEXTO_AVISO[ev.clima]) sumar('clima', TEXTO_AVISO[ev.clima]); break;

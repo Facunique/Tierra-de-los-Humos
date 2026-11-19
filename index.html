@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="arte/corteza/carta.css">
 <link rel="stylesheet" href="juego/interfaz/juego.css">
 <link rel="stylesheet" href="juego/interfaz/pantallas.css">
+<link rel="stylesheet" href="minijuegos/minijuegos.css">
 <link rel="icon" href="arte/logo/favicon-32.png" type="image/png">
 <link rel="apple-touch-icon" href="arte/logo/icono-192.png">
 </head>
@@ -106,6 +107,8 @@
       <h2 id="t-fin"></h2>
       <p class="fin__cronica-titulo">Crónica del viaje</p>
       <p class="fin__cronica" id="fin-texto"></p>
+      <ul class="fin__marcas" id="fin-marcas" aria-label="Marcas del viaje" hidden></ul>
+      <p class="fin__mejor" id="fin-mejor"></p>
       <p class="fin__dato" id="fin-dato" hidden></p>
       <p id="fin-lista-titulo"></p>
       <ul class="lista-saberes" id="fin-lista"></ul>
@@ -197,6 +200,9 @@
 <script src="juego/interfaz/herencia.js"></script>
 <script src="juego/interfaz/carta.js"></script>
 <script src="juego/interfaz/cronica.js"></script>
+<script src="juego/interfaz/marcas.js"></script>
+<script src="minijuegos/juegos-tierra.js"></script>
+<script src="minijuegos/juegos-canoa.js"></script>
 <script src="minijuegos/minijuegos.js"></script>
 <script src="juego/interfaz/juego.js"></script>
 </body>

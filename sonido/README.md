@@ -111,9 +111,11 @@ Es diseño de sonido, no un dato: no imitamos aves ni animales, para no inventar
 
 [`voz.js`](voz.js) lee las cartas de saber con la voz que ya trae el sistema (Web Speech API), en castellano y de preferencia rioplatense. No usa archivos ni hace falta internet en la mayoría de los equipos. Sirve a quien lee con dificultad, a quien ve poco y a los chicos más chicos.
 
+Desde el 19/11 lee solo **el título y el dato** (antes leía también el tipo, «En el juego» y la fuente entera, con editorial y páginas: se hacía largo y sonaba a máquina), y elige **la mejor voz que tenga el dispositivo**: suman las voces «naturales» o neuronales (Edge, Chrome, Android, iOS) y la variante rioplatense, y pierden las de baja calidad. La fuente sigue escrita en la carta.
+
 ```js
 if (TDH_VOZ.disponible()) botonEscuchar.hidden = false;
-TDH_VOZ.leerCarta({ tipo, titulo, dato, juego, fuente });
+TDH_VOZ.leerCarta({ titulo, dato });   // lee el título y el dato
 TDH_VOZ.detener();
 ```
 

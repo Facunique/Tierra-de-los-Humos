@@ -118,6 +118,7 @@
         case 'avivo': frases.push(conLena ? 'Avivaste el fuego: sube a ' + conLena.despues + '.' : 'Avivaste el fuego.'); break;
         case 'saber': { const c = saberes[ev.id]; frases.push('Un saber nuevo' + (c && c.titulo ? ': ' + c.titulo.replace(/<[^>]+>/g, '') : '') + '.'); break; }
         case 'reencendido': frases.push('Con la pirita, el fuego vuelve a prender.'); break;
+        case 'brasas': frases.push('Quedan brasas: avivá el fuego. Aguantan ' + ev.quedan + (ev.quedan === 1 ? ' remada.' : ' remadas.')); break;
         case 'acampe': frases.push('Amarraron en el cachiyuyo y pasaron la noche.'); break;
         case 'clima': frases.push(mayus(CLIMA[ev.clima] || 'cambia el tiempo') + '.'); break;
         case 'aviso': if (AVISO[ev.clima]) frases.push(AVISO[ev.clima] + '.'); break;

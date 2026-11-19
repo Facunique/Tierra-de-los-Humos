@@ -15,7 +15,7 @@
  * - La fuente queda siempre a la vista: si el texto no entra, se desplaza el
  *   cuerpo de la carta (dato y en el juego), no la fuente ni los botones.
  * - La ilustración se dibuja con Corteza y lleva el texto alternativo (carta.alt).
- * - «Escuchar la carta» la lee con TDH_VOZ.leerCarta, si el dispositivo tiene voz.
+ * - «Escuchar» lee el título y el dato con TDH_VOZ.leerCarta, si el dispositivo tiene voz.
  * - Teclado: el foco queda adentro de la carta; Escape la cierra. Al cerrar, el
  *   foco vuelve a donde estaba.
  * - Si llega otra carta mientras hay una abierta, espera su turno.
@@ -96,7 +96,7 @@
       const botones = el('div', 'tdh-carta__botones');
       let escuchar = null;
       if (voz) {
-        escuchar = el('button', 'boton-papel', '🔊 Escuchar la carta');
+        escuchar = el('button', 'boton-papel', '🔊 Escuchar');
         escuchar.type = 'button';
         escuchar.setAttribute('aria-pressed', 'false');
         botones.appendChild(escuchar);
@@ -108,11 +108,11 @@
       velo.appendChild(art);
 
       // ── Voz ──
-      function vozLista() { if (!escuchar) return; escuchar.setAttribute('aria-pressed', 'false'); escuchar.textContent = '🔊 Escuchar la carta'; }
+      function vozLista() { if (!escuchar) return; escuchar.setAttribute('aria-pressed', 'false'); escuchar.textContent = '🔊 Escuchar'; }
       if (escuchar) escuchar.addEventListener('click', async () => {
         if (escuchar.getAttribute('aria-pressed') === 'true') { voz.detener(); vozLista(); return; }
         escuchar.setAttribute('aria-pressed', 'true'); escuchar.textContent = '⏹ Detener la lectura';
-        await (op.rotulo ? voz.leer([op.rotulo + '.', carta.titulo + '.', 'Dato: ' + carta.dato, 'En el juego: ' + carta.juego, 'Fuente: ' + carta.fuente].join(' ').replace(/<[^>]+>/g, '')) : voz.leerCarta(carta));
+        await voz.leerCarta(carta);   // el título y el dato (sonido/voz.js)
         if (velo.isConnected) vozLista();
       });
 

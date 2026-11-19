@@ -21,15 +21,27 @@
   const sintesis = raiz.speechSynthesis;
   let vozElegida = null;
 
+  /**
+   * La mejor voz en castellano que tenga el dispositivo (19/11). Antes se tomaba la primera
+   * del idioma, que suele ser la más robótica. Ahora suman puntos las voces «naturales» o
+   * neuronales (Edge, Chrome, Android, iOS) y la variante rioplatense; pierden las de baja calidad.
+   */
+  function puntaje(v) {
+    const lang = (v.lang || '').replace('_', '-').toLowerCase(), n = (v.name || '').toLowerCase();
+    if (!lang.startsWith('es')) return -1;
+    let p = 0;
+    if (/natural|neural|online|premium|enhanced|mejorad|siri/.test(n)) p += 50;
+    if (/google/.test(n)) p += 25;
+    p += { 'es-ar': 20, 'es-uy': 18, 'es-419': 15, 'es-us': 12, 'es-mx': 10, 'es-cl': 10, 'es-es': 6 }[lang.slice(0, 6)] || 4;
+    if (/compact|espeak|low/.test(n)) p -= 30;
+    if (v.localService) p += 2;   // anda sin internet
+    return Math.max(0, p);          // una voz en castellano, aunque sea mala, es mejor que ninguna
+  }
   function elegirVoz() {
     if (!sintesis) return null;
-    const voces = sintesis.getVoices();
-    const orden = ['es-AR', 'es-UY', 'es-419', 'es-US', 'es-MX', 'es-CL', 'es-ES', 'es'];
-    for (const lang of orden) {
-      const v = voces.find((x) => x.lang && x.lang.replace('_', '-').toLowerCase().startsWith(lang.toLowerCase()));
-      if (v) return v;
-    }
-    return null;
+    const voces = sintesis.getVoices().filter((v) => puntaje(v) >= 0);
+    voces.sort((a, b) => puntaje(b) - puntaje(a));
+    return voces[0] || null;
   }
   if (sintesis && 'onvoiceschanged' in sintesis) sintesis.addEventListener('voiceschanged', () => { vozElegida = elegirVoz(); });
 
@@ -44,7 +56,7 @@
     /** Lee un texto. Devuelve una promesa que se cumple al terminar (o al detener). */
     leer(texto, opciones) {
       if (!api.disponible()) return Promise.resolve(false);
-      const op = Object.assign({ velocidad: 0.95, tono: 1 }, opciones || {});
+      const op = Object.assign({ velocidad: 1, tono: 1 }, opciones || {});
       sintesis.cancel();
       vozElegida = vozElegida || elegirVoz();
       return new Promise((ok) => {
@@ -60,18 +72,16 @@
         if (!partes.length) ok(true);
       });
     },
-    /** Lee una carta en el mismo orden en que se ve: tipo, título, dato, en el juego, fuente. */
+    /**
+     * Lee una carta: el título y el dato (19/11). Antes leía también el tipo, «En el juego»
+     * y la fuente entera, con páginas y editorial: se hacía largo y sonaba a máquina.
+     * La fuente sigue escrita en la carta.
+     */
     leerCarta(c) {
-      return api.leer([
-        'Saber. ' + limpiar(c.tipo) + '.',
-        limpiar(c.titulo) + '.',
-        'Dato: ' + limpiar(c.dato),
-        'En el juego: ' + limpiar(c.juego),
-        'Fuente: ' + limpiar(c.fuente),
-      ].join(' '));
+      return api.leer(limpiar(c.titulo) + '. ' + limpiar(c.dato));
     },
     detener() { if (sintesis) sintesis.cancel(); },
     get hablando() { return !!(sintesis && sintesis.speaking); },
   };
-  if (typeof module !== 'undefined' && module.exports) module.exports = api; else raiz.TDH_VOZ = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = Object.assign(api, { puntaje }); else raiz.TDH_VOZ = api;
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -183,7 +183,7 @@
     const b = $('b-empezar');
     if (!confirmarOtro) {
       b.textContent = '¿Terminar este viaje? Tocá de nuevo';
-      anunciar('Si empezás otro viaje, este termina acá. Lo que aprendieron pasa a la generación siguiente. Tocá de nuevo para confirmar.');
+      anunciar('Este viaje termina y lo aprendido pasa a la generación siguiente.');
       confirmarOtro = setTimeout(() => { confirmarOtro = null; pintarTitulo(); }, 4000);
       return;
     }
@@ -239,7 +239,7 @@
     return {
       titulo: 'Por qué viajan',
       dato: d.dato,
-      juego: 'La familia de este viaje es ficción. Va en canoa hacia ' + destino.nombre + ', al este del canal. Llevá el fuego encendido hasta ahí.',
+      juego: 'Llevá el fuego encendido hasta ' + destino.nombre + ', al este. La familia es ficción.',
       fuente: d.fuente,
       estado: d.estado,
       // La ilustración: la de la carta del destino, o su dibujo en una playa.
@@ -247,6 +247,13 @@
       extra: saber && saber.mapa ? saber.extra : { objetos: d.dibujo ? [{ id: d.dibujo, x: 4, y: 1 }] : [] },
     };
   }
+  // Lo que deja cada saber heredado (juego/nucleo/reglas.js, HERENCIA), en corto.
+  const RECUERDA = {
+    fuego: 'cómo llevar el fuego alto', amarre: 'dónde amarrar', mejillones: 'dónde hay mejillones', pescado: 'dónde hay pescado',
+    hongos: 'cómo guardar comida', pirita: 'cómo prender con pirita', choza: 'el abrigo de la choza', corteza: 'cómo hacer la canoa firme',
+    ballena: 'el camino',
+  };
+  const lista = (l) => (l.length <= 1 ? l.join('') : l.slice(0, -1).join(', ') + ' y ' + l[l.length - 1]);
   async function contarMotivo(esta) {
     // Que el humo de la pantalla anterior termine de abrirse antes de mostrar la carta.
     while (enTransicion) await new Promise((r) => setTimeout(r, 50));
@@ -255,8 +262,9 @@
     if (motivo) await TDH_CARTA.mostrar(motivo, { nueva: false, rotulo: 'Motivo del viaje · Yagán', altoContraste });
     if (partida !== esta) return;
     // Con la luz real, el viaje puede empezar de noche: que se sepa por qué el fuego baja rápido.
-    const deNoche = esta.estado.hora === 'noche' ? ' Es de noche: el frío gasta más el fuego. Amarrá en el cachiyuyo, junto a una playa, para pasar la noche.' : '';
-    anunciar('Generación ' + generacion + '. Llevá el fuego hasta ' + esta.estado.destino.nombre + ', hacia el este.' + deNoche);
+    const deNoche = esta.estado.hora === 'noche' ? ' Es de noche: buscá un cachiyuyo para acampar.' : '';
+    const recuerda = (esta.estado.herencia || []).map((id) => RECUERDA[id]).filter(Boolean);
+    anunciar('Generación ' + generacion + ' · Hasta ' + esta.estado.destino.nombre + '.' + (recuerda.length ? ' La familia recuerda ' + lista(recuerda) + '.' : '') + deNoche);
   }
   /**
    * El tamaño de la celda se calcula solo al entrar al viaje y al cambiar el
@@ -293,11 +301,18 @@
     if (icono) f.appendChild(typeof icono === 'string' ? ARTE.aCanvas(icono, 0, 'verano', 1) : icono);
     f.appendChild(document.createTextNode(texto)); return f;
   }
+  /** Cuántas remadas faltan hasta el destino, por el agua (null si no hay camino). */
+  function faltan(e) {
+    const d = e.destino; if (!d) return null;
+    const r = TDH_MAPA.camino(e.mapa, e.canoa, (x, y) => Math.max(Math.abs(x - d.x), Math.abs(y - d.y)) <= 1);
+    return r ? r.length : null;
+  }
   const nombreDe = (id) => ((window.TDH_ELEMENTOS && TDH_ELEMENTOS.ELEMENTOS[id]) || { nombre: id }).nombre;
   function pintar() {
     const e = partida.estado, hud = $('hud');
     hud.textContent = '';
-    hud.appendChild(ficha(fuegoHud, 'Fuego ' + e.canoa.fuego + ' de 4', 'ficha--fuego' + (e.canoa.fuego <= 1 ? ' ficha--alerta' : '')));
+    const brasas = e.brasas != null && e.brasas > 0;
+    hud.appendChild(ficha(fuegoHud, brasas ? 'Brasas · ' + e.brasas : 'Fuego ' + e.canoa.fuego + ' de 4', 'ficha--fuego' + (brasas ? ' ficha--brasas' : e.canoa.fuego <= 1 ? ' ficha--alerta' : '')));
     hud.appendChild(ficha('icono-lena', 'Leña ' + e.recursos.lena));
     hud.appendChild(ficha('icono-comida', 'Comida ' + e.recursos.comida));
     if (e.recursos.pirita) hud.appendChild(ficha('icono-pirita', 'Pirita'));
@@ -305,6 +320,8 @@
     // El cambio de tiempo que ya se anunció queda a la vista hasta que llega (o hasta acampar).
     if (e.pronostico && PRONOSTICO[e.pronostico.clima]) hud.appendChild(ficha(CLIMA[e.pronostico.clima][0], PRONOSTICO[e.pronostico.clima], 'ficha--aviso'));
     hud.appendChild(ficha(null, HORA[e.hora]));
+    const falta = faltan(e);
+    if (falta != null) hud.appendChild(ficha(null, 'Faltan ' + falta, 'ficha--meta'));
     hud.appendChild(ficha('icono-generacion', 'Gen. ' + generacion));
     const p = partida.puede();
     $('a-juntar').disabled = !p.juntar;
@@ -326,6 +343,7 @@
   // Los textos de lo que pasó. El núcleo solo manda eventos.
   const CAUSA = { viento: 'el viento del canal', lluvia: 'la lluvia', noche: 'el frío de la noche' };
   const APAGADO = { viento: 'con el viento del canal', lluvia: 'con la lluvia', noche: 'con el frío de la noche', remar: 'de tanto remar' };
+  const BRASAS = (window.TDH_REGLAS && TDH_REGLAS.BRASAS_PASOS) || 3;
   function texto(ev) {
     switch (ev.tipo) {
       case 'fuego': {
@@ -334,16 +352,17 @@
         const pesa = (ev.causas || []).filter((c) => CAUSA[c]).map((c) => CAUSA[c]);
         return 'El fuego baja a ' + ev.despues + (pesa.length ? ': ' + pesa.join(' y ') + ' lo gasta' + (pesa.length > 1 ? 'n' : '') + ' más.' : '.');
       }
-      case 'avivo': return 'El fuego se aviva.';
+      case 'avivo': return ev.extra ? '¡Perfecto! El fuego se aviva de más.' : 'El fuego se aviva.';
+      case 'brasas': return ev.quedan === BRASAS ? '¡Quedan brasas! Avivá el fuego: aguantan ' + ev.quedan + ' remadas.' : 'Brasas: ' + (ev.quedan === 1 ? 'la próxima remada las apaga.' : 'quedan ' + ev.quedan + '.');
       case 'demora': return 'No salió: se les fue el tiempo.';
-      case 'junto': return 'Juntaste ' + ev.nombre + '.';
+      case 'junto': return 'Juntaste ' + ev.nombre + (ev.extra ? '. ¡Perfecto: +' + ev.extra + '!' : '.');
       case 'clima': return { calma: 'El tiempo se calma.', viento: 'Se levanta viento.', lluvia: 'Empieza a llover.' }[ev.clima] || '';
       // El aviso llega un paso antes del cambio: da tiempo de decidir si acampar o seguir.
-      case 'aviso': return { calma: 'El tiempo va a mejorar.', viento: 'Se ve venir el viento. Para esperar que pase, amarrá y acampá.', lluvia: 'Se ven nubes: viene lluvia. Para esperar que pase, amarrá y acampá.' }[ev.clima] || '';
-      case 'hora': return { dia: 'Amanece.', tarde: 'Cae la tarde.', noche: 'Se hace de noche: el frío gasta más el fuego.' }[ev.hora] || '';
+      case 'aviso': return { calma: 'El tiempo va a mejorar.', viento: 'Viene viento: acampar lo deja pasar.', lluvia: 'Viene lluvia: acampar la deja pasar.' }[ev.clima] || '';
+      case 'hora': return { dia: 'Amanece.', tarde: 'Cae la tarde.', noche: 'Cae la noche: el frío gasta más.' }[ev.hora] || '';
       case 'reencendido': return 'Con la pirita, el fuego vuelve a prender.';
       // Acampar no es gratis: cuidar el fuego toda la noche lo gasta, y comer lo repone.
-      case 'acampe': return 'Amarraron la canoa en el cachiyuyo y pasaron la noche cuidando el fuego' + (ev.comio ? ', y comieron lo que juntaron.' : '. No había comida: el fuego bajó.');
+      case 'acampe': return 'Pasaron la noche amarrados' + (ev.comio ? ' y comieron.' : '. Sin comida, el fuego bajó.') + (ev.extra ? ' ¡Amarre perfecto!' : '');
       default: return '';
     }
   }
@@ -368,7 +387,7 @@
     const que = accion.tipo === 'juntar' ? p.juntar : accion.tipo;
     if (!MJ.cual(accion.tipo, que)) return true;
     ocupado = true; cola = [];
-    try { return await MJ.jugar(accion.tipo, que, { estacion: partida.estado.estacion, altoContraste, reducido, fuego: partida.estado.canoa.fuego }); }
+    try { return await MJ.jugar(accion.tipo, que, { estacion: partida.estado.estacion, altoContraste, reducido, fuego: partida.estado.canoa.fuego, sonido: conSonido ? sonido : null }); }
     finally { ocupado = false; }
   }
   async function hacer(accion) {
@@ -376,6 +395,7 @@
     if (accion.tipo !== 'remar') {
       const salio = await minijuego(accion);
       if (salio === 'fallo') accion = { tipo: 'demora' };
+      else if (salio === 'perfecto') accion = Object.assign({}, accion, { bien: true });   // suma un poco más (núcleo, BIEN_*)
       else if (!salio) return false;
     }
     if (!partida || partida.terminada || actual !== 'viaje') return false;
@@ -406,7 +426,7 @@
       const p = cola.shift(), c = partida.estado.canoa;
       const eventos = await hacer({ tipo: 'remar', dx: p.x - c.x, dy: p.y - c.y });
       if (!eventos) { cola = []; return; }
-      const aviso = eventos.some((ev) => (ev.tipo === 'fuego' && ev.despues <= 1 && ev.despues < ev.antes) || (ev.tipo === 'hora' && ev.hora === 'noche') || (ev.tipo === 'aviso' && ev.clima !== 'calma'));
+      const aviso = eventos.some((ev) => ev.tipo === 'brasas' || (ev.tipo === 'fuego' && ev.despues <= 1 && ev.despues < ev.antes) || (ev.tipo === 'hora' && ev.hora === 'noche') || (ev.tipo === 'aviso' && ev.clima !== 'calma'));
       if (aviso && cola.length) { cola = []; return; }
       await new Promise((r) => setTimeout(r, reducido ? 0 : 150));
     }
@@ -476,13 +496,40 @@
       : ev.gano
         ? 'Llegaron a ' + e.destino.nombre + ' después de ' + e.pasos + ' casillas.'
         : 'El fuego se apagó ' + (APAGADO[e.causa] || '') + ', después de ' + e.pasos + ' casillas. Pero lo aprendido no se pierde.';
-    // Al llegar, el dato del destino con su fuente (juego/nucleo/territorio/destinos.js).
+    // Al llegar, el dato del destino con su fuente en corto (la completa está en la carta y en el códice).
     $('fin-dato').hidden = !(ev.gano && d);
-    if (ev.gano && d) $('fin-dato').textContent = d.dato + ' (' + d.fuente + ')';
-    $('fin-lista-titulo').textContent = e.aprendidos.length ? 'Estos saberes pasan a la generación ' + linaje.generacion + ':' : 'Esta vez no aprendieron nada nuevo. Lo que ya sabía la familia sigue en la memoria.';
+    if (ev.gano && d) $('fin-dato').textContent = d.dato + ' (' + fuenteCorta(d.fuente) + ')';
+    $('fin-lista-titulo').textContent = e.aprendidos.length ? 'Pasan a la generación ' + linaje.generacion + ':' : 'Esta vez no aprendieron nada nuevo.';
+    pintarMarcas(e);
     const lista = $('fin-lista'); lista.textContent = '';
     for (const id of e.aprendidos) { const li = document.createElement('li'); li.innerHTML = SABERES[id].titulo; lista.appendChild(li); }
     setTimeout(() => irConHumo('fin'), reducido ? 0 : 700);
+  }
+  // Las tres marcas del viaje (núcleo: partida.marcas()) y la mejor de la familia por destino (marcas.js).
+  const MARCAS = window.TDH_MARCAS ? TDH_MARCAS.crear(almacen) : null;
+  function pintarMarcas(e) {
+    const caja = $('fin-marcas'); if (!caja) return;
+    caja.textContent = '';
+    if (!partida.marcas || !MARCAS) { caja.hidden = true; $('fin-mejor').textContent = ''; return; }
+    const r = MARCAS.anotar(PUEBLO, e.destino.id, partida.marcas());
+    caja.hidden = false;
+    for (const m of r.marcas) {
+      const li = document.createElement('li');
+      li.className = 'marca' + (m.logrado ? ' marca--si' : '') + (m.nueva ? ' marca--nueva' : '');
+      const fz = document.createElement('canvas'); fz.width = 48; fz.height = 52; fz.setAttribute('aria-hidden', 'true');
+      CZ.fuego(fz.getContext('2d'), 24, 46, 1, m.logrado ? 3 : 0, 0.8);
+      const nombre = TDH_MARCAS.nombre(m.id, e);
+      li.appendChild(fz);
+      li.appendChild(document.createTextNode(nombre + (m.nueva ? ' · ¡nueva!' : '')));
+      li.setAttribute('aria-label', nombre + ': ' + (m.logrado ? 'lograda' : 'pendiente') + (m.nueva ? ', por primera vez' : ''));
+      caja.appendChild(li);
+    }
+    $('fin-mejor').textContent = 'Mejor de la familia hasta ' + e.destino.nombre + ': ' + r.mejor + ' de 3.';
+  }
+  /** «Cooper (1946); Vargas Filgueira (2019)» a partir de la cita completa. Si no la entiende, la deja como está. */
+  function fuenteCorta(f) {
+    const v = [...String(f).replace(/<[^>]+>/g, '').matchAll(/(?:^|\.\s)([A-ZÁÉÍÓÚ][a-záéíóúñ]+(?: [A-ZÁÉÍÓÚ][a-záéíóúñ]+)?),[^()]{0,20}\((\d{4})\)/g)].map((m) => m[1] + ' (' + m[2] + ')');
+    return v.length ? [...new Set(v)].join('; ') : f;
   }
   /** El paso del fuego («Generación 1 → 2», con los saberes que pasan) y el viaje nuevo. Lo usan el final del viaje y «Empezar otro viaje». */
   async function pasarALaGeneracionSiguiente(desde) {
@@ -567,13 +614,15 @@
     const L = $('ayuda-lista'); if (L.children.length) return;
     const fila = (canvas, titulo, texto) => { const d = document.createElement('div'); d.className = 'papel'; canvas.setAttribute('aria-hidden', 'true'); d.appendChild(canvas); d.insertAdjacentHTML('beforeend', '<div><h3>' + titulo + '</h3><p>' + texto + '</p></div>'); L.appendChild(d); };
     const fz = document.createElement('canvas'); fz.width = 96; fz.height = 96; const x = fz.getContext('2d'); x.scale(2, 2); CZ.fuego(x, 24, 44, 1.2, 3, 1.2);
-    fila(fz, 'El fuego es tu vida', 'Remar lo gasta, y más con viento en el canal hondo, con lluvia o de noche. Cerca de una choza se gasta menos. Si llega a 0, el viaje termina.');
-    fila(ARTE.aCanvas('icono-lena', 0, 'verano', 3), 'Avivar el fuego', 'Usá leña para que el fuego crezca. La leña está en las playas.');
-    fila(ARTE.aCanvas('icono-comida', 0, 'verano', 3), 'Lo que tiene borde de papel, se junta', 'Acercá la canoa y tocá «Juntar»: leña, comida, pirita y saberes. Con pirita, el fuego apagado vuelve a prender una vez.');
+    fila(fz, 'El fuego es tu vida', 'Remar lo gasta, más con viento en el canal hondo, lluvia o de noche. En 0 quedan brasas: unas remadas para avivarlo.');
+    fila(ARTE.aCanvas('icono-lena', 0, 'verano', 3), 'Avivar el fuego', 'La leña está en las playas. Avivá antes de que queden brasas.');
+    fila(ARTE.aCanvas('icono-comida', 0, 'verano', 3), 'Lo que tiene borde de papel, se junta', 'Leña, comida, pirita y saberes. Cada cosa tiene su minijuego: si sale perfecto, suma de más. Con pirita, el fuego apagado vuelve a prender.');
     fila(ARTE.aCanvas('icono-remo', 0, 'verano', 3), 'Remar', 'Tocá el agua y la canoa rema hasta ahí; si tocás algo que se junta, va y lo junta. También con las flechas, o con <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>. <kbd>Enter</kbd> junta, <kbd>F</kbd> aviva, <kbd>M</kbd> amarra y <kbd>Esc</kbd> pone pausa.');
-    fila(ARTE.aCanvas('icono-refugio', 0, 'verano', 3), 'Amarrar y acampar', 'En el cachiyuyo, junto a una playa, pasan la noche. Cuidar el fuego toda la noche lo gasta; comer lo que juntaron lo compensa. Amanece y vuelve la calma: si se ve venir viento o lluvia, acampar es la forma de esperar que pase.');
-    fila(ARTE.aCanvas('icono-viento', 0, 'verano', 3), 'Escuchá y mirá el lugar', 'Con «Luz real de Ushuaia», el viaje empieza con la luz y la estación de ahora en el canal Beagle. Con sonido, el bosque, la playa y el canal suenan distinto, con subtítulos. Con el narrador, el viaje se cuenta en voz alta; <kbd>N</kbd> describe lo que rodea a la canoa. La voz es la que trae tu dispositivo: es automática y su pronunciación no la revisó la comunidad.');
-    fila(ARTE.aCanvas('icono-generacion', 0, 'verano', 3), 'Lo aprendido se transmite', 'Cada saber que encontrás queda en la memoria de la familia y pasa a la siguiente generación. Se guarda en este dispositivo y se ve en el códice.');
+    fila(ARTE.aCanvas('icono-refugio', 0, 'verano', 3), 'Amarrar y acampar', 'En el cachiyuyo, junto a una playa. La noche gasta fuego y comer lo repone. Amanece en calma: si viene viento o lluvia, acampá.');
+    fila(ARTE.aCanvas('icono-generacion', 0, 'verano', 3), 'Lo aprendido se transmite', 'Cada saber pasa a la generación siguiente y le deja algo: ver dónde amarrar, salir con comida, más fuego…');
+    const fm = document.createElement('canvas'); fm.width = 96; fm.height = 96; const xm = fm.getContext('2d'); xm.scale(2, 2); CZ.fuego(xm, 24, 44, 1.2, 4, 0.4);
+    fila(fm, 'Tres marcas por viaje', 'Llegar, llegar con 3 de comida para compartir y llegar a tiempo. La familia guarda su mejor marca.');
+    fila(ARTE.aCanvas('icono-viento', 0, 'verano', 3), 'Escuchá y mirá el lugar', 'Con «Luz real», el viaje empieza con la luz de ahora en Ushuaia. Con sonido, cada lugar suena distinto. Con el narrador, <kbd>N</kbd> describe lo que rodea a la canoa.');
   }
 
   // ── Sonido, subtítulos y narrador ─────────────────────────────────────────
@@ -614,7 +663,7 @@
   });
   $('b-narrador').addEventListener('click', () => {
     conNarrador = !conNarrador; guardarPref('tdh-narrador', conNarrador); pintarOpciones();
-    if (narrador) { if (conNarrador) TDH_VOZ.leer('Narrador encendido. En el viaje, la tecla N describe lo que rodea a la canoa.'); else narrador.callar(); }
+    if (narrador) { if (conNarrador) TDH_VOZ.leer('Narrador encendido. La tecla N describe lo que rodea a la canoa.'); else narrador.callar(); }
   });
   $('b-contraste').addEventListener('click', () => {
     altoContraste = !altoContraste; guardarPref('tdh-alto-contraste', altoContraste); pintarOpciones();

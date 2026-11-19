@@ -129,8 +129,10 @@
   /** Fuego en capas de papel. nivel 0 a 4. (x, y) es la base. s es la escala (1 = una celda de 48 px). */
   function fuego(ctx, x, y, s, nivel, t) {
     if (nivel <= 0) {
+      // Brasas: dos puntos que laten (19/11). Con t quieto (movimiento reducido), quietos.
+      const late = 1 + Math.sin((t || 0) * 4) * 0.35;
       ctx.fillStyle = C.x; ctx.beginPath(); elipse(ctx, x, y - 1 * s, 9 * s, 3 * s); ctx.fill();
-      ctx.fillStyle = C.e; ctx.beginPath(); circulo(ctx, x - 3 * s, y - 2 * s, 1.4 * s); circulo(ctx, x + 2 * s, y - 1.5 * s, 1.1 * s); ctx.fill();
+      ctx.fillStyle = C.e; ctx.beginPath(); circulo(ctx, x - 3 * s, y - 2 * s, 1.4 * s * late); circulo(ctx, x + 2 * s, y - 1.5 * s, 1.1 * s * late); ctx.fill();
       return;
     }
     const f = [0, 0.55, 0.75, 0.95, 1.18][nivel];
