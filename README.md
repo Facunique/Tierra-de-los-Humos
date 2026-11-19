@@ -154,6 +154,7 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 ## Uso de inteligencia artificial
 
+- **Pitch: rigor y nombres (18/11):** a pedido de Facu (Persona B), Claude Code cambió en la presentación de la Persona D la línea de la diapositiva de rigor que mostraba una ruta del repositorio, puso los nombres del equipo en el cierre y volvió a exportar las imágenes y el PDF. No agregó datos culturales.
 - **Menú y botones (18/11):** a pedido de Facu (Persona B), Claude Code arregló «Empezar otro viaje» después de pausar, sumó «Volver al menú» al final del viaje, un aviso mientras se prepara la generación siguiente y el resaltado de los botones al pasar el mouse, con colores de la paleta. Es interfaz: no agregó datos culturales.
 - **Canoa que se mece y deja estela (18/11):** a pedido de Facu (Persona B), Claude Code sumó al motor Corteza de la Persona D un balanceo suave de la canoa y una estela de ondas al remar, que se apagan con movimiento reducido. Es animación: no agregó dibujos ni datos nuevos.
 - **Viajes más largos (18/11):** a pedido de Facu (Persona B), Claude Code midió con los jugadores automáticos cuánto dura un viaje y ajustó tres números del núcleo (fuego inicial, leña al salir y que la noche termine sola), con sus pruebas. Son reglas de juego: no agregó datos culturales.
