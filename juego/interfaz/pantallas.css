@@ -44,9 +44,13 @@ html:has(.tdh-juego) { height: 100%; }
   .tdh-juego .boton-papel:not([disabled]):hover { background: #e7ddcb; transform: scale(1.05); }   /* w de la paleta */
   .tdh-juego .boton-papel--fuego:not([disabled]):hover { background: #f39a2c; }                    /* y de la paleta */
   .tdh-juego .boton-papel:not([disabled]):active { transform: translate(2px, 3px); }
+  /* ¿A quién acompañás?: la tarjeta que se puede elegir crece un poco, toma el papel w y un borde de
+     fuego (Y). La de «Próximamente» no es botón y no cambia. */
+  .tdh-juego .pueblo { transition: transform 0.15s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out; }
+  .tdh-juego button.pueblo:hover { background-color: #e7ddcb; transform: scale(1.03); box-shadow: 0 0 0 4px #ffd47c, 3px 4px 0 var(--tdh-sombra); }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
-  .tdh-juego .boton-papel:not([disabled]):hover { transform: none; }
+  .tdh-juego .boton-papel:not([disabled]):hover, .tdh-juego button.pueblo:hover { transform: none; }
 }
 .tdh-juego .boton-papel.cargando { cursor: progress; opacity: 0.85; }
 .opciones .boton-papel { min-width: 0; font-size: 15px; padding: 8px 14px; }
