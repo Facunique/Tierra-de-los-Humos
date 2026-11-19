@@ -4,7 +4,7 @@
 
 Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de Tierra del Fuego. Lo desarrolla el equipo **Tierra de los Humos** para la hackatón [SoberaníaTech 2026](https://soberaniatech.com.ar/), organizada por la Agencia de Innovación de Tierra del Fuego.
 
-> 🚧 **En desarrollo** (9 al 18 de noviembre de 2026). El viaje ya se juega de punta a punta: elegir pueblo, remar, cuidar el fuego, encontrar saberes y heredarlos. Dani aprobó las nueve cartas originales el 18/11; la consulta comunitaria sigue abierta y los números del juego se ajustan hasta la entrega.
+> 🚧 **En desarrollo** (9 al 19 de noviembre de 2026). El viaje ya se juega de punta a punta: elegir pueblo, remar, cuidar el fuego, encontrar saberes y heredarlos. Dani aprobó las nueve cartas originales el 18/11; la consulta comunitaria sigue abierta y los números del juego se ajustan hasta la entrega.
 
 **Jugalo:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/) (el viaje completo, en el celular o en la compu; también abre con doble clic en `index.html`, sin internet) · **Video:** ✏️ *[enlace]* · **Presentación:** [facunique.github.io/Tierra-de-los-Humos/presentacion](https://facunique.github.io/Tierra-de-los-Humos/presentacion/) ([PDF](https://facunique.github.io/Tierra-de-los-Humos/presentacion/pitch.pdf))
 
