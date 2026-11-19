@@ -156,7 +156,8 @@ button.pueblo { cursor: pointer; font: inherit; }
 
 /* ── Postal ── */
 .postal { z-index: 40; }
-.postal__caja { display: grid; gap: 12px; justify-items: center; width: min(100%, 900px); max-height: 100%; overflow-y: auto; }
+/* El padding deja lugar al botón agrandado por el hover: sin él aparecía la barra, la postal se achicaba y el botón temblaba. */
+.postal__caja { display: grid; gap: 12px; justify-items: center; width: min(100%, 900px); max-height: 100%; overflow-y: auto; padding: 8px; box-sizing: border-box; scrollbar-gutter: stable both-edges; }
 .postal__imagen { width: 100%; height: auto; border-radius: 12px; display: block; }
 
 /* ── Alto contraste ── */
