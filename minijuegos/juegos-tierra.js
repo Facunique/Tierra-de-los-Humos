@@ -71,7 +71,7 @@
 
   // ── Mantener: despegar los mejillones con la marea baja ────────────────────
   M.mantener = function (c) {
-    const j = c.j, TIEMPO = 0.75 * c.velocidad;   // con racha, hay que mantener un poco más
+    const j = c.j, TIEMPO = 0.9 * c.velocidad;   // con racha, hay que mantener un poco más
     const marea = c.crear('div', 'mj__marea', c.escena);
     let juntados = 0, apretado = null, auto = null;   // apretado: { b, t }
     function soltar(b) {
@@ -129,7 +129,7 @@
 
   // ── Memoria: dónde estaban los hongos ──────────────────────────────────────
   M.memoria = function (c) {
-    const j = c.j, MIRAR = (c.reducido ? 2.8 : 1.9) / c.velocidad;
+    const j = c.j, MIRAR = (c.reducido ? 2.6 : 1.6) / c.velocidad;
     const lista = c.lugares(j.cantidad + (j.vacios || 0));
     let fase = 'mirar', encontrados = 0, errores = 0, desde = 0;
     const cosas = lista.map((p, i) => {
@@ -204,7 +204,7 @@
         x.beginPath(); x.arc(px * lienzo.width, (py - banda[0]) / (banda[1] - banda[0]) * lienzo.height, R * lienzo.width, 0, Math.PI * 2); x.fill();
         for (const g of oros) {
           if (g.listo || Math.hypot(g.p.x - px, (g.p.y - py) * 0.6) > R * 0.9) continue;
-          if (++g.toques >= 5) {
+          if (++g.toques >= 6) {
             g.listo = true; g.o.classList.add('encontrada'); encontradas++; c.contar(encontradas, j.cantidad);
             if (encontradas >= j.cantidad) c.ganar(); else c.sonar('chispa');
           }

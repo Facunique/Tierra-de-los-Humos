@@ -121,7 +121,7 @@ Trabajo interno del equipo:
 | Pirita | Se lleva de a 1. Si el fuego se apaga, la pirita lo vuelve a prender y se gasta |
 | El día | La tarde cae a las 12 casillas, la noche a las 18 y amanece a las 22 (en invierno, a las 8, 12 y 18) |
 | El clima | Calma, viento o lluvia. Cada cambio se avisa un paso antes |
-| Minijuegos | De 12 a 14 segundos, o 3 intentos para avivar. Perfecto: 1 más de lo que se junta, la leña rinde 3 más o la noche gasta 2 menos. Si no sale, se pierde el turno: gasta como una remada, sin moverse |
+| Minijuegos | De 10 a 12 segundos, o 3 intentos para avivar. Perfecto: 1 más de lo que se junta, la leña rinde 3 más o la noche gasta 2 menos. Si no sale, se pierde el turno: gasta como una remada, sin moverse |
 | Lo heredado | Cada saber deja algo propio: la tabla está en [`juego/nucleo/README.md`](juego/nucleo/README.md#los-números) |
 | Las marcas | Llegar · llegar con 3 de comida · llegar en no más de 1,6 veces el camino más corto |
 

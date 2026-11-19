@@ -52,7 +52,7 @@
       mover(s, dt) {
         // El pez cambia de rumbo cada tanto; con racha, más seguido y más rápido.
         if (s >= cambio) { objetivo = 0.08 + c.r() * 0.84; cambio = s + (0.7 + c.r() * 1.1) / c.velocidad; }
-        py += Math.sign(objetivo - py) * Math.min(Math.abs(objetivo - py), dt * 0.38 * c.velocidad);
+        py += Math.sign(objetivo - py) * Math.min(Math.abs(objetivo - py), dt * 0.44 * c.velocidad);
         // El lazo: sube apretado, baja suelto, con un poco de inercia.
         v += (apretado ? 1.9 : -1.5) * dt; v *= 0.9;
         y += v * dt * 3;
@@ -62,7 +62,7 @@
         const si = dentro();
         lazo.classList.toggle('dentro', si);
         // La barra sube con el pez en el lazo y baja despacio si se va (nunca antes de empezar).
-        if (si) lleno += dt * 0.4; else if (empezo || s > 1.2) lleno = Math.max(0, lleno - dt * 0.16);
+        if (si) lleno += dt * 0.35; else if (empezo || s > 1.2) lleno = Math.max(0, lleno - dt * 0.16);
         fuera = si ? 0 : fuera + dt;
         if (fuera > 0.8 && lleno < 0.95) c.manchar();
         c.progreso(lleno);
@@ -160,7 +160,7 @@
       },
       mover(s, dt) {
         // La corriente: va y viene, con ráfagas. Con racha, empuja más.
-        const corriente = (Math.sin(s * 0.9) * 0.22 + Math.sin(s * 2.3 + 1) * 0.12) * c.velocidad;
+        const corriente = (Math.sin(s * 0.9) * 0.26 + Math.sin(s * 2.3 + 1) * 0.14) * c.velocidad;
         v += (corriente + empuje * 0.85) * dt; v *= 0.93;
         x += v * dt * 1.6;
         if (x < 0.04) { x = 0.04; v = 0; } if (x > 0.96) { x = 0.96; v = 0; }
@@ -168,7 +168,7 @@
         const si = x >= desde && x <= desde + ancho;
         z.classList.toggle('dentro', si);
         if (si) entro = true;
-        lleno = Math.max(0, lleno + (si ? dt / 2.2 : -dt * 0.15));
+        lleno = Math.max(0, lleno + (si ? dt / 2.5 : -dt * 0.18));
         fuera = si || !entro ? 0 : fuera + dt;
         if (fuera > 1) c.manchar();
         c.progreso(lleno);

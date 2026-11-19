@@ -49,41 +49,42 @@
    * `segundos`: el tiempo (sin él, se juega por intentos). `premio`: lo que dice si sale perfecto.
    * `fuente`: de dónde sale lo que se dibuja (no se muestra; ver docs/05).
    */
+  // Dificultad (19/11, a pedido de Mati): un 15 % más difíciles que la primera versión.
   const JUEGOS = {
     lena: {
-      mecanica: 'arrastrar', tierra: true, escena: 'playa', objeto: 'lena', cantidad: 3, segundos: 12, banda: [0.3, 0.62],
+      mecanica: 'arrastrar', tierra: true, escena: 'playa', objeto: 'lena', cantidad: 3, segundos: 10, banda: [0.3, 0.62],
       titulo: 'Juntar leña', pide: 'Arrastrá tres ramas hasta la canoa.', premio: '¡Perfecto! +1 leña',
       fuente: 'Cooper (1946), pp. 88 y 91 (el fuego en la canoa). 🔍 Falta una cita yagán sobre la recolección de leña.',
     },
     mejillones: {
-      mecanica: 'mantener', tierra: true, escena: 'orilla', objeto: 'mejillones', cantidad: 3, segundos: 14, banda: [0.4, 0.74],
+      mecanica: 'mantener', tierra: true, escena: 'orilla', objeto: 'mejillones', cantidad: 3, segundos: 12, banda: [0.4, 0.74],
       titulo: 'Mejillones con la marea baja', pide: 'Mantené apretado cada uno para despegarlo. Si sube el agua, esperá.', premio: '¡Perfecto! +1 comida',
       fuente: 'Vargas Filgueira (2019), pp. 30 y 44 del visor del PDF; Cooper (1946), p. 84.',
     },
     hongos: {
-      mecanica: 'memoria', tierra: true, escena: 'bosque', objeto: 'hongos', cantidad: 3, vacios: 4, segundos: 12, banda: [0.15, 0.46],
+      mecanica: 'memoria', tierra: true, escena: 'bosque', objeto: 'hongos', cantidad: 3, vacios: 4, segundos: 10, banda: [0.15, 0.46],
       titulo: 'Hongos de los árboles', pide: 'Mirá dónde están: después las hojas los tapan.', premio: '¡Perfecto! +1 comida',
       fuente: 'Vargas Filgueira (2019), p. 54 del visor del PDF.',
     },
     pirita: {
-      mecanica: 'frotar', tierra: true, escena: 'playa', objeto: 'pirita', cantidad: 2, piedras: 3, segundos: 14, banda: [0.41, 0.59], arena: [2 / 6, 4 / 6],
+      mecanica: 'frotar', tierra: true, escena: 'playa', objeto: 'pirita', cantidad: 2, piedras: 3, segundos: 12, banda: [0.41, 0.59], arena: [2 / 6, 4 / 6],
       titulo: 'Piedras de fuego', pide: 'Frotá la arena con el dedo y encontrá las dos doradas.', premio: '¡Perfecto!',
       fuente: 'Cooper (1946), pp. 91 y 95.',
     },
     pescado: {
-      mecanica: 'seguir', tierra: false, escena: 'canal', objeto: 'pescado', segundos: 14, ancho: 0.3,
+      mecanica: 'seguir', tierra: false, escena: 'canal', objeto: 'pescado', segundos: 12, ancho: 0.27,
       titulo: 'Pescar desde la canoa', pide: 'La carnada va en un lazo, sin anzuelo. Mantené apretado para subir el lazo y seguí al pez.', premio: '¡Perfecto! +1 comida',
       boton: 'Subir el lazo',
       fuente: 'Cooper (1946), pp. 84 y 96.',
     },
     avivar: {
-      mecanica: 'cargar', tierra: false, escena: 'canal', objeto: 'lena', intentos: 3, franja: [0.58, 0.82],
+      mecanica: 'cargar', tierra: false, escena: 'canal', objeto: 'lena', intentos: 3, franja: [0.6, 0.8],
       titulo: 'Avivar el fuego', pide: 'Mantené apretado para sumar leña y soltá en la franja, sin ahogarlo.', premio: '¡Perfecto! El fuego rinde más',
       boton: 'Sumar leña',
       fuente: 'Vargas Filgueira (2019), p. 33 del visor del PDF.',
     },
     amarrar: {
-      mecanica: 'guiar', tierra: false, escena: 'cachiyuyo', objeto: 'canoa', segundos: 14,
+      mecanica: 'guiar', tierra: false, escena: 'cachiyuyo', objeto: 'canoa', segundos: 12,
       titulo: 'Amarrar en el cachiyuyo', pide: 'La corriente empuja. Tocá de un lado o del otro para dejar la canoa sobre el cachiyuyo.', premio: '¡Perfecto! La noche gasta menos',
       fuente: 'Cooper (1946), p. 88 (paginación impresa).',
     },
