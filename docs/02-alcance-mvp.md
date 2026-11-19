@@ -81,4 +81,4 @@ Qué cambia en el código: A elige el destino según la estación en `partida.js
 
 ## Los números
 
-Están en `juego/nucleo/reglas.js` y los decide A jugando. Hoy: fuego 12 de 16 al empezar, más 1 por cada saber heredado; remar gasta 1, y 1 más con viento en el canal hondo, con lluvia o de noche; cerca de una choza gasta 1 menos; cada leña aviva 6; comer al acampar suma 3; la pirita lo vuelve a prender una vez.
+Están en `juego/nucleo/reglas.js` y los decide A jugando. Hoy (18/11): fuego 14 de 16 al empezar, más 1 por cada saber heredado, y 2 atados de leña al salir; remar gasta 1, y 1 más con viento en el canal hondo, con lluvia o de noche; cerca de una choza gasta 1 menos; cada leña aviva 6; comer al acampar suma 3; acampar gasta 2; la noche termina sola si no se acampa; fallar un minijuego gasta como una remada, sin moverse; la pirita lo vuelve a prender una vez. La versión de mesa sigue con 12 de fuego y 1 leña.
