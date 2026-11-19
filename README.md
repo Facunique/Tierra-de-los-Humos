@@ -154,6 +154,7 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 ## Uso de inteligencia artificial
 
+- **Mapa de los pueblos (18/11):** a pedido de Facu (Persona B), Claude Code hizo que la etiqueta «Yagán» del mapa de «¿A quién acompañás?» también elija, y que el territorio se ilumine al pasar el mouse por la tarjeta. Usa la opción de destacar del mapa de la Persona D, sin cambiar su dibujo. No agregó datos culturales.
 - **Pitch: rigor y nombres (18/11):** a pedido de Facu (Persona B), Claude Code cambió en la presentación de la Persona D la línea de la diapositiva de rigor que mostraba una ruta del repositorio, puso los nombres del equipo en el cierre y volvió a exportar las imágenes y el PDF. No agregó datos culturales.
 - **Menú y botones (18/11):** a pedido de Facu (Persona B), Claude Code arregló «Empezar otro viaje» después de pausar, sumó «Volver al menú» al final del viaje, un aviso mientras se prepara la generación siguiente y el resaltado de los botones al pasar el mouse, con colores de la paleta. Es interfaz: no agregó datos culturales.
 - **Canoa que se mece y deja estela (18/11):** a pedido de Facu (Persona B), Claude Code sumó al motor Corteza de la Persona D un balanceo suave de la canoa y una estela de ondas al remar, que se apagan con movimiento reducido. Es animación: no agregó dibujos ni datos nuevos.

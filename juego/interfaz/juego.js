@@ -142,9 +142,34 @@
     requestAnimationFrame(() => {
       escenaEn($('ilus-yagan'), ['GGLGGLGG', '..,,,,..', ',,,--,,,'], { canoa: { x: 3, y: 2, fuego: 4 }, hora: 'tarde' });
       escenaEn($('ilus-kawesqar'), ['~~~~~~~~', '~~~~~~~~', '~~~~~~~~'], { explorado: () => false, bordeNiebla: false });
-      if (window.TDH_TERRITORIOS) TDH_TERRITORIOS.dibujar($('mapa-pueblos'), { ancho: 900, territorios: true, nombres: true, hoy: false, destacar: 'yagan' });
+      dibujarMapaPueblos(!conMouse);
     });
   }
+  // El mapa de «¿A quién acompañás?» (18/11): la etiqueta «Yagán» también elige, y con mouse el territorio
+  // yagán se ilumina al pasar por la tarjeta o por la etiqueta. Sin mouse (celular) queda siempre destacado.
+  // El dibujo es de arte/mapa/mapa.js (D): acá solo se elige qué destacar y se ubica el botón sobre el rótulo.
+  const conMouse = typeof matchMedia === 'function' && matchMedia('(hover: hover) and (pointer: fine)').matches;
+  let mapaDestacado = null;
+  function dibujarMapaPueblos(destacar) {
+    if (!window.TDH_TERRITORIOS) return;
+    mapaDestacado = !!destacar;
+    TDH_TERRITORIOS.dibujar($('mapa-pueblos'), { ancho: 900, territorios: true, nombres: true, hoy: false, destacar: destacar ? 'yagan' : null });
+    const t = TDH_TERRITORIOS.TERRITORIOS.find((x) => x.id === 'yagan'), K = window.TDH_COSTAS && TDH_COSTAS.caja, b = $('b-mapa-yagan');
+    if (!t || !K) return;
+    // El mapa es lineal en longitud y latitud (mapa.js, P): el rótulo cae en esta fracción del lienzo.
+    b.style.left = ((t.rotulo[0] - K.oeste) / (K.este - K.oeste) * 100) + '%';
+    b.style.top = ((K.norte - t.rotulo[1]) / (K.norte - K.sur) * 100) + '%';
+    b.hidden = false;
+  }
+  function destacarYagan(si) { if (conMouse && actual === 'pueblo' && mapaDestacado !== si) dibujarMapaPueblos(si); }
+  for (const id of ['b-yagan', 'b-mapa-yagan']) {
+    $(id).addEventListener('mouseenter', () => destacarYagan(true));
+    $(id).addEventListener('mouseleave', () => destacarYagan(false));
+  }
+  $('b-yagan').addEventListener('focus', () => destacarYagan(true));
+  $('b-yagan').addEventListener('blur', () => destacarYagan(false));
+  $('b-mapa-yagan').addEventListener('click', () => $('b-yagan').click());
+
   // Empezar otro viaje con uno a medias: termina este, y lo aprendido igual pasa a la generación siguiente.
   // Se confirma en el mismo botón (primer toque avisa, el segundo confirma): confirm() puede estar
   // bloqueado en algunos navegadores y entonces el botón no hacía nada (18/11).
