@@ -24,7 +24,7 @@ Teclas: <kbd>Espacio</kbd> pausa, <kbd>→</kbd> pasa a la escena siguiente.
 
 ## Antes de imprimir
 
-- [ ] **Verificar el QR del juego en un celular.** Apunta a `https://facunique.github.io/Tierra-de-los-Humos/`, que se activa cuando la Persona B publique en GitHub Pages. Si la dirección es otra, regenerar el QR:
+- [x] **Verificar el QR del juego en un celular** (19/11, Facu: abre el juego). Apunta a `https://facunique.github.io/Tierra-de-los-Humos/`, que se activa cuando la Persona B publique en GitHub Pages. Si la dirección es otra, regenerar el QR:
 
   ```bash
   npm i --no-save qrcode@1.5.4
@@ -40,5 +40,5 @@ Teclas: <kbd>Espacio</kbd> pausa, <kbd>→</kbd> pasa a la escena siguiente.
   node stand/exportar.cjs
   ```
 
-- [ ] Completar los nombres del equipo en `cartel.html` (marcados con ✏️).
+- [x] Completar los nombres del equipo en `cartel.html` (19/11).
 - [ ] La Persona C aprueba los textos de las cartas antes de imprimirlas.
