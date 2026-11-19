@@ -104,7 +104,22 @@ Trabajo interno del equipo:
 - **El códice** junta todas las cartas de saber, separadas por pueblo, y se puede recorrer sin jugar. «Empezar de cero» borra la memoria de la familia en ese dispositivo.
 - **Opciones** (en la pantalla de título): sonido con subtítulos, narrador para jugar sin ver, alto contraste y luz real de Ushuaia.
 
-✏️ *Completar con los números finales del juego (Personas A y B).* Los de hoy están en [`juego/nucleo/reglas.js`](juego/nucleo/reglas.js) y qué entra en la entrega, en [`docs/02-alcance-mvp.md`](docs/02-alcance-mvp.md) (propuesta, falta acordarla).
+**Los números del juego** (son recursos de juego, no datos; están en [`juego/nucleo/reglas.js`](juego/nucleo/reglas.js)):
+
+| Qué | Cuánto |
+|---|---|
+| El fuego | 16 puntos, que se ven como «Fuego 1 a 4» (4 puntos cada uno). Se sale con 14, más 1 por cada saber heredado |
+| Al salir | 2 atados de leña |
+| Remar una casilla | Gasta 1 punto; 1 más con viento en el canal hondo, con lluvia o de noche. Cerca de una choza, 1 menos |
+| Leña | Cada atado que se junta da 2; avivar con uno suma 6 puntos. Se llevan hasta 5 |
+| Comida | Mejillones, hongos o pescado. Se llevan hasta 5. Al acampar se come una y suma 3 puntos |
+| Acampar | Cuidar el fuego toda la noche gasta 2 puntos. Al otro día amanece en calma |
+| Pirita | Se lleva de a 1. Si el fuego se apaga, la pirita lo vuelve a prender y se gasta |
+| El día | La tarde cae a las 12 casillas, la noche a las 18 y amanece a las 22 (en invierno, a las 8, 12 y 18) |
+| El clima | Calma, viento o lluvia. Cada cambio se avisa un paso antes |
+| Minijuegos | Los de tocar a tiempo dan 3 intentos; los de juntar, de 10 a 13 segundos. Si no sale, se pierde el turno: gasta como una remada, sin moverse |
+
+Con estos números, un jugador automático que junta, aviva y acampa llega al destino 92 de cada 100 veces, en unas 57 casillas. Si va derecho sin juntar nada, el fuego se le apaga en unas 13 casillas: hace falta el territorio. Qué entra en la entrega está en [`docs/02-alcance-mvp.md`](docs/02-alcance-mvp.md).
 
 ## Tecnologías
 
@@ -154,6 +169,7 @@ El resto del arte (motor de dibujo, pegatinas, paleta, logo) y todo el sonido so
 
 ## Uso de inteligencia artificial
 
+- **Números del juego en el README (18/11):** a pedido de Facu (Persona B), Claude Code completó la tabla de números de *Cómo se juega* con los valores de `reglas.js`, `elementos.js` y los minijuegos, y el balance que midió la Persona A. No agregó datos culturales.
 - **Mapa de los pueblos (18/11):** a pedido de Facu (Persona B), Claude Code hizo que la etiqueta «Yagán» del mapa de «¿A quién acompañás?» también elija, y que el territorio se ilumine al pasar el mouse por la tarjeta. Usa la opción de destacar del mapa de la Persona D, sin cambiar su dibujo. No agregó datos culturales.
 - **Pitch: rigor y nombres (18/11):** a pedido de Facu (Persona B), Claude Code cambió en la presentación de la Persona D la línea de la diapositiva de rigor que mostraba una ruta del repositorio, puso los nombres del equipo en el cierre y volvió a exportar las imágenes y el PDF. No agregó datos culturales.
 - **Menú y botones (18/11):** a pedido de Facu (Persona B), Claude Code arregló «Empezar otro viaje» después de pausar, sumó «Volver al menú» al final del viaje, un aviso mientras se prepara la generación siguiente y el resaltado de los botones al pasar el mouse, con colores de la paleta. Es interfaz: no agregó datos culturales.
