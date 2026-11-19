@@ -57,18 +57,37 @@ Están todos en [`reglas.js`](reglas.js). Son recursos de juego y se ajustan jug
 
 | Qué | Cuánto |
 |---|---|
-| Fuego al empezar | 14 de 16 (se ve como «Fuego 4 de 4»), más 1 por cada saber heredado, hasta 16 |
-| Al salir se lleva | 2 atados de leña |
+| Fuego al empezar | 18 de 24 (se ve como «Fuego 3 de 4»). Con el saber del fuego heredado, 21 (fuego 4) |
+| Al salir se lleva | 2 atados de leña (y 1 de comida si se heredó el saber de los hongos) |
 | Remar una casilla | Gasta 1 |
 | Fallar un minijuego | Gasta como remar una casilla, sin moverse |
-| Viento en el canal hondo, lluvia, noche | Cada uno gasta 1 más |
-| Cerca de una choza | Gasta 1 menos |
-| Leña | Cada atado da 2; avivar el fuego con una suma 6. Se lleva hasta 5 |
-| Comida | Se lleva hasta 5. Al acampar se come 1 y suma 3 de fuego |
-| Acampar | Cuidar el fuego toda la noche gasta 2 (con comida, queda en +1) |
-| Pirita | Se lleva 1. Si el fuego se apaga, vuelve a 4 |
+| Viento en el canal hondo, lluvia, noche | Cada uno gasta 1 más, pero una remada nunca gasta más de 2 |
+| Cerca de una choza | Gasta 1 menos (2 si se heredó el saber de la choza) |
+| Leña | Cada atado da 2; avivar el fuego con una suma 9 (unas 9 remadas de día). Se lleva hasta 5 |
+| Comida | Se lleva hasta 5. Al acampar se come 1 y suma 4 de fuego |
+| Acampar | Cuidar el fuego toda la noche gasta 3 (con comida, queda en +1) |
+| Brasas | Con el fuego en 0 y sin pirita, quedan brasas por 3 remadas: avivar (o acampar con comida) lo vuelve a prender |
+| Pirita | Se lleva 1. Si el fuego se apaga, vuelve a 6 (fuego 1); con el saber de la pirita heredado, a 12 |
+| Minijuego perfecto | Sin errar y rápido: juntar da 1 más, avivar suma 3 más y acampar gasta 2 menos |
 | El día | Cae la tarde a las 12 casillas, la noche a las 18 y amanece a las 22. En invierno, a las 8, a las 12 y a las 18. Acampar hace amanecer enseguida |
 | El clima | Dura al menos 4 pasos; después cambia con 12 % de chance por paso, y se avisa 1 paso antes |
+| Las tres marcas | Llegar · llegar con 3 de comida · llegar a tiempo (1,6 veces el camino más corto) |
+
+**Lo que deja cada saber heredado (19/11).** Antes, cada saber heredado sumaba 1 de fuego, todos igual. Ahora cada uno deja algo propio, y lo dice su carta en «En el juego»:
+
+| Saber | Le deja a la generación siguiente |
+|---|---|
+| El fuego viaja en la canoa | Sale con 3 más de fuego |
+| Amarrar en el cachiyuyo | Los amarres se ven a través del humo |
+| Recolectar en la costa | Los mejillones se ven a través del humo |
+| Pescar para el campamento | El pescado se ve a través del humo |
+| Hongos de los árboles | Sale con 1 de comida |
+| Piedras de fuego | La pirita reenciende más alto |
+| Preparar el campamento | Cerca de la choza casi no se gasta |
+| Una canoa de corteza | El viento del canal hondo no gasta de más |
+| La ballena varada | El destino se ve desde el principio |
+
+**Fuego más largo (19/11).** Todo el fuego se multiplicó por 1,5 (energía, leña, comida, acampar y pirita) y una remada gasta 2 como mucho. Había que avivarlo cada pocas remadas y cansaba. Remar sigue gastando 1, así que cada leña rinde unas 9 remadas de día y 4 o 5 de noche (antes, 6 y 2 o 3).
 
 El fuego inicial, las 2 leñas y el amanecer sin acampar son del 18/11 (los ajustó la Persona B a pedido del equipo, para que el viaje no termine a las pocas remadas). La versión de mesa sigue con 12 de fuego y 1 leña: es más simple a propósito. Tampoco tiene el aviso del clima, el gasto de acampar ni los minijuegos, y su leña aviva 5 porque el tablero es la mitad de ancho que el mapa (`docs/02-alcance-mvp.md`, *La versión de mesa*).
 
@@ -76,7 +95,7 @@ El fuego inicial, las 2 leñas y el amanecer sin acampar son del 18/11 (los ajus
 
 Al correr `node --test` en la raíz del repo se revisa:
 
-- **Que el juego se pueda ganar.** Un jugador automático que junta, acampa y hace caso al aviso de lluvia llega el 92 % de las veces (en 500 viajes, 18/11). Es más difícil en invierno y saliendo de noche: del 95 % en verano de día al 77 % en invierno de noche. Uno que va derecho sin juntar nada no llega nunca: el fuego se le apaga en unas 13 casillas (8 en invierno de noche). Esto se mide con cada destino. Los jugadores automáticos no juegan minijuegos: no miden el costo de fallarlos.
+- **Que el juego se pueda ganar.** Un jugador automático que junta, acampa y hace caso al aviso de lluvia llega casi siempre: el 100 % en verano de día y el 98 % en invierno de noche (500 viajes, 19/11; antes, 95 % y 77 %). El reto ahora está en las tres marcas: ese mismo jugador llega con 3 de comida el 35 % de las veces (7 % en invierno de noche) y a tiempo el 26 % (14 %). Uno que va derecho sin juntar nada no llega nunca: el fuego se le apaga en unas 19 casillas (15 en invierno de noche), y el camino más corto tiene unas 29. Esto se mide con cada destino. Los jugadores automáticos no juegan minijuegos: no miden el costo de fallarlos ni el premio de hacerlos perfectos.
 - **Que cada mapa sea jugable.** Se prueban 500 mapas: todos tienen camino por agua hasta el destino, todo lo que se junta queda al alcance de la canoa y hay lugares para amarrar. Salen 500 mapas distintos.
 - **Que los datos del territorio sean consistentes:**
   - cada cosa tiene fuente (o 🔍), dibujo en el estilo Corteza y un lugar válido;
@@ -116,8 +135,8 @@ Son ideas para charlar en el grupo. El aviso del clima ya está (PR 22).
 | Propuesta | Qué propone A | Depende de |
 |---|---|---|
 | El viaje en 3 tramos | Para después de la hackatón. Por ahora, el ciclo de *explorar, encontrar y volver* lo cierra la herencia entre generaciones | El equipo |
-| Qué deja cada saber heredado | Para después de la hackatón: cambia las cartas y el dibujo | El equipo |
-| Las brasas | No entra: con los viajes más largos ya no hace tanta falta, y le suma trabajo a D el último día | El equipo |
+| Qué deja cada saber heredado | Hecha el 19/11 (rama `jugabilidad/chispa`): ver la tabla de arriba | — |
+| Las brasas | Hecha el 19/11 (rama `jugabilidad/chispa`): 3 remadas para avivarlo | — |
 | La carta de la corteza | Resuelta: C cambió el texto y la carta ya no promete arreglar la canoa. La canoa no se daña (`docs/02-alcance-mvp.md`, *Queda afuera*) | — |
 | El destino del viaje | Resuelto el 18/11: Dani habilitó la pirita como motivo del viaje, junto con la ballena, pasando ese destino a `'borrador'` | — |
 | El juego de mesa | Se presenta como una versión más simple, con sus propios números | El equipo |
@@ -127,9 +146,9 @@ El detalle de cada una:
 
 - **El viaje dividido en 3 partes.** Hoy el viaje es un solo canal largo, de la salida al destino. La propuesta es partirlo en 3 tramos con un campamento entre uno y otro. Así se nota más el ciclo de *explorar, encontrar y volver* que pide el concepto, y cada partida tiene momentos de respiro.
 
-- **Qué deja cada saber heredado.** Hoy, cuando una generación termina, cada saber que aprendió le da a la siguiente un poco más de fuego al arrancar. La propuesta es que cada saber deje un conocimiento concreto. Por ejemplo, quien heredó el de los mejillones ve dónde hay comida aunque esté tapada por el humo, y quien heredó el del amarre ve dónde se puede acampar. Va más con la idea de que lo que pasa de generación en generación es la memoria. Si se aprueba, hay que ajustar el texto «En el juego» de algunas cartas.
+- **Qué deja cada saber heredado (hecha el 19/11).** Antes, cada saber heredado daba un poco más de fuego al arrancar. La propuesta era que cada saber deje un conocimiento concreto. Por ejemplo, quien heredó el de los mejillones ve dónde hay comida aunque esté tapada por el humo, y quien heredó el del amarre ve dónde se puede acampar. Va más con la idea de que lo que pasa de generación en generación es la memoria. Si se aprueba, hay que ajustar el texto «En el juego» de algunas cartas.
 
-- **Las brasas.** Hoy, cuando el fuego llega a cero, el viaje termina de golpe. La propuesta es que quede unos pasos en brasas y que, si se aviva a tiempo con leña, vuelva. Es menos frustrante y ya existe el dibujo de las brasas.
+- **Las brasas (hecha el 19/11).** Antes, cuando el fuego llegaba a cero, el viaje terminaba de golpe. La propuesta era que quede unos pasos en brasas y que, si se aviva a tiempo con leña, vuelva. Es menos frustrante y ya existe el dibujo de las brasas.
 
 - **El destino del viaje.** La ballena varada y la búsqueda de piedras de fuego (pirita) están habilitadas. La corteza buena para canoas sigue como propuesta. Cada motivo conserva su fuente en [`territorio/destinos.js`](territorio/destinos.js).
 

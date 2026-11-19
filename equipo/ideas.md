@@ -89,14 +89,14 @@
 
 ## Si el equipo aprueba una propuesta de Mati
 
-**10. «Lo que la abuela sabía»: que la herencia se vea.**
+**10. ~~«Lo que la abuela sabía»: que la herencia se vea.~~ Hecha el 19/11 (rama `jugabilidad/chispa`):** lo heredado se ve a través del humo (amarres, mejillones, pescado, el destino), sin dibujo nuevo: el núcleo los marca como explorados.
 - **Qué:** para la propuesta «Qué deja cada saber heredado». Lo heredado se ve como silueta tenue a través del humo; por ejemplo, la comida para quien heredó el saber de los mejillones. El motor dibujaría `objetos` con `presentido: true`.
 - **Suma a:** pertinencia: la herencia se ve en la pantalla, no solo en un texto.
 - **Señal:** el equipo aprueba la propuesta.
 - **Le tocaría a:** A decide la regla; D, el dibujo en el motor.
 - **Esfuerzo:** 1 a 2 horas en el motor.
 
-**11. Las brasas.**
+**11. ~~Las brasas.~~ Hecha el 19/11 (rama `jugabilidad/chispa`):** 3 remadas para avivarlo; el motor hace latir las brasas y el HUD dice «Brasas · N».
 - **Qué:** para la propuesta del fuego en brasas. El motor ya dibuja el fuego en 5 niveles; falta un estado de brasa que late, con su sonido (crepitar que se apaga) y un subtítulo.
 - **Suma a:** funcionalidad, porque perder se siente menos de golpe.
 - **Señal:** se aprueba la propuesta.
@@ -189,11 +189,11 @@ Lo que hace volver a un roguelike: cada acción se siente, cada viaje deja un n�
 
 **28. Viaje del día.** Un botón que usa la fecha como semilla (`?semilla=` ya existe): todas las personas reman el mismo mapa ese día y pueden comparar cuán lejos llegaron. En la escuela, toda la clase juega el mismo viaje. *Le toca a B (título).* *Señal:* se usa en una clase o en el stand.
 
-**29. Lo más lejos que llegó la familia.** En el final del viaje: «Llegaron a 18 casillas de la ballena. La generación 2 llegó más cerca que nunca». Un récord por linaje, guardado junto a la herencia. *Le toca a B (pantalla del final y `herencia.js`).* *Señal:* las personas que prueban vuelven a jugar.
+**29. ~~Lo más lejos que llegó la familia.~~ Hecha distinta el 19/11:** tres marcas por viaje y la mejor de la familia por destino (`juego/interfaz/marcas.js`). En el final del viaje: «Llegaron a 18 casillas de la ballena. La generación 2 llegó más cerca que nunca». Un récord por linaje, guardado junto a la herencia. *Le toca a B (pantalla del final y `herencia.js`).* *Señal:* las personas que prueban vuelven a jugar.
 
 **30. Otra vez con un toque.** En el final del viaje, <kbd>Enter</kbd> empieza la generación siguiente y el foco queda en ese botón. *Le toca a B.* *Señal:* en las pruebas con personas se ve que buscan cómo seguir.
 
-**31. Cuánto falta.** En el HUD, una tira chica con el camino hasta el destino y la canoa encima: la meta siempre a la vista. *Le toca a B (HUD).* *Señal:* alguien pregunta «¿y ahora adónde voy?».
+**31. ~~Cuánto falta.~~ Hecha el 19/11:** el HUD dice «Faltan N» remadas hasta el destino. En el HUD, una tira chica con el camino hasta el destino y la canoa encima: la meta siempre a la vista. *Le toca a B (HUD).* *Señal:* alguien pregunta «¿y ahora adónde voy?».
 
 **32. ~~Que fallar un minijuego cueste algo.~~ Hecha por B el 18/11 (PR 32), revisada por A:** fallar cuesta un turno (`demora` en `juego/nucleo/partida.js`): el fuego gasta como al remar, sin moverse.
 

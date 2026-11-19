@@ -32,9 +32,10 @@ El concepto completo está en [docs/01-concepto.md](docs/01-concepto.md).
 
 ### Para todos, también en el aula
 
-- **Con las manos:** antes de juntar, avivar el fuego o amarrar, se juega un [minijuego](minijuegos/README.md) corto. Para juntar en la costa, la familia baja a tierra: ramas, mejillones con la marea baja, hongos de los árboles y piedras de fuego. Desde la canoa se pesca con línea sin anzuelo, se aviva el fuego y se amarra en el cachiyuyo. Cada uno muestra el dato de su fuente y lleva la cuenta de la racha al primer intento. Si no sale, se pierde el turno. Al remar, la canoa se desliza de casilla en casilla y deja estela; quieta, se mece con el agua. Lo que se junta o se gasta sube un momento sobre ella («+2 leña»).
+- **Con las manos:** antes de juntar, avivar el fuego o amarrar, se juega un [minijuego](minijuegos/README.md) corto. Para juntar en la costa, la familia baja a tierra: ramas, mejillones con la marea baja, hongos de los árboles y piedras de fuego. Desde la canoa se pesca con línea sin anzuelo, se aviva el fuego y se amarra en el cachiyuyo. Cada uno se juega distinto: arrastrar las ramas hasta la canoa, mantener apretado para despegar los mejillones, recordar dónde estaban los hongos, frotar la arena para encontrar la pirita, seguir al pez con el lazo, sumar la leña justa y guiar la canoa contra la corriente. Si sale perfecto, suma de más; si no sale, se pierde el turno. La racha al primer intento los hace un poco más difíciles. Al remar, la canoa se desliza de casilla en casilla y deja estela; quieta, se mece con el agua. Lo que se junta o se gasta sube un momento sobre ella («+2 leña»).
 - **Accesible:** un narrador cuenta el viaje en voz alta para jugar sin ver la pantalla, las cartas se escuchan en voz alta, hay modo alto contraste, tipografía para baja visión, colores probados para daltonismo y subtítulos para cada sonido.
 - **El territorio se siente:** la luz del juego es la de Ushuaia en ese momento (de día, al atardecer o de noche, y en su estación), y el sonido cambia según el lugar: el bosque, la playa y el canal abierto suenan distinto.
+- **Ganas de volver a jugar:** cada saber heredado le deja algo concreto a la generación siguiente (ver los amarres a través del humo, salir con comida, más fuego). Cada viaje tiene tres marcas (llegar, llegar con comida para compartir y llegar a tiempo) y la familia guarda la mejor de cada destino. Si el fuego se apaga, quedan unas remadas de brasas para salvarlo.
 - **Algo para llevarse:** al terminar, una crónica cuenta lo que pasó en el viaje, y hay una postal con el recorrido y los saberes aprendidos.
 - **En la escuela:** una [guía para docentes](escuelas/README.md) con una actividad por carta, y una [versión de mesa](mesa/README.md) para jugar sin pantallas.
 
@@ -89,18 +90,20 @@ Trabajo interno del equipo:
 | Qué | En el celular | Con teclado |
 |---|---|---|
 | Remar | Tocar el agua: la canoa rema hasta ahí. O las flechas de la pantalla | Flechas o <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> |
-| Juntar (leña, comida, pirita, saberes) | Botón «Juntar», o tocar la pegatina. Después, el minijuego | <kbd>Enter</kbd> o <kbd>J</kbd>. En el minijuego, <kbd>Tab</kbd> y <kbd>Enter</kbd>, o la barra espaciadora |
+| Juntar (leña, comida, pirita, saberes) | Botón «Juntar», o tocar la pegatina. Después, el minijuego | <kbd>Enter</kbd> o <kbd>J</kbd>. En el minijuego, <kbd>Tab</kbd>, <kbd>Enter</kbd>, la barra espaciadora o las flechas ([detalle](minijuegos/README.md#para-todos)) |
 | Avivar el fuego con leña | Botón «Avivar el fuego» | <kbd>F</kbd> |
 | Amarrar en el cachiyuyo y acampar | Botón «Amarrar y acampar» | <kbd>M</kbd> |
 | Describir lo que rodea a la canoa (con el narrador) | Botón «Describir alrededor» | <kbd>N</kbd> |
 | Pausa | Botón «Pausa» | <kbd>Esc</kbd> |
 
-- **Los minijuegos** salen antes de juntar, avivar y amarrar. Si sale bien, la acción se hace; si no sale, se pierde el turno y el fuego baja un poco, como al remar. Se apagan en el título (Minijuegos: no), y con el narrador encendido no aparecen.
-- **El fuego** se gasta al remar, y más con viento en el canal hondo, con lluvia o de noche. Cerca de una choza se gasta menos. Siempre se muestra su número («Fuego 3 de 4»).
+- **Los minijuegos** salen antes de juntar, avivar y amarrar. Si sale bien, la acción se hace; si sale perfecto, suma un poco más; si no sale, se pierde el turno y el fuego baja un poco, como al remar. Se apagan en el título (Minijuegos: no), y con el narrador encendido no aparecen.
+- **El fuego** se gasta al remar, y más con viento en el canal hondo, con lluvia o de noche. Cerca de una choza se gasta menos. Siempre se muestra su número («Fuego 3 de 4»). En 0 quedan brasas por 3 remadas: si se aviva a tiempo, vuelve.
+- **Arriba** se ve cuántas remadas faltan hasta el destino.
+- **Las tres marcas** se ven al final del viaje: llegar, llegar con 3 de comida y llegar a tiempo. La familia guarda la mejor de cada destino.
 - **Lo que tiene borde de papel (las pegatinas) se puede juntar.** El resto es paisaje.
 - **El humo** cubre lo que todavía no exploraste.
 - **Al remar tocando lejos**, la canoa se frena sola si el fuego queda en 1 o cae la noche, para que haya tiempo de avivarlo o de acampar.
-- **La herencia** se guarda en el dispositivo: al volver a abrir el juego, la familia sigue en la generación en que iba.
+- **La herencia** se guarda en el dispositivo: al volver a abrir el juego, la familia sigue en la generación en que iba. Cada saber heredado deja algo propio, y lo dice su carta («Heredado: …»).
 - **El códice** junta todas las cartas de saber, separadas por pueblo, y se puede recorrer sin jugar. «Empezar de cero» borra la memoria de la familia en ese dispositivo.
 - **Opciones** (en la pantalla de título): sonido con subtítulos, narrador para jugar sin ver, alto contraste y luz real de Ushuaia.
 
@@ -108,18 +111,21 @@ Trabajo interno del equipo:
 
 | Qué | Cuánto |
 |---|---|
-| El fuego | 16 puntos, que se ven como «Fuego 1 a 4» (4 puntos cada uno). Se sale con 14, más 1 por cada saber heredado |
+| El fuego | 24 puntos, que se ven como «Fuego 1 a 4» (6 puntos cada uno). Se sale con 18; con el saber del fuego heredado, con 21 |
 | Al salir | 2 atados de leña |
-| Remar una casilla | Gasta 1 punto; 1 más con viento en el canal hondo, con lluvia o de noche. Cerca de una choza, 1 menos |
-| Leña | Cada atado que se junta da 2; avivar con uno suma 6 puntos. Se llevan hasta 5 |
-| Comida | Mejillones, hongos o pescado. Se llevan hasta 5. Al acampar se come una y suma 3 puntos |
-| Acampar | Cuidar el fuego toda la noche gasta 2 puntos. Al otro día amanece en calma |
+| Remar una casilla | Gasta 1 punto; 1 más con viento en el canal hondo, con lluvia o de noche, pero nunca más de 2. Cerca de una choza, 1 menos |
+| Leña | Cada atado que se junta da 2; avivar con uno suma 9 puntos (unas 9 remadas de día). Se llevan hasta 5 |
+| Comida | Mejillones, hongos o pescado. Se llevan hasta 5. Al acampar se come una y suma 4 puntos |
+| Acampar | Cuidar el fuego toda la noche gasta 3 puntos. Al otro día amanece en calma |
+| Brasas | Con el fuego en 0 y sin pirita, quedan 3 remadas para avivarlo |
 | Pirita | Se lleva de a 1. Si el fuego se apaga, la pirita lo vuelve a prender y se gasta |
 | El día | La tarde cae a las 12 casillas, la noche a las 18 y amanece a las 22 (en invierno, a las 8, 12 y 18) |
 | El clima | Calma, viento o lluvia. Cada cambio se avisa un paso antes |
-| Minijuegos | Los de tocar a tiempo dan 3 intentos; los de juntar, de 10 a 13 segundos. Si no sale, se pierde el turno: gasta como una remada, sin moverse |
+| Minijuegos | De 12 a 14 segundos, o 3 intentos para avivar. Perfecto: 1 más de lo que se junta, la leña rinde 3 más o la noche gasta 2 menos. Si no sale, se pierde el turno: gasta como una remada, sin moverse |
+| Lo heredado | Cada saber deja algo propio: la tabla está en [`juego/nucleo/README.md`](juego/nucleo/README.md#los-números) |
+| Las marcas | Llegar · llegar con 3 de comida · llegar en no más de 1,6 veces el camino más corto |
 
-Con estos números, un jugador automático que junta, aviva y acampa llega al destino 92 de cada 100 veces, en unas 57 casillas. Si va derecho sin juntar nada, el fuego se le apaga en unas 13 casillas: hace falta el territorio. Qué entra en la entrega está en [`docs/02-alcance-mvp.md`](docs/02-alcance-mvp.md).
+Con estos números, un jugador automático que junta, aviva y acampa llega al destino casi siempre (98 % en invierno de noche, lo más difícil), en unas 60 casillas. El reto está en las marcas: ese mismo jugador llega con 3 de comida 35 de cada 100 veces y a tiempo, 26. Si va derecho sin juntar nada, el fuego se le apaga en unas 19 casillas, y el camino más corto tiene 29: hace falta el territorio. Qué entra en la entrega está en [`docs/02-alcance-mvp.md`](docs/02-alcance-mvp.md).
 
 ## Tecnologías
 
@@ -221,6 +227,8 @@ Las bases piden declararlo (cláusula 7.4).
 - **Núcleo del juego (13/11):** a pedido de la Persona A, Claude Code escribió el núcleo (`juego/nucleo/`): el generador del mapa con semilla, que valida que haya camino por agua hasta el destino; el fuego, los recursos, el clima, la hora, el amarre y las condiciones de victoria y de derrota; los números en `reglas.js`, iguales a los de la versión de mesa salvo la leña. Pasó a datos aparte (`juego/nucleo/territorio/`) lo que hay en el territorio, dónde va, qué hace y de qué fuente sale, con la fuente tomada de `docs/05-rigor-historico.md`, y el destino del viaje. También escribió las pruebas (`pruebas/nucleo*.test.cjs`), dos jugadores automáticos para medir el balance (`pruebas/bots.cjs`) y una página para jugar el viaje entero (`pruebas/nucleo.html`, con un modo revisión). No cambió ningún texto cultural de las cartas. La Persona A revisa y decide los números.
 - **Juego sin internet y alcance (14/11):** a pedido de la Persona B, Claude Code escribió `sw.js` y `manifest.webmanifest` para que el juego publicado abra sin internet, con su prueba (`pruebas/sin-internet.test.cjs`), y lo probó apagando el servidor. También redactó la propuesta de alcance (`docs/02-alcance-mvp.md`) a partir de las propuestas de la Persona A, la decisión de nomadismo de la Persona C y el cronograma de la organización; la acuerdan A y B, y C confirma lo cultural.
 - **El juego conectado (13/11):** a pedido de la Persona B, Claude Code armó el juego en `index.html`: las pantallas de la maqueta conectadas al núcleo (`juego/interfaz/juego.js` y `pantallas.css`), la herencia guardada en el navegador (`juego/interfaz/herencia.js`), el códice por pueblo, los controles táctiles y de teclado, y el sonido, los subtítulos, el narrador, la postal, el alto contraste y la luz real que ya existían. Escribió las pruebas (`pruebas/herencia.test.cjs` y `pruebas/juego.test.cjs`) y jugó partidas enteras en el navegador, en el celular parado y acostado y en la compu. Los textos de las pantallas son de juego (qué pasó en el viaje); los datos culturales salen de las cartas y de los datos del territorio, sin cambios.
+
+- **Jugabilidad: minijuegos distintos, fuego más largo, herencia y marcas (19/11, rama `jugabilidad/chispa`):** a pedido de Mati (Persona A), con el OK del equipo, Claude Code investigó en foros y análisis de otros juegos (roguelites de partidas cortas, *Dredge*, *Stardew Valley*, *WarioWare*, *Don't Starve*, *Slay the Spire*) qué hace que den ganas de seguir jugando, y lo trajo sin cambiar la esencia del viaje. Rehízo los minijuegos para que cada uno tenga su mecánica (arrastrar, mantener, memoria, frotar, seguir, cargar y guiar), con premio si salen perfectos y dificultad que sube con la racha. En el núcleo, el fuego dura 1,5 veces más y una remada gasta 2 como mucho; sumó las brasas, lo que deja cada saber heredado, el premio del minijuego perfecto y las tres marcas del viaje, con sus pruebas. En la interfaz, la distancia al destino, las marcas del final con la mejor de la familia (`juego/interfaz/marcas.js`) y textos más cortos: los minijuegos ya no repiten el dato y la fuente de las cartas, y la pantalla final cita la fuente en corto. La voz de las cartas elige la mejor voz del dispositivo y lee el título y el dato. En las cartas, sumó al «En el juego» qué deja cada saber al heredarse (recurso de juego); no cambió ningún dato ni fuente.
 
 ## Integrantes
 
