@@ -98,7 +98,7 @@ Checklist para llevar:
 - [ ] El **cartel A3 con QR** impreso: [`stand/cartel-A3.pdf`](../stand/cartel-A3.pdf). Antes, verificar el QR en un celular (ver [`stand/README.md`](../stand/README.md)).
 - [ ] La **vidriera** corriendo en una pantalla, en bucle: [`stand/vidriera.html`](../stand/vidriera.html), con <kbd>F</kbd> para pantalla completa.
 - [ ] **Cartas de saber impresas** en cartulina, para que la gente se las lleve: [`arte/cartas/cartas-para-imprimir.pdf`](../arte/cartas/cartas-para-imprimir.pdf) (A4, doble faz, girar por el borde largo). Llevan la fuente al dorso. Antes de imprimir, la Persona C aprueba los textos.
-- [ ] Mínimo 2 integrantes presentes (obligatorio).
+- [x] Mínimo 2 integrantes presentes (obligatorio): van los 4 (confirmado el 19/11).
 
 ## README (desde el 15/11)
 
@@ -123,5 +123,5 @@ Lo que coordina con la organización, sea cual sea su rol:
 - [x] Formato de la entrega final: cinco links en la plataforma (prototipo, repositorio, README, video y presentación), antes del 19/11 a las 15:00 (antes era el 18/11 a las 21:00).
 - [x] Video: YouTube, Drive u otra plataforma, con acceso por link. Presentación: un link (puede ser el PDF del repo o la versión HTML en GitHub Pages).
 - [ ] Preguntar si en Fábrica de Talento hay proyector, HDMI, internet y enchufes.
-- [ ] Confirmar el horario del ensayo del 18/11 y quiénes van a la demo del 20/11 (15:00 a 19:00).
+- [x] Confirmar quiénes van a la demo del 20/11 (15:00 a 19:00): van los 4 integrantes (19/11).
 - [ ] Confirmar la asistencia al taller del eje y los 2 encuentros con la mentoría (obligatorios). Pedirle a la mentoría que nos conecte con la comunidad o con un museo si la consulta se demora.
