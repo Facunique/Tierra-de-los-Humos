@@ -1,38 +1,39 @@
 /*
- * Tierra de los Humos · Minijuegos: juntar, pescar, avivar y amarrar con las manos
- * -------------------------------------------------------------------------------
+ * Tierra de los Humos · Minijuegos: el marco
+ * ------------------------------------------
  * Antes de juntar algo, avivar el fuego o amarrar la canoa, se juega un momento
- * corto. Para juntar en la costa, la familia baja a tierra; para pescar, avivar
- * y amarrar, se queda en la canoa. Si sale bien, la acción se hace igual que
- * antes (el núcleo no cambia: mismos números, mismas reglas). Si no sale, se
- * puede probar de nuevo o volver al viaje, y no se pierde nada.
+ * corto. Desde el 19/11 cada uno se juega distinto (antes todos eran «tocar»):
  *
- * Hay dos clases de minijuego:
- *  - «juntar»: tocar lo que se junta (ramas, mejillones, hongos, piedras de fuego)
- *    antes de que se haga tarde. Cada cosa es un botón: anda con el dedo, el mouse
- *    o el teclado (Tab y Enter).
- *  - «tiempo»: tocar «¡Ahora!» (o la barra espaciadora) cuando la marca pasa por la zona.
+ *   leña        arrastrar   llevar las ramas hasta la canoa        (juegos-tierra.js)
+ *   mejillones  mantener    mantener apretado para despegarlos, con la marea
+ *   hongos      memoria     mirar dónde están y encontrarlos tapados
+ *   pirita      frotar      frotar la arena para destapar las piedras de fuego
+ *   pescado     seguir      mantener el lazo sobre el pez           (juegos-canoa.js)
+ *   avivar      cargar      mantener apretado y soltar en la franja
+ *   amarrar     guiar       llevar la canoa contra la corriente hasta el cachiyuyo
  *
- * Cada minijuego dice qué dato de las fuentes lo acompaña (el mismo que las cartas
- * de datos/saberes.js y los elementos de juego/nucleo/territorio/elementos.js).
- * La mecánica (el tiempo, la marea que sube, la marca que va y viene) es recurso
- * de juego y lo dice en pantalla.
+ * Este archivo arma la pantalla, el tiempo, la racha y el resultado; cada mecánica
+ * está en juegos-tierra.js o juegos-canoa.js (global TDH_MJ_MECANICAS). Los estilos,
+ * en minijuegos.css. index.html carga los cuatro.
  *
- * Uso (juego/interfaz/juego.js):
- *   if (TDH_MINIJUEGOS.cual('juntar', 'mejillones')) {
- *     const ok = await TDH_MINIJUEGOS.jugar('juntar', 'mejillones', { estacion, altoContraste, reducido });
- *     if (ok) partida.hacer({ tipo: 'juntar' });
- *   }
+ * Resultado de jugar(): 'perfecto' (sin errar y rápido: el núcleo suma un poco más,
+ * con `bien: true`), true (salió), false (volvió al viaje sin probar) o 'fallo' (no
+ * salió, o volvió después de errar: la interfaz hace { tipo: 'demora' }).
  *
- * Con movimiento reducido no hay apuro: el tiempo no se acaba y la marca va más lenta.
- * Para las pruebas: TDH_MINIJUEGOS.abierto() y TDH_MINIJUEGOS.ganar().
- * La lógica sin pantalla (cual, marcaEn, dentro, lugares) se prueba con Node:
- * pruebas/minijuegos.test.cjs.
+ *   const r = await TDH_MINIJUEGOS.jugar('juntar', 'mejillones', { estacion, altoContraste, reducido, sonido });
  *
- * Licencia: MIT (el código); CC BY-SA 4.0 (los textos).
+ * La racha (minijuegos seguidos al primer intento) sube un poco la dificultad, hasta
+ * 5. Con movimiento reducido no hay apuro: no se acaba el tiempo y todo va más lento.
+ * Los datos de las fuentes no se muestran acá (están en las cartas); `fuente` queda
+ * para docs/05-rigor-historico.md. La mecánica es recurso de juego.
+ *
+ * Para las pruebas: abierto(), ganar() y auto() (juega solo, por los mismos caminos
+ * que una persona). Licencia: MIT (el código); CC BY-SA 4.0 (los textos).
  */
 (function (raiz) {
   'use strict';
+  const pedir = (ruta) => (typeof require === 'function' ? require(ruta) : null);
+  const mecanicas = () => raiz.TDH_MJ_MECANICAS || Object.assign({}, pedir('./juegos-tierra.js'), pedir('./juegos-canoa.js'));
 
   // Escenas de fondo, en las letras del motor Corteza (arte/corteza/corteza.js).
   const ESCENAS = {
@@ -44,65 +45,49 @@
   };
 
   /**
-   * Los minijuegos. `banda` es la franja de la escena donde aparecen las cosas (en
-   * fracciones del alto: arriba 0, abajo 1). `dato` repite, en corto y con redacción
-   * directa, lo que dicen las cartas (sin fórmulas sobre el autor: decisión de C del 14/11);
-   * la atribución va en `fuente`. null si no hay una cita yagán específica.
+   * Los minijuegos. `banda`: la franja donde aparecen las cosas (0 arriba, 1 abajo).
+   * `segundos`: el tiempo (sin él, se juega por intentos). `premio`: lo que dice si sale perfecto.
+   * `fuente`: de dónde sale lo que se dibuja (no se muestra; ver docs/05).
    */
   const JUEGOS = {
     lena: {
-      modo: 'juntar', tierra: true, escena: 'playa', objeto: 'lena', cantidad: 3, segundos: 10, banda: [0.36, 0.62],
-      titulo: 'Bajan a tierra a juntar leña',
-      pide: 'Tocá tres ramas antes de que se haga tarde.',
-      dato: null,
+      mecanica: 'arrastrar', tierra: true, escena: 'playa', objeto: 'lena', cantidad: 3, segundos: 12, banda: [0.3, 0.62], x: [0.07, 0.52],
+      titulo: 'Juntar leña', pide: 'Arrastrá tres ramas hasta la canoa.', premio: '¡Perfecto! +1 leña',
+      fuente: 'Cooper (1946), pp. 88 y 91 (el fuego en la canoa). 🔍 Falta una cita yagán sobre la recolección de leña.',
     },
     mejillones: {
-      modo: 'juntar', tierra: true, escena: 'orilla', objeto: 'mejillones', cantidad: 4, segundos: 13, banda: [0.4, 0.74], marea: true,
-      titulo: 'Bajan a tierra con la marea baja',
-      pide: 'Juntá cuatro mejillones a mano. Cuando el agua vuelve a subir, esperá a que baje.',
-      dato: 'La marea baja permite recolectar mariscos en la costa. El mejillón se junta a mano.',
+      mecanica: 'mantener', tierra: true, escena: 'orilla', objeto: 'mejillones', cantidad: 3, segundos: 14, banda: [0.4, 0.74],
+      titulo: 'Mejillones con la marea baja', pide: 'Mantené apretado cada uno para despegarlo. Si sube el agua, esperá.', premio: '¡Perfecto! +1 comida',
       fuente: 'Vargas Filgueira (2019), pp. 30 y 44 del visor del PDF; Cooper (1946), p. 84.',
     },
     hongos: {
-      modo: 'juntar', tierra: true, escena: 'bosque', objeto: 'hongos', cantidad: 3, segundos: 10, banda: [0.08, 0.46],
-      titulo: 'Bajan a tierra, al borde del bosque',
-      pide: 'Juntá tres hongos de los árboles.',
-      dato: 'Los hongos de los árboles complementan los alimentos durante un invierno difícil.',
+      mecanica: 'memoria', tierra: true, escena: 'bosque', objeto: 'hongos', cantidad: 3, vacios: 4, segundos: 12, banda: [0.15, 0.46],
+      titulo: 'Hongos de los árboles', pide: 'Mirá dónde están: después las hojas los tapan.', premio: '¡Perfecto! +1 comida',
       fuente: 'Vargas Filgueira (2019), p. 54 del visor del PDF.',
     },
     pirita: {
-      modo: 'juntar', tierra: true, escena: 'playa', objeto: 'pirita', cantidad: 2, segundos: 12, banda: [0.3, 0.7], piedras: 5,
-      titulo: 'Bajan a tierra a buscar piedras de fuego',
-      pide: 'Encontrá las dos piedras de fuego, las doradas, entre las piedras de la playa.',
-      dato: 'La pirita se usa junto con el pedernal para encender el fuego.',
+      mecanica: 'frotar', tierra: true, escena: 'playa', objeto: 'pirita', cantidad: 2, piedras: 3, segundos: 14, banda: [0.41, 0.59], arena: [2 / 6, 4 / 6],
+      titulo: 'Piedras de fuego', pide: 'Frotá la arena con el dedo y encontrá las dos doradas.', premio: '¡Perfecto!',
       fuente: 'Cooper (1946), pp. 91 y 95.',
     },
     pescado: {
-      modo: 'tiempo', tierra: false, escena: 'canal', objeto: 'pescado', intentos: 3, ancho: 0.2, vueltas: 0.42,
-      titulo: 'Pescar desde la canoa',
-      pide: 'La carnada va atada en un lazo, sin anzuelo. Cuando el pez llegue a la carnada, levantá la línea.',
-      boton: 'Levantar la línea', zonaNombre: 'carnada',
-      dato: 'La pesca con línea no usa anzuelo: la carnada va en un lazo y el pez se toma con la mano.',
+      mecanica: 'seguir', tierra: false, escena: 'canal', objeto: 'pescado', segundos: 14, ancho: 0.3,
+      titulo: 'Pescar desde la canoa', pide: 'La carnada va en un lazo, sin anzuelo. Mantené apretado para subir el lazo y seguí al pez.', premio: '¡Perfecto! +1 comida',
+      boton: 'Subir el lazo',
       fuente: 'Cooper (1946), pp. 84 y 96.',
     },
     avivar: {
-      modo: 'tiempo', tierra: false, escena: 'canal', objeto: 'lena', intentos: 3, ancho: 0.26, vueltas: 0.5,
-      titulo: 'Avivar el fuego',
-      pide: 'Sumá la leña cuando la llama esté baja, sin ahogarla.',
-      boton: 'Sumar la leña', zonaNombre: 'llama baja',
-      dato: 'El fuego se lleva encendido en la canoa.',
+      mecanica: 'cargar', tierra: false, escena: 'canal', objeto: 'lena', intentos: 3, franja: [0.58, 0.82],
+      titulo: 'Avivar el fuego', pide: 'Mantené apretado para sumar leña y soltá en la franja, sin ahogarlo.', premio: '¡Perfecto! El fuego rinde más',
+      boton: 'Sumar leña',
       fuente: 'Vargas Filgueira (2019), p. 33 del visor del PDF.',
     },
     amarrar: {
-      modo: 'tiempo', tierra: false, escena: 'cachiyuyo', objeto: 'canoa', intentos: 3, ancho: 0.24, vueltas: 0.38,
-      titulo: 'Amarrar en el cachiyuyo',
-      pide: 'Cuando la canoa pase sobre el cachiyuyo, amarrala.',
-      boton: 'Amarrar', zonaNombre: 'cachiyuyo',
-      dato: 'Para detenerse, la canoa se amarra en bancos de grandes algas marinas, fuera de la orilla.',
+      mecanica: 'guiar', tierra: false, escena: 'cachiyuyo', objeto: 'canoa', segundos: 14,
+      titulo: 'Amarrar en el cachiyuyo', pide: 'La corriente empuja. Tocá de un lado o del otro para dejar la canoa sobre el cachiyuyo.', premio: '¡Perfecto! La noche gasta menos',
       fuente: 'Cooper (1946), p. 88 (paginación impresa).',
     },
   };
-  const RECURSO = 'El minijuego es recurso de juego: el tiempo, la marea que sube y la marca que va y viene no salen de las fuentes.';
 
   /** Qué minijuego va antes de una acción, o null si no hay (por ejemplo, un saber). */
   function cual(tipo, que) {
@@ -111,37 +96,21 @@
     return null;
   }
 
-  /** La marca va y viene entre 0 y 1: `vueltas` idas por segundo. */
-  function marcaEn(segundos, vueltas) {
-    const f = (segundos * vueltas) % 2;
-    return f < 1 ? f : 2 - f;
-  }
-  const dentro = (pos, zona) => pos >= zona.desde && pos <= zona.hasta;
-
   /** Un azar con semilla (para que las pruebas den siempre lo mismo). */
   function azar(semilla) {
     let s = (semilla >>> 0) || 1;
     return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
   }
 
-  /** Dónde va la zona de una marca: en el medio de la pista, nunca pegada a un borde. */
-  function zonaDe(j, r) {
-    const desde = 0.2 + r() * (0.6 - j.ancho);
-    return { desde, hasta: desde + j.ancho };
-  }
-
-  /**
-   * Dónde aparecen las cosas para juntar (en fracciones del ancho y del alto), sin
-   * pisarse entre sí. Las primeras `cantidad` son las que se juntan; el resto, piedras.
-   */
-  function lugares(j, r) {
-    const total = j.cantidad + (j.piedras || 0), lista = [];
-    for (let i = 0; i < total; i++) {
+  /** Dónde van `total` cosas (fracciones del ancho y del alto), en su franja y sin pisarse. */
+  function lugares(j, r, total) {
+    const n = total || j.cantidad, lista = [], x = j.x || [0.08, 0.92];
+    for (let i = 0; i < n; i++) {
       let p, prueba = 0;
       do {
-        p = { x: 0.08 + r() * 0.84, y: j.banda[0] + r() * (j.banda[1] - j.banda[0]) };
+        p = { x: x[0] + r() * (x[1] - x[0]), y: j.banda[0] + r() * (j.banda[1] - j.banda[0]) };
         prueba++;
-      } while (prueba < 200 && lista.some((q) => Math.abs(q.x - p.x) < 0.17 && Math.abs(q.y - p.y) < 0.2));
+      } while (prueba < 200 && lista.some((q) => Math.abs(q.x - p.x) < 0.15 && Math.abs(q.y - p.y) < 0.18));
       lista.push(p);
     }
     return lista;
@@ -151,54 +120,21 @@
   const mareaAlta = (segundos) => (segundos % 4.5) > 3.1;
   const LINEA_MAREA = 0.62; // lo que está más abajo que esto queda tapado con la marea alta
 
-  // ── Pantalla ──────────────────────────────────────────────────────────────
-  const ESTILO = `
-.mj { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: 12px; background: rgba(11, 16, 21, 0.72); }
-.mj__papel { width: min(640px, 100%); max-height: 100%; overflow: auto; padding: 16px 16px 14px; color: var(--tdh-tinta, #28221e); }
-.mj__sub { margin: 0; font: 700 13px/1.2 "Atkinson Hyperlegible", system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--tdh-ocre, #973a25); }
-.mj h2 { margin: 4px 0 6px; font-size: 22px; line-height: 1.15; }
-.mj__pide { margin: 0 0 10px; font-size: 16px; line-height: 1.35; }
-.mj__escena { position: relative; width: 100%; aspect-ratio: 10 / 6; border-radius: 10px; overflow: hidden; background: var(--tdh-mar, #1d2e38); touch-action: manipulation; }
-.mj__escena canvas.mj__fondo { position: absolute; inset: 0; width: 100%; height: 100%; }
-.mj__cosa { position: absolute; transform: translate(-50%, -50%); width: 17%; aspect-ratio: 1; min-width: 44px; min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer; transition: opacity .25s, transform .25s; }
-.mj__cosa img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; pointer-events: none; }
-.mj__cosa:focus-visible { outline: 3px solid var(--tdh-luz, #ffd47c); outline-offset: 2px; border-radius: 8px; }
-.mj__cosa.juntado { opacity: 0; transform: translate(-50%, -90%) scale(1.3); pointer-events: none; }
-.mj__cosa:disabled { cursor: default; }
-.mj__cosa.tapado { opacity: .15; }
-.mj__piedra { display: block; width: 62%; height: 46%; margin: 27% auto 0; border-radius: 48% 52% 44% 56% / 58% 50% 50% 42%; background: #7d7f78; box-shadow: inset -6px -5px 0 rgba(0,0,0,.25), 0 0 0 3px #eee5d0, 3px 4px 0 3px rgba(15,26,33,.45); }
-.mj__marea { position: absolute; left: 0; right: 0; bottom: 0; height: 0; background: rgba(43, 79, 96, .86); border-top: 3px solid rgba(238, 229, 208, .7); transition: height .6s ease-in-out; pointer-events: none; }
-.mj__marea.alta { height: calc(100% * (1 - ${LINEA_MAREA}) + 6%); }
-.mj__pista { position: absolute; left: 6%; right: 6%; bottom: 10%; height: 22%; border-radius: 12px; background: rgba(238, 229, 208, .2); box-shadow: inset 0 0 0 2px rgba(238, 229, 208, .55); }
-.mj__zona { position: absolute; top: 0; bottom: 0; border-radius: 10px; background: rgba(255, 212, 124, .38); box-shadow: inset 0 0 0 3px #ffd47c; }
-.mj__zona span { position: absolute; left: 50%; top: -1.6em; transform: translateX(-50%); white-space: nowrap; font: 700 13px/1 "Atkinson Hyperlegible", system-ui, sans-serif; color: #eee5d0; text-shadow: 0 1px 2px #0b1015; }
-.mj__marca { position: absolute; top: 50%; width: 15%; aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; }
-.mj__marca img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
-.mj__estado { min-height: 1.4em; margin: 8px 0 4px; font-weight: 700; }
-.mj__tiempo { height: 8px; border-radius: 4px; background: rgba(40, 34, 30, .15); overflow: hidden; }
-.mj__tiempo div { height: 100%; width: 100%; background: var(--tdh-ocre, #973a25); transform-origin: left; }
-.mj__dato { margin: 10px 0 0; font-size: 14px; line-height: 1.35; }
-.mj__recurso { margin: 4px 0 0; font-size: 12.5px; line-height: 1.3; opacity: .8; }
-.mj__botones { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-.mj__botones .boton-papel { flex: 1 1 160px; min-width: 0; }
-.alto-contraste .mj__zona { background: rgba(255, 212, 124, .6); box-shadow: inset 0 0 0 4px #ffd47c, 0 0 0 3px #0b1015; }
-.alto-contraste .mj__cosa img { filter: drop-shadow(0 0 0 #0b1015) drop-shadow(0 0 3px #0b1015); }
-@media (max-height: 520px) { .mj__escena { aspect-ratio: 10 / 4.2; } .mj h2 { font-size: 19px; } .mj__dato, .mj__recurso { display: none; } }
-`;
+  /** Cuánto más rápido va todo según la racha: 1 sin racha, hasta 1,3 con racha de 5. */
+  const dificultad = (r) => 1 + 0.06 * Math.max(0, Math.min(5, r || 0));
 
-  let actual = null; // el minijuego abierto: { ganar(), cerrar() }
-
-  // Racha: cuántos minijuegos seguidos salieron al primer intento (sin fallar ni tocar una piedra
-  // común). Es solo un reto propio: no cambia nada del viaje. La mejor se guarda en el dispositivo.
+  // Racha: minijuegos seguidos al primer intento. Es un reto propio; la mejor se guarda en el dispositivo.
   let racha = 0, mejor = 0;
   try { mejor = Number(raiz.localStorage && raiz.localStorage.getItem('tdh-mejor-racha')) || 0; } catch (e) { /* sin almacenamiento */ }
-  /** Suma a la racha si salió al primer intento, o la corta. Devuelve { racha, mejor, record }. */
   function anotar(limpio) {
     racha = limpio ? racha + 1 : 0;
     const record = racha > mejor && racha >= 2;
     if (racha > mejor) { mejor = racha; try { raiz.localStorage.setItem('tdh-mejor-racha', String(mejor)); } catch (e) { /* nada */ } }
     return { racha, mejor, record };
   }
+
+  // ── Pantalla ──────────────────────────────────────────────────────────────
+  let actual = null; // el minijuego abierto: { ganar(), cerrar(), auto() }
 
   function crear(tag, clase, padre, texto) {
     const n = document.createElement(tag);
@@ -208,43 +144,40 @@
     return n;
   }
   function imagen(id, op) {
-    const CZ = raiz.TDH_CORTEZA;
     try {
-      const lienzo = CZ.pegatina(CZ.PEGATINAS[id] || id, 4, op.estacion || 'verano', !!op.altoContraste);
-      return lienzo.toDataURL();
+      if (id === 'canoa') return raiz.TDH_ARTE.aCanvas('canoa', 0, op.estacion || 'verano', 4).toDataURL();
+      const CZ = raiz.TDH_CORTEZA;
+      return CZ.pegatina(CZ.PEGATINAS[id] || id, 4, op.estacion || 'verano', !!op.altoContraste).toDataURL();
     } catch (e) { return ''; }
   }
 
-  /**
-   * Abre un minijuego. Devuelve una promesa: true si salió bien (y hay que hacer la
-   * acción), false si la persona volvió al viaje sin probar, y 'fallo' si no salió:
-   * se acabaron los intentos o el tiempo, o volvió después de errar. Con 'fallo' la
-   * interfaz hace { tipo: 'demora' }: se les fue el tiempo y el fuego baja (18/11, B).
-   */
   function jugar(tipo, que, opciones) {
     const j = cual(tipo, que);
-    if (!j || typeof document === 'undefined') return Promise.resolve(true);
+    const M = mecanicas();
+    if (!j || typeof document === 'undefined' || !M[j.mecanica]) return Promise.resolve(true);
     if (actual) actual.cerrar(false);
     const op = opciones || {};
-    if (!document.getElementById('mj-estilo')) { const st = crear('style', null, document.head, ESTILO); st.id = 'mj-estilo'; }
     const r = azar(op.semilla != null ? op.semilla : Math.floor(Math.random() * 1e9));
     const antes = document.activeElement;
+    const vel = dificultad(racha) * (op.reducido ? 0.6 : 1);
 
     return new Promise((resolver) => {
       const capa = crear('div', 'mj', document.body);
       capa.setAttribute('role', 'dialog'); capa.setAttribute('aria-modal', 'true'); capa.setAttribute('aria-labelledby', 'mj-titulo');
       const papel = crear('div', 'mj__papel papel', capa);
-      crear('p', 'mj__sub', papel, (j.tierra ? 'Bajan a tierra' : 'En la canoa') + (racha >= 2 ? ' · Racha de ' + racha : ''));
+      crear('p', 'mj__sub', papel, (j.tierra ? 'En tierra' : 'En la canoa') + (racha >= 2 ? ' · Racha ' + racha : ''));
       const h = crear('h2', null, papel, j.titulo); h.id = 'mj-titulo';
       crear('p', 'mj__pide', papel, j.pide);
       const escena = crear('div', 'mj__escena', papel);
       const fondo = crear('canvas', 'mj__fondo', escena); fondo.setAttribute('aria-hidden', 'true');
+      const barra = crear('div', 'mj__barra', papel); const lleno = crear('div', null, barra); barra.hidden = true;
       const estado = crear('p', 'mj__estado', papel); estado.setAttribute('aria-live', 'polite');
       const reloj = crear('div', 'mj__tiempo', papel); const arena = crear('div', null, reloj);
-      if (op.reducido || j.modo === 'tiempo') reloj.hidden = true;
-      if (j.dato) crear('p', 'mj__dato', papel, 'Dato: ' + j.dato + ' Fuente: ' + j.fuente);
-      crear('p', 'mj__recurso', papel, j.dato ? RECURSO : RECURSO + ' Falta una cita yagán sobre la recolección de leña 🔍.');
+      const limite = j.segundos ? j.segundos / dificultad(racha) : 0;
+      if (op.reducido || !limite) reloj.hidden = true;
       const botones = crear('div', 'mj__botones', papel);
+      const volver = crear('button', 'boton-papel mj__volver', botones, 'Volver al viaje'); volver.type = 'button';
+      volver.addEventListener('click', () => cerrar(false));
 
       // El fondo: la escena en Corteza, con la canoa esperando en el agua.
       let motor = null;
@@ -252,138 +185,135 @@
       try {
         motor = raiz.TDH_CORTEZA.crear(fondo, { celda: 48 });
         motor.escena({ mapa: ESCENAS[j.escena], objetos: [], estacion: op.estacion || 'verano', hora: 'dia', clima: 'calma', altoContraste: !!op.altoContraste, suave: false,
-          canoa: j.objeto === 'canoa' ? null : { x: j.tierra ? 7 : 4, y: j.tierra ? fila : fila - 1, fuego: op.fuego || 3, mira: -1 } });
+          canoa: j.objeto === 'canoa' || j.mecanica === 'cargar' ? null : { x: j.tierra ? 7 : 4, y: j.tierra ? fila : fila - 1, fuego: op.fuego || 3, mira: -1 } });
       } catch (e) { motor = null; }
 
-      let t0 = performance.now(), fin = false, cuadroId = 0, terminado = null;
+      let t0 = performance.now(), desdeReloj = 0, fin = false, cuadroId = 0, terminado = null, limpio = true, jugando = false, autoJuega = false, ultimo = 0;
+      const alCerrar = [];
       const segundos = () => (performance.now() - t0) / 1000;
+      const sonar = (n, t) => { try { if (op.sonido) op.sonido.efecto(n, t); } catch (e) { /* sin sonido */ } };
+
       function cerrar(ok) {
         if (fin) return; fin = true;
-        if (ok === false && !terminado) anotar(false); // volver al viaje sin terminar corta la racha
-        if (ok === false && !limpio) ok = 'fallo';     // volver después de errar también cuesta
+        if (ok === false && !terminado) anotar(false);   // volver sin terminar corta la racha
+        if (ok === false && jugando && !limpio) ok = 'fallo';   // volver después de errar también cuesta
         cancelAnimationFrame(cuadroId);
-        document.removeEventListener('keydown', teclas, true);
+        document.removeEventListener('keydown', teclaBaja, true);
+        document.removeEventListener('keyup', teclaSube, true);
+        alCerrar.forEach((f) => { try { f(); } catch (e) { /* nada */ } });
         capa.remove(); actual = null;
         if (antes && antes.focus) try { antes.focus({ preventScroll: true }); } catch (e) { /* nada */ }
         resolver(ok);
       }
-      function ganar() {
+      function ganar(perfecto) {
         if (terminado) return;
         terminado = 'bien';
-        const r = anotar(limpio);
-        estado.textContent = r.racha >= 2 ? '¡Listo! ' + r.racha + ' seguidos al primer intento.' + (r.record ? ' ¡Tu mejor racha!' : '') : '¡Listo!';
-        setTimeout(() => cerrar(true), op.reducido ? 300 : 650);
+        const p = perfecto != null ? perfecto && limpio : limpio && (!limite || op.reducido || segundos() - desdeReloj <= limite * 0.6);
+        const a = anotar(limpio);
+        estado.textContent = (p ? j.premio : '¡Listo!') + (a.racha >= 2 ? ' · Racha ' + a.racha + (a.record ? ', ¡tu mejor!' : '') : '');
+        if (p) { papel.classList.add('mj--perfecto'); sonar('chispa', j.premio); } else sonar('junto');
+        setTimeout(() => cerrar(p ? 'perfecto' : true), op.reducido ? 400 : p ? 900 : 650);
       }
       function perder(texto) {
         if (terminado) return;
         terminado = 'mal';
         anotar(false);
+        sonar('piedra');
         estado.textContent = texto + ' Se les fue el tiempo: el fuego baja un poco.';
-        botones.textContent = '';
+        volver.remove();
+        botones.querySelectorAll('.mj__mantener').forEach((b) => b.remove());
         const seguir = crear('button', 'boton-papel boton-papel--fuego', botones, 'Seguir el viaje'); seguir.type = 'button';
         seguir.addEventListener('click', () => cerrar('fallo'));
         seguir.focus();
       }
 
-      // ── Juntar: cada cosa es un botón ──
-      let pulsar = null, marca = null, zona = null, marea = null, fallas = 0, limpio = true, mover = () => {};
-      const cosas = [];
-      if (j.modo === 'juntar') {
-        const img = imagen(j.objeto, op);
-        let juntados = 0;
-        const contar = () => { estado.textContent = 'Juntaste ' + juntados + ' de ' + j.cantidad + '.'; };
-        lugares(j, r).forEach((p, i) => {
-          const es = i < j.cantidad;
+      // Lo que cada mecánica usa del marco.
+      const c = {
+        j, op, r, escena, botones, crear, sonar, mareaAlta, LINEA_MAREA, velocidad: vel, reducido: !!op.reducido,
+        get terminado() { return !!terminado; },
+        imagen: (id) => imagen(id, op),
+        lugares: (total) => lugares(j, r, total),
+        /** Posición de un toque en fracciones de la escena (0 a 1). */
+        pos(e) { const b = escena.getBoundingClientRect(); return { x: Math.max(0, Math.min(1, (e.clientX - b.left) / b.width)), y: Math.max(0, Math.min(1, (e.clientY - b.top) / b.height)) }; },
+        /** Un botón con dibujo en la escena, en (p.x, p.y). */
+        cosa(id, p, etiqueta) {
           const b = crear('button', 'mj__cosa', escena); b.type = 'button';
           b.style.left = (p.x * 100) + '%'; b.style.top = (p.y * 100) + '%';
-          b.dataset.y = p.y;
-          if (es) { const im = crear('img', null, b); im.src = img; im.alt = ''; b.setAttribute('aria-label', 'Juntar ' + (j.objeto === 'lena' ? 'una rama' : j.objeto === 'pirita' ? 'una piedra de fuego' : j.objeto === 'hongos' ? 'un hongo' : 'un mejillón')); }
-          else { crear('span', 'mj__piedra', b); b.setAttribute('aria-label', 'Una piedra gris'); }
-          b.addEventListener('click', () => {
-            if (terminado || b.disabled) return;
-            if (!es) { limpio = false; estado.textContent = 'Esa es una piedra común. Las de fuego son doradas.'; b.disabled = true; b.classList.add('juntado'); return; }
-            b.disabled = true; b.classList.add('juntado'); juntados++; contar();
-            if (juntados >= j.cantidad) ganar();
-          });
-          cosas.push(b);
-        });
-        contar();
-        const volver = crear('button', 'boton-papel', botones, 'Volver al viaje'); volver.type = 'button';
-        volver.addEventListener('click', () => cerrar(false));
-        if (j.marea) marea = crear('div', 'mj__marea', escena);
-        setTimeout(() => { const pri = cosas.find((b) => !b.disabled); if (pri) pri.focus({ preventScroll: true }); }, 30);
-        mover = (s) => {
-          if (!op.reducido && !terminado) {
-            const queda = Math.max(0, 1 - s / j.segundos);
-            arena.style.transform = 'scaleX(' + queda + ')';
-            if (queda === 0) perder('Se hizo tarde.');
-          }
-          if (j.marea) {
-            const alta = !op.reducido && !terminado && mareaAlta(s);
-            marea.classList.toggle('alta', alta);
-            cosas.forEach((b) => { if (b.classList.contains('juntado')) return; const tapa = alta && Number(b.dataset.y) > LINEA_MAREA; b.disabled = tapa; b.classList.toggle('tapado', tapa); });
-          }
-        };
-      } else {
-        // ── Tiempo: tocar cuando la marca pasa por la zona ──
-        zona = zonaDe(j, r);
-        const pista = crear('div', 'mj__pista', escena);
-        const z = crear('div', 'mj__zona', pista); z.style.left = (zona.desde * 100) + '%'; z.style.width = ((zona.hasta - zona.desde) * 100) + '%';
-        crear('span', null, z, j.zonaNombre);
-        marca = crear('div', 'mj__marca', pista);
-        const im = crear('img', null, marca); im.alt = '';
-        im.src = j.objeto === 'canoa' ? (raiz.TDH_ARTE ? raiz.TDH_ARTE.aCanvas('canoa', 0, op.estacion || 'verano', 4).toDataURL() : '') : imagen(j.objeto, op);
-        const vueltas = j.vueltas * (op.reducido ? 0.5 : 1);
-        estado.textContent = 'Te quedan ' + j.intentos + ' intentos.';
-        pulsar = () => {
-          if (terminado) return;
-          const pos = marcaEn(segundos(), vueltas);
-          if (dentro(pos, zona)) { ganar(); return; }
-          fallas++; limpio = false;
-          if (fallas >= j.intentos) perder('No salió esta vez.');
-          else estado.textContent = 'Todavía no. Te ' + (j.intentos - fallas === 1 ? 'queda 1 intento.' : 'quedan ' + (j.intentos - fallas) + ' intentos.');
-        };
-        const ya = crear('button', 'boton-papel boton-papel--fuego', botones, j.boton); ya.type = 'button';
-        ya.setAttribute('aria-describedby', 'mj-titulo');
-        ya.addEventListener('click', pulsar);
-        escena.addEventListener('pointerdown', (e) => { e.preventDefault(); pulsar(); });
-        const volver = crear('button', 'boton-papel', botones, 'Volver al viaje'); volver.type = 'button';
-        volver.addEventListener('click', () => cerrar(false));
-        setTimeout(() => ya.focus({ preventScroll: true }), 30);
-        mover = (s) => { if (!terminado) marca.style.left = (marcaEn(s, vueltas) * 100) + '%'; };
-      }
+          if (id) { const im = crear('img', null, b); im.src = imagen(id, op); im.alt = ''; }
+          b.setAttribute('aria-label', etiqueta);
+          return b;
+        },
+        decir(t) { if (!terminado) estado.textContent = t; },
+        contar(n, de) { if (!terminado) estado.textContent = n + ' de ' + de + '.'; },
+        progreso(f) { barra.hidden = false; lleno.style.transform = 'scaleX(' + Math.max(0, Math.min(1, f)) + ')'; },
+        /** Un error: corta el «perfecto» y la racha, pero se sigue jugando. */
+        error(t) { jugando = true; limpio = false; sonar('piedra'); if (t) c.decir(t); },
+        manchar() { jugando = true; limpio = false; },
+        empezo() { jugando = true; },
+        /** El tiempo empieza a correr desde ahora (la memoria, después de mirar). */
+        relojDesde(s) { desdeReloj = s; },
+        enfocar(lista) { setTimeout(() => { const b = lista.find((x) => !x.disabled) || lista[0]; if (b && b.focus) b.focus({ preventScroll: true }); }, 30); },
+        /** Un botón que se mantiene apretado (también con la barra espaciadora: ver tecla). */
+        botonMantener(texto, bajar, subir) {
+          const b = crear('button', 'boton-papel boton-papel--fuego mj__mantener', botones, texto); b.type = 'button';
+          botones.insertBefore(b, volver);
+          b.addEventListener('pointerdown', (e) => { e.preventDefault(); bajar(); });
+          for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) b.addEventListener(ev, subir);
+          b.addEventListener('click', (e) => e.preventDefault());
+          return b;
+        },
+        alCerrar: (f) => alCerrar.push(f),
+        /** Cambia el fondo (por ejemplo, para que el cachiyuyo quede donde está la zona). */
+        fondo(mapa) { if (motor) try { motor.escena({ mapa }); } catch (e) { /* queda el de antes */ } },
+        ganar, perder,
+      };
+      const mec = M[j.mecanica](c);
 
-      function teclas(e) {
+      function teclaBaja(e) {
         if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); cerrar(false); return; }
-        // Que las teclas del viaje (flechas, letras, Enter) no muevan la canoa por detrás.
-        e.stopPropagation();
-        // Con la barra o Enter: si hay un botón con el foco, lo aprieta el navegador; si no, es «¡Ahora!».
-        const enBoton = document.activeElement && document.activeElement.tagName === 'BUTTON' && capa.contains(document.activeElement);
-        if ((e.key === ' ' || e.key === 'Enter') && pulsar && !enBoton) { e.preventDefault(); pulsar(); }
+        e.stopPropagation();   // que las teclas del viaje no muevan la canoa por detrás
+        // En «Volver al viaje» o «Seguir el viaje», Enter y la barra hacen lo de siempre: apretar ese botón.
+        const f = document.activeElement;
+        if (f && f.closest && f.closest('.mj__botones') && !f.classList.contains('mj__mantener')) return;
+        if (!terminado && mec.tecla && mec.tecla(e, true)) e.preventDefault();
       }
-      document.addEventListener('keydown', teclas, true);
+      function teclaSube(e) {
+        e.stopPropagation();
+        if (!terminado && mec.tecla && mec.tecla(e, false)) e.preventDefault();
+      }
+      document.addEventListener('keydown', teclaBaja, true);
+      document.addEventListener('keyup', teclaSube, true);
 
       function cuadro(ms) {
         if (fin) return;
-        const s = segundos();
+        const s = segundos(), dt = Math.min(0.1, Math.max(0, s - ultimo)); ultimo = s;
         if (motor) { try { motor.dibujar(op.reducido ? 2 : ms / 1000); } catch (e) { motor = null; } }
-        mover(s);
+        if (!terminado) {
+          if (autoJuega && mec.auto) mec.auto(s, dt);
+          if (mec.mover) mec.mover(s, dt);
+          if (limite && !op.reducido && !terminado) {
+            const queda = Math.max(0, 1 - (s - desdeReloj) / limite);
+            arena.style.transform = 'scaleX(' + queda + ')';
+            if (queda === 0) perder('Se hizo tarde.');
+          }
+        }
         cuadroId = requestAnimationFrame(cuadro);
       }
       cuadroId = requestAnimationFrame(cuadro);
-      actual = { ganar, cerrar, juego: j };
-    }).then((ok) => (ok === null ? jugar(tipo, que, Object.assign({}, op, { semilla: undefined })) : ok));
+      actual = { ganar: () => ganar(false), cerrar, auto: () => { autoJuega = true; }, juego: j };
+    });
   }
 
   const api = {
-    JUEGOS, ESCENAS, RECURSO, cual, jugar, anotar,
-    /** La racha actual y la mejor (para mostrarlas en otra pantalla). */
+    JUEGOS, ESCENAS, cual, jugar, anotar, azar, lugares, mareaAlta, LINEA_MAREA, dificultad,
+    /** La racha actual y la mejor. */
     get racha() { return { racha, mejor }; },
-    marcaEn, dentro, lugares, azar, zonaDe, mareaAlta, LINEA_MAREA,
     /** ¿Hay un minijuego abierto? */
     abierto: () => !!actual,
-    /** Para las pruebas automáticas: da por ganado el minijuego abierto. */
+    /** Para las pruebas: da por ganado el minijuego abierto (sin «perfecto»). */
     ganar: () => { if (actual) actual.ganar(); },
+    /** Para las pruebas y el video: el minijuego abierto se juega solo, por los mismos caminos que una persona. */
+    auto: () => { if (actual) actual.auto(); },
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else raiz.TDH_MINIJUEGOS = api;

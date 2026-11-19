@@ -95,20 +95,15 @@ function subtitulos() {
     await p.locator('#b-yagan').click(); await p.waitForTimeout(1600);
   }
 
-  // Juega el minijuego abierto (minijuegos/minijuegos.js) como una persona: toca lo que se junta o
-  // espera a que la marca pase por la zona.
+  // Juega el minijuego abierto (minijuegos/): TDH_MINIJUEGOS.auto() lo juega solo, por los mismos
+  // caminos que una persona (arrastra la rama, mantiene apretado, sigue al pez…).
   async function jugarMinijuego(p) {
     const t0 = Date.now();
+    await p.waitForTimeout(soloFotos ? 50 : 600);
+    await p.evaluate(() => window.TDH_MINIJUEGOS && TDH_MINIJUEGOS.auto());
     while ((await p.locator('.mj').count()) && Date.now() - t0 < 25000) {
-      const cosas = p.locator('.mj__cosa:not(:disabled):has(img)');
-      if (await cosas.count()) { await p.waitForTimeout(soloFotos ? 50 : 450); await cosas.first().click(); continue; }
-      if (await visible(p, /^Probar de nuevo$/)) { await boton(p, /^Probar de nuevo$/).click(); await p.waitForTimeout(300); continue; }
-      await p.evaluate(() => {
-        const z = document.querySelector('.mj__zona'), m = document.querySelector('.mj__marca'); if (!z || !m) return;
-        const a = z.getBoundingClientRect(), b = m.getBoundingClientRect(), c = b.left + b.width / 2;
-        if (c > a.left + 8 && c < a.right - 8) document.querySelector('.mj__botones .boton-papel--fuego').click();
-      });
-      await p.waitForTimeout(25);
+      if (await visible(p, /^Seguir el viaje$/)) { await boton(p, /^Seguir el viaje$/).click(); await p.waitForTimeout(300); continue; }
+      await p.waitForTimeout(100);
     }
     await p.waitForTimeout(700);
   }

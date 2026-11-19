@@ -90,8 +90,36 @@ const MAX_ACCIONES = 400;
       for (const b of chicos) (b.w < 24 || b.h < 24 ? r.errores : r.avisos).push(momento + ': el botón «' + b.t + '» mide ' + b.w + ' × ' + b.h + ' px (conviene 44 × 44).');
     };
     await revisarPantalla('Al empezar');
-    const textoFuego = async () => { const m = (await p.textContent('body')).match(UI.fuego); return m ? Number(m[1]) : null; };
+    // «Brasas · 2» (19/11) cuenta como fuego 0: hay que avivar ya.
+    const textoFuego = async () => { const t = await p.textContent('body'); if (/Brasas · \d/.test(t)) return 0; const m = t.match(UI.fuego); return m ? Number(m[1]) : null; };
     if ((await textoFuego()) == null) r.errores.push('No se ve cuánto fuego queda («Fuego N de 4»).');
+
+    // Juega un rato el minijuego con el mouse o el teclado de verdad. Si se cierra, anota cómo salió.
+    async function aMano(titulo) {
+      const caja = async (sel) => { const l = p.locator(sel).first(); return (await l.count()) ? l.boundingBox() : null; };
+      if (/leña/i.test(titulo)) {
+        const rama = await caja('.mj__cosa:not(:disabled)'), canoa = await caja('.mj__destino');
+        if (rama && canoa) {
+          await p.mouse.move(rama.x + rama.width / 2, rama.y + rama.height / 2); await p.mouse.down();
+          await p.mouse.move(canoa.x + canoa.width / 2, canoa.y + canoa.height / 2, { steps: 8 }); await p.mouse.up();
+          const llevadas = await p.locator('.mj__cosa.juntado').count();
+          if (llevadas !== 1) r.errores.push('Arrastrar una rama con el mouse hasta la canoa no la juntó.');
+        }
+      } else if (/mejillones/i.test(titulo)) {
+        const m = await caja('.mj__cosa:not(:disabled)');
+        if (m) { await p.mouse.move(m.x + m.width / 2, m.y + m.height / 2); await p.mouse.down(); await p.waitForTimeout(1300); await p.mouse.up(); }
+      } else if (/avivar/i.test(titulo)) {
+        await p.keyboard.down(' '); await p.waitForTimeout(250); await p.keyboard.up(' ');
+        const est = (await p.locator('.mj__estado').textContent()) || '';
+        if (!/faltó|intento|Listo|Perfecto/i.test(est)) r.errores.push('Mantener la barra espaciadora en «Avivar» no hizo nada: «' + est + '».');
+      } else if (/amarrar/i.test(titulo)) {
+        await p.keyboard.down('ArrowLeft'); await p.waitForTimeout(300); await p.keyboard.up('ArrowLeft');
+      } else if (/piedras/i.test(titulo)) {
+        const a = await caja('.mj__arena');
+        if (a) { await p.mouse.move(a.x + 10, a.y + a.height / 2); await p.mouse.down(); await p.mouse.move(a.x + a.width - 10, a.y + a.height / 2, { steps: 12 }); await p.mouse.up(); }
+      }
+      await p.waitForTimeout(200);
+    }
 
     // ── Jugar ──
     let cartasVistas = 0, motivosVistos = 0, acampoRecien = false, acampesSeguidos = 0, bloqueadoEste = false, vertical = -1, vueltas = 0, pasosBordeando = 0;
@@ -99,24 +127,23 @@ const MAX_ACCIONES = 400;
       let termino = false, acciones = 0;
       while (!termino && acciones < MAX_ACCIONES) {
         acciones++;
-        // Minijuego (minijuegos/minijuegos.js): se juega como una persona. Para juntar, se tocan las
-        // cosas (no las piedras grises); para los de tiempo, se toca cuando la marca está en la zona.
+        // Minijuego (minijuegos/): la primera vez que aparece cada uno, se prueba con el mouse o el
+        // teclado de verdad (arrastrar, mantener apretado, la barra espaciadora); después, y si con
+        // eso no termina, se juega solo con TDH_MINIJUEGOS.auto(), por los mismos caminos.
         if (await p.locator('.mj').count()) {
           const titulo = ((await p.locator('#mj-titulo').textContent()) || '').trim();
           r.minijuegos[titulo] = (r.minijuegos[titulo] || 0) + 1;
-          if (r.minijuegos[titulo] === 1) { await revisarPantalla('En el minijuego «' + titulo + '»'); await p.screenshot({ path: path.join(SALIDA, nombre + '-minijuego-' + Object.keys(r.minijuegos).length + '.png') }); }
+          if (r.minijuegos[titulo] === 1) {
+            await revisarPantalla('En el minijuego «' + titulo + '»');
+            await p.screenshot({ path: path.join(SALIDA, nombre + '-minijuego-' + Object.keys(r.minijuegos).length + '.png') });
+            await aMano(titulo);
+          }
           const t0 = Date.now();
+          await p.evaluate(() => window.TDH_MINIJUEGOS && TDH_MINIJUEGOS.auto());
           while ((await p.locator('.mj').count()) && Date.now() - t0 < 25000) {
-            const cosas = p.locator('.mj__cosa:not(:disabled):has(img)');
-            if (await cosas.count()) { await cosas.first().click(); await p.waitForTimeout(120); continue; }
             // Si no salió, se pierde el turno (18/11): se sigue el viaje y el fuego baja.
             if (await visible(/^Seguir el viaje$/)) { r.fallos = (r.fallos || 0) + 1; await boton(/^Seguir el viaje$/).click(); await p.waitForTimeout(300); continue; }
-            await p.evaluate(() => {
-              const z = document.querySelector('.mj__zona'), m = document.querySelector('.mj__marca'); if (!z || !m) return;
-              const a = z.getBoundingClientRect(), b = m.getBoundingClientRect(), c = b.left + b.width / 2;
-              if (c > a.left + 6 && c < a.right - 6) document.querySelector('.mj__botones .boton-papel--fuego').click();
-            });
-            await p.waitForTimeout(25);
+            await p.waitForTimeout(100);
           }
           if (await p.locator('.mj').count()) { r.errores.push('El minijuego «' + titulo + '» no se pudo terminar en 25 segundos.'); await p.keyboard.press('Escape'); }
           await p.waitForTimeout(700);
@@ -157,7 +184,15 @@ const MAX_ACCIONES = 400;
           // Remar como una persona: hacia el este (ahí está el destino) y, si la costa lo impide,
           // bordearla hacia arriba o hacia abajo hasta poder seguir.
           acampoRecien = false;
-          const tecla = bloqueadoEste ? (vertical < 0 ? 'ArrowUp' : 'ArrowDown') : 'ArrowRight';
+          // Si bordear no alcanza (una costa que obliga a dar la vuelta), mira el mapa como una persona
+          // y rema hacia donde sigue el agua hasta el destino.
+          const porAgua = bloqueadoEste && vueltas >= 1 ? await p.evaluate(() => {
+            const e = window.TDH_JUEGO && TDH_JUEGO.partida && TDH_JUEGO.partida.estado; if (!e || !window.TDH_MAPA) return null;
+            const d = e.destino, c = e.canoa, ruta = TDH_MAPA.camino(e.mapa, c, (x, y) => Math.max(Math.abs(x - d.x), Math.abs(y - d.y)) <= 1);
+            const s = ruta && ruta[0]; if (!s) return null;
+            return s.x > c.x ? 'ArrowRight' : s.x < c.x ? 'ArrowLeft' : s.y > c.y ? 'ArrowDown' : 'ArrowUp';
+          }) : null;
+          const tecla = porAgua || (bloqueadoEste ? (vertical < 0 ? 'ArrowUp' : 'ArrowDown') : 'ArrowRight');
           await p.keyboard.press(tecla);
           await p.waitForTimeout(220);
           const aviso = (await p.textContent('[role=status]').catch(() => '')) || '';

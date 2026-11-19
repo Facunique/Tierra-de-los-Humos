@@ -1,41 +1,59 @@
 # Minijuegos
 
-Antes de juntar algo, avivar el fuego o amarrar la canoa, se juega un momento corto. Si sale bien, la acción se hace igual que siempre: el núcleo no cambia, con los mismos números y las mismas reglas. Si no sale (se acaban los intentos o el tiempo, o se vuelve después de errar), se pierde el turno: se les fue el tiempo y el fuego baja como al remar, sin moverse (`{ tipo: 'demora' }` del núcleo). Volver al viaje antes de probar no cuesta nada.
+Antes de juntar algo, avivar el fuego o amarrar la canoa, se juega un momento corto. Desde el 19/11 **cada uno se juega distinto** (antes, todos eran tocar cosas o tocar a tiempo). Las mecánicas salen de juegos fáciles de un gesto: arrastrar y soltar, mantener apretado, la memoria, frotar para destapar, el pez que hay que seguir con un solo botón, cargar y soltar, y guiar contra la corriente.
 
-| Acción | Minijuego | Dónde |
+| Acción | Minijuego | Cómo se juega |
 |---|---|---|
-| Juntar leña | Tocar tres ramas antes de que se haga tarde | Bajan a tierra, en la playa |
-| Juntar mejillones | Juntar cuatro a mano mientras la marea está baja; cuando el agua sube, esperar | Bajan a tierra, en la costa |
-| Juntar hongos | Tocar tres hongos de los árboles | Bajan a tierra, al borde del bosque |
-| Juntar pirita | Encontrar las dos piedras de fuego (las doradas) entre las grises | Bajan a tierra, en la playa |
-| Juntar pescado | Levantar la línea cuando el pez llega a la carnada (sin anzuelo) | En la canoa |
-| Avivar el fuego | Sumar la leña cuando la llama está baja | En la canoa |
-| Amarrar y acampar | Amarrar cuando la canoa pasa sobre el cachiyuyo | En la canoa |
+| Juntar leña | **Arrastrar** | Llevar tres ramas hasta la canoa |
+| Juntar mejillones | **Mantener** | Mantener apretado cada mejillón hasta despegarlo; si sube el agua, esperar |
+| Juntar hongos | **Memoria** | Mirar dónde están; después las hojas los tapan y hay que encontrarlos (3 errores y no sale) |
+| Juntar pirita | **Frotar** | Frotar la arena con el dedo hasta destapar las dos piedras doradas |
+| Juntar pescado | **Seguir** | Mantener apretado para subir el lazo y dejarlo sobre el pez hasta llenar la barra |
+| Avivar el fuego | **Cargar** | Mantener apretado para sumar leña y soltar dentro de la franja: de menos no prende, de más lo ahoga |
+| Amarrar y acampar | **Guiar** | La corriente empuja la canoa: tocar a un lado o al otro para dejarla sobre el cachiyuyo |
 
-Cada minijuego muestra el dato de las fuentes que lo acompaña, el mismo de las cartas y de los elementos del territorio. También aclara que la mecánica es recurso de juego. Qué dibuja cada uno y de qué fuente sale está en [`docs/05-rigor-historico.md`](../docs/05-rigor-historico.md#los-minijuegos-minijuegos-1811-d).
+- **Si sale bien,** la acción se hace igual que siempre.
+- **Si sale perfecto** (sin errar y rápido), suma un poco más: juntar da 1 más, avivar rinde más y la noche gasta menos (`BIEN_*` en `juego/nucleo/reglas.js`).
+- **Si no sale** (se acaba el tiempo o los intentos, o se vuelve después de errar), se pierde el turno: el fuego baja como al remar, sin moverse (`{ tipo: 'demora' }`). Volver al viaje antes de probar no cuesta nada.
+
+Los minijuegos no muestran el dato ni la fuente: están en las cartas, completos. La fuente de lo que se dibuja queda en `minijuegos.js` (campo `fuente`) y en [`docs/05-rigor-historico.md`](../docs/05-rigor-historico.md#los-minijuegos-minijuegos-1811-d-cada-uno-con-su-mecánica-desde-el-1911). La mecánica es recurso de juego.
 
 ## Racha
 
-Cada minijuego que sale al primer intento suma a la racha; fallar, tocar una piedra común o volver al viaje la corta. La racha se ve arriba del minijuego, y la mejor se guarda en el dispositivo. Es un reto propio: no cambia nada del viaje.
+Cada minijuego que sale al primer intento suma a la racha; fallar o volver al viaje la corta. La racha se ve arriba del minijuego, la mejor se guarda en el dispositivo y **sube un poco la dificultad** (todo va hasta un 30 % más rápido con racha de 5). Es un reto propio: no cambia nada del viaje.
 
 ## Para todos
 
-- Se juegan con el dedo, el mouse o el teclado. Las cosas para juntar son botones (<kbd>Tab</kbd> y <kbd>Enter</kbd>); en los de tiempo, alcanza con la barra espaciadora. <kbd>Esc</kbd> vuelve al viaje.
-- Con movimiento reducido no hay apuro: el tiempo no se acaba y la marca va más lenta.
+- Se juegan con el dedo, el mouse o el teclado:
+  - arrastrar y memoria: <kbd>Tab</kbd> y <kbd>Enter</kbd>;
+  - mantener: <kbd>Tab</kbd> y mantener la barra espaciadora;
+  - frotar: las flechas mueven la mano, que va frotando;
+  - seguir y cargar: mantener la barra espaciadora (o el botón grande);
+  - guiar: las flechas o <kbd>A</kbd> y <kbd>D</kbd> (o los botones «◀ Remar» y «Remar ▶»).
+- <kbd>Esc</kbd> vuelve al viaje.
+- Con movimiento reducido no hay apuro: el tiempo no se acaba y todo va más lento.
 - Con el narrador encendido no hay minijuegos, porque son para ver.
 - En la pantalla de título, **Minijuegos: sí / no** los apaga.
 
 ## Para programar
 
 ```js
-if (TDH_MINIJUEGOS.cual('juntar', 'mejillones')) {
-  const ok = await TDH_MINIJUEGOS.jugar('juntar', 'mejillones', { estacion, altoContraste, reducido });
-  if (ok) partida.hacer({ tipo: 'juntar' });
-}
+const r = await TDH_MINIJUEGOS.jugar('juntar', 'mejillones', { estacion, altoContraste, reducido, sonido });
+// r: 'perfecto' | true | false (volvió sin probar) | 'fallo'
+if (r === 'perfecto') partida.hacer({ tipo: 'juntar', bien: true });
+else if (r === true) partida.hacer({ tipo: 'juntar' });
+else if (r === 'fallo') partida.hacer({ tipo: 'demora' });
 ```
 
-El gancho está en `juego/interfaz/juego.js` (función `minijuego`). Para sumar un minijuego, copiá una entrada de `JUEGOS` en `minijuegos.js`. `node --test` revisa que tenga textos, escena, dibujo y fuente, y que no use anzuelos, redes ni escenas de caza (`pruebas/minijuegos.test.cjs`). `pruebas/de-punta-a-punta.cjs` los juega tocando, como una persona.
+| Archivo | Qué tiene |
+|---|---|
+| `minijuegos.js` | El marco: la pantalla, el tiempo, la racha, el resultado y los datos de cada minijuego (`JUEGOS`) |
+| `juegos-tierra.js` | Arrastrar, mantener, memoria y frotar |
+| `juegos-canoa.js` | Seguir, cargar y guiar |
+| `minijuegos.css` | Los estilos, con la paleta Corteza |
 
-**Fallar cuesta (18/11, decisión del equipo):** si no sale, el núcleo hace `{ tipo: 'demora' }`: gasta lo mismo que una remada (más con lluvia o de noche) y pasa el tiempo, pero la canoa no se mueve. El número lo puede ajustar A en `demora()` de `juego/nucleo/partida.js`.
+Cada mecánica recibe `c` (la escena, `ganar`, `perder`, `error`, `progreso`…) y devuelve `{ mover(s, dt), tecla(e, baja), auto(s, dt) }`. Para sumar un minijuego, copiá una entrada de `JUEGOS` y elegí una mecánica (o escribí una nueva). `node --test` revisa que cada uno tenga textos cortos, escena, dibujo, fuente y su propia mecánica, y que no use anzuelos, redes ni escenas de caza (`pruebas/minijuegos.test.cjs`).
+
+`TDH_MINIJUEGOS.auto()` hace que el minijuego abierto se juegue solo, por los mismos caminos que una persona (arrastra la rama, mantiene apretado, sigue al pez). Lo usan `pruebas/de-punta-a-punta.cjs`, que además prueba la primera vez cada uno con el mouse o el teclado de verdad, y el grabador del video.
 
 Licencia: MIT (el código); CC BY-SA 4.0 (los textos).

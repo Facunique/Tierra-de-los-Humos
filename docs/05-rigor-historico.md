@@ -122,19 +122,19 @@ También comían los **hongos que crecen en los árboles** (no los del suelo) y 
 | Arco y flecha | Tenían un lugar muy secundario y probablemente lo tomaron de los selk'nam (Cooper, p. 91). | ⛔ No se dibuja. |
 | Cerámica y tejido | No existían (Cooper, p. 89). | ⛔ |
 
-### Los minijuegos (`minijuegos/`, 18/11, D)
+### Los minijuegos (`minijuegos/`, 18/11, D; cada uno con su mecánica desde el 19/11)
 
-Antes de juntar, avivar o amarrar, se juega un momento corto. Lo que se dibuja sale de pegatinas y escenas que ya están en esta tabla. La mecánica (el tiempo, la marea que sube, la marca que va y viene) es recurso de juego y lo dice en pantalla. No se dibujan personas en los minijuegos.
+Antes de juntar, avivar o amarrar, se juega un momento corto. Lo que se dibuja sale de pegatinas y escenas que ya están en esta tabla. La mecánica (arrastrar, mantener apretado, la memoria, frotar la arena, la corriente, el tiempo) es recurso de juego. Desde el 19/11 los minijuegos no muestran el dato ni la fuente: eran textos largos que se repetían con las cartas, que siguen teniéndolos completos. La fuente de cada uno queda en `minijuegos/minijuegos.js` y en esta tabla. No se dibujan personas en los minijuegos.
 
-| Minijuego | Qué se ve | Fuente | Estado |
+| Minijuego | Qué se ve y qué se hace | Fuente | Estado |
 |---|---|---|---|
-| Bajar a tierra a juntar leña | Ramas en la playa; la canoa espera en el agua. | 🔍 Falta una cita yagán sobre la recolección de leña (ver «Leña»). | En pantalla dice que es recurso de juego y que falta la cita. |
-| Mejillones con la marea baja | Mejillones en la costa; el agua sube y baja. | Vargas Filgueira (2019, pp. 30 y 44 del visor del PDF): recolección de mariscos con la marea baja. Cooper (1946, p. 84): el mejillón se junta a mano. | ✅ |
-| Hongos de los árboles | Hongos sobre el bosque, no en el suelo. | Vargas Filgueira (2019, p. 54 del visor del PDF); Cooper (1946, p. 84). | ✅ |
-| Piedras de fuego | Pirita dorada entre piedras grises de la playa. | Cooper (1946, pp. 91 y 95). | ✅ Dónde se encontraba la pirita no se afirma: la escena es recurso de juego. |
-| Pescar desde la canoa | El pez y la «carnada» en una pista; no se dibuja la línea. | Cooper (1946, pp. 84 y 96): línea sin anzuelo, carnada en un lazo, el pez se toma con la mano. | ✅ ⛔ Sin anzuelos ni redes (lo revisa `pruebas/minijuegos.test.cjs`). |
-| Avivar el fuego | La leña y la «llama baja» en una pista. | Vargas Filgueira (2019, p. 33 del visor del PDF): el fuego viaja en la canoa. | ✅ |
-| Amarrar en el cachiyuyo | La canoa pasa sobre el cachiyuyo. | Cooper (1946, p. 88 impresa): mismo respaldo del amarre de la carta; alcance en docs/03. | Se conserva el nombre del recurso de juego; no se identifica una especie a partir de esta fuente. |
+| Juntar leña | Ramas en la playa; se arrastran hasta la canoa, que espera en el agua. | 🔍 Falta una cita yagán sobre la recolección de leña (ver «Leña»). Cooper (1946, pp. 88 y 91) respalda el fuego en la canoa. | 🔍 Arrastrar es recurso de juego. |
+| Mejillones con la marea baja | Mejillones en la costa; se mantiene apretado para despegarlos; el agua sube y baja. | Vargas Filgueira (2019, pp. 30 y 44 del visor del PDF): recolección de mariscos con la marea baja. Cooper (1946, p. 84): el mejillón se junta a mano. | ✅ |
+| Hongos de los árboles | Hongos sobre el bosque, no en el suelo; las hojas los tapan y hay que recordar dónde estaban. | Vargas Filgueira (2019, p. 54 del visor del PDF); Cooper (1946, p. 84). | ✅ Las hojas que tapan son recurso de juego. |
+| Piedras de fuego | Pirita dorada y piedras grises bajo la arena de la playa, que se frota para destaparlas. | Cooper (1946, pp. 91 y 95). | ✅ Dónde se encontraba la pirita no se afirma: la escena es recurso de juego. |
+| Pescar desde la canoa | El pez y el lazo en una pista vertical; se mantiene el lazo sobre el pez. No se dibuja la línea. | Cooper (1946, pp. 84 y 96): línea sin anzuelo, carnada en un lazo, el pez se toma con la mano. | ✅ ⛔ Sin anzuelos ni redes (lo revisa `pruebas/minijuegos.test.cjs`). |
+| Avivar el fuego | El fuego crece mientras se suma leña; se suelta en la franja, sin ahogarlo. | Vargas Filgueira (2019, p. 33 del visor del PDF): el fuego viaja en la canoa. | ✅ Cuánta leña «ahoga» el fuego es recurso de juego. |
+| Amarrar en el cachiyuyo | La corriente empuja la canoa; se la deja sobre el cachiyuyo. | Cooper (1946, p. 88 impresa): mismo respaldo del amarre de la carta; alcance en docs/03. | Se conserva el nombre del recurso de juego; no se identifica una especie a partir de esta fuente. La corriente es recurso de juego. |
 
 ### El paisaje
 
