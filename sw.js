@@ -21,7 +21,7 @@
  * Licencia: MIT.
  */
 'use strict';
-const VERSION = 'tdh-v4';
+const VERSION = 'tdh-v5';
 const ESPERA_RED = 3500;
 const ARCHIVOS = [
   './',
@@ -62,6 +62,7 @@ const ARCHIVOS = [
   'juego/nucleo/partida.js',
   // Interfaz
   'juego/interfaz/herencia.js',
+  'juego/interfaz/fuente.js',
   'juego/interfaz/carta.js',
   'juego/interfaz/cronica.js',
   'juego/interfaz/marcas.js',

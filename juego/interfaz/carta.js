@@ -10,12 +10,15 @@
  *
  * Con { rotulo: 'Motivo del viaje · Yagán' } la misma pantalla muestra algo que
  * no es un saber (el motivo del viaje al empezar): cambia el renglón de arriba
- * y lo que lee la voz, y la carta lleva la clase tdh-carta--otra.
+ * y la carta lleva la clase tdh-carta--otra.
  *
  * - La fuente queda siempre a la vista: si el texto no entra, se desplaza el
  *   cuerpo de la carta (dato y en el juego), no la fuente ni los botones.
  * - La ilustración se dibuja con Corteza y lleva el texto alternativo (carta.alt).
- * - «Escuchar» lee el título y el dato con TDH_VOZ.leerCarta, si el dispositivo tiene voz.
+ * - La fuente va en corto (autor, año y página) con juego/interfaz/fuente.js; la
+ *   referencia completa está al final del códice. Sin fuente.js, va entera.
+ * - Sin botón de voz desde el 19/11: la voz del dispositivo sonaba robótica. Un lector
+ *   de pantalla la lee igual, y el narrador del viaje sigue en las opciones.
  * - Teclado: el foco queda adentro de la carta; Escape la cierra. Al cerrar, el
  *   foco vuelve a donde estaba.
  * - Si llega otra carta mientras hay una abierta, espera su turno.
@@ -24,7 +27,7 @@
  * por eso se insertan como HTML (la fuente usa <i> para el título de la obra).
  *
  * Requiere: arte/fuente/arte.js, arte/corteza/corteza.js, arte/corteza/carta.css
- * y juego/interfaz/juego.css. Opcionales: arte/corteza/transiciones.js, sonido/voz.js.
+ * y juego/interfaz/juego.css. Opcionales: arte/corteza/transiciones.js, juego/interfaz/fuente.js.
  * Licencia: MIT.
  */
 (function (raiz) {
@@ -90,31 +93,15 @@
       cuerpo.appendChild(el('p', null, '<span class="etiqueta etiqueta--juego">En el juego</span> ' + carta.juego));
       art.appendChild(cuerpo);
 
-      art.appendChild(el('p', 'carta-saber__fuente', 'Fuente: ' + carta.fuente));
-      if (carta.estado === 'borrador') art.appendChild(el('p', 'tdh-carta__estado', 'Texto en revisión con las fuentes.'));
+      art.appendChild(el('p', 'carta-saber__fuente', 'Fuente: ' + (raiz.TDH_FUENTE ? raiz.TDH_FUENTE.corta(carta.fuente) : carta.fuente)));
+      // «Texto en revisión» es una nota del equipo: en el viaje no se muestra (19/11); sigue en el códice.
 
       const botones = el('div', 'tdh-carta__botones');
-      let escuchar = null;
-      if (voz) {
-        escuchar = el('button', 'boton-papel', '🔊 Escuchar');
-        escuchar.type = 'button';
-        escuchar.setAttribute('aria-pressed', 'false');
-        botones.appendChild(escuchar);
-      }
       const seguir = el('button', 'boton-papel boton-papel--fuego', op.nueva ? 'Guardar en la memoria' : 'Seguir');
       seguir.type = 'button';
       botones.appendChild(seguir);
       art.appendChild(botones);
       velo.appendChild(art);
-
-      // ── Voz ──
-      function vozLista() { if (!escuchar) return; escuchar.setAttribute('aria-pressed', 'false'); escuchar.textContent = '🔊 Escuchar'; }
-      if (escuchar) escuchar.addEventListener('click', async () => {
-        if (escuchar.getAttribute('aria-pressed') === 'true') { voz.detener(); vozLista(); return; }
-        escuchar.setAttribute('aria-pressed', 'true'); escuchar.textContent = '⏹ Detener la lectura';
-        await voz.leerCarta(carta);   // el título y el dato (sonido/voz.js)
-        if (velo.isConnected) vozLista();
-      });
 
       // ── Cerrar ──
       function cerrar() {
@@ -134,7 +121,7 @@
       function teclas(e) {
         if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); cerrar(); return; }
         if (e.key === 'Tab') {
-          const enfocables = [cuerpo, escuchar, seguir].filter((x) => x && x.tabIndex >= 0);
+          const enfocables = [cuerpo, seguir].filter((x) => x && x.tabIndex >= 0);
           const i = enfocables.indexOf(document.activeElement);
           if (e.shiftKey && i <= 0) { e.preventDefault(); enfocables[enfocables.length - 1].focus(); }
           else if (!e.shiftKey && i === enfocables.length - 1) { e.preventDefault(); enfocables[0].focus(); }

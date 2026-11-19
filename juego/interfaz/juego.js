@@ -529,11 +529,8 @@
     }
     $('fin-mejor').textContent = 'Mejor de la familia hasta ' + e.destino.nombre + ': ' + r.mejor + ' de 3.';
   }
-  /** «Cooper (1946); Vargas Filgueira (2019)» a partir de la cita completa. Si no la entiende, la deja como está. */
-  function fuenteCorta(f) {
-    const v = [...String(f).replace(/<[^>]+>/g, '').matchAll(/(?:^|\.\s)([A-ZÁÉÍÓÚ][a-záéíóúñ]+(?: [A-ZÁÉÍÓÚ][a-záéíóúñ]+)?),[^()]{0,20}\((\d{4})\)/g)].map((m) => m[1] + ' (' + m[2] + ')');
-    return v.length ? [...new Set(v)].join('; ') : f;
-  }
+  /** La fuente en corto: «Cooper (1946), p. 84; Vargas Filgueira (2019), p. 16-17» (juego/interfaz/fuente.js). */
+  const fuenteCorta = (f) => (window.TDH_FUENTE ? TDH_FUENTE.corta(f) : f);
   /** El paso del fuego («Generación 1 → 2», con los saberes que pasan) y el viaje nuevo. Lo usan el final del viaje y «Empezar otro viaje». */
   async function pasarALaGeneracionSiguiente(desde) {
     // Si el humo de la pantalla anterior todavía se está abriendo, se espera a que termine.
@@ -591,7 +588,7 @@
         const a = document.createElement('article'); a.className = 'carta-saber papel';
         a.innerHTML = '<p class="carta-saber__tipo">Saber · Yagán · ' + c.tipo + '</p><canvas class="carta-saber__ilus" role="img"></canvas><h3 class="carta-saber__titulo">' + c.titulo + '</h3>' +
           '<p><span class="etiqueta etiqueta--dato">Dato</span> ' + c.dato + '</p><p><span class="etiqueta etiqueta--juego">En el juego</span> ' + c.juego + '</p>' +
-          '<p class="carta-saber__fuente">Fuente: ' + c.fuente + '</p>' + (c.estado === 'borrador' ? '<p class="borrador">Texto en revisión con las fuentes.</p>' : '');
+          '<p class="carta-saber__fuente">Fuente: ' + fuenteCorta(c.fuente) + '</p>' + (c.estado === 'borrador' ? '<p class="borrador">Texto en revisión con las fuentes.</p>' : '');
         const cv = a.querySelector('canvas'); cv.setAttribute('aria-label', c.alt || 'Ilustración de la carta');
         cont.appendChild(a); dibujar.push([cv, c.mapa, c.extra]);
       } else {
@@ -602,6 +599,14 @@
       }
     }
     requestAnimationFrame(() => dibujar.forEach(([cv, mapa, extra]) => { if (mapa) escenaEn(cv, mapa, extra); }));
+    // Las obras citadas, completas y una sola vez (las cartas las citan en corto).
+    const obras = $('codice-obras');
+    if (obras && window.TDH_FUENTE) {
+      const lista = TDH_FUENTE.obras(ids.filter((id) => sabe.has(id)).map((id) => SABERES[id].fuente));
+      obras.hidden = !lista.length;
+      const ul = obras.querySelector('ul'); ul.textContent = '';
+      for (const o of lista) { const li = document.createElement('li'); li.textContent = o; ul.appendChild(li); }
+    }
     $('b-borrar').hidden = !l.saberes.length && l.generacion === 1;
   }
   $('b-borrar').addEventListener('click', () => {
