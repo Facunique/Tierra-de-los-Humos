@@ -27,9 +27,9 @@ Los siguientes textos corresponden a los borradores de `datos/saberes.js`. Cada 
 
 ### 2. Amarrar en el cachiyuyo · `amarre`
 
-- **Dato:** Cooper describe a las mujeres remando y amarrando la canoa lejos de la orilla, en el cachiyuyo. Vargas Filgueira también relata a mujeres remando.
+- **Dato vigente:** ver la carta `amarre` en [`datos/saberes.js`](../datos/saberes.js). Corrección editorial del 18/11: el respaldo del amarre se limita a bancos de grandes algas marinas, fuera de la orilla.
 - **En el juego:** Para acampar, amarrá la canoa en el cachiyuyo, cerca de una playa.
-- **Fuente:** Cooper, J. M. (1946). «The Yahgan». Handbook of South American Indians, vol. 1. Smithsonian Institution, p. 88 y 96. Vargas Filgueira, Víctor (2019). Mi sangre yagán (ahua saapa yagan). Primera edición digital. Editora Cultural Tierra del Fuego, p. 33 del visor del PDF.
+- **Fuentes y alcance:** ver [`docs/03`, sección Cooper](../docs/03-contenido-cultural.md#cooper-1946-síntesis-etnográfica). Amarre: Cooper, John M. (1946), «The Yahgan», p. 88 impresa. Vargas Filgueira (2019), p. 33 del visor, se conserva solo como referencia complementaria para mujeres remando. Se retira la p. 96 del respaldo específico del amarre hasta cotejarla; esta corrección no supone acceso directo al pasaje de Cooper.
 - **Alt:** La canoa, con el fuego encendido y dos personas en silueta, está quieta entre las algas del cachiyuyo, en el agua frente a una playa con bosque.
 - **Ilustración revisada:** [amarre.jpg](../arte/cartas/ilustraciones/amarre.jpg).
 - **Observaciones:** Se atribuye la descripción a Cooper y se agrega la referencia de Vargas Filgueira (2019), p. 33 del visor, aportada por la Persona C sobre mujeres remando. Esta última referencia no se usa para probar el amarre. No se convierte la distribución de tareas en una regla de todas las familias. El amarre cerca de una playa corresponde a la acción de acampar del prototipo. El alt no identifica género ni rasgos de las figuras.

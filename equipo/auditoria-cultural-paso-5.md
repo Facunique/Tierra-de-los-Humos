@@ -235,7 +235,7 @@ Los enlaces de esta sección apuntan a la versión auditada de la primera pasada
 | Carta | Actualización |
 |---|---|
 | Fuego | Se compara la carta con Vargas Filgueira (2019), p. 66; se retira la dificultad de reencendido como inferencia. El gasto numérico sigue identificado como ficción. |
-| Amarre | Se comparan Cooper, pp. 88 y 96, y Vargas Filgueira, p. 33. Se distingue remo de amarre y se evita extender el pasaje a todas las familias actuales. |
+| Amarre | Se comparan las referencias sobre tareas de Cooper, pp. 88 y 96, y Vargas Filgueira, p. 33 del visor. El respaldo específico del amarre se limita a Cooper, p. 88 impresa, según la corrección del 18/11 en docs/03; Vargas aporta solo el relato del remo. |
 | Mejillones | Se incorpora Bird, «The Archeology of Patagonia», pp. 20–21. El registro de meriendas es un ejercicio, no un conchal. Se retira la afirmación jurídica sin referencia. |
 | Pescado | El dibujo se limita al método descrito. La tabla de materiales pide fuente y página; no se inventan especies ni recorridos. |
 | Hongos | Se conserva la distinción entre conservación documentada y experimento de aula. El ejercicio y sus pautas siguen pendientes de revisión docente. |

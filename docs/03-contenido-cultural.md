@@ -29,7 +29,7 @@ Se utiliza la referencia de esta edición confirmada por la Persona C y los pasa
 | Desplazamiento para acudir a una ballena varada | 16–17 | Carta `ballena` y dato del destino. Es uno de los motivos posibles del viaje. |
 | Estacionalidad de la extracción de corteza | 23 | Referencias del territorio y revisión de la carta de corteza. |
 | Recuperación de corteza conservada para reparar una canoa | 31–32 | Dato de `corteza` en el territorio. Se distingue de extraerla de un árbol y de una mecánica de reparación, que el juego no tiene. |
-| Mujeres remando | 33 | Referencia adicional de la carta `amarre`; este pasaje no se usa para probar el amarre en cachiyuyo. |
+| Mujeres remando | 33 | Referencia complementaria de la carta `amarre`, limitada al relato del remo. No respalda la técnica de amarre. |
 | Personas mayores enseñando a construir canoas | 39 | Base documental para revisar la transmisión de conocimientos. No fija la ubicación de personas dentro de la canoa. |
 | Decisiones compartidas | 46 | Referencia para revisar generalizaciones sobre tareas y organización. |
 | Recuperación de reservas de grasa para el invierno | 53–54 | Propuesta de carta de reservas preparada en la revisión del paso 3, todavía fuera del catálogo. |
@@ -64,10 +64,11 @@ El equipo registra la consulta de la edición digital de archive.org, identifica
 | Alimentos, recolección y métodos de pesca | 84 | Cartas y elementos de mejillones, pescado y hongos; referencias de fauna con límites de identificación. |
 | Viviendas de domo y cónicas, accesos y fuego | 85–86 | Carta y elemento de choza; revisión del arte. |
 | Vestimenta | 86 | Referencia del arte de las figuras. |
-| Canoa, corteza, costuras y amarre | 88–89 | Cartas de fuego, amarre y corteza; arte y datos del territorio. |
+| Canoa, corteza y costuras | 88–89 | Cartas de fuego y corteza; arte y datos del territorio. |
+| Amarre en bancos de grandes algas marinas, fuera de la orilla | 88, paginación impresa | Carta `amarre` y sus materiales derivados. Referencia de Cooper, John M., indicada en la corrección editorial del 18/11; sin nuevo cotejo directo del pasaje. La p. 96 queda fuera del respaldo específico del amarre hasta cotejarla. |
 | Encendido con pedernal y pirita, y yesca | 91 | Carta y elemento de pirita, y referencia del fuego. |
 | Motivos de desplazamiento: corteza, piedras de fuego y ballena varada | 94–95 | Datos de los destinos y documentación del enfoque de viaje. |
-| Distribución de tareas descrita por el autor | 96 | Cartas de amarre y pescado; atribución contextual de las tareas. |
+| Distribución de tareas descrita por el autor | 96 | Contexto de tareas y carta de pescado; se conserva la referencia para esos contenidos, no como respaldo del amarre. |
 | Reuniones de familias por varamientos | 99 | Carta y destino de ballena. |
 
 La referencia al orden de alimentos de **Lothrop (1928), p. 32**, llega mediante **Cooper (1946), p. 84**. Se mantiene esa cadena de cita en la carta de mejillones; no se declara consultado directamente el libro de Lothrop.

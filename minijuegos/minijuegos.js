@@ -98,8 +98,8 @@
       titulo: 'Amarrar en el cachiyuyo',
       pide: 'Cuando la canoa pase sobre el cachiyuyo, amarrala.',
       boton: 'Amarrar', zonaNombre: 'cachiyuyo',
-      dato: 'Para detenerse, la canoa se asegura entre el cachiyuyo, lejos de la orilla.',
-      fuente: 'Cooper (1946), pp. 88 y 96.',
+      dato: 'Para detenerse, la canoa se amarra en bancos de grandes algas marinas, fuera de la orilla.',
+      fuente: 'Cooper (1946), p. 88 (paginación impresa).',
     },
   };
   const RECURSO = 'El minijuego es recurso de juego: el tiempo, la marea que sube y la marca que va y viene no salen de las fuentes.';
