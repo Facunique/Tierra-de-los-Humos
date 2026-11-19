@@ -497,7 +497,11 @@
         : 'El fuego se apagó ' + (APAGADO[e.causa] || '') + ', después de ' + e.pasos + ' casillas. Pero lo aprendido no se pierde.';
     // Al llegar, el dato del destino con su fuente en corto (la completa está en la carta y en el códice).
     $('fin-dato').hidden = !(ev.gano && d);
-    if (ev.gano && d) $('fin-dato').textContent = d.dato + ' · ' + fuenteCorta(d.fuente);
+    if (ev.gano && d) {
+      const fd = $('fin-dato'); fd.textContent = d.dato;
+      fd.appendChild(document.createElement('br'));
+      fd.appendChild(document.createTextNode('Fuente: ' + fuenteCorta(d.fuente)));
+    }
     $('fin-lista-titulo').textContent = e.aprendidos.length ? 'Pasan a la generación ' + linaje.generacion + ':' : 'Esta vez no aprendieron nada nuevo.';
     pintarMarcas(e);
     const lista = $('fin-lista'); lista.textContent = '';
