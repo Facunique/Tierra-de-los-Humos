@@ -61,6 +61,14 @@ html:has(.tdh-juego) { height: 100%; }
 /* ── Elegir pueblo ── */
 .mapa-pueblos { margin: 0; padding: 10px; width: min(100%, 620px); flex: none; }
 .mapa-pueblos canvas { width: 100%; height: auto; display: block; border-radius: 10px; }
+.mapa-pueblos__lienzo { position: relative; }
+/* Botón transparente sobre el rótulo «Yagán» del mapa: hace lo mismo que la tarjeta (18/11). */
+.mapa-pueblos__yagan { position: absolute; transform: translate(-50%, -50%); width: 14%; height: 7%; min-width: 48px; min-height: 32px; padding: 0; border: 0; border-radius: 10px; background: transparent; cursor: pointer; }
+.mapa-pueblos__yagan:focus-visible { outline: 3px solid var(--tdh-luz); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .mapa-pueblos__yagan { transition: box-shadow 0.15s ease-out; }
+  .mapa-pueblos__yagan:hover { box-shadow: 0 0 0 4px #ffd47c; }   /* Y de la paleta, como la tarjeta */
+}
 .mapa-pueblos figcaption { font-size: 13px; color: #5b524a; margin-top: 6px; text-align: left; }
 .pueblos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; width: min(100%, 900px); flex: none; }
 .pueblo { text-align: left; padding: 18px; border: 0; display: flex; flex-direction: column; gap: 8px; color: var(--tdh-tinta); }
