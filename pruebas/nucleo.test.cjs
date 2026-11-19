@@ -90,7 +90,8 @@ test('juntar leña y avivar el fuego', () => {
   assert.ok(!p.estado.objetos.some((o) => o.id === 'lena' && o.x === 6 && o.y === 4), 'la leña ya no está en el mapa');
   const e = p.estado.energia;
   assert.deepEqual(tipos(p.hacer({ tipo: 'avivar' })).slice(0, 1), ['avivo']);
-  assert.equal(p.estado.energia, Math.min(16, e + 6));
+  const R = require('../juego/nucleo/reglas.js');
+  assert.equal(p.estado.energia, Math.min(R.ENERGIA_MAX, e + R.AVIVAR));
 });
 
 test('con el atado lleno, la leña queda en el mapa', () => {
@@ -113,8 +114,9 @@ test('cerca de la choza el fuego se gasta menos', () => {
 });
 
 test('no se puede avivar sin leña ni con el fuego lleno', () => {
-  const p = fija({ heredados: ['a', 'b', 'c', 'd'] }); // 12 + 4 = 16, fuego lleno
-  assert.equal(p.estado.energia, 16);
+  const R = require('../juego/nucleo/reglas.js');
+  const p = fija();
+  p.estado.energia = R.ENERGIA_MAX; // fuego lleno
   assert.deepEqual(p.hacer({ tipo: 'avivar' }), []);
   p.estado.recursos.lena = 0; p.estado.energia = 4;
   assert.deepEqual(p.hacer({ tipo: 'avivar' }), []);
@@ -281,12 +283,104 @@ test('llegar a la ballena con el fuego encendido gana y da la carta de la ballen
   assert.deepEqual(p.puede(), { juntar: null, avivar: false, amarrar: false });
 });
 
-test('lo heredado no vuelve a salir como carta y abriga el fuego inicial', () => {
-  const p = fija({ heredados: ['fuego', 'amarre'] });
+test('lo heredado no vuelve a salir como carta, y cada saber deja algo propio', () => {
   const R = require('../juego/nucleo/reglas.js');
-  assert.equal(p.estado.energia, Math.min(R.ENERGIA_MAX, R.ENERGIA_INICIAL + 2 * R.ENERGIA_POR_HEREDADO));
+  const p = fija({ heredados: ['fuego', 'amarre'] });
+  assert.equal(p.estado.energia, Math.min(R.ENERGIA_MAX, R.ENERGIA_INICIAL + R.HERENCIA.fuego.energia), 'el saber del fuego abriga al salir');
+  assert.deepEqual(p.estado.herencia, ['fuego', 'amarre']);
   const ev = p.hacer({ tipo: 'remar', dx: 1, dy: 0 });
   assert.ok(!ev.some((e) => e.tipo === 'saber'), 'la carta del fuego ya la sabían');
+  // Un saber que no está en HERENCIA no hace nada (y no rompe).
+  assert.equal(fija({ heredados: ['otro'] }).estado.energia, R.ENERGIA_INICIAL);
+});
+
+test('lo heredado se ve a través del humo: amarres, mejillones y el destino', () => {
+  const sin = fija(), con = fija({ heredados: ['amarre', 'mejillones', 'ballena'] });
+  const e = con.estado;
+  const amarres = [];
+  for (let y = 0; y < e.mapa.length; y++) for (let x = 0; x < e.mapa[0].length; x++) if (e.mapa[y][x] === 'k' && [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => (e.mapa[y + dy] || '')[x + dx] === '.')) amarres.push([x, y]);
+  assert.ok(amarres.length && amarres.every(([x, y]) => e.explorado(x, y)), 'todos los amarres a la vista');
+  assert.ok(amarres.some(([x, y]) => !sin.estado.explorado(x, y)), 'sin el saber, alguno está en el humo');
+  for (const o of e.objetos.filter((o) => o.junta === 'mejillones')) assert.ok(e.explorado(o.x, o.y));
+  assert.ok(e.explorado(e.destino.x, e.destino.y) && !sin.estado.explorado(sin.estado.destino.x, sin.estado.destino.y));
+});
+
+test('los hongos heredados dan comida al salir; la pirita heredada reenciende más alto', () => {
+  const R = require('../juego/nucleo/reglas.js');
+  assert.equal(fija({ heredados: ['hongos'] }).estado.recursos.comida, (R.RECURSOS_INICIALES.comida || 0) + R.HERENCIA.hongos.comida);
+  const p = fija({ heredados: ['pirita'] });
+  p.estado.recursos.pirita = 1; p.estado.energia = 1;
+  p.hacer({ tipo: 'remar', dx: 1, dy: 0 });
+  assert.equal(p.estado.energia, R.HERENCIA.pirita.pirita);
+});
+
+test('con la corteza heredada, el viento del canal hondo no gasta de más; nada gasta más que el tope', () => {
+  const R = require('../juego/nucleo/reglas.js');
+  for (const [her, esperado] of [[[], 'viento'], [['corteza'], null]]) {
+    const p = TDH_PARTIDA.nueva({ semilla: 7, saberes: ORDEN, heredados: her, reglas: { CLIMA_PROB_CAMBIO: 0 } });
+    p.estado.clima = 'viento'; p.estado.hora = 'noche';
+    const e = p.estado, c = e.canoa;
+    const ruta = MAPA.camino(e.mapa, c, (x, y) => e.mapa[y][x] === '~');
+    if (!ruta) continue;
+    for (const paso of ruta.slice(0, -1)) p.hacer({ tipo: 'remar', dx: paso.x - e.canoa.x, dy: paso.y - e.canoa.y });
+    e.energia = 20; e.hora = 'noche'; e.clima = 'viento'; e.pronostico = null;
+    const ult = ruta[ruta.length - 1];
+    const ev = p.hacer({ tipo: 'remar', dx: ult.x - e.canoa.x, dy: ult.y - e.canoa.y });
+    const f = ev.find((x) => x.tipo === 'fuego');
+    assert.ok(20 - e.energia <= R.GASTO_TOPE, 'una remada no gasta más que el tope');
+    if (esperado) assert.ok(!f || f.causas.includes('viento') || 20 - e.energia === R.GASTO_TOPE);
+    else assert.ok(!f || !f.causas.includes('viento'), 'con la corteza, el viento no pesa');
+  }
+});
+
+test('brasas: con el fuego en 0 quedan unas remadas; avivar lo vuelve a prender', () => {
+  const R = require('../juego/nucleo/reglas.js');
+  const p = fija({ reglas: { CLIMA_PROB_CAMBIO: 0 } });
+  p.estado.energia = 1;
+  let ev = p.hacer({ tipo: 'remar', dx: 1, dy: 0 });
+  assert.equal(p.terminada, false, 'no termina de golpe');
+  assert.deepEqual(ev.find((e) => e.tipo === 'brasas'), { tipo: 'brasas', quedan: R.BRASAS_PASOS });
+  assert.equal(p.estado.brasas, R.BRASAS_PASOS);
+  ev = p.hacer({ tipo: 'avivar' });
+  assert.equal(p.estado.brasas, null, 'de las brasas vuelve a prender');
+  assert.ok(p.estado.canoa.fuego > 0);
+  // Sin leña, las brasas se acaban y termina el viaje.
+  const q = fija({ reglas: { CLIMA_PROB_CAMBIO: 0 } });
+  q.estado.energia = 1; q.estado.recursos.lena = 0;
+  const dirs = [[1, 0], [1, 0], [1, 0], [1, 0], [1, 0], [1, 0]];
+  let pasos = 0;
+  for (const [dx, dy] of dirs) { if (q.terminada) break; q.hacer({ tipo: 'remar', dx, dy }); pasos++; }
+  assert.equal(q.terminada, true);
+  assert.equal(pasos, R.BRASAS_PASOS + 1, 'la remada que apaga, y después las de las brasas');
+  // Con BRASAS_PASOS: 0, se apaga de golpe, como antes.
+  const r = fija({ reglas: { BRASAS_PASOS: 0 } });
+  r.estado.energia = 1;
+  r.hacer({ tipo: 'remar', dx: 1, dy: 0 });
+  assert.equal(r.terminada, true);
+});
+
+test('minijuego perfecto (bien: true): un poco más de lo mismo', () => {
+  const R = require('../juego/nucleo/reglas.js');
+  const p = fija();
+  for (const [dx, dy] of [[1, 0], [1, 0], [1, 0], [1, 0], [0, -1]]) p.hacer({ tipo: 'remar', dx, dy });
+  const lena = p.estado.recursos.lena;
+  const ev = p.hacer({ tipo: 'juntar', bien: true });
+  assert.equal(ev[0].extra, R.BIEN_JUNTAR);
+  assert.equal(p.estado.recursos.lena, Math.min(R.RECURSOS_MAX.lena, lena + 2 + R.BIEN_JUNTAR));
+  p.estado.energia = 2;
+  p.hacer({ tipo: 'avivar', bien: true });
+  assert.equal(p.estado.energia, 2 + R.AVIVAR + R.BIEN_AVIVAR);
+});
+
+test('las tres marcas del viaje', () => {
+  const R = require('../juego/nucleo/reglas.js');
+  const p = fija({ reglas: { GASTO_REMAR: 0, GASTO_NOCHE: 0, GASTO_LLUVIA: 0, GASTO_VIENTO_HONDO: 0 } });
+  assert.ok(p.estado.limite > 0);
+  assert.deepEqual(p.marcas().map((m) => m.logrado), [false, false, false]);
+  p.estado.recursos.comida = R.MARCA_COMIDA;
+  const d = p.estado.destino;
+  for (const paso of MAPA.camino(p.estado.mapa, p.estado.canoa, (x, y) => Math.max(Math.abs(x - d.x), Math.abs(y - d.y)) <= 1)) p.hacer({ tipo: 'remar', dx: paso.x - p.estado.canoa.x, dy: paso.y - p.estado.canoa.y });
+  assert.deepEqual(p.marcas(), [{ id: 'llegaron', logrado: true }, { id: 'comida', logrado: true }, { id: 'tiempo', logrado: true }]);
 });
 
 test('la ruta guarda el recorrido para la postal', () => {

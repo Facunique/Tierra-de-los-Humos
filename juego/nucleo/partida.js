@@ -15,8 +15,8 @@
  *   const partida = TDH_PARTIDA.nueva({ semilla, saberes, heredados, estacion, hora, pueblo, destino, mapa });
  *     semilla:   número. Misma semilla, misma partida (mapa, clima, todo).
  *     saberes:   ids de las cartas que se pueden encontrar (el catálogo del pueblo, p. ej. ORDEN).
- *     heredados  (+) ids que el linaje ya sabe. No vuelven a salir como carta y dan
- *                +1 de energía inicial cada uno (como en la versión de mesa).
+ *     heredados  (+) ids que el linaje ya sabe. No vuelven a salir como carta y cada uno
+ *                deja algo propio (REGLAS.HERENCIA, 19/11): más fuego, comida, ver a través del humo…
  *     estacion   (+) 'verano' | 'otono' | 'invierno' | 'primavera'. Sin ella, sale de la semilla.
  *     hora       (+) 'dia' | 'tarde' | 'noche' (para la luz real de Ushuaia). Sin ella, 'dia'.
  *     pueblo     (+) id de territorio/pueblos.js. Sin él, 'yagan'.
@@ -27,7 +27,9 @@
  *
  *   partida.estado   la forma que espera motor.escena de Corteza:
  *     { mapa, objetos, canoa: { x, y, fuego, mira, remando }, explorado, clima, estacion, hora, humos }
- *     (+) recursos: { lena, comida, pirita } (números), energia (0 a 16), pasos,
+ *     (+) recursos: { lena, comida, pirita } (números), energia (0 a ENERGIA_MAX), pasos,
+ *         brasas: null | pasos que les quedan con el fuego en 0 (19/11), herencia: [ids heredados con efecto],
+ *         limite: remadas para la marca «a tiempo»,
  *         ruta: [[x, y], ...] (para la postal), aprendidos: [ids de este viaje],
  *         inicio, destino: { x, y, id, nombre }, gano, causa, pueblo,
  *         pronostico: null | { clima, faltan } (el cambio de tiempo que ya se anunció)
@@ -39,6 +41,8 @@
  *     { tipo: 'amarrar' }    (+)  en el cachiyuyo, al lado de una playa: pasan la noche.
  *     { tipo: 'demora' }     (+)  un minijuego no salió: pasa el tiempo y el fuego gasta como al remar,
  *                                 pero la canoa no se mueve. Evento: { tipo: 'demora' }. (18/11, B)
+ *     (+) juntar, avivar y amarrar aceptan `bien: true` si el minijuego salió perfecto: suman un poco
+ *         más (REGLAS.BIEN_*), y el evento lleva `extra`. (19/11)
  *
  *   Eventos:
  *     (+) { tipo: 'remo', x, y }      la canoa avanzó. Siempre es el primero al remar: así una
@@ -60,11 +64,14 @@
  *     (+) { tipo: 'clima', antes, clima }        cambió el tiempo: 'calma' | 'viento' | 'lluvia'
  *     (+) { tipo: 'hora', antes, hora }          cayó la tarde, la noche o amaneció
  *     (+) { tipo: 'reencendido', con: 'pirita' } el fuego se apagó y volvió a prender
+ *     (+) { tipo: 'brasas', quedan }             el fuego está en 0: quedan brasas por `quedan` pasos;
+ *                          avivar (o comer al acampar) lo vuelve a prender. (19/11)
  *     (+) { tipo: 'acampe', comio }              pasaron la noche amarrados. Cuidar el fuego toda la
  *                          noche gasta GASTO_ACAMPAR; comer suma COMER_AL_ACAMPAR.
  *
  *   partida.puede()   (+) { juntar: id del elemento | null, avivar: bool, amarrar: bool }, para los botones.
  *   partida.camino(x, y)  (+) casillas por el agua hasta (x, y), o null. Para remar tocando lejos.
+ *   partida.marcas()      (+) las tres marcas del viaje: [{ id: 'llegaron' | 'fuego' | 'tiempo', logrado }].
  *   partida.terminada     true cuando terminó el viaje.
  *
  *   TDH_PARTIDA.elegirDestino({ semilla, estacion, pueblo })  (+) el id del motivo del viaje que
@@ -140,7 +147,14 @@
     let pasosDelDia = op.hora === 'noche' ? DIA.noche : op.hora === 'tarde' ? DIA.tarde : 0;
     let pasosDelClima = 0;
     const fuegoDe = (e) => Math.ceil(e / R.ENERGIA_POR_FUEGO);
-    const energia = Math.min(R.ENERGIA_MAX, R.ENERGIA_INICIAL + heredados.size * R.ENERGIA_POR_HEREDADO);
+    // Lo que deja cada saber heredado (R.HERENCIA): solo los que el linaje sabe y tienen efecto.
+    const herencia = [...heredados].filter((id) => R.HERENCIA && R.HERENCIA[id]);
+    const deja = (campo) => herencia.map((id) => R.HERENCIA[id][campo]).filter((v) => v != null);
+    const suma = (campo) => deja(campo).reduce((a, b) => a + b, 0);
+    const energia = Math.min(R.ENERGIA_MAX, R.ENERGIA_INICIAL + heredados.size * R.ENERGIA_POR_HEREDADO + suma('energia'));
+    const reenciende = Math.max(R.PIRITA_REENCIENDE, ...deja('pirita'));
+    const ahorroChoza = deja('cerca').length ? Math.max(...deja('cerca')) : null;
+    const sinVientoHondo = deja('viento').length > 0;
 
     const estado = {
       mapa: m.mapa,
@@ -151,8 +165,11 @@
       estacion,
       hora: horaDe(pasosDelDia),
       humos: m.humos,
-      recursos: Object.assign({}, R.RECURSOS_INICIALES),
+      recursos: Object.assign({}, R.RECURSOS_INICIALES, { comida: (R.RECURSOS_INICIALES.comida || 0) + suma('comida') }),
       energia,
+      brasas: null,
+      herencia,
+      limite: null,
       pasos: 0,
       ruta: [[m.inicio.x, m.inicio.y]],
       aprendidos: [],
@@ -175,10 +192,29 @@
     }
     revelar(estado.canoa.x, estado.canoa.y);
 
+    // Lo heredado que se ve a través del humo: la casilla y las de al lado.
+    const verCasilla = (x, y) => { for (const [dx, dy] of [[0, 0], ...V4]) visto.add((x + dx) + ',' + (y + dy)); };
+    const ver = new Set(deja('ver'));
+    if (ver.has('amarre')) {
+      for (let y = 0; y < estado.mapa.length; y++) for (let x = 0; x < estado.mapa[0].length; x++) {
+        if (estado.mapa[y][x] === 'k' && V4.some(([dx, dy]) => MAPA.letra(estado.mapa, x + dx, y + dy) === '.')) verCasilla(x, y);
+      }
+    }
+    for (const o of estado.objetos) if (o.junta && ver.has(o.junta)) verCasilla(o.x, o.y);
+    if (deja('destino').length) { const d = estado.destino; for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) verCasilla(d.x + dx, d.y + dy); }
+
+    // Marca «a tiempo»: llegar en no más de 1,6 veces el camino más corto (TDH_PARTIDA.marcas).
+    {
+      const d = estado.destino;
+      const corto = MAPA.camino(estado.mapa, estado.canoa, (x, y) => Math.max(Math.abs(d.x - x), Math.abs(d.y - y)) <= 1);
+      estado.limite = corto ? Math.ceil(corto.length * R.MARCA_TIEMPO) : null;
+    }
+
     function cambiarEnergia(delta, motivo, eventos, causas) {
       const c = estado.canoa, antes = c.fuego;
       estado.energia = Math.max(0, Math.min(R.ENERGIA_MAX, estado.energia + delta));
       c.fuego = fuegoDe(estado.energia);
+      if (estado.energia > 0) estado.brasas = null;   // de las brasas vuelve a prender
       if (c.fuego !== antes) {
         const ev = { tipo: 'fuego', antes, despues: c.fuego, motivo };
         if (causas) ev.causas = causas;
@@ -215,9 +251,21 @@
       for (const o of estado.objetos) {
         const el = ELEMENTO(o);
         if (!el || !el.cerca || o.id !== el.dibujo) continue;
-        if (Math.max(Math.abs(o.x - c.x), Math.abs(o.y - c.y)) <= el.cerca.distancia) ahorro = Math.max(ahorro, el.cerca.ahorro);
+        const cuanto = el.id === 'choza' && ahorroChoza != null ? Math.max(el.cerca.ahorro, ahorroChoza) : el.cerca.ahorro;
+        if (Math.max(Math.abs(o.x - c.x), Math.abs(o.y - c.y)) <= el.cerca.distancia) ahorro = Math.max(ahorro, cuanto);
       }
       return ahorro;
+    }
+    /** Lo que gasta un paso (remar o demora): base, más lo que pese, con tope, menos lo que ahorre la choza. */
+    function gastoDe(causas, hondo) {
+      let gasto = R.GASTO_REMAR;
+      if (hondo && estado.clima === 'viento' && !sinVientoHondo) { gasto += R.GASTO_VIENTO_HONDO; causas.push('viento'); }
+      if (estado.clima === 'lluvia') { gasto += R.GASTO_LLUVIA; causas.push('lluvia'); }
+      if (estado.hora === 'noche') { gasto += R.GASTO_NOCHE; causas.push('noche'); }
+      if (R.GASTO_TOPE != null) gasto = Math.min(gasto, R.GASTO_TOPE);
+      const ahorro = ahorroCerca();
+      if (ahorro) { gasto = Math.max(0, gasto - ahorro); causas.push('cerca'); }
+      return gasto;
     }
     function pasarElTiempo(eventos) {
       const antes = estado.hora;
@@ -247,13 +295,26 @@
       pasosDelClima = 0;
       eventos.push({ tipo: 'clima', antes: previo, clima });
     }
-    /** El fuego llegó a 0: la pirita lo vuelve a prender, o termina el viaje. Devuelve true si terminó. */
+    /**
+     * El fuego está en 0: la pirita lo vuelve a prender; si no hay, quedan brasas por
+     * BRASAS_PASOS pasos (cada paso en brasas consume una). Sin brasas, termina el viaje.
+     * Devuelve true si terminó.
+     */
     function sinFuego(causa, eventos) {
       if (estado.energia > 0) return false;
       if (estado.recursos.pirita > 0) {
         estado.recursos.pirita--;
         eventos.push({ tipo: 'reencendido', con: 'pirita' });
-        cambiarEnergia(R.PIRITA_REENCIENDE, 'pirita', eventos);
+        cambiarEnergia(reenciende, 'pirita', eventos);
+        return false;
+      }
+      if (estado.brasas == null && R.BRASAS_PASOS > 0) {
+        estado.brasas = R.BRASAS_PASOS;
+        eventos.push({ tipo: 'brasas', quedan: estado.brasas });
+        return false;
+      }
+      if (estado.brasas != null && --estado.brasas > 0) {
+        eventos.push({ tipo: 'brasas', quedan: estado.brasas });
         return false;
       }
       terminar(false, causa, eventos);
@@ -276,12 +337,7 @@
 
       // El fuego se gasta: más con viento en el canal hondo, con lluvia y de noche; menos cerca de una choza.
       const causas = [];
-      let gasto = R.GASTO_REMAR;
-      if (estado.clima === 'viento' && letra(nx, ny) === '~') { gasto += R.GASTO_VIENTO_HONDO; causas.push('viento'); }
-      if (estado.clima === 'lluvia') { gasto += R.GASTO_LLUVIA; causas.push('lluvia'); }
-      if (estado.hora === 'noche') { gasto += R.GASTO_NOCHE; causas.push('noche'); }
-      const ahorro = ahorroCerca();
-      if (ahorro) { gasto = Math.max(0, gasto - ahorro); causas.push('cerca'); }
+      const gasto = gastoDe(causas, letra(nx, ny) === '~');
       cambiarEnergia(-gasto, 'remar', eventos, causas);
       pasarElTiempo(eventos);
 
@@ -295,28 +351,32 @@
       return eventos;
     }
 
-    function juntar() {
+    /** `bien`: el minijuego salió perfecto; suma BIEN_JUNTAR de lo mismo (hasta el máximo). */
+    function juntar(bien) {
       const o = juntable();
       if (!o) return [];
       const el = ELEMENTO(o), eventos = [];
       if (el.queda) delete o.junta;                    // el dibujo queda en el mapa (un árbol): solo se junta una vez
       else estado.objetos.splice(estado.objetos.indexOf(o), 1);
-      eventos.push({ tipo: 'junto', que: el.id, nombre: el.nombre });
+      const ev = { tipo: 'junto', que: el.id, nombre: el.nombre };
+      eventos.push(ev);
       const ef = el.efecto;
       if (ef && ef.tipo === 'sumar') {
         const max = R.RECURSOS_MAX[ef.recurso];
-        estado.recursos[ef.recurso] = Math.min(max == null ? Infinity : max, (estado.recursos[ef.recurso] || 0) + ef.cantidad);
+        const extra = bien && ef.recurso !== 'pirita' ? R.BIEN_JUNTAR : 0;
+        if (extra) ev.extra = extra;
+        estado.recursos[ef.recurso] = Math.min(max == null ? Infinity : max, (estado.recursos[ef.recurso] || 0) + ef.cantidad + extra);
       }
       saber(el.carta, eventos);
       return eventos;
     }
 
-    function avivar() {
+    function avivar(bien) {
       const r = estado.recursos;
       if (r.lena <= 0 || estado.energia >= R.ENERGIA_MAX) return [];
-      const eventos = [{ tipo: 'avivo' }];
+      const eventos = [bien ? { tipo: 'avivo', extra: R.BIEN_AVIVAR } : { tipo: 'avivo' }];
       r.lena--;
-      cambiarEnergia(R.AVIVAR, 'lena', eventos);
+      cambiarEnergia(R.AVIVAR + (bien ? R.BIEN_AVIVAR : 0), 'lena', eventos);
       return eventos;
     }
 
@@ -324,26 +384,23 @@
     function demora() {
       const eventos = [{ tipo: 'demora' }];
       const causas = [];
-      let gasto = R.GASTO_REMAR;
-      if (estado.clima === 'lluvia') { gasto += R.GASTO_LLUVIA; causas.push('lluvia'); }
-      if (estado.hora === 'noche') { gasto += R.GASTO_NOCHE; causas.push('noche'); }
-      const ahorro = ahorroCerca();
-      if (ahorro) { gasto = Math.max(0, gasto - ahorro); causas.push('cerca'); }
-      cambiarEnergia(-gasto, 'demora', eventos, causas);
+      cambiarEnergia(-gastoDe(causas, false), 'demora', eventos, causas);
       pasarElTiempo(eventos);
       sinFuego(['noche', 'lluvia'].find((k) => causas.includes(k)) || 'remar', eventos);
       return eventos;
     }
 
-    function amarrar() {
+    function amarrar(bien) {
       if (!puedeAmarrar()) return [];
       const r = estado.recursos, comio = r.comida > 0;
-      const eventos = [{ tipo: 'acampe', comio }];
+      const eventos = [bien ? { tipo: 'acampe', comio, extra: R.BIEN_AMARRAR } : { tipo: 'acampe', comio }];
       saber('amarre', eventos);
       // Acampar no es gratis: cuidar el fuego toda la noche gasta. Comer lo compensa.
       if (comio) r.comida--;
-      const delta = (comio ? R.COMER_AL_ACAMPAR : 0) - R.GASTO_ACAMPAR;
+      const delta = (comio ? R.COMER_AL_ACAMPAR : 0) - Math.max(0, R.GASTO_ACAMPAR - (bien ? R.BIEN_AMARRAR : 0));
       if (delta) cambiarEnergia(delta, delta > 0 ? 'comida' : 'acampar', eventos);
+      // En brasas y sin comida, la noche entera las apaga (sin pirita).
+      if (estado.energia <= 0 && estado.brasas != null && estado.recursos.pirita <= 0) { terminar(false, 'noche', eventos); return eventos; }
       if (sinFuego('noche', eventos)) return eventos;
       if (estado.hora !== 'dia') { eventos.push({ tipo: 'hora', antes: estado.hora, hora: 'dia' }); estado.hora = 'dia'; }
       pasosDelDia = 0;
@@ -361,9 +418,9 @@
         if (terminada || !accion) return [];
         switch (accion.tipo) {
           case 'remar': return remar(Math.sign(accion.dx || 0), Math.sign(accion.dy || 0));
-          case 'juntar': return juntar();
-          case 'avivar': return avivar();
-          case 'amarrar': return amarrar();
+          case 'juntar': return juntar(!!accion.bien);
+          case 'avivar': return avivar(!!accion.bien);
+          case 'amarrar': return amarrar(!!accion.bien);
           case 'demora': return demora();
           default: return [];
         }
@@ -372,6 +429,19 @@
         if (terminada) return { juntar: null, avivar: false, amarrar: false };
         const o = juntable();
         return { juntar: o ? o.junta : null, avivar: estado.recursos.lena > 0 && estado.energia < R.ENERGIA_MAX, amarrar: puedeAmarrar() };
+      },
+      /**
+       * Las tres marcas del viaje (19/11), para el final: [{ id, logrado }].
+       *   llegaron: llegar al destino · fuego: llegar con el fuego en 3 o más ·
+       *   tiempo: llegar en `estado.limite` remadas o menos (1,6 veces el camino más corto).
+       */
+      marcas() {
+        const g = estado.gano === true;
+        return [
+          { id: 'llegaron', logrado: g },
+          { id: 'comida', logrado: g && estado.recursos.comida >= R.MARCA_COMIDA },
+          { id: 'tiempo', logrado: g && estado.limite != null && estado.pasos <= estado.limite },
+        ];
       },
       /** @returns {Casilla[] | null} */
       camino(x, y) {

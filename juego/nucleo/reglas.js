@@ -17,27 +17,61 @@
 
   const REGLAS = {
     // ── El fuego ──────────────────────────────────────────────────────────
-    ENERGIA_MAX: 16,
-    ENERGIA_POR_FUEGO: 4,         // 16 de energía = fuego 4 de 4
-    ENERGIA_INICIAL: 14,          // la brasa empieza en 14 (en la mesa, 12): con 12 se apagaba a las pocas remadas (18/11)…
-    ENERGIA_POR_HEREDADO: 1,      // …más 1 por cada saber heredado, hasta ENERGIA_MAX
+    // 19/11: todo el fuego ×1,5 (antes: 16, 4, 14, 6). Había que avivarlo cada pocas remadas y cansaba.
+    ENERGIA_MAX: 24,
+    ENERGIA_POR_FUEGO: 6,         // 24 de energía = fuego 4 de 4
+    ENERGIA_INICIAL: 18,          // fuego 3 de 4 al salir; heredar el saber del fuego lo sube a 4
+    ENERGIA_POR_HEREDADO: 0,      // lo heredado ya no suma fuego parejo: cada saber deja algo propio (HERENCIA)
 
     // Gasto por cada casilla remada
     GASTO_REMAR: 1,
     GASTO_VIENTO_HONDO: 1,        // extra con viento en el canal hondo (~)
     GASTO_LLUVIA: 1,              // extra con lluvia
     GASTO_NOCHE: 1,               // extra de noche: el frío
+    GASTO_TOPE: 2,                // una remada nunca gasta más que esto, aunque se sumen noche, lluvia y viento (19/11)
     // Lo que ahorra estar cerca de una choza está en su elemento (territorio/elementos.js, `cerca`).
+
+    // ── Brasas (19/11) ────────────────────────────────────────────────────
+    // Cuando el fuego llega a 0 y no hay pirita, quedan brasas: unas remadas para avivarlo con leña
+    // (o acampar con comida). Si se acaban, termina el viaje. Perder ya no es de golpe.
+    BRASAS_PASOS: 3,
 
     // ── Recursos ──────────────────────────────────────────────────────────
     // Cuánto suma cada cosa que se junta está en su elemento (territorio/elementos.js, `efecto`).
     RECURSOS_INICIALES: { lena: 2, comida: 0, pirita: 0 },   // 2 leñas (antes 1): da tiempo de llegar a juntar (18/11)
     RECURSOS_MAX: { lena: 5, comida: 5, pirita: 1 },   // con el máximo, lo que se junta queda en el mapa
-    AVIVAR: 6,                    // energía que suma una leña (en la mesa, 5; el mapa es el doble de ancho que el tablero)
-    COMER_AL_ACAMPAR: 3,          // energía que suma comer al pasar la noche
-    GASTO_ACAMPAR: 2,             // energía que gasta cuidar el fuego toda la noche: acampar no es gratis
+    AVIVAR: 9,                    // energía que suma una leña: unas 9 remadas de día, 4 o 5 de noche
+    COMER_AL_ACAMPAR: 4,          // energía que suma comer al pasar la noche
+    GASTO_ACAMPAR: 3,             // energía que gasta cuidar el fuego toda la noche: acampar no es gratis
                                   // (con comida queda en +1; sin comida, cada noche lo baja)
-    PIRITA_REENCIENDE: 4,         // energía con la que vuelve el fuego (fuego 1)
+    PIRITA_REENCIENDE: 6,         // energía con la que vuelve el fuego (fuego 1)
+
+    // ── Minijuego perfecto (19/11) ────────────────────────────────────────
+    // Si el minijuego sale perfecto (sin errar y rápido), la interfaz manda la acción con `bien: true`.
+    BIEN_JUNTAR: 1,               // juntar: una unidad más de lo mismo (hasta el máximo)
+    BIEN_AVIVAR: 3,               // avivar: la leña rinde más
+    BIEN_AMARRAR: 2,              // amarrar: la noche gasta menos
+
+    // ── Las tres marcas del viaje (19/11) ─────────────────────────────────
+    MARCA_COMIDA: 3,              // «para compartir»: llegar con 3 de comida o más
+    MARCA_TIEMPO: 1.6,            // «a tiempo»: llegar en no más de 1,6 veces el camino más corto
+
+    // ── Lo que deja cada saber heredado (19/11) ───────────────────────────
+    // Recurso de juego, no dato: lo dice el texto «En el juego» de cada carta (datos/saberes.js).
+    //   energia: suma al salir · ver: lo que se ve a través del humo desde el principio
+    //   comida: comida al salir · pirita: energía con la que reenciende · cerca: ahorro junto a la choza
+    //   viento: el viento del canal hondo no gasta de más · destino: se ve el destino desde el principio
+    HERENCIA: {
+      fuego: { energia: 3 },
+      amarre: { ver: 'amarre' },
+      mejillones: { ver: 'mejillones' },
+      pescado: { ver: 'pescado' },
+      hongos: { comida: 1 },
+      pirita: { pirita: 12 },
+      choza: { cerca: 2 },
+      corteza: { viento: true },
+      ballena: { destino: true },
+    },
 
     // ── El día ────────────────────────────────────────────────────────────
     // Pasos remados desde que amanece hasta que cae la tarde, la noche y vuelve a amanecer.
