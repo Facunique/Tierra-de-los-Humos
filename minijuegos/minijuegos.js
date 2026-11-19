@@ -51,7 +51,7 @@
    */
   const JUEGOS = {
     lena: {
-      mecanica: 'arrastrar', tierra: true, escena: 'playa', objeto: 'lena', cantidad: 3, segundos: 12, banda: [0.3, 0.62], x: [0.07, 0.52],
+      mecanica: 'arrastrar', tierra: true, escena: 'playa', objeto: 'lena', cantidad: 3, segundos: 12, banda: [0.3, 0.62],
       titulo: 'Juntar leña', pide: 'Arrastrá tres ramas hasta la canoa.', premio: '¡Perfecto! +1 leña',
       fuente: 'Cooper (1946), pp. 88 y 91 (el fuego en la canoa). 🔍 Falta una cita yagán sobre la recolección de leña.',
     },
@@ -98,7 +98,9 @@
 
   /** Un azar con semilla (para que las pruebas den siempre lo mismo). */
   function azar(semilla) {
-    let s = (semilla >>> 0) || 1;
+    // La semilla se mezcla primero: con semillas seguidas (1, 2, 3…) el primer número salía casi igual.
+    let s = (semilla >>> 0) ^ 0x9e3779b9;
+    s = Math.imul(s ^ (s >>> 16), 0x85ebca6b); s = Math.imul(s ^ (s >>> 13), 0xc2b2ae35); s = ((s ^ (s >>> 16)) >>> 0) || 1;
     return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
   }
 
@@ -182,10 +184,12 @@
       // El fondo: la escena en Corteza, con la canoa esperando en el agua.
       let motor = null;
       const fila = ESCENAS[j.escena].length - 1;
+      // En tierra, la canoa espera a la izquierda o a la derecha (19/11): que no sea siempre igual.
+      const colCanoa = j.tierra ? (r() < 0.5 ? 1 : 7) : 4;
       try {
         motor = raiz.TDH_CORTEZA.crear(fondo, { celda: 48 });
         motor.escena({ mapa: ESCENAS[j.escena], objetos: [], estacion: op.estacion || 'verano', hora: 'dia', clima: 'calma', altoContraste: !!op.altoContraste, suave: false,
-          canoa: j.objeto === 'canoa' || j.mecanica === 'cargar' ? null : { x: j.tierra ? 7 : 4, y: j.tierra ? fila : fila - 1, fuego: op.fuego || 3, mira: -1 } });
+          canoa: j.objeto === 'canoa' || j.mecanica === 'cargar' ? null : { x: colCanoa, y: j.tierra ? fila : fila - 1, fuego: op.fuego || 3, mira: colCanoa > 4 ? -1 : 1 } });
       } catch (e) { motor = null; }
 
       let t0 = performance.now(), desdeReloj = 0, fin = false, cuadroId = 0, terminado = null, limpio = true, jugando = false, autoJuega = false, ultimo = 0;
@@ -232,6 +236,8 @@
       // Lo que cada mecánica usa del marco.
       const c = {
         j, op, r, escena, botones, crear, sonar, mareaAlta, LINEA_MAREA, velocidad: vel, reducido: !!op.reducido,
+        /** Dónde está la canoa del fondo, en fracción del ancho (su centro). */
+        canoaX: (colCanoa + 0.5) / 10,
         get terminado() { return !!terminado; },
         imagen: (id) => imagen(id, op),
         lugares: (total) => lugares(j, r, total),
@@ -266,7 +272,7 @@
         },
         alCerrar: (f) => alCerrar.push(f),
         /** Cambia el fondo (por ejemplo, para que el cachiyuyo quede donde está la zona). */
-        fondo(mapa) { if (motor) try { motor.escena({ mapa }); } catch (e) { /* queda el de antes */ } },
+        fondo(cambios) { if (motor) try { motor.escena(Array.isArray(cambios) ? { mapa: cambios } : cambios); } catch (e) { /* queda el de antes */ } },
         ganar, perder,
       };
       let mec;

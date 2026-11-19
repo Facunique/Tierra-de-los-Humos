@@ -74,8 +74,14 @@ test('las cosas aparecen en su franja, sin pisarse, y siempre en el mismo lugar 
     for (const p of l) assert.ok(p.x >= x[0] && p.x <= x[1] && p.y >= j.banda[0] && p.y <= j.banda[1], id + ': algo quedó fuera de la franja');
     assert.deepEqual(MJ.lugares(j, MJ.azar(42), total), l);
   }
-  // Las ramas no aparecen ya sobre la canoa (a la derecha, abajo).
-  for (let s = 1; s < 30; s++) for (const p of MJ.lugares(MJ.JUEGOS.lena, MJ.azar(s))) assert.ok(p.x < 0.6);
+  // Con otra semilla, otro lugar (19/11: que no estén siempre en el mismo sitio).
+  for (const id of ['lena', 'mejillones', 'hongos', 'pirita']) {
+    const vistas = new Set();
+    for (let s = 1; s <= 20; s++) vistas.add(MJ.lugares(MJ.JUEGOS[id], MJ.azar(s)).map((p) => p.x.toFixed(2)).join());
+    assert.ok(vistas.size >= 18, id + ': casi siempre en el mismo lugar');
+    const xs = []; for (let s = 1; s <= 40; s++) xs.push(...MJ.lugares(MJ.JUEGOS[id], MJ.azar(s)).map((p) => p.x));
+    assert.ok(Math.min(...xs) < 0.25 && Math.max(...xs) > 0.75, id + ': no usa todo el ancho');
+  }
   const l = MJ.lugares(MJ.JUEGOS.mejillones, MJ.azar(5));
   assert.ok(l.some((p) => p.y <= MJ.LINEA_MAREA), 'con la marea alta tiene que quedar algún mejillón a la vista');
 });

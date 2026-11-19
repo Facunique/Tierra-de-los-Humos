@@ -36,12 +36,14 @@
   M.seguir = function (c) {
     const j = c.j, ancho = j.ancho / Math.sqrt(c.velocidad);
     const pista = c.crear('div', 'mj__pista mj__pista--alta', c.escena);
+    if (c.r() < 0.5) { pista.style.right = 'auto'; pista.style.left = '6%'; }   // a un lado o al otro (19/11)
     const lazo = c.crear('div', 'mj__zona', pista); c.crear('span', null, lazo, 'lazo');
     lazo.style.height = ancho * 100 + '%';
     const pez = c.crear('div', 'mj__marca', pista); const im = c.crear('img', null, pez); im.src = c.imagen(j.objeto); im.alt = '';
     // Posiciones de 0 (abajo) a 1 (arriba).
     // El pez arranca sobre el lazo y quieto un momento: da tiempo de entender qué pasa.
-    let y = 0, v = 0, py = ancho / 2, objetivo = ancho / 2, cambio = 1.2, apretado = false, lleno = 0.3, fuera = 0, empezo = false;
+    const y0 = c.r() * (1 - ancho);   // el lazo arranca a una altura distinta cada vez, con el pez adentro
+    let y = y0, v = 0, py = y0 + ancho / 2, objetivo = py, cambio = 1.2, apretado = false, lleno = 0.3, fuera = 0, empezo = false;
     const control = apretable(c, j.boton, () => { apretado = true; empezo = true; c.empezo(); }, () => { apretado = false; });
     c.progreso(lleno);
     const dentro = () => py >= y && py <= y + ancho;
@@ -72,11 +74,19 @@
 
   // ── Cargar: la leña justa ──────────────────────────────────────────────────
   M.cargar = function (c) {
-    const j = c.j, angosta = (j.franja[1] - j.franja[0]) / c.velocidad, medio = (j.franja[0] + j.franja[1]) / 2;
-    const franja = [medio - angosta / 2, medio + angosta / 2];
+    const j = c.j, angosta = (j.franja[1] - j.franja[0]) / c.velocidad;
     const llama = c.crear('canvas', 'mj__llama', c.escena); llama.width = 160; llama.height = 220; llama.setAttribute('aria-hidden', 'true');
     const medidor = c.crear('div', 'mj__medidor', c.escena);
-    const z = c.crear('div', 'mj__zona', medidor); z.style.bottom = franja[0] * 100 + '%'; z.style.height = (franja[1] - franja[0]) * 100 + '%';
+    if (c.r() < 0.5) { medidor.style.left = '22%'; llama.style.left = '44%'; }   // el fuego y el medidor, a un lado o al otro
+    const z = c.crear('div', 'mj__zona', medidor);
+    // La franja cambia de altura en cada intento (19/11): entre la mitad y casi arriba.
+    let medio = 0, franja = [0, 0];
+    function nuevaFranja() {
+      medio = 0.42 + angosta / 2 + c.r() * (0.92 - 0.42 - angosta);
+      franja = [medio - angosta / 2, medio + angosta / 2];
+      z.style.bottom = franja[0] * 100 + '%'; z.style.height = (franja[1] - franja[0]) * 100 + '%';
+    }
+    nuevaFranja();
     const nivelDiv = c.crear('div', 'mj__nivel', medidor);
     let nivel = 0, apretado = false, intentos = j.intentos, t = 0;
     const CZ = raiz.TDH_CORTEZA;
@@ -87,7 +97,7 @@
       intentos--;
       c.error((nivel < franja[0] ? 'Le faltó leña.' : '¡Lo ahogaste!') + (intentos ? ' ' + (intentos === 1 ? 'Queda 1 intento.' : 'Quedan ' + intentos + ' intentos.') : ''));
       nivel = 0;
-      if (!intentos) c.perder('No prendió esta vez.');
+      if (!intentos) c.perder('No prendió esta vez.'); else nuevaFranja();
     }
     const control = apretable(c, j.boton, () => { if (!c.terminado) { apretado = true; nivel = 0; c.empezo(); } }, soltar);
     c.decir(intentos + ' intentos.');

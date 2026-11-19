@@ -22,14 +22,14 @@
 
   // ── Arrastrar: la leña hasta la canoa ──────────────────────────────────────
   M.arrastrar = function (c) {
-    const j = c.j, zona = { x0: 0.6, x1: 0.95, y0: 0.72, y1: 1 };
+    const j = c.j, x0 = c.canoaX > 0.5 ? 0.6 : 0.05, zona = { x0, x1: x0 + 0.35, y0: 0.72, y1: 1 };   // alrededor de la canoa
     const centro = { x: (zona.x0 + zona.x1) / 2, y: (zona.y0 + zona.y1) / 2 };
     const destino = c.crear('div', 'mj__destino', c.escena);
     Object.assign(destino.style, { left: zona.x0 * 100 + '%', top: zona.y0 * 100 + '%', width: (zona.x1 - zona.x0) * 100 + '%', height: (zona.y1 - zona.y0) * 100 + '%' });
     c.crear('span', null, destino, 'canoa');
     let llevadas = 0, agarrada = null, auto = null;
     const poner = (b, x, y) => { b.style.left = x * 100 + '%'; b.style.top = y * 100 + '%'; };
-    const enLaCanoa = (q) => q.x >= zona.x0 - 0.04 && q.y >= zona.y0 - 0.1;
+    const enLaCanoa = (q) => q.x >= zona.x0 - 0.04 && q.x <= zona.x1 + 0.04 && q.y >= zona.y0 - 0.1;
     function llevar(b) {
       if (b.disabled || c.terminado) return;
       b.disabled = true; b.classList.remove('arrastrando'); poner(b, centro.x, centro.y); b.classList.add('juntado');
