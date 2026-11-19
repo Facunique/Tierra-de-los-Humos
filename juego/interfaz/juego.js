@@ -173,20 +173,27 @@
   // Empezar otro viaje con uno a medias: termina este, y lo aprendido igual pasa a la generación siguiente.
   // Se confirma en el mismo botón (primer toque avisa, el segundo confirma): confirm() puede estar
   // bloqueado en algunos navegadores y entonces el botón no hacía nada (18/11).
-  let confirmarOtro = null;
-  $('b-empezar').addEventListener('click', (e) => {
+  // Al confirmar, va directo al viaje nuevo con el paso del fuego (18/11): antes pasaba por «¿A quién
+  // acompañás?» con la misma familia una generación más adelante, y parecía que no había pasado nada.
+  let confirmarOtro = null, reiniciando = false;
+  $('b-empezar').addEventListener('click', async (e) => {
+    if (reiniciando) { e.stopImmediatePropagation(); return; }   // un toque más durante el paso del fuego no lleva a otra pantalla
     if (!viajeEnCurso()) return;
+    e.stopImmediatePropagation();
+    const b = $('b-empezar');
     if (!confirmarOtro) {
-      e.stopImmediatePropagation();
-      const b = $('b-empezar');
-      b.textContent = '¿Seguro? Tocá de nuevo';
+      b.textContent = '¿Terminar este viaje? Tocá de nuevo';
       anunciar('Si empezás otro viaje, este termina acá. Lo que aprendieron pasa a la generación siguiente. Tocá de nuevo para confirmar.');
       confirmarOtro = setTimeout(() => { confirmarOtro = null; pintarTitulo(); }, 4000);
       return;
     }
     clearTimeout(confirmarOtro); confirmarOtro = null;
+    const desde = generacion;
     herencia.cerrarViaje(PUEBLO, partida.estado.aprendidos, { gano: false });
     partida = null;
+    b.textContent = 'Preparando el viaje…';
+    reiniciando = true;
+    try { await pasarALaGeneracionSiguiente(desde); } finally { reiniciando = false; }
   }, true);
   $('b-seguir').addEventListener('click', () => irConHumo('viaje'));
   $('b-yagan').addEventListener('click', () => { if (!viajeEnCurso()) partida = null; irConHumo('viaje'); });
@@ -477,6 +484,20 @@
     for (const id of e.aprendidos) { const li = document.createElement('li'); li.innerHTML = SABERES[id].titulo; lista.appendChild(li); }
     setTimeout(() => irConHumo('fin'), reducido ? 0 : 700);
   }
+  /** El paso del fuego («Generación 1 → 2», con los saberes que pasan) y el viaje nuevo. Lo usan el final del viaje y «Empezar otro viaje». */
+  async function pasarALaGeneracionSiguiente(desde) {
+    // Si el humo de la pantalla anterior todavía se está abriendo, se espera a que termine.
+    while (enTransicion) await new Promise((r) => setTimeout(r, 50));
+    const l = herencia.leer(PUEBLO);
+    if (oido) oido.generacion();
+    if (window.TDH_TRANSICIONES && !reducido && desde) {
+      enTransicion = true;
+      try { await conTope(TDH_TRANSICIONES.pasoDelFuego(document.body, { desde, hasta: l.generacion, saberes: l.saberes.map((id) => SABERES[id].titulo) }), 6500); }
+      finally { enTransicion = false; }
+    }
+    partida = null;
+    ir('viaje');
+  }
   let pasando = false;
   $('b-generacion').addEventListener('click', async () => {
     if (pasando) return;
@@ -485,17 +506,7 @@
     const bg = $('b-generacion'), textoAntes = bg.textContent;
     bg.textContent = 'Preparando el viaje…'; bg.setAttribute('aria-busy', 'true'); bg.classList.add('cargando');
     try {
-      // Si el humo de la pantalla anterior todavía se está abriendo, se espera a que termine.
-      while (enTransicion) await new Promise((r) => setTimeout(r, 50));
-      const l = herencia.leer(PUEBLO);
-      if (oido) oido.generacion();
-      if (window.TDH_TRANSICIONES && !reducido && ultimo) {
-        enTransicion = true;
-        try { await conTope(TDH_TRANSICIONES.pasoDelFuego(document.body, { desde: ultimo.generacion, hasta: l.generacion, saberes: l.saberes.map((id) => SABERES[id].titulo) }), 6500); }
-        finally { enTransicion = false; }
-      }
-      partida = null;
-      ir('viaje');
+      await pasarALaGeneracionSiguiente(ultimo && ultimo.generacion);
     } finally { pasando = false; bg.textContent = textoAntes; bg.removeAttribute('aria-busy'); bg.classList.remove('cargando'); }
   });
 
