@@ -12,7 +12,7 @@ Tierra de los Humos es un juego web por turnos. Cada partida es un viaje en cano
 
 4
 00:00:40,000 --> 00:01:15,000
-El fuego es tu vida. El viento, la lluvia y la noche lo gastan; la leña y el amarre en el cachiyuyo lo sostienen.
+El fuego es tu vida. El viento, la lluvia y la noche lo gastan; la leña y el amarre en el cachiyuyo lo sostienen. Antes de juntar, avivar o amarrar hay un desafío: si sale mal, se pierde el turno.
 
 5
 00:01:15,000 --> 00:01:40,000
@@ -20,7 +20,7 @@ En el viaje aparecen saberes. Cada carta separa lo que es dato de lo que es recu
 
 6
 00:01:40,000 --> 00:02:05,000
-Si el fuego se apaga, el viaje termina. Lo aprendido se transmite: pasa a la siguiente generación.
+El viaje termina al llegar al destino o cuando el fuego se apaga. Una crónica cuenta lo que pasó, y lo aprendido pasa a la siguiente generación.
 
 7
 00:02:05,000 --> 00:02:25,000
