@@ -108,7 +108,7 @@
       id: 'corteza', nombre: 'corteza de guindo', tipo: 'recurso', dibujo: 'guindo-grande',
       donde: 'bosque-costa', zona: { desde: 0.5, hasta: 0.82 }, cantidad: 1,
       queda: true,
-      efecto: null, // 🔍 La carta dice «permite arreglar la canoa», pero la canoa no se daña en el juego. Ver equipo/memory.md.
+      efecto: null, // Sin efecto: la canoa no se daña, y la carta ya no promete arreglarla (18/11; docs/02-alcance-mvp.md).
       carta: 'corteza',
       dato: 'Cooper describe la extracción de corteza de guindo en primavera para construir canoas y señala que la corteza adecuada se encuentra en ciertos lugares. Vargas Filgueira relata la recuperación de corteza conservada para reparar una canoa.',
       fuente: COOPER + ', p. 88 y 94-95. Vargas Filgueira, Víctor (2019). Mi sangre yagán (ahua saapa yagan). Primera edición digital. Editora Cultural Tierra del Fuego, p. 23 y 31-32 del visor del PDF.',

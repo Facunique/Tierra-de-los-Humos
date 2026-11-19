@@ -2,7 +2,7 @@
 
 Es la parte que hace funcionar el viaje: el mapa, el fuego, lo que se junta, el clima y cómo termina. No dibuja pantallas ni guarda nada en el navegador: eso es de la interfaz. La interfaz le pregunta al núcleo qué pasó y lo muestra.
 
-**Última actualización:** 14/11/2026.
+**Última actualización:** 18/11/2026.
 
 ---
 
@@ -16,7 +16,8 @@ Es la parte que hace funcionar el viaje: el mapa, el fuego, lo que se junta, el 
 - **Se junta** leña, comida (mejillones, pescado y hongos), pirita, el saber de la choza y la corteza del guindo grande.
 - **La leña aviva el fuego**, y la pirita lo vuelve a prender una vez cuando se apaga.
 - **Amarrar y acampar** en el cachiyuyo, al lado de una playa: pasan la noche, vuelve la calma y comen lo que juntaron. **Acampar no es gratis:** cuidar el fuego toda la noche gasta, así que sin comida cada noche lo baja y una partida no puede durar para siempre.
-- **El día pasa:** día, tarde y noche. En invierno los días son más cortos.
+- **El día pasa:** día, tarde y noche. En invierno los días son más cortos y las noches, más largas. La noche termina al acampar o, si no se acampa, sola, unos pasos después.
+- **Fallar un minijuego cuesta un turno** (acción `demora`): el fuego gasta como al remar y pasa el tiempo, pero la canoa no se mueve. Los minijuegos son de la Persona D (`minijuegos/`); el núcleo solo pone el costo.
 - **El clima cambia solo:** calma, viento y lluvia. **Cada cambio se avisa un paso antes** («se ven nubes»), para decidir si acampar o seguir.
 - **Las cartas de saber** salen la primera vez que se junta cada cosa, la primera vez que se acampa y al llegar al destino.
 - **El motivo del viaje** sale de la semilla y de la estación, entre los destinos documentados que no están en «propuesta» (ver *Los datos del territorio*). Hoy solo entra la ballena varada: las otras dos esperan a la Persona C.
@@ -56,24 +57,26 @@ Están todos en [`reglas.js`](reglas.js). Son recursos de juego y se ajustan jug
 
 | Qué | Cuánto |
 |---|---|
-| Fuego al empezar | 12 de 16 (se ve como «Fuego 3 de 4»), más 1 por cada saber heredado, hasta 16 |
+| Fuego al empezar | 14 de 16 (se ve como «Fuego 4 de 4»), más 1 por cada saber heredado, hasta 16 |
+| Al salir se lleva | 2 atados de leña |
 | Remar una casilla | Gasta 1 |
+| Fallar un minijuego | Gasta como remar una casilla, sin moverse |
 | Viento en el canal hondo, lluvia, noche | Cada uno gasta 1 más |
 | Cerca de una choza | Gasta 1 menos |
 | Leña | Cada atado da 2; avivar el fuego con una suma 6. Se lleva hasta 5 |
 | Comida | Se lleva hasta 5. Al acampar se come 1 y suma 3 de fuego |
 | Acampar | Cuidar el fuego toda la noche gasta 2 (con comida, queda en +1) |
 | Pirita | Se lleva 1. Si el fuego se apaga, vuelve a 4 |
-| El día | Cae la tarde a las 12 casillas y la noche a las 18. En invierno, a las 8 y a las 12 |
+| El día | Cae la tarde a las 12 casillas, la noche a las 18 y amanece a las 22. En invierno, a las 8, a las 12 y a las 18. Acampar hace amanecer enseguida |
 | El clima | Dura al menos 4 pasos; después cambia con 12 % de chance por paso, y se avisa 1 paso antes |
 
-Son los mismos números de la versión de mesa, salvo la leña (el mapa es el doble de ancho que el tablero), el gasto de acampar y el aviso del clima, que la mesa no tiene (`docs/02-alcance-mvp.md`, *La versión de mesa*).
+El fuego inicial, las 2 leñas y el amanecer sin acampar son del 18/11 (los ajustó la Persona B a pedido del equipo, para que el viaje no termine a las pocas remadas). La versión de mesa sigue con 12 de fuego y 1 leña: es más simple a propósito. Tampoco tiene el aviso del clima, el gasto de acampar ni los minijuegos, y su leña aviva 5 porque el tablero es la mitad de ancho que el mapa (`docs/02-alcance-mvp.md`, *La versión de mesa*).
 
 ### Qué se revisa solo
 
 Al correr `node --test` en la raíz del repo se revisa:
 
-- **Que el juego se pueda ganar.** Un jugador automático que junta, acampa y hace caso al aviso de lluvia llega el 81 % de las veces (en 500 viajes; sin el aviso, el 77 %), y uno que va derecho sin juntar nada no llega nunca. Esto se mide con cada destino.
+- **Que el juego se pueda ganar.** Un jugador automático que junta, acampa y hace caso al aviso de lluvia llega el 92 % de las veces (en 500 viajes, 18/11). Es más difícil en invierno y saliendo de noche: del 95 % en verano de día al 77 % en invierno de noche. Uno que va derecho sin juntar nada no llega nunca: el fuego se le apaga en unas 13 casillas (8 en invierno de noche). Esto se mide con cada destino. Los jugadores automáticos no juegan minijuegos: no miden el costo de fallarlos.
 - **Que cada mapa sea jugable.** Se prueban 500 mapas: todos tienen camino por agua hasta el destino, todo lo que se junta queda al alcance de la canoa y hay lugares para amarrar. Salen 500 mapas distintos.
 - **Que los datos del territorio sean consistentes:**
   - cada cosa tiene fuente (o 🔍), dibujo en el estilo Corteza y un lugar válido;
@@ -87,7 +90,7 @@ Al correr `node --test` en la raíz del repo se revisa:
 
 ### Lo que todavía no está
 
-- **La corteza no tiene efecto en el juego:** su carta dice que permite arreglar la canoa, pero la canoa no se daña.
+- **La corteza no tiene efecto en el juego:** se junta y da su carta, nada más. La carta ya no promete arreglar la canoa, y la canoa no se daña.
 - **El viaje es un solo tramo**, no tiene etapas.
 
 ### Para quien programa
@@ -106,7 +109,21 @@ Se cargan con `<script>` clásicos, en este orden: `azar.js`, `reglas.js`, `terr
 
 ## Propuestas de mejora
 
-Nada de esto está hecho. Son ideas para charlar en el grupo.
+Son ideas para charlar en el grupo. El aviso del clima ya está (PR 22).
+
+**Qué propone A para la entrega del 19/11 (18/11):** no sumar cambios grandes al núcleo y cerrar lo que ya anda.
+
+| Propuesta | Qué propone A | Depende de |
+|---|---|---|
+| El viaje en 3 tramos | Para después de la hackatón. Por ahora, el ciclo de *explorar, encontrar y volver* lo cierra la herencia entre generaciones | El equipo |
+| Qué deja cada saber heredado | Para después de la hackatón: cambia las cartas y el dibujo | El equipo |
+| Las brasas | No entra: con los viajes más largos ya no hace tanta falta, y le suma trabajo a D el último día | El equipo |
+| La carta de la corteza | Resuelta: C cambió el texto y la carta ya no promete arreglar la canoa. La canoa no se daña (`docs/02-alcance-mvp.md`, *Queda afuera*) | — |
+| El destino del viaje | Que la pirita pase a `'borrador'`: C ya la confirmó con la entrevista del 13/11 y el núcleo la elige solo. Así la ballena deja de ser el único motivo, sin programar | C (`territorio/destinos.js`) |
+| El juego de mesa | Se presenta como una versión más simple, con sus propios números | El equipo |
+| Dónde se guardan los datos del territorio | Se quedan donde están: moverlos ahora no suma y puede romper algo | El equipo |
+
+El detalle de cada una:
 
 - **El viaje dividido en 3 partes.** Hoy el viaje es un solo canal largo, de la salida al destino. La propuesta es partirlo en 3 tramos con un campamento entre uno y otro. Así se nota más el ciclo de *explorar, encontrar y volver* que pide el concepto, y cada partida tiene momentos de respiro.
 
@@ -116,13 +133,13 @@ Nada de esto está hecho. Son ideas para charlar en el grupo.
 
 - **El destino del viaje.** Hoy la familia viaja hacia una ballena varada. Hay otras dos opciones documentadas en Cooper (1946, p. 94-95): buscar corteza buena para canoas o buscar piedras de fuego (pirita), que solo se encontraban en algunos lugares. El juego ya está preparado para cambiar de destino sin reprogramar nada. Falta elegir cuál, idealmente con lo que diga la comunidad.
 
-- **La carta de la corteza.** La carta dice que encontrar un guindo grande «permite arreglar la canoa», pero en el juego la canoa nunca se rompe. Así la carta promete algo que no pasa. Hay dos caminos: cambiar el texto de la carta o agregar que la canoa se pueda dañar, por ejemplo al chocar con rocas.
+- ~~**La carta de la corteza.**~~ Resuelta: C cambió el texto «En el juego» de la carta. Lo que decía antes: la carta decía que encontrar un guindo grande «permite arreglar la canoa», pero en el juego la canoa nunca se rompe. Así la carta promete algo que no pasa. Hay dos caminos: cambiar el texto de la carta o agregar que la canoa se pueda dañar, por ejemplo al chocar con rocas.
 
 - **Las fuentes que faltan.** Cada cosa que aparece en el mapa tiene su fuente con página, salvo tres: la leña (no hay una cita propia), los conchales (falta la cita exacta) y la tonina (falta confirmar qué especie vive en el Beagle). Están marcadas como pendientes.
 
-- **El juego de mesa.** Es la versión en papel que ya está en el repo, con tablero, fichas, dado y reglas, pensada para escuelas sin computadoras y para el stand. Hoy tiene las mismas reglas que el juego de la compu. Si se aprueban los cambios de arriba, las dos versiones dejan de coincidir: hay que decidir si se actualiza la de papel o si se presenta como una versión más simple.
+- **El juego de mesa.** Es la versión en papel que ya está en el repo, con tablero, fichas, dado y reglas, pensada para escuelas sin computadoras y para el stand. Desde el 18/11 ya no tiene los mismos números que el juego de la compu (ver *Los números*). Hay que decidir si se actualiza la de papel o si se presenta como una versión más simple.
 
-- **Cómo se conecta el juego con las pantallas.** La parte que hace funcionar el viaje ya está armada para encajar con la pantalla de cartas que existe. Falta revisar juntos que le sirva a quien hace las pantallas y conectarla al juego real, en lugar de la versión de prueba.
+- ~~**Cómo se conecta el juego con las pantallas.**~~ Hecho: B lo conectó el 13/11 y el juego se juega de punta a punta en `index.html`.
 
 - **Dónde se guardan los datos del territorio.** Todo lo que puede cambiar con la investigación (qué hay en el mapa, dónde aparece, qué hace, de qué fuente sale y el destino) quedó en unos archivos aparte, que se pueden editar sin programar. Hoy están en la carpeta del motor del juego. Se puede dejar así o pasarlos a la carpeta de datos, junto con las cartas.
 
