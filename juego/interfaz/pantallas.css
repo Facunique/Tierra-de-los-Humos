@@ -33,6 +33,10 @@ html:has(.tdh-juego) { height: 100%; }
 .rotulo p { margin: 10px 0 0; font-size: 17px; }
 .sub { font-size: 13px !important; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tdh-ocre); margin: 0 0 6px !important; }
 .botones { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 640px; flex: none; }
+/* Las pantallas son position: fixed, así que el body medía 0 de alto, y las transiciones (el humo entre
+   pantallas y el paso del fuego, arte/corteza/transiciones.js) se dibujaban en un lienzo de 0 px: no se
+   veían (18/11). Con el body del alto de la pantalla, se ven. */
+body.tdh-juego { min-height: 100vh; min-height: 100dvh; }
 .tdh-juego .boton-papel { min-height: 44px; min-width: 180px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
 /* Los botones de la carta los ubica juego.css: sin ancho mínimo, para que no tapen la fuente. */
 .tdh-juego .tdh-carta__botones .boton-papel { min-width: 0; }
