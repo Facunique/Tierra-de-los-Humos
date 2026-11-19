@@ -40,5 +40,5 @@ Teclas: <kbd>Espacio</kbd> pausa, <kbd>→</kbd> pasa a la escena siguiente.
   node stand/exportar.cjs
   ```
 
-- [ ] Completar los nombres del equipo en `cartel.html` (marcados con ✏️).
+- [x] Completar los nombres del equipo en `cartel.html` (19/11).
 - [ ] La Persona C aprueba los textos de las cartas antes de imprimirlas.
