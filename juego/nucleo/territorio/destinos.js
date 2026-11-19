@@ -61,7 +61,7 @@
       carta: 'pirita', humos: false,
       dato: 'Las piedras de fuego se encuentran en ciertos lugares. Buscar pirita para el encendido puede motivar un desplazamiento.',
       fuente: COOPER + ', p. 94-95.',
-      estado: 'propuesta',
+      estado: 'borrador',
     },
   };
 

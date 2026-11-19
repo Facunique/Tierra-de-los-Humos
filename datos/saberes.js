@@ -9,7 +9,9 @@
  * Fuente principal: Vargas Filgueira (2019), con página del visor del PDF.
  * Cooper (1946) documenta los detalles que el pasaje de Vargas no confirma.
  * La entrevista se registra aparte; no se inventan respuestas ni permisos.
- * Son BORRADORES para revisión de la Persona C. Ver docs/03 y docs/05.
+ * Las nueve cartas originales fueron revisadas y aprobadas por Dani (18/11/2026).
+ * Es revisión de contenido del equipo; la consulta comunitaria sigue abierta.
+ * Ver docs/03 y docs/05. Las ocho propuestas nuevas siguen en otro archivo.
  *
  * ── Cómo cargar una carta nueva (sin programar) ─────────────────────────────
  *
@@ -50,7 +52,7 @@
   const VARGAS = 'Vargas Filgueira, Víctor (2019). Mi sangre yagán (ahua saapa yagan). Primera edición digital. Editora Cultural Tierra del Fuego';
   const SABERES = {
     fuego: {
-      id: 'fuego', pueblo: 'yagan', estado: 'borrador',
+      id: 'fuego', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Fuego', titulo: 'El fuego viaja en la canoa',
       dato: 'El fuego se lleva encendido en la canoa. Antes de partir, se acomoda junto con las pertenencias del viaje.',
       juego: 'Avivá el fuego con leña para seguir el viaje.',
@@ -59,16 +61,16 @@
       mapa: ['GGLGGLGG', '..,,,,..', ',,,--,,,'], extra: { canoa: { x: 3, y: 2, fuego: 4 }, hora: 'tarde' },
     },
     amarre: {
-      id: 'amarre', pueblo: 'yagan', estado: 'borrador',
+      id: 'amarre', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Canoa', titulo: 'Amarrar en el cachiyuyo',
-      dato: 'El manejo de la canoa incluye el remo y el amarre. Para detenerse, se asegura entre el cachiyuyo, lejos de la orilla.',
+      dato: 'El manejo de la canoa incluye el remo y el amarre. Para detenerse, la canoa se amarra en bancos de grandes algas marinas, fuera de la orilla.',
       juego: 'Para acampar, amarrá la canoa en el cachiyuyo, cerca de una playa.',
-      fuente: COOPER + ', p. 88 y 96 (amarre en cachiyuyo). ' + VARGAS + ', p. 33 del visor del PDF.',
+      fuente: COOPER + ', p. 88 (paginación impresa; amarre). Referencia complementaria para mujeres remando: ' + VARGAS + ', p. 33 del visor del PDF.',
       alt: 'La canoa, con el fuego encendido y dos personas en silueta, está quieta entre las algas del cachiyuyo, en el agua frente a una playa con bosque.',
       mapa: ['GGLLGGGG', '........', ',,k,k,,,'], extra: { canoa: { x: 3, y: 2, fuego: 2 } },
     },
     mejillones: {
-      id: 'mejillones', pueblo: 'yagan', estado: 'borrador',
+      id: 'mejillones', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Alimento', titulo: 'Recolectar en la costa',
       dato: 'La marea baja permite recolectar mariscos en la costa. Después de preparar el campamento, se aprovecha ese momento para reunir alimento.',
       juego: 'Juntá mejillones en la playa para sumar comida.',
@@ -77,7 +79,7 @@
       mapa: ['GGGGLLGG', '........', ',,r,,r,,'], extra: { objetos: [{ id: 'mejillones', x: 3, y: 1 }, { id: 'mejillones', x: 5, y: 1 }] },
     },
     pescado: {
-      id: 'pescado', pueblo: 'yagan', estado: 'borrador',
+      id: 'pescado', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Alimento', titulo: 'Pescar para el campamento',
       dato: 'La pesca aporta alimento al campamento. Mientras parte del grupo sale a pescar, otras personas trabajan la corteza para fabricar canoas.',
       juego: 'El pescado se junta en el agua baja.',
@@ -86,7 +88,7 @@
       mapa: ['GGLLGGGG', '........', ',,,,,,,,'], extra: { objetos: [{ id: 'pescado', x: 4, y: 2 }] },
     },
     hongos: {
-      id: 'hongos', pueblo: 'yagan', estado: 'borrador',
+      id: 'hongos', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Alimento', titulo: 'Hongos de los árboles',
       dato: 'Los hongos de los árboles y las raíces complementan los alimentos disponibles durante un invierno difícil.',
       juego: 'Los hongos se juntan en la orilla del bosque.',
@@ -95,7 +97,7 @@
       mapa: ['LLGLLGLL', 'p......p', ',,,,,,,,'], extra: { objetos: [{ id: 'hongos', x: 3, y: 1 }], estacion: 'otono' },
     },
     pirita: {
-      id: 'pirita', pueblo: 'yagan', estado: 'borrador',
+      id: 'pirita', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Fuego', titulo: 'Piedras de fuego',
       dato: 'La pirita se usa junto con el pedernal para encender el fuego. Como escasea, se mantiene una fogata encendida en la canoa durante los viajes.',
       juego: 'Si llevás pirita, el juego la usa automáticamente para volver a encender el fuego una vez.',
@@ -104,7 +106,7 @@
       mapa: ['GGGGLLGG', '..r.....', ',,,,,,,,'], extra: { objetos: [{ id: 'pirita', x: 3, y: 1 }] },
     },
     choza: {
-      id: 'choza', pueblo: 'yagan', estado: 'borrador',
+      id: 'choza', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Refugio', titulo: 'Preparar el campamento',
       dato: 'Las viviendas del campamento se arman al detenerse y se desarman antes de continuar. El campamento forma parte del recorrido.',
       juego: 'Junto a una choza, el fuego se gasta más despacio.',
@@ -113,7 +115,7 @@
       mapa: ['LLGGLLGL', 'Gp..p.GG', '........', ',,,,,,,,'], extra: { objetos: [{ id: 'choza', x: 3, y: 1 }, { id: 'conchal', x: 5, y: 2 }] },
     },
     corteza: {
-      id: 'corteza', pueblo: 'yagan', estado: 'borrador',
+      id: 'corteza', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Canoa', titulo: 'Una canoa de corteza',
       dato: 'La corteza se busca en la época en que se afloja. También se conserva en el agua de un turbal para recuperarla cuando hace falta reparar una canoa.',
       juego: 'La primera vez que juntás corteza, descubrís este saber.',
@@ -122,7 +124,7 @@
       mapa: ['GGGGGGGG', 'GG....GG', ',,,,,,,,'], extra: { objetos: [{ id: 'guindo-grande', x: 3, y: 1 }] },
     },
     ballena: {
-      id: 'ballena', pueblo: 'yagan', estado: 'borrador',
+      id: 'ballena', pueblo: 'yagan', estado: 'revisado',
       tipo: 'Encuentro', titulo: 'La ballena varada',
       dato: 'Una ballena varada reúne a varias familias para compartir alimento y reencontrarse. Acudir al varamiento puede motivar un viaje.',
       juego: 'Una ballena varada es uno de los motivos del viaje. En esta versión, llegar con el fuego encendido completa la partida.',

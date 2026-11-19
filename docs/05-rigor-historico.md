@@ -52,7 +52,7 @@ Estado: ✅ coincide con la fuente · 🔧 estaba mal y se corrigió · 🔍 fal
 | Quién va dónde | La mujer remaba y manejaba la canoa: era la «dueña de la canoa, con su fogón y su fuego siempre encendido» (Cooper, p. 88). El hombre iba adelante del fuego, con sus armas, y la mujer justo atrás (Spears, p. 56-57 y 64). En la caza desde la canoa, él mataba y ella maniobraba (Cooper, p. 96). | 🔧 **Antes las figuras estaban lejos del fuego y la de adelante no llevaba nada.** Ahora el hombre va adelante del fuego con el arpón en reposo y la mujer atrás, remando. |
 | Remo | De una sola pieza, con pala larga y lanceolada y mango corto redondo, sin travesaño (Cooper, p. 88). | ✅ |
 | Arpón | Asta de 2,5 a 4 m. El arpón era una lanza con punta de hueso dentada que se soltaba, atada con una tira de cuero (Cooper, p. 91). | ✅ Asta larga con punta de hueso. Se muestra **en reposo, nunca cazando**. |
-| Amarre | La mujer amarraba la canoa lejos de la orilla, en un bosque de cachiyuyo (Cooper, p. 88). | ✅ El cachiyuyo está en el agua baja de cada costa. Idea de mecánica: para acampar hay que amarrar en el cachiyuyo. |
+| Amarre | Cooper describe el amarre en bancos de grandes algas marinas, fuera de la orilla (1946, p. 88 impresa; ver el alcance de la referencia en docs/03). | El recurso de juego se llama cachiyuyo y está en el agua baja de cada costa. Para acampar hay que amarrar allí; la redacción corregida no identifica una especie. |
 | Niños | Las fuentes no coinciden: alrededor del fuego (Museo Chileno de Arte Precolombino) o más lejos del fuego (Spears, p. 57). | 🔍 Por eso no dibujamos niños hasta tener una fuente firme. |
 | Vela | Una vela de cuero, a veces. No se sabe si es de origen nativo o europeo (Cooper, p. 88-89). | ⛔ No se dibuja. |
 | Canoa de un tronco (dugout) | Se adoptó después de 1880 (Cooper, p. 89). | ⛔ No se dibuja: el juego muestra la canoa de corteza. |
@@ -134,7 +134,7 @@ Antes de juntar, avivar o amarrar, se juega un momento corto. Lo que se dibuja s
 | Piedras de fuego | Pirita dorada entre piedras grises de la playa. | Cooper (1946, pp. 91 y 95). | ✅ Dónde se encontraba la pirita no se afirma: la escena es recurso de juego. |
 | Pescar desde la canoa | El pez y la «carnada» en una pista; no se dibuja la línea. | Cooper (1946, pp. 84 y 96): línea sin anzuelo, carnada en un lazo, el pez se toma con la mano. | ✅ ⛔ Sin anzuelos ni redes (lo revisa `pruebas/minijuegos.test.cjs`). |
 | Avivar el fuego | La leña y la «llama baja» en una pista. | Vargas Filgueira (2019, p. 33 del visor del PDF): el fuego viaja en la canoa. | ✅ |
-| Amarrar en el cachiyuyo | La canoa pasa sobre el cachiyuyo. | Cooper (1946, pp. 88 y 96): amarre lejos de la orilla, en el cachiyuyo. | ✅ |
+| Amarrar en el cachiyuyo | La canoa pasa sobre el cachiyuyo. | Cooper (1946, p. 88 impresa): mismo respaldo del amarre de la carta; alcance en docs/03. | Se conserva el nombre del recurso de juego; no se identifica una especie a partir de esta fuente. |
 
 ### El paisaje
 
@@ -163,9 +163,9 @@ Antes de juntar, avivar o amarrar, se juega un momento corto. Lo que se dibuja s
 ## Hallazgos para todo el equipo
 
 1. **Dani decidió el nomadismo como enfoque del viaje.** Clima, comida y ambiente se combinan como motivos de desplazamiento; el cierre y los objetivos quedan pendientes con A y B (`equipo/memory.md`). Las notas de Vargas Filgueira (2019), pp. 16–17, 23, 31–32 y 53–54 del visor, aportan episodios distintos; Cooper registra la ballena, la corteza y la pirita como motivos de desplazamiento (pp. 94–95 y 99). Cada situación conserva su fuente; la combinación es una decisión de diseño.
-2. **Distribución de tareas con autor y contexto.** Cooper describe a las mujeres remando, amarrando y cuidando el fuego, además de otras tareas (pp. 88 y 96). Las notas de Dani de Vargas Filgueira (2019) mencionan mujeres remando (p. 33), personas mayores enseñando a construir canoas (p. 39) y decisiones compartidas (p. 46 del visor). Las cartas atribuyen cada descripción a su fuente; no la convierten en una regla rígida para todas las familias ni en una descripción de las prácticas actuales de todo el pueblo yagán.
+2. **Distribución de tareas con autor y contexto.** Cooper describe a las mujeres remando y cuidando el fuego, además de otras tareas (pp. 88 y 96). El respaldo específico del amarre se limita a la p. 88 impresa, con el alcance registrado en docs/03. Las notas de Dani de Vargas Filgueira (2019) mencionan mujeres remando (p. 33), personas mayores enseñando a construir canoas (p. 39) y decisiones compartidas (p. 46 del visor). Las cartas atribuyen cada descripción a su fuente; no la convierten en una regla rígida para todas las familias ni en una descripción de las prácticas actuales de todo el pueblo yagán.
 3. **Mecánicas que salen de las fuentes:**
-   - amarrar la canoa en el cachiyuyo para acampar;
+   - amarrar para acampar en el recurso llamado cachiyuyo; el respaldo histórico se limita a grandes algas marinas, según la fila «Amarre»;
    - el fuego nunca se apaga a propósito;
    - los mejillones son la comida más común;
    - la pirita es rara y valiosa;

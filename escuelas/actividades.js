@@ -36,7 +36,7 @@
       ],
       minutos: 20,
       areas: ['Ciencias Sociales', 'ESI'],
-      cuidado: { tipo: 'Cuidado', texto: 'Cooper y Vargas Filgueira escriben desde lugares distintos. Estos pasajes no fijan tareas de todas las familias actuales. La página 33 respalda el remo; el amarre en cachiyuyo se toma de Cooper.' },
+      cuidado: { tipo: 'Cuidado', texto: 'Cooper y Vargas Filgueira escriben desde lugares distintos. Estos pasajes no fijan tareas de todas las familias actuales. La página 33 de Vargas respalda el remo; el amarre en bancos de grandes algas marinas se atribuye a Cooper, p. 88 impresa.' },
     },
     mejillones: {
       pregunta: '¿Qué nos puede contar una montaña de valvas?',
