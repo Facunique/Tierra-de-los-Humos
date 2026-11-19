@@ -6,7 +6,7 @@ Videojuego web de tipo roguelike sobre los saberes de los pueblos originarios de
 
 > 🚧 **En desarrollo** (9 al 18 de noviembre de 2026). El viaje ya se juega de punta a punta: elegir pueblo, remar, cuidar el fuego, encontrar saberes y heredarlos. Las cartas siguen en revisión con la consulta, y los números del juego se ajustan hasta la entrega del 18/11.
 
-**Jugalo:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/) (el viaje completo, en el celular o en la compu; también abre con doble clic en `index.html`, sin internet) · **Video:** ✏️ *[enlace]* · **Presentación:** [`presentacion/`](presentacion/index.html) ([PDF](presentacion/pitch.pdf))
+**Jugalo:** [facunique.github.io/Tierra-de-los-Humos](https://facunique.github.io/Tierra-de-los-Humos/) (el viaje completo, en el celular o en la compu; también abre con doble clic en `index.html`, sin internet) · **Video:** ✏️ *[enlace]* · **Presentación:** [facunique.github.io/Tierra-de-los-Humos/presentacion](https://facunique.github.io/Tierra-de-los-Humos/presentacion/) ([PDF](https://facunique.github.io/Tierra-de-los-Humos/presentacion/pitch.pdf))
 
 ## Eje
 
