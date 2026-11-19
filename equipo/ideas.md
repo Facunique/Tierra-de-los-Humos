@@ -195,9 +195,9 @@ Lo que hace volver a un roguelike: cada acción se siente, cada viaje deja un n�
 
 **31. Cuánto falta.** En el HUD, una tira chica con el camino hasta el destino y la canoa encima: la meta siempre a la vista. *Le toca a B (HUD).* *Señal:* alguien pregunta «¿y ahora adónde voy?».
 
-**32. Que fallar un minijuego cueste algo.** Hoy fallar no cuesta nada. Si cuesta, por ejemplo un poco de fuego, el minijuego pesa más. *Le toca a A (números del núcleo).* *Señal:* los minijuegos se sienten de trámite.
+**32. ~~Que fallar un minijuego cueste algo.~~ Hecha por B el 18/11 (PR 32), revisada por A:** fallar cuesta un turno (`demora` en `juego/nucleo/partida.js`). Hoy fallar no cuesta nada. Si cuesta, por ejemplo un poco de fuego, el minijuego pesa más. *Le toca a A (números del núcleo).* *Señal:* los minijuegos se sienten de trámite.
 
-**33. Viajes más largos.** Hoy, con la luz real de noche, un viaje dura unas 14 acciones y casi no se llega a las cosas para juntar. *Le toca a A (balance).* *Señal:* en la prueba de punta a punta o con personas, el viaje termina antes de juntar algo.
+**33. ~~Viajes más largos.~~ Hecha por B el 18/11 (PR 33), revisada por A:** fuego inicial 14, 2 leñas y la noche termina sola. El jugador automático cuidadoso hace unas 57 acciones por viaje y llega el 92 % de las veces (`juego/nucleo/README.md`, *Qué se revisa solo*). Hoy, con la luz real de noche, un viaje dura unas 14 acciones y casi no se llega a las cosas para juntar. *Le toca a A (balance).* *Señal:* en la prueba de punta a punta o con personas, el viaje termina antes de juntar algo.
 
 ---
 
