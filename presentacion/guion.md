@@ -2,7 +2,7 @@
 
 Para la demo del viernes 20/11. Se dice sobre las 9 diapositivas de [`index.html`](index.html) (con <kbd>N</kbd> se ven las notas del orador; el respaldo es [`pitch.pdf`](pitch.pdf)).
 
-Hay **dos versiones**: con Nacho (Persona D) y sin Nacho, por si no puede venir. Las diapositivas son las mismas; cambia solo quién habla.
+**La que va es la [versión final](#versión-final--demo-qr-y-guía-docente-3-minutos)** (decidida el 20/11): 3 minutos, sin diapositivas, con la demo, el QR y la guía docente. Nacho no viene. Las versiones A y B quedan abajo como respaldo, con las 9 diapositivas.
 
 Sigue el punteo que pidió la organización: quiénes somos → problema → solución → demo → impacto y soberanía. La demo se lleva la parte más larga, como recomendaron.
 
@@ -17,6 +17,69 @@ Sigue el punteo que pidió la organización: quiénes somos → problema → sol
   - Nada de la historia del origen del nombre (no tiene fuente).
   - Desde el 19/11 las cartas del juego **no muestran la fuente**: están todas en la pantalla **Fuentes** del menú. Decir «cada saber tiene su fuente», no «cada carta cita su fuente».
   - Desde el 19/11 las cartas **no tienen botón de voz**. El narrador sí sigue.
+
+---
+
+## Versión final · demo, QR y guía docente (3 minutos)
+
+Sin diapositivas. **Dani juega** sin hablar y maneja las pestañas; **Mati y Facu hablan**. El foco es el aula: cada cosa que pasa en el juego se conecta con lo que puede hacer un docente. Mejor terminar antes que pasarse: si falta tiempo, se recorta la partida 2.
+
+| Tiempo | Quién habla | En pantalla (Dani) |
+|---|---|---|
+| 0:00 a 0:25 | **Facu** | El juego en la pantalla de inicio (pestaña 1) |
+| 0:25 a 1:50 | **Mati**, con dos frases de **Facu** | Las dos partidas (pestañas 1 y 2) |
+| 1:50 a 2:10 | **Facu** | La imagen del QR (pestaña 3) |
+| 2:10 a 2:50 | **Mati y Facu** | La guía docente (pestaña 4) |
+| 2:50 a 3:00 | **Facu** | La imagen del QR (pestaña 3) |
+
+**Antes de subir**, cuatro pestañas en este orden, todo desde la carpeta del repo (anda sin internet):
+
+1. `index.html?destino=ballena`, en la pantalla de inicio, con **Minijuegos: sí** y **Narrador: no**.
+2. `index.html?destino=pirita`, también en la pantalla de inicio.
+3. `presentacion/jugalo-qr.jpg`: la escena de la canoa con el QR grande.
+4. `escuelas/guia.html`: la guía para docentes.
+
+### 0:00 · Facu · Quiénes somos y para qué
+
+> Hola, somos el equipo **Tierra de los Humos**: Mati, Dani, que está jugando, y yo, Facu. Nacho, que hizo el arte y el sonido, hoy no pudo venir.
+>
+> Los saberes de los pueblos fueguinos casi no llegan al aula, y cuando llegan, se cuentan en pasado. Pero el pueblo yagán **sigue acá**. Por eso hicimos un juego pensado para la escuela.
+
+### 0:25 · Mati (y Facu) · La demo
+
+Dani juega las dos partidas de la demo (abajo, en la versión A, está el detalle de cada paso). Mati cuenta lo que pasa:
+
+- **Motivo del viaje (partida 1):** «Cada partida es un viaje en canoa con una familia yagán ficticia. Esta vez van hasta una ballena varada, que reúne a varias familias.»
+- **Remar:** «El fuego es la vida del viaje: el viento, la lluvia y la noche lo gastan.»
+- **Minijuego:** «Antes de juntar leña hay un desafío. Si sale mal, se pierde el turno.»
+- **Carta de saber** (habla Facu): «Fíjense que la carta separa el **dato** de lo que es **juego**. Es lo primero que se trabaja en el aula: qué es real y qué es ficción.»
+- **Corte** (Dani: Pausa → Empezar otro viaje, dos toques): «Cuando el viaje termina, **lo aprendido pasa a la generación siguiente**.»
+- **Partida 2:** «Esta familia ya sabe lo que aprendió la anterior. Y viaja por otro motivo: buscar pirita, las piedras para encender el fuego.»
+- **Fuentes** (habla Facu): «Cada saber tiene autor y página. Lo hicimos con *Mi sangre yagán*, de Víctor Vargas Filgueira, referente yagán, y con una entrevista con él. La consulta sigue abierta.»
+
+> Si algo falla: «Les mostramos el video», y se pasa al video sin explicar.
+
+### 1:50 · Facu · El QR
+
+> Lo pueden jugar ahora, desde el celular. Anda en el navegador, también **sin internet**, y es **gratis y abierto**: cualquier escuela lo puede copiar y adaptar.
+
+Dejar unos segundos para que escaneen.
+
+### 2:10 · Mati y Facu · La guía docente
+
+Dani baja por la guía: la portada, *Tres formas de jugar en clase*, una actividad por carta y la hoja *Un saber que quiero heredar*.
+
+> **Mati:** Y para que llegue al aula, hicimos una **guía para docentes**.
+>
+> **Facu:** Trae tres formas de jugar: con celulares, con un proyector, o **sin pantallas**, con una versión de mesa para imprimir. Una clase armada de 80 minutos. Una actividad por cada carta, con su fuente y una pregunta. Y una hoja donde cada chico escribe un saber de **su propia familia** que quiere que se herede.
+>
+> **Mati:** Lo queremos llevar a escuelas de Ushuaia, Tolhuin y Río Grande.
+
+### 2:50 · Facu · Cierre
+
+Dani vuelve a la pestaña del QR.
+
+> Cuando el fuego se apaga, **lo aprendido no se pierde**. Gracias.
 
 ---
 
