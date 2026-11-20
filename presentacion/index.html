@@ -121,6 +121,7 @@
             <p class="sub">Rigor</p>
             <h2>Cada saber, con su fuente y su página.</h2>
             <p style="margin-top:18px">La carta separa lo que es <b>dato</b> de lo que es <b>recurso de juego</b>.</p>
+            <p style="margin-top:14px">Todas las fuentes están juntas en la pantalla <b>Fuentes</b> del juego, con las obras completas.</p>
             <p style="margin-top:14px">Si un saber no tiene fuente, no entra al juego: queda pendiente hasta verificarlo con los libros y la consulta.</p>
           </div>
         </div>
@@ -166,7 +167,7 @@
         <p class="sub">Para todos</p>
         <h2>Se juega en el navegador, también en el celular.</h2>
         <ul class="puntos" style="margin-top:26px">
-          <li>Un narrador cuenta el viaje en voz alta para jugar sin ver la pantalla. Las cartas también se escuchan.</li>
+          <li>Un narrador cuenta el viaje en voz alta para jugar sin ver la pantalla.</li>
           <li>Modo alto contraste, tipografía para baja visión y subtítulos para cada sonido.</li>
           <li>Probado con simulación de daltonismo; la costa no depende del color.</li>
           <li>El sonido cuenta el lugar (bosque, playa, canal) y la luz es la de Ushuaia en ese momento.</li>
@@ -222,6 +223,7 @@
 <script src="../arte/fuente/arte.js"></script>
 <script src="../arte/corteza/corteza.js"></script>
 <script src="../datos/saberes.js"></script>
+<script src="../juego/interfaz/fuente.js"></script>
 <script>
 (function () {
   'use strict';
@@ -269,7 +271,7 @@
   // ── Contenido especial ──────────────────────────────────────────────────
   (function cartaDemo() {
     const c = SABERES.amarre, cont = document.getElementById('carta-demo');
-    cont.innerHTML = '<article class="carta-saber papel"><p class="carta-saber__tipo">Saber · Yagán · ' + c.tipo + '</p><canvas class="carta-saber__ilus" aria-hidden="true"></canvas><h3 class="carta-saber__titulo">' + c.titulo + '</h3><p><span class="etiqueta etiqueta--dato">Dato</span>' + c.dato + '</p><p><span class="etiqueta etiqueta--juego">En el juego</span>' + c.juego + '</p><p class="carta-saber__fuente">Fuente: ' + c.fuente + '</p></article>';
+    cont.innerHTML = '<article class="carta-saber papel"><p class="carta-saber__tipo">Saber · Yagán · ' + c.tipo + '</p><canvas class="carta-saber__ilus" aria-hidden="true"></canvas><h3 class="carta-saber__titulo">' + c.titulo + '</h3><p><span class="etiqueta etiqueta--dato">Dato</span>' + c.dato + '</p><p><span class="etiqueta etiqueta--juego">En el juego</span>' + c.juego + '</p><p class="carta-saber__fuente">Fuente: ' + (window.TDH_FUENTE ? TDH_FUENTE.corta(c.fuente) : c.fuente) + '</p></article>';
     mini(cont.querySelector('canvas'), c.mapa, c.extra);
   })();
   mini(document.querySelector('[data-mini=gen1]'), ['GGLG', '..,,', ',,--'], { canoa: { x: 2, y: 2, fuego: 0 }, hora: 'tarde' });

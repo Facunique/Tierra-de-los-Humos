@@ -153,9 +153,4 @@ La demo, igual que en la versión A. Termina justo cuando arranca la generación
 
 - [ ] Ensayar la versión que toque con reloj, una vez entera. Si no se sabe si viene Nacho, ensayar la B: es la que cambia más.
 - [ ] El juego abierto en una pestaña, en la elección de familia, y el video descargado en otra.
-- [ ] Revisar las diapositivas 4 y 7 (ver abajo).
-
-### Diapositivas que quedaron atrás del juego (19/11)
-
-- **Diapo 7:** dice «Las cartas también se escuchan». Desde el 19/11 las cartas no tienen botón de voz. Hay que sacar esa frase (o no decirla).
-- **Diapo 4:** el título «Cada saber, con su fuente y su página» sigue siendo cierto, pero la carta grande de la diapositiva puede mostrarse distinta a como se ve ahora en el juego, donde la fuente está en la pantalla Fuentes. Conviene mirarla antes.
+Las diapositivas 4 y 7 ya están al día con el juego del 19/11 (20/11): la 4 dice que las fuentes están en la pantalla Fuentes y la carta lleva la fuente en corto; la 7 ya no dice que las cartas se escuchan.
