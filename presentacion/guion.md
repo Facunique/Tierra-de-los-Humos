@@ -52,15 +52,29 @@ Sigue el punteo que pidió la organización: quiénes somos → problema → sol
 
 ### 1:30 · Mati · Demo en vivo (diapo 5)
 
-Sin discurso largo: se juega y se cuenta lo que pasa. Recorrido sugerido:
+Sin discurso largo: se juega y se cuenta lo que pasa. Son **dos partidas rápidas** (lo propuso Mati el 20/11): la primera muestra los minijuegos y la segunda, que el motivo del viaje cambia.
 
-1. **Elegir a la familia yagán** en el mapa.
+**Antes de subir:** dos pestañas del juego abiertas en la pantalla de inicio. Como el motivo se sortea, se fija agregando algo a la dirección:
+
+- Pestaña 1: `index.html?destino=ballena`
+- Pestaña 2: `index.html?destino=pirita`
+
+En la pantalla de inicio tiene que decir **Minijuegos: sí** y **Narrador: no** (con el narrador no hay minijuegos).
+
+**Partida 1 · la ballena varada, con minijuegos (unos 50 segundos)**
+
+1. **Empezar el viaje** → **elegir a la familia yagán** en el mapa. Sale el **motivo del viaje**: «Viajan porque una ballena varada reúne a varias familias para compartir alimento.»
 2. **Remar.** «El fuego es la vida del viaje. El viento, la lluvia y la noche lo gastan.» Señalar la barra del fuego bajando.
-3. **Juntar leña:** sale el minijuego. «Antes de juntar, avivar o amarrar hay un desafío. Si sale mal, se pierde el turno.»
+3. **Juntar leña:** sale el minijuego. «Antes de juntar, avivar o amarrar hay un desafío. Si sale perfecto, suma de más; si sale mal, se pierde el turno.»
 4. **Aparece una carta de saber.** Leer el título y señalar *Dato* y *En el juego*.
-5. **Si el fuego llega a cero:** «Quedan brasas: tres remadas para avivarlo.»
-6. **El final:** la crónica cuenta lo que pasó y empieza la **generación siguiente** con lo aprendido.
-7. Si sobra tiempo: abrir **Fuentes** desde el menú.
+5. Cortar acá, sin esperar al final: **Pausa** (o <kbd>Esc</kbd>) → **Empezar otro viaje**, y tocarlo **dos veces** (el primer toque pregunta). Sale el paso del fuego: «El viaje termina, pero lo aprendido pasa a la familia que sigue.» Recién ahí queda guardado lo aprendido.
+
+**Partida 2 · las piedras de fuego (unos 40 segundos)**
+
+1. Pasar a la pestaña 2 → **Empezar el viaje** → **Yagán**. La familia **arranca sabiendo** lo que aprendió la anterior: señalarlo. (La pestaña 1 queda con otro viaje a la ballena: se ignora.)
+2. **Otro motivo del viaje:** «Esta vez van a buscar pirita, las piedras de fuego para encender. Cada motivo sale de las fuentes.»
+3. Remar un par de veces. Si hay pirita cerca: «Con pirita, el fuego apagado vuelve a prender.»
+4. Si sobra tiempo: abrir **Fuentes** desde el menú. Ahí están los motivos del viaje con su autor y su página.
 
 > Si algo falla: «Les mostramos el video», y se pasa al video sin explicar.
 
@@ -117,7 +131,7 @@ Igual que en la versión A. Al final del bloque, la frase del dibujo puede recon
 
 ### 1:30 · Mati · Demo y herencia (diapos 5 y 6)
 
-La demo, igual que en la versión A. Termina justo cuando arranca la generación siguiente, y Mati pasa a la 6:
+Las dos partidas, igual que en la versión A. Después de la segunda (la de la pirita, que ya arrancó sabiendo), Mati pasa a la 6:
 
 > Esto es lo que más nos importa: **cuando el fuego se apaga, el viaje termina, pero lo aprendido no se pierde.** La familia que sigue arranca sabiendo lo que aprendió la anterior. La mecánica es el mensaje. Y todas las cartas quedan en un **códice** que se recorre sin jugar, pensado para el aula.
 
