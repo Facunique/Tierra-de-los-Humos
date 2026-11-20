@@ -62,6 +62,8 @@ Tres ideas que se repiten en el video, el pitch y el README:
 
 Todo el equipo habla: es parte del criterio. Cada bloque tiene una persona y una sola idea.
 
+**Guion para decirlo, en dos versiones (con Nacho y sin Nacho):** [`presentacion/guion.md`](../presentacion/guion.md) (19/11). Sigue el punteo de la organización y tiene en cuenta lo que cambió en el juego el 19/11.
+
 | Tiempo | Quién | Diapositiva | Qué decir |
 |---|---|---|---|
 | 0:00 a 0:40 | **D** | 1. Portada con humo · 2. El problema | Presentar el juego: cada partida acompaña a una familia ficticia por los canales fueguinos. El problema como propósito: acercar fuentes sobre los saberes del territorio a jóvenes y escuelas, en presente. Sin la historia del nombre, que no tiene fuente. |
